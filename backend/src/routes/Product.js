@@ -33,15 +33,7 @@ router.get("/products/", async (req, res, next) => {
     next(e);
   }
 });
-// Traer  todos los tipos de categoria ( no es necesario pero lo dejo por si acaso )
-router.get("/category", async (req, res, next) => {
-  try {
-    const AllCategory = Category.findAll();
-    res.send(AllCategory);
-  } catch (e) {
-    next(e);
-  }
-});
+
 // creando un producto y uniendolo a la tabla intermedia de categorias
 //  si no existe una categoria se crea una y se hace la relacion
 //  (category es un array "HACER FORMULARIO CONTROLADO")
