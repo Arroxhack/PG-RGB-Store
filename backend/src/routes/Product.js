@@ -83,7 +83,6 @@ router.post("/products", async (req, res, next) => {
       wattsPowerSupply,
       inOffer,
       PorcentageDiscount,
-      category,
     });
     // Recorremos el array category para buscar en la base de datos y relacionarlos
     // o crear uno nuevo
