@@ -11,3 +11,11 @@ router.get("/category", async (req, res, next) => {
     next(e);
   }
 });
+
+router.post("/category",async(req,res,next)=>{
+  const { category } = req.body
+try{
+  let NewCategory = await Category.create({ name: category });
+    res.send(NewCategory);
+}catch(e){next(e)}
+})
