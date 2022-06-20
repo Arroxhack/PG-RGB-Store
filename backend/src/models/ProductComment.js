@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
   //HAY QUE REVEEEEEEEER ESTO
   sequelize.define('productComment', {
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(300),
       allowNull: true,
     },
   });
