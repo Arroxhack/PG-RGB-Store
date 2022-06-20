@@ -1,0 +1,3 @@
+
+
+export const GET_ALL_COMPONENTS = "GET_ALL_COMPONENTS";
