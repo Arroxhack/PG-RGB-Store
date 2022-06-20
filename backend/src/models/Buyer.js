@@ -3,10 +3,16 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('pokemon', {
-    name: {
-      type: DataTypes.STRING,
+  sequelize.define('buyer', {
+    points: {
+      type: DataTypes.NUMBER,
       allowNull: false,
+      defaultValue: 0,
+    },
+    permissions: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   });
 };
