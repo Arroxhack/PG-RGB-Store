@@ -8,7 +8,7 @@ const PATH = "http://localhost:3001"
 export function getAllComponents(){
     return async function(dispatch){
         try{
-            let allComponents = await axios.get(`${PATH}/components`) //components por ahora
+            let allComponents = await axios.get(`${PATH}/products`) //components por ahora
             let allComponentsData = allComponents.data
             return dispatch({
                 type: GET_ALL_COMPONENTS,
