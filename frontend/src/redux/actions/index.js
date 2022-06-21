@@ -1,21 +1,23 @@
 import axios from 'axios';
-import { GET_ALL_COMPONENTS, GET_PRODUCT_DETAIL } from '../types/index';
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL } from '../types/index';
+
 
 const PATH = 'http://localhost:3001';
 
-export function getAllComponents() {
-  return async function (dispatch) {
-    try {
-      let allComponents = await axios.get(`${PATH}/products`); //components por ahora
-      let allComponentsData = allComponents.data;
-      return dispatch({
-        type: GET_ALL_COMPONENTS,
-        payload: allComponentsData,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export function getAllProducts(){
+    return async function(dispatch){
+        try{
+            let allProducts = await axios.get(`${PATH}/products`) //products por ahora
+            let allProductsData = allProducts.data
+            return dispatch({
+                type: GET_ALL_PRODUCTS,
+                payload: allProductsData
+            })
+        }
+        catch(error){
+            console.log(error)
+        }
+    };
 }
 
 export function getProductDetail(id) {

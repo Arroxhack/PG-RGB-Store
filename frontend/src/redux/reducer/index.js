@@ -1,16 +1,16 @@
-import { GET_ALL_COMPONENTS, GET_PRODUCT_DETAIL } from '../types/index';
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL } from '../types/index';
 
 const initialState = {
-  allComponents: [],
+  allProducts: [],
   detail: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALL_COMPONENTS:
+    case GET_ALL_PRODUCTS:
       return {
         ...state,
-        allComponents: action.payload,
+        allProducts: action.payload
       };
     case GET_PRODUCT_DETAIL:
       return {
@@ -23,3 +23,4 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
+
