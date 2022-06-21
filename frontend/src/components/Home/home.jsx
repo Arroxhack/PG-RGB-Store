@@ -1,8 +1,8 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getAllProducts} from "../redux/actions/index";
-import Product from "./Product/Product";
+import {getAllProducts} from "../../redux/actions/index";
+import Product from "../Product/Product";
 
 function home() {
 

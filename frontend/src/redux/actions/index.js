@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL } from '../types/index';
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL } from '../types/index';
 
 
 const PATH = 'http://localhost:3001';
@@ -32,4 +32,11 @@ export function getProductDetail(id) {
       console.log(error, ' product detail');
     }
   };
+}
+
+export const addCart = (product)=>{
+  return {
+    type:ADD_CART,
+    payload:product
+  }
 }
