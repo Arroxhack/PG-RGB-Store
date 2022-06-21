@@ -7,30 +7,27 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: null,
     },
     price: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      defaultValue: null,
     },
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: null,
+      defaultValue: 0,
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: null,
+      allowNull: false,
     },
     compatibilityBrands: {
-      type: DataTypes.TEXT('AMD', 'INTEL'),
+      type: DataTypes.ENUM('AMD', 'INTEL'),
       allowNull: true,
       defaultValue: null,
     },
     ddr: {
-      type: DataTypes.INTEGER(2, 3, 4, 5),
+      type: DataTypes.ENUM(2, 3, 4, 5),
       allowNull: true,
       defaultValue: null,
     },
@@ -39,8 +36,8 @@ module.exports = (sequelize) => {
       defaultValue: null,
     },
     image: {
+      allowNull: false,
       type: DataTypes.TEXT,
-      defaultValue: null,
     },
     factorMother: {
       type: DataTypes.ENUM(
@@ -75,8 +72,8 @@ module.exports = (sequelize) => {
     },
     percentageDiscount: {
       type: DataTypes.FLOAT,
-      allowNull: true,
-      defaultValue: null,
+      allowNull: false,
+      defaultValue: 0,
     },
   });
 };
