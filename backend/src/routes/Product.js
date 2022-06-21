@@ -13,6 +13,7 @@ router.get("/products/", async (req, res, next) => {
         include: {
           model: Category,
           where: { name: cat },
+          attributes: ["name"],
         },
       });
       if (AllProduct.length > 0) {
@@ -24,11 +25,24 @@ router.get("/products/", async (req, res, next) => {
       const AllProduct = await Product.findAll({
         include: {
           model: Category,
+          attributes: ["name"],
         },
       });
 
       res.send(AllProduct);
     }
+  } catch (e) {
+    next(e);
+  }
+});
+router.get("/product/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const ProductID = Product.findOne({
+      where: { id: id },
+      include: { model: Category, attributes: ["name"] },
+    });
+    res.send(ProductID);
   } catch (e) {
     next(e);
   }
