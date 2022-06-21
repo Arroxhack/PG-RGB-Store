@@ -1,23 +1,26 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { addCart } from '../../redux/actions'
+import { resetCart } from '../../redux/actions'
 
 const Cart = () => {
-
     const myStorage = window.localStorage
     const carrito = myStorage.carrito
     const product = JSON.parse(myStorage.getItem('carrito',JSON.parse(carrito)))
 
+    const dispatch = useDispatch()
+
+    console.log(product)
+ 
+
+    const {cart} = useSelector(state=>state)
 
 const deleteCart = (e)=>{
-    e.preventDefault()
-    myStorage.setItem('carrito',JSON.stringify({name:'carrito vacio'}))
+    myStorage.setItem('carrito',JSON.stringify([]))
 }
 
   return (
     <div>
-        { product && product.map(p=>{
+        {product && product.map(p=>{
             return(
                 <div>
                     <p key={p.id}>{p.name}</p>

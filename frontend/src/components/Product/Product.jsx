@@ -1,10 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
 import { addCart } from '../../redux/actions'
 import { useEffect } from "react"
+import { useState } from "react"
 
 
 const Product = ({product}) => {
-  const carrito = useSelector(state=>state.cart)
+  
+  const [state, setState] = useState([])
+
   const dispatch = useDispatch()
   const myStorage = window.localStorage
   const sendProduct = {
@@ -17,8 +20,10 @@ const Product = ({product}) => {
 
   const sendCard = (e)=>{
     e.preventDefault()
-    myStorage.setItem('carrito',JSON.stringify(sendProduct))
+    setState([...state, sendProduct])
+    myStorage.setItem('carrito',JSON.stringify(state))
   }
+  console.log(state)
 
   return (
     <div className='bg-blue-700 w-64 h-84 flex flex-col items-center rounded-md gap-2 hover:shadow-lg hover:shadow-green-700/50'>
