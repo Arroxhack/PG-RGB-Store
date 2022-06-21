@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Product, Category, Op } = require('../db');
+const { Product, Category, Op } = require('../../db');
 const router = Router();
 
 // hacemos un get de components (Products)
@@ -119,7 +119,7 @@ router.post('/products', async (req, res, next) => {
   }
 });
 
-router.get('/product/', async (req, res, next) => {
+router.get('/products/', async (req, res, next) => {
   const { name } = req.query;
   try {
     //CASOS ==========================
