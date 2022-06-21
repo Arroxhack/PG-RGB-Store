@@ -1,16 +1,16 @@
-import {GET_ALL_COMPONENTS} from "../types/index";
+import {GET_ALL_PRODUCTS} from "../types/index";
 
 const initialState = {
-    allComponents:[],
+    allProducts:[],
   };
   
   const reducer = (state = initialState, action) => {
     switch (action.type) {
       
-      case GET_ALL_COMPONENTS:
+      case GET_ALL_PRODUCTS:
         return{
           ...state,
-          allComponents: action.payload
+          allProducts: action.payload
         }
         default:
         return state;

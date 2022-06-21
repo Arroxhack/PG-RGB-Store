@@ -1,21 +1,29 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getAllComponents} from "../redux/actions/index"
+import {getAllProducts} from "../redux/actions/index";
+import Product from "./Product/Product";
 
 function home() {
 
 const dispatch = useDispatch(); 
-const allComponents = useSelector(state => state.allComponents);
+const allProducts = useSelector(state => state.allProducts);
 
 useEffect(() => {
-  dispatch(getAllComponents())
+  dispatch(getAllProducts())
 }, [dispatch])
 
-
-
   return(
-    <div>Hola Soy Tino</div> 
+    <div>
+      {allProducts.map(product => {
+        return(
+          <Product
+            key={product.id}
+            product={product}
+          /> 
+        )
+      })}
+    </div> 
   ); 
 }
 
