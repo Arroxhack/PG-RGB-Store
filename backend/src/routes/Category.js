@@ -19,3 +19,6 @@ try{
     res.send(NewCategory);
 }catch(e){next(e)}
 })
+
+module.exports = router;
+
