@@ -22,12 +22,12 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     compatibilityBrands: {
-      type: DataTypes.STRING("AMD", "INTEL"),
+      type: DataTypes.STRING,
       allowNull: true,
       defaultValue: null,
     },
     ddr: {
-      type: DataTypes.INTEGER(2, 3, 4, 5),
+      type: DataTypes.INTEGER,
       allowNull: true,
       defaultValue: null,
     },
@@ -40,13 +40,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
     },
     factorMother: {
-      type: DataTypes.STRING(
-        "standard-ATX",
-        "micro-ATX",
-        "mini-ITX",
-        "nano-ITX",
-        "pico-ITX"
-      ),
+      type: DataTypes.STRING
       allowNull: true,
       defaultValue: null,
     },
