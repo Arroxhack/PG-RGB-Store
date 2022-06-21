@@ -14,7 +14,7 @@ function DetailProduct() {
       dispatch(getProductDetail(id));
     }, []);
 
-    const Product = useSelector(())
+    const ProductDetail = useSelector((state)=> state.detail)
 
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
@@ -27,7 +27,7 @@ function DetailProduct() {
 
   return (
     <div>
-      <div>PRODUCT DETAILS</div>
+      <div>PRODUCT DETAIL</div>
       <div>
         <h1>{ProductDetail.name ? ProductDetail.name : null} </h1>
         <h3>{ProductDetail.stock ? `${ProductDetail.stock} in stock!` : null}</h3>
