@@ -4,12 +4,13 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('order', {
     creationDate: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     paid: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
     },
     payMethod: {
       type: DataTypes.STRING,

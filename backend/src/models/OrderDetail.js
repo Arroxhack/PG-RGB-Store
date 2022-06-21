@@ -6,12 +6,12 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('orderDetail', {
     amount: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
     },
     price: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
     },
