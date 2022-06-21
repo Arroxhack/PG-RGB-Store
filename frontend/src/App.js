@@ -6,8 +6,7 @@ import DetailProduct from "./components/DetailProduct/DetailProduct.jsx";
 import Cart from "./components/Cart/Cart";
 function App() {
   return (
-    <div>
-      <h1>Henry</h1>
+    <div className='Font-Open'>
       <Routes>
         <Route path="/" element={<ContainerProduct />} />
         <Route path="/home" element={<Home />} exact />
