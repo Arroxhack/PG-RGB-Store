@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
   sequelize.define(
     'orderDetail',
     {
-      amount: {
+      quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
