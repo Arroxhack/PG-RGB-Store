@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
     },
     socket: {
       type: DataTypes.STRING,
-      defaultValue: null,
+      defaultValue: true,
     },
     image: {
       allowNull: false,
