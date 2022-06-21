@@ -5,9 +5,6 @@ function App() {
   return (
     <div>
       <h1>Henry</h1>
-    <div>
-      <SideBar/>
-    </div>
     </div>
   );
 }
