@@ -15,23 +15,23 @@ module.exports = (sequelize) => {
       defaultValue: null,
     },
     stock: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: null,
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
     },
     compatibilityBrands: {
-      type: DataTypes.ENUM('AMD', 'INTEL'),
-      allowNull: false,
+      type: DataTypes.TEXT('AMD', 'INTEL'),
+      allowNull: true,
       defaultValue: null,
     },
     ddr: {
-      type: DataTypes.ENUM(2, 3, 4, 5),
-      allowNull: false,
+      type: DataTypes.INTEGER(2, 3, 4, 5),
+      allowNull: true,
       defaultValue: null,
     },
     socket: {
@@ -50,22 +50,22 @@ module.exports = (sequelize) => {
         'nano-ITX',
         'pico-ITX'
       ),
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
     },
     weight: {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
     },
     proportions: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
     },
     wattsPowerSupply: {
-      type: DataTypes.NUMBER,
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: true,
       defaultValue: null,
     },
     inOffer: {
