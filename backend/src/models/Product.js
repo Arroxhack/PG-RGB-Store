@@ -1,9 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('product', {
+  sequelize.define("product", {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -22,12 +22,12 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     compatibilityBrands: {
-      type: DataTypes.ENUM('AMD', 'INTEL'),
+      type: DataTypes.STRING,
       allowNull: true,
       defaultValue: null,
     },
     ddr: {
-      type: DataTypes.ENUM(2, 3, 4, 5),
+      type: DataTypes.INTEGER,
       allowNull: true,
       defaultValue: null,
     },
@@ -40,13 +40,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
     },
     factorMother: {
-      type: DataTypes.ENUM(
-        'standard-ATX',
-        'micro-ATX',
-        'mini-ITX',
-        'nano-ITX',
-        'pico-ITX'
-      ),
+      type: DataTypes.STRING
       allowNull: true,
       defaultValue: null,
     },
