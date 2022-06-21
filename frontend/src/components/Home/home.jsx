@@ -16,7 +16,6 @@ function Home() {
 
   return (
     <div>
-      <SideBar />
       {allProducts.map((product) => {
         return (
           <Link to={`/products/${product.id}`}>
