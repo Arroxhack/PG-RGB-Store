@@ -1,8 +1,8 @@
 import "./App.css";
 import { Route, Routes } from "react-router";
 import ContainerProduct from "./components/ContainerProduct/ContainerProduct";
-import Home from "./components/Home";
-import DetailProduct from "./components/DetailProduct";
+import Home from "./components/Home/Home.jsx";
+import DetailProduct from "./components/DetailProduct/DetailProduct.jsx";
 import Cart from "./components/Cart/Cart";
 function App() {
   return (
