@@ -3,9 +3,11 @@ import SideBar from './components/SideBar/SideBar';
 
 function App() {
   return (
-    <div className= 'text-3xl font-bold underline'>
+    <div>
       <h1>Henry</h1>
- 
+    <div>
+      <SideBar/>
+    </div>
     </div>
   );
 }
