@@ -24,18 +24,20 @@ module.exports = (sequelize) => {
     compatibilityBrands: {
       type: DataTypes.ENUM('AMD', 'INTEL'),
       allowNull: true,
+      defaultValue: null,
     },
     ddr: {
       type: DataTypes.ENUM(2, 3, 4, 5),
       allowNull: true,
+      defaultValue: null,
     },
     socket: {
       type: DataTypes.STRING,
       defaultValue: true,
     },
     image: {
-      type: DataTypes.TEXT,
       allowNull: false,
+      type: DataTypes.TEXT,
     },
     factorMother: {
       type: DataTypes.ENUM(
@@ -70,8 +72,8 @@ module.exports = (sequelize) => {
     },
     percentageDiscount: {
       type: DataTypes.FLOAT,
-      allowNull: true,
-      defaultValue: null,
+      allowNull: false,
+      defaultValue: 0,
     },
   });
 };
