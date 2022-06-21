@@ -72,7 +72,6 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
-      defaultValue: null,
     },
     percentageDiscount: {
       type: DataTypes.FLOAT,
