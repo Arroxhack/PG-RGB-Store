@@ -2,6 +2,7 @@ const { Router } = require("express");
 const Products = require("./Product");
 const Category = require("./Category");
 const CargarDB = require("./CargarDB");
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 

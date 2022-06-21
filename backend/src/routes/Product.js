@@ -16,7 +16,7 @@ router.get("/products/", async (req, res, next) => {
           attributes: ["name"],
         },
       });
-      if (AllProduct.length > 0) {
+      if (AllProduct.length) {
         res.send(AllProduct);
       } else {
         res.send("Error, Not Product with that Category");
@@ -28,21 +28,31 @@ router.get("/products/", async (req, res, next) => {
           attributes: ["name"],
         },
       });
-
-      res.send(AllProduct);
+      if (AllProduct.length) {
+        res.send(AllProduct);
+      } else {
+        res.send("Error, Not Product with that Category");
+      }
     }
   } catch (e) {
     next(e);
   }
 });
-router.get("/product/:id", async (req, res, next) => {
-  const { id } = req.params;
+router.get("/products/:ID", async (req, res, next) => {
+  let { ID } = req.params;
+  ID = Number(ID);
+  console.log(ID);
+
   try {
-    const ProductID = Product.findOne({
-      where: { id: id },
+    const ProductID = await Product.findByPk(ID, {
       include: { model: Category, attributes: ["name"] },
     });
-    res.send(ProductID);
+    console.log(ProductID);
+    if (ProductID) {
+      res.send(ProductID);
+    } else {
+      res.send("Error, Not Product with that ID");
+    }
   } catch (e) {
     next(e);
   }
@@ -110,4 +120,3 @@ router.post("/products", async (req, res, next) => {
 });
 
 module.exports = router;
-
