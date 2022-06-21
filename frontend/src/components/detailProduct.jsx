@@ -1,8 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { getProductDetail } from "../redux/actions/index";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useParams } from "react-router-dom";
+// import { useEffect } from "react";
+// import { getProductDetail } from "../redux/actions/index";
 
 function DetailProduct() {
   const ProductDetail = {

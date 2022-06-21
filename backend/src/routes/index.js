@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 const { Router } = require('express');
-const products = require('./Product');
-const category = require('./Category');
-=======
-const { Router } = require("express");
-const Products = require("./Product");
-const Category = require("./Category");
-const CargarDB = require("./CargarDB");
->>>>>>> d7cc50c519687a812801247ece4f08be2c8444b1
+const Products = require('./products/Product');
+const Category = require('./categories/Category');
+const CargarDB = require('./products/CargarDB');
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -15,13 +10,7 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-<<<<<<< HEAD
-router.use('/', products);
-router.use('/', category);
-
-=======
-router.use("/", Products);
-router.use("/", Category);
-router.use("/api", CargarDB);
->>>>>>> d7cc50c519687a812801247ece4f08be2c8444b1
+router.use('/', Products);
+router.use('/', Category);
+router.use('/api', CargarDB);
 module.exports = router;

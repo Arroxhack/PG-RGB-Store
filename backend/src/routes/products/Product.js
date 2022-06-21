@@ -1,11 +1,11 @@
-const { Router } = require("express");
-const { Product, Category } = require("../db");
+const { Router } = require('express');
+const { Product, Category, Op } = require('../../db');
 const router = Router();
 
 // hacemos un get de components (Products)
 // preguntamos si tiene query para filtrar por categoria
 // si no tiene query trae todos los productos
-router.get("/products/", async (req, res, next) => {
+router.get('/products/', async (req, res, next) => {
   try {
     const cat = req.query.category;
     if (cat) {
@@ -13,36 +13,46 @@ router.get("/products/", async (req, res, next) => {
         include: {
           model: Category,
           where: { name: cat },
-          attributes: ["name"],
+          attributes: ['name'],
         },
       });
-      if (AllProduct.length > 0) {
+      if (AllProduct.length) {
         res.send(AllProduct);
       } else {
-        res.send("Error, Not Product with that Category");
+        res.status(404).send('Error, Not Product with that Category');
       }
     } else {
       const AllProduct = await Product.findAll({
         include: {
           model: Category,
-          attributes: ["name"],
+          attributes: ['name'],
         },
       });
-
-      res.send(AllProduct);
+      if (AllProduct.length) {
+        res.send(AllProduct);
+      } else {
+        res.status(404).send('Error, Not Product with that Category');
+      }
     }
   } catch (e) {
     next(e);
   }
 });
-router.get("/product/:id", async (req, res, next) => {
-  const { id } = req.params;
+router.get('/products/:ID', async (req, res, next) => {
+  let { ID } = req.params;
+  ID = Number(ID);
+  console.log(ID);
+
   try {
-    const ProductID = Product.findOne({
-      where: { id: id },
-      include: { model: Category, attributes: ["name"] },
+    const ProductID = await Product.findByPk(ID, {
+      include: { model: Category, attributes: ['name'] },
     });
-    res.send(ProductID);
+    console.log(ProductID);
+    if (ProductID) {
+      res.send(ProductID);
+    } else {
+      res.status(404).send('Error, Not Product with that ID');
+    }
   } catch (e) {
     next(e);
   }
@@ -52,7 +62,7 @@ router.get("/product/:id", async (req, res, next) => {
 //  si no existe una categoria se crea una y se hace la relacion
 //  (category es un array "HACER FORMULARIO CONTROLADO")
 
-router.post("/products", async (req, res, next) => {
+router.post('/products', async (req, res, next) => {
   const {
     name,
     price,
@@ -72,7 +82,7 @@ router.post("/products", async (req, res, next) => {
   } = req.body;
   try {
     if (!name && !price && !description && !image && !category.length) {
-      return res.send(new Error("Error not params in body"));
+      return res.send(new Error('Error not params in body'));
     }
     let newProduct = await Product.create({
       name,
@@ -109,5 +119,25 @@ router.post("/products", async (req, res, next) => {
   }
 });
 
+router.get('/products/', async (req, res, next) => {
+  const { name } = req.query;
+  try {
+    //CASOS ==========================
+    //product existe -> lo devuelvo
+    //product no existe -> devuelvo un mensaje de error
+    const response = await Product.findAll({
+      include: { model: Category },
+      where: {
+        name: { [Op.like]: `%${name}%` },
+      },
+    });
+    if (response.length > 0) {
+      res.send(response);
+    } else {
+      res.status(404).send('Not product found');
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = router;
-
