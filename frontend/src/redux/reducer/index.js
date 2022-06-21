@@ -1,4 +1,4 @@
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL } from '../types/index';
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART } from '../types/index';
 
 const initialState = {
   allProducts: [],
@@ -22,6 +22,11 @@ const reducer = (state = initialState, action) => {
       return{
         ...state,
         cart:[...state.cart, action.payload]
+      }
+    case RESET_CART:
+      return{
+        ...state,
+        cart:[]
       }
     default:
       return { ...state };
