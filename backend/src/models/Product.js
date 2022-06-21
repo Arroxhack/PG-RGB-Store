@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
     },
     factorMother: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
       allowNull: true,
       defaultValue: null,
     },
