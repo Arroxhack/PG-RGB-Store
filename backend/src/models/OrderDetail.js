@@ -4,16 +4,20 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('orderDetail', {
-    amount: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
+  sequelize.define(
+    'orderDetail',
+    {
+      amount: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
     },
-    price: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
-    },
-  });
+    { timestamps: false }
+  );
 };
