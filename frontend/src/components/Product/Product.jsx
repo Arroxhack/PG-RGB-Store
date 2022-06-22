@@ -31,7 +31,7 @@ const Product = ({product}) => {
         <div className='flex flex-col items-center p-4'>
         <h3 className='text-xl font-bold'>{`$${product.price}`}</h3>
         <p className='text-l uppercase'>{product.name}</p>
-        <button onClick={sendCard}>Add to Cart</button>
+        <button className="bg-primary-300 px-3 py-1 rounded-md mt-2 mb-2 hover:border" onClick={sendCard}>Add to Cart</button>
         </div>
     </div>
   )
