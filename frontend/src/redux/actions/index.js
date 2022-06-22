@@ -60,3 +60,16 @@ export function searchProducts(search) {
   })
   }
 }
+
+export function PostUser(user) {
+  return async function () {
+    try{
+      const exit = await axios.post("/register",user)
+      if (exit.data){
+        alert("Register Succesfully")
+      }
+     }catch(e){
+      console.log("Error in Register")
+  }
+  }
+}
