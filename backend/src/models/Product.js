@@ -51,7 +51,7 @@ module.exports = (sequelize) => {
         allowNull: true,
         defaultValue: null,
       },
-      proportions: {
+      dimensions: {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: null,

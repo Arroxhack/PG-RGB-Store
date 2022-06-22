@@ -57,6 +57,11 @@ module.exports = (sequelize) => {
       allowNull: true,
       defaultValue: null,
     },
+    verify: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
     lock: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
