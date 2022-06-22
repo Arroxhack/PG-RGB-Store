@@ -4,9 +4,11 @@ import SearchBar from "../SearchBar/SearchBar";
 
 function NavBar({ toggleOpen }) {
   return (
-    <nav className="flex justify-between items-center h-16 bg-gray-300 text-black relative shadow-sm">
-      <Link to="/" class="pl-8">
-        RGB
+    <nav className="flex justify-evenly items-center h-36 bg-gray-300 text-black relative shadow-sm bg-primary-200">
+      <Link to="/" className="flex flex-col items-center text-primary-400 font-Open text-5xl font-extrabold">
+        RGB 
+        <span className="font-PT text-primary-300 font-normal text-4xl"
+        >STORE</span>
       </Link>
       <div>
       <SearchBar/>
@@ -26,14 +28,11 @@ function NavBar({ toggleOpen }) {
         </svg>
       </div>
      
-      <div className="pr-8 hidden md:block">
-        <Link to="" className="p-4">
-          Home
-        </Link>
-        <Link to="" className="p-4">
+      <div className="flex gap-5">
+        <Link to="" className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
           Ingresar
         </Link>
-        <Link to="" className="p-4">
+        <Link to="" className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
           Carrito
         </Link>
       </div>
