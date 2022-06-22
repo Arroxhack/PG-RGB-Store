@@ -8,8 +8,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<ContainerProduct />} />
-        <Route path="/home" element={<Home />} exact />
+        <Route path="/" element={<Home />} />
         <Route path="/products/:id" element={<DetailProduct />} exact />
         <Route path="/cart" element={<Cart />} />
       </Routes>

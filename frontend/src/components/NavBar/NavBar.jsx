@@ -26,9 +26,6 @@ function NavBar({ toggleOpen }) {
      
       <div className="pr-8 hidden md:block">
         <Link to="" className="p-4">
-          Home
-        </Link>
-        <Link to="" className="p-4">
           Ingresar
         </Link>
         <Link to="" className="p-4">
