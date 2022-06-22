@@ -18,7 +18,7 @@ const CartProvider = ({children}) => {
         console.log(products)
     }, [products])
 
-    const addProductToCart=(product)=>{
+    const addProductToCart= product=>{
         const inCart = products.find(p=>p.id===product.id)
 
         if(inCart){
@@ -28,36 +28,39 @@ const CartProvider = ({children}) => {
                 }
                 else return p
             }))
+        }else{
+            setProducts([...products, {...product, amount:1}])
         }
 
-        // setProducts([...products,{...product, amount:1}])
-
-        // if(inCart){
-        //     setProducts(products.map(p=>{
-        //         if(p.id===product.id){
-        //             return {...inCart, amount:inCart.amount+1}
-        //         }else return p
-        //     }))
-        // }
-        // else{
-        //     setProducts([...product, {...product, amount:1}])
-        // }
     }
 
     const deleteProductCart = product=>{
         const inCart = products.find(p=>p.id===product.id)
-        if(inCart.amount ===1 ){
-            setProducts(
-                products.filter(p=>p.id!==product.id)
-            )
+        console.log(inCart)
+
+        if(inCart.amount === 1 ){
+            setProducts(products.filter(p=>p.id!==product.id))
         }
         if(inCart.amount > 1){
-            setProducts(p=>{
+            setProducts(products.map(p=>{
                 if(p.id===product.id){
-                    return {...inCart, amount:inCart.amount-1}
+                    return {...p, amount:p.amount-1}
                 } else return p
-            })
+            }))
         }
+
+        // if(inCart.amount ===1 ){
+        //     setProducts(
+        //         products.filter(p=>p.id!==product.id)
+        //     )
+        // }
+        // if(inCart.amount > 1){
+        //     setProducts(p=>{
+        //         if(p.id===product.id){
+        //             return {...inCart, amount:inCart.amount-1}
+        //         } else return p
+        //     })
+        // }
     }
 
     const resetProductCart = ()=>{
@@ -66,9 +69,7 @@ const CartProvider = ({children}) => {
 
 
     return (
-        <CartContext.Provider
-        value={{products, addProductToCart,deleteProductCart}}
-        >
+        <CartContext.Provider value={{products, addProductToCart,deleteProductCart, resetProductCart}}>
             {children}
         </CartContext.Provider>
     )
