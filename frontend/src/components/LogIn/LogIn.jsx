@@ -59,10 +59,14 @@ const handleLoginSubmit = async(e) => {
             LogIn
         </button>
     </div> */
-    <div className='min-h-screen'>
-      <form onSubmit={(e) => handleLoginSubmit(e)}>
+    <div className=' flex flex-col items-center justify-center min-h-screen bg-primary-300'>
+      <form className=' w-1/3 h-96  border-white border-2 gap-6 rounded-md flex flex-col justify-center items-center
+      sm:w-2/4  ' onSubmit={(e) => handleLoginSubmit(e)}>
         <div>
-          <input 
+        <img className='w-16' src="https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg" alt="avatar" />
+        </div>
+        <div className='xs'>
+          <input className='border-2 rounded max-w-max  '
           type='text'
           value={userName}
           name='Username'
@@ -71,7 +75,7 @@ const handleLoginSubmit = async(e) => {
           />
         </div>
         <div>
-          <input 
+          <input className='w-full'
           type='password' 
           value={password}
           name='Password'
