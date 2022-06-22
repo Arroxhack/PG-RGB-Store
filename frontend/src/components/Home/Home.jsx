@@ -21,7 +21,7 @@ function Home() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="bg-gradient-to-t from-primary-300 to-primary">
       <NavBar/>
       <Nav/>
       <Slider/>
