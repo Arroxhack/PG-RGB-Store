@@ -23,7 +23,7 @@ const Product = ({product}) => {
     setState([...state, sendProduct])
     myStorage.setItem('carrito',JSON.stringify(state))
   }
-  console.log(state)
+  
 
   return (
     <div className='bg-primary w-36 h-56 flex flex-col items-center rounded-md gap-2 text-primary-200 hover:shadow-lg hover:shadow-primary-200'>

@@ -2,33 +2,36 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
-import orderedByPrice from '../../redux/reducer'
+import {orderedByPrice} from '../../redux/actions'
 import {getAllCategories} from '../../redux/actions'
+import { setFilter } from "../../redux/actions";
 
 
 export default function SideBar() {
 
   const dispatch = useDispatch();
-  const products = useSelector(state => state.products);
   const categories= useSelector(state=> state.categories)
-  const[order,setOrder]= useState('')
+  const filters= useSelector(state=>state.filtros)
+
+
+
   
   const marcas=[
         "hyperX","Redragron","Logitech","T-dagger","hp"
     ]
 
      useEffect(()=>{
-      dispatch(getAllCategories()) 
+      dispatch(getAllCategories())
      },[dispatch])
 
 
     function handleOrderedByPrice(e){
       e.preventDefault();
-      console.log(products)
       dispatch(orderedByPrice(e.target.value));
-      setOrder(`Ordenado ${e.target.value} `)
+      dispatch(setFilter(e.target.value))
     }
-    console.log(categories)
+    
+    console.log(filters)
   
   
   
@@ -48,7 +51,6 @@ export default function SideBar() {
           <div className="flex justify-center">
             <h4>Order by</h4>
           <select onChange={e => handleOrderedByPrice(e)} className='w-1/2 '>
-            <option value="" selected disabled>Price</option>
             <option value="mayor valor">higher price</option>
             <option value="menor valor">lower price</option>
           </select>

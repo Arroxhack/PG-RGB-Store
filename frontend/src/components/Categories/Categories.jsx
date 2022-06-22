@@ -14,7 +14,7 @@ export default function () {
     useEffect(() => {
       dispatch(getAllProducts());
     }, [dispatch]);
-  
+
 
   return (
     <div className="bg-primary-200 flex p-0 ">

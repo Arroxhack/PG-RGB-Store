@@ -5,3 +5,4 @@ export const FILTER_BY_PRICE = 'FILTER_BY_PRICE'
 export const RESET_CART = 'RESET_CART';
 export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
 export const GET_CATEGORIES= 'GET_CATEGORIES';
+export const SET_FILTER= 'SET_FILTER';

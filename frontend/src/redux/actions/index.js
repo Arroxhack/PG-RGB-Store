@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES } from "../types/index";
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER } from "../types/index";
 const PATH = "http://localhost:3001";
 
 export function getAllProducts() {
@@ -44,7 +44,7 @@ export const resetCart = ()=>{
   }
 }
 
-export function orderedByPrice(payload){
+export function orderedByPrice(payload){  
   return {
     type: FILTER_BY_PRICE,
     payload
@@ -59,7 +59,6 @@ export function searchProducts(search) {
           payload: products.data
       })
   }))
-  
   .catch(() => {
       alert("Product not found!")
   })
@@ -71,7 +70,8 @@ export function getAllCategories() {
   return async function (dispatch) {
     try {
       let AllCategory = await axios.get(`${PATH}/category`); 
-      let allCategoryData = AllCategory.map((e)=>e.name)
+      console.log(AllCategory)
+      let allCategoryData = AllCategory.data.map((e)=>e.name)
       return dispatch({
         type: GET_CATEGORIES,
         payload: allCategoryData,
@@ -80,4 +80,11 @@ export function getAllCategories() {
       console.log(error);
     }
   };
+}
+
+export function setFilter(payload){
+  return {
+    type: SET_FILTER,
+    payload
+  }
 }
