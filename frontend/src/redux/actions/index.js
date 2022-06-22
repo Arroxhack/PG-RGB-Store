@@ -67,9 +67,17 @@ export function searchProducts(search) {
 }
 
 
-export function filterPokemonsByCategory(payload) {
-  return {
-    type: GET_CATEGORIES,
-    payload,
+export function getAllCategories() {
+  return async function (dispatch) {
+    try {
+      let AllCategory = await axios.get(`${PATH}/category`); 
+      let allCategoryData = AllCategory.map((e)=>e.name)
+      return dispatch({
+        type: GET_CATEGORIES,
+        payload: allCategoryData,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }

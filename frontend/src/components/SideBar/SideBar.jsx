@@ -3,6 +3,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
 import orderedByPrice from '../../redux/reducer'
+import {getAllCategories} from '../../redux/actions'
+
+
 export default function SideBar() {
 
   const dispatch = useDispatch();
@@ -14,15 +17,10 @@ export default function SideBar() {
         "hyperX","Redragron","Logitech","T-dagger","hp"
     ]
 
-    
-    // useEffect(() => {
-    //   dispatch(filterCategories());
-    // }, [dispatch]);
-  
-    function handleFilterCategory(e) {
-      e.preventDefault();
-      dispatch(filterPokemonsByCategory(e.target.value));
-    }
+     useEffect(()=>{
+      dispatch(getAllCategories()) 
+     },[dispatch])
+
 
     function handleOrderedByPrice(e){
       e.preventDefault();
@@ -31,7 +29,10 @@ export default function SideBar() {
       setOrder(`Ordenado ${e.target.value} `)
     }
     console.log(categories)
-  return (
+  
+  
+  
+    return (
     <aside className='w-1/4 md:w-64 sm:text-xs fixed  shadow-xl flex flex-col justify-around bg-primary-200 h-screen text-lg md:text-sm text-center text-primary-400 '>
       <div>
       <h4 className='text-xl text-yellow-300'>Categories</h4>
@@ -39,7 +40,7 @@ export default function SideBar() {
         <li className='flex flex-col text-left '>
           {categories?categories.map((cat)=>{
             return(
-                <button  onChange={e => handleFilterCategory(e)} className='no-underline hover:text-yellow-300 hover:rounded-lg hover:transition-y-6 text-left pl-4' >{cat}</button>
+                <button  className='no-underline hover:text-yellow-300 hover:rounded-lg hover:transition-y-6 text-left pl-4' >{cat}</button>
           )}):0}
         </li>
       </ul>

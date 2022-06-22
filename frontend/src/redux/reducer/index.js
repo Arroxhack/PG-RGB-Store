@@ -1,6 +1,5 @@
 
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, FILTER_CATEGORIES } from '../types/index';
-import filterCategories from '../../redux/reducer'
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES } from '../types/index';
 
 const initialState = {
   allProducts: [],
@@ -59,13 +58,12 @@ const reducer = (state = initialState, action) => {
           ...state,
           products: action.payload
         }
-        case FILTER_BY_TYPE:
-          const allProducts = state.allProducts;
-          const categoryFilter = action.payload.length ? allProducts : allProducts.filter((e) => e.category.includes(action.payload));
-          return {
+          case GET_CATEGORIES:
+            return {
               ...state,
-              products: categoryFilter,
-          };
+              categories: action.payload,
+            };
+
     default:
       return { ...state };
   }

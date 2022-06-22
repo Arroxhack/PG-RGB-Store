@@ -15,6 +15,7 @@ export default function () {
       dispatch(getAllProducts());
     }, [dispatch]);
   
+
   return (
     <div className="bg-primary-200 flex p-0 ">
     <fragment className='w-1/4'>
