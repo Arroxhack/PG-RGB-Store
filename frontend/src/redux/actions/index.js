@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART  } from "../types/index";
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART,FILTER_BY_PRICE  } from "../types/index";
 
 const PATH = "http://localhost:3001";
 
@@ -42,5 +42,12 @@ export const addCart = (product) => {
 export const resetCart = ()=>{
   return{
     type:RESET_CART
+  }
+}
+
+export function orderedByPrice(payload){
+  return {
+    type: FILTER_BY_PRICE,
+    payload
   }
 }

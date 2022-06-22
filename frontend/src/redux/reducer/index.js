@@ -1,9 +1,10 @@
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART } from '../types/index';
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART , FILTER_BY_PRICE} from '../types/index';
 
 const initialState = {
   allProducts: [],
   detail: [],
-  cart:[]
+  cart:[],
+  products:[]
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,7 +12,8 @@ const reducer = (state = initialState, action) => {
     case GET_ALL_PRODUCTS:
       return {
         ...state,
-        allProducts: action.payload
+        allProducts: action.payload,
+        products: action.payload,
       };
     case GET_PRODUCT_DETAIL:
       return {
@@ -28,6 +30,26 @@ const reducer = (state = initialState, action) => {
         ...state,
         cart:[]
       }
+      case FILTER_BY_PRICE:
+          let orderedByPrice = action.payload === 'Menor precio'?
+          state.products.sort(function(a, b) {
+              if (a.price > b.price)return 1;    
+              if (b.price > a.price)return -1;
+
+              return 0;
+        
+              
+          }):
+          state.products.sort(function(a,b){
+              if(a.price > b.price) return -1;
+              if(b.price > a.price) return 1;
+              return 0;
+          })
+          return{
+              ...state,
+              products: orderedByPrice
+          };
+
     default:
       return { ...state };
   }
