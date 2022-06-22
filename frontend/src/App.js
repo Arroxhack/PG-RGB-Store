@@ -5,6 +5,7 @@ import Home from "./components/Home/Home.jsx";
 import DetailProduct from "./components/DetailProduct/DetailProduct.jsx";
 import Cart from "./components/Cart/Cart";
 import Categories from "./components/Categories/Categories";
+import LogIn from "./components/LogIn/LogIn";
 function App() {
   return (
     <div className='Font-Open'>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/products/:id" element={<DetailProduct />} exact />
         <Route path="/cart" element={<Cart />} />
         <Route path="/categories" element={<Categories />} />
+        <Route path="/logIn" element={<LogIn />} />
       </Routes>
     </div>
   );
