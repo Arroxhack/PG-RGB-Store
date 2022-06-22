@@ -1,4 +1,5 @@
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_PRODUCT_DETAIL = 'GET_PRODUCT_DETAIL';
-export const ADD_CART = 'ADD_CART'
-export const RESET_CART = 'RESET_CART'
+export const ADD_CART = 'ADD_CART';
+export const RESET_CART = 'RESET_CART';
+export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
