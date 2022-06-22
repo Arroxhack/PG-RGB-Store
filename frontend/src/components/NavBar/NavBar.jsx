@@ -1,8 +1,19 @@
-import React from "react";
+import React,{useState} from "react";
 import { Link, NavLink } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+import BoxCart from "../Cart/BoxCart";
+
 
 function NavBar({ toggleOpen }) {
+  const username = localStorage.getItem("username")
+
+  const [cartOpen, setCartOpen]= useState(false)
+
+  const handleCart = (e)=>{
+    e.preventDefault()
+    setCartOpen(!cartOpen)
+  }
+
   return (
     <nav className="flex justify-evenly items-center h-36 bg-gray-300 text-black relative shadow-sm bg-primary-200">
       <Link to="/" className="flex flex-col items-center text-primary-400 font-Open text-5xl font-extrabold">
@@ -29,12 +40,16 @@ function NavBar({ toggleOpen }) {
       </div>
      
       <div className="flex gap-5">
-        <Link to="" className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
+        {username ? <h2>Bienvenido {username}</h2> : 
+        <Link to="/logIn" className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
           Ingresar
-        </Link>
-        <Link to="" className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
-          Carrito
-        </Link>
+        </Link>}
+      {
+        cartOpen ? <BoxCart onClick={handleCart}/> :         <p onClick={handleCart} className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
+        Carrito
+      </p>
+      }
+
       </div>
     </nav>
   );
