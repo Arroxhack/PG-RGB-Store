@@ -1,12 +1,10 @@
 
 import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES,SET_FILTER} from '../types/index';
-
 const initialState = {
   allProducts: [],
   products: [],
   detail: [],
   cart:[],
-  products:[],
   categories:[],
   filtros: [],
 };

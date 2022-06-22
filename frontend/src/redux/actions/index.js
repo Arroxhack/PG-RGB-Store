@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER } from "../types/index";
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER} from "../types/index";
 const PATH = "http://localhost:3001";
 
 export function getAllProducts() {
@@ -16,6 +16,8 @@ export function getAllProducts() {
     }
   };
 }
+
+
 
 export function getProductDetail(id) {
   return async function (dispatch) {
@@ -86,5 +88,17 @@ export function setFilter(payload){
   return {
     type: SET_FILTER,
     payload
+  }
+}
+export function PostUser(user) {
+  return async function () {
+    try{
+      const exit = await axios.post("/register",user)
+      if (exit.data){
+        alert("Register Succesfully")
+      }
+     }catch(e){
+      console.log("Error in Register")
+  }
   }
 }

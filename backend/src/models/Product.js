@@ -35,7 +35,8 @@ module.exports = (sequelize) => {
       },
       socket: {
         type: DataTypes.STRING,
-        defaultValue: true,
+        allowNull: true,
+        defaultValue: null,
       },
       image: {
         allowNull: false,
@@ -51,7 +52,7 @@ module.exports = (sequelize) => {
         allowNull: true,
         defaultValue: null,
       },
-      proportions: {
+      dimensions: {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: null,
@@ -70,6 +71,11 @@ module.exports = (sequelize) => {
         type: DataTypes.FLOAT,
         allowNull: false,
         defaultValue: 0,
+      },
+      brand: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
       },
     },
     { timestamps: false }
