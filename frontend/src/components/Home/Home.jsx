@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getAllProducts } from "../../redux/actions/index";
 import Nav from "../NavBar/Nav";
 import NavBar from "../NavBar/NavBar";
@@ -20,6 +20,7 @@ function Home() {
     dispatch(getAllProducts());
   }, [dispatch]);
 
+
   return (
     <div className="bg-gradient-to-t from-primary-300 to-primary">
       <NavBar/>
@@ -37,7 +38,11 @@ function Home() {
       products={product}
       />
       </div>
-
+      <div>
+        <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank">
+          <img class='fixed bottom-2 right-2 w-20 m-5' src="https://storage.googleapis.com/m-infra.appspot.com/public/whatsapp/Whatsapp_logo.svg"/>
+        </a>
+      </div>
       {/* {allProducts.map((product) => {
         return (
           <Link to={`/products/${product.id}`}>

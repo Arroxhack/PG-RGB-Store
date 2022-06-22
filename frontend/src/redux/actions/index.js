@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS  } from "../types/index";
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS, LOAD_USER} from "../types/index";
 
 const PATH = "http://localhost:3001";
 
@@ -17,6 +17,8 @@ export function getAllProducts() {
     }
   };
 }
+
+
 
 export function getProductDetail(id) {
   return async function (dispatch) {
@@ -47,7 +49,7 @@ export const resetCart = ()=>{
 
 export function searchProducts(search) {
   return function (dispatch) {
-  axios.get("/products?name=" + search)
+  axios.get(`${PATH}/products?name=` + search)
   .then((products => {
       dispatch({
           type: SEARCH_PRODUCTS,
@@ -60,3 +62,4 @@ export function searchProducts(search) {
   })
   }
 }
+

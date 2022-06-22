@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import Logout from "../LogOut/Logout";
 import SearchBar from "../SearchBar/SearchBar";
+import BoxCart from "../Cart/BoxCart";
 
 function NavBar({ toggleOpen }) {
+  const username = localStorage.getItem("username");
+
+  const [cartOpen, setCartOpen] = useState(false);
+
+  const handleCart = (e) => {
+    e.preventDefault();
+    setCartOpen(!cartOpen);
+  };
+
   return (
     <nav className="flex justify-evenly items-center h-36 bg-gray-300 text-black relative shadow-sm bg-primary-200">
-      <Link to="/" className="flex flex-col items-center text-primary-400 font-Open text-5xl font-extrabold">
-        RGB 
-        <span className="font-PT text-primary-300 font-normal text-4xl"
-        >STORE</span>
+      <Link
+        to="/"
+        className="flex flex-col items-center text-primary-400 font-Open text-5xl font-extrabold"
+      >
+        RGB
+        <span className="font-PT text-primary-300 font-normal text-4xl">
+          STORE
+        </span>
       </Link>
       <div>
-      <SearchBar/>
+        <SearchBar />
       </div>
       <div className="px-4 cursor-pointer md:hidden" onClick={toggleOpen}>
         <svg
@@ -27,14 +42,43 @@ function NavBar({ toggleOpen }) {
           />
         </svg>
       </div>
-     
+
       <div className="flex gap-5">
-        <Link to="/logIn" className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
-          Ingresar
-        </Link>
-        <Link to="" className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
-          Carrito
-        </Link>
+        {username ? (
+          <>
+            <Link to="/profile">
+              <h2 className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
+                Bienvenido {username}
+              </h2>
+            </Link>{" "}
+            <Logout />
+          </>
+        ) : (
+          <>
+            <Link
+              to="/logIn"
+              className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+            >
+              Ingresar
+            </Link>
+            <Link
+              to="/register"
+              className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+            >
+              Register
+            </Link>
+          </>
+        )}
+        {cartOpen ? (
+          <BoxCart onClick={handleCart} />
+        ) : (
+          <p
+            onClick={handleCart}
+            className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+          >
+            Carrito
+          </p>
+        )}
       </div>
     </nav>
   );

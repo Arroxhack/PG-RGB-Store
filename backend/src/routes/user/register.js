@@ -5,12 +5,15 @@ const randomstring = require("randomstring");
 const router = Router();
 
 function isAuthenticated(req, res, next) {
-  console.log(req.session, ' esto es req.session register isAuthenticated');
-  console.log(req.user, ' esto es req.user register isAuthenticated');
-  console.log(req.cookies,' esto es req.cookies register isAuthenticated' )
-  console.log(req.signedCookies,' esto es req.signedCookies register isAuthenticated' )
+  console.log(req.session, " esto es req.session register isAuthenticated");
+  console.log(req.user, " esto es req.user register isAuthenticated");
+  console.log(req.cookies, " esto es req.cookies register isAuthenticated");
+  console.log(
+    req.signedCookies,
+    " esto es req.signedCookies register isAuthenticated"
+  );
   if (req.isAuthenticated()) {
-    res.redirect('/api/service/register');
+    res.redirect("/api/service/register");
   } else {
     next();
   }
@@ -21,9 +24,11 @@ function isAuthenticated(req, res, next) {
 // hacer un post a /register.
 //-------------------------------------------------------------------------------
 
-router.get('/register', (req, res, next) => {
-  res.send('No puede realizar un post /register mientras su sesión esté iniciada');
-})
+router.get("/register", (req, res, next) => {
+  res.send(
+    "No puede realizar un post /register mientras su sesión esté iniciada"
+  );
+});
 
 router.post("/register", async (req, res, next) => {
   const {
@@ -75,19 +80,17 @@ router.post("/register", async (req, res, next) => {
           name,
           lastname,
           username,
-          image: image || null,
-          cellphone: cellphone || null,
           email,
           password: promisedAll[3],
-          address,
           secretToken: promisedAll[2],
         });
 
         if (newUser.id) {
           userId = newUser.id;
         }
-
-        res.send(newUser);
+        res.send(
+          newUser.username
+        );
         // res.redirect(
         //   `/register/activation/${userId}/${promisedAll[2]}/${newUser.username}`
         // );

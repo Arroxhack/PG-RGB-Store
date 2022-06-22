@@ -39,7 +39,8 @@ module.exports = (sequelize) => {
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: null,
     },
     points: {
       type: DataTypes.INTEGER,
@@ -55,6 +56,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
       defaultValue: null,
+    },
+    verify: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
     lock: {
       type: DataTypes.BOOLEAN,
