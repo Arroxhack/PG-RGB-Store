@@ -7,8 +7,10 @@ const session = require("express-session");
 const passport = require("passport");
 const Strategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
-const { findUser } = require("./controllers/users")
+const { findUser } = require("./controllers/users");
 require("./db.js");
+require("dotenv").config();
+const { CORS_URL, SECRET } = process.env;
 
 const server = express();
 
@@ -90,7 +92,7 @@ passport.deserializeUser(function (_id, done) {
 
 server.use(
   session({
-    secret: SECRET || "secret",
+    secret: "secret",
     resave: true,
     saveUninitialized: true,
   })
