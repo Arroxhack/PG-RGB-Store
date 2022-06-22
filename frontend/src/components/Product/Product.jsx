@@ -3,11 +3,17 @@ import { CartContext } from "../Cart/CartContext"
 
 const Product = ({product}) => {
   
-  const {addProductToCart} = useContext(CartContext)
+
+  const {addProductToCart, resetProductCart} = useContext(CartContext)
 
   const sendCard = (e)=>{
     e.preventDefault()
     addProductToCart(product)
+  }
+
+  const reset = (e)=>{
+    e.preventDefault()
+    resetProductCart()
   }
 
   return (
@@ -17,6 +23,7 @@ const Product = ({product}) => {
         <h3 className='text-xl font-bold'>{`$${product.price}`}</h3>
         <p className='text-l uppercase'>{product.name}</p>
         <button className="bg-primary-300 px-3 py-1 rounded-md mt-2 mb-2 hover:border" onClick={sendCard}>Add to Cart</button>
+        {/* <button className="bg-primary-300 px-3 py-1 rounded-md mt-2 mb-2 hover:border" onClick={resetProductCart}>NO TOCAR</button> */}
         </div>
     </div>
   )

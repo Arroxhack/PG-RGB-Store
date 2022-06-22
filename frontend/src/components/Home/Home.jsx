@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getAllProducts } from "../../redux/actions/index";
 import Nav from "../NavBar/Nav";
 import NavBar from "../NavBar/NavBar";
@@ -19,6 +19,7 @@ function Home() {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
+
 
   return (
     <div className="bg-gradient-to-t from-primary-300 to-primary">
