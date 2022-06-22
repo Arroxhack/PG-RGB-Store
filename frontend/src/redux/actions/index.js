@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART  } from "../types/index";
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS  } from "../types/index";
 
 const PATH = "http://localhost:3001";
 
@@ -42,5 +42,21 @@ export const addCart = (product) => {
 export const resetCart = ()=>{
   return{
     type:RESET_CART
+  }
+}
+
+export function searchProducts(search) {
+  return function (dispatch) {
+  axios.get("/products?name=" + search)
+  .then((products => {
+      dispatch({
+          type: SEARCH_PRODUCTS,
+          payload: products.data
+      })
+  }))
+  
+  .catch(() => {
+      alert("Product not found!")
+  })
   }
 }

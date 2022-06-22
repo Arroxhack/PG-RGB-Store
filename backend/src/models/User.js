@@ -12,13 +12,21 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: null,
+      unique: true,
+    },
     image: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: null,
     },
     cellphone: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: null,
     },
     email: {
       type: DataTypes.STRING,
@@ -41,6 +49,16 @@ module.exports = (sequelize) => {
     permissions: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
+    },
+    secretToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: null,
+    },
+    lock: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
       defaultValue: false,
     },
     //AGREGAR FAVORITOS
