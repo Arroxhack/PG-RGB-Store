@@ -88,8 +88,9 @@ router.post("/register", async (req, res, next) => {
         if (newUser.id) {
           userId = newUser.id;
         }
-
-        res.send(newUser);
+        res.send(
+          newUser.username
+        );
         // res.redirect(
         //   `/register/activation/${userId}/${promisedAll[2]}/${newUser.username}`
         // );

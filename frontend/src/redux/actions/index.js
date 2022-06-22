@@ -49,7 +49,7 @@ export const resetCart = ()=>{
 
 export function searchProducts(search) {
   return function (dispatch) {
-  axios.get("/products?name=" + search)
+  axios.get(`${PATH}/products?name=` + search)
   .then((products => {
       dispatch({
           type: SEARCH_PRODUCTS,
@@ -63,15 +63,3 @@ export function searchProducts(search) {
   }
 }
 
-export function PostUser(user) {
-  return async function () {
-    try{
-      const exit = await axios.post("/register",user)
-      if (exit.data){
-        alert("Register Succesfully")
-      }
-     }catch(e){
-      console.log("Error in Register")
-  }
-  }
-}

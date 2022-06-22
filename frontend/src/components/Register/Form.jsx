@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { validate, regexPass, regexEmail } from "./Validations";
 import { useDispatch, useSelector } from "react-redux";
 import { PostUser } from "../../redux/actions";
+import { useNavigate } from "react-router";
+import axios from "axios";
 export default function Register() {
-  const dispatch = useDispatch();
+  let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [user, setUser] = useState({
     name: "",
@@ -30,7 +32,7 @@ export default function Register() {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       name.length === 0 ||
@@ -60,7 +62,35 @@ export default function Register() {
       regexPass.test(password) &&
       password === passwordValidate
     ) {
-      dispatch(PostUser(user)); //HACERRRRRRRRRRRRRRRRRR
+      const UserRegister = await axios({
+        method: "post",
+        url: "http://localhost:3001/register",
+        data: user,
+        headers: { "X-Requested-With": "XMLHttpRequest" },
+        withCredentials: true,
+      })
+        .then((e) => e.data)
+        .catch((e) => console.log(e));
+
+      if (UserRegister) {
+        localStorage.setItem("username", UserRegister);
+        navigate("/home");
+      } else {
+        console.log("Hubo un error en el registro intentalo de nuevo");
+      }
+
+      //       export function PostUser(user) {
+      //   return async function () {
+      //     try{
+      //       const exit = await axios.post(`${PATH}/register`,user)
+      //       if (exit.data){
+      //         alert("Register Succesfully")
+      //       }
+      //      }catch(e){
+      //       console.log("Error in Register")
+      //   }
+      //   }
+      // }
       //CHECKEAR NODEMAILER!!!https://www.youtube.com/watch?v=KjheexBLY4A
       //https://nodemailer.com/about/
       setUser({
@@ -70,6 +100,7 @@ export default function Register() {
         email: "",
         password: "",
         passwordValidate: "",
+        address: "ejemplo",
       });
     }
   };

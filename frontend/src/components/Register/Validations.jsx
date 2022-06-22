@@ -1,7 +1,7 @@
-const regexEmail =
+export const regexEmail =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-const regexPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{8,}$/;
-function validate({
+export const regexPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{8,}$/;
+export function validate({
   name,
   lastname,
   username,
@@ -32,9 +32,7 @@ al menos 8 caracteres, no permite espacios.*/
   //VALIDACIONES PARA username
   if (!username) {
     errors.username = <b>Enter username ❌</b>;
-  } else if (!/^[a-zA-Z\s]*$/.test(username)) {
-    errors.username = <b>Characters are not allowed ❌</b>;
-  }
+  } 
 
   //VALIDACIONES PARA email
   if (!email) {
@@ -59,5 +57,3 @@ al menos 8 caracteres, no permite espacios.*/
 
   return errors;
 }
-
-module.exports = { validate, regexEmail, regexPass };
