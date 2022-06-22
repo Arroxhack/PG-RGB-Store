@@ -89,10 +89,10 @@ router.post('/register', async (req, res, next) => {
           userId = newUser.id;
         }
 
-        //res.send(newUser);
-        res.redirect(
-          `/register/activation/${userId}/${promisedAll[2]}/${newUser.username}`
-        );
+        res.send(newUser);
+        // res.redirect(
+        //   `/register/activation/${userId}/${promisedAll[2]}/${newUser.username}`
+        // );
       }
     } else {
       res.status(404).send('Blanks in form, register not created');
