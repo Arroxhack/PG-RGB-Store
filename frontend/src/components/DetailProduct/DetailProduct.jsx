@@ -95,9 +95,7 @@ function DetailProduct() {
             : "Weight: 200grs"}
         </p>
         <p>
-          {ProductDetail.proportions
-            ? `Proportions: ${ProductDetail.proportions}`
-            : "Proportions: 244 mm × 244 mm "}
+          {ProductDetail.proportions? `Proportions: ${ProductDetail.proportions}` : "Proportions: 244 mm × 244 mm "}
         </p>
         <p>
           {ProductDetail.wattsPowerSupply
