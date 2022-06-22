@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE } from "../types/index";
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES } from "../types/index";
 const PATH = "http://localhost:3001";
 
 export function getAllProducts() {
@@ -64,4 +64,12 @@ export function searchProducts(search) {
       alert("Product not found!")
   })
   }
+}
+
+
+export function filterPokemonsByCategory(payload) {
+  return {
+    type: GET_CATEGORIES,
+    payload,
+  };
 }

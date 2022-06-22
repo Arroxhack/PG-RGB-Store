@@ -7,30 +7,30 @@ export default function SideBar() {
 
   const dispatch = useDispatch();
   const products = useSelector(state => state.products);
-
-
-
+  const categories= useSelector(state=> state.categories)
   const[order,setOrder]= useState('')
-
-
-
-    const categories= [
-        "procesadores",
-        "pcs armadas",
-        "monitores",
-        "perisfericos",
-        "mothers"]
-
-    const marcas=[
+  
+  const marcas=[
         "hyperX","Redragron","Logitech","T-dagger","hp"
     ]
+
+    
+    // useEffect(() => {
+    //   dispatch(filterCategories());
+    // }, [dispatch]);
+  
+    function handleFilterCategory(e) {
+      e.preventDefault();
+      dispatch(filterPokemonsByCategory(e.target.value));
+    }
+
     function handleOrderedByPrice(e){
       e.preventDefault();
       console.log(products)
       dispatch(orderedByPrice(e.target.value));
       setOrder(`Ordenado ${e.target.value} `)
     }
-
+    console.log(categories)
   return (
     <aside className='w-1/4 md:w-64 sm:text-xs fixed  shadow-xl flex flex-col justify-around bg-primary-200 h-screen text-lg md:text-sm text-center text-primary-400 '>
       <div>
@@ -39,7 +39,7 @@ export default function SideBar() {
         <li className='flex flex-col text-left '>
           {categories?categories.map((cat)=>{
             return(
-                <button  className='no-underline hover:text-yellow-300 hover:rounded-lg hover:transition-y-6 text-left pl-4' >{cat}</button>
+                <button  onChange={e => handleFilterCategory(e)} className='no-underline hover:text-yellow-300 hover:rounded-lg hover:transition-y-6 text-left pl-4' >{cat}</button>
           )}):0}
         </li>
       </ul>
@@ -47,7 +47,7 @@ export default function SideBar() {
           <div className="flex justify-center">
             <h4>Order by</h4>
           <select onChange={e => handleOrderedByPrice(e)} className='w-1/2 '>
-            <option value="" selected disabled>price</option>
+            <option value="" selected disabled>Price</option>
             <option value="mayor valor">higher price</option>
             <option value="menor valor">lower price</option>
           </select>
