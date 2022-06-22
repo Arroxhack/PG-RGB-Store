@@ -54,7 +54,7 @@ export function orderedByPrice(payload){
 }
 export function searchProducts(search) {
   return function (dispatch) {
-  axios.get("/products?name=" + search)
+  axios.get(`${PATH}/products?name=` + search)
   .then((products => {
       dispatch({
           type: SEARCH_PRODUCTS,
