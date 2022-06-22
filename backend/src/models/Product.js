@@ -71,6 +71,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: 0,
       },
+      brand: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+      },
     },
     { timestamps: false }
   );
