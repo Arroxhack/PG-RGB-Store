@@ -1,7 +1,10 @@
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART , FILTER_BY_PRICE} from '../types/index';
+
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE } from '../types/index';
+
 
 const initialState = {
   allProducts: [],
+  products: [],
   detail: [],
   cart:[],
   products:[]
@@ -50,6 +53,11 @@ const reducer = (state = initialState, action) => {
               products: orderedByPrice
           };
 
+      case SEARCH_PRODUCTS:
+        return{
+          ...state,
+          products: action.payload
+        }
     default:
       return { ...state };
   }
