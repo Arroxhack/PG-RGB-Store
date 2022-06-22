@@ -7,16 +7,26 @@ const session = require("express-session");
 const passport = require("passport");
 const Strategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
-const { findUser } = require("./controllers/users")
+const { findUser } = require("./controllers/users");
 require("./db.js");
+require("dotenv").config();
+const { CORS_URL, SECRET } = process.env;
 
 const server = express();
 
 server.name = "API";
 
+server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
-server.use(cookieParser());
+server.use(
+  session({
+    secret: "SECRET",
+    resave: true,
+    saveUninitialized: true,
+  })
+); // estaban seteados a false
+
 server.use(morgan("dev"));
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
@@ -74,12 +84,12 @@ passport.use(
 
 passport.serializeUser(function (user, done) {
   console.log("paso dos de la autenticación");
-  done(null, user._id);
+  done(null, user.id);
 });
 
-passport.deserializeUser(function (_id, done) {
+passport.deserializeUser(function (id, done) {
   console.log("paso tres de la autenticación");
-  findUser({ _id: _id })
+  findUser({ id: id })
     .then((user) => {
       done(null, user);
     })
@@ -87,14 +97,6 @@ passport.deserializeUser(function (_id, done) {
       return done(err);
     });
 });
-
-server.use(
-  session({
-    secret: SECRET || "secret",
-    resave: true,
-    saveUninitialized: true,
-  })
-); // estaban seteados a false
 
 server.use(passport.initialize());
 server.use(passport.session());
