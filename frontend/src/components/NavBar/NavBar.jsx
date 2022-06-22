@@ -1,6 +1,6 @@
 import React from "react";
-
 import { Link, NavLink } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar";
 
 function NavBar({ toggleOpen }) {
   return (
@@ -8,7 +8,9 @@ function NavBar({ toggleOpen }) {
       <Link to="/" class="pl-8">
         RGB
       </Link>
-      
+      <div>
+      <SearchBar/>
+      </div>
       <div className="px-4 cursor-pointer md:hidden" onClick={toggleOpen}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
