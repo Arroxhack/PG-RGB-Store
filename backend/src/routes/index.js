@@ -4,6 +4,7 @@ const Category = require("./categories/Category");
 const CargarDB = require("./products/CargarDB");
 const Register = require("./user/register");
 const Login = require("./user/login");
+const Logout = require("./user/logout");
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -16,4 +17,5 @@ router.use("/", Category);
 router.use("/api", CargarDB);
 router.use("/", Register);
 router.use("/", Login);
+router.use("/", Logout);
 module.exports = router;
