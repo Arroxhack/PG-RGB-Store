@@ -68,6 +68,7 @@ function DetailProduct() {
           {ProductDetail.proportions
             ? `Proportions: ${ProductDetail.proportions}`
             : null}
+            
         </h3>
         <h3>
           {ProductDetail.wattsPowerSupply
