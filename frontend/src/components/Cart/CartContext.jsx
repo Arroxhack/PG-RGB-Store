@@ -13,6 +13,8 @@ const CartProvider = ({children}) => {
         }
     })
 
+    console.log(products)
+
     useEffect(()=>{
         localStorage.setItem('cartProducts', JSON.stringify(products))
         console.log(products)
@@ -24,28 +26,48 @@ const CartProvider = ({children}) => {
         if(inCart){
             setProducts(products.map(p=>{
                 if(p.id===product.id){
-                    return {...inCart, amount:inCart.amount+1}
-                }
-                else return p
-            }))
-
-        }
-    }
-    const deleteProductCart = product=>{
-        const inCart = products.find(p=>p.id===product.id)
-        if(inCart.amount ===1 ){
-            setProducts(
-                products.filter(p=>p.id!==product.id)
-            )
-        }
-        if(inCart.amount > 1){
-            setProducts(p=>{
-                if(p.id===product.id){
-                    return {...inCart, amount:inCart.amount-1}
+                    return {...inCart, amount: inCart.amount+1}
                 } else return p
-            })
+            }))
+        }        else{
+            setProducts([...products, {...product, amount:1}])
         }
+
     }
+
+    const deleteProductCart = product =>{
+        
+            const inCart = products.find(p=>p.id===product.id)
+
+            if(inCart.amount===1){
+                setProducts(products.filter(p=>p.id!==product.id))
+            }
+            if(inCart.amount>1){
+                setProducts(products.map(p=>{
+                    if(p.id===product.id){
+                       return {...inCart, amount:inCart.amount-1}
+                    } return p
+                }))
+            }
+        
+    }
+
+    // const deleteProductCart = product=>{
+    //     products.filter(p=>p.id!==product.id
+    //     const inCart = products.find(p=>p.id===product.id)
+    //     if(inCart.amount ===1 ){
+    //         setProducts(
+    //             products.filter(p=>p.id!==product.id)
+    //         )
+    //     }
+    //     if(inCart.amount > 1){
+    //         setProducts(p=>{
+    //             if(p.id===product.id){
+    //                 return {...inCart, amount:inCart.amount-1}
+    //             } else return p
+    //         })
+    //     }
+    // }
 
     const resetProductCart = ()=>{
         setProducts([])
