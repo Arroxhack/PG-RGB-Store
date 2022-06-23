@@ -1,9 +1,8 @@
 const { Router } = require('express');
-const { User, LockAccounts } = require('../../db');
+const { User } = require('../../db');
 const bcrypt = require('bcrypt');
 const randomstring = require('randomstring');
 const router = Router();
-const { transporter } = require('../../controllers/mail');
 
 //-------------------------------------------------------------------------------
 // Esta ruta get responde cuando un usuario con sesión activa intenta
