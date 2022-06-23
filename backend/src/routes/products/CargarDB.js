@@ -5,17 +5,18 @@ const axios = require('axios');
 //Poner Link de su API de firebase
 const api = 'https://pg-api-6f759-default-rtdb.firebaseio.com/Products.json';
 // HARCODEAR NO ME DEJA DEJARLOS EN NULL <---- VER URGENTE
-const stock = 6;
-const description = 'Holaaa';
-const compatibilityBrands = 'AMD';
-const ddr = 4;
-const socket = 'sad';
-const factorMother = 'standard-ATX';
-const weight = 56;
-const proportions = '45x45';
-const wattsPowerSupply = 45;
-const inOffer = true;
-const PorcentageDiscount = 45;
+// const stock = 6;
+// const description = 'Holaaa';
+// const compatibilityBrands = 'AMD';
+// const ddr = 4;
+// const socket = 'sad';
+// const factorMother = 'standard-ATX';
+// const weight = 56;
+// const proportions = '45x45';
+// const wattsPowerSupply = 45;
+// const inOffer = true;
+// const PorcentageDiscount = 45;+
+
 router.post('/', async (req, res, next) => {
   try {
     const AllProduct = await axios.get(
