@@ -5,17 +5,15 @@ const axios = require('axios');
 //Poner Link de su API de firebase
 const api = 'https://pg-api-6f759-default-rtdb.firebaseio.com/Products.json';
 
-
 router.post('/', async (req, res, next) => {
   try {
     const AllProduct = await axios.get(
       'https://pg-api-6f759-default-rtdb.firebaseio.com/Products.json'
     );
     const result = AllProduct.data ? AllProduct.data : [];
-    console.log(result, "asd")
+    console.log(result, 'asd');
     if (result) {
       for (let i = 0; i < result.length; i++) {
-        
         let newProduct = await Product.create({
           name: result[i].name,
           image: result[i].image,
@@ -30,20 +28,18 @@ router.post('/', async (req, res, next) => {
           dimensions: result[i].dimensions,
           wattsPowerSupply: result[i].wattsPowerSupply,
           inOffer: result[i].inOffer,
-          PorcentageDiscount: result[i].PorcentageDiscount
+          PorcentageDiscount: result[i].PorcentageDiscount,
+          category: result[i].category,
         });
 
         for (let j = 0; j < result[i].category.length; j++) {
           let categoryDB = await Category.findOne({
             where: { name: result[i].category[j] },
           });
-          if (categoryDB) {
-            newProduct.addCategory(categoryDB);
-          } else {
-            let NewCategory = await Category.create({
+          if (!categoryDB) {
+            await Category.create({
               name: result[i].category[j],
             });
-            newProduct.addCategory(NewCategory);
           }
         }
       }
