@@ -153,7 +153,7 @@ export default function Register() {
           onChange={handleOnChange}
         />
         <input class="block border border-grey-light w-full p-3 rounded mb-4"
-          type="Password"
+          type="password"
           placeholder="Password"
           value={passwordValidate}
           name="passwordValidate"
