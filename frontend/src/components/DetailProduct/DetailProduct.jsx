@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getProductDetail } from "../../redux/actions/index";
+import NavBar from "../NavBar/NavBar";
 
 function DetailProduct() {
   const dispatch = useDispatch();
@@ -26,113 +27,169 @@ function DetailProduct() {
   }
 
   return (
-    <div className="">
-      <div className="flex flex-col items-center justify-center h-screen ">
-        <div className="bg-primary-100 flex w-4/5 h-2/3 justify-evenly items-center">
-          <div className="max-h-screen">
-            <img
-              className=""
-              src={
-                ProductDetail.image
-                  ? ProductDetail.image
-                  : "1602010489_p_setting_fff_1_90_end_600.jpg"
-              }
-              width="150px"
-              height="150px"
-              alt="image not found"
-            />
-            <img
-              className=""
-              src={
-                ProductDetail.image
-                  ? ProductDetail.image
-                  : "1602010489_p_setting_fff_1_90_end_600.jpg"
-              }
-              width="150px"
-              height="150px"
-              alt="image not found"
-            />
-            <img
-              className=""
-              src={
-                ProductDetail.image
-                  ? ProductDetail.image
-                  : "1602010489_p_setting_fff_1_90_end_600.jpg"
-              }
-              width="150px"
-              height="150px"
-              alt="image not found"
-            />
-          </div>
-          <div>
-            <img
-              className=""
-              src={
-                ProductDetail.image
-                  ? ProductDetail.image
-                  : "1602010489_p_setting_fff_1_90_end_600.jpg"
-              }
-              width="450px"
-              height="400px"
-              alt="image not found"
-            />
+    <div> 
+      <NavBar/>
+    <section class="font-Open">
+     
+      <div class="relative max-w-screen-xl px-4 py-8 mx-auto">
+        <div class="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
+          <div class="grid grid-cols-2 gap-4 md:grid-cols-1">
+            <div class="aspect-w-1 aspect-h-1">
+              <img
+                alt="Image not found"
+                class="object-cover rounded-xl"
+                src={
+                  ProductDetail.image
+                    ? ProductDetail.image[0]
+                    : "1602010489_p_setting_fff_1_90_end_600.jpg"
+                }
+              />
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 lg:mt-2">
+
+              <div class="aspect-w-1 aspect-h-1">
+                <img
+                  alt="Image not found"
+                  class="object-cover rounded-xl"
+                  src={
+                    ProductDetail.image
+                      ? ProductDetail.image[1]
+                      : "1602010489_p_setting_fff_1_90_end_600.jpg"
+                  }
+                />
+              </div>
+
+              <div class="aspect-w-1 aspect-h-1">
+                <img
+                  alt="Image not found"
+                  class="object-cover rounded-xl"
+                  src={
+                    ProductDetail.image
+                      ? ProductDetail.image[2]
+                      : "1602010489_p_setting_fff_1_90_end_600.jpg"
+                  }
+                />
+              </div>
+            </div>
           </div>
 
-          <div className="w-1/4 flex flex-col justify-around ">
-            <div className="mb-12">
-              <p className="text-7x5">
-                {ProductDetail.name ? ProductDetail.name : null}
-              </p>
-              <p>{ProductDetail.price ? `U$D ${ProductDetail.price}` : null}</p>
-              <p>{ProductDetail.inOffer ? ProductDetail.inOffer : null}</p>
-              <p>
-                {ProductDetail.percentageDiscount && ProductDetail.price
-                  ? `BUYING TODAY ${discount()} U$D!`
-                  : null}
-              </p>
+          <div class="sticky top-0">
+            <strong class="border border-blue-600 rounded-full tracking-wide px-3 font-medium py-0.5 text-xs bg-gray-100 text-blue-600">
+              {ProductDetail.category ? ProductDetail.category[0] : "HDD"}
+            </strong>
 
+            <div class="flex justify-between mt-8">
+              <div class="max-w-[35ch]">
+                <h1 class="text-2xl font-bold">
+                  {ProductDetail.name ? ProductDetail.name : null}
+                </h1>
+
+                <p class="mt-0.5 text-sm">
+                  {ProductDetail.stock
+                    ? `${ProductDetail.stock} in stock!`
+                    : null}
+                </p>
+              </div>
+
+              <p class="text-lg font-bold">
+                {ProductDetail.price ? `U$D ${ProductDetail.price}` : null}
+                <p>{ProductDetail.inOffer ? ProductDetail.inOffer : null}</p>
+                <p class="text-lg font-bold text-">
+                  {ProductDetail.percentageDiscount && ProductDetail.price
+                    ? `BUYING TODAY ${discount()} U$D!`
+                    : "BUYING TODAY 50 U$d!"}
+                </p>
+              </p>
+            </div>
+
+            <details class="relative mt-4 group">
+              <summary class="block">
+                <div>
+                  <div class="prose max-w-none group-open:hidden">
+                    <p>
+                      {ProductDetail.description
+                        ? truncate(ProductDetail.description, 300)
+                        : null}
+                    </p>
+                  </div>
+
+                  <span class="mt-4 text-sm font-medium underline cursor-pointer group-open:absolute group-open:bottom-0 group-open:left-0 group-open:mt-0">
+                    Read More
+                  </span>
+                </div>
+              </summary>
+
+              <div class="pb-6 prose max-w-none">
+                <p>
+                  {ProductDetail.description ? ProductDetail.description : null}
+                </p>
+              </div>
+            </details>
+
+            <form class="mt-8">
+              <legend class="mb-1 text-sm font-medium">More details</legend>
               <p>
-                {ProductDetail.stock
-                  ? `${ProductDetail.stock} in stock!`
+                {ProductDetail.brand
+                  ? `Brand: ${ProductDetail.brand}`
                   : null}
               </p>
-            </div>
-            <div>
-              <p className="text-xs leading-relaxed text-gray-50">
-                {ProductDetail.description
-                  ? truncate(ProductDetail.description, 250)
+              <p>
+                {ProductDetail.compatibilityBrands
+                  ? `Compatible with ${ProductDetail.compatibilityBrands}`
                   : null}
               </p>
-            </div>
+              <p>{ProductDetail.ddr ? `DDR: ${ProductDetail.ddr}` : null} </p>
+              <p>
+                {ProductDetail.socket
+                  ? `Socket: ${ProductDetail.socket}`
+                  : null}{" "}
+              </p>
+              <p>
+                {ProductDetail.factorMother
+                  ? `Factor mother: ${ProductDetail.factorMother}`
+                  : null}
+              </p>
+              <p>
+                {ProductDetail.weight
+                  ? `Weight: ${ProductDetail.weight}`
+                  : null}
+              </p>
+              <p>
+                {ProductDetail.dimensions
+                  ? `Dimensions: ${ProductDetail.dimensions}`
+                  : null}
+              </p>
+              <p>
+                {ProductDetail.wattsPowerSupply
+                  ? `Watts: ${ProductDetail.wattsPowerSupply}`
+                  : null}
+              </p>
+              
+
+              <div class="flex mt-8">
+                <div>
+                  <input
+                    type="number"
+                    id="quantity"
+                    min="1"
+                    value="1"
+                    class="w-12 py-3 text-xs text-center border-200 rounded no-spinners"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  class="block px-5 py-3 ml-3 text-xs font-medium text-white bg-green-600 rounded hover:bg-green-500"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-      <div>
-        MORE DETAILS
-        <p>{ProductDetail.socket ? `Socket: ${ProductDetail.socket}` : null}</p>
-        <p>{ProductDetail.weight ? `Weight: ${ProductDetail.weight}` : null}</p>
-        <p>
-          {ProductDetail.proportions
-            ? `Proportions: ${ProductDetail.proportions}`
-            : null}
-        </p>
-        <p>
-          {ProductDetail.wattsPowerSupply
-            ? `Watts: ${ProductDetail.wattsPowerSupply}`
-            : null}
-        </p>
-        <p>
-          {ProductDetail.factorMother
-            ? `Factor mother: ${ProductDetail.factorMother}`
-            : null}
-        </p>
-        <p>{ProductDetail.ddr ? `DDR: ${ProductDetail.ddr}` : null}</p>
-        <p>
-          {ProductDetail.compatibilityBrands
-            ? `Compatible with ${ProductDetail.compatibilityBrands}`
-            : null}
-        </p>
-      </div>
+    </section>
     </div>
   );
 }
