@@ -23,8 +23,8 @@ export function getAllProducts() {
 export function getBrand() {
   return async function (dispatch) {
     try {
-      let allProducts = await axios.get(`${PATH}/products`); //products por ahora
-      let allBrands = allProducts.data.map(el => el.brand);
+      let allProducts = await axios.get(`${PATH}/brands`); //products por ahora
+      let allBrands = allProducts.data
       return dispatch({
         type: GET_BRANDS,
         payload: allBrands,
