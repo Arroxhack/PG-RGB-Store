@@ -1,6 +1,5 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS, LOAD_USER} from "../types/index";
-
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES} from "../types/index";
 const PATH = "http://localhost:3001";
 
 export function getAllProducts() {
@@ -47,22 +46,50 @@ export const resetCart = ()=>{
   }
 }
 
+export function orderedByPrice(payload){  
+  return {
+    type: FILTER_BY_PRICE,
+    payload
+  }
+}
 export function searchProducts(search) {
   return function (dispatch) {
-  axios.get("/products?name=" + search)
+  axios.get(`${PATH}/products?name=` + search)
   .then((products => {
       dispatch({
           type: SEARCH_PRODUCTS,
           payload: products.data
       })
   }))
-  
   .catch(() => {
       alert("Product not found!")
   })
   }
 }
 
+
+export function getAllCategories() {
+  return async function (dispatch) {
+    try {
+      let AllCategory = await axios.get(`${PATH}/category`); 
+      console.log(AllCategory)
+      let allCategoryData = AllCategory.data.map((e)=>e.name)
+      return dispatch({
+        type: GET_CATEGORIES,
+        payload: allCategoryData,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function setFilter(payload){
+  return {
+    type: SET_FILTER,
+    payload
+  }
+}
 export function PostUser(user) {
   return async function () {
     try{
@@ -75,3 +102,9 @@ export function PostUser(user) {
   }
   }
 }
+ export function filterCategories(payload){
+  return{
+    type: FILTER_CATEGORIES,
+    payload
+  }
+ }

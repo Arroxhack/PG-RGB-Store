@@ -53,36 +53,35 @@ const handleLoginSubmit = async(e) => {
   }
 }
 
-  return (
-/*     <div className="container">
-        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded">
-            LogIn
-        </button>
-    </div> */
-    <div className='min-h-screen'>
-      <form onSubmit={(e) => handleLoginSubmit(e)}>
-        <div>
-          <input 
-          type='text'
-          value={userName}
-          name='Username'
-          placeholder='Username'
-          onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <input 
-          type='password' 
-          value={password}
-          name='Password'
-          placeholder='Password'
-          onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type='submit' >
-          Login
-        </button>
-      </form>
-    </div>
-  )
+return (
+      <div className=' flex flex-col items-center justify-center min-h-screen '>
+        <form className=' w-1/3 h-96  border-white border-2 gap-6 rounded-md flex flex-col justify-center items-center
+        sm:w-80 sm:h-80  ' onSubmit={(e) => handleLoginSubmit(e)}>
+          <div>
+          <img className='w-16' src="https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg" alt="avatar" />
+          </div>
+          <div className='flex flex-col items-center justify-center gap-1'>
+            <input className='border-2 border-primary-400 rounded max-w-max  '
+            type='text'
+            value={userName}
+            name='Username'
+            placeholder='Username'
+            onChange={(e) => setUsername(e.target.value)}
+            />
+            <input  className='border-2 border-primary-400 rounded max-w-max  '
+            type='password' 
+            value={password}
+            name='Password'
+            placeholder='Password'
+            onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button type='submit' className='hover:bg-primary-400 rounded-xl w-24 text-xl items-center' >
+            Login
+          </button>
+        </form>
+      </div>
+    )
 }
+
+
