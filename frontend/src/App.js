@@ -12,13 +12,14 @@ function App() {
   return (
     <div className="Font-Open">
       <Routes>
-        <Route path="/" element={<ContainerProduct />} />
-        <Route path="/home" element={<Home />} exact />
+        <Route path="/" element={<Home />} exact />
         <Route path="/products/:id" element={<DetailProduct />} exact />
-        <Route path="/cart" element={<Cart />} />
+        {/* <Route path="/cart" element={<Cart />} /> */}
         <Route path="/categories" element={<Categories />} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
+
+        {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
       </Routes>
     </div>
   );

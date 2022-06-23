@@ -11,6 +11,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    /// GET, POST, UPDATE, DELETE ///
     case GET_ALL_PRODUCTS:
       return {
         ...state,
@@ -23,64 +24,64 @@ const reducer = (state = initialState, action) => {
         ...state,
         detail: action.payload,
       };
-    case ADD_CART:
-      return{
+    case GET_CATEGORIES:
+      return {
         ...state,
-        cart:[...state.cart, action.payload]
-      }
-    case RESET_CART:
-      return{
-        ...state,
-        cart:[]
-      }
-      case FILTER_BY_PRICE:
-          let orderedByPrice = state.filtros.includes('Menor precio')?
-          state.products.sort(function(a, b) {
-              if (a.price > b.price)return 1;    
-              if (b.price > a.price)return -1;
+        categories: action.payload,
+      };
 
-              return 0;
-        
-              
-          }):
-          state.products.sort(function(a,b){
-              if(a.price > b.price) return -1;
-              if(b.price > a.price) return 1;
-              return 0;
+    /// BUSQUEDA ///
+    case SEARCH_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload,
+      };
+
+    /// FILTRADO Y ORDENAMIENTO ///
+    case FILTER_BY_PRICE:
+      let orderedByPrice = state.filtros.includes("Menor precio")
+        ? state.products.sort(function (a, b) {
+            if (a.price > b.price) return 1;
+            if (b.price > a.price) return -1;
+
+            return 0;
           })
-          return{
-              ...state,
-              products: orderedByPrice
-          };
-
-      case SEARCH_PRODUCTS:
-        return{
-          ...state,
-          products: action.payload,
-        }
-          case GET_CATEGORIES:
-            return {
-              ...state,
-              categories: action.payload,
-            };
-            
-            
-            case SET_FILTER:
-              return{
-                ...state,
-                filtros: action.payload,
-            };
-
-      case FILTER_CATEGORIES:
-      const products = state.allProducts
-      const filter = state.filtros
-      const categoriesFiltered = filter.includes("all")? products: products.filter(e=>e.categories[0].name.includes(filter));
-        return{
-          ...state,
-          products: categoriesFiltered,
-        }
-
-
+        : state.products.sort(function (a, b) {
+            if (a.price > b.price) return -1;
+            if (b.price > a.price) return 1;
+            return 0;
+          });
+      return {
+        ...state,
+        products: orderedByPrice,
+      };
+    case SET_FILTER:
+      return {
+        ...state,
+        filtros: action.payload,
+      };
+    case FILTER_CATEGORIES:
+      const products = state.allProducts;
+      const filter = state.filtros;
+      const categoriesFiltered = filter.includes("all")
+        ? products
+        : products.filter((e) => e.categories[0].name.includes(filter));
+      return {
+        ...state,
+        products: categoriesFiltered,
+      };
+    
+    /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///
+    case ADD_CART:
+      return {
+        ...state,
+        cart: [...state.cart, action.payload],
+      };
+    case RESET_CART:
+      return {
+        ...state,
+        cart: [],
+      };
     default:
       return { ...state };
   }
