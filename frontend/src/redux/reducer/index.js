@@ -1,5 +1,5 @@
 
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES,SET_FILTER, FILTER_CATEGORIES, GET_BRANDS} from '../types/index';
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES,SET_FILTER, FILTER_CATEGORIES, GET_BRANDS, FILTER_BRANDS} from '../types/index';
 const initialState = {
   allProducts: [],
   products: [],
@@ -34,7 +34,7 @@ const reducer = (state = initialState, action) => {
     case GET_BRANDS:
       return{
         ...state,
-        brands: action.payload
+        brands: action.payload,
       }
 
 
@@ -62,23 +62,38 @@ const reducer = (state = initialState, action) => {
         ...state,
         products: orderedByPrice,
       };
+
+      case FILTER_CATEGORIES:
+        const products = state.allProducts;
+        const filter = state.filtros;
+        const categoriesFiltered = filter.includes("all")
+          ? products
+          : products.filter(e=>e.category.includes(filter));
+          
+          return {
+          ...state,
+          products: categoriesFiltered,
+        };
+      
+      case FILTER_BRANDS: 
+      const brandsFiltered = state.filtros.includes("all")
+        ? state.products
+        : state.products.filter(e=>e.brand == state.filtros)
+        return {
+        ...state,
+        products: brandsFiltered,
+        
+      };
+
+
+    
     ///SETEA EL ESTADO DE FILTROS///
-    case SET_FILTER:
+      case SET_FILTER:
       return {
         ...state,
         filtros: action.payload,
       };
-    case FILTER_CATEGORIES:
-      const products = state.allProducts;
-      const filter = state.filtros;
-      const categoriesFiltered = filter.includes("all")
-        ? products
-        : products.filter(e=>e.category.includes(filter));
-        
-        return {
-        ...state,
-        products: categoriesFiltered,
-      };
+   
     
     /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///
     case ADD_CART:
