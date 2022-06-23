@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 export default function Register() {
   return (
-    <div className=" h-screen flex flex-col align">
+    <div className="h-screen flex flex-col align">
       <Form />
     </div>
   );
