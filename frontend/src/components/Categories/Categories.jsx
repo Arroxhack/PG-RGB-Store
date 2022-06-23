@@ -11,6 +11,7 @@ export default function () {
     const dispatch = useDispatch();
     const allProducts = useSelector((state) => state.allProducts);
     const products = useSelector((state) => state.products);
+    const filters= useSelector(state=>state.filtros)
   
     useEffect(() => {
       dispatch(getAllProducts());
@@ -19,8 +20,10 @@ export default function () {
 
   return (
     <div className="bg-primary-200 flex p-0 ">
+      <fragment>
+      <Ordenamientos/>
+      </fragment>
     <fragment className='w-1/4'>
-    <Ordenamientos/>
     <SideBar/>
     </fragment>
     

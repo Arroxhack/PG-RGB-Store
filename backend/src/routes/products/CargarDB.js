@@ -30,7 +30,7 @@ router.post('/', async (req, res, next) => {
           inOffer: result[i].inOffer,
           PorcentageDiscount: result[i].PorcentageDiscount,
           category: result[i].category,
-          brand: result[i].brand,
+          brand: result[i].brand
         });
 
         const brandDB = await Brand.findOne({

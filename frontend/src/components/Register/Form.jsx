@@ -106,10 +106,14 @@ export default function Register() {
   };
 
   return (
-    <div>
+    <div class="bg-secundary-250 min-h-screen flex flex-col">
+    <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+            <h1 class="mb-8 text-3xl text-center">Sign up</h1>
       <form onSubmit={handleSubmit}>
+        <div>
         <label>Name</label>
-        <input
+        <input class="block border border-grey-light w-full p-3 rounded mb-4"
           type="text"
           placeholder="Name"
           value={name}
@@ -117,7 +121,7 @@ export default function Register() {
           onChange={handleOnChange}
         />
         <label>Lastname</label>
-        <input
+        <input class="block border border-grey-light w-full p-3 rounded mb-4"
           type="text"
           placeholder="Lastname"
           value={lastname}
@@ -125,7 +129,7 @@ export default function Register() {
           onChange={handleOnChange}
         />
         <label>Username</label>
-        <input
+        <input class="block border border-grey-light w-full p-3 rounded mb-4"
           type="text"
           placeholder="Username"
           value={username}
@@ -133,7 +137,7 @@ export default function Register() {
           onChange={handleOnChange}
         />
         <label>Email</label>
-        <input
+        <input class="block border border-grey-light w-full p-3 rounded mb-4"
           type="text"
           placeholder="Email"
           value={email}
@@ -141,22 +145,31 @@ export default function Register() {
           onChange={handleOnChange}
         />
         <label>Password</label>
-        <input
+        <input class="block border border-grey-light w-full p-3 rounded mb-4"
           type="password"
-          placeholder="password"
+          placeholder="Password"
           value={password}
           name="password"
           onChange={handleOnChange}
         />
-        <input
+        <input class="block border border-grey-light w-full p-3 rounded mb-4"
           type="password"
-          placeholder="password"
+          placeholder="Password"
           value={passwordValidate}
           name="passwordValidate"
           onChange={handleOnChange}
         />
-        <button type="submit"> Submit </button>
+        <button class="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1" type="submit"> Submit </button>
+        </div>
+        <div class="t-6">
+            Already have an account? 
+            <a class="no-underline border-b" href="../login/">
+                Log in
+            </a>.
+        </div>
       </form>
+      </div>
+      </div>
       <div>
         {errors.name && <p>{errors.name}</p>}
         {errors.lastname && <p>{errors.lastname}</p>}

@@ -50,7 +50,7 @@ router.get('/products/:ID', async (req, res, next) => {
   }
 });
 
-router.get('/products/', async (req, res, next) => {
+router.get('/product/', async (req, res, next) => {
   const { name } = req.query;
   try {
     //CASOS ==========================
@@ -58,7 +58,7 @@ router.get('/products/', async (req, res, next) => {
     //product no existe -> devuelvo un mensaje de error
     const response = await Product.findAll({
       where: {
-        name: { [Op.like]: `%${name}%` },
+        name: { [Op.iLike]: `%${name}%` },
       },
     });
     if (response.length > 0) {

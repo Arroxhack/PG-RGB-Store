@@ -9,7 +9,7 @@ const ContainerProduct = () => {
   return (
     <div className='grid grid-cols-1 gap-5 w-full justify-items-center'>
         {allProducts.map(p=>
-                <Link key={p.id} to={`/${p.id}`}>
+                <Link key={p.id} to={`/products/${p.id}`}>
                     <Product product={p}/>
                 </Link>)}
     </div>

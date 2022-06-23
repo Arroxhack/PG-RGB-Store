@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES} from "../types/index";
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES,GET_BRANDS,FILTER_BRANDS} from "../types/index";
 const PATH = "http://localhost:3001";
 
 /// GET PRODUCTOS ///
@@ -17,6 +17,27 @@ export function getAllProducts() {
     }
   };
 }
+
+/// GET MARCAS DE PRODUCTOS ///
+
+export function getBrand() {
+  return async function (dispatch) {
+    try {
+      let allProducts = await axios.get(`${PATH}/brands`); //products por ahora
+      let allBrands = allProducts.data
+      console.log(allBrands)
+      return dispatch({
+        type: GET_BRANDS,
+        payload: allBrands,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
+
 
 /// GET DETALLE DE PRODUCTOS ///
 export function getProductDetail(id) {
@@ -98,10 +119,17 @@ export function filterCategories(payload){
   }
  }
 
+
+ export function filterBrands(payload){
+  return{
+    type: FILTER_BRANDS,
+    payload
+  }
+ }
 /// BUSQUEDA ///
 export function searchProducts(search) {
   return function (dispatch) {
-  axios.get(`${PATH}/products?name=` + search)
+  axios.get(`${PATH}/product?name=` + search)
   .then((products => {
       dispatch({
           type: SEARCH_PRODUCTS,
