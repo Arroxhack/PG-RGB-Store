@@ -16,16 +16,7 @@ router.get('/register', (req, res, next) => {
 });
 
 router.post('/register', async (req, res, next) => {
-  const {
-    name,
-    lastname,
-    username,
-    image,
-    cellphone,
-    email,
-    password,
-    address,
-  } = req.body;
+  const { name, lastname, username, email, password } = req.body;
 
   if (!name || !lastname || !password || !email || !username) {
     return res.send('Fill all the blanks');
@@ -99,7 +90,6 @@ router.put('/register/verify/:username', async (req, res, next) => {
   } else {
     res.status(404).send('Invalid token');
   }
-
   //Update nos devuelve un array de length 1 con un 1 si fue todo bien y con 0 si salio mal
 });
 module.exports = router;
