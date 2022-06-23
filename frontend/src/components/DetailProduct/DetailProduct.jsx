@@ -27,13 +27,13 @@ function DetailProduct() {
 
   return (
     <div>
-      <div class="text-white">PRODUCT DETAIL</div>
-      <div class="container mx-auto px-20">
-        <div class="border bg-primary-200 bg-opacity-50 rounded-lg p-6 text-gray-100 relative z-10">
-          <div class="flex flex-wrap items-center">
-            <div class="w-8/12 pr-4 relative">
+      <div>PRODUCT DETAIL</div>
+      <div className="">
+        <div className="grid grid-cols-[1fr_2fr_2fr]">
+          <div className="">
+            <div className="">
               <img
-                class="object-cover object-top rounded-lg bg-white"
+                className="[grid-column:1/2]"
                 src={
                   ProductDetail.image
                     ? ProductDetail.image
@@ -43,38 +43,27 @@ function DetailProduct() {
                 height="400px"
                 alt="image not found"
               />
-              <p class="font-bold font-Open text-xl">
-                {ProductDetail.name ? ProductDetail.name : "ASUS PRIME B550M-K"}{" "}
+              <p className=" [grid-column:2/3]">
+                {ProductDetail.name ? ProductDetail.name : null}
               </p>
-              <p>{ProductDetail.price ? ProductDetail.price : "U$D200"}</p>
+              <p>{ProductDetail.price ? ProductDetail.price : null}</p>
               <p>{ProductDetail.inOffer ? ProductDetail.inOffer : null}</p>
               <p>
                 {ProductDetail.percentageDiscount && ProductDetail.price
                   ? `BUYING TODAY ${discount()} U$D!`
-                  : " BUYING TODAY U$D180"}
+                  : null}
               </p>
               <p>
                 {ProductDetail.stock
                   ? `${ProductDetail.stock} in stock!`
-                  : "2 in stock!"}
+                  : null}
               </p>
-              <p class="text-xs leading-relaxed text-gray-50">
-                {ProductDetail.description ? (
-                  truncate(ProductDetail.description, 250)
-                ) : (
-                  <p>
-                    La serie ASUS Prime está diseñada por expertos para liberar
-                    todo el potencial de la plataforma AMD Ryzen de tercera
-                    generación. Con un diseño de energía robusto, soluciones de
-                    enfriamiento integrales y opciones de ajuste inteligentes,
-                    las placas base de la serie Prime B550 brindan a los
-                    usuarios diarios y a los constructores de PC DIY una gama de
-                    opciones de ajuste del rendimiento a través de funciones de
-                    software y firmware intuitivas.
-                  </p>
-                )}
+              <p className="text-xs leading-relaxed text-gray-50">
+                {ProductDetail.description
+                  ? truncate(ProductDetail.description, 250)
+                  : null}
               </p>
-              <button class="w-full block text-center relative text-white font-bold text-sm bg-teal-800 px-4 py-3 rounded-lg shadow-lg hover:shadow-none hover:opacity-75">
+              <button className="w-full block text-center relative text-white font-bold text-sm bg-teal-800 px-4 py-3 rounded-lg shadow-lg hover:shadow-none hover:opacity-75">
                 Add to cart
               </button>
             </div>
@@ -84,34 +73,28 @@ function DetailProduct() {
       <div>
         {" "}
         MORE DETAILS
+        <p>{ProductDetail.socket ? `Socket: ${ProductDetail.socket}` : null}</p>
+        <p>{ProductDetail.weight ? `Weight: ${ProductDetail.weight}` : null}</p>
         <p>
-          {ProductDetail.socket
-            ? `Socket: ${ProductDetail.socket}`
-            : " Socket: AM4"}
-        </p>
-        <p>
-          {ProductDetail.weight
-            ? `Weight: ${ProductDetail.weight}`
-            : "Weight: 200grs"}
-        </p>
-        <p>
-          {ProductDetail.proportions? `Proportions: ${ProductDetail.proportions}` : "Proportions: 244 mm × 244 mm "}
+          {ProductDetail.proportions
+            ? `Proportions: ${ProductDetail.proportions}`
+            : null}
         </p>
         <p>
           {ProductDetail.wattsPowerSupply
             ? `Watts: ${ProductDetail.wattsPowerSupply}`
-            : "200WATTS"}
+            : null}
         </p>
         <p>
           {ProductDetail.factorMother
             ? `Factor mother: ${ProductDetail.factorMother}`
-            : "Micro-ATX"}
+            : null}
         </p>
-        <p>{ProductDetail.ddr ? `DDR: ${ProductDetail.ddr}` : "DDR: 4"}</p>
+        <p>{ProductDetail.ddr ? `DDR: ${ProductDetail.ddr}` : null}</p>
         <p>
           {ProductDetail.compatibilityBrands
             ? `Compatible with ${ProductDetail.compatibilityBrands}`
-            : "Compatible with AMD"}
+            : null}
         </p>
       </div>
     </div>
