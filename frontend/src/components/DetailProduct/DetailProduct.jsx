@@ -82,7 +82,7 @@ function DetailProduct() {
 
           <div class="sticky top-0">
             <strong class="border border-blue-600 rounded-full tracking-wide px-3 font-medium py-0.5 text-xs bg-gray-100 text-blue-600">
-              {ProductDetail.category ? ProductDetail.category[0] : "HDD"}
+              {ProductDetail.category ? ProductDetail.category[0] : null}
             </strong>
 
             <div class="flex justify-between mt-8">
