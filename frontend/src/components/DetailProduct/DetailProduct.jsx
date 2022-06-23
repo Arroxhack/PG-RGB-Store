@@ -27,8 +27,10 @@ function DetailProduct() {
   }
 
   return (
-    <section class="font-Open">
+    <div> 
       <NavBar/>
+    <section class="font-Open">
+     
       <div class="relative max-w-screen-xl px-4 py-8 mx-auto">
         <div class="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
           <div class="grid grid-cols-2 gap-4 md:grid-cols-1">
@@ -188,6 +190,7 @@ function DetailProduct() {
         </div>
       </div>
     </section>
+    </div>
   );
 }
 
