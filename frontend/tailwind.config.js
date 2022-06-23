@@ -9,12 +9,12 @@ module.exports = {
       },
     },
     colors: {
-      'primary': {
-        DEFAULT: '#2BCDC5',
-        '100': '#38817A',
-        '200':  '#202324',
-        '300': '#F66095',
-        '400': '#2BCDC5',
+      primary: {
+        DEFAULT: "#2BCDC5",
+        100: "#38817A",
+        200: "#171818",
+        300: "#F66095",
+        400: "#2BCDC5",
       },
     },
     screens: {

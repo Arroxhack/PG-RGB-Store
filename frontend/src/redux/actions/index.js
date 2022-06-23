@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES} from "../types/index";
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES,GET_BRANDS} from "../types/index";
 const PATH = "http://localhost:3001";
 
 /// GET PRODUCTOS ///
@@ -26,7 +26,7 @@ export function getBrand() {
       let allProducts = await axios.get(`${PATH}/products`); //products por ahora
       let allBrands = allProducts.data.map(el => el.brand);
       return dispatch({
-        type: GET_ALL_PRODUCTS,
+        type: GET_BRANDS,
         payload: allBrands,
       });
     } catch (error) {

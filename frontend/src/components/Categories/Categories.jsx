@@ -20,8 +20,10 @@ export default function () {
 
   return (
     <div className="bg-primary-200 flex p-0 ">
+      <fragment>
+      <Ordenamientos/>
+      </fragment>
     <fragment className='w-1/4'>
-    <Ordenamientos/>
     <SideBar/>
     </fragment>
     

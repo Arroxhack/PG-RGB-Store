@@ -53,7 +53,7 @@ export default function SideBar() {
       
       <div className='flex flex-col  pl-4 pt-4'>
         <h4  className='text-xl text-yellow-300 pb-3'>Marcas</h4>
-        {brand? brand.map((m)=>{
+        {marcas? marcas.map((m)=>{
             return(
         <label className='text-left'  htmlFor=""> <input className='cursor-pointer bg-yellow-300 border-yelloy-300'  value='menor valor' type="checkbox" name="" id="" />{m}</label>
             )
