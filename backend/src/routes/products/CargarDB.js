@@ -30,6 +30,7 @@ router.post('/', async (req, res, next) => {
           inOffer: result[i].inOffer,
           PorcentageDiscount: result[i].PorcentageDiscount,
           category: result[i].category,
+          brand: result[i].brand
         });
 
         for (let j = 0; j < result[i].category.length; j++) {

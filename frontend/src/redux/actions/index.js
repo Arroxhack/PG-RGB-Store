@@ -18,6 +18,26 @@ export function getAllProducts() {
   };
 }
 
+/// GET MARCAS DE PRODUCTOS ///
+
+export function getBrand() {
+  return async function (dispatch) {
+    try {
+      let allProducts = await axios.get(`${PATH}/products`); //products por ahora
+      let allBrands = allProducts.data.map(el => el.brand);
+      return dispatch({
+        type: GET_ALL_PRODUCTS,
+        payload: allBrands,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
+
+
 /// GET DETALLE DE PRODUCTOS ///
 export function getProductDetail(id) {
   return async function (dispatch) {
