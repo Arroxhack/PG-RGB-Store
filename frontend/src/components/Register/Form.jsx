@@ -3,6 +3,7 @@ import { validate, regexPass, regexEmail } from "./Validations";
 import { useDispatch, useSelector } from "react-redux";
 import { PostUser } from "../../redux/actions";
 import { useNavigate } from "react-router";
+import {transporter} from "../../Nodemailer/Config";
 import axios from "axios";
 export default function Register() {
   let navigate = useNavigate();
@@ -72,8 +73,14 @@ export default function Register() {
         .then((e) => e.data)
         .catch((e) => console.log(e));
 
-      if (UserRegister) {
-        localStorage.setItem("username", UserRegister);
+      if (UserRegister.username && UserRegister.verify === false) {
+         await transporter.sendMail({
+          from: 'rgbstore0@gmail.com', // sender address
+          to: UserRegister.email, // list of receivers
+          subject: "Verification ✔", // Subject line
+          html: `<b>Hola, Aca esta tu codigo de Verificacion! ${UserRegister.secretToken}</b>`, // html body
+        });
+        localStorage.setItem("user", UserRegister);
         navigate("/home");
       } else {
         console.log("Hubo un error en el registro intentalo de nuevo");
