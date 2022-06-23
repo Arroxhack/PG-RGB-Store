@@ -1,34 +1,14 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import Product from '../Product/Product';
+import {useSelector} from 'react-redux'
 
 const ContainerProduct = () => {
-    const arr = [
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 2, name:'Producto',image:'https://us.123rf.com/450wm/scanrail/scanrail1701/scanrail170100025/68835630-abstracto-creativo-tecnolog%C3%ADa-de-negocios-concepto-de-la-oficina-de-comunicaci%C3%B3n-de-internet-web-3d-.jpg?ver=6', price:'1000'},
-    {id: 3, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 4, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 5, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 6, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 7, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 8, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 9, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 10, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},
-    {id: 1, name:'Producto',image:'https://i.pinimg.com/originals/3d/a2/7a/3da27a2f49d0a9e209bdbf719de9f571.jpg', price:'1000'},]
+  const allProducts = useSelector(state=>state.products)
 
   return (
     <div className='grid grid-cols-1 gap-5 w-full justify-items-center'>
-        {arr.map(p=>
+        {allProducts.map(p=>
                 <Link key={p.id} to={`/${p.id}`}>
                     <Product product={p}/>
                 </Link>)}
