@@ -5,14 +5,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import transporter from "../../Nodemailer/Config";
+import {transporter} from "../../Nodemailer/Config";
 
-export const Verificade = await transporter.sendMail({
-    from: 'rgbstore0@gmail.com', // sender address
-    to: email, // list of receivers
-    subject: "Verification ✔", // Subject line
-    html: `<b>Hola, Aca esta tu codigo de Verificacion! ${token}</b>`, // html body
-  });
 
 
 export default  function Validations() {
