@@ -5,21 +5,6 @@ const randomstring = require('randomstring');
 const router = Router();
 const { transporter } = require('../../controllers/mail');
 
-function isAuthenticated(req, res, next) {
-  console.log(req.session, ' esto es req.session register isAuthenticated');
-  console.log(req.user, ' esto es req.user register isAuthenticated');
-  console.log(req.cookies, ' esto es req.cookies register isAuthenticated');
-  console.log(
-    req.signedCookies,
-    ' esto es req.signedCookies register isAuthenticated'
-  );
-  if (req.isAuthenticated()) {
-    res.redirect('/api/service/register');
-  } else {
-    next();
-  }
-}
-
 //-------------------------------------------------------------------------------
 // Esta ruta get responde cuando un usuario con sesión activa intenta
 // hacer un post a /register.
@@ -102,4 +87,14 @@ router.post('/register', async (req, res, next) => {
   }
 });
 
+router.put('/register/verify/:username', async (req, res, next) => {
+  const user = User.findOne({ where: { username } });
+
+  const isVerified = user.update({ verify: true });
+
+  //Update nos devuelve un array de length 1 con un 1 si fue todo bien y con 0 si salio mal
+  isVerified[0] === 1
+    ? res.send('Correctly edit')
+    : res.status(404).send('Failed on edit');
+});
 module.exports = router;
