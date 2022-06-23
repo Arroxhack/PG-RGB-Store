@@ -90,8 +90,6 @@ return (
           </button>
         </form>
         <div id="signInDiv"></div>
-
-
         {/* <GoogleLogin
           clientId="845489565296-qmdicsbtthqvkbagr51v87i3hu45ru3p.apps.googleusercontent.com"
           buttonText="Login with google"
