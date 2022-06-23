@@ -102,6 +102,7 @@ router.post('/products', async (req, res, next) => {
     });
     // Recorremos el array category para buscar en la base de datos y relacionarlos
     // o crear uno nuevo
+    console.log(category);
     for (let i = 0; i < category.length; i++) {
       let categoryDB = await Category.findOne({
         where: { name: category[i] },

@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
         defaultValue: 0,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       compatibilityBrands: {
