@@ -100,7 +100,7 @@ function DetailProduct() {
             <div>
               <p className="text-xs leading-relaxed text-gray-50">
                 {ProductDetail.description
-                  ? truncate(ProductDetail.description, 250)
+                  ? truncate(ProductDetail.description, 300)
                   : null}
               </p>
             </div>
