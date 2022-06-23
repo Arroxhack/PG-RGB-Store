@@ -88,7 +88,7 @@ router.post('/register', async (req, res, next) => {
 
 router.put('/register/verify/:username', async (req, res, next) => {
   const { token } = req.body;
-
+  const { username } = req.params;
   const user = User.findOne({ where: { username } });
 
   if (user.secretToken === token) {
