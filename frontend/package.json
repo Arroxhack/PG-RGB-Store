@@ -8,13 +8,9 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
-<<<<<<< HEAD
-    "nodemailer": "^6.7.5",
-=======
     "i": "^0.3.7",
     "jwt-decode": "^3.1.2",
     "npm": "^8.13.0",
->>>>>>> 4389135f543fa4f4f12b157f3a1442bbaad3b9e4
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
