@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import { CartContext } from './CartContext'
 
 const BoxCart = ({onClick}) => {
-    const {products, deleteProductCart} = useContext(CartContext)
+    const {products, deleteProductCart,resetProductCart} = useContext(CartContext)
 
 
 
@@ -19,16 +19,16 @@ const BoxCart = ({onClick}) => {
                     {products.map(p=>{
                         return(
                             <div key={p.id} className='flex flex-row gap-1'>
-                            <img src={p.image} alt='Imagen' width='50px' height='50px'/>
+                            {/* <img src={p.image} alt='Imagen' width='50px' height='50px'/> */}
                             <p>{p.name}</p>
                             <p>{p.price}</p><span>{`x ${p.amount}`}</span>
-                            <p>{`$ ${p.price * p.amount}`}</p>
+                            <p>{`$ ${(p.price * p.amount).toFixed(2)}`}</p>
                             <button onClick={(e)=>deleteProductCart(p)}>x</button>
                             </div>
                         )
                     })}
                     <div className='flex justify-end'>
-                    <p>{`Total a pagar: ${total}`}</p>
+                    <p>{`Total a pagar: ${total.toFixed(2)}`}</p>
                     </div>
                 </div>
             }

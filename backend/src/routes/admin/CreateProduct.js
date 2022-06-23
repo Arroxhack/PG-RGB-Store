@@ -1,11 +1,11 @@
-const { Router } = require("express");
-const { Product, Category } = require("../../db");
+const { Router } = require('express');
+const { Product, Category, Brand } = require('../../db');
 const router = Router();
 // creando un producto y uniendolo a la tabla intermedia de categorias
 //  si no existe una categoria se crea una y se hace la relacion
 //  (category es un array "HACER FORMULARIO CONTROLADO")
 
-router.post("/products", async (req, res, next) => {
+router.post('/products', async (req, res, next) => {
   const {
     name,
     price,
@@ -22,10 +22,11 @@ router.post("/products", async (req, res, next) => {
     inOffer,
     PorcentageDiscount,
     category,
+    brand,
   } = req.body;
   try {
     if (!name && !price && !description && !image && !category.length) {
-      return res.send(new Error("Error not params in body"));
+      return res.send(new Error('Error not params in body'));
     }
     let newProduct = await Product.create({
       name,
@@ -43,9 +44,15 @@ router.post("/products", async (req, res, next) => {
       inOffer,
       PorcentageDiscount,
       category,
+      brand,
     });
     // Recorremos el array category para buscar en la base de datos y relacionarlos
     // o crear uno nuevo
+
+    const brandDB = await Brand.findOne({ where: { name: brand } });
+    if (!brandDB) {
+      await Brand.create({ name: brand });
+    }
 
     for (let i = 0; i < category.length; i++) {
       let categoryDB = await Category.findOne({

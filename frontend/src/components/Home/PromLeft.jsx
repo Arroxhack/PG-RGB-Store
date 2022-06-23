@@ -8,7 +8,7 @@ const Promo = ({left, img, products}) => {
         <img src={img} alt='img promo' className='object-cover h-72 w-48 '/>
         {products.map(p=>{
             return (
-                <Link to={`/${p.id}`}>
+                <Link key={p.id} to={`/${p.id}`}>
                 <Product product={p}/>
                 </Link>
             )
