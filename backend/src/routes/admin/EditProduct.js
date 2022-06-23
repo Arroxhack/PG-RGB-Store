@@ -39,6 +39,7 @@ router.put('/products/:id', async (req, res) => {
     wattsPowerSupply,
     inOffer,
     percentageDiscount,
+    category
   };
 
   const toEdit = await Product.update(newProduct, {
