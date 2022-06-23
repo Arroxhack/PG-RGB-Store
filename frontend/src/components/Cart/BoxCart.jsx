@@ -1,5 +1,6 @@
 import React, {useContext} from 'react'
 import { CartContext } from './CartContext'
+import X from '../SVG/X'
 
 const BoxCart = ({onClick}) => {
     const {products, deleteProductCart,resetProductCart} = useContext(CartContext)
@@ -10,8 +11,10 @@ const BoxCart = ({onClick}) => {
     products.forEach(p=>total+=p.amount*p.price)
 
   return (
-    <div className='h-auto w-auto absolute bg-primary-100 ml-36'>
-        <span onClick={onClick}>x</span>
+    <div className='h-auto w-72 absolute bg-primary-100 ml-72'>
+        <div className='flex flex-row-reverse pr-2'>
+        <span onClick={onClick}><X/></span>
+        </div>
         <div>
             {
                 products.length <=0 ? <p>No hay productos</p>:
