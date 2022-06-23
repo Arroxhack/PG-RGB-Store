@@ -129,7 +129,7 @@ export function filterCategories(payload){
 /// BUSQUEDA ///
 export function searchProducts(search) {
   return function (dispatch) {
-  axios.get(`${PATH}/products?name=` + search)
+  axios.get(`${PATH}/product?name=` + search)
   .then((products => {
       dispatch({
           type: SEARCH_PRODUCTS,

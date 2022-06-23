@@ -14,10 +14,10 @@ const Nav = () => {
         PC Armadas
         </Link>
         <Link to='/categorias/placas-de-videos' className='hover:bg-primary-300 hover:py-3 px-4'>
-        Placas de videos
+        Placas de video
         </Link>
         <Link to='/arma-tu-pc' className='hover:bg-primary-300 hover:py-3 px-4'>
-        <p>Arma tu pc</p>
+        <p>Armá tu pc</p>
         </Link>
     </div>
   )
