@@ -12,7 +12,6 @@ const [userName, setUsername] = useState("")
 const [password, setPassword] = useState("")
 const dispatch = useDispatch()
 
-
 const handleLoginSubmit = async(e) => {
   e.preventDefault();
   let userLogin = {username: userName, password: password}
@@ -34,14 +33,10 @@ const handleLoginSubmit = async(e) => {
   if(login == true){
     setUsername("");
     setPassword("");
-    navigate("/home");
+    navigate("/");
   }
 }
 
-/* funcion para usar con la libreria react-google-login */
-const responseGoogle = (response) => {
-  console.log(response)
-}
 
 function handleCallbackResponse(response) {
   console.log("Encoded JWT ID token: " + response.credential);
@@ -73,15 +68,16 @@ return (
             <input className='border-2 border-primary-400 rounded max-w-max  '
             type='text'
             value={userName}
-            name='Username'
-            placeholder='Username'
+            name="Username"
+            placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
-            />
-            <input  className='border-2 border-primary-400 rounded max-w-max  '
-            type='password' 
+          />
+          <input
+            className="border-2 border-primary-400 rounded max-w-max  "
+            type="password"
             value={password}
-            name='Password'
-            placeholder='Password'
+            name="Password"
+            placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
             />
           </div>

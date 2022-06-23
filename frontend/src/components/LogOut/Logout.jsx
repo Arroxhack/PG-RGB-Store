@@ -21,7 +21,7 @@ export default function Logout() {
           // localStorage.removeItem('avatar');
           localStorage.clear();
           setActualizar(" ");
-          return (window.location = "http://localhost:3000/home");
+          return (window.location = "http://localhost:3000/");
         }
       })
       .catch((error) => console.log(error));

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { validate, regexPass, regexEmail } from "./Validations";
-import { useDispatch, useSelector } from "react-redux";
 import { PostUser } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import axios from "axios";
@@ -71,10 +70,10 @@ export default function Register() {
       })
         .then((e) => e.data)
         .catch((e) => console.log(e));
-
+      console.log(UserRegister);
       if (UserRegister) {
-        localStorage.setItem("username", UserRegister);
-        navigate("/home");
+        localStorage.setItem("user", UserRegister);
+        navigate(`/validate/${UserRegister.username}`);
       } else {
         console.log("Hubo un error en el registro intentalo de nuevo");
       }
