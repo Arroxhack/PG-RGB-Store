@@ -42,7 +42,7 @@ const reducer = (state = initialState, action) => {
     case SEARCH_PRODUCTS:
       return {
         ...state,
-        products: action.payload,
+        products: action.payload
       };
 
     /// FILTRADO Y ORDENAMIENTO ///
