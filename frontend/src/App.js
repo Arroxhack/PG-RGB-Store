@@ -8,6 +8,7 @@ import Categories from "./components/Categories/Categories";
 import LogIn from "./components/LogIn/LogIn";
 import Register from "./components/Register/Register.jsx";
 import Product from "./components/Product/Product";
+import HomeAdmin from "./components/Admin/HomeAdmin";
 function App() {
   return (
     <div className="Font-Open">
@@ -18,7 +19,7 @@ function App() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
-
+        <Route path="/admin" element={<HomeAdmin/>}/>
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
       </Routes>
     </div>

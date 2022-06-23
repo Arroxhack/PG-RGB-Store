@@ -106,7 +106,7 @@ export default function Register() {
   };
 
   return (
-    <div>
+    <div className="bg-primary-200">
       <form onSubmit={handleSubmit}>
         <label>Name</label>
         <input

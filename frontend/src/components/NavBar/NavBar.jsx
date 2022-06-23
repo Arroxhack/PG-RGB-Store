@@ -15,7 +15,7 @@ function NavBar({ toggleOpen }) {
   };
 
   return (
-    <nav className="flex justify-evenly items-center h-34 bg-gray-300 text-black relative shadow-sm bg-primary-200">
+    <nav className="flex justify-evenly items-center h-36 bg-gray-300 text-black relative shadow-sm bg-primary-200">
       <Link
         to="/"
         className="flex flex-col items-center text-primary-400 font-Open text-4xl font-extrabold"

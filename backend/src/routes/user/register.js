@@ -88,13 +88,13 @@ router.post('/register', async (req, res, next) => {
 
 router.put('/register/verify/:username', async (req, res, next) => {
   const { token } = req.body;
-
+  const { username } = req.params;
   const user = User.findOne({ where: { username } });
 
   if (user.secretToken === token) {
     const isVerified = user.update({ verify: true });
     isVerified[0] === 1
-      ? res.send('Correctly edit')
+      ? res.json({validate:true,user})
       : res.status(404).send('Failed on edit');
   } else {
     res.status(404).send('Invalid token');

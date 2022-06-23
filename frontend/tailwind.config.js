@@ -12,10 +12,16 @@ module.exports = {
       primary: {
         DEFAULT: "#2BCDC5",
         100: "#38817A",
-        200: "#171818",
+        200: "#010005",
         300: "#F66095",
         400: "#2BCDC5",
       },
+      secondary:{
+        DEFAULT: '#000000',
+        50: '#FF0000',
+        100: '#FFFFFF',
+        500: '#000000'
+      }
     },
     screens: {
       sm: "370px",

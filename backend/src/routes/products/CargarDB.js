@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Product, Category } = require('../../db');
+const { Product, Category, Brand } = require('../../db');
 const router = Router();
 const axios = require('axios');
 //Poner Link de su API de firebase
@@ -30,7 +30,15 @@ router.post('/', async (req, res, next) => {
           inOffer: result[i].inOffer,
           PorcentageDiscount: result[i].PorcentageDiscount,
           category: result[i].category,
+          brand: result[i].brand
         });
+
+        const brandDB = await Brand.findOne({
+          where: { name: result[i].brand },
+        });
+        if (!brandDB) {
+          await Brand.create({ name: result[i].brand });
+        }
 
         for (let j = 0; j < result[i].category.length; j++) {
           let categoryDB = await Category.findOne({
