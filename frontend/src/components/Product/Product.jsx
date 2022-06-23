@@ -3,6 +3,7 @@ import { CartContext } from "../Cart/CartContext"
 
 const Product = ({product}) => {
   
+
   const {addProductToCart, resetProductCart} = useContext(CartContext)
 
   const sendCard = (e)=>{
