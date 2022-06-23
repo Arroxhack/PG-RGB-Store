@@ -38,7 +38,11 @@ function Home() {
       products={product}
       />
       </div>
-
+      <div>
+        <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank">
+          <img class='fixed bottom-2 right-2 w-20 m-5' src="https://storage.googleapis.com/m-infra.appspot.com/public/whatsapp/Whatsapp_logo.svg"/>
+        </a>
+      </div>
       {/* {allProducts.map((product) => {
         return (
           <Link to={`/products/${product.id}`}>

@@ -44,14 +44,18 @@ router.post('/', async (req, res, next) => {
           PorcentageDiscount,
         });
 
-        let categoryDB = await Category.findOne({
-          where: { name: result[i].category },
-        });
-        if (categoryDB) {
-          newProduct.addCategory(categoryDB);
-        } else {
-          let NewCategory = await Category.create({ name: result[i].category });
-          newProduct.addCategory(NewCategory);
+        for (let j = 0; j < result[i].category.length; j++) {
+          let categoryDB = await Category.findOne({
+            where: { name: result[i].category[j] },
+          });
+          if (categoryDB) {
+            newProduct.addCategory(categoryDB);
+          } else {
+            let NewCategory = await Category.create({
+              name: result[i].category[j],
+            });
+            newProduct.addCategory(NewCategory);
+          }
         }
       }
       res.send('Base de Datos Llena satisfactoriamente :D ');
