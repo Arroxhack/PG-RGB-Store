@@ -35,7 +35,7 @@ function DetailProduct() {
         <div class="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
           <div class="grid grid-cols-2 gap-4 md:grid-cols-1">
             <div class="aspect-w-1 aspect-h-1">
-              <img
+              <img 
                 alt="Image not found"
                 class="object-cover rounded-xl"
                 src={
@@ -43,6 +43,8 @@ function DetailProduct() {
                     ? ProductDetail.image[0]
                     : "1602010489_p_setting_fff_1_90_end_600.jpg"
                 }
+                height='400px'
+                width='400px'
               />
             </div>
 
@@ -57,6 +59,8 @@ function DetailProduct() {
                       ? ProductDetail.image[1]
                       : "1602010489_p_setting_fff_1_90_end_600.jpg"
                   }
+                  height='300px'
+                  width='300px'
                 />
               </div>
 
@@ -69,6 +73,8 @@ function DetailProduct() {
                       ? ProductDetail.image[2]
                       : "1602010489_p_setting_fff_1_90_end_600.jpg"
                   }
+                  height='300px'
+                  width='300px'
                 />
               </div>
             </div>
@@ -95,10 +101,10 @@ function DetailProduct() {
               <p class="text-lg font-bold">
                 {ProductDetail.price ? `U$D ${ProductDetail.price}` : null}
                 <p>{ProductDetail.inOffer ? ProductDetail.inOffer : null}</p>
-                <p class="text-lg font-bold text-">
+                <p class="text-lg font-bold color-300">
                   {ProductDetail.percentageDiscount && ProductDetail.price
                     ? `BUYING TODAY ${discount()} U$D!`
-                    : "BUYING TODAY 50 U$d!"}
+                    : null}
                 </p>
               </p>
             </div>
@@ -143,7 +149,7 @@ function DetailProduct() {
               <p>
                 {ProductDetail.socket
                   ? `Socket: ${ProductDetail.socket}`
-                  : null}{" "}
+                  : null}
               </p>
               <p>
                 {ProductDetail.factorMother
