@@ -1,5 +1,5 @@
 
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES,SET_FILTER} from '../types/index';
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES,SET_FILTER, FILTER_CATEGORIES} from '../types/index';
 const initialState = {
   allProducts: [],
   products: [],
@@ -16,6 +16,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         allProducts: action.payload,
         products: action.payload,
+        productsFilter: action.payload,
       };
     case GET_PRODUCT_DETAIL:
       return {
@@ -55,7 +56,7 @@ const reducer = (state = initialState, action) => {
       case SEARCH_PRODUCTS:
         return{
           ...state,
-          products: action.payload
+          products: action.payload,
         }
           case GET_CATEGORIES:
             return {
@@ -70,6 +71,14 @@ const reducer = (state = initialState, action) => {
                 filtros: action.payload,
             };
 
+      case FILTER_CATEGORIES:
+      const products = state.allProducts
+      const filter = state.filtros
+      const categoriesFiltered = filter.includes("all")? products: products.filter(e=>e.categories[0].name.includes(filter));
+        return{
+          ...state,
+          products: categoriesFiltered,
+        }
 
 
     default:

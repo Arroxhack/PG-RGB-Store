@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { getAllProducts } from "../../redux/actions/index";
 import Product from "../Product/Product";
 import SideBar from "../SideBar/SideBar";
-import Layout from '../../components/NavBar/Layout'
+import Ordenamientos from "../Ordenamientos/Ordenamientos";
 
 export default function () {
     const dispatch = useDispatch();
     const allProducts = useSelector((state) => state.allProducts);
+    const products = useSelector((state) => state.products);
   
     useEffect(() => {
       dispatch(getAllProducts());
@@ -19,10 +20,13 @@ export default function () {
   return (
     <div className="bg-primary-200 flex p-0 ">
     <fragment className='w-1/4'>
+    <Ordenamientos/>
     <SideBar/>
     </fragment>
+    
+
     <div className="grid grid-cols-3 gap-12 grid-rows-none">
-    {allProducts.map((product) => {
+    {products.map((product) => {
         return (
           <Link to={`/products/${product.id}`}>
             <Product key={product.id} product={product} />

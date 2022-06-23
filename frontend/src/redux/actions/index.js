@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER} from "../types/index";
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES} from "../types/index";
 const PATH = "http://localhost:3001";
 
 export function getAllProducts() {
@@ -102,3 +102,9 @@ export function PostUser(user) {
   }
   }
 }
+ export function filterCategories(payload){
+  return{
+    type: FILTER_CATEGORIES,
+    payload
+  }
+ }
