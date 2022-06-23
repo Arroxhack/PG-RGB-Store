@@ -2,6 +2,7 @@ import axios from "axios";
 import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES} from "../types/index";
 const PATH = "http://localhost:3001";
 
+/// GET PRODUCTOS ///
 export function getAllProducts() {
   return async function (dispatch) {
     try {
@@ -17,8 +18,7 @@ export function getAllProducts() {
   };
 }
 
-
-
+/// GET DETALLE DE PRODUCTOS ///
 export function getProductDetail(id) {
   return async function (dispatch) {
     try {
@@ -34,40 +34,7 @@ export function getProductDetail(id) {
   };
 }
 
-export const addCart = (product) => {
-  return {
-    type:ADD_CART,
-    payload:product
-  }
-}
-export const resetCart = ()=>{
-  return{
-    type:RESET_CART
-  }
-}
-
-export function orderedByPrice(payload){  
-  return {
-    type: FILTER_BY_PRICE,
-    payload
-  }
-}
-export function searchProducts(search) {
-  return function (dispatch) {
-  axios.get(`${PATH}/products?name=` + search)
-  .then((products => {
-      dispatch({
-          type: SEARCH_PRODUCTS,
-          payload: products.data
-      })
-  }))
-  .catch(() => {
-      alert("Product not found!")
-  })
-  }
-}
-
-
+/// GET A LAS CATEGORIAS ///
 export function getAllCategories() {
   return async function (dispatch) {
     try {
@@ -84,12 +51,7 @@ export function getAllCategories() {
   };
 }
 
-export function setFilter(payload){
-  return {
-    type: SET_FILTER,
-    payload
-  }
-}
+/// POST REGISTRAR USUARIO ///
 export function PostUser(user) {
   return async function () {
     try{
@@ -102,9 +64,52 @@ export function PostUser(user) {
   }
   }
 }
- export function filterCategories(payload){
+
+/// DISPATCH PARA EL CARRITO (CREO QUE HAY QUE BORRAR) ///
+export const addCart = (product) => {
+  return {
+    type:ADD_CART,
+    payload:product
+  }
+}
+export const resetCart = ()=>{
+  return{
+    type:RESET_CART
+  }
+}
+export function setFilter(payload){
+  return {
+    type: SET_FILTER,
+    payload
+  }
+}
+
+/// ORDENAMIENTOS Y FILTRADOS ///
+export function orderedByPrice(payload){  
+  return {
+    type: FILTER_BY_PRICE,
+    payload
+  }
+}
+export function filterCategories(payload){
   return{
     type: FILTER_CATEGORIES,
     payload
   }
  }
+
+/// BUSQUEDA ///
+export function searchProducts(search) {
+  return function (dispatch) {
+  axios.get(`${PATH}/products?name=` + search)
+  .then((products => {
+      dispatch({
+          type: SEARCH_PRODUCTS,
+          payload: products.data
+      })
+  }))
+  .catch(() => {
+      alert("Product not found!")
+  })
+  }
+}

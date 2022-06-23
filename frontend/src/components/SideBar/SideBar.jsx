@@ -26,9 +26,10 @@ export default function SideBar() {
  
     function handleFilterCat(e) {
       e.preventDefault();
-      dispatch(filterCategories(e.target.value));
       dispatch(setFilter(e.target.value))
-
+      dispatch(filterCategories(e.target.value));
+      
+    
     }
     
     return (
@@ -36,7 +37,7 @@ export default function SideBar() {
 
       <div className="flex flex-col pb-4">
       <h4 className='text-xl text-yellow-300 pb-4'>Categories</h4>
-      <ul >
+      <ul>
         <li className='flex flex-col   '>
         <button className="text-left text-lg pl-8" onClick={(e)=>handleFilterCat(e)} value={"all"}>All</button>
           {categories?categories.map((cat)=>{

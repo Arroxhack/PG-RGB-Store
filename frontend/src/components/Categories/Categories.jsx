@@ -11,6 +11,7 @@ export default function () {
     const dispatch = useDispatch();
     const allProducts = useSelector((state) => state.allProducts);
     const products = useSelector((state) => state.products);
+    const filters= useSelector(state=>state.filtros)
   
     useEffect(() => {
       dispatch(getAllProducts());
