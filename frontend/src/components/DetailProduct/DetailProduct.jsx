@@ -26,52 +26,88 @@ function DetailProduct() {
   }
 
   return (
-    <div>
-      <div>PRODUCT DETAIL</div>
-      <div className="">
-        <div className="grid grid-cols-[1fr_2fr_2fr]">
-          <div className="">
-            <div className="">
-              <img
-                className="[grid-column:1/2]"
-                src={
-                  ProductDetail.image
-                    ? ProductDetail.image
-                    : "1602010489_p_setting_fff_1_90_end_600.jpg"
-                }
-                width="450px"
-                height="400px"
-                alt="image not found"
-              />
-              <p className=" [grid-column:2/3]">
+    <div className="">
+      <div className="flex flex-col items-center justify-center h-screen ">
+        <div className="bg-primary-100 flex w-4/5 h-2/3 justify-evenly items-center">
+          <div className="max-h-screen">
+            <img
+              className=""
+              src={
+                ProductDetail.image
+                  ? ProductDetail.image
+                  : "1602010489_p_setting_fff_1_90_end_600.jpg"
+              }
+              width="150px"
+              height="150px"
+              alt="image not found"
+            />
+            <img
+              className=""
+              src={
+                ProductDetail.image
+                  ? ProductDetail.image
+                  : "1602010489_p_setting_fff_1_90_end_600.jpg"
+              }
+              width="150px"
+              height="150px"
+              alt="image not found"
+            />
+            <img
+              className=""
+              src={
+                ProductDetail.image
+                  ? ProductDetail.image
+                  : "1602010489_p_setting_fff_1_90_end_600.jpg"
+              }
+              width="150px"
+              height="150px"
+              alt="image not found"
+            />
+          </div>
+          <div>
+            <img
+              className=""
+              src={
+                ProductDetail.image
+                  ? ProductDetail.image
+                  : "1602010489_p_setting_fff_1_90_end_600.jpg"
+              }
+              width="450px"
+              height="400px"
+              alt="image not found"
+            />
+          </div>
+
+          <div className="w-1/4 flex flex-col justify-around ">
+            <div className="mb-12">
+              <p className="text-7x5">
                 {ProductDetail.name ? ProductDetail.name : null}
               </p>
-              <p>{ProductDetail.price ? ProductDetail.price : null}</p>
+              <p>{ProductDetail.price ? `U$D ${ProductDetail.price}` : null}</p>
               <p>{ProductDetail.inOffer ? ProductDetail.inOffer : null}</p>
               <p>
                 {ProductDetail.percentageDiscount && ProductDetail.price
                   ? `BUYING TODAY ${discount()} U$D!`
                   : null}
               </p>
+
               <p>
                 {ProductDetail.stock
                   ? `${ProductDetail.stock} in stock!`
                   : null}
               </p>
+            </div>
+            <div>
               <p className="text-xs leading-relaxed text-gray-50">
                 {ProductDetail.description
                   ? truncate(ProductDetail.description, 250)
                   : null}
               </p>
-              <button className="w-full block text-center relative text-white font-bold text-sm bg-teal-800 px-4 py-3 rounded-lg shadow-lg hover:shadow-none hover:opacity-75">
-                Add to cart
-              </button>
             </div>
           </div>
         </div>
       </div>
       <div>
-        {" "}
         MORE DETAILS
         <p>{ProductDetail.socket ? `Socket: ${ProductDetail.socket}` : null}</p>
         <p>{ProductDetail.weight ? `Weight: ${ProductDetail.weight}` : null}</p>
