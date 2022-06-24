@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { User } = require('../../db');
 const bcrypt = require('bcrypt');
 const randomstring = require('randomstring');
+const { transporter } = require('../../nodemailer/config');
 const router = Router();
 
 //-------------------------------------------------------------------------------
@@ -16,7 +17,16 @@ router.get('/register', (req, res, next) => {
 });
 
 router.post('/register', async (req, res, next) => {
-  const { name, lastname, username, email, password } = req.body;
+  const {
+    name,
+    lastname,
+    username,
+    image,
+    cellphone,
+    email,
+    password,
+    address,
+  } = req.body;
 
   if (!name || !lastname || !password || !email || !username) {
     return res.send('Fill all the blanks');
@@ -64,10 +74,14 @@ router.post('/register', async (req, res, next) => {
         if (newUser.id) {
           userId = newUser.id;
         }
-        res.send(newUser.username);
-        // res.redirect(
-        //   `/register/activation/${userId}/${promisedAll[2]}/${newUser.username}`
-        // );
+        await transporter.sendMail({
+          from: 'rgbstore0@gmail.com', // sender address
+          to: newUser.email, // list of receivers
+          subject: 'Verificacìon ✔', // Subject line
+          text: '', // plain text body
+          html: `<b>TU CODIGO DE VERIFICACION:</b> <h1>${newUser.secretToken}</h1>`, // html body
+        });
+        res.send(newUser);
       }
     } else {
       res.status(404).send('Blanks in form, register not created');
@@ -77,19 +91,30 @@ router.post('/register', async (req, res, next) => {
   }
 });
 
-router.put('/register/verify/:username', async (req, res, next) => {
-  const { token } = req.body;
-  const { username } = req.params;
-  const user = User.findOne({ where: { username } });
+router.put('/register/verify/', async (req, res, next) => {
+  const { token, username } = req.body;
+  console.log(username);
+  const user = await User.findOne({ where: { username: username } });
+  console.log(token);
 
   if (user.secretToken === token) {
-    const isVerified = user.update({ verify: true });
+    console.log('ACAAAAA');
+    const isVerified = await User.update(
+      { verify: true },
+      { where: { username: username } }
+    );
     isVerified[0] === 1
-      ? res.json({validate:true,user})
+      ? res.json({ validate: true, user })
       : res.status(404).send('Failed on edit');
   } else {
     res.status(404).send('Invalid token');
   }
   //Update nos devuelve un array de length 1 con un 1 si fue todo bien y con 0 si salio mal
+});
+
+router.get('/user/:username', async (req, res) => {
+  const { username } = req.params;
+  const user = await User.findOne({ where: { username: username } });
+  res.send(user);
 });
 module.exports = router;
