@@ -4,13 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { verify } from '../../redux/actions';
 import { useNavigate } from 'react-router';
 import jwt_decode from "jwt-decode";
-// import GoogleLogin from 'react-google-login';
+
+
 
 export default function LogIn() {
 let navigate = useNavigate()
 const [userName, setUsername] = useState("")
 const [password, setPassword] = useState("")
-const dispatch = useDispatch()
+
+/* 
+Hacer ruta get de que si esta el mail que le haga login y si no que lo haga registrarse, que lo mande a la ruta del register.
+*/
 
 const handleLoginSubmit = async(e) => {
   e.preventDefault();
@@ -18,22 +22,26 @@ const handleLoginSubmit = async(e) => {
   const user = await axios({
     method: "post",
     url: "http://localhost:3001/login",
-    data: userLogin,
+    data: userLogin, // objeto que tiene {username, password}
     headers: { "X-Requested-With": "XMLHttpRequest" },
     withCredentials: true,
   })
   .then((data) => data.data)
   .catch(e => console.log(e))
   let {login, lastname, image, username, email, cellphone, name} = user;
-  localStorage.setItem("username", username);
-  localStorage.setItem("name", name);
-  localStorage.setItem("lastname", lastname);
-  localStorage.setItem("login", login);
-  localStorage.setItem("email", email);
-  if(login == true){
+  if(login){
+    localStorage.setItem("username", username);
+    localStorage.setItem("name", name);
+    localStorage.setItem("lastname", lastname);
+    localStorage.setItem("login", login);
+    localStorage.setItem("email", email);
     setUsername("");
     setPassword("");
     navigate("/");
+  }
+  else{
+    setUsername("");
+    setPassword("");
   }
 }
 
@@ -55,7 +63,7 @@ useEffect(() => {
     document.getElementById("signInDiv"),
     {theme: "outline", size: "large"}
   );
-}, [])
+}, []);
 
 return (
       <div className=' flex flex-col items-center justify-center min-h-screen '>
@@ -86,15 +94,6 @@ return (
           </button>
         </form>
         <div id="signInDiv"></div>
-
-
-        {/* <GoogleLogin
-          clientId="845489565296-qmdicsbtthqvkbagr51v87i3hu45ru3p.apps.googleusercontent.com"
-          buttonText="Login with google"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={'single_host_origin'}
-        /> */}
       </div>
     )
 }

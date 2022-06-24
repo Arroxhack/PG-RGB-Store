@@ -17,7 +17,7 @@ router.post(
     let AccountLock = await User.findOne({
       where: { username: req.user.username },
     });
-    console.log(AccountLock);
+    console.log("AccountLock:", AccountLock);
     if (AccountLock?.lock) {
       return res.redirect("/lockedaccount");
     }
