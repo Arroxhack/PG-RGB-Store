@@ -12,9 +12,9 @@ import Promo from "./PromLeft";
 
 function Home() {
   const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.allProducts);
+  const products = useSelector((state) => state.allProducts);
 
-  const product = allProducts.slice(0,5)
+  const product = products.slice(0,5)
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -43,13 +43,15 @@ function Home() {
           <img class='fixed bottom-2 right-2 w-20 m-5' src="https://storage.googleapis.com/m-infra.appspot.com/public/whatsapp/Whatsapp_logo.svg"/>
         </a>
       </div>
-      {/* {allProducts.map((product) => {
+      <div  className="grid grid-cols-3 gap-12 grid-rows-none">
+      {/* {products.map((product) => {
         return (
           <Link to={`/products/${product.id}`}>
             <Product key={product.id} product={product} />
           </Link>
         );
       })} */}
+      </div>
     </div>
   );
 }
