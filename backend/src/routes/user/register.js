@@ -17,16 +17,7 @@ router.get('/register', (req, res, next) => {
 });
 
 router.post('/register', async (req, res, next) => {
-  const {
-    name,
-    lastname,
-    username,
-    image,
-    cellphone,
-    email,
-    password,
-    address,
-  } = req.body;
+  const { name, lastname, username, email, password } = req.body;
 
   if (!name || !lastname || !password || !email || !username) {
     return res.send('Fill all the blanks');
@@ -98,7 +89,6 @@ router.put('/register/verify/', async (req, res, next) => {
   console.log(token);
 
   if (user.secretToken === token) {
-    console.log('ACAAAAA');
     const isVerified = await User.update(
       { verify: true },
       { where: { username: username } }
