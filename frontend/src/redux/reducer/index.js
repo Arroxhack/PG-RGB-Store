@@ -1,5 +1,5 @@
 
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES,SET_FILTER, FILTER_CATEGORIES} from '../types/index';
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES,SET_FILTER, FILTER_CATEGORIES, CREATE_PRODUCT} from '../types/index';
 const initialState = {
   allProducts: [],
   products: [],
@@ -7,6 +7,7 @@ const initialState = {
   cart:[],
   categories:[],
   filtros: [],
+  newProduct:[]
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,7 +30,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         categories: action.payload,
       };
-
+    case CREATE_PRODUCT:
+      return{
+        ...state,
+        newProduct:action.payload
+      }
     /// BUSQUEDA ///
     case SEARCH_PRODUCTS:
       return {

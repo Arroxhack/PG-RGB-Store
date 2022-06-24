@@ -1,5 +1,8 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES} from "../types/index";
+import CreateProduct from "../../components/Admin/Productos/CreateProduct";
+import { CREATE_PRODUCT, ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES} from "../types/index";
+import Swal from 'sweetalert2'
+
 const PATH = "http://localhost:3001";
 
 /// GET PRODUCTOS ///
@@ -16,6 +19,33 @@ export function getAllProducts() {
       console.log(error);
     }
   };
+}
+
+/// POST PRODUCTOS ///
+export const createProduct = (product)=>{
+  return async dispatch=>{
+    try {
+      const post = await axios.post(`${PATH}/create-product`, product)
+      Swal.fire({
+        title: `${post.data.name}`,
+        text: 'creado con exito!',
+        icon:'success',
+        confirmButtonText: 'ok'
+      })
+
+      return{
+        type: CREATE_PRODUCT,
+        payload: post.data
+      }
+    } catch (error) {
+      Swal.fire({
+        title: 'Ups, algo fallo',
+        text: 'No se pudo crear el producto',
+        icon:'error',
+        confirmButtonText: 'ok'
+      })
+    }
+  }
 }
 
 /// GET DETALLE DE PRODUCTOS ///
