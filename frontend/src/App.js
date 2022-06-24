@@ -10,6 +10,7 @@ import Register from "./components/Register/Register.jsx";
 import Product from "./components/Product/Product";
 import Validacion from "./components/ValidateMail/Validacion.jsx"
 import HomeAdmin from "./components/Admin/HomeAdmin";
+import BuildPc from "./components/BuildPc/BuildPc";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Home />} exact />
         <Route path="/products/:id" element={<DetailProduct />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
+        <Route path="/arma-tu-pc" element={<BuildPc/>}/>
         <Route path="/categories" element={<Categories />} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
