@@ -1,6 +1,6 @@
 import axios from "axios";
 import CreateProduct from "../../components/Admin/Productos/CreateProduct";
-import { CREATE_PRODUCT, ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES} from "../types/index";
+import { CREATE_PRODUCT, ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES, GET_BRANDS,FILTER_BRANDS} from "../types/index";
 import Swal from 'sweetalert2'
 
 const PATH = "http://localhost:3001";
@@ -14,6 +14,23 @@ export function getAllProducts() {
       return dispatch({
         type: GET_ALL_PRODUCTS,
         payload: allProductsData,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+/// GET MARCAS DE PRODUCTOS ///
+export function getBrand() {
+  return async function (dispatch) {
+    try {
+      let allProducts = await axios.get(`${PATH}/brands`); //products por ahora
+      let allBrands = allProducts.data
+      console.log(allBrands)
+      return dispatch({
+        type: GET_BRANDS,
+        payload: allBrands,
       });
     } catch (error) {
       console.log(error);
@@ -124,6 +141,12 @@ export function orderedByPrice(payload){
 export function filterCategories(payload){
   return{
     type: FILTER_CATEGORIES,
+    payload
+  }
+ }
+ export function filterBrands(payload){
+  return{
+    type: FILTER_BRANDS,
     payload
   }
  }
