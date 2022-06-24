@@ -6,7 +6,7 @@ const CargarDB = require('./products/CargarDB');
 const Register = require('./user/register');
 const Login = require('./user/login');
 const Logout = require('./user/logout');
-
+const LoadCartProduct = require('./user/LoadCart');
 //====ADMIN===
 const Delete = require('./admin/DeleteProduct');
 const Put = require('./admin/EditProduct');
@@ -33,4 +33,5 @@ router.use('/', Create);
 router.use('/', GetUsers);
 router.use('/', Brand);
 router.use('/', EditUser);
+router.use('/', LoadCartProduct);
 module.exports = router;
