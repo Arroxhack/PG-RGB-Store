@@ -28,6 +28,7 @@ module.exports = (sequelize) => {
         allowNull: true,
         defaultValue: null,
       },
+
       ddr: {
         type: DataTypes.INTEGER,
         allowNull: true,
