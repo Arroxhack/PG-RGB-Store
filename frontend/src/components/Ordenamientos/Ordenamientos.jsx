@@ -7,13 +7,14 @@ export default function Ordenamientos() {
     
     const dispatch = useDispatch();
     const filters= useSelector(state=>state.filtros)
+    const allProducts = useSelector((state) => state.allProducts);
+    const products = useSelector(state=> state.products)
 
     function handleOrderedByPrice(e){
         e.preventDefault();
-        dispatch(orderedByPrice(e.target.value));
         dispatch(setFilter(e.target.value))
+        dispatch(orderedByPrice(e.target.value));
       }
-
       
     return (
         <div className="flex justify-center">

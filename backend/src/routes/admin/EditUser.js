@@ -19,7 +19,7 @@ router.put('/Users/:id', async (req, res, next) => {
     lock,
   } = req.body;
 
-  const arr = [
+  const aux = {
     name,
     lastname,
     username,
@@ -30,9 +30,15 @@ router.put('/Users/:id', async (req, res, next) => {
     points,
     image,
     lock,
-  ];
+  };
 
-  const aux = arr.filter((e) => e);
+  let final;
+
+  for (const x of aux) {
+    if (aux[x]) {
+      final[x] = aux[x];
+    }
+  }
   //   const finalUser = aux.reduce((target, key, index) => {
   //     target[index] = key;
   //     return target;

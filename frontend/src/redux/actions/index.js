@@ -39,7 +39,7 @@ export const createProduct = (product)=>{
       }
     } catch (error) {
       Swal.fire({
-        title: 'Ups, algo fallo',
+        title: 'Algo fallo',
         text: 'No se pudo crear el producto',
         icon:'error',
         confirmButtonText: 'ok'

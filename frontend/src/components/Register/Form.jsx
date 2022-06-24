@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { validate, regexPass, regexEmail } from "./Validations";
-import { useDispatch, useSelector } from "react-redux";
 import { PostUser } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import axios from "axios";
@@ -71,10 +70,10 @@ export default function Register() {
       })
         .then((e) => e.data)
         .catch((e) => console.log(e));
-
+      console.log(UserRegister);
       if (UserRegister) {
-        localStorage.setItem("username", UserRegister);
-        navigate("/home");
+        localStorage.setItem("user", UserRegister);
+        navigate(`/validate/${UserRegister.username}`);
       } else {
         console.log("Hubo un error en el registro intentalo de nuevo");
       }
@@ -106,57 +105,83 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>Name</label>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          name="name"
-          onChange={handleOnChange}
-        />
-        <label>Lastname</label>
-        <input
-          type="text"
-          placeholder="Lastname"
-          value={lastname}
-          name="lastname"
-          onChange={handleOnChange}
-        />
-        <label>Username</label>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          name="username"
-          onChange={handleOnChange}
-        />
-        <label>Email</label>
-        <input
-          type="text"
-          placeholder="Email"
-          value={email}
-          name="email"
-          onChange={handleOnChange}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          name="password"
-          onChange={handleOnChange}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          value={passwordValidate}
-          name="passwordValidate"
-          onChange={handleOnChange}
-        />
-        <button type="submit"> Submit </button>
-      </form>
+    <div class="bg-secundary-250 min-h-screen flex flex-col">
+      <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+          <h1 class="mb-8 text-3xl text-center">Sign up</h1>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Name</label>
+              <input
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                type="text"
+                placeholder="Name"
+                value={name}
+                name="name"
+                onChange={handleOnChange}
+              />
+              <label>Lastname</label>
+              <input
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                type="text"
+                placeholder="Lastname"
+                value={lastname}
+                name="lastname"
+                onChange={handleOnChange}
+              />
+              <label>Username</label>
+              <input
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                type="text"
+                placeholder="Username"
+                value={username}
+                name="username"
+                onChange={handleOnChange}
+              />
+              <label>Email</label>
+              <input
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                type="text"
+                placeholder="Email"
+                value={email}
+                name="email"
+                onChange={handleOnChange}
+              />
+              <label>Password</label>
+              <input
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                type="password"
+                placeholder="Password"
+                value={password}
+                name="password"
+                onChange={handleOnChange}
+              />
+              <input
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                type="password"
+                placeholder="Password"
+                value={passwordValidate}
+                name="passwordValidate"
+                onChange={handleOnChange}
+              />
+              <button
+                class="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
+                type="submit"
+              >
+                {" "}
+                Submit{" "}
+              </button>
+            </div>
+            <div class="t-6">
+              Already have an account?
+              <a class="no-underline border-b" href="../login/">
+                Log in
+              </a>
+              .
+            </div>
+          </form>
+        </div>
+      </div>
       <div>
         {errors.name && <p>{errors.name}</p>}
         {errors.lastname && <p>{errors.lastname}</p>}
