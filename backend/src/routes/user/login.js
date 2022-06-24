@@ -34,6 +34,22 @@ router.post(
   }
 );
 
+router.get("/googleLogin", async(req, res) => {
+  let {googleMail} = req.query
+    try {
+      if(googleMail){
+        let googleUser = await User.findOne({
+          where: { email: googleMail },
+        });
+        console.log(googleUser)
+        return res.json(googleUser)
+      }
+      return res.json("nada")
+    }catch(error){
+      next(error)
+    }
+})
+
 
 router.get("/lockedaccount", (req, res) => {
   res.send("Su email ha sido bloquedo por el administrador del sitio");
