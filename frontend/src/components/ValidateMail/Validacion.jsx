@@ -13,15 +13,17 @@ export default function Validations() {
 
   async function HandleSubmit(e) {
     e.preventDefault();
+    console.log("ACAAAAAAAAA");
+    console.log(token);
     const UserRegister = await axios({
-      method: "post",
-      url: `http://localhost:3001/register/verify/${username}`,
-      data: token,
+      method: "put",
+      url: `http://localhost:3001/register/verify`,
+      data: { token, username },
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
     })
       .then((e) => e.data)
-      .catch((e) => console.log(e, "ACA"));
+      .catch((e) => console.log(e));
     if (UserRegister.validate === true) {
       let { login, lastname, image, username, email, cellphone, name } =
         UserRegister.user;

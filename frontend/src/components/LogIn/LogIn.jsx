@@ -4,13 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { verify } from '../../redux/actions';
 import { useNavigate } from 'react-router';
 import jwt_decode from "jwt-decode";
-// import GoogleLogin from 'react-google-login';
+
+
 
 export default function LogIn() {
 let navigate = useNavigate()
-const [userName, setUsername] = useState("")
-const [password, setPassword] = useState("")
-const dispatch = useDispatch()
+const [userName, setUsername] = useState("");
+const [password, setPassword] = useState("");
+const [googleUser, setGoogleUser] = useState({});
+
+/* 
+Hacer ruta get de que si esta el mail que le haga login y si no que lo haga registrarse, que lo mande a la ruta del register.
+*/
 
 const handleLoginSubmit = async(e) => {
   e.preventDefault();
@@ -18,44 +23,66 @@ const handleLoginSubmit = async(e) => {
   const user = await axios({
     method: "post",
     url: "http://localhost:3001/login",
-    data: userLogin,
+    data: userLogin, // objeto que tiene {username, password}
     headers: { "X-Requested-With": "XMLHttpRequest" },
     withCredentials: true,
   })
   .then((data) => data.data)
   .catch(e => console.log(e))
   let {login, lastname, image, username, email, cellphone, name} = user;
-  localStorage.setItem("username", username);
-  localStorage.setItem("name", name);
-  localStorage.setItem("lastname", lastname);
-  localStorage.setItem("login", login);
-  localStorage.setItem("email", email);
-  if(login == true){
+  if(login){
+    localStorage.setItem("username", username);
+    localStorage.setItem("name", name);
+    localStorage.setItem("lastname", lastname);
+    localStorage.setItem("login", login);
+    localStorage.setItem("email", email);
     setUsername("");
     setPassword("");
     navigate("/");
   }
+  else{
+    setUsername("");
+    setPassword("");
+  }
 }
 
+//googleUser.email -> julian.sonido@gmail.com
 
-function handleCallbackResponse(response) {
-  console.log("Encoded JWT ID token: " + response.credential);
-  var userObject = jwt_decode(response.credential);
-  console.log(userObject);
- /*  setUsername */
+async function handleCallbackResponse(response) { // al hacer click en el boton se ejecuta esta funcion
+  // console.log("Encoded JWT ID token: " + response.credential);
+  var userObject = jwt_decode(response.credential); // -> objeto con propiedad email
+  console.log("userObject: ", userObject);
+  setGoogleUser(userObject);
+  let user = await axios.get(`http://localhost:3001/googleLogin?googleMail=${userObject.email}`)
+    .then((data) => data.data)
+    .catch(e => console.log(e))
+  // let userData = user.data
+  console.log(user)
+  if(user){
+    localStorage.setItem("username", user.username);
+    localStorage.setItem("name", user.name);
+    localStorage.setItem("lastname", user.lastname);
+    localStorage.setItem("login", true);
+    localStorage.setItem("email", user.email);
+    navigate("/");
+  }
+  else {
+    navigate("/register");
+  }
+
 }
 useEffect(() => {
   /* global google */
   google.accounts.id.initialize({
     client_id:  "40192132874-9l8jidbuvjeqfq497io9jlom3oh1uulg.apps.googleusercontent.com",
-    callback: handleCallbackResponse  
+    callback: handleCallbackResponse 
   });
 
   google.accounts.id.renderButton(
     document.getElementById("signInDiv"),
     {theme: "outline", size: "large"}
   );
-}, [])
+}, []);
 
 return (
       <div className=' flex flex-col items-center justify-center min-h-screen '>
@@ -86,15 +113,13 @@ return (
           </button>
         </form>
         <div id="signInDiv"></div>
-
-
-        {/* <GoogleLogin
-          clientId="845489565296-qmdicsbtthqvkbagr51v87i3hu45ru3p.apps.googleusercontent.com"
-          buttonText="Login with google"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={'single_host_origin'}
-        /> */}
+ {/*        { googleUser && 
+          <div>
+            <img src={googleUser.picture} alt="User"/>
+            <h3>{googleUser.name}</h3>
+            <h3>{googleUser.email}</h3>
+          </div>
+        } */}
       </div>
     )
 }

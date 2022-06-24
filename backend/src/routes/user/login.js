@@ -17,7 +17,7 @@ router.post(
     let AccountLock = await User.findOne({
       where: { username: req.user.username },
     });
-    console.log(AccountLock);
+    console.log("AccountLock:", AccountLock);
     if (AccountLock?.lock) {
       return res.redirect("/lockedaccount");
     }
@@ -33,6 +33,22 @@ router.post(
   });
   }
 );
+
+router.get("/googleLogin", async(req, res) => {
+  let {googleMail} = req.query
+    try {
+      if(googleMail){
+        let googleUser = await User.findOne({
+          where: { email: googleMail },
+        });
+        console.log(googleUser)
+        return res.json(googleUser)
+      }
+      return res.json("nada")
+    }catch(error){
+      next(error)
+    }
+})
 
 
 router.get("/lockedaccount", (req, res) => {
