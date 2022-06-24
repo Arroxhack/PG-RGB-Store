@@ -9,8 +9,9 @@ import jwt_decode from "jwt-decode";
 
 export default function LogIn() {
 let navigate = useNavigate()
-const [userName, setUsername] = useState("")
-const [password, setPassword] = useState("")
+const [userName, setUsername] = useState("");
+const [password, setPassword] = useState("");
+const [googleUser, setGoogleUser] = useState({});
 
 /* 
 Hacer ruta get de que si esta el mail que le haga login y si no que lo haga registrarse, que lo mande a la ruta del register.
@@ -45,18 +46,36 @@ const handleLoginSubmit = async(e) => {
   }
 }
 
+//googleUser.email -> julian.sonido@gmail.com
 
-function handleCallbackResponse(response) {
-  console.log("Encoded JWT ID token: " + response.credential);
-  var userObject = jwt_decode(response.credential);
-  console.log(userObject);
- /*  setUsername */
+async function handleCallbackResponse(response) { // al hacer click en el boton se ejecuta esta funcion
+  // console.log("Encoded JWT ID token: " + response.credential);
+  var userObject = jwt_decode(response.credential); // -> objeto con propiedad email
+  console.log("userObject: ", userObject);
+  setGoogleUser(userObject);
+  let user = await axios.get(`http://localhost:3001/googleLogin?googleMail=${userObject.email}`)
+    .then((data) => data.data)
+    .catch(e => console.log(e))
+  // let userData = user.data
+  console.log(user)
+  if(user){
+    localStorage.setItem("username", user.username);
+    localStorage.setItem("name", user.name);
+    localStorage.setItem("lastname", user.lastname);
+    localStorage.setItem("login", true);
+    localStorage.setItem("email", user.email);
+    navigate("/");
+  }
+  else {
+    navigate("/register");
+  }
+
 }
 useEffect(() => {
   /* global google */
   google.accounts.id.initialize({
     client_id:  "40192132874-9l8jidbuvjeqfq497io9jlom3oh1uulg.apps.googleusercontent.com",
-    callback: handleCallbackResponse  
+    callback: handleCallbackResponse 
   });
 
   google.accounts.id.renderButton(
@@ -94,6 +113,13 @@ return (
           </button>
         </form>
         <div id="signInDiv"></div>
+ {/*        { googleUser && 
+          <div>
+            <img src={googleUser.picture} alt="User"/>
+            <h3>{googleUser.name}</h3>
+            <h3>{googleUser.email}</h3>
+          </div>
+        } */}
       </div>
     )
 }
