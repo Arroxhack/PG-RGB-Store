@@ -15,7 +15,7 @@ function NavBar({ toggleOpen }) {
   };
 
   return (
-    <nav className="flex justify-evenly items-center h-34 bg-gray-300 text-black relative shadow-sm bg-primary-200">
+    <nav className="flex justify-evenly items-center h-36 bg-gray-300 text-black relative shadow-sm bg-primary-200">
       <Link
         to="/"
         className="flex flex-col items-center text-primary-400 font-Open text-4xl font-extrabold"
@@ -45,14 +45,14 @@ function NavBar({ toggleOpen }) {
 
       <div className="flex gap-5">
         {username ? (
-          <>
+          <div>
             <Link to="/profile">
-              <h2 className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
-                Bienvenido {username}
-              </h2>
+              <p className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
+                {username} Bienvenido!
+              </p>
             </Link>{" "}
             <Logout />
-          </>
+          </div>
         ) : (
           <>
             <Link

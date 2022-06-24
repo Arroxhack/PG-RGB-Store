@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { verify } from '../../redux/actions';
 import { useNavigate } from 'react-router';
 import jwt_decode from "jwt-decode";
-// import GoogleLogin from 'react-google-login';
+
 
 
 export default function LogIn() {
@@ -15,7 +15,6 @@ const [password, setPassword] = useState("")
 /* 
 Hacer ruta get de que si esta el mail que le haga login y si no que lo haga registrarse, que lo mande a la ruta del register.
 */
-
 
 const handleLoginSubmit = async(e) => {
   e.preventDefault();
@@ -46,10 +45,6 @@ const handleLoginSubmit = async(e) => {
   }
 }
 
-/* funcion para usar con la libreria react-google-login */
-const responseGoogle = (response) => {
-  console.log(response)
-}
 
 function handleCallbackResponse(response) {
   console.log("Encoded JWT ID token: " + response.credential);
@@ -81,15 +76,16 @@ return (
             <input className='border-2 border-primary-400 rounded max-w-max  '
             type='text'
             value={userName}
-            name='Username'
-            placeholder='Username'
+            name="Username"
+            placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
-            />
-            <input  className='border-2 border-primary-400 rounded max-w-max  '
-            type='password' 
+          />
+          <input
+            className="border-2 border-primary-400 rounded max-w-max  "
+            type="password"
             value={password}
-            name='Password'
-            placeholder='Password'
+            name="Password"
+            placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
             />
           </div>
@@ -98,13 +94,6 @@ return (
           </button>
         </form>
         <div id="signInDiv"></div>
-        {/* <GoogleLogin
-          clientId="845489565296-qmdicsbtthqvkbagr51v87i3hu45ru3p.apps.googleusercontent.com"
-          buttonText="Login with google"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={'single_host_origin'}
-        /> */}
       </div>
     )
 }
