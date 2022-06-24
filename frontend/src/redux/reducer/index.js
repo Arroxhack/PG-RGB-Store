@@ -10,6 +10,7 @@ import {
   FILTER_CATEGORIES,
   GET_BRANDS,
   FILTER_BRANDS,
+  CREATE_PRODUCT,
 } from '../types/index';
 const initialState = {
   allProducts: [],
@@ -19,6 +20,7 @@ const initialState = {
   categories: [],
   filtros: [],
   brands: [],
+  newProduct:[],
 };
 
 const reducer = (state = initialState, action) => {
@@ -47,6 +49,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         brands: action.payload,
       };
+      case CREATE_PRODUCT:
+        return{
+          ...state,
+          newProduct:action.payload
+        }
 
     /// BUSQUEDA ///
     case SEARCH_PRODUCTS:
