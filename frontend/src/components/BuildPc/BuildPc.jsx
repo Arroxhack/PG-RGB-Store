@@ -1,9 +1,11 @@
 import React from 'react'
+import NavBar from '../NavBar/NavBar'
 
 function BuildPc() {
   return (
     <div>
-      arma tu pc cabron
+      <NavBar />
+      
     </div>
   )
 }

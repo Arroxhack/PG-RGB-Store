@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { searchProducts } from "../../redux/actions";
 
 export default function SearchBar() {
@@ -28,8 +29,10 @@ export default function SearchBar() {
           value={search}
           onChange={onInputChange}
         ></input>
+       <Link to='/categories'>
         <input type="submit" class="absolute right-0 top-0 mt-5 mr-4" value='🔍'>
         </input>
+        </Link> 
       </form>
     </div>
   );
