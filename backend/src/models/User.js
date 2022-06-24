@@ -67,6 +67,12 @@ module.exports = (sequelize) => {
       allowNull: true,
       defaultValue: false,
     },
+    cartProducts: {
+      //LO QUE VA A TENER ESTO ES: TODO LO QUE TIENE PRODUCT + AMOUNT (CANTIDAD DE CADA PRODUCTO EN EL CARRITO)
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: true,
+      defaultValue: [{}],
+    },
     //AGREGAR FAVORITOS
   });
 };
