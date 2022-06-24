@@ -1,13 +1,12 @@
 import axios from "axios";
 import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES,GET_BRANDS,FILTER_BRANDS,CREATE_PRODUCT} from "../types/index";
 import Swal from 'sweetalert2'
-const PATH = "http://localhost:3001";
  
 /// GET PRODUCTOS ///
 export function getAllProducts() {
   return async function (dispatch) {
     try {
-      let allProducts = await axios.get(`${PATH}/products`); //products por ahora
+      let allProducts = await axios.get(`/products`); //products por ahora
       let allProductsData = allProducts.data;
       return dispatch({
         type: GET_ALL_PRODUCTS,
@@ -23,7 +22,7 @@ export function getAllProducts() {
 export function getBrand() {
   return async function (dispatch) {
     try {
-      let allProducts = await axios.get(`${PATH}/brands`); //products por ahora
+      let allProducts = await axios.get(`/brands`); //products por ahora
       let allBrands = allProducts.data
       console.log(allBrands)
       return dispatch({
@@ -40,14 +39,14 @@ export function getBrand() {
 export function getProductDetail(id) {
   return async function (dispatch) {
     try {
-      let product = await axios.get(`${PATH}/products/${id}`);
+      let product = await axios.get(`/products/${id}`);
       product = product.data;
       return dispatch({
         type: GET_PRODUCT_DETAIL,
         payload: product,
       });
     } catch (error) {
-      console.log(error, " product detail");
+      console.log(error, "product detail");
     }
   };
 }
@@ -56,7 +55,7 @@ export function getProductDetail(id) {
 export function getAllCategories() {
   return async function (dispatch) {
     try {
-      let AllCategory = await axios.get(`${PATH}/category`); 
+      let AllCategory = await axios.get(`/category`); 
       console.log(AllCategory)
       let allCategoryData = AllCategory.data.map((e)=>e.name)
       return dispatch({
@@ -73,7 +72,7 @@ export function getAllCategories() {
 export const createProduct = (product)=>{
   return async dispatch=>{
     try {
-      const post = await axios.post(`${PATH}/create-product`, product)
+      const post = await axios.post(`/create-product`, product)
       Swal.fire({
         title: `${post.data.name}`,
         text: 'creado con exito!',
@@ -153,7 +152,7 @@ export function filterCategories(payload){
 /// BUSQUEDA ///
 export function searchProducts(search) {
   return function (dispatch) {
-  axios.get(`${PATH}/product?name=` + search)
+  axios.get(`/product?name=` + search)
   .then((products => {
       dispatch({
           type: SEARCH_PRODUCTS,

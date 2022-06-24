@@ -7,6 +7,11 @@ import {BrowserRouter} from 'react-router-dom'
 import { Provider } from 'react-redux';
 import store from './redux/store.js'
 import CartProvider from './components/Cart/CartContext';
+import dotenv from 'dotenv'
+import axios from 'axios'
+
+dotenv.config()
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 ReactDOM.render(
   <React.StrictMode>
