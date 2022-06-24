@@ -1,10 +1,19 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CartContext } from "../Cart/CartContext";
+import { useDispatch } from "react-redux";
 
 export default function Logout() {
   const [actualizar, setActualizar] = useState("");
+  const {products} = useContext(CartContext); //CartContext estado global // products array con prodcucts con amount
+  const dispatch = useDispatch();
+
   function onClick(e) {
     e.preventDefault();
+    // dispatch(postCart(products))
+    
+    // axios.post("/rutaParaAgregarCarritoAUsuario", )
+
     axios({
       method: "post",
       url: "http://localhost:3001/logout",
