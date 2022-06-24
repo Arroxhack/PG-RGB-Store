@@ -9,3 +9,6 @@ export const SET_FILTER= 'SET_FILTER';
 export const FILTER_CATEGORIES= 'FILTER_CATEGORIES';
 export const GET_BRANDS= 'GET_BRANDS';
 export const FILTER_BRANDS= 'FILTER_BRANDS';
+export const FILTER_MIN = 'FILTER_MIN_MAX'
+export const FILTER_MAX = 'FILTER_MAX'
+export const SET_FILTER_MAX = 'SET_FILTER_MAX'

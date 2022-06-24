@@ -1,5 +1,6 @@
 
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES,SET_FILTER, FILTER_CATEGORIES, GET_BRANDS, FILTER_BRANDS} from '../types/index';
+import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE,
+   GET_CATEGORIES,SET_FILTER, FILTER_CATEGORIES, GET_BRANDS, FILTER_BRANDS, FILTER_MIN,SET_FILTER_MAX} from '../types/index';
 const initialState = {
   allProducts: [],
   products: [],
@@ -7,7 +8,8 @@ const initialState = {
   cart:[],
   categories:[],
   filtros: [],
-  brands:[]
+  brands:[],
+  filterMax:[],
 };
 
 const reducer = (state = initialState, action) => {
@@ -84,8 +86,14 @@ const reducer = (state = initialState, action) => {
         products: brandsFiltered,
         
       };
-
-
+    
+      case FILTER_MIN:
+      const filterMaxAndMin= state.filtros?
+      state.products.filter(e=> e.price > state.filtros && e.price < state.filterMax):alert()
+      return{
+        ...state,
+        products: filterMaxAndMin
+      }
     
     ///SETEA EL ESTADO DE FILTROS///
       case SET_FILTER:
@@ -93,7 +101,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         filtros: action.payload,
       };
-   
+      case SET_FILTER_MAX:
+        return {
+          ...state,
+          filterMax: action.payload,
+        };
+
     
     /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///
     case ADD_CART:

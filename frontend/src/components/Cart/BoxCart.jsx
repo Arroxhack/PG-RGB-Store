@@ -11,7 +11,7 @@ const BoxCart = ({onClick}) => {
     products.forEach(p=>total+=p.amount*p.price)
 
   return (
-    <div className='h-auto w-72 absolute bg-primary-100 ml-72'>
+    <div className='h-auto w-72 absolute bg-primary-100 mt-10 '>
         <div className='flex flex-row-reverse pr-2'>
         <span onClick={onClick}><X/></span>
         </div>
@@ -30,7 +30,7 @@ const BoxCart = ({onClick}) => {
                             </div>
                         )
                     })}
-                    <div className='flex justify-end'>
+                    <div className='flex '>
                     <p>{`Total a pagar: ${total.toFixed(2)}`}</p>
                     </div>
                 </div>

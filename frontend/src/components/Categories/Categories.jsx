@@ -6,6 +6,7 @@ import { getAllProducts } from "../../redux/actions/index";
 import Product from "../Product/Product";
 import SideBar from "../SideBar/SideBar";
 import Ordenamientos from "../Ordenamientos/Ordenamientos";
+import NavBar from '../NavBar/NavBar'
 
 export default function () {
     const dispatch = useDispatch();
@@ -19,16 +20,16 @@ export default function () {
 
 
   return (
-    <div className="bg-primary-200 flex p-0 ">
-      <fragment>
+    <div className="bg-primary-200 flex flex-col p-0 ">
+      <NavBar/>
+      <fragment className='w-full flex justify-end p-8'>
       <Ordenamientos/>
       </fragment>
-    <fragment className='w-1/4'>
+    <fragment className='w-full relative flex'>
+      <fragment>
     <SideBar/>
     </fragment>
-    
-
-    <div className="grid grid-cols-3 gap-12 grid-rows-none">
+    <div className="grid grid-cols-3 w-full gap-12 grid-rows-none relative">
     {products.map((product) => {
         return (
           <Link to={`/products/${product.id}`}>
@@ -37,6 +38,7 @@ export default function () {
         );
       })}
       </div>
+      </fragment>
     </div>
   )
 }
