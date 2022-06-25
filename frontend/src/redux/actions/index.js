@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES,GET_BRANDS,FILTER_BRANDS} from "../types/index";
-const PATH = "http://localhost:3001";
+const PATH = "https://proyecto-grupal-rgb.herokuapp.com";
 
 /// GET PRODUCTOS ///
 export function getAllProducts() {

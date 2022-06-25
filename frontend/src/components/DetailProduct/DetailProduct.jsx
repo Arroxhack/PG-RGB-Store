@@ -15,9 +15,9 @@ function DetailProduct() {
   }, []);
 
   const ProductDetail = useSelector((state) => state.detail);
-  function truncate(str, n) {
-    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
-  }
+  // function truncate(str, n) {
+  //   return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  // }
 
   function discount() {
     let total =
@@ -114,9 +114,10 @@ function DetailProduct() {
                 <div>
                   <div class="prose max-w-none group-open:hidden">
                     <p>
-                      {ProductDetail.description
+                      {/* {ProductDetail.description
                         ? truncate(ProductDetail.description, 300)
-                        : null}
+                        : null} */}
+                        {ProductDetail.description}
                     </p>
                   </div>
 

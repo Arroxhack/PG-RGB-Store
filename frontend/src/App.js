@@ -1,13 +1,11 @@
 import "./App.css";
+import React from "react";
 import { Route, Routes } from "react-router";
-import ContainerProduct from "./components/ContainerProduct/ContainerProduct";
 import Home from "./components/Home/Home.jsx";
 import DetailProduct from "./components/DetailProduct/DetailProduct.jsx";
-import Cart from "./components/Cart/Cart";
 import Categories from "./components/Categories/Categories";
 import LogIn from "./components/LogIn/LogIn";
 import Register from "./components/Register/Register.jsx";
-import Product from "./components/Product/Product";
 import Validacion from "./components/ValidateMail/Validacion.jsx"
 import HomeAdmin from "./components/Admin/HomeAdmin";
 import BuildPc from "./components/BuildPc/BuildPc";
