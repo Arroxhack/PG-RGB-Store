@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllProducts } from "../../redux/actions/index";
+import { clean } from "../../redux/actions/index";
 import Product from "../Product/Product";
 import SideBar from "../SideBar/SideBar";
 import Ordenamientos from "../Ordenamientos/Ordenamientos";
@@ -16,6 +17,7 @@ export default function () {
   
     useEffect(() => {
       dispatch(getAllProducts());
+      dispatch(clean())
     }, [dispatch]);
 
 

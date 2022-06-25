@@ -120,6 +120,7 @@ const reducer = (state = initialState, action) => {
           ...state,
           filterMax: action.payload,
         };
+        
       case CLEAN:
         return{
           ...state,
