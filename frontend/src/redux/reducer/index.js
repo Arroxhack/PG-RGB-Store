@@ -1,12 +1,26 @@
 
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE,
-   GET_CATEGORIES,SET_FILTER, FILTER_CATEGORIES, GET_BRANDS, FILTER_BRANDS, FILTER_MIN,SET_FILTER_MAX, CLEAN} from '../types/index';
-const initialState = {
+import { ADD_CART,
+   GET_ALL_PRODUCTS,
+   GET_PRODUCT_DETAIL,
+   RESET_CART,
+   SEARCH_PRODUCTS,
+   FILTER_BY_PRICE,
+   GET_CATEGORIES,
+   SET_FILTER, 
+   FILTER_CATEGORIES, 
+   GET_BRANDS, 
+   FILTER_BRANDS, 
+   FILTER_MIN,
+   SET_FILTER_MAX, 
+   CLEAN} from '../types/index';
+
+
+   const initialState = {
   allProducts: [],
   products: [],
   detail: [],
-  cart:[],
-  categories:[],
+  cart: [],
+  categories: [],
   filtros: [],
   brands:[],
   filterMax:[],
@@ -32,61 +46,51 @@ const reducer = (state = initialState, action) => {
         ...state,
         categories: action.payload,
       };
-      
+
     case GET_BRANDS:
-      return{
+      return {
         ...state,
         brands: action.payload,
-      }
-
+      };
 
     /// BUSQUEDA ///
     case SEARCH_PRODUCTS:
       return {
         ...state,
-        products: action.payload
+        products: action.payload,
       };
 
     /// FILTRADO Y ORDENAMIENTO ///
     case FILTER_BY_PRICE:
-      let orderedByPrice = state.filtros.includes("menor valor")
-      ? state.products.sort(function (a, b) {
-          if (a.price > b.price) return 1;
-          if (b.price > a.price) return -1;
-          return 0;
-        })
-      : state.products.sort(function (a, b) {
-          if (a.price > b.price) return -1;
-          if (b.price > a.price) return 1;
-          return 0;
-        });
+      let orderedByPrice = state.filtros.includes('menor valor')
+        ? state.products.sort(function (a, b) {
+            if (a.price > b.price) return 1;
+            if (b.price > a.price) return -1;
+            return 0;
+          })
+        : state.products.sort(function (a, b) {
+            if (a.price > b.price) return -1;
+            if (b.price > a.price) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: orderedByPrice,
       };
 
-      case FILTER_CATEGORIES:
-        const products = state.allProducts;
-        const filter = state.filtros;
-        const categoriesFiltered = filter.includes("all")
-          ? products
-          : products.filter(e=>e.category.includes(filter));
-          
-          return {
-          ...state,
-          products: categoriesFiltered,
-        };
-      
-      case FILTER_BRANDS: 
-      const brandsFiltered = state.filtros.includes("all")
-        ? state.products
-        : state.products.filter(e=>e.brand == state.filtros)
-        return {
+    case FILTER_CATEGORIES:
+      const products = state.allProducts;
+      const filter = state.filtros;
+      const categoriesFiltered = filter.includes('all')
+        ? products
+        : products.filter((e) => e.category.includes(filter));
+
+      return {
         ...state,
-        products: brandsFiltered,
-        
+        products: categoriesFiltered,
       };
-    
+
+  
       case FILTER_MIN:
       const filterMaxAndMin= state.filtros?
       state.products.filter(e=> e.price > state.filtros && e.price < state.filterMax):alert("No existen productos en este rango")
@@ -94,9 +98,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         products: filterMaxAndMin
       }
-    
+
+
+    case FILTER_BRANDS:
+      const brandsFiltered = state.filtros.includes('all')
+        ? state.products
+        : state.products.filter((e) => e.brand === state.filtros);
+      return {
+        ...state,
+        products: brandsFiltered,
+      };
+
     ///SETEA EL ESTADO DE FILTROS///
-      case SET_FILTER:
+    case SET_FILTER:
       return {
         ...state,
         filtros: action.payload,
@@ -130,4 +144,3 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
-
