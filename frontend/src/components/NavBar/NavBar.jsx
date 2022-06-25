@@ -44,7 +44,18 @@ function NavBar({ toggleOpen }) {
       </div>
 
       <div className="flex gap-5">
-        {username ? (
+       
+        {cartOpen ? (
+          <BoxCart onClick={handleCart} />
+        ) : (
+          <p
+            onClick={handleCart}
+            className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+          >
+            Carrito
+          </p>
+        )}
+         {username ? (
           <div>
             <Link to="/profile">
               <p className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
@@ -68,16 +79,6 @@ function NavBar({ toggleOpen }) {
               Register
             </Link>
           </>
-        )}
-        {cartOpen ? (
-          <BoxCart onClick={handleCart} />
-        ) : (
-          <p
-            onClick={handleCart}
-            className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
-          >
-            Carrito
-          </p>
         )}
       </div>
     </nav>

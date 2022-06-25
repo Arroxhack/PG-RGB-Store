@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getProductDetail } from "../../redux/actions/index";
+import { clean } from "../../redux/actions/index";
 import NavBar from "../NavBar/NavBar";
 
 function DetailProduct() {
@@ -11,8 +12,9 @@ function DetailProduct() {
   id = Number(id);
 
   useEffect(() => {
-    dispatch(getProductDetail(id));
-  }, []);
+    dispatch(getProductDetail(id))
+    dispatch(clean())
+  }, [dispatch,id]);
 
   const ProductDetail = useSelector((state) => state.detail);
   function truncate(str, n) {

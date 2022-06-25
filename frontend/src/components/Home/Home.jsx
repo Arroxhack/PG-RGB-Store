@@ -14,7 +14,7 @@ function Home() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProducts);
 
-  const product = products.slice(0,5)
+  const product = products.slice(0,4)
 
   useEffect(() => {
     dispatch(getAllProducts());
