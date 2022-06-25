@@ -45,6 +45,7 @@ const handleLoginSubmit = async(e) => {
     navigate("/");
   }
   else{ //Si no trae login quiere decir que no esta autenticado el usuario
+    if (user == "Contraseña")
     setErrors(user)
     setUsername("");
     setPassword("");
