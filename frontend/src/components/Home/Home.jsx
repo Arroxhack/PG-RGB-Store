@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getAllProducts } from "../../redux/actions/index";
+import { clean } from "../../redux/actions/index";
 import Nav from "../NavBar/Nav";
 import NavBar from "../NavBar/NavBar";
 import Product from "../Product/Product";
@@ -18,6 +19,7 @@ function Home() {
 
   useEffect(() => {
     dispatch(getAllProducts());
+    dispatch(clean())
   }, [dispatch]);
 
 

@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getProductDetail } from "../../redux/actions/index";
-import { clean } from "../../redux/actions/index";
 import NavBar from "../NavBar/NavBar";
+import Loading from '../Loading/Loading'
 
 function DetailProduct() {
   const dispatch = useDispatch();
   let { id } = useParams();
   id = Number(id);
 
+  const [loading, setLoading]= useState(false)
+
   useEffect(() => {
+    setLoading(true)
+    setTimeout(()=>{
+      setLoading(false)
+    },500)
     dispatch(getProductDetail(id))
-    dispatch(clean())
-  }, [dispatch,id]);
+  }, []);
 
   const ProductDetail = useSelector((state) => state.detail);
   function truncate(str, n) {
@@ -31,9 +36,13 @@ function DetailProduct() {
   return (
     <div> 
       <NavBar/>
-    <section class="font-Open">
-     
-      <div class="relative max-w-screen-xl px-4 py-8 mx-auto">
+      
+      
+    <section class="font-Open ">
+    {loading?(
+       <div className="h-screen"><Loading/></div>
+    ) :
+     ( <div class="relative max-w-screen-xl px-4 py-8 mx-auto">
         <div class="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
           <div class="grid grid-cols-2 gap-4 md:grid-cols-1">
             <div class="aspect-w-1 aspect-h-1">
@@ -196,7 +205,7 @@ function DetailProduct() {
             </form>
           </div>
         </div>
-      </div>
+      </div>) }
     </section>
     </div>
   );
