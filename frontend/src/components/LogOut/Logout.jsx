@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { CartContext } from "../Cart/CartContext";
 import { useDispatch } from "react-redux";
 
+
 export default function Logout() {
   const [actualizar, setActualizar] = useState("");
   const {products} = useContext(CartContext); //CartContext estado global // products array con prodcucts con amount

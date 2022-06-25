@@ -9,38 +9,41 @@ import jwt_decode from "jwt-decode";
 
 export default function LogIn() {
 let navigate = useNavigate()
-const [userName, setUsername] = useState("");
-const [password, setPassword] = useState("");
+const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
+const [password, setPassword] = useState(""); // Llega del input del form password al hacer submit.
 const [googleUser, setGoogleUser] = useState({});
 
-/* 
-Hacer ruta get de que si esta el mail que le haga login y si no que lo haga registrarse, que lo mande a la ruta del register.
-*/
+
 
 const handleLoginSubmit = async(e) => {
   e.preventDefault();
-  let userLogin = {username: userName, password: password}
-  const user = await axios({
+  
+  let userLogin = {username: userName, password: password} // Creo este objeto userLogin con la info de mi estado local.
+
+  const user = await axios({ //La ruta trae toda la info en la base de datos de un usuario
     method: "post",
     url: "http://localhost:3001/login",
-    data: userLogin, // objeto que tiene {username, password}
+    data: userLogin, // objeto que tiene {userName y password}
     headers: { "X-Requested-With": "XMLHttpRequest" },
     withCredentials: true,
   })
   .then((data) => data.data)
   .catch(e => console.log(e))
-  let {login, lastname, image, username, email, cellphone, name} = user;
+
+  let {login, lastname, image, username, email, cellphone, name} = user; //Info que trae la ruta
+
   if(login){
-    localStorage.setItem("username", username);
+    localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
     localStorage.setItem("name", name);
     localStorage.setItem("lastname", lastname);
     localStorage.setItem("login", login);
     localStorage.setItem("email", email);
-    setUsername("");
+    setUsername(""); //Reseteo mis estados locales
     setPassword("");
     navigate("/");
   }
-  else{
+  else{ //Si no trae login quiere decir que no esta autenticado el usuario
+
     setUsername("");
     setPassword("");
   }
