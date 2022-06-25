@@ -21,7 +21,7 @@ export default function SideBar() {
   const filterMax= useSelector(state=>state.filterMax)
 
 
-  //-----------------------------------------------------------------//
+  //
      useEffect(()=>{
       dispatch(getAllCategories())
       dispatch(getBrand())
@@ -39,13 +39,12 @@ export default function SideBar() {
       e.preventDefault();
       dispatch(setFilter(e.target.value))
       dispatch(filterBrands(e.target.value))
+      
     }
 
     function handleFilterMax(e) {
       e.preventDefault();
-      dispatch(filterMin(e.target.value));
-      console.log(filters)
-      
+      dispatch(filterMin(e.target.value));      
     }
     function onChangeMin(e){
       e.preventDefault()
@@ -56,7 +55,7 @@ export default function SideBar() {
       dispatch(setFilterMax(e.target.value))
     }
 
-    
+    console.log(filters)
     return (
     <aside className='w-1/4 md:w-64 sm:text-xs  shadow-xl flex flex-col justify-around bg-primary-200 h-screen text-lg md:text-sm text-center text-primary-400 '>
 
@@ -75,8 +74,8 @@ export default function SideBar() {
           
       
       <div className='flex flex-col  pl-4 pt-4'>
-        <h4  className='text-xl text-yellow-300 pb-3'>Marcas</h4>
-        <label className='text-left'  htmlFor=""> <input className='cursor-pointer bbg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300'  value="all" type="checkbox" name="" id="" />All</label>
+        <h4  className='text-xl text-yellow-300 pb-3'>Brands</h4>
+        <label className='text-left'  htmlFor=""> <input className='cursor-pointer bg-yellow-300 border-yelloy-300'  value="all" type="checkbox" name="" id="" />All</label>
         {brand? brand.map((m)=>{
             return(
         <label className='text-left'  htmlFor=""> <input className='cursor-pointer bg-yellow-300 border-yelloy-300' onChange={(e)=> handleFilterBrand(e)}  value={m.name} type="checkbox" name="" id="" />{m.name}</label>
@@ -85,9 +84,11 @@ export default function SideBar() {
       </div>
       <div className='pt-4'>
           <label htmlFor=""><input className='w-16 rounded-lg text-center bg-yellow-300 text-black placeholder:text-gray-900 ' type="number" placeholder="Min" onChange={onChangeMin}/> </label>
-          <label htmlFor=""><input className='w-16 rounded-lg text-center bg-yellow-300 text-black placeholder:text-gray-900 ' type="number" placeholder="Max"  onChange={onChangeMax}/> - </label>
-          <button type="submit" onClick={(e)=> handleFilterMax(e)}>submit</button>
-          </div>
+          <label htmlFor=""><input className='w-16 rounded-lg text-center bg-yellow-300 text-black placeholder:text-gray-900 ' type="number" placeholder="Max"  onChange={onChangeMax}/> </label>
+           </div>
+           <fragments className='flex-col items-center pt-2'>
+          <button type="submit" className="bg-primary-400 font-Open py-1 rounded-lg text-primary-200  font-semibold hover:bg-primary-300" onClick={(e)=> handleFilterMax(e)}>submit</button>
+          </fragments>
     </aside>
   );
 }

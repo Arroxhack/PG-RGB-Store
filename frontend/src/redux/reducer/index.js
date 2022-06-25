@@ -1,6 +1,6 @@
 
 import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE,
-   GET_CATEGORIES,SET_FILTER, FILTER_CATEGORIES, GET_BRANDS, FILTER_BRANDS, FILTER_MIN,SET_FILTER_MAX} from '../types/index';
+   GET_CATEGORIES,SET_FILTER, FILTER_CATEGORIES, GET_BRANDS, FILTER_BRANDS, FILTER_MIN,SET_FILTER_MAX, CLEAN} from '../types/index';
 const initialState = {
   allProducts: [],
   products: [],
@@ -89,7 +89,7 @@ const reducer = (state = initialState, action) => {
     
       case FILTER_MIN:
       const filterMaxAndMin= state.filtros?
-      state.products.filter(e=> e.price > state.filtros && e.price < state.filterMax):alert()
+      state.products.filter(e=> e.price > state.filtros && e.price < state.filterMax):alert("No existen productos en este rango")
       return{
         ...state,
         products: filterMaxAndMin
@@ -106,6 +106,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           filterMax: action.payload,
         };
+      case CLEAN:
+        return{
+          ...state,
+          detail:action.payload
+        }
 
     
     /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///

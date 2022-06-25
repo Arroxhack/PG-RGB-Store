@@ -29,7 +29,7 @@ export default function () {
       <fragment>
     <SideBar/>
     </fragment>
-    <div className="grid grid-cols-3 w-full gap-12 grid-rows-none relative">
+    <div className="grid grid-cols-4 w-full gap-12 grid-rows-none relative">
     {products.map((product) => {
         return (
           <Link to={`/products/${product.id}`}>

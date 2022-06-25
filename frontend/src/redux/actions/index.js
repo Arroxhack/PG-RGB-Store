@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES,
-  SET_FILTER,LOAD_USER, FILTER_CATEGORIES,GET_BRANDS,FILTER_BRANDS, FILTER_MIN,SET_FILTER_MAX} from "../types/index";
+  SET_FILTER,LOAD_USER, FILTER_CATEGORIES,GET_BRANDS,FILTER_BRANDS, FILTER_MIN,SET_FILTER_MAX, CLEAN} from "../types/index";
 const PATH = "http://localhost:3001";
 
 /// GET PRODUCTOS ///
@@ -35,6 +35,12 @@ export function getBrand() {
       console.log(error);
     }
   };
+}
+export function clean(){
+  return{
+    type: CLEAN,
+    payload:[]
+  }
 }
 
 
