@@ -33,11 +33,11 @@ router.post("/login",  // recibe username y password
   }
 );
 
-router.get("/googleLogin", async(req, res) => {
+router.get("/googleLogin", async(req, res) => { // recibe mail de google por query
   let {googleMail} = req.query
     try {
       if(googleMail){
-        let googleUser = await User.findOne({
+        let googleUser = await User.findOne({ //encuentra el usuario que coincide 
           where: { email: googleMail },
         });
         console.log(googleUser)

@@ -12,7 +12,7 @@ export default function LogIn() {
 let navigate = useNavigate()
 const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
 const [password, setPassword] = useState(""); // Llega del input del form password al hacer submit.
-const [googleUser, setGoogleUser] = useState({});
+const [googleUser, setGoogleUser] = useState({}); // info del usuario de google (no se usa aun)
 const [errors, setErrors] = useState("");
 
 
@@ -53,11 +53,13 @@ const handleLoginSubmit = async(e) => {
 
 /* Desde aca arranca google */
 
-async function handleCallbackResponse(response) { // al hacer click en el boton se ejecuta esta funcion
+async function handleCallbackResponse(response) { // Al hacer click en el boton de google se ejecuta esta funcion
   // console.log("Encoded JWT ID token: " + response.credential);
   var userObject = jwt_decode(response.credential); // -> objeto con propiedades del usuario, usamos propiedad email 
-  console.log("userObject: ", userObject);
-  setGoogleUser(userObject);
+  /* console.log("userObject: ", userObject); */
+
+  setGoogleUser(userObject); // tengo la info
+
   let user = await axios.get(`http://localhost:3001/googleLogin?googleMail=${userObject.email}`)
     .then((data) => data.data)
     .catch(e => console.log(e))
@@ -71,13 +73,13 @@ async function handleCallbackResponse(response) { // al hacer click en el boton 
     localStorage.setItem("email", user.email);
     navigate("/");
   }
-  else {
+  else { //Si no trae user quiere decir que no hay usuario registrado aun
     swal("El email asociado a la cuenta de google no coincide con ningun usuario registrado", "...redirigiendo para registrarse como un nuevo usuario!"); // sweet alert
     navigate("/register");
   }
 
 }
-useEffect(() => {
+useEffect(() => { // cosas de google no borrar los comentarios porque ejecutan codigo, SI!! lo verde ejecuta codigo
   /* global google */
   google.accounts.id.initialize({
     client_id:  "40192132874-9l8jidbuvjeqfq497io9jlom3oh1uulg.apps.googleusercontent.com",

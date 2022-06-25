@@ -11,11 +11,13 @@ import Product from "./components/Product/Product";
 import Validacion from "./components/ValidateMail/Validacion.jsx"
 import HomeAdmin from "./components/Admin/HomeAdmin";
 import BuildPc from "./components/BuildPc/BuildPc";
+import Paypal from "./components/Paypal/Paypal";
 
 function App() {
   return (
     <div className="Font-Open">
       <Routes>
+        <Route path="/paypal" element={<Paypal />} exact/>
         <Route path="/" element={<Home />} exact />
         <Route path="/products/:id" element={<DetailProduct />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
