@@ -6,8 +6,7 @@ const routeRegister = require("./register");
 const router = Router();
 const { User } = require("../../db");
 
-router.post(
-  "/login",
+router.post("/login",  // recibe username y password
   passport.authenticate("local", {
     failureRedirect: "/login",
     failureMessage: true,
@@ -21,15 +20,15 @@ router.post(
     if (AccountLock?.lock) {
       return res.redirect("/lockedaccount");
     }
-    let { name, lastname, image, username, email, cellphone } = req.user;
-      res.json({
+    let { name, lastname, image, username, email, cellphone } = req.user; // User autenticado, en req.user esta toda la data del usuario guardada en la base de datos.
+      return res.json({
     login: true,
     lastname,
     image,
     username,
     email,
     cellphone,
-    name,
+    name
   });
   }
 );

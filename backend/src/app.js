@@ -70,7 +70,7 @@ passport.use(
             if (res === true) {
               // Si hay coincidencia entre las password
               // console.log(user, res, ' user en la 54');
-              return done(null, user);
+              return done(null, user); // !!!! usuario que se retorna en la ruta post "/login"
             }
           });
         }

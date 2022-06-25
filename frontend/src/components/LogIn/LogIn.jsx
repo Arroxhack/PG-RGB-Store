@@ -4,53 +4,58 @@ import { useDispatch, useSelector } from 'react-redux';
 import { verify } from '../../redux/actions';
 import { useNavigate } from 'react-router';
 import jwt_decode from "jwt-decode";
+import swal from 'sweetalert';
 
 
 
 export default function LogIn() {
 let navigate = useNavigate()
-const [userName, setUsername] = useState("");
-const [password, setPassword] = useState("");
+const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
+const [password, setPassword] = useState(""); // Llega del input del form password al hacer submit.
 const [googleUser, setGoogleUser] = useState({});
+const [errors, setErrors] = useState("");
 
-/* 
-Hacer ruta get de que si esta el mail que le haga login y si no que lo haga registrarse, que lo mande a la ruta del register.
-*/
+
 
 const handleLoginSubmit = async(e) => {
   e.preventDefault();
-  let userLogin = {username: userName, password: password}
-  const user = await axios({
+  
+  let userLogin = {username: userName, password: password} // Creo este objeto userLogin con la info de mi estado local.
+
+  const user = await axios({ //La ruta trae toda la info en la base de datos de un usuario
     method: "post",
     url: "http://localhost:3001/login",
-    data: userLogin, // objeto que tiene {username, password}
+    data: userLogin, // objeto que tiene {userName y password}
     headers: { "X-Requested-With": "XMLHttpRequest" },
     withCredentials: true,
   })
   .then((data) => data.data)
   .catch(e => console.log(e))
-  let {login, lastname, image, username, email, cellphone, name} = user;
+
+  let {login, lastname, image, username, email, cellphone, name} = user; //Info que trae la ruta
+
   if(login){
-    localStorage.setItem("username", username);
+    localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
     localStorage.setItem("name", name);
     localStorage.setItem("lastname", lastname);
     localStorage.setItem("login", login);
     localStorage.setItem("email", email);
-    setUsername("");
+    setUsername(""); //Reseteo mis estados locales
     setPassword("");
     navigate("/");
   }
-  else{
+  else{ //Si no trae login quiere decir que no esta autenticado el usuario
+    setErrors(user)
     setUsername("");
     setPassword("");
   }
 }
 
-//googleUser.email -> julian.sonido@gmail.com
+/* Desde aca arranca google */
 
 async function handleCallbackResponse(response) { // al hacer click en el boton se ejecuta esta funcion
   // console.log("Encoded JWT ID token: " + response.credential);
-  var userObject = jwt_decode(response.credential); // -> objeto con propiedad email
+  var userObject = jwt_decode(response.credential); // -> objeto con propiedades del usuario, usamos propiedad email 
   console.log("userObject: ", userObject);
   setGoogleUser(userObject);
   let user = await axios.get(`http://localhost:3001/googleLogin?googleMail=${userObject.email}`)
@@ -67,6 +72,7 @@ async function handleCallbackResponse(response) { // al hacer click en el boton 
     navigate("/");
   }
   else {
+    swal("El email asociado a la cuenta de google no coincide con ningun usuario registrado", "...redirigiendo para registrarse como un nuevo usuario!"); // sweet alert
     navigate("/register");
   }
 
@@ -108,6 +114,9 @@ return (
             onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+
+          {errors ? <p /* style={{color: "red"}} */ class="bg-secundary-50">{errors}</p> : null} {/* si hay errores salen aca */}
+
           <button type='submit' className='hover:bg-primary-400 rounded-xl w-24 text-xl items-center' >
             Login
           </button>
