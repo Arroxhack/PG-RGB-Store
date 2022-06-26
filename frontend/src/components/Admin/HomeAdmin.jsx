@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Menu from "./Menu/Menu";
 import Error from "../Error/Error";
 
 const HomeAdmin = () => {
   const admin = localStorage.getItem("admin");
+  console.log(admin);
   return (
     <>
       {admin ? (

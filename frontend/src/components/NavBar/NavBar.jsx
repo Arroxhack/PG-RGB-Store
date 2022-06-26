@@ -6,6 +6,7 @@ import BoxCart from "../Cart/BoxCart";
 
 function NavBar() {
   const username = localStorage.getItem("username");
+  const admin = localStorage.getItem("admin");
 
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -19,7 +20,6 @@ function NavBar() {
     if (menuBox.style.display == "block") {
       menuBox.style.display = "none";
     } else {
-
       menuBox.style.display = "block";
     }
   }
@@ -27,7 +27,6 @@ function NavBar() {
   return (
     <nav className="relative w-full flex flex-wrap items-center justify-between py-4 shadow-lg navbar navbar-expand-lg navbar-light bg-primary-200">
       <div class="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-secundary-250 pb-5 lg:pb-0">
-        
         <div class="flex items-center flex-shrink-0 text-gray-800 mr-16">
           <Link
             to="/"
@@ -40,7 +39,7 @@ function NavBar() {
           </Link>
         </div>
         <div class="block lg:hidden">
-        {/* <div class="block lg:hidden"  id="menu" onClick={toggleMenu}> */}
+          {/* <div class="block lg:hidden"  id="menu" onClick={toggleMenu}> */}
           <button class="text-secundary-250 py-2 px-2.5">
             <svg
               aria-hidden="true"
@@ -107,6 +106,13 @@ function NavBar() {
                 </p>
               </Link>{" "}
               <Logout />
+              {admin ? (
+                <Link to="/admin">
+                  <button className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
+                    ADMINPANEL
+                  </button>
+                </Link>
+              ) : null}
             </div>
           ) : (
             <>
