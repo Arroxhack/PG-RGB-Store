@@ -11,6 +11,8 @@ import Product from "./components/Product/Product";
 import Validacion from "./components/ValidateMail/Validacion.jsx"
 import HomeAdmin from "./components/Admin/HomeAdmin";
 import BuildPc from "./components/BuildPc/BuildPc";
+import Amd from "./components/BuildPc/Amd";
+import Intel from "./components/BuildPc/Intel";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/products/:id" element={<DetailProduct />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
         <Route path="/arma-tu-pc" element={<BuildPc/>}/>
+        <Route path="/arma-tu-pc/amd" element={<Amd/>}/>
+        <Route path="/arma-tu-pc/intel" element={<Intel/>}/>
         <Route path="/categories" element={<Categories />} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
