@@ -5,6 +5,7 @@ import { verify } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2'
+import swal from 'sweetalert'
 
 
 
