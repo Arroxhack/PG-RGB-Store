@@ -4,6 +4,7 @@ var passport = require("passport");
 var Strategy = require("passport-local").Strategy;
 const routeRegister = require("./register");
 const router = Router();
+const { transporter } = require("../../nodemailer/config");
 const { User } = require("../../db");
 
 router.post(
@@ -14,15 +15,23 @@ router.post(
     failureFlash: true,
   }),
   async (req, res) => {
-    console.log(req.user, " esto es req.user autenticado");
     let AccountLock = await User.findOne({
       where: { username: req.user.username },
     });
-    console.log("AccountLock:", AccountLock);
     if (AccountLock?.lock) {
       return res.redirect("/lockedaccount");
     }
-    let { name, lastname, image, username, email, cellphone } = req.user; // User autenticado, en req.user esta toda la data del usuario guardada en la base de datos.
+    let {
+      name,
+      lastname,
+      image,
+      username,
+      email,
+      cellphone,
+      permissions,
+      verify,
+    } = req.user;
+    // User autenticado, en req.user esta toda la data del usuario guardada en la base de datos.
     return res.json({
       login: true,
       lastname,
@@ -31,6 +40,8 @@ router.post(
       email,
       cellphone,
       name,
+      permissions,
+      verify,
     });
   }
 );
@@ -58,6 +69,8 @@ router.get("/lockedaccount", (req, res) => {
 router.get("/login", (req, res) => {
   res.send(`${req.flash("error")[0]}`);
 });
+
+
 
 // Middleware para mostrar la sesión actual en cada request
 router.use((req, res, next) => {
