@@ -15,7 +15,7 @@ export default function Checkout() {
                         {
                             description: "Cool looking table",
                             amout: {
-                                currency_code: "USD", 
+                                currency_code:"USD", 
                                 value: 650.00
                             }
                         }
