@@ -5,6 +5,7 @@ import { getAllProducts } from "../../redux/actions";
 import BoxCart from "../Cart/BoxCart";
 import NavBar from "../NavBar/NavBar";
 import Product from "../Product/Product";
+import PcCart from "./PcCart";
 
 function Intel() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function Intel() {
       <NavBar />
       <p>Now, pick your cpu!</p>
       <div>
-        <BoxCart />
+        <PcCart />
       </div>
       <section>
         <div className="grid grid-cols-4 w-full gap-2.5 grid-rows-none relative">
