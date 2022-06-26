@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getAllProducts } from "../../redux/actions/index";
+import { clean } from "../../redux/actions/index";
 import Nav from "../NavBar/Nav";
 import NavBar from "../NavBar/NavBar";
 import Product from "../Product/Product";
@@ -14,10 +15,11 @@ function Home() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProducts);
 
-  const product = products.slice(0,5)
+  const product = products.slice(0,4)
 
   useEffect(() => {
     dispatch(getAllProducts());
+    dispatch(clean())
   }, [dispatch]);
 
 

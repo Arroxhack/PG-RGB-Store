@@ -17,9 +17,10 @@ export default function Ordenamientos() {
       }
       
     return (
-        <div className="flex justify-center">
-        <h4>Order by</h4>
-      <select onChange={e => handleOrderedByPrice(e)} className='w-1/2 '>
+        <div className="flex w-60 h-8">
+        <h4 className='text-primary-400 w/20 pr-5'>Order by</h4>
+      <select onChange={e => handleOrderedByPrice(e)} className='w-36 bg-primary-400 font-Open flex items-center rounded-lg text-primary-200 uppercase font-semibold  '>
+        <option disabled>Price </option>
         <option value="mayor valor">higher price</option>
         <option value="menor valor">lower price</option>
       </select>
