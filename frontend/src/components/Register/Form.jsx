@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { validate, regexPass, regexEmail } from "./Validations";
 import { PostUser } from "../../redux/actions";
+import NavBar from '../NavBar/NavBar'
 import { useNavigate } from "react-router";
 import axios from "axios";
 export default function Register() {
@@ -105,14 +106,14 @@ export default function Register() {
   };
 
   return (
-    <div class="h-screen bg-gradient-to-t from-primary-300 to-primary font-Open min-h-screen flex flex-col">
+    <div class="h-screen bg-gradient-to-t from-primary-300 to-primary">
+      <NavBar/>
       <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <div class="bg-secundary-250 px-6 py-8 rounded shadow-md text-black w-full">
           <h1 class="mb-8 text-3xl text-center">Sign up</h1>
           <form onSubmit={handleSubmit}>
             <div>
               <label>Name</label>
-              {errors.name && <p>{errors.name}</p>}
               <input
                 class="block border border-grey-light w-full p-3 rounded mb-4"
                 type="text"
@@ -120,10 +121,8 @@ export default function Register() {
                 value={name}
                 name="name"
                 onChange={handleOnChange}
-                
               />
               <label>Lastname</label>
-              {errors.lastname && <p>{errors.lastname}</p>}
               <input
                 class="block border border-grey-light w-full p-3 rounded mb-4"
                 type="text"
@@ -133,7 +132,6 @@ export default function Register() {
                 onChange={handleOnChange}
               />
               <label>Username</label>
-              {errors.username && <p>{errors.username}</p>}
               <input
                 class="block border border-grey-light w-full p-3 rounded mb-4"
                 type="text"
@@ -143,7 +141,6 @@ export default function Register() {
                 onChange={handleOnChange}
               />
               <label>Email</label>
-              {errors.email && <p>{errors.email}</p>}
               <input
                 class="block border border-grey-light w-full p-3 rounded mb-4"
                 type="text"
@@ -153,7 +150,6 @@ export default function Register() {
                 onChange={handleOnChange}
               />
               <label>Password</label>
-              {errors.password && <p>{errors.password}</p>}
               <input
                 class="block border border-grey-light w-full p-3 rounded mb-4"
                 type="password"
@@ -187,6 +183,13 @@ export default function Register() {
             </div>
           </form>
         </div>
+      </div>
+      <div>
+        {errors.name && <p>{errors.name}</p>}
+        {errors.lastname && <p>{errors.lastname}</p>}
+        {errors.username && <p>{errors.username}</p>}
+        {errors.email && <p>{errors.email}</p>}
+        {errors.password && <p>{errors.password}</p>}
       </div>
     </div>
   );
