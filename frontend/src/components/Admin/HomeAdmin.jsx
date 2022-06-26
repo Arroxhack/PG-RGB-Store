@@ -7,27 +7,36 @@ import DeleteProduct from './Productos/DeleteProduct'
 import EditProduct from './Productos/EditProduct'
 import CreateAdmin from './Usuarios/CreateAdmin'
 import EditUser from './Usuarios/EditUser'
+import Error from "../Error/Error";
 
 const HomeAdmin = () => {
+    const admin = localStorage.getItem("admin");
 
     const [menu, setMenu] = useState(0)
 
     console.log(menu)
   return (
-    <div>
-    <Nav/>
-    <div className='flex flex-row'>
-    <div className='bg-primary-200 h-screen w-60'>
-        <Menu value={menu} setValue={setMenu}/>
-    </div>
-    { menu==0 && <CreateProduct/>}
-    { menu==1 && <EditProduct/>}
-    { menu==2 && <DeleteProduct/>}
-    { menu==3 && <CreateAdmin/>}
-    { menu==4 && <EditUser/>}
-    </div>
-    </div>
+    <>
+    {admin ? (
+          <div>
+          <Nav/>
+          <div className='flex flex-row'>
+          <div className='bg-primary-200 h-screen w-60'>
+              <Menu value={menu} setValue={setMenu}/>
+          </div>
+          { menu==0 && <CreateProduct/>}
+          { menu==1 && <EditProduct/>}
+          { menu==2 && <DeleteProduct/>}
+          { menu==3 && <CreateAdmin/>}
+          { menu==4 && <EditUser/>}
+          </div>
+          </div>
+    ) : (
+      <Error />
+    )}
+  </>
   )
 }
 
-export default HomeAdmin
+
+export default HomeAdmin;

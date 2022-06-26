@@ -7,13 +7,17 @@ import {BrowserRouter} from 'react-router-dom'
 import { Provider } from 'react-redux';
 import store from './redux/store.js'
 import CartProvider from './components/Cart/CartContext';
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import initialOptions from './components/Paypal/initialOptions.js'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
     <Provider store={store}>
     <CartProvider>
+    <PayPalScriptProvider options={initialOptions}>
     <App/>
+    </PayPalScriptProvider>
     </CartProvider>
     </Provider>
     </BrowserRouter>
