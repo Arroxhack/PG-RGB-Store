@@ -3,6 +3,7 @@ import { validate, regexPass, regexEmail } from "./Validations";
 import { PostUser } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import NavBar from "../NavBar/NavBar";
 export default function Register() {
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
@@ -106,6 +107,7 @@ export default function Register() {
 
   return (
     <div class="h-screen bg-gradient-to-t from-primary-300 to-primary font-Open min-h-screen flex flex-col">
+      <NavBar/>
     <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
       <div class="bg-secundary-250 px-6 py-8 rounded shadow-md text-black w-full">
         <h1 class="mb-8 text-3xl text-center">Sign up</h1>
