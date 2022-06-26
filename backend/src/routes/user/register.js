@@ -25,7 +25,6 @@ router.post('/register', async (req, res, next) => {
 
   try {
     const AccountLock = await User.findOne({ where: { email } });
-    console.log(AccountLock);
     if (AccountLock?.lock) {
       return res.status(400).send('Account blocked');
     }
