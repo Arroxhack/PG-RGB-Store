@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { verify } from '../../redux/actions';
 import { useNavigate } from 'react-router';
 import jwt_decode from "jwt-decode";
-import swal from 'sweetalert';
+import Swal from 'sweetalert2'
 
 
 
@@ -73,7 +73,13 @@ async function handleCallbackResponse(response) { // al hacer click en el boton 
     navigate("/");
   }
   else {
-    swal("El email asociado a la cuenta de google no coincide con ningun usuario registrado", "...redirigiendo para registrarse como un nuevo usuario!"); // sweet alert
+    Swal.fire({
+      icon:'error',
+      title:'Redirigiendo',
+      text:'El email asociado a la cuenta de google no coincide con ningun usuario registrado',
+      showConfirmButton: false,
+      timer: 1000
+    })
     navigate("/register");
   }
 

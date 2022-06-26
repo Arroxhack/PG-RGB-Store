@@ -55,7 +55,6 @@ export default function SideBar() {
       dispatch(setFilterMax(e.target.value))
     }
 
-    console.log(filters)
     return (
     <aside className='w-1/4 md:w-64 sm:text-xs  shadow-xl flex flex-col justify-around bg-primary-200 h-screen text-lg md:text-sm text-center text-primary-400 '>
 
