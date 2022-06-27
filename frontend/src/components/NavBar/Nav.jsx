@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Nav = () => {
+
+
   return (
-    <div class="flex justify-center bg-primary-200">
-          <ul class=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0">
+    <div class="flex justify-center bg-primary-200 ">
+          <ul class=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0 ">
             <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
               <Link to="/categories">
                 <p>Categories</p>

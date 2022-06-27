@@ -119,8 +119,8 @@ const reducer = (state = initialState, action) => {
 
     case FILTER_BRANDS:
       const brandsFiltered = state.filtros.includes('all')
-        ? state.products
-        : state.products.filter((e) => e.brand === state.filtros);
+        ? state.allProducts
+        : state.allProducts.filter((e) => e.brand === state.filtros);
       return {
         ...state,
         products: brandsFiltered,
