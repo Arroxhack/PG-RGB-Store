@@ -30,6 +30,7 @@ router.post(
       cellphone,
       permissions,
       verify,
+      id,
     } = req.user;
     // User autenticado, en req.user esta toda la data del usuario guardada en la base de datos.
     return res.json({
@@ -42,6 +43,7 @@ router.post(
       name,
       permissions,
       verify,
+      id,
     });
   }
 );
@@ -69,8 +71,6 @@ router.get("/lockedaccount", (req, res) => {
 router.get("/login", (req, res) => {
   res.send(`${req.flash("error")[0]}`);
 });
-
-
 
 // Middleware para mostrar la sesión actual en cada request
 router.use((req, res, next) => {
