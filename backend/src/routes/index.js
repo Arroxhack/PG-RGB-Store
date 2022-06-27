@@ -7,24 +7,15 @@ const Register = require('./user/register');
 const Login = require('./user/login');
 const Logout = require('./user/logout');
 const LoadCartProduct = require('./user/LoadCart');
-<<<<<<< HEAD
-//===USER STUFF===
-const Profile = require('./user/Profile');
-const editProfileUser = require('./user/editProfile');
-=======
-const email = require("./user/email");
->>>>>>> c965c43f8b38345f64c41c514b903c58c6f39f3d
+const email = require('./user/email');
 //====ADMIN===
 const Delete = require('./admin/DeleteProduct');
 const Put = require('./admin/EditProduct');
 const Create = require('./admin/CreateProduct');
 const GetUsers = require('./admin/GetUsers');
 const EditUser = require('./admin/EditUser');
-<<<<<<< HEAD
+const CreateAdminUser = require('./admin/CreateAdminUser');
 
-=======
-const CreateAdminUser = require("./admin/CreateAdminUser")
->>>>>>> c965c43f8b38345f64c41c514b903c58c6f39f3d
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -46,12 +37,6 @@ router.use('/', GetUsers);
 router.use('/', Brand);
 router.use('/', EditUser);
 router.use('/', LoadCartProduct);
-<<<<<<< HEAD
-//user
-router.use('/', Profile);
-router.use('/', editProfileUser);
-=======
-router.use("/",email)
-router.use("/",CreateAdminUser);
->>>>>>> c965c43f8b38345f64c41c514b903c58c6f39f3d
+router.use('/', email);
+router.use('/', CreateAdminUser);
 module.exports = router;

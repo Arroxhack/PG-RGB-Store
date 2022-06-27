@@ -45,7 +45,6 @@ export function getBrand() {
     try {
       let allProducts = await axios.get(`${PATH}/brands`); //products por ahora
       let allBrands = allProducts.data;
-      console.log(allBrands);
       return dispatch({
         type: GET_BRANDS,
         payload: allBrands,
@@ -195,6 +194,7 @@ export function searchProducts(search) {
     axios
       .get(`${PATH}/product?name=` + search)
       .then((products) => {
+        console.log(products, ' soy products');
         dispatch({
           type: SEARCH_PRODUCTS,
           payload: products.data,

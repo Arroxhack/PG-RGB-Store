@@ -60,22 +60,6 @@ function NavBar() {
         </div>
       </div>
 
-<<<<<<< HEAD
-      <div className="flex gap-5">
-        {username ? (
-          <div>
-            <Link to={`/profile/${username}`}>
-              <p className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
-                {username} Bienvenido!
-              </p>
-            </Link>{" "}
-            <Logout />
-          </div>
-        ) : (
-          <>
-            <Link
-              to="/logIn"
-=======
       <div class="menu w-full lg:flex flex-grow space-x-3 lg:items-center lg:w-auto lg:px-3 px-8">
         <div>
           <SearchBar></SearchBar>
@@ -86,7 +70,6 @@ function NavBar() {
           ) : (
             <p
               onClick={handleCart}
->>>>>>> c965c43f8b38345f64c41c514b903c58c6f39f3d
               className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
             >
               Cart
