@@ -8,6 +8,7 @@ import NavBar from "../NavBar/NavBar";
 import swal from "sweetalert2";
 
 export default function LogIn() {
+  const PATH = 'https://proyecto-grupal-rgb.herokuapp.com';
   let navigate = useNavigate();
   const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
   const [password, setPassword] = useState(""); // Llega del input del form password al hacer submit.
@@ -20,7 +21,7 @@ export default function LogIn() {
     console.log(email);
     await axios({
       method: "post",
-      url: "http://localhost:3001/resendEmailLogin",
+      url: `${PATH}/resendEmailLogin`,
       data: { email }, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -34,7 +35,7 @@ export default function LogIn() {
     const user = await axios({
       //La ruta trae toda la info en la base de datos de un usuario
       method: "post",
-      url: "http://localhost:3001/login",
+      url: `${PATH}/login`,
       data: userLogin, // objeto que tiene {userName y password}
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -84,7 +85,7 @@ export default function LogIn() {
     console.log("userObject: ", userObject);
     setGoogleUser(userObject);
     let user = await axios
-      .get(`http://localhost:3001/googleLogin?googleMail=${userObject.email}`)
+      .get(`${PATH}/googleLogin?googleMail=${userObject.email}`)
       .then((data) => data.data)
       .catch((e) => console.log(e));
     // let userData = user.data

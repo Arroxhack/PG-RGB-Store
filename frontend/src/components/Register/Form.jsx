@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import NavBar from "../NavBar/NavBar";
 export default function Register() {
+  const PATH = 'https://proyecto-grupal-rgb.herokuapp.com';
+
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [user, setUser] = useState({
@@ -64,7 +66,7 @@ export default function Register() {
     ) {
       const UserRegister = await axios({
         method: "post",
-        url: "http://localhost:3001/register",
+        url: `${PATH}/register`,
         data: user,
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,

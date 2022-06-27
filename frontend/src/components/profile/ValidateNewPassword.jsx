@@ -8,6 +8,8 @@ import { useNavigate } from "react-router";
 import swal from "sweetalert2";
 
 export default function Validations() {
+  const PATH = 'https://proyecto-grupal-rgb.herokuapp.com';
+
   const navigate = useNavigate();
   const [token, setToken] = useState("");
   const [NewPassword, setNewPassword] = useState("");
@@ -21,7 +23,7 @@ export default function Validations() {
     }
     const result = await axios({
       method: "put",
-      url: `http://localhost:3001/resetPassword`,
+      url: `${PATH}/resetPassword`,
       data: { token, username, NewPassword },
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,

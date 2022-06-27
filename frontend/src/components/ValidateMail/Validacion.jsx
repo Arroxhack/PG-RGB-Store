@@ -8,6 +8,8 @@ import { useNavigate } from "react-router";
 import swal from "sweetalert2";
 
 export default function Validations() {
+  const PATH = 'https://proyecto-grupal-rgb.herokuapp.com';
+
   const navigate = useNavigate();
   const [token, setToken] = useState("");
   let { username } = useParams();
@@ -16,7 +18,7 @@ export default function Validations() {
     e.preventDefault();
     const UserRegister = await axios({
       method: "put",
-      url: `http://localhost:3001/register/verify`,
+      url: `${PATH}/register/verify`,
       data: { token, username },
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -49,7 +51,7 @@ export default function Validations() {
     deshabilitar_btnEnviar();
     const result = await axios({
       method: "post",
-      url: "http://localhost:3001/resendEmail",
+      url: `${PATH}/resendEmail`,
       data: { username }, // username
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,

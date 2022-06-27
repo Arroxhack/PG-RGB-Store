@@ -3,6 +3,8 @@ import axios from "axios";
 import swal from "sweetalert2";
 import { useNavigate } from "react-router";
 function ChangePassword() {
+  const PATH = 'https://proyecto-grupal-rgb.herokuapp.com';
+
   const navigate = useNavigate();
   const username = localStorage.getItem("username");
   const [user, setUser] = useState({
@@ -26,7 +28,7 @@ function ChangePassword() {
     const { password } = user;
     const result = await axios({
       method: "put",
-      url: "http://localhost:3001/sendTokenReset",
+      url: `${PATH}/sendTokenReset`,
       data: { username, password },
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -48,7 +50,7 @@ function ChangePassword() {
         button: "Aceptar",
       });
       window.location.replace(
-        `http://localhost:3000/resetPassword/${username}`
+        `*/resetPassword/${username}`
       );
     }
   };

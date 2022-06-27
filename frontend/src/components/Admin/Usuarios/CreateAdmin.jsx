@@ -6,6 +6,8 @@ import { useState } from "react";
 import swal from "sweetalert2";
 
 const CreateAdmin = () => {
+  const PATH = 'https://proyecto-grupal-rgb.herokuapp.com';
+
   const idAdmin = localStorage.getItem("id");
   const [users, setUsers] = useState([]);
   const [Userid, setUserid] = useState(0);
@@ -19,7 +21,7 @@ const CreateAdmin = () => {
   const getAllUsers = async () => {
     const allusers = await axios({
       method: "get",
-      url: "http://localhost:3001/Users",
+      url: `${PATH}/Users`,
       data: null, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -30,7 +32,7 @@ const CreateAdmin = () => {
     e.preventDefault();
     const allusers = await axios({
       method: "get",
-      url: "http://localhost:3001/Users",
+      url: `${PATH}/Users`,
       data: null, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -52,7 +54,7 @@ const CreateAdmin = () => {
     if (method === "updateToAdmin") {
       const result = await axios({
         method: "post",
-        url: "http://localhost:3001/updateToAdmin",
+        url: `${PATH}/updateToAdmin`,
         data: { idUser, idAdmin }, // email
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,
@@ -81,7 +83,7 @@ const CreateAdmin = () => {
     if (method === "updateToUser") {
       const result = await axios({
         method: "post",
-        url: "http://localhost:3001/updateToUser",
+        url: `${PATH}/updateToUser`,
         data: { idUser, idAdmin }, // email
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,
@@ -109,7 +111,7 @@ const CreateAdmin = () => {
     if (method === "UpdateToSuperAdmin") {
       const result = await axios({
         method: "post",
-        url: "http://localhost:3001/UpdateToSuperAdmin",
+        url: `${PATH}/UpdateToSuperAdmin`,
         data: { idUser, idAdmin }, // email
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,

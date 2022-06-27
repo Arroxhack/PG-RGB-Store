@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 
 
 export default function Logout() {
+  const PATH = 'https://proyecto-grupal-rgb.herokuapp.com';
+
   const [actualizar, setActualizar] = useState("");
   const {products} = useContext(CartContext); //CartContext estado global // products array con prodcucts con amount
   const dispatch = useDispatch();
@@ -17,7 +19,7 @@ export default function Logout() {
 
     axios({
       method: "post",
-      url: "http://localhost:3001/logout",
+      url: `${PATH}/logout`,
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
     })
@@ -31,7 +33,7 @@ export default function Logout() {
           // localStorage.removeItem('avatar');
           localStorage.clear();
           setActualizar(" ");
-          return (window.location = "http://localhost:3000/");
+          return (window.location = "*");
         }
       })
       .catch((error) => console.log(error));
