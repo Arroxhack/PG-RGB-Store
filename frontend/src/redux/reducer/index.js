@@ -10,8 +10,13 @@ import {
   FILTER_CATEGORIES,
   GET_BRANDS,
   FILTER_BRANDS,
+  FILTER_MIN,
+  SET_FILTER_MAX,
+  CLEAN,
   GET_PROFILE,
+  CREATE_PRODUCT,
 } from '../types/index';
+
 const initialState = {
   allProducts: [],
   products: [],
@@ -20,7 +25,8 @@ const initialState = {
   categories: [],
   filtros: [],
   brands: [],
-  profile: {},
+  filterMax: [],
+  newProduct: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -56,6 +62,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         brands: action.payload,
+      };
+    case CREATE_PRODUCT:
+      return {
+        ...state,
+        newProduct: action.payload,
       };
 
     /// BUSQUEDA ///
@@ -95,6 +106,17 @@ const reducer = (state = initialState, action) => {
         products: categoriesFiltered,
       };
 
+    case FILTER_MIN:
+      const filterMaxAndMin = state.filtros
+        ? state.products.filter(
+            (e) => e.price > state.filtros && e.price < state.filterMax
+          )
+        : alert('No existen productos en este rango');
+      return {
+        ...state,
+        products: filterMaxAndMin,
+      };
+
     case FILTER_BRANDS:
       const brandsFiltered = state.filtros.includes('all')
         ? state.products
@@ -109,6 +131,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filtros: action.payload,
+      };
+    case SET_FILTER_MAX:
+      return {
+        ...state,
+        filterMax: action.payload,
+      };
+
+    case CLEAN:
+      return {
+        ...state,
+        detail: action.payload,
       };
 
     /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///

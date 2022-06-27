@@ -4,60 +4,73 @@ var passport = require("passport");
 var Strategy = require("passport-local").Strategy;
 const routeRegister = require("./register");
 const router = Router();
+const { transporter } = require("../../nodemailer/config");
 const { User } = require("../../db");
 
 router.post(
-  "/login",
+  "/login", // recibe username y password
   passport.authenticate("local", {
     failureRedirect: "/login",
     failureMessage: true,
+    failureFlash: true,
   }),
   async (req, res) => {
-    console.log(req.user, " esto es req.user autenticado");
     let AccountLock = await User.findOne({
       where: { username: req.user.username },
     });
-    console.log("AccountLock:", AccountLock);
     if (AccountLock?.lock) {
       return res.redirect("/lockedaccount");
     }
-    let { name, lastname, image, username, email, cellphone } = req.user;
-      res.json({
-    login: true,
-    lastname,
-    image,
-    username,
-    email,
-    cellphone,
-    name,
-  });
+    let {
+      name,
+      lastname,
+      image,
+      username,
+      email,
+      cellphone,
+      permissions,
+      verify,
+    } = req.user;
+    // User autenticado, en req.user esta toda la data del usuario guardada en la base de datos.
+    return res.json({
+      login: true,
+      lastname,
+      image,
+      username,
+      email,
+      cellphone,
+      name,
+      permissions,
+      verify,
+    });
   }
 );
 
-router.get("/googleLogin", async(req, res) => {
-  let {googleMail} = req.query
-    try {
-      if(googleMail){
-        let googleUser = await User.findOne({
-          where: { email: googleMail },
-        });
-        console.log(googleUser)
-        return res.json(googleUser)
-      }
-      return res.json("nada")
-    }catch(error){
-      next(error)
+router.get("/googleLogin", async (req, res) => {
+  let { googleMail } = req.query;
+  try {
+    if (googleMail) {
+      let googleUser = await User.findOne({
+        where: { email: googleMail },
+      });
+      console.log(googleUser);
+      return res.json(googleUser);
     }
-})
-
+    return res.json("nada");
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.get("/lockedaccount", (req, res) => {
   res.send("Su email ha sido bloquedo por el administrador del sitio");
 });
 
 router.get("/login", (req, res) => {
-  res.send("Email o contraseña incorrecta");
+  res.send(`${req.flash("error")[0]}`);
 });
+
+
 
 // Middleware para mostrar la sesión actual en cada request
 router.use((req, res, next) => {

@@ -9,12 +9,17 @@ import {
   GET_CATEGORIES,
   SET_FILTER,
   LOAD_USER,
-  GET_PROFILE,
   FILTER_CATEGORIES,
   GET_BRANDS,
   FILTER_BRANDS,
+  CREATE_PRODUCT,
+  CLEAN,
+  SET_FILTER_MAX,
+  FILTER_MIN,
   EDIT_PROFILE,
+  GET_PROFILE,
 } from '../types/index';
+import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
 
 /// GET PRODUCTOS ///
@@ -48,6 +53,12 @@ export function getBrand() {
     } catch (error) {
       console.log(error);
     }
+  };
+}
+export function clean() {
+  return {
+    type: CLEAN,
+    payload: [],
   };
 }
 
@@ -84,6 +95,33 @@ export function getAllCategories() {
   };
 }
 
+/// POST PRODUCTOS ///
+export const createProduct = (product) => {
+  return async (dispatch) => {
+    try {
+      const post = await axios.post(`${PATH}/create-product`, product);
+      Swal.fire({
+        title: `${post.data.name}`,
+        text: 'creado con exito!',
+        icon: 'success',
+        confirmButtonText: 'ok',
+      });
+
+      return {
+        type: CREATE_PRODUCT,
+        payload: post.data,
+      };
+    } catch (error) {
+      Swal.fire({
+        title: 'Algo fallo',
+        text: 'No se pudo crear el producto',
+        icon: 'error',
+        confirmButtonText: 'ok',
+      });
+    }
+  };
+};
+
 /// POST REGISTRAR USUARIO ///
 export function PostUser(user) {
   return async function () {
@@ -117,6 +155,13 @@ export function setFilter(payload) {
   };
 }
 
+export function setFilterMax(payload) {
+  return {
+    type: SET_FILTER_MAX,
+    payload,
+  };
+}
+
 /// ORDENAMIENTOS Y FILTRADOS ///
 export function orderedByPrice(payload) {
   return {
@@ -137,6 +182,13 @@ export function filterBrands(payload) {
     payload,
   };
 }
+export function filterMin(payload) {
+  return {
+    type: FILTER_MIN,
+    payload,
+  };
+}
+
 /// BUSQUEDA ///
 export function searchProducts(search) {
   return function (dispatch) {

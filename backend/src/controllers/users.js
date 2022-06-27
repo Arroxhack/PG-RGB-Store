@@ -15,7 +15,7 @@ const response = await User.findOne({where:{username:username}})
 return response;
 }catch(e){
     console.log(e)
-    return e
+    return "NO EXISTE USUARIO"
 }
 }
 
