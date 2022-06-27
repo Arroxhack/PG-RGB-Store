@@ -214,7 +214,12 @@ export function searchProducts(search) {
         });
       })
       .catch(() => {
-        alert('Product not found!');
+        Swal.fire({
+          icon:'info',
+          title: 'Product not found',
+          button: 'OK'
+        })
+        ;
       });
   };
 }

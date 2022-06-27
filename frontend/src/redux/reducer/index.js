@@ -140,7 +140,7 @@ const reducer = (state = initialState, action) => {
     case SET_FILTER:
       return {
         ...state,
-        filtros:[...state.filtros, action.payload],
+        filtros:[action.payload],
       };
     case SET_FILTER_MAX:
       return {
