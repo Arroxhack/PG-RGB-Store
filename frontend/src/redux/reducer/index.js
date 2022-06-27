@@ -108,10 +108,10 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_CATEGORIES:
-      const products = state.allProducts;
+      const products = state.products;
       const filter = state.filtros;
       const categoriesFiltered = filter.includes('all')
-        ? products
+        ? state.allProducts
         : products.filter((e) => e.category.includes(filter[0]));
 
       return {
