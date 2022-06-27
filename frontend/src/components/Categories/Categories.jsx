@@ -14,6 +14,7 @@ export default function Categories () {
     const products = useSelector((state) => state.products);
     const filters= useSelector(state=>state.filtros)
   
+  
     useEffect(() => {
       if(!products.length) dispatch(getAllProducts())
       dispatch(clean())

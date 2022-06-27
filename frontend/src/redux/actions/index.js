@@ -20,7 +20,8 @@ import {
   EDIT_PROFILE,
   GET_PROFILE,
   SET_FILTER_PRICE,
-  CLEAN_FILTER
+  CLEAN_FILTER,
+  SET_FILTER_BRANDS,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -184,6 +185,12 @@ export function setFilterPrice(payload) {
 export function setFilterMax(payload) {
   return {
     type: SET_FILTER_MAX,
+    payload,
+  };
+}
+export function setFilterBrands(payload) {
+  return {
+    type: SET_FILTER_BRANDS,
     payload,
   };
 }

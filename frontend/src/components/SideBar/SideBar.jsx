@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getAllCategories, getAllProducts, setFilterMax,setFilterPrice} from '../../redux/actions'
+import {getAllCategories, getAllProducts, setFilterBrands, setFilterMax,setFilterPrice} from '../../redux/actions'
 import { setFilter } from "../../redux/actions";
 import {filterCategories} from '../../redux/actions'
 import { getBrand } from "../../redux/actions";
@@ -21,28 +21,30 @@ export default function SideBar() {
   const filters= useSelector(state=>state.filtros)
   const filterPrice= useSelector(state=> state.filterPrice)
   const filterMax= useSelector(state=> state.filterMax)
+  const filterBrand = useSelector(state=> state.filterBrands) 
 
   //
      useEffect(()=>{
       dispatch(getAllCategories())
       dispatch(getBrand())
-      if(filters.length>1 || filters.length>2)dispatch(cleanFilter())
      },[products])
 
 
-
- 
+    function handleSubmitCleanF(e){
+      e.preventDefault();
+      dispatch(cleanFilter())
+    } 
     function handleFilterCat(e) {
       e.preventDefault();
       dispatch(setFilter(e.target.value))
       dispatch(filterCategories(e.target.value));
+      console.log(filters)
     }
 
     function handleFilterBrand(e) {
       e.preventDefault();
-      dispatch(setFilter(e.target.value))
+      dispatch(setFilterBrands(e.target.value))
       dispatch(filterBrands(e.target.value))
-      
     }
 
     function handleFilterMax(e) {
@@ -60,11 +62,27 @@ export default function SideBar() {
     return (
     <aside className='w-1/4 md:w-64 sm:text-xs flex flex-col justify-around bg-primary-200 h-screen sticky text-lg md:text-sm text-center text-primary-400 '>
       
-      <div className="flex justify-around" >
+      <div className="flex   justify-center items-center" >
+        <div >
         <p>{filterMax} {filterPrice}</p>
-        <div>
-        <p>{filters}</p>
         </div>
+        
+
+        <div className="h-10  border-2 items-center">
+        <div className="p-2 flex ">
+        <p className="text-primary w-full ">{filters}</p>
+        <button onClick={(e)=>handleSubmitCleanF(e)} className="pb-6 pl-4 ">x</button>
+        </div>
+        </div>
+        <div className="pl-4">
+        <div className="h-10  border-2 items-center pl-2">
+        <div className="p-2 flex ">
+        <p className="text-primary w-full ">{filterBrand}</p>
+        <button className="pb-6 pl-4 ">x</button>
+        </div>
+        </div>
+        </div>
+     
 
         </div>
       <div className="flex flex-col pb-4">

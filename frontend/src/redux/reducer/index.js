@@ -1,3 +1,4 @@
+import { filterBrands } from '../actions';
 import {
   ADD_CART,
   GET_ALL_PRODUCTS,
@@ -17,7 +18,8 @@ import {
   CREATE_PRODUCT,
   GET_PROFILE,
   SET_FILTER_PRICE,
-  CLEAN_FILTER
+  CLEAN_FILTER,
+  SET_FILTER_BRANDS,
 } from '../types/index';
 
 const initialState = {
@@ -32,6 +34,7 @@ const initialState = {
   newProduct: [],
   UserData: [],
   filterPrice: [],
+  filterBrands:[],
 };
 
 const reducer = (state = initialState, action) => {
@@ -112,7 +115,7 @@ const reducer = (state = initialState, action) => {
       const filter = state.filtros;
       const categoriesFiltered = filter.includes('all')
         ? state.allProducts
-        : products.filter((e) => e.category.includes(filter[0]));
+        : state.allProducts.filter((e) => e.category.includes(filter));
 
       return {
         ...state,
@@ -131,9 +134,9 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_BRANDS:
-      const brandsFiltered = state.filtros.includes('all')
+      const brandsFiltered = state.filterBrands ==='all'
         ? state.allProducts
-        : state.allProducts.filter((e) =>state.filtros.includes(e.brand));
+        : state.products.filter((e) => e.brand.includes(state.filterBrands));
       return {
         ...state,
         products: brandsFiltered,
@@ -143,7 +146,7 @@ const reducer = (state = initialState, action) => {
     case SET_FILTER:
       return {
         ...state,
-        filtros:[...state.filtros, action.payload],
+        filtros: action.payload,
       };
     case SET_FILTER_MAX:
       return {
@@ -155,7 +158,13 @@ const reducer = (state = initialState, action) => {
           ...state,
           filterPrice: action.payload,
         };
-
+    
+      case SET_FILTER_BRANDS:
+      return {
+      ...state,
+      filterBrands: action.payload,
+      };
+      
     case CLEAN:
       return {
         ...state,

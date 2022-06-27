@@ -13,7 +13,6 @@ export default function Ordenamientos() {
         e.preventDefault();
         dispatch(setFilter(e.target.value))
         dispatch(orderedByPrice(e.target.value))
-        dispatch(cleanFilter())
         console.log(products)
       }
       
