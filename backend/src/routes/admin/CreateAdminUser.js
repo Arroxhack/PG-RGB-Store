@@ -21,6 +21,7 @@ router.post("/updateToAdmin", async (req, res) => {
           const newAdmin = await Admin.create({
             username: userToAdmin.username,
             email: userToAdmin.email,
+            id: idUser,
           });
           if (newAdmin.username == userToAdmin.username) {
             await transporter.sendMail({
@@ -30,21 +31,21 @@ router.post("/updateToAdmin", async (req, res) => {
               text: "", // plain text body
               html: `<b>Sus permisos en la pagina fueron modificados su nuevo rol es:</b> <p>ADMINISTRADOR</p>`, // html body
             });
-            res.send("Nuevo Admin Creado con Existo");
+            res.send(`Rol de ${userToAdmin.username} cambiado a Admin`);
           }
         } else {
           res.status(404).send("Failed on edit");
         }
       } else {
-        res.send("Este usuario ya tiene permisos de Admin");
+        res.send("Error Este usuario ya tiene permisos de Admin");
       }
     } else {
       res.send(
-        "El Administrador no tiene Suficiente Rango para realizar esta operacion"
+        "Error El Administrador no tiene Suficiente Rango para realizar esta operacion"
       );
     }
   } else {
-    res.send("No se mando ningun id");
+    res.send("Error No se mando ningun id");
   }
 });
 
@@ -57,16 +58,16 @@ router.post("/updateToUser", async (req, res) => {
     });
     if (RangoSuperAdmin.superAdmin === true) {
       const AdminToUser = await User.findOne({ where: { id: idUser } });
-      const TableAdmin = await Admin.findOne({
+      const TablaAdmin = await Admin.findOne({
         where: { username: AdminToUser.username },
       });
-      if (TableAdmin.permissions) {
+      if (AdminToUser.permissions === true) {
         const QuitarPermisos = await User.update(
           { permissions: false },
           { where: { id: idUser } }
         );
         if (QuitarPermisos[0] === 1) {
-          await TableAdmin.destroy();
+          await TablaAdmin.destroy();
 
           await transporter.sendMail({
             from: "rgbstore0@gmail.com", // sender address
@@ -77,44 +78,47 @@ router.post("/updateToUser", async (req, res) => {
           });
           res.send(`Rol de ${AdminToUser.username} cambiado a usuario`);
         } else {
-          res.status(404).send("Failed on edit");
+          res.send("Error Failed on edit");
         }
       } else {
-        res.send("Este usuario no tiene permisos de Administrador");
+        res.send("Error Este usuario no tiene permisos de Administrador");
       }
     } else {
       res.send(
-        "El Administrador no tiene Suficiente Rango para realizar esta operacion"
+        "Error El Administrador no tiene Suficiente Rango para realizar esta operacion"
       );
     }
   } else {
-    res.send("No se mando ningun id");
+    res.send("Error No se mando ningun id");
   }
 });
 
 router.post("/UpdateToSuperAdmin", async (req, res) => {
-  const { idOfSuperAdmin, idAdmin } = req.body;
-  const AdminPrincipal = await User.findOne({ where: { id: idOfSuperAdmin } });
-  if (AdminPrincipal.permissions === true) {
-    const VerificacionSuperAdmin = Admin.findOne({
+  const { idUser, idAdmin } = req.body;
+  const AdminPrincipal = await User.findOne({ where: { id: idAdmin } });
+  if (AdminPrincipal?.permissions === true) {
+    const VerificacionSuperAdmin = await Admin.findOne({
       where: { username: AdminPrincipal.username },
     });
-    if (VerificacionSuperAdmin.superAdmin === true) {
-      const AdminToSuperAdmin = await User.findOne({ where: { id: idAdmin } });
-      const TableAdmin = await Admin.findOne({
+    if (VerificacionSuperAdmin?.superAdmin === true) {
+      const AdminToSuperAdmin = await User.findOne({ where: { id: idUser } });
+      const TablaAdmin = await Admin.findOne({
         where: { username: AdminToSuperAdmin.username },
       });
-      if (TableAdmin.username == AdminToSuperAdmin.username) {
+      if (!TablaAdmin) {
+        return res.send("Error, El Usuario no tiene Rango Administrador");
+      }
+      if (TablaAdmin.username == AdminToSuperAdmin.username) {
         const DarSuperAdmin = await Admin.update(
           { superAdmin: true },
-          { where: { username: TableAdmin.username } }
+          { where: { username: TablaAdmin.username } }
         );
 
         if (DarSuperAdmin[0] === 1) {
-          if (TableAdmin.username == AdminToSuperAdmin.username) {
+          if (TablaAdmin.username == AdminToSuperAdmin.username) {
             await transporter.sendMail({
               from: "rgbstore0@gmail.com", // sender address
-              to: TableAdmin.email, // list of receivers
+              to: TablaAdmin.email, // list of receivers
               subject: "✔MODIFICACION DE PERMISOS✔", // Subject line
               text: "", // plain text body
               html: `<b>Sus permisos en la pagina fueron modificados su nuevo rol es:</b> <p>SUPER ADMINISTRADOR</p>`, // html body
@@ -133,11 +137,13 @@ router.post("/UpdateToSuperAdmin", async (req, res) => {
       }
     } else {
       res.send(
-        "No tienes los permisos necesarios para Realizar estas Acciones"
+        "Error No tienes los permisos necesarios para Realizar estas Acciones"
       );
     }
   } else {
-    res.send("No tienes los permisos necesarios para Realizar estas Acciones");
+    res.send(
+      "Error No tienes los permisos necesarios para Realizar estas Acciones"
+    );
   }
 });
 
