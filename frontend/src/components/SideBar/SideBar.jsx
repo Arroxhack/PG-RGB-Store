@@ -26,7 +26,7 @@ export default function SideBar() {
      useEffect(()=>{
       dispatch(getAllCategories())
       dispatch(getBrand())
-      if(filters.length>2)dispatch(cleanFilter())
+      if(filters.length>1 || filters.length>2)dispatch(cleanFilter())
      },[products])
 
 
@@ -61,7 +61,7 @@ export default function SideBar() {
     <aside className='w-1/4 md:w-64 sm:text-xs flex flex-col justify-around bg-primary-200 h-screen sticky text-lg md:text-sm text-center text-primary-400 '>
       
       <div className="flex justify-around" >
-        <p>de ${filterMax} a ${filterPrice}</p>
+        <p>{filterMax} {filterPrice}</p>
         <div>
         <p>{filters}</p>
         </div>
@@ -74,7 +74,7 @@ export default function SideBar() {
         <button className="text-left text-lg pl-8" onClick={(e)=>handleFilterCat(e)} value={"all"}>All</button>
           {categories?categories.map((cat)=>{
             return(
-            <button className="text-left text-lg pl-8 " key={cat.id}  onClick={(e)=>handleFilterCat(e)} value={cat}>{cat}</button>
+            <button className="text-left text-lg pl-8 hover:animate-pulse " key={cat.id}  onClick={(e)=>handleFilterCat(e)} value={cat}>{cat}</button>
         )}):0}
         </li>
       </ul>
@@ -84,7 +84,7 @@ export default function SideBar() {
       <div className='flex flex-col  pl-4 pt-4'>
         <h4  className='text-xl text-yellow-300 pb-3'>Brands</h4>
         
-        <button className="text-left text-lg pl-4" value={"All"}>All</button>
+        <button className="text-left text-lg pl-4" onClick={(e)=>handleFilterBrand(e)} value={"all"}>All</button>
         {brand? brand.map((m)=>{
             return(
         <button className="text-left text-lg pl-4 hover:animate-pulse "  onClick={(e)=>handleFilterBrand(e)} value={m} > {m}</button>
