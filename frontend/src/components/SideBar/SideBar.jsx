@@ -61,7 +61,7 @@ export default function SideBar() {
         <button className="text-left text-lg pl-8" onClick={(e)=>handleFilterCat(e)} value={"all"}>All</button>
           {categories?categories.map((cat)=>{
             return(
-            <button className="text-left text-lg pl-8 "  onClick={(e)=>handleFilterCat(e)} value={cat}>{cat}</button>
+            <button className="text-left text-lg pl-8 " key={cat.id}  onClick={(e)=>handleFilterCat(e)} value={cat}>{cat}</button>
         )}):0}
         </li>
       </ul>
@@ -74,7 +74,7 @@ export default function SideBar() {
         <button className="text-left text-lg pl-4" value={"All"}>All</button>
         {brand? brand.map((m)=>{
             return(
-        <button className="text-left text-lg pl-4 hover:animate-pulse " onClick={(e)=>handleFilterBrand(e)} value={m.name} key={m.id}> {m.name}</button>
+        <button className="text-left text-lg pl-4 hover:animate-pulse "  onClick={(e)=>handleFilterBrand(e)} value={m.name} key={m.id}> {m.name}</button>
             )
         }):0}
       </div>

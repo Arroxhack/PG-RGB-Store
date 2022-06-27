@@ -6,11 +6,14 @@ import { setFilter } from "../../redux/actions";
 export default function Ordenamientos() {
     
     const dispatch = useDispatch();
+    const products = useSelector(state=> state.products)
+
 
     function handleOrderedByPrice(e){
         e.preventDefault();
         dispatch(setFilter(e.target.value))
         dispatch(orderedByPrice(e.target.value));
+        console.log(products)
       }
       
     return (

@@ -168,23 +168,6 @@ export function orderedByPrice(payload) {
     payload,
   };
 }
-<<<<<<< HEAD
-export function filterCategories(payload){
-  return async function(dispatch){
-    try {
-      var json=   await axios.get(`${PATH}/products/`)
-      return dispatch({
-        type: FILTER_CATEGORIES,
-        payload: json.data
-      })
-    } catch (error) {
-      alert('Error, Not Product with that Category')
-    }
-  }
-
- }
-
-
  export function filterBrands(payload){
   return{
     type: FILTER_BRANDS,
@@ -196,27 +179,14 @@ export function filterCategories(payload){
     type: FILTER_MIN,
     payload
   }
-=======
+ }
 export function filterCategories(payload) {
   return {
     type: FILTER_CATEGORIES,
     payload,
   };
->>>>>>> fe24612775262e8acc0b8db1842cb62a5609dbf9
 }
 
-export function filterBrands(payload) {
-  return {
-    type: FILTER_BRANDS,
-    payload,
-  };
-}
-export function filterMin(payload) {
-  return {
-    type: FILTER_MIN,
-    payload,
-  };
-}
 
 /// BUSQUEDA ///
 export function searchProducts(search) {

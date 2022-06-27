@@ -185,4 +185,3 @@ const CreateAdmin = () => {
 };
 
 export default CreateAdmin;
->>>>>>> 906c71973521a34504bca04fec67a22756c0fd54
