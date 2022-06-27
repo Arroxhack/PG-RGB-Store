@@ -11,10 +11,12 @@ import NavBar from '../NavBar/NavBar'
 
 export default function Categories() {
     const dispatch = useDispatch();
+    const allproducts = useSelector((state) => state.allProducts);
     const products = useSelector((state) => state.products);
-  
+    const filters = useSelector(state=>state.filters);
     useEffect(() => {
-      //dispatch(getAllProducts());
+      if(!products.length)
+      dispatch(getAllProducts());
       dispatch(clean())
     }, [dispatch]);
 
