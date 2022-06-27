@@ -1,31 +1,32 @@
+import {
+  ADD_CART,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_DETAIL,
+  RESET_CART,
+  SEARCH_PRODUCTS,
+  FILTER_BY_PRICE,
+  GET_CATEGORIES,
+  SET_FILTER,
+  FILTER_CATEGORIES,
+  GET_BRANDS,
+  FILTER_BRANDS,
+  FILTER_MIN,
+  SET_FILTER_MAX,
+  CLEAN,
+  GET_PROFILE,
+  CREATE_PRODUCT,
+} from '../types/index';
 
-import { ADD_CART,
-   GET_ALL_PRODUCTS,
-   GET_PRODUCT_DETAIL,
-   RESET_CART,
-   SEARCH_PRODUCTS,
-   FILTER_BY_PRICE,
-   GET_CATEGORIES,
-   SET_FILTER, 
-   FILTER_CATEGORIES, 
-   GET_BRANDS, 
-   FILTER_BRANDS, 
-   FILTER_MIN,
-   SET_FILTER_MAX, 
-   CLEAN,
-  CREATE_PRODUCT} from '../types/index';
-
-
-   const initialState = {
+const initialState = {
   allProducts: [],
   products: [],
   detail: [],
   cart: [],
   categories: [],
   filtros: [],
-  brands:[],
-  filterMax:[],
-  newProduct:[],
+  brands: [],
+  filterMax: [],
+  newProduct: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,6 +44,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         detail: action.payload,
       };
+    //======================================
+    //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
+    //======================================
+    case GET_PROFILE:
+      return {
+        ...state,
+        profile: action.payload,
+      };
     case GET_CATEGORIES:
       return {
         ...state,
@@ -54,11 +63,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         brands: action.payload,
       };
-      case CREATE_PRODUCT:
-        return{
-          ...state,
-          newProduct:action.payload
-        }
+    case CREATE_PRODUCT:
+      return {
+        ...state,
+        newProduct: action.payload,
+      };
 
     /// BUSQUEDA ///
     case SEARCH_PRODUCTS:
@@ -97,20 +106,21 @@ const reducer = (state = initialState, action) => {
         products: categoriesFiltered,
       };
 
-  
-      case FILTER_MIN:
-      const filterMaxAndMin= state.filtros?
-      state.products.filter(e=> e.price > state.filtros && e.price < state.filterMax):alert("No existen productos en este rango")
-      return{
+    case FILTER_MIN:
+      const filterMaxAndMin = state.filtros
+        ? state.products.filter(
+            (e) => e.price > state.filtros && e.price < state.filterMax
+          )
+        : alert('No existen productos en este rango');
+      return {
         ...state,
-        products: filterMaxAndMin
-      }
-
+        products: filterMaxAndMin,
+      };
 
     case FILTER_BRANDS:
       const brandsFiltered = state.filtros.includes('all')
-        ? state.products
-        : state.products.filter((e) => e.brand === state.filtros);
+        ? state.allProducts
+        : state.allProducts.filter((e) => e.brand === state.filtros);
       return {
         ...state,
         products: brandsFiltered,
@@ -122,19 +132,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         filtros: action.payload,
       };
-      case SET_FILTER_MAX:
-        return {
-          ...state,
-          filterMax: action.payload,
-        };
-        
-      case CLEAN:
-        return{
-          ...state,
-          detail:action.payload
-        }
+    case SET_FILTER_MAX:
+      return {
+        ...state,
+        filterMax: action.payload,
+      };
 
-    
+    case CLEAN:
+      return {
+        ...state,
+        detail: action.payload,
+      };
+
     /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///
     case ADD_CART:
       return {

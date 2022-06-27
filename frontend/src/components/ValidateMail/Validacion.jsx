@@ -23,6 +23,7 @@ export default function Validations() {
     })
       .then((e) => e.data)
       .catch((e) => console.log(e));
+
     if (UserRegister.validate === true) {
       let { login, lastname, verify, username, email, permissions, name } = UserRegister.user;
       localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage

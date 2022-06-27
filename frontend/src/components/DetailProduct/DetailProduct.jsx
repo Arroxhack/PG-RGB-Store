@@ -37,7 +37,7 @@ function DetailProduct() {
   }
 
   return (
-    <div className="h-screen bg-gradient-to-t from-primary-300 to-primary ">
+    <div className="md:h-screen bg-gradient-to-t from-primary-300 to-primary ">
       <NavBar />
 
       <section class="font-Open ">

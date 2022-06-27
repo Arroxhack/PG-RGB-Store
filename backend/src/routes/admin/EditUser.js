@@ -8,6 +8,7 @@ router.put('/Users/:id', async (req, res, next) => {
   if (!user) {
     return res.status(404).send('No users with that ID');
   }
+
   const objFinal = checkUser(req.body);
   const isUpdated = await User.update(objFinal, { where: { id } });
   //Update nos devuelve un array de length 1 con un 1 si fue todo bien y con 0 si salio mal

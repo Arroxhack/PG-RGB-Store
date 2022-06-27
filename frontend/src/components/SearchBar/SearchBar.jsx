@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { searchProducts } from "../../redux/actions";
 
 export default function SearchBar() {
   const [search, setSearch] = useState("");
   let dispatch = useDispatch();
-
+  const navigate = useNavigate();
   function onSubmit(e) {
     e.preventDefault();
     dispatch(searchProducts(search));
     setSearch("");
+    navigate('/categories')
   }
 
   function onInputChange(e) {
@@ -29,10 +30,10 @@ export default function SearchBar() {
           value={search}
           onChange={onInputChange}
         ></input>
-       <Link to='/categories'>
+      
         <input type="submit" class="absolute right-0 top-0 mt-5 mr-4" value='🔍'>
         </input>
-        </Link> 
+      
       </form>
     </div>
   );
