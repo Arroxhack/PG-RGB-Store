@@ -26,9 +26,7 @@ function Home() {
   return (
     <div className="bg-gradient-to-t from-primary-300 to-primary">
       <NavBar/>
-      <div>
-      <Nav/>
-      </div>
+     
       <Slider/>
       <div className="flex flex-col items-center gap-3">
       <Promo
