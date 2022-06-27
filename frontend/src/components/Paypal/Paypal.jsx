@@ -60,3 +60,10 @@ export default function Paypal() {
     </div>
   )
 }
+
+
+
+
+
+
+
