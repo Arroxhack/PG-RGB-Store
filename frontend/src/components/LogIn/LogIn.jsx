@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { verify } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import jwt_decode from "jwt-decode";
-import swal from "sweetalert2";
+import swal from "sweetalert";
 
 export default function LogIn() {
   let navigate = useNavigate();
@@ -41,7 +41,8 @@ export default function LogIn() {
       .then((data) => data.data)
       .catch((e) => console.log(e));
 
-    let { login, lastname, verify, username, email, permissions, name } = user; //Info que trae la ruta
+    let { login, lastname, verify, username, email, permissions, name, id } =
+      user; //Info que trae la ruta
     if (verify === false) {
       swal.fire({
         icon: "error" / "success",
@@ -58,6 +59,7 @@ export default function LogIn() {
       localStorage.setItem("lastname", lastname);
       localStorage.setItem("login", login);
       localStorage.setItem("email", email);
+      localStorage.setItem("id", id);
       localStorage.setItem("admin", permissions);
       setUsername(""); //Reseteo mis estados locales
       setPassword("");
