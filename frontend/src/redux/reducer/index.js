@@ -17,7 +17,7 @@ import {
   CREATE_PRODUCT,
   GET_PROFILE,
   SET_FILTER_PRICE,
-  CLEAN_FILTER
+  CLEAN_FILTER,
 } from '../types/index';
 
 const initialState = {
@@ -64,10 +64,10 @@ const reducer = (state = initialState, action) => {
       };
 
     case GET_BRANDS:
-    let allBrands= state.products.map(e=> e.brand)  
-    let brand= new Set(allBrands) 
-      let arr= [...brand]
-    return {
+      let allBrands = state.products.map((e) => e.brand);
+      let brand = new Set(allBrands);
+      let arr = [...brand];
+      return {
         ...state,
         brands: arr,
       };
@@ -133,7 +133,7 @@ const reducer = (state = initialState, action) => {
     case FILTER_BRANDS:
       const brandsFiltered = state.filtros.includes('all')
         ? state.allProducts
-        : state.allProducts.filter((e) =>state.filtros.includes(e.brand));
+        : state.allProducts.filter((e) => state.filtros.includes(e.brand));
       return {
         ...state,
         products: brandsFiltered,
@@ -143,18 +143,18 @@ const reducer = (state = initialState, action) => {
     case SET_FILTER:
       return {
         ...state,
-        filtros:[...state.filtros, action.payload],
+        filtros: [action.payload],
       };
     case SET_FILTER_MAX:
       return {
         ...state,
         filterMax: action.payload,
       };
-      case SET_FILTER_PRICE:
-        return {
-          ...state,
-          filterPrice: action.payload,
-        };
+    case SET_FILTER_PRICE:
+      return {
+        ...state,
+        filterPrice: action.payload,
+      };
 
     case CLEAN:
       return {
@@ -162,12 +162,11 @@ const reducer = (state = initialState, action) => {
         detail: action.payload,
       };
 
-      case CLEAN_FILTER:
-        return {
-          ...state,
-          filtros: action.payload,
-        };
-        
+    case CLEAN_FILTER:
+      return {
+        ...state,
+        filtros: action.payload,
+      };
 
     /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///
     case ADD_CART:

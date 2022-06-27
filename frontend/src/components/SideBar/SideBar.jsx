@@ -26,7 +26,7 @@ export default function SideBar() {
      useEffect(()=>{
       dispatch(getAllCategories())
       dispatch(getBrand())
-      if(filters.length>2)dispatch(cleanFilter())
+      
      },[products])
 
 
@@ -61,10 +61,10 @@ export default function SideBar() {
     <aside className='w-1/4 md:w-64 sm:text-xs flex flex-col justify-around bg-primary-200 h-screen sticky text-lg md:text-sm text-center text-primary-400 '>
       
       <div className="flex justify-around" >
-        <p>de ${filterMax} a ${filterPrice}</p>
+        {/* <p>de ${filterMax} a ${filterPrice}</p>
         <div>
         <p>{filters}</p>
-        </div>
+        </div> */}
 
         </div>
       <div className="flex flex-col pb-4">
