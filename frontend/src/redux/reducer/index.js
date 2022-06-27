@@ -36,7 +36,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         allProducts: action.payload,
         products: action.payload,
-        productsFilter: action.payload,
       };
     case GET_PRODUCT_DETAIL:
       return {

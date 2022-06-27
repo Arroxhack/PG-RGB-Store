@@ -23,7 +23,7 @@ export default function () {
 
 
   return (
-    <div className="bg-gradient-to-t from-primary-300 to-primary flex flex-col p-0 ">
+    <div className="bg-gradient-to-t  h-screen from-primary-300 to-primary flex flex-col p-0 ">
       <NavBar/>
       <fragment className='w-full flex justify-end '>
       <Ordenamientos/>

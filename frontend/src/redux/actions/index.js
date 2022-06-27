@@ -155,10 +155,18 @@ export function orderedByPrice(payload){
   }
 }
 export function filterCategories(payload){
-  return{
-    type: FILTER_CATEGORIES,
-    payload
+  return async function(dispatch){
+    try {
+      var json=   await axios.get(`${PATH}/products/`)
+      return dispatch({
+        type: FILTER_CATEGORIES,
+        payload: json.data
+      })
+    } catch (error) {
+      alert('Error, Not Product with that Category')
+    }
   }
+
  }
 
 
