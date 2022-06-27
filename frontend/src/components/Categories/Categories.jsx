@@ -13,7 +13,12 @@ export default function Categories() {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.products);
   
-    console.log(products,'asd')
+    useEffect(() => {
+      //dispatch(getAllProducts());
+      dispatch(clean())
+    }, [dispatch]);
+
+
   return (
     <div className="bg-primary-200 flex flex-col p-0 ">
       <NavBar/>
