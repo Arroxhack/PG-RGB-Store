@@ -10,18 +10,11 @@ import Ordenamientos from "../Ordenamientos/Ordenamientos";
 import NavBar from '../NavBar/NavBar'
 import ContainerProduct from '../ContainerProduct/ContainerProduct'
 
-export default function () {
+export default function Categories() {
     const dispatch = useDispatch();
-    const allProducts = useSelector((state) => state.allProducts);
     const products = useSelector((state) => state.products);
-    const filters= useSelector(state=>state.filtros)
   
-    useEffect(() => {
-      dispatch(getAllProducts());
-      dispatch(clean())
-    }, [dispatch]);
-
-
+    console.log(products,'asd')
   return (
     <div className="bg-gradient-to-t  h-screen from-primary-300 to-primary flex flex-col p-0 ">
       <NavBar/>
