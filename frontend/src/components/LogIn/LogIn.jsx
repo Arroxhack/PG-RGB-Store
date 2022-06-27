@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { verify } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import jwt_decode from "jwt-decode";
-import swal from "sweetalert2";
 import NavBar from "../NavBar/NavBar";
-import Swal from 'sweetalert2'
-import swal from 'sweetalert'
+import swal from 'sweetalert2'
+
 
 export default function LogIn() {
   let navigate = useNavigate();
