@@ -40,7 +40,10 @@ export function getAllProducts() {
 
 /// GET MARCAS DE PRODUCTOS ///
 
-export function getBrand(payload) {
+
+
+
+export function getBrand() {
       return {
         type: GET_BRANDS,
         payload,
@@ -161,18 +164,6 @@ export function orderedByPrice(payload) {
     payload,
   };
 }
- export function filterBrands(payload){
-  return{
-    type: FILTER_BRANDS,
-    payload
-  }
- }
- export function filterMin(payload){
-  return{
-    type: FILTER_MIN,
-    payload
-  }
- }
 export function filterCategories(payload) {
   return {
     type: FILTER_CATEGORIES,
@@ -180,6 +171,18 @@ export function filterCategories(payload) {
   };
 }
 
+export function filterBrands(payload) {
+  return {
+    type: FILTER_BRANDS,
+    payload,
+  };
+}
+export function filterMin(payload) {
+  return {
+    type: FILTER_MIN,
+    payload
+  }
+ }
 
 /// BUSQUEDA ///
 export function searchProducts(search) {

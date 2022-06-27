@@ -31,9 +31,9 @@ const HomeAdmin = () => {
           { menu==4 && <EditUser/>}
           </div>
           </div>
-    ) : (
-      <Error />
-    )}
+    )  : 
+    (<Error />)
+    }
   </>
   )
 }
