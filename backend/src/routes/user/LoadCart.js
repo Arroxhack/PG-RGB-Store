@@ -34,7 +34,6 @@ router.put('/userCart/:email', async (req, res, next) => {
 });
 
 //Recuperar carrito de la bd
-
 router.get('/userCart/:email', async (req, res, next) => {
   const { email } = req.params;
 

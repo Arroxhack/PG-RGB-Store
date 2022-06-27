@@ -16,6 +16,7 @@ import {
   CLEAN,
   SET_FILTER_MAX,
   FILTER_MIN,
+  GET_USER_DATA,
   EDIT_PROFILE,
   GET_PROFILE,
 } from '../types/index';
@@ -43,7 +44,7 @@ export function getAllProducts() {
 
 
 
-export function getBrand() {
+export function getBrand(payload) {
       return {
         type: GET_BRANDS,
         payload,
@@ -121,12 +122,28 @@ export const createProduct = (product) => {
 export function PostUser(user) {
   return async function () {
     try {
-      const exit = await axios.post('/register', user);
+      const exit = await axios.post(`${PATH}/register`, user);
       if (exit.data) {
         alert('Register Succesfully');
       }
     } catch (e) {
       console.log('Error in Register');
+    }
+  };
+}
+
+// DATOS DEL USUARIO //
+export function GetUserData(id) {
+  return async function (dispatch) {
+    try {
+      const usuario = await axios.get(`${PATH}/Users/${id}`);
+      const user = usuario.data;
+      return dispatch({
+        type: GET_USER_DATA,
+        payload: user,
+      });
+    } catch (e) {
+      console.log('Error in Get Data');
     }
   };
 }
