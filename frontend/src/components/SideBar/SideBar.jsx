@@ -55,6 +55,10 @@ export default function SideBar() {
       e.preventDefault()
       dispatch(setFilterMax(e.target.value))
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 580ac6d35896e052f526726006bba2e2add8be7e
     return (
     <aside className='w-1/4 md:w-64 sm:text-xs flex flex-col justify-around bg-primary-200 h-screen relative text-lg md:text-sm text-center text-primary-400 '>
 

@@ -13,3 +13,4 @@ export const FILTER_MIN = 'FILTER_MIN_MAX'
 export const FILTER_MAX = 'FILTER_MAX'
 export const SET_FILTER_MAX = 'SET_FILTER_MAX';
 export const CLEAN = 'CLEAN';
+export const CREATE_PRODUCT='CREATE_PRODUCT';
