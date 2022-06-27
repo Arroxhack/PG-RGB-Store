@@ -3,32 +3,30 @@ import { Link, NavLink } from "react-router-dom";
 import Logout from "../LogOut/Logout";
 import SearchBar from "../SearchBar/SearchBar";
 import BoxCart from "../Cart/BoxCart";
+import Nav from "./Nav";
 
 function NavBar() {
   const username = localStorage.getItem("username");
+  const admin = localStorage.getItem("admin");
 
   const [cartOpen, setCartOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleCart = (e) => {
     e.preventDefault();
     setCartOpen(!cartOpen);
   };
 
-  function toggleMenu() {
-    let menuBox = document.getElementById("menu-box");
-    if (menuBox.style.display == "block") {
-      menuBox.style.display = "none";
-    } else {
-
-      menuBox.style.display = "block";
-    }
-  }
+  const handleMenu = (e) => {
+    e.preventDefault();
+    setMenuOpen(!menuOpen);
+  };
 
   return (
-    <nav className="relative w-full flex flex-wrap items-center justify-between py-4 shadow-lg navbar navbar-expand-lg navbar-light bg-primary-200">
-      <div class="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-secundary-250 pb-5 lg:pb-0">
-        
-        <div class="flex items-center flex-shrink-0 text-gray-800 mr-16">
+    <nav className="relative w-full flex flex-wrap items-center justify-between py-4 shadow-lg bg-primary-200">
+      <div class="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 y-4  pb-5 lg:pb-0">
+        {/*LOGO */}
+        <div class="flex items-center flex-shrink-0 mr-16">
           <Link
             to="/"
             className="flex flex-col items-center text-primary-400 font-Open text-xl tracking-tight font-extrabold"
@@ -39,9 +37,60 @@ function NavBar() {
             </span>
           </Link>
         </div>
+        {/*LOGO */}
+       
+        <div class="flex justify-center bg-primary-200">
+          <ul class=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0 ">
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories">
+                <p>Categories</p>
+              </Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories/notebooks">Notebooks</Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories/pc-armadas">Prebuilt PCs</Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories/placas-de-videos">GPUs</Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/arma-tu-pc">
+                <p>Build your PC</p>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      
+{/*       
         <div class="block lg:hidden">
-        {/* <div class="block lg:hidden"  id="menu" onClick={toggleMenu}> */}
-          <button class="text-secundary-250 py-2 px-2.5">
+          {menuOpen ?   
+           <div class="flex justify-center bg-primary-200 ">
+          <ul class=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0 ">
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories">
+                <p>Categories</p>
+              </Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories/notebooks">Notebooks</Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories/pc-armadas">Prebuilt PCs</Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories/placas-de-videos">GPUs</Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/arma-tu-pc">
+                <p>Build your PC</p>
+              </Link>
+            </li>
+          </ul>
+        </div>   : null}
+
+          <button onClick={handleMenu} class="text-secundary-250 py-2 px-2.5">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -59,36 +108,13 @@ function NavBar() {
             </svg>
           </button>
         </div>
-      </div>
-
-      <div class="menu w-full lg:flex flex-grow space-x-3 lg:items-center lg:w-auto lg:px-3 px-8">
-        <div class=" flex-grow items-center">
-          <ul class=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0">
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
-              <Link to="/categories">
-                <p>Categorías</p>
-              </Link>
-            </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
-              <Link to="/categories/notebooks">Notebooks</Link>
-            </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
-              <Link to="/categories/pc-armadas">PC Armadas</Link>
-            </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
-              <Link to="/categories/placas-de-videos">Placas de video</Link>
-            </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
-              <Link to="/arma-tu-pc">
-                <p>Armá tu pc</p>
-              </Link>
-            </li>
-          </ul>
-        </div>
+      </div> */}
+</div>
+      <div class="menu w-full lg:flex  space-x-3 lg:items-center lg:w-auto lg:px-3 px-8">
         <div>
           <SearchBar></SearchBar>
         </div>
-        <div className="flex gap-5">
+        <div className="flex ">
           {cartOpen ? (
             <BoxCart onClick={handleCart} />
           ) : (
@@ -96,17 +122,24 @@ function NavBar() {
               onClick={handleCart}
               className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
             >
-              Carrito
+              Cart
             </p>
           )}
           {username ? (
             <div>
               <Link to="/profile">
                 <p className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
-                  {username} Bienvenido!
+                  Welcome {username}!
                 </p>
               </Link>{" "}
               <Logout />
+              {admin ? (
+                <Link to="/admin">
+                  <button className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
+                    ADMINPANEL
+                  </button>
+                </Link>
+              ) : null}
             </div>
           ) : (
             <>
@@ -114,7 +147,7 @@ function NavBar() {
                 to="/logIn"
                 className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
               >
-                Ingresar
+                Log in
               </Link>
               <Link
                 to="/register"

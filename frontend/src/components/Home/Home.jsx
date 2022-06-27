@@ -13,7 +13,7 @@ import Promo from "./PromLeft";
 
 function Home() {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.allProducts);
+  const products = useSelector((state) => state.products);
 
   const product = products.slice(0,4)
 
@@ -26,7 +26,7 @@ function Home() {
   return (
     <div className="bg-gradient-to-t from-primary-300 to-primary">
       <NavBar/>
-      <Nav/>
+     
       <Slider/>
       <div className="flex flex-col items-center gap-3">
       <Promo

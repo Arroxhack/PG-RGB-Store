@@ -4,8 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { verify } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import jwt_decode from "jwt-decode";
+<<<<<<< HEAD
 import swal from "sweetalert2";
 import NavBar from "../NavBar/NavBar";
+=======
+import Swal from 'sweetalert2'
+import swal from 'sweetalert'
+
+
+>>>>>>> c049654cf6936db03bec01b095f9208ccf5695f3
 export default function LogIn() {
   let navigate = useNavigate();
   const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
@@ -17,10 +24,10 @@ export default function LogIn() {
   };
   const ResendEmail = async (email) => {
     console.log(email);
-      await axios({
+    await axios({
       method: "post",
       url: "http://localhost:3001/resendEmailLogin",
-      data: {email}, // email
+      data: { email }, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
     });
@@ -41,16 +48,16 @@ export default function LogIn() {
       .then((data) => data.data)
       .catch((e) => console.log(e));
 
-    let { login, lastname, verify, username, email, permissions, name } = user; //Info que trae la ruta
+    let { login, lastname, verify, username, email, permissions, name, id } =
+      user; //Info que trae la ruta
     if (verify === false) {
-      swal
-        .fire({
-          icon: "error" / "success",
-          title: "Error",
-          text: "Su Cuenta no esta verificada, sera redirigido a una pagina para verificar su correo electronico",
-          button: "Aceptar",
-        })
-      ResendEmail(email)
+      swal.fire({
+        icon: "error" / "success",
+        title: "Error",
+        text: "Su Cuenta no esta verificada, sera redirigido a una pagina para verificar su correo electronico",
+        button: "Aceptar",
+      });
+      ResendEmail(email);
       return navigate(`/validate/${username}`);
     }
     if (login) {
@@ -59,7 +66,8 @@ export default function LogIn() {
       localStorage.setItem("lastname", lastname);
       localStorage.setItem("login", login);
       localStorage.setItem("email", email);
-      localStorage.setItem("Admin", permissions);
+      localStorage.setItem("id", id);
+      localStorage.setItem("admin", permissions);
       setUsername(""); //Reseteo mis estados locales
       setPassword("");
       navigate("/");
