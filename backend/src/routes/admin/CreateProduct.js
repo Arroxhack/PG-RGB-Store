@@ -5,7 +5,7 @@ const router = Router();
 //  si no existe una categoria se crea una y se hace la relacion
 //  (category es un array "HACER FORMULARIO CONTROLADO")
 
-router.post('/products', async (req, res, next) => {
+router.post('/create-product', async (req, res, next) => {
   const {
     name,
     price,

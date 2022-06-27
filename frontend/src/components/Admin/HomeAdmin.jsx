@@ -18,6 +18,8 @@ const HomeAdmin = () => {
   return (
     <>
     {admin ? (
+      <Error />
+    ) : (
           <div>
           <Nav/>
           <div className='flex flex-row'>
@@ -31,9 +33,7 @@ const HomeAdmin = () => {
           { menu==4 && <EditUser/>}
           </div>
           </div>
-    ) : (
-      <Error />
-    )}
+    ) }
   </>
   )
 }
