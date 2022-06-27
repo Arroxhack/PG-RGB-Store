@@ -4,15 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { verify } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import jwt_decode from "jwt-decode";
-<<<<<<< HEAD
 import swal from "sweetalert2";
 import NavBar from "../NavBar/NavBar";
-=======
 import Swal from 'sweetalert2'
 import swal from 'sweetalert'
 
-
->>>>>>> c049654cf6936db03bec01b095f9208ccf5695f3
 export default function LogIn() {
   let navigate = useNavigate();
   const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
