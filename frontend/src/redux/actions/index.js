@@ -1,6 +1,24 @@
 import axios from "axios";
-import { ADD_CART, GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, RESET_CART, SEARCH_PRODUCTS,FILTER_BY_PRICE, GET_CATEGORIES, SET_FILTER,LOAD_USER, FILTER_CATEGORIES,GET_BRANDS,FILTER_BRANDS,CREATE_PRODUCT, CLEAN, SET_FILTER_MAX,FILTER_MIN} from "../types/index";
-import Swal from 'sweetalert2'
+import {
+  ADD_CART,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_DETAIL,
+  RESET_CART,
+  SEARCH_PRODUCTS,
+  FILTER_BY_PRICE,
+  GET_CATEGORIES,
+  SET_FILTER,
+  LOAD_USER,
+  FILTER_CATEGORIES,
+  GET_BRANDS,
+  FILTER_BRANDS,
+  CREATE_PRODUCT,
+  CLEAN,
+  SET_FILTER_MAX,
+  FILTER_MIN,
+  GET_USER_DATA,
+} from "../types/index";
+import Swal from "sweetalert2";
 const PATH = "http://localhost:3001";
 
 /// GET PRODUCTOS ///
@@ -25,8 +43,8 @@ export function getBrand() {
   return async function (dispatch) {
     try {
       let allProducts = await axios.get(`${PATH}/brands`); //products por ahora
-      let allBrands = allProducts.data
-      console.log(allBrands)
+      let allBrands = allProducts.data;
+      console.log(allBrands);
       return dispatch({
         type: GET_BRANDS,
         payload: allBrands,
@@ -36,15 +54,12 @@ export function getBrand() {
     }
   };
 }
-export function clean(){
-  return{
+export function clean() {
+  return {
     type: CLEAN,
-    payload:[]
-  }
+    payload: [],
+  };
 }
-
-
-
 
 /// GET DETALLE DE PRODUCTOS ///
 export function getProductDetail(id) {
@@ -66,9 +81,9 @@ export function getProductDetail(id) {
 export function getAllCategories() {
   return async function (dispatch) {
     try {
-      let AllCategory = await axios.get(`${PATH}/category`); 
-      console.log(AllCategory)
-      let allCategoryData = AllCategory.data.map((e)=>e.name)
+      let AllCategory = await axios.get(`${PATH}/category`);
+      console.log(AllCategory);
+      let allCategoryData = AllCategory.data.map((e) => e.name);
       return dispatch({
         type: GET_CATEGORIES,
         payload: allCategoryData,
@@ -80,115 +95,128 @@ export function getAllCategories() {
 }
 
 /// POST PRODUCTOS ///
-export const createProduct = (product)=>{
-  return async dispatch=>{
+export const createProduct = (product) => {
+  return async (dispatch) => {
     try {
-      const post = await axios.post(`${PATH}/create-product`, product)
+      const post = await axios.post(`${PATH}/create-product`, product);
       Swal.fire({
         title: `${post.data.name}`,
-        text: 'creado con exito!',
-        icon:'success',
-        confirmButtonText: 'ok'
-      })
+        text: "creado con exito!",
+        icon: "success",
+        confirmButtonText: "ok",
+      });
 
-      return{
+      return {
         type: CREATE_PRODUCT,
-        payload: post.data
-      }
+        payload: post.data,
+      };
     } catch (error) {
       Swal.fire({
-        title: 'Algo fallo',
-        text: 'No se pudo crear el producto',
-        icon:'error',
-        confirmButtonText: 'ok'
-      })
+        title: "Algo fallo",
+        text: "No se pudo crear el producto",
+        icon: "error",
+        confirmButtonText: "ok",
+      });
     }
-  }
-}
+  };
+};
 
 /// POST REGISTRAR USUARIO ///
 export function PostUser(user) {
   return async function () {
-    try{
-      const exit = await axios.post("/register",user)
-      if (exit.data){
-        alert("Register Succesfully")
+    try {
+      const exit = await axios.post(`${PATH}/register`, user);
+      if (exit.data) {
+        alert("Register Succesfully");
       }
-     }catch(e){
-      console.log("Error in Register")
-  }
-  }
+    } catch (e) {
+      console.log("Error in Register");
+    }
+  };
+}
+
+// DATOS DEL USUARIO //
+export function GetUserData(id) {
+  return async function (dispatch) {
+    try {
+      const usuario = await axios.get(`${PATH}/Users/${id}`);
+      const user = usuario.data;
+      return dispatch({
+        type: GET_USER_DATA,
+        payload: user,
+      });
+    } catch (e) {
+      console.log("Error in Get Data");
+    }
+  };
 }
 
 /// DISPATCH PARA EL CARRITO (CREO QUE HAY QUE BORRAR) ///
 export const addCart = (product) => {
   return {
-    type:ADD_CART,
-    payload:product
-  }
-}
-export const resetCart = ()=>{
-  return{
-    type:RESET_CART
-  }
-}
-export function setFilter(payload){
+    type: ADD_CART,
+    payload: product,
+  };
+};
+export const resetCart = () => {
+  return {
+    type: RESET_CART,
+  };
+};
+export function setFilter(payload) {
   return {
     type: SET_FILTER,
-    payload
-  }
+    payload,
+  };
 }
 
-export function setFilterMax(payload){
+export function setFilterMax(payload) {
   return {
     type: SET_FILTER_MAX,
-    payload
-  }
+    payload,
+  };
 }
-
 
 /// ORDENAMIENTOS Y FILTRADOS ///
-export function orderedByPrice(payload){  
+export function orderedByPrice(payload) {
   return {
     type: FILTER_BY_PRICE,
-    payload
-  }
+    payload,
+  };
 }
-export function filterCategories(payload){
-  return{
+export function filterCategories(payload) {
+  return {
     type: FILTER_CATEGORIES,
-    payload
-  }
- }
-
-
- export function filterBrands(payload){
-  return{
-    type: FILTER_BRANDS,
-    payload
-  }
- }
- export function filterMin(payload){
-  return{
-    type: FILTER_MIN,
-    payload
-  }
+    payload,
+  };
 }
 
+export function filterBrands(payload) {
+  return {
+    type: FILTER_BRANDS,
+    payload,
+  };
+}
+export function filterMin(payload) {
+  return {
+    type: FILTER_MIN,
+    payload,
+  };
+}
 
 /// BUSQUEDA ///
 export function searchProducts(search) {
   return function (dispatch) {
-  axios.get(`${PATH}/product?name=` + search)
-  .then((products => {
-      dispatch({
+    axios
+      .get(`${PATH}/product?name=` + search)
+      .then((products) => {
+        dispatch({
           type: SEARCH_PRODUCTS,
-          payload: products.data
+          payload: products.data,
+        });
       })
-  }))
-  .catch(() => {
-      alert("Product not found!")
-  })
-  }
+      .catch(() => {
+        alert("Product not found!");
+      });
+  };
 }
-
