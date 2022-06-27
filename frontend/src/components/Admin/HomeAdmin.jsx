@@ -13,9 +13,11 @@ const HomeAdmin = () => {
     const admin = localStorage.getItem("admin");
 
     const [menu, setMenu] = useState(0)
+
+    console.log(menu)
   return (
     <>
-    {admin ?(
+    {admin ? (
           <div>
           <Nav/>
           <div className='flex flex-row'>
@@ -29,9 +31,9 @@ const HomeAdmin = () => {
           { menu==4 && <EditUser/>}
           </div>
           </div>
-    ) : (
-      <Error />
-    ) }
+    )  : 
+    (<Error />)
+    }
   </>
   )
 }
