@@ -10,6 +10,7 @@ import {
   FILTER_CATEGORIES,
   GET_BRANDS,
   FILTER_BRANDS,
+  GET_PROFILE,
 } from '../types/index';
 const initialState = {
   allProducts: [],
@@ -19,6 +20,7 @@ const initialState = {
   categories: [],
   filtros: [],
   brands: [],
+  profile: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +37,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         detail: action.payload,
+      };
+    //======================================
+    //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
+    //======================================
+    case GET_PROFILE:
+      return {
+        ...state,
+        profile: action.payload,
       };
     case GET_CATEGORIES:
       return {

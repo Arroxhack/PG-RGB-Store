@@ -24,7 +24,7 @@ export default function Validations() {
     })
       .then((e) => e.data)
       .catch((e) => console.log(e));
-    if (UserRegister.validate === true) {
+    if (UserRegister?.validate === true) {
       let { login, lastname, image, username, email, cellphone, name } =
         UserRegister.user;
       localStorage.setItem("username", username);

@@ -46,7 +46,7 @@ function NavBar({ toggleOpen }) {
       <div className="flex gap-5">
         {username ? (
           <div>
-            <Link to="/profile">
+            <Link to={`/profile/${username}`}>
               <p className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
                 {username} Bienvenido!
               </p>

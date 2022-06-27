@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { User } = require('../../db');
 const router = Router();
 
+//Cargar carrito en la bd
 router.put('/userCart/:email', async (req, res, next) => {
   const { cartProductArray } = req.body;
   const { email } = req.params;
@@ -30,6 +31,26 @@ router.put('/userCart/:email', async (req, res, next) => {
   } catch (e) {
     res.status(404).send('error updating user cart');
   }
+});
+
+//Recuperar carrito de la bd
+
+router.get('/userCart/:email', async (req, res, next) => {
+  const { email } = req.params;
+
+  //traerme los datos
+  const user = await User.findOne({ where: { email } });
+
+  //ver si el user existe
+  if (!user) {
+    return res.send('User doesnt exist');
+  }
+
+  //guardar el carrito
+  const userCart = user.cartProducts;
+
+  //devolver el carrito
+  res.send(userCart);
 });
 
 module.exports = router;

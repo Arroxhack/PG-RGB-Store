@@ -7,12 +7,16 @@ const Register = require('./user/register');
 const Login = require('./user/login');
 const Logout = require('./user/logout');
 const LoadCartProduct = require('./user/LoadCart');
+//===USER STUFF===
+const Profile = require('./user/Profile');
+const editProfileUser = require('./user/editProfile');
 //====ADMIN===
 const Delete = require('./admin/DeleteProduct');
 const Put = require('./admin/EditProduct');
 const Create = require('./admin/CreateProduct');
 const GetUsers = require('./admin/GetUsers');
 const EditUser = require('./admin/EditUser');
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -34,4 +38,7 @@ router.use('/', GetUsers);
 router.use('/', Brand);
 router.use('/', EditUser);
 router.use('/', LoadCartProduct);
+//user
+router.use('/', Profile);
+router.use('/', editProfileUser);
 module.exports = router;
