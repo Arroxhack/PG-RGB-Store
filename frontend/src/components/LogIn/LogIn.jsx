@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { verify } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import jwt_decode from "jwt-decode";
-import swal from "sweetalert2";
+import NavBar from "../NavBar/NavBar";
+import swal from 'sweetalert2'
+
+
 export default function LogIn() {
   let navigate = useNavigate();
   const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
@@ -16,10 +19,10 @@ export default function LogIn() {
   };
   const ResendEmail = async (email) => {
     console.log(email);
-      await axios({
+    await axios({
       method: "post",
       url: "http://localhost:3001/resendEmailLogin",
-      data: {email}, // email
+      data: { email }, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
     });
@@ -40,16 +43,16 @@ export default function LogIn() {
       .then((data) => data.data)
       .catch((e) => console.log(e));
 
-    let { login, lastname, verify, username, email, permissions, name } = user; //Info que trae la ruta
+    let { login, lastname, verify, username, email, permissions, name, id } =
+      user; //Info que trae la ruta
     if (verify === false) {
-      swal
-        .fire({
-          icon: "error" / "success",
-          title: "Error",
-          text: "Su Cuenta no esta verificada, sera redirigido a una pagina para verificar su correo electronico",
-          button: "Aceptar",
-        })
-      ResendEmail(email)
+      swal.fire({
+        icon: "error" / "success",
+        title: "Error",
+        text: "Su Cuenta no esta verificada, sera redirigido a una pagina para verificar su correo electronico",
+        button: "Aceptar",
+      });
+      ResendEmail(email);
       return navigate(`/validate/${username}`);
     }
     if (login) {
@@ -58,7 +61,8 @@ export default function LogIn() {
       localStorage.setItem("lastname", lastname);
       localStorage.setItem("login", login);
       localStorage.setItem("email", email);
-      localStorage.setItem("Admin", permissions);
+      localStorage.setItem("id", id);
+      localStorage.setItem("admin", permissions);
       setUsername(""); //Reseteo mis estados locales
       setPassword("");
       navigate("/");
@@ -114,10 +118,12 @@ export default function LogIn() {
   }, []);
 
   return (
-    <div className=" flex flex-col items-center justify-center min-h-screen ">
+    <div>
+    <NavBar/>
+    <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-gradient-to-t from-primary-300 to-primary">
+      <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black">
       <form
-        className=" w-1/3 h-96  border-white border-2 gap-6 rounded-md flex flex-col justify-center items-center
-        sm:w-80 sm:h-80  "
+        className="flex flex-col justify-center items-center sm:w-80 sm:h-80"
         onSubmit={(e) => handleLoginSubmit(e)}
       >
         <div>
@@ -129,7 +135,7 @@ export default function LogIn() {
         </div>
         <div className="flex flex-col items-center justify-center gap-1">
           <input
-            className="border-2 border-primary-400 rounded max-w-max  "
+            className="block border border-grey-light w-full p-3 rounded mb-4"
             type="text"
             value={userName}
             name="Username"
@@ -137,7 +143,7 @@ export default function LogIn() {
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            className="border-2 border-primary-400 rounded max-w-max  "
+            className="block border border-grey-light w-full p-3 rounded mb-4"
             type="password"
             value={password}
             name="Password"
@@ -160,12 +166,13 @@ export default function LogIn() {
         {/* si hay errores salen aca */}
         <button
           type="submit"
-          className="hover:bg-primary-400 rounded-xl w-24 text-xl items-center"
+          className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
         >
           Login
         </button>
+        <div id="signInDiv"></div>
       </form>
-      <div id="signInDiv"></div>
+      </div>
       {/*        { googleUser && 
           <div>
             <img src={googleUser.picture} alt="User"/>
@@ -173,6 +180,7 @@ export default function LogIn() {
             <h3>{googleUser.email}</h3>
           </div>
         } */}
+  </div>
     </div>
   );
 }

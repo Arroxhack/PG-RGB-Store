@@ -1,25 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Nav = () => {
+
+
   return (
-    <div className='flex flex-row justify-evenly bg-primary h-12 items-center font-semibold text-xl uppercase'>
-        <Link to='/categories' className='hover:bg-primary-300 hover:py-3 px-4 '>
-        <p>Categorías</p>
-        </Link>
-        <Link to='/categories/notebooks' className='hover:bg-primary-300 hover:py-3 px-4'>
-        Notebooks
-        </Link>
-        <Link to='/categories/pc-armadas' className='hover:bg-primary-300 hover:py-3 px-4'>
-        PC Armadas
-        </Link>
-        <Link to='/categories/placas-de-videos' className='hover:bg-primary-300 hover:py-3 px-4'>
-        Placas de video
-        </Link>
-        <Link to='/arma-tu-pc' className='hover:bg-primary-300 hover:py-3 px-4'>
-        <p>Armá tu pc</p>
-        </Link>
-    </div>
+    <div class="flex justify-center bg-primary-200 ">
+          <ul class=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0 ">
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories">
+                <p>Categories</p>
+              </Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories/notebooks">Notebooks</Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories/pc-armadas">Prebuilt PCs</Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/categories/placas-de-videos">GPUs</Link>
+            </li>
+            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+              <Link to="/arma-tu-pc">
+                <p>Build your PC</p>
+              </Link>
+            </li>
+          </ul>
+        </div>
   )
 }
 

@@ -3,6 +3,7 @@ import { validate, regexPass, regexEmail } from "./Validations";
 import { PostUser } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import NavBar from "../NavBar/NavBar";
 export default function Register() {
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
@@ -187,7 +188,91 @@ export default function Register() {
             </div>
           </form>
         </div>
+
+      <NavBar/>
+    <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      <div class="bg-secundary-250 px-6 py-8 rounded shadow-md text-black w-full">
+        <h1 class="mb-8 text-3xl text-center">Sign up</h1>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Name</label>
+            {errors.name && <p>{errors.name}</p>}
+            <input
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              type="text"
+              placeholder="Name"
+              value={name}
+              name="name"
+              onChange={handleOnChange}
+              
+            />
+            <label>Lastname</label>
+            {errors.lastname && <p>{errors.lastname}</p>}
+            <input
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              type="text"
+              placeholder="Lastname"
+              value={lastname}
+              name="lastname"
+              onChange={handleOnChange}
+            />
+            <label>Username</label>
+            {errors.username && <p>{errors.username}</p>}
+            <input
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              type="text"
+              placeholder="Username"
+              value={username}
+              name="username"
+              onChange={handleOnChange}
+            />
+            <label>Email</label>
+            {errors.email && <p>{errors.email}</p>}
+            <input
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              type="text"
+              placeholder="Email"
+              value={email}
+              name="email"
+              onChange={handleOnChange}
+            />
+            <label>Password</label>
+            {errors.password && <p>{errors.password}</p>}
+            <input
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              type="password"
+              placeholder="Password"
+              value={password}
+              name="password"
+              onChange={handleOnChange}
+            />
+            <input
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              type="password"
+              placeholder="Password"
+              value={passwordValidate}
+              name="passwordValidate"
+              onChange={handleOnChange}
+            />
+            <button
+              class="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
+              type="submit"
+            >
+              {" "}
+              Submit{" "}
+            </button>
+          </div>
+          <div class="t-6">
+            Already have an account?
+            <a class="no-underline border-b" href="../login/">
+              Log in
+            </a>
+            .
+          </div>
+        </form>
+
       </div>
     </div>
+  </div>
   );
 }
