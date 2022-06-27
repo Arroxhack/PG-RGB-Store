@@ -8,7 +8,7 @@ const CreateAdmin = () => {
   const idAdmin = localStorage.getItem("id");
   const [users, setUsers] = useState([]);
   const [Userid, setUserid] = useState(0);
-  const [method, setMethod] = useState("");
+  const [method, setMethod] = useState("Upgradear a Admin");
   const [state, setState] = useState("");
 
   useEffect(async () => {
@@ -45,6 +45,8 @@ const CreateAdmin = () => {
   };
   const HandleSubmit = async (e) => {
     e.preventDefault();
+    document.getElementById("enviar").innerHTML = "Enviando...";
+    document.getElementById("enviar").disabled = true;
     const idUser = Number(Userid);
     if (method === "updateToAdmin") {
       const result = await axios({
@@ -70,6 +72,8 @@ const CreateAdmin = () => {
           button: "Aceptar",
         });
       }
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = method;
       setState("   ");
     }
 
@@ -97,6 +101,8 @@ const CreateAdmin = () => {
           button: "Aceptar",
         });
       }
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = method;
       setState("  ");
     }
     if (method === "UpdateToSuperAdmin") {
@@ -123,6 +129,8 @@ const CreateAdmin = () => {
           button: "Aceptar",
         });
       }
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = method;
       setState(" ");
     }
   };
@@ -135,8 +143,10 @@ const CreateAdmin = () => {
         Recargar Usuarios
       </button>
       <p>CREAR NUEVO ADMIN/SUPERADMIN/USUARIO:</p>
-      Elija una opcion:
       <select onChange={(e) => HandleFilter(e)}>
+        <option value="" disabled selected>
+          Seleccione una de las 3 opciones:
+        </option>
         <option value={"updateToAdmin"}>USER a ADMIN</option>
         <option value={"updateToUser"}>ADMIN a USER</option>
         <option value={"UpdateToSuperAdmin"}>ADMIN a SuperADMIN</option>
@@ -146,6 +156,9 @@ const CreateAdmin = () => {
           HandleSelect(e);
         }}
       >
+        <option value="" disabled selected>
+          Seleccione un usuario:
+        </option>
         {users &&
           users.map((e, i) => {
             return (
@@ -156,6 +169,7 @@ const CreateAdmin = () => {
           })}
       </select>
       <button
+        id="enviar"
         onClick={(e) => HandleSubmit(e)}
         className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
       >
