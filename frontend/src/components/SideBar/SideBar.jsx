@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getAllCategories, setFilterMax} from '../../redux/actions'
+import {getAllCategories, getAllProducts, setFilterMax} from '../../redux/actions'
 import { setFilter } from "../../redux/actions";
 import {filterCategories} from '../../redux/actions'
 import { getBrand } from "../../redux/actions";
@@ -16,13 +16,14 @@ export default function SideBar() {
   const dispatch = useDispatch();
   const categories= useSelector(state=> state.categories)
   const brand = useSelector(state => state.brands)
-
+  const products = useSelector(state => state.products)
+  const filters= useSelector(state=>state.filtros)
 
   //
      useEffect(()=>{
       dispatch(getAllCategories())
       dispatch(getBrand())
-     },[dispatch])
+     },[products])
 
 
  
@@ -53,7 +54,7 @@ export default function SideBar() {
     }
     return (
     <aside className='w-1/4 md:w-64 sm:text-xs flex flex-col justify-around bg-primary-200 h-screen sticky text-lg md:text-sm text-center text-primary-400 '>
-
+        <div>{filters}</div>
       <div className="flex flex-col pb-4">
       <h4 className='text-xl text-yellow-300 pb-4'>Categories</h4>
       <ul>
@@ -74,7 +75,7 @@ export default function SideBar() {
         <button className="text-left text-lg pl-4" value={"All"}>All</button>
         {brand? brand.map((m)=>{
             return(
-        <button className="text-left text-lg pl-4 hover:animate-pulse "  onClick={(e)=>handleFilterBrand(e)} value={m.name} key={m.id}> {m.name}</button>
+        <button className="text-left text-lg pl-4 hover:animate-pulse "  onClick={(e)=>handleFilterBrand(e)} value={m} > {m}</button>
             )
         }):0}
       </div>

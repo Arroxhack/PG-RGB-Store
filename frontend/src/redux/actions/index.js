@@ -41,20 +41,16 @@ export function getAllProducts() {
 
 /// GET MARCAS DE PRODUCTOS ///
 
-export function getBrand() {
-  return async function (dispatch) {
-    try {
-      let allProducts = await axios.get(`${PATH}/brands`); //products por ahora
-      let allBrands = allProducts.data;
-      return dispatch({
+
+
+
+export function getBrand(payload) {
+      return {
         type: GET_BRANDS,
-        payload: allBrands,
-      });
-    } catch (error) {
-      console.log(error);
+        payload,
+      };
     }
-  };
-}
+
 export function clean() {
   return {
     type: CLEAN,
@@ -185,6 +181,13 @@ export function orderedByPrice(payload) {
     payload,
   };
 }
+export function filterCategories(payload) {
+  return {
+    type: FILTER_CATEGORIES,
+    payload,
+  };
+}
+
 export function filterBrands(payload) {
   return {
     type: FILTER_BRANDS,
@@ -194,15 +197,9 @@ export function filterBrands(payload) {
 export function filterMin(payload) {
   return {
     type: FILTER_MIN,
-    payload,
-  };
-}
-export function filterCategories(payload) {
-  return {
-    type: FILTER_CATEGORIES,
-    payload,
-  };
-}
+    payload
+  }
+ }
 
 /// BUSQUEDA ///
 export function searchProducts(search) {
