@@ -38,7 +38,7 @@ function NavBar() {
           </Link>
         </div>
         {/*LOGO */}
-       
+
         <div class="flex justify-center bg-primary-200">
           <ul class=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0 ">
             <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
@@ -62,8 +62,8 @@ function NavBar() {
             </li>
           </ul>
         </div>
-      
-{/*       
+
+        {/*       
         <div class="block lg:hidden">
           {menuOpen ?   
            <div class="flex justify-center bg-primary-200 ">
@@ -109,22 +109,20 @@ function NavBar() {
           </button>
         </div>
       </div> */}
-</div>
+      </div>
       <div class="menu w-full lg:flex  space-x-3 lg:items-center lg:w-auto lg:px-3 px-8">
         <div>
           <SearchBar></SearchBar>
         </div>
         <div className="flex ">
-          {cartOpen ? (
+        <p onClick={handleCart} className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">Cart</p>
+        {cartOpen ? <div className="absolute">
+          <BoxCart onClick={handleCart}/>
+        </div> : <></>}
+          {/* {cartOpen ? (
             <BoxCart onClick={handleCart} />
           ) : (
-            <p
-              onClick={handleCart}
-              className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
-            >
-              Cart
-            </p>
-          )}
+            <p onClick={handleCart} className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">Cart</p>)} */}
           {username ? (
             <div>
               <Link to="/profile">

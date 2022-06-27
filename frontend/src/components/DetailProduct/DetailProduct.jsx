@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getProductDetail } from "../../redux/actions/index";
 import NavBar from "../NavBar/NavBar";
 import Loading from "../Loading/Loading";
+import { CartContext } from "../Cart/CartContext";
 
 function DetailProduct() {
   const dispatch = useDispatch();
   let { id } = useParams();
   id = Number(id);
+
+  const {addProductToCart} = useContext(CartContext)
 
   const [loading, setLoading] = useState(false);
 
@@ -19,7 +22,6 @@ function DetailProduct() {
       setLoading(false);
     }, 500);
     dispatch(getProductDetail(id));
-    console.log(ProductDetail);
   }, []);
 
   const ProductDetail = useSelector((state) => state.detail);
@@ -36,11 +38,17 @@ function DetailProduct() {
     return total;
   }
 
-  return (
-    <div className="md:h-screen bg-gradient-to-t from-primary-300 to-primary ">
-      <NavBar />
+  const addCart = (e)=>{
+    e.preventDefault()
+    addProductToCart(ProductDetail)
+  }
 
-      <section class="font-Open ">
+  return (
+    <div className="md:h-screen bg-gradient-to-t from-primary-300 to-primary flex flex-col">
+      <div className="relative z-50">
+      <NavBar/>
+      </div>
+      <section class="font-Open absolute z-100 mt-40">
         {loading ? (
           <div className="h-full">
             <Loading />
@@ -206,6 +214,7 @@ function DetailProduct() {
                   </p>
 
                   <button
+                    onClick={addCart}
                     class="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
                   >
                     Add to cart
