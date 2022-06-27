@@ -13,7 +13,7 @@ import Promo from "./PromLeft";
 
 function Home() {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.allProducts);
+  const products = useSelector((state) => state.products);
 
   const product = products.slice(0,4)
 
