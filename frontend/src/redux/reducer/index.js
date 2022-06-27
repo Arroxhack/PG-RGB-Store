@@ -13,9 +13,15 @@ import {
   FILTER_MIN,
   SET_FILTER_MAX,
   CLEAN,
+<<<<<<< HEAD
   GET_USER_DATA,
   CREATE_PRODUCT,
 } from "../types/index";
+=======
+  GET_PROFILE,
+  CREATE_PRODUCT,
+} from '../types/index';
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
 
 const initialState = {
   allProducts: [],
@@ -27,7 +33,10 @@ const initialState = {
   brands: [],
   filterMax: [],
   newProduct: [],
+<<<<<<< HEAD
   UserData: [],
+=======
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
 };
 
 const reducer = (state = initialState, action) => {
@@ -45,6 +54,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         detail: action.payload,
       };
+    //======================================
+    //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
+    //======================================
+    case GET_PROFILE:
+      return {
+        ...state,
+        profile: action.payload,
+      };
     case GET_CATEGORIES:
       return {
         ...state,
@@ -61,11 +78,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         newProduct: action.payload,
       };
+<<<<<<< HEAD
     case GET_USER_DATA:
       return {
         ...state,
         UserData: action.payload,
       };
+=======
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
 
     /// BUSQUEDA ///
     case SEARCH_PRODUCTS:
@@ -109,16 +129,26 @@ const reducer = (state = initialState, action) => {
         ? state.products.filter(
             (e) => e.price > state.filtros && e.price < state.filterMax
           )
+<<<<<<< HEAD
         : alert("No existen productos en este rango");
+=======
+        : alert('No existen productos en este rango');
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
       return {
         ...state,
         products: filterMaxAndMin,
       };
 
     case FILTER_BRANDS:
+<<<<<<< HEAD
       const brandsFiltered = state.filtros.includes("all")
         ? state.products
         : state.products.filter((e) => e.brand === state.filtros);
+=======
+      const brandsFiltered = state.filtros.includes('all')
+        ? state.allProducts
+        : state.allProducts.filter((e) => e.brand === state.filtros);
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
       return {
         ...state,
         products: brandsFiltered,

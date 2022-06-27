@@ -13,7 +13,7 @@ import Intel from "./components/BuildPc/Intel";
 import Error from "./components/Error/Error.jsx";
 import Paypal from "./components/Paypal/Paypal";
 import Profile from "./components/profile/Profile";
-import ValidateNewPassword from "./components/profile/ValidateNewPassword.jsx"
+import ValidateNewPassword from "./components/profile/ValidateNewPassword.jsx";
 
 function App() {
   return (
@@ -34,7 +34,10 @@ function App() {
         <Route path="/validate/:username" element={<Validacion />} />
         <Route path="/admin" element={<HomeAdmin />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/resetPassword/:username" element={<ValidateNewPassword />}/>
+        <Route
+          path="/resetPassword/:username"
+          element={<ValidateNewPassword />}
+        />
         <Route path="*" element={<Error />} />
 
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
