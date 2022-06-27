@@ -12,7 +12,8 @@ import { ADD_CART,
    FILTER_BRANDS, 
    FILTER_MIN,
    SET_FILTER_MAX, 
-   CLEAN} from '../types/index';
+   CLEAN,
+  CREATE_PRODUCT} from '../types/index';
 
 
    const initialState = {
@@ -24,6 +25,7 @@ import { ADD_CART,
   filtros: [],
   brands:[],
   filterMax:[],
+  newProduct:[],
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,6 +54,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         brands: action.payload,
       };
+      case CREATE_PRODUCT:
+        return{
+          ...state,
+          newProduct:action.payload
+        }
 
     /// BUSQUEDA ///
     case SEARCH_PRODUCTS:
