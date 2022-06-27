@@ -62,6 +62,7 @@ router.get('/product/', async (req, res, next) => {
       },
     });
     if (response.length > 0) {
+      console.log(response, ' soy response  ');
       res.send(response);
     } else {
       res.status(404).send('Not product found');

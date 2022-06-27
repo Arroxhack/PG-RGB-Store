@@ -15,11 +15,7 @@ export default function SideBar() {
   //ESTADOS
   const dispatch = useDispatch();
   const categories= useSelector(state=> state.categories)
-  const filters= useSelector(state=>state.filtros)
   const brand = useSelector(state => state.brands)
-  const products = useSelector(state => state.products)
-  const filterMax= useSelector(state=>state.filterMax)
-
 
   //
      useEffect(()=>{
