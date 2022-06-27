@@ -13,9 +13,15 @@ import {
   FILTER_MIN,
   SET_FILTER_MAX,
   CLEAN,
+<<<<<<< HEAD
+  GET_USER_DATA,
+  CREATE_PRODUCT,
+} from "../types/index";
+=======
   GET_PROFILE,
   CREATE_PRODUCT,
 } from '../types/index';
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
 
 const initialState = {
   allProducts: [],
@@ -27,6 +33,10 @@ const initialState = {
   brands: [],
   filterMax: [],
   newProduct: [],
+<<<<<<< HEAD
+  UserData: [],
+=======
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
 };
 
 const reducer = (state = initialState, action) => {
@@ -68,6 +78,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         newProduct: action.payload,
       };
+<<<<<<< HEAD
+    case GET_USER_DATA:
+      return {
+        ...state,
+        UserData: action.payload,
+      };
+=======
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
 
     /// BUSQUEDA ///
     case SEARCH_PRODUCTS:
@@ -78,7 +96,7 @@ const reducer = (state = initialState, action) => {
 
     /// FILTRADO Y ORDENAMIENTO ///
     case FILTER_BY_PRICE:
-      let orderedByPrice = state.filtros.includes('menor valor')
+      let orderedByPrice = state.filtros.includes("menor valor")
         ? state.products.sort(function (a, b) {
             if (a.price > b.price) return 1;
             if (b.price > a.price) return -1;
@@ -97,7 +115,7 @@ const reducer = (state = initialState, action) => {
     case FILTER_CATEGORIES:
       const products = state.allProducts;
       const filter = state.filtros;
-      const categoriesFiltered = filter.includes('all')
+      const categoriesFiltered = filter.includes("all")
         ? products
         : products.filter((e) => e.category.includes(filter));
 
@@ -111,16 +129,26 @@ const reducer = (state = initialState, action) => {
         ? state.products.filter(
             (e) => e.price > state.filtros && e.price < state.filterMax
           )
+<<<<<<< HEAD
+        : alert("No existen productos en este rango");
+=======
         : alert('No existen productos en este rango');
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
       return {
         ...state,
         products: filterMaxAndMin,
       };
 
     case FILTER_BRANDS:
+<<<<<<< HEAD
+      const brandsFiltered = state.filtros.includes("all")
+        ? state.products
+        : state.products.filter((e) => e.brand === state.filtros);
+=======
       const brandsFiltered = state.filtros.includes('all')
         ? state.allProducts
         : state.allProducts.filter((e) => e.brand === state.filtros);
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
       return {
         ...state,
         products: brandsFiltered,
