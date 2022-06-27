@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import axios from "axios";
+=======
 import axios from 'axios';
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
 import {
   ADD_CART,
   GET_ALL_PRODUCTS,
@@ -16,11 +20,18 @@ import {
   CLEAN,
   SET_FILTER_MAX,
   FILTER_MIN,
+<<<<<<< HEAD
+  GET_USER_DATA,
+} from "../types/index";
+import Swal from "sweetalert2";
+const PATH = "http://localhost:3001";
+=======
   EDIT_PROFILE,
   GET_PROFILE,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
 
 /// GET PRODUCTOS ///
 export function getAllProducts() {
@@ -45,6 +56,10 @@ export function getBrand() {
     try {
       let allProducts = await axios.get(`${PATH}/brands`); //products por ahora
       let allBrands = allProducts.data;
+<<<<<<< HEAD
+      console.log(allBrands);
+=======
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
       return dispatch({
         type: GET_BRANDS,
         payload: allBrands,
@@ -101,9 +116,15 @@ export const createProduct = (product) => {
       const post = await axios.post(`${PATH}/create-product`, product);
       Swal.fire({
         title: `${post.data.name}`,
+<<<<<<< HEAD
+        text: "creado con exito!",
+        icon: "success",
+        confirmButtonText: "ok",
+=======
         text: 'creado con exito!',
         icon: 'success',
         confirmButtonText: 'ok',
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
       });
 
       return {
@@ -112,10 +133,17 @@ export const createProduct = (product) => {
       };
     } catch (error) {
       Swal.fire({
+<<<<<<< HEAD
+        title: "Algo fallo",
+        text: "No se pudo crear el producto",
+        icon: "error",
+        confirmButtonText: "ok",
+=======
         title: 'Algo fallo',
         text: 'No se pudo crear el producto',
         icon: 'error',
         confirmButtonText: 'ok',
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
       });
     }
   };
@@ -125,12 +153,37 @@ export const createProduct = (product) => {
 export function PostUser(user) {
   return async function () {
     try {
+<<<<<<< HEAD
+      const exit = await axios.post(`${PATH}/register`, user);
+      if (exit.data) {
+        alert("Register Succesfully");
+      }
+    } catch (e) {
+      console.log("Error in Register");
+    }
+  };
+}
+
+// DATOS DEL USUARIO //
+export function GetUserData(id) {
+  return async function (dispatch) {
+    try {
+      const usuario = await axios.get(`${PATH}/Users/${id}`);
+      const user = usuario.data;
+      return dispatch({
+        type: GET_USER_DATA,
+        payload: user,
+      });
+    } catch (e) {
+      console.log("Error in Get Data");
+=======
       const exit = await axios.post('/register', user);
       if (exit.data) {
         alert('Register Succesfully');
       }
     } catch (e) {
       console.log('Error in Register');
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
     }
   };
 }
@@ -168,18 +221,7 @@ export function orderedByPrice(payload) {
     payload,
   };
 }
- export function filterBrands(payload){
-  return{
-    type: FILTER_BRANDS,
-    payload
-  }
- }
- export function filterMin(payload){
-  return{
-    type: FILTER_MIN,
-    payload
-  }
- }
+<<<<<<< HEAD
 export function filterCategories(payload) {
   return {
     type: FILTER_CATEGORIES,
@@ -187,6 +229,31 @@ export function filterCategories(payload) {
   };
 }
 
+export function filterBrands(payload) {
+  return {
+=======
+ export function filterBrands(payload){
+  return{
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
+    type: FILTER_BRANDS,
+    payload,
+  };
+}
+export function filterMin(payload) {
+  return {
+    type: FILTER_MIN,
+<<<<<<< HEAD
+=======
+    payload
+  }
+ }
+export function filterCategories(payload) {
+  return {
+    type: FILTER_CATEGORIES,
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
+    payload,
+  };
+}
 
 /// BUSQUEDA ///
 export function searchProducts(search) {
@@ -194,13 +261,21 @@ export function searchProducts(search) {
     axios
       .get(`${PATH}/product?name=` + search)
       .then((products) => {
+<<<<<<< HEAD
+=======
         console.log(products, ' soy products');
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
         dispatch({
           type: SEARCH_PRODUCTS,
           payload: products.data,
         });
       })
       .catch(() => {
+<<<<<<< HEAD
+        alert("Product not found!");
+      });
+  };
+=======
         alert('Product not found!');
       });
   };
@@ -234,4 +309,5 @@ export function putUserProfile(username) {
       console.log(error);
     }
   };
+>>>>>>> 04d700bbc90f7ef3266be057ca316e21db732c9d
 }
