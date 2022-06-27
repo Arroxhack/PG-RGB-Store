@@ -22,8 +22,11 @@ export default function Categories () {
 
   return (
     <div className="bg-gradient-to-t h-screen from-primary-300 to-primary flex flex-col p-0 ">
+      <div className="relative z-50">
       <NavBar/>
-      <fragment className='w-full flex justify-end '>
+      </div>
+    <div>
+    <fragment className='w-full flex justify-end '>
       <Ordenamientos/>
       </fragment>
     <fragment className='w-full h-screen relative flex'>
@@ -34,6 +37,7 @@ export default function Categories () {
     <ContainerProduct/>
     </div>
       </fragment>
+    </div>
     </div>
   )
 }

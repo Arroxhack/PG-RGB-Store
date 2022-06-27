@@ -115,16 +115,14 @@ function NavBar() {
           <SearchBar></SearchBar>
         </div>
         <div className="flex ">
-          {cartOpen ? (
+        <p onClick={handleCart} className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">Cart</p>
+        {cartOpen ? <div className="absolute">
+          <BoxCart onClick={handleCart}/>
+        </div> : <></>}
+          {/* {cartOpen ? (
             <BoxCart onClick={handleCart} />
           ) : (
-            <p
-              onClick={handleCart}
-              className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
-            >
-              Cart
-            </p>
-          )}
+            <p onClick={handleCart} className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">Cart</p>)} */}
           {username ? (
             <div>
               <Link to="/profile">
