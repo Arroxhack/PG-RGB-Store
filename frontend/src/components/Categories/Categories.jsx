@@ -22,21 +22,27 @@ export default function Categories () {
 
   return (
     <div className="h-max w-full bg-gradient-to-t  from-primary-300 to-primary  flex flex-col p-0 ">
-  
+      
+      <div className="relative z-50">
       <NavBar/>
-      <fragment className='w-full flex justify-between '>
+      </div>
+      <div>
+      <fragment className='w-full flex justify-between'>
         <div className="bg-primary-200 w-64"></div>
+      <div className="mr-36 pb-5 pt-5">
       <Ordenamientos/>
+      </div>
       </fragment>
     <fragment className='w-full flex justify-between '>
       <fragment className='pt-32 bg-primary-200 '>
     <SideBar/>
     </fragment>
-    <div className="pr-20 pt-8">
+    <div className="my-0 mx-auto">
     <ContainerProduct/>
     </div>
       </fragment>
 
+    </div>
     </div>
   )
 }
