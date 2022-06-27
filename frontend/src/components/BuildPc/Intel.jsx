@@ -15,7 +15,7 @@ function Intel() {
   }, [dispatch]);
 
   return (
-    <div className="h-full bg-gradient-to-t from-primary-300 to-primary ">
+    <div className="h-screen bg-gradient-to-t from-primary-300 to-primary ">
       <NavBar />
       <p>Now, pick your cpu!</p>
       <div>

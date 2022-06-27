@@ -16,6 +16,8 @@ import {
   GET_USER_DATA,
   CREATE_PRODUCT,
   GET_PROFILE,
+  SET_FILTER_PRICE,
+  CLEAN_FILTER
 } from '../types/index';
 
 const initialState = {
@@ -29,6 +31,7 @@ const initialState = {
   filterMax: [],
   newProduct: [],
   UserData: [],
+  filterPrice: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -119,7 +122,7 @@ const reducer = (state = initialState, action) => {
     case FILTER_MIN:
       const filterMaxAndMin = state.filtros
         ? state.products.filter(
-            (e) => e.price > state.filtros && e.price < state.filterMax
+            (e) => e.price > state.filterPrice && e.price < state.filterMax
           )
         : alert('No existen productos en este rango');
       return {
@@ -140,19 +143,31 @@ const reducer = (state = initialState, action) => {
     case SET_FILTER:
       return {
         ...state,
-        filtros:[action.payload],
+        filtros:[...state.filtros, action.payload],
       };
     case SET_FILTER_MAX:
       return {
         ...state,
         filterMax: action.payload,
       };
+      case SET_FILTER_PRICE:
+        return {
+          ...state,
+          filterPrice: action.payload,
+        };
 
     case CLEAN:
       return {
         ...state,
         detail: action.payload,
       };
+
+      case CLEAN_FILTER:
+        return {
+          ...state,
+          filtros: action.payload,
+        };
+        
 
     /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///
     case ADD_CART:

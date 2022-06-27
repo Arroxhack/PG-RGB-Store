@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 
 function BuildPc() {
   return (
-    <div className="h-full bg-gradient-to-t from-primary-300 to-primary ">
+    <div className="h-screen bg-gradient-to-t from-primary-300 to-primary ">
       <NavBar />
       <p>First, choose your socket</p>
-      <section className="w-full h-screen flex items-center justify-center">
+      <section className="w-full flex items-center justify-center">
         <div>
         
           <Link to="/arma-tu-pc/intel">
