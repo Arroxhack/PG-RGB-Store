@@ -27,6 +27,8 @@ function DetailProduct() {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
 
+  const images = ProductDetail.image
+
   function discount() {
     let total =
       ProductDetail.price -
@@ -35,7 +37,7 @@ function DetailProduct() {
   }
 
   return (
-    <div className="h-screen bg-gradient-to-t from-primary-300 to-primary ">
+    <div className="md:h-screen bg-gradient-to-t from-primary-300 to-primary ">
       <NavBar />
 
       <section class="font-Open ">
@@ -48,7 +50,20 @@ function DetailProduct() {
             <div class="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
               <div class="grid grid-cols-2 gap-4 md:grid-cols-1 ">
                 <div class="aspect-w-1 aspect-h-1">
-                  <img 
+                  {images && images[0].length > 100 ? images.map(i=>{
+                    return <img src={i} alt="Image not found" />
+                  }) : <img 
+                  alt="Image not found"
+                  class="object-cover rounded-xl"
+                  src={
+                    ProductDetail.image
+                      ? ProductDetail.image[0]
+                      : "1602010489_p_setting_fff_1_90_end_600.jpg"
+                  }
+                  height="600px"
+                  width="600px"
+                />}
+                  {/* <img 
                     alt="Image not found"
                     class="object-cover rounded-xl"
                     src={
@@ -58,7 +73,7 @@ function DetailProduct() {
                     }
                     height="600px"
                     width="600px"
-                  />
+                  /> */}
                 </div>
 
                 {/* <div class="grid grid-cols-2 gap-2 lg:mt-2">

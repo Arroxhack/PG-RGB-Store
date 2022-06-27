@@ -15,7 +15,7 @@ const Create = require('./admin/CreateProduct');
 const GetUsers = require('./admin/GetUsers');
 const EditUser = require('./admin/EditUser');
 const CreateAdminUser = require('./admin/CreateAdminUser');
-
+const ResetPassword = require('./user/ResetPassword');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -39,4 +39,5 @@ router.use('/', EditUser);
 router.use('/', LoadCartProduct);
 router.use('/', email);
 router.use('/', CreateAdminUser);
+router.use('/', ResetPassword);
 module.exports = router;

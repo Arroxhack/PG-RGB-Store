@@ -72,6 +72,8 @@ router.get("/login", (req, res) => {
   res.send(`${req.flash("error")[0]}`);
 });
 
+
+
 // Middleware para mostrar la sesión actual en cada request
 router.use((req, res, next) => {
   // console.log(req.session, ' esto es req.session 120');

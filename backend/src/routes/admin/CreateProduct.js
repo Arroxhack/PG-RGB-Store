@@ -5,7 +5,7 @@ const router = Router();
 //  si no existe una categoria se crea una y se hace la relacion
 //  (category es un array "HACER FORMULARIO CONTROLADO")
 
-router.post('/products', async (req, res, next) => {
+router.post('/create-product', async (req, res, next) => {
   const {
     name,
     price,
@@ -49,19 +49,12 @@ router.post('/products', async (req, res, next) => {
     // Recorremos el array category para buscar en la base de datos y relacionarlos
     // o crear uno nuevo
 
-    const brandDB = await Brand.findOne({ where: { name: brand } });
-    if (!brandDB) {
-      await Brand.create({ name: brand });
-    }
+    const brandDB = await Brand.findOrCreate({where:{name:brand}})
 
-    for (let i = 0; i < category.length; i++) {
-      let categoryDB = await Category.findOne({
-        where: { name: category[i] },
-      });
-      if (!categoryDB) {
-        await Category.create({ name: category[i] });
-      }
-    }
+    category.map(c=>{
+      Category.findOrCreate({where:{name:c}})
+    })
+
     res.send(newProduct);
   } catch (e) {
     next(e);
