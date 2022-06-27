@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import {orderedByPrice} from '../../redux/actions'
+import {cleanFilter, orderedByPrice} from '../../redux/actions'
 import { setFilter } from "../../redux/actions";
 
 export default function Ordenamientos() {
@@ -12,7 +12,8 @@ export default function Ordenamientos() {
     function handleOrderedByPrice(e){
         e.preventDefault();
         dispatch(setFilter(e.target.value))
-        dispatch(orderedByPrice(e.target.value));
+        dispatch(orderedByPrice(e.target.value))
+        dispatch(cleanFilter())
         console.log(products)
       }
       
