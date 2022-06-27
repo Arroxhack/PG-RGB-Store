@@ -40,20 +40,13 @@ export function getAllProducts() {
 
 /// GET MARCAS DE PRODUCTOS ///
 
-export function getBrand() {
-  return async function (dispatch) {
-    try {
-      let allProducts = await axios.get(`${PATH}/brands`); //products por ahora
-      let allBrands = allProducts.data;
-      return dispatch({
+export function getBrand(payload) {
+      return {
         type: GET_BRANDS,
-        payload: allBrands,
-      });
-    } catch (error) {
-      console.log(error);
+        payload,
+      };
     }
-  };
-}
+
 export function clean() {
   return {
     type: CLEAN,

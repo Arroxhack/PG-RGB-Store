@@ -59,9 +59,12 @@ const reducer = (state = initialState, action) => {
       };
 
     case GET_BRANDS:
-      return {
+    let allBrands= state.products.map(e=> e.brand)  
+    let brand= new Set(allBrands) 
+      let arr= [...brand]
+    return {
         ...state,
-        brands: action.payload,
+        brands: arr,
       };
     case CREATE_PRODUCT:
       return {
@@ -99,7 +102,7 @@ const reducer = (state = initialState, action) => {
       const filter = state.filtros;
       const categoriesFiltered = filter.includes('all')
         ? products
-        : products.filter((e) => e.category.includes(filter));
+        : products.filter((e) => e.category.includes(filter[0]));
 
       return {
         ...state,
@@ -120,7 +123,7 @@ const reducer = (state = initialState, action) => {
     case FILTER_BRANDS:
       const brandsFiltered = state.filtros.includes('all')
         ? state.allProducts
-        : state.allProducts.filter((e) => e.brand === state.filtros);
+        : state.allProducts.filter((e) =>state.filtros.includes(e.brand));
       return {
         ...state,
         products: brandsFiltered,
@@ -130,7 +133,7 @@ const reducer = (state = initialState, action) => {
     case SET_FILTER:
       return {
         ...state,
-        filtros: action.payload,
+        filtros:[...state.filtros, action.payload],
       };
     case SET_FILTER_MAX:
       return {
