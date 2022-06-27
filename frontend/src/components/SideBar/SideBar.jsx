@@ -21,6 +21,7 @@ export default function SideBar() {
   const filterMax= useSelector(state=>state.filterMax)
 
 
+
   //
      useEffect(()=>{
       dispatch(getAllCategories())
@@ -54,10 +55,8 @@ export default function SideBar() {
       e.preventDefault()
       dispatch(setFilterMax(e.target.value))
     }
-
-    console.log(filters)
     return (
-    <aside className='w-1/4 md:w-64 sm:text-xs  shadow-xl flex flex-col justify-around bg-primary-200 h-screen text-lg md:text-sm text-center text-primary-400 '>
+    <aside className='w-1/4 md:w-64 sm:text-xs flex flex-col justify-around bg-primary-200 h-screen relative text-lg md:text-sm text-center text-primary-400 '>
 
       <div className="flex flex-col pb-4">
       <h4 className='text-xl text-yellow-300 pb-4'>Categories</h4>
@@ -66,7 +65,7 @@ export default function SideBar() {
         <button className="text-left text-lg pl-8" onClick={(e)=>handleFilterCat(e)} value={"all"}>All</button>
           {categories?categories.map((cat)=>{
             return(
-            <button className="text-left text-lg pl-8"  onClick={(e)=>handleFilterCat(e)} value={cat}>{cat}</button>
+            <button className="text-left text-lg pl-8 "  onClick={(e)=>handleFilterCat(e)} value={cat}>{cat}</button>
         )}):0}
         </li>
       </ul>
@@ -75,10 +74,11 @@ export default function SideBar() {
       
       <div className='flex flex-col  pl-4 pt-4'>
         <h4  className='text-xl text-yellow-300 pb-3'>Brands</h4>
-        <label className='text-left'  htmlFor=""> <input className='cursor-pointer bg-yellow-300 border-yelloy-300'  value="all" type="checkbox" name="" id="" />All</label>
+        
+        <button className="text-left text-lg pl-4" value={"All"}>All</button>
         {brand? brand.map((m)=>{
             return(
-        <label className='text-left'  htmlFor=""> <input className='cursor-pointer bg-yellow-300 border-yelloy-300' onChange={(e)=> handleFilterBrand(e)}  value={m.name} type="checkbox" name="" id="" />{m.name}</label>
+        <button className="text-left text-lg pl-4 hover:animate-pulse " onClick={(e)=>handleFilterBrand(e)} value={m.name} key={m.id}> {m.name}</button>
             )
         }):0}
       </div>

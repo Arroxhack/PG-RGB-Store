@@ -7,7 +7,7 @@ const ContainerProduct = () => {
   const allProducts = useSelector(state=>state.products)
 
   return (
-    <div className='grid grid-cols-1 gap-5 w-full justify-items-center'>
+    <div className="grid grid-cols-4 w-full gap-12 grid-rows-none relative">
         {allProducts.map(p=>
                 <Link key={p.id} to={`/products/${p.id}`}>
                     <Product product={p}/>

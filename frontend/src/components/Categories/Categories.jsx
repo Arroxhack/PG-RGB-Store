@@ -8,6 +8,7 @@ import Product from "../Product/Product";
 import SideBar from "../SideBar/SideBar";
 import Ordenamientos from "../Ordenamientos/Ordenamientos";
 import NavBar from '../NavBar/NavBar'
+import ContainerProduct from '../ContainerProduct/ContainerProduct'
 
 export default function () {
     const dispatch = useDispatch();
@@ -22,24 +23,18 @@ export default function () {
 
 
   return (
-    <div className="bg-primary-200 flex flex-col p-0 ">
+    <div className="bg-gradient-to-t from-primary-300 to-primary flex flex-col p-0 ">
       <NavBar/>
-      <fragment className='w-full flex justify-end p-8'>
+      <fragment className='w-full flex justify-end '>
       <Ordenamientos/>
       </fragment>
-    <fragment className='w-full relative flex'>
-      <fragment>
+    <fragment className='w-full h-screen relative flex'>
+      <fragment className='mt-32 bg-primary-200 h-screen'>
     <SideBar/>
     </fragment>
-    <div className="grid grid-cols-4 w-full gap-12 grid-rows-none relative">
-    {products.map((product) => {
-        return (
-          <Link to={`/products/${product.id}`}>
-            <Product key={product.id} product={product} />
-          </Link>
-        );
-      })}
-      </div>
+    <div>
+    <ContainerProduct/>
+    </div>
       </fragment>
     </div>
   )
