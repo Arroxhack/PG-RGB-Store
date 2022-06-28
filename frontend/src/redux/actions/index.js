@@ -22,6 +22,8 @@ import {
   SET_FILTER_PRICE,
   CLEAN_FILTER,
   SET_FILTER_BRANDS,
+  CLEAN_FILTER_BRANDS,
+  SET_ORDER,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -66,6 +68,13 @@ export function cleanFilter() {
     payload: [],
   };
 }
+export function cleanFilterBrands() {
+  return {
+    type: CLEAN_FILTER_BRANDS,
+    payload: [],
+  };
+}
+
 
 
 /// GET DETALLE DE PRODUCTOS ///
@@ -193,6 +202,12 @@ export function setFilterBrands(payload) {
     type: SET_FILTER_BRANDS,
     payload,
   };
+}
+export function setOrder(payload){
+  return{
+    type: SET_ORDER,
+    payload
+  }
 }
 
 /// ORDENAMIENTOS Y FILTRADOS ///

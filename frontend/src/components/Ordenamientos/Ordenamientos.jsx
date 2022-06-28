@@ -1,17 +1,18 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import {cleanFilter, orderedByPrice} from '../../redux/actions'
-import { setFilter } from "../../redux/actions";
+import { orderedByPrice, setOrder} from '../../redux/actions'
+
 
 export default function Ordenamientos() {
     
     const dispatch = useDispatch();
     const products = useSelector(state=> state.products)
+    const filterOrder= useSelector(state=> state.filterOrder)
 
 
     function handleOrderedByPrice(e){
         e.preventDefault();
-        dispatch(setFilter(e.target.value))
+        dispatch(setOrder(e.target.value))
         dispatch(orderedByPrice(e.target.value))
         console.log(products)
       }

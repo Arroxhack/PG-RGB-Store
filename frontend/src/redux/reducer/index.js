@@ -20,6 +20,8 @@ import {
   SET_FILTER_PRICE,
   CLEAN_FILTER,
   SET_FILTER_BRANDS,
+  CLEAN_FILTER_BRANDS,
+  SET_ORDER 
 } from '../types/index';
 
 const initialState = {
@@ -35,6 +37,7 @@ const initialState = {
   UserData: [],
   filterPrice: [],
   filterBrands:[],
+  filterOrder: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -94,7 +97,7 @@ const reducer = (state = initialState, action) => {
 
     /// FILTRADO Y ORDENAMIENTO ///
     case FILTER_BY_PRICE:
-      let orderedByPrice = state.filtros.includes('menor valor')
+      let orderedByPrice = state.filterOrder.includes('menor valor')
         ? state.products.sort(function (a, b) {
             if (a.price > b.price) return 1;
             if (b.price > a.price) return -1;
@@ -115,7 +118,7 @@ const reducer = (state = initialState, action) => {
       const filter = state.filtros;
       const categoriesFiltered = filter.includes('all')
         ? state.allProducts
-        : state.allProducts.filter((e) => e.category.includes(filter));
+        : state.products.filter((e) => e.category.includes(filter));
 
       return {
         ...state,
@@ -123,11 +126,12 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_MIN:
-      const filterMaxAndMin = state.filtros
+      const filterMaxAndMin = state.filterPrice
         ? state.products.filter(
             (e) => e.price > state.filterPrice && e.price < state.filterMax
           )
-        : alert('No existen productos en este rango');
+        : alert('No existen productos en este rango')
+        if(!state.filterMax) return state.products.filter( (el)=> el.price > state.filterPrice)
       return {
         ...state,
         products: filterMaxAndMin,
@@ -164,6 +168,11 @@ const reducer = (state = initialState, action) => {
       ...state,
       filterBrands: action.payload,
       };
+      case SET_ORDER:
+      return {
+      ...state,
+      filterOrder: action.payload,
+      };
       
     case CLEAN:
       return {
@@ -176,6 +185,13 @@ const reducer = (state = initialState, action) => {
           ...state,
           filtros: action.payload,
         };
+        
+        case CLEAN_FILTER_BRANDS:
+          return{
+            ...state,
+            filterBrands:action.payload,
+          }
+
         
 
     /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///

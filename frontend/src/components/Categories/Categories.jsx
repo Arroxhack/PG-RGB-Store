@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../redux/actions/index";
+import { getAllProducts, cleanFilter } from "../../redux/actions/index";
 import { clean } from "../../redux/actions/index";
 import SideBar from "../SideBar/SideBar";
 import Ordenamientos from "../Ordenamientos/Ordenamientos";
@@ -18,32 +18,31 @@ export default function Categories () {
     useEffect(() => {
       if(!products.length) dispatch(getAllProducts())
       dispatch(clean())
+      dispatch(cleanFilter());
     }, [dispatch]);
 
 
   return (
-    <div className="h-max w-full bg-gradient-to-t  from-primary-300 to-primary  flex flex-col p-0 ">
+    <div className=" w-full bg-gradient-to-t h-screen bg-primary-200  flex flex-col ">
       
-      <div className="relative z-50">
+      <div className="relative z-25">
       <NavBar/>
       </div>
-      <div>
-      <fragment className='w-full flex justify-between'>
-        <div className="bg-primary-200 w-64"></div>
-      <div className="mr-36 pb-5 pt-5">
-      <Ordenamientos/>
-      </div>
-      </fragment>
-    <fragment className='w-full flex justify-between '>
-      <fragment className='pt-32 bg-primary-200 '>
+      
+      
+    <div className='w-full flex justify-between  bg-primary-200 '>
+      <div className=' bg-primary-200'>
     <SideBar/>
-    </fragment>
-    <div className="my-0 mx-auto">
+    </div>
+    <div className="my-0 mx-auto  bg-primary-200 ">
+    <div className="w-full flex justify-end mb-7 mt-7">
+    <Ordenamientos/>
+    </div>
     <ContainerProduct/>
     </div>
-      </fragment>
+      </div>
 
     </div>
-    </div>
+    
   )
 }
