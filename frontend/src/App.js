@@ -14,6 +14,7 @@ import Error from "./components/Error/Error.jsx";
 import Paypal from "./components/Paypal/Paypal";
 import Profile from "./components/profile/Profile";
 import ValidateNewPassword from "./components/profile/ValidateNewPassword.jsx";
+import CheckProduct from "./components/BuildPc/CheckProduct";
 
 function App() {
   return (
@@ -25,8 +26,7 @@ function App() {
         {/* <Route path="/cart" element={<Cart />} /> */}
 
         <Route path="/arma-tu-pc" element={<BuildPc />} />
-        <Route path="/arma-tu-pc/amd" element={<Amd />} />
-        <Route path="/arma-tu-pc/intel" element={<Intel />} />
+   
 
         <Route path="/categories" element={<Categories />} />
         <Route path="/logIn" element={<LogIn />} />
@@ -41,6 +41,8 @@ function App() {
         <Route path="*" element={<Error />} />
 
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
+
+        <Route path="/probando" element={<CheckProduct />} />
       </Routes>
     </div>
   );
