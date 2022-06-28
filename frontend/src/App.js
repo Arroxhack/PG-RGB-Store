@@ -8,12 +8,13 @@ import Register from './components/Register/Register.jsx';
 import Validacion from './components/ValidateMail/Validacion.jsx';
 import HomeAdmin from './components/Admin/HomeAdmin';
 import BuildPc from './components/BuildPc/BuildPc';
-import Amd from './components/BuildPc/Amd';
-import Intel from './components/BuildPc/Intel';
+// import Amd from "./components/BuildPc/Amd";
+// import Intel from "./components/BuildPc/Intel";
 import Error from './components/Error/Error.jsx';
 import Paypal from './components/Paypal/Paypal';
 import Profile from './components/profile/Profile';
 import ValidateNewPassword from './components/profile/ValidateNewPassword.jsx';
+import CheckProduct from './components/BuildPc/CheckProduct';
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
         <Route path='*' element={<Error />} />
 
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
+
+        <Route path='/probando' element={<CheckProduct />} />
       </Routes>
     </div>
   );
