@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllProducts } from "../../redux/actions";
+import { getProductsByCategory } from "../../redux/actions";
 import BoxCart from "../Cart/BoxCart";
 import NavBar from "../NavBar/NavBar";
 import Product from "../Product/Product";
 
 function Intel() {
   const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.allProducts);
+  const allProducts = useSelector((state) => state.productsByCategory);
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getProductsByCategory('cpu'));
   }, [dispatch]);
 
   return (

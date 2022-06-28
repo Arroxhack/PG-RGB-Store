@@ -29,9 +29,6 @@ router.put('/profile/edit/:username', async (req, res, next) => {
       if (req.body.email) {
         user.set({ email: req.body.email });
       }
-      if (req.body.password) {
-        user.set({ password: req.body.password });
-      }
       if (req.body.cellphone) {
         user.set({ cellphone: req.body.cellphone });
       }

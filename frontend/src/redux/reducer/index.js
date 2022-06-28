@@ -1,3 +1,4 @@
+import { buildPc } from '../actions';
 import {
   ADD_CART,
   GET_ALL_PRODUCTS,
@@ -15,9 +16,10 @@ import {
   CLEAN,
   GET_USER_DATA,
   CREATE_PRODUCT,
-  GET_PROFILE,
   SET_FILTER_PRICE,
   CLEAN_FILTER,
+  BUILD_PC,
+  GET_PRODUCTS_BY_CATEGORY,
 } from '../types/index';
 
 const initialState = {
@@ -32,6 +34,8 @@ const initialState = {
   newProduct: [],
   UserData: [],
   filterPrice: [],
+  buildPc: {},
+  productsByCategory: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -49,14 +53,28 @@ const reducer = (state = initialState, action) => {
         ...state,
         detail: action.payload,
       };
+
+    //BUILD PC PROPIAAA
+    //SE GUARDA COMO UN OBJETO QUE EN SUS ATRIBUTOS TIENE OBJETOS, CADA KEY ES UNA CATEGORY Y CADA VALUE ES COMPONENTE QUE PERTENCE A ESA CATEGORY
+    case BUILD_PC:
+      return {
+        ...state,
+        buildPc: { ...buildPc, [action.payload.category]: action.payload },
+      };
+
+    case GET_PRODUCTS_BY_CATEGORY:
+      return {
+        ...state,
+        productsByCategory: action.payload,
+      };
     //======================================
     //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
     //======================================
-    case GET_PROFILE:
-      return {
-        ...state,
-        profile: action.payload,
-      };
+    // case GET_PROFILE:
+    //   return {
+    //     ...state,
+    //     profile: action.payload,
+    //   };
     case GET_CATEGORIES:
       return {
         ...state,

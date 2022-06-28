@@ -8,7 +8,6 @@ import {
   FILTER_BY_PRICE,
   GET_CATEGORIES,
   SET_FILTER,
-  LOAD_USER,
   FILTER_CATEGORIES,
   GET_BRANDS,
   FILTER_BRANDS,
@@ -18,9 +17,10 @@ import {
   FILTER_MIN,
   GET_USER_DATA,
   EDIT_PROFILE,
-  GET_PROFILE,
   SET_FILTER_PRICE,
-  CLEAN_FILTER
+  CLEAN_FILTER,
+  BUILD_PC,
+  GET_PRODUCTS_BY_CATEGORY,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -41,17 +41,31 @@ export function getAllProducts() {
   };
 }
 
+export function getProductsByCategory(category) {
+  return async (dispatch) => {
+    try {
+      const PRODUCTS = await axios.get(`${PATH}/?cat=${category}`);
+      return dispatch({
+        type: GET_PRODUCTS_BY_CATEGORY,
+        payload: PRODUCTS.data,
+      });
+    } catch (error) {}
+  };
+}
+//ARMADO PC
+export function buildPc(payload) {
+  return {
+    type: BUILD_PC,
+    payload,
+  };
+}
 /// GET MARCAS DE PRODUCTOS ///
-
-
-
-
 export function getBrand(payload) {
-      return {
-        type: GET_BRANDS,
-        payload,
-      };
-    }
+  return {
+    type: GET_BRANDS,
+    payload,
+  };
+}
 
 export function clean() {
   return {
@@ -65,7 +79,6 @@ export function cleanFilter() {
     payload: [],
   };
 }
-
 
 /// GET DETALLE DE PRODUCTOS ///
 export function getProductDetail(id) {
@@ -211,9 +224,9 @@ export function filterBrands(payload) {
 export function filterMin(payload) {
   return {
     type: FILTER_MIN,
-    payload
-  }
- }
+    payload,
+  };
+}
 
 /// BUSQUEDA ///
 export function searchProducts(search) {
@@ -229,11 +242,10 @@ export function searchProducts(search) {
       })
       .catch(() => {
         Swal.fire({
-          icon:'info',
+          icon: 'info',
           title: 'Product not found',
-          button: 'OK'
-        })
-        ;
+          button: 'OK',
+        });
       });
   };
 }
@@ -241,17 +253,17 @@ export function searchProducts(search) {
 //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
 //======================================
 // PERFIL DE USER
-export function getUserProfile(username) {
-  return (dispatch) => {
-    try {
-      axios
-        .get(`${PATH}/profile/${username}`)
-        .then((user) => dispatch({ type: GET_PROFILE, payload: user.data }));
-    } catch (error) {
-      console.log('ERROR EN GETUSERPROFILE ACTIONS');
-    }
-  };
-}
+// export function getUserProfile(username) {
+//   return (dispatch) => {
+//     try {
+//       axios
+//         .get(`${PATH}/profile/${username}`)
+//         .then((user) => dispatch({ type: GET_PROFILE, payload: user.data }));
+//     } catch (error) {
+//       console.log('ERROR EN GETUSERPROFILE ACTIONS');
+//     }
+//   };
+// }
 //======================================
 //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
 //======================================

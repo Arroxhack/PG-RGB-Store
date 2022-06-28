@@ -7,21 +7,22 @@ import BoxCart from "../Cart/BoxCart";
 import NavBar from "../NavBar/NavBar";
 import Product from "../Product/Product";
 
-function Amd() {
+function Mother() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.productsByCategory);
-  
+
   useEffect(() => {
-    dispatch(getProductsByCategory('cpu'));
+    dispatch(getProductsByCategory('motherboard'));
   }, [dispatch]);
 
+  
   return (
     <div className="h-full bg-gradient-to-t from-primary-300 to-primary ">
       <NavBar />
       <div>
         <BoxCart />
       </div>
-      <p>Now, pick your cpu!</p>
+      <p>Now, pick your mother!</p>
      
       <div className="grid grid-cols-4 w-full gap-2.5 grid-rows-none relative">
       {allProducts.map((product) => {
@@ -37,4 +38,4 @@ function Amd() {
   );
 }
 
-export default Amd;
+export default Mother;
