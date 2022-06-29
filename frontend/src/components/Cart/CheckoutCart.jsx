@@ -18,7 +18,7 @@ function CheckoutCart() {
       <NavBar/>
       <div className="flex items-center justify-center py-8">
         <div>
-          <div className="w-full absolute z-10 right-0 h-full overflow-x-hidden transform translate-x-0 transition">
+          <div className="w-full absolute z-10 right-0 h-full">
             <div className="flex md:flex-row flex-col justify-end">
               <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-secundary-250 overflow-y-auto overflow-x-hidden h-screen">
                 <div className="flex items-center text-gray-500 hover:text-primary-300 cursor-pointer">
@@ -37,11 +37,10 @@ function CheckoutCart() {
                     >
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                       <polyline points="15 6 9 12 15 18" />
-                    </svg>
-                    <p className="text-sm pl-2 leading-none">
-                      {" "}
-                      Back to products{" "}
+                    </svg><p className="text-sm pl-2 leading-none">
+                      Back to products
                     </p>
+                    
                   </Link>
                 </div>
                 <p className="text-5xl font-black font-Open leading-10 pt-3">

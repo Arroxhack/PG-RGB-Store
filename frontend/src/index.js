@@ -10,7 +10,8 @@ import CartProvider from './components/Cart/CartContext';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import initialOptions from './components/Paypal/initialOptions.js'
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <React.StrictMode>
     <BrowserRouter>
     <Provider store={store}>
