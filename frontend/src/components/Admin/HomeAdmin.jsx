@@ -28,7 +28,6 @@ const HomeAdmin = () => {
             {menu == 1 && <EditProduct />}
             {menu == 2 && <DeleteProduct />}
             {menu == 3 && <CreateAdmin />}
-            
             {menu == 4 && <EditUser />}
           </div>
         </div>
