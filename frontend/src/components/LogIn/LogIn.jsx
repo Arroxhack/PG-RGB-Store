@@ -172,6 +172,14 @@ export default function LogIn() {
               Login
             </button>
             <div id="signInDiv"></div>
+            <br />
+            <div class="t-6">
+            {`Don't have an account yet? `} 
+            <a class="no-underline border-b" href="../login/">
+            {`Sign Up`}
+            </a>
+            .
+          </div>
           </form>
         </div>
         {/*        { googleUser && 
