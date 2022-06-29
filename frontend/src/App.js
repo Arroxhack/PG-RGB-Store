@@ -11,7 +11,7 @@ import BuildPc from "./components/BuildPc/BuildPc";
 import Amd from "./components/BuildPc/Amd";
 import Intel from "./components/BuildPc/Intel";
 import Error from "./components/Error/Error.jsx";
-import PaypalButton from "./components/Paypal/PaypalButton.jsx";
+import Pagando from "./components/Paypal/Pagando";
 import Profile from "./components/profile/Profile";
 import ValidateNewPassword from "./components/profile/ValidateNewPassword.jsx";
 import CheckProduct from "./components/BuildPc/CheckProduct";
@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="Font-Open">
       <Routes>
-        <Route path="/paypal" element={<PaypalButton />} exact />
+        <Route path="/paypal" element={<Pagando />} exact />
         <Route path="/" element={<Home />} exact />
         <Route path="/products/:id" element={<DetailProduct />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
