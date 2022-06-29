@@ -14,7 +14,7 @@ function Error() {
           <p className="mt-4 mb-8">
             But dont worry, you can find plenty of other things on our homepage.
           </p>
-          <a class="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
+          <a className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
             rel="noopener noreferrer"
             href="http://localhost:3000/"
             

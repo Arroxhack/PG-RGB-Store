@@ -25,9 +25,9 @@ function NavBar() {
 
   return (
     <nav className="relative w-full flex flex-wrap items-center justify-between py-4 shadow-lg bg-primary-200">
-      <div class="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 y-4  pb-5 lg:pb-0">
+      <div className="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 y-4  pb-5 lg:pb-0">
         {/*LOGO */}
-        <div class="flex items-center flex-shrink-0 mr-16">
+        <div className="flex items-center flex-shrink-0 mr-16">
           <Link
             to="/"
             className="flex flex-col items-center text-primary-400 font-Open text-xl tracking-tight font-extrabold"
@@ -40,23 +40,23 @@ function NavBar() {
         </div>
         {/*LOGO */}
 
-        <div class="flex justify-center bg-primary-200">
-          <ul class=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0 ">
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+        <div className="flex justify-center bg-primary-200">
+          <ul className=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0 ">
+            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
               <Link to="/categories">
                 <p>Categories</p>
               </Link>
             </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
               <Link to="/categories/notebooks">Notebooks</Link>
             </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
               <Link to="/categories/pc-armadas">Prebuilt PCs</Link>
             </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
               <Link to="/categories/placas-de-videos">GPUs</Link>
             </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
               <Link to="/arma-tu-pc">
                 <p>Build your PC</p>
               </Link>
