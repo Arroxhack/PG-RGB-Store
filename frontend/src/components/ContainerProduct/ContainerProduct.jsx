@@ -14,16 +14,16 @@ const ContainerProduct = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 2000);
   }, []);
 
 
   return (
-    <div className="grid grid-cols-5 w-full gap-12 grid-rows-none relative">
+    <div className="lg:grid lg:grid-cols-4 lg:w-full lg:gap-12 lg:grid-rows-none relative sm:grid-cols-1">
         {allProducts.length>0?allProducts.map(p=>
                 <Link key={p.id} to={`/products/${p.id}`}>
                     <Product product={p}/>
-                </Link>): <Loading/>}
+                </Link>): <div className="h-screen w-full flex justify-center items-center"><Loading/></div>}
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { filterBrands } from '../actions';
 import {
   ADD_CART,
   GET_ALL_PRODUCTS,
@@ -17,7 +18,12 @@ import {
   CREATE_PRODUCT,
   GET_PROFILE,
   SET_FILTER_PRICE,
-  CLEAN_FILTER
+  CLEAN_FILTER,
+  SET_FILTER_BRANDS,
+  CLEAN_FILTER_BRANDS,
+  SET_ORDER, 
+  CLEAN_ORDER,
+  CLEAN_FILTER_PRICE
 } from '../types/index';
 
 const initialState = {
@@ -32,6 +38,8 @@ const initialState = {
   newProduct: [],
   UserData: [],
   filterPrice: [],
+  filterBrands:[],
+  filterOrder: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -91,59 +99,91 @@ const reducer = (state = initialState, action) => {
 
     /// FILTRADO Y ORDENAMIENTO ///
     case FILTER_BY_PRICE:
-      let orderedByPrice = state.filtros.includes('menor valor')
-        ? state.products.sort(function (a, b) {
-            if (a.price > b.price) return 1;
-            if (b.price > a.price) return -1;
-            return 0;
-          })
-        : state.products.sort(function (a, b) {
-            if (a.price > b.price) return -1;
-            if (b.price > a.price) return 1;
-            return 0;
-          });
+      let orderedByPrice =
+        //SI TENGO CATEGORIES
+                !state.filterBrands.length>0 && state.filtros.length>0 && state.filterOrder.includes('menor valor')
+                ? state.products.sort(function (a, b) {
+                if (a.price > b.price) return 1;
+                if (b.price > a.price) return -1;
+                return 0;
+              }): !state.filterBrands.length>0 && state.filtros.length>0 && state.filterOrder.includes('mayor valor')?
+                state.products.sort(function (a, b) {
+                if (a.price > b.price) return -1;
+                if (b.price > a.price) return 1;
+                return 0;
+              }):
+        //SI NO TENGO CATEGORIES NI MARCAS
+              !state.filtros.length>0 && !state.filterBrands.length>0 && state.filterOrder.includes('menor valor')?
+              state.allProducts.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+            }): !state.filtros.length>0 && !state.filterBrands.length>0 && state.filterOrder.includes('mayor valor')?
+              state.allProducts.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
+            }): 
+        // SI TENGO MARCAS        
+              state.brands.length>0 && state.filterOrder.includes('menor valor')?
+              state.products.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+              }):state.brands.length>0 && state.filterOrder.includes('mayor valor')?
+              state.products.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
+              })
+                    
+              //// SI TENGO TODO       
+              :state.brands.length>0 && state.filtros.length>0 && state.filterMax.length>0
+              && state.filterPrice.le && state.filterOrder.includes('menor valor')?
+              state.products.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+              }):state.brands.length>0 && state.filterOrder.includes('mayor valor')?
+              state.products.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
+              }):0
+    
+
       return {
         ...state,
         products: orderedByPrice,
       };
 
     case FILTER_CATEGORIES:
-      const products = state.products;
-      const filter = state.filtros;
-      const categoriesFiltered = filter.includes('all')
-        ? state.allProducts
-        : products.filter((e) => e.category.includes(filter[0]));
-
       return {
         ...state,
-        products: categoriesFiltered,
+        products: action.payload,
       };
 
     case FILTER_MIN:
-      const filterMaxAndMin = state.filtros
-        ? state.products.filter(
-            (e) => e.price > state.filterPrice && e.price < state.filterMax
-          )
-        : alert('No existen productos en este rango');
-      return {
+     let filterMaxAndMin=  
+    state.allProducts.filter(
+        (e) => e.price > state.filterPrice && e.price < state.filterMax)
+       
+        return {
         ...state,
         products: filterMaxAndMin,
       };
 
     case FILTER_BRANDS:
-      const brandsFiltered = state.filtros.includes('all')
-        ? state.allProducts
-        : state.allProducts.filter((e) =>state.filtros.includes(e.brand));
       return {
         ...state,
-        products: brandsFiltered,
+        products: action.payload,
       };
 
     ///SETEA EL ESTADO DE FILTROS///
     case SET_FILTER:
       return {
         ...state,
-        filtros:[...state.filtros, action.payload],
+        filtros: action.payload,
       };
     case SET_FILTER_MAX:
       return {
@@ -155,7 +195,18 @@ const reducer = (state = initialState, action) => {
           ...state,
           filterPrice: action.payload,
         };
-
+    
+      case SET_FILTER_BRANDS:
+      return {
+      ...state,
+      filterBrands: action.payload,
+      };
+      case SET_ORDER:
+      return {
+      ...state,
+      filterOrder: action.payload,
+      };
+      
     case CLEAN:
       return {
         ...state,
@@ -167,6 +218,23 @@ const reducer = (state = initialState, action) => {
           ...state,
           filtros: action.payload,
         };
+        
+        case CLEAN_FILTER_BRANDS:
+          return{
+            ...state,
+            filterBrands:action.payload,
+          }
+          case CLEAN_ORDER:
+          return{
+            ...state,
+            filterOrder:action.payload,
+          }
+          case CLEAN_FILTER_PRICE:
+            return{
+              ...state,
+              filterMax:action.payload,
+              filterPrice:action.payload
+            }
         
 
     /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///
