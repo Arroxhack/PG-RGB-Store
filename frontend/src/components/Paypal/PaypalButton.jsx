@@ -57,8 +57,8 @@ if(error){
 }
 
   return (
-    <div>
-    <PayPalButtons
+    <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "500px"}}> 
+    <PayPalButtons style={{width: 200}}
 /*         onClick={(data, actions) => {
             //validate on button click
         }} */
