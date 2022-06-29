@@ -23,7 +23,7 @@ export default function Profile() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.UserData);
   const [mostrarChangePassword, setMostrarChangePassword] = useState(false);
-  useEffect(async () => {
+  useEffect( () => {
     dispatch(GetUserData(id));
   }, []);
   const handleChangePassword = (e) => {
