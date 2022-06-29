@@ -11,24 +11,32 @@ import BuildPc from "./components/BuildPc/BuildPc";
 import Amd from "./components/BuildPc/Amd";
 import Intel from "./components/BuildPc/Intel";
 import Error from "./components/Error/Error.jsx";
-import Paypal from "./components/Paypal/Paypal";
+import Pagando from "./components/Paypal/Pagando";
 import Profile from "./components/profile/Profile";
 import ValidateNewPassword from "./components/profile/ValidateNewPassword.jsx";
+import CheckProduct from "./components/BuildPc/CheckProduct";
+import CheckoutCart from "./components/Cart/CheckoutCart";
 
 function App() {
   return (
     <div className="Font-Open">
       <Routes>
-        <Route path="/paypal" element={<Paypal />} exact />
+        <Route path="/paypal" element={<Pagando />} exact />
         <Route path="/" element={<Home />} exact />
         <Route path="/products/:id" element={<DetailProduct />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
 
         <Route path="/arma-tu-pc" element={<BuildPc />} />
+<<<<<<< HEAD
         <Route path="/arma-tu-pc/amd" element={<Amd />} />
         <Route path="/arma-tu-pc/intel" element={<Intel />} />
 
         <Route path="/categories/"  element={<Categories />} />
+=======
+   
+        <Route path="/cart" element={<CheckoutCart />} />
+        <Route path="/categories" element={<Categories />} />
+>>>>>>> f8da5b439c76703e3389b032e397a84ec90e2a7d
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
         <Route path="/validate/:username" element={<Validacion />} />
@@ -41,6 +49,8 @@ function App() {
         <Route path="*" element={<Error />} />
 
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
+      
+      
       </Routes>
     </div>
   );

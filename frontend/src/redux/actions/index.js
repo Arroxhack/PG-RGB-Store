@@ -233,21 +233,44 @@ export function orderedByPrice(payload) {
     payload,
   };
 }
-export function filterCategories(payload) {
-  
-  
-  return {
-    type: FILTER_CATEGORIES,
-    payload,
+export function filterCategories(category) {
+  return async function (dispatch) {
+    let categories;
+    try {
+     if(category!=="all"){
+     categories = await axios.get(`${PATH}/products/?category=${category}`); //products por ahora
+     }else{
+      categories= await axios.get(`${PATH}/products`)
+     }
+      return dispatch({
+        type: FILTER_CATEGORIES,
+        payload: categories.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 
-export function filterBrands(payload) {
-  return {
-    type: FILTER_BRANDS,
-    payload,
+
+export function filterBrands(brand) {
+  return async function (dispatch) {
+    let brands;
+    try {
+     if(brand!=="all"){
+     brands = await axios.get(`${PATH}/brands/?brand=${brand}`); //products por ahora
+     } 
+     
+     return dispatch({
+        type: FILTER_BRANDS,
+        payload: brands.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
+
 export function filterMin(payload) {
   return {
     type: FILTER_MIN,

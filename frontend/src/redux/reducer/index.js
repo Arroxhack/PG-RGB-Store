@@ -158,39 +158,14 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_CATEGORIES:
-      const filter = state.filtros;
-      const categoriesFiltered = filter.includes('all')
-        ? state.allProducts
-        //SI TENGO CATEGORIAS
-        : state.brands.length>0?state.products.filter((e) => e.category.includes(filter))
-        : state.allProducts.filter((e) => e.category.includes(filter))
-
       return {
         ...state,
-        products: categoriesFiltered,
+        products: action.payload,
       };
 
     case FILTER_MIN:
-      //filtra cuando tengo solamente categorias
-      const filterMaxAndMin = state.filtros.length>0 && state.filterPrice.length>0?state.products.filter(
-        (e) => e.price > state.filterPrice && e.price < state.filterMax)
-        //filtra cuando hay marcas nomas
-        :state.filterBrands.length>0 && state.filterPrice.length>0?state.products.filter(
-          (e) => e.price > state.filterPrice && e.price < state.filterMax)
-          //filtra cuando hay categorias y filtros
-        :state.filterBrands.length>0 && state.filtros.length>0 && state.filterPrice.length>0?state.products.filter(
-          (e) => e.price > state.filterPrice && e.price < state.filterMax)
-        //filtra cuaando hay categorias y ordenamiento
-        :state.filterOrder.length>0 && state.filtros.length>0 && state.filterPrice.length>0?state.products.filter(
-          (e) => e.price > state.filterPrice && e.price < state.filterMax)
-        //filtra cuando hay marcas y ordenamiento
-        :state.filterOrder.length>0 && state.filterBrands.length>0 && state.filterPrice.length>0?state.products.filter(
-          (e) => e.price > state.filterPrice && e.price < state.filterMax)
-        //filtras con todos los filtros
-        :state.filterOrder.length>0 && state.filterBrands.length>0 && state.filtros.length>0 && state.filterPrice.length>0?state.products.filter(
-          (e) => e.price > state.filterPrice && e.price < state.filterMax)
-        
-          :state.allProducts.filter(
+     let filterMaxAndMin=  
+    state.allProducts.filter(
         (e) => e.price > state.filterPrice && e.price < state.filterMax)
        
         return {
@@ -199,14 +174,9 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_BRANDS:
-      const brandsFiltered = state.filterBrands ==='all'
-        ? state.allProducts
-        : !state.filtros.length>0? state.allProducts.filter((e) => e.brand.includes(state.filterBrands)):
-        state.products.filter((e) => e.brand.includes(state.filterBrands))
-
       return {
         ...state,
-        products: brandsFiltered,
+        products: action.payload,
       };
 
     ///SETEA EL ESTADO DE FILTROS///

@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, cleanFilter, cleanFilterBrands, cleanFilterPrice, cleanOrder } from "../../redux/actions/index";
 import { clean } from "../../redux/actions/index";
@@ -8,6 +8,7 @@ import Ordenamientos from "../Ordenamientos/Ordenamientos";
 import NavBar from '../NavBar/NavBar'
 import ContainerProduct from '../ContainerProduct/ContainerProduct'
 
+
 export default function Categories () {
     const dispatch = useDispatch();
     const allProducts = useSelector((state) => state.allProducts);
@@ -15,6 +16,8 @@ export default function Categories () {
     const filters= useSelector(state=>state.filtros)
     const filterOrder= useSelector(state=> state.filterOrder)
   
+
+
   
     useEffect(() => {
       if(!products.length) dispatch(getAllProducts())

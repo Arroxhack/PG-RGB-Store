@@ -14,7 +14,7 @@ import { getBrand } from "../../redux/actions";
 import { filterBrands } from "../../redux/actions";
 import { filterMin } from "../../redux/actions";
 import { cleanFilter } from "../../redux/actions";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 export default function SideBar() {
   //ESTADOS
   const dispatch = useDispatch();
@@ -29,186 +29,193 @@ export default function SideBar() {
 
   
   const[searchParams,setSearchParams]= useSearchParams()
-  
+  const categoryQuery = searchParams.get("category")
+  const brandQuery=searchParams.get("brand")
   useEffect(() => {
     dispatch(getAllCategories());
-    dispatch(getBrand());
-  }, [products]);
+    dispatch(getBrand())
+    if(categoryQuery != "all" && categories.length<10) dispatch(filterCategories(categoryQuery))
 
-
-  //--------------HANDLES CLEAN--------------
-  function handleSubmitCleanF(e) {
-    e.preventDefault();
-    //SI TENGO MARCAS
-    if(filterBrand.length>0 && !filterOrder.length && !filterPrice.length>0 && !filterMax.length>0){ 
-     dispatch(cleanFilter())
-     dispatch(filterBrands(filterBrand))
     }
-    //SI TENGO ORDENAMIENTO Y MARCAS
-    else if( filterOrder.length>0 && filterBrand.length>0 & !filterPrice.length>0 && !filterMax.length>0){
-      dispatch(cleanFilter())
-      dispatch(filterBrands(filterBrand))
-      dispatch(orderedByPrice(filterOrder))
-    }
-    //SI TENGO MARCAS Y FILTRO DE PRECIOS
-    else if(filterBrand.length>0 && filterMax.length && filterPrice.length && !filterOrder.length){
-      dispatch(cleanFilter())
-      dispatch(filterBrands(filterBrand))
-      dispatch(filterMin(filterPrice,filterMax))
-    }
-    //SI TENGO FILTRO DE PRECIO
-    else if(filterMax.length && filterPrice.length && !filterOrder.length && !filterBrand.length>0){
-      dispatch(cleanFilter())
-      dispatch(filterMin(filterMax,filterPrice))
-    }
-    //SI TENGO ORDENAMIENTO 
-    else if(filterOrder.length>0 && !filterBrand.length>0 && !filterPrice.length>0 && !filterMax.length>0){
-      dispatch(cleanFilter())
-      dispatch(orderedByPrice(filterOrder))
-    }
-    else if(filterBrand.length>0 && filterMax.length>0 && filterOrder.length>0 && filterPrice.length>0){
-      dispatch(cleanFilter())
-      dispatch(filterBrands(filterBrand))
-      dispatch(orderedByPrice(filterOrder))
-      dispatch(filterMin(filterPrice,filterMax))
-     }
-    else{
-      dispatch(cleanFilter())
-      dispatch(getAllProducts())
-    }
-  }
-
-  function handleSubmitCleanB(e) {
-    e.preventDefault();
-    if(filters.length>0 && !filterOrder.length && !filterPrice.length>0 && !filterMax.length>0){ 
-      dispatch(cleanFilterBrands())
-      dispatch(filterCategories(filters))
-      //SI TENGO ORDENAMIENTO Y MARCAS
-     }
-     else if( filterOrder.length>0 && filters.length>0 && !filterPrice.length>0 && !filterMax.length>0){
-       dispatch(cleanFilterBrands())
-       dispatch(filterCategories(filters))
-       dispatch(orderedByPrice(filterOrder))
-     }
-     else if(filters.length>0 && filterMax.length && filterPrice.length && !filterOrder.length>0){
-       dispatch(cleanFilterBrands())
-       dispatch(filterCategories(filters))
-       dispatch(filterMin(filterPrice,filterMax))
-     }
-     else if(filterMax.length && filterPrice.length && !filterOrder.length && !filters.length>0){
-       dispatch(cleanFilterBrands())
-       dispatch(filterMin(filterMax,filterPrice))
-     }
-     else if(filterOrder.length>0 && !filters.length>0 && !filterPrice.length>0 && !filterMax.length>0 && !filterOrder.length>0){
-       dispatch(cleanFilterBrands())
-       dispatch(orderedByPrice(filterOrder))
-     }
-     else if(filters.length>0 && filterMax.length>0 && filterOrder.length>0 && filterPrice.length>0){
-      dispatch(cleanFilterBrands())
-      dispatch(filterCategories(filters))
-      dispatch(orderedByPrice(filterOrder))
-      dispatch(filterMin(filterPrice,filterMax))
-
-     }
-     else{
-       dispatch(cleanFilterBrands())
-       dispatch(getAllProducts())
-     }
+  , [products, dispatch,brandQuery,categoryQuery]);
+  
 
 
-}
+  // //--------------HANDLES CLEAN--------------
+  // function handleSubmitCleanF(e) {
+  //   e.preventDefault();
+  //   //SI TENGO MARCAS
+  //   if(filterBrand.length>0 && !filterOrder.length && !filterPrice.length>0 && !filterMax.length>0){ 
+  //    dispatch(cleanFilter())
+  //    dispatch(filterBrands(filterBrand))
+  //   }
+  //   //SI TENGO ORDENAMIENTO Y MARCAS
+  //   else if( filterOrder.length>0 && filterBrand.length>0 & !filterPrice.length>0 && !filterMax.length>0){
+  //     dispatch(cleanFilter())
+  //     dispatch(filterBrands(filterBrand))
+  //     dispatch(orderedByPrice(filterOrder))
+  //   }
+  //   //SI TENGO MARCAS Y FILTRO DE PRECIOS
+  //   else if(filterBrand.length>0 && filterMax.length && filterPrice.length && !filterOrder.length){
+  //     dispatch(cleanFilter())
+  //     dispatch(filterBrands(filterBrand))
+  //     dispatch(filterMin(filterPrice,filterMax))
+  //   }
+  //   //SI TENGO FILTRO DE PRECIO
+  //   else if(filterMax.length && filterPrice.length && !filterOrder.length && !filterBrand.length>0){
+  //     dispatch(cleanFilter())
+  //     dispatch(filterMin(filterMax,filterPrice))
+  //   }
+  //   //SI TENGO ORDENAMIENTO 
+  //   else if(filterOrder.length>0 && !filterBrand.length>0 && !filterPrice.length>0 && !filterMax.length>0){
+  //     dispatch(cleanFilter())
+  //     dispatch(orderedByPrice(filterOrder))
+  //   }
+  //   else if(filterBrand.length>0 && filterMax.length>0 && filterOrder.length>0 && filterPrice.length>0){
+  //     dispatch(cleanFilter())
+  //     dispatch(filterBrands(filterBrand))
+  //     dispatch(orderedByPrice(filterOrder))
+  //     dispatch(filterMin(filterPrice,filterMax))
+  //    }
+  //   else{
+  //     dispatch(cleanFilter())
+  //     dispatch(getAllProducts())
+  //   }
+  // }
 
-  function handleSubmitCleanOrder(e) {
-    e.preventDefault(); 
-        //SI TENNGO CATEGORIAS SOLAMENTE
-    if(filters.length>0 && !filterBrand.length>0 && !filterPrice.length>0 && !filterMax.length>0){ 
-      dispatch(cleanOrder())
-      dispatch(filterCategories(filters))
+//   function handleSubmitCleanB(e) {
+//     e.preventDefault();
+//     if(filters.length>0 && !filterOrder.length && !filterPrice.length>0 && !filterMax.length>0){ 
+//       dispatch(cleanFilterBrands())
+//       dispatch(filterCategories(filters))
+//       //SI TENGO ORDENAMIENTO Y MARCAS
+//      }
+//      else if( filterOrder.length>0 && filters.length>0 && !filterPrice.length>0 && !filterMax.length>0){
+//        dispatch(cleanFilterBrands())
+//        dispatch(filterCategories(filters))
+//        dispatch(orderedByPrice(filterOrder))
+//      }
+//      else if(filters.length>0 && filterMax.length && filterPrice.length && !filterOrder.length>0){
+//        dispatch(cleanFilterBrands())
+//        dispatch(filterCategories(filters))
+//        dispatch(filterMin(filterPrice,filterMax))
+//      }
+//      else if(filterMax.length && filterPrice.length && !filterOrder.length && !filters.length>0){
+//        dispatch(cleanFilterBrands())
+//        dispatch(filterMin(filterMax,filterPrice))
+//      }
+//      else if(filterOrder.length>0 && !filters.length>0 && !filterPrice.length>0 && !filterMax.length>0 && !filterOrder.length>0){
+//        dispatch(cleanFilterBrands())
+//        dispatch(orderedByPrice(filterOrder))
+//      }
+//      else if(filters.length>0 && filterMax.length>0 && filterOrder.length>0 && filterPrice.length>0){
+//       dispatch(cleanFilterBrands())
+//       dispatch(filterCategories(filters))
+//       dispatch(orderedByPrice(filterOrder))
+//       dispatch(filterMin(filterPrice,filterMax))
+
+//      }
+//      else{
+//        dispatch(cleanFilterBrands())
+//        dispatch(getAllProducts())
+//      }
+
+
+// }
+
+//   function handleSubmitCleanOrder(e) {
+//     e.preventDefault(); 
+//         //SI TENNGO CATEGORIAS SOLAMENTE
+//     if(filters.length>0 && !filterBrand.length>0 && !filterPrice.length>0 && !filterMax.length>0){ 
+//       dispatch(cleanOrder())
+//       dispatch(filterCategories(filters))
     
-     }
-     //SI TENGO MARCAS SOLAMENTE
-     else if( filterBrand.length>0 && !filters.length>0 && !filterPrice.length>0 && !filterMax.length>0){
-       dispatch(cleanOrder())
-       dispatch(filterBrands(filterBrand))
-     }
-     //SI TENGO MARCAS Y CATEGORIAS
-     else if(filters.length>0 && filterBrand.length>0 && !filterMax.length>0 && !filterPrice.length>0){
-       dispatch(cleanOrder())
-       dispatch(filterCategories(filters))
-       dispatch(filterBrands(filterBrand))
-     }
-     //SI TENGO FILTRO POR PRECIO
-     else if(filterMax.length>0 && filterPrice.length>0 && !filterBrand.length>0 && !filters.length>0){
-       dispatch(cleanOrder())
-       dispatch(filterMin(filterMax,filterPrice))
-     }
-     //SI TENGO TODOS
-     else if(filters.length>0 && filterMax.length>0 && filterBrand.length>0 && filterPrice.length>0){
-      dispatch(cleanOrder())
-      dispatch(filterMin(filterPrice,filterMax))
-      dispatch(filterBrand(filterBrand))
-      dispatch(filterCategories(filters))
-     }
-     else{
-       dispatch(cleanOrder())
-       dispatch(getAllProducts())
-     }
+//      }
+//      //SI TENGO MARCAS SOLAMENTE
+//      else if( filterBrand.length>0 && !filters.length>0 && !filterPrice.length>0 && !filterMax.length>0){
+//        dispatch(cleanOrder())
+//        dispatch(filterBrands(filterBrand))
+//      }
+//      //SI TENGO MARCAS Y CATEGORIAS
+//      else if(filters.length>0 && filterBrand.length>0 && !filterMax.length>0 && !filterPrice.length>0){
+//        dispatch(cleanOrder())
+//        dispatch(filterCategories(filters))
+//        dispatch(filterBrands(filterBrand))
+//      }
+//      //SI TENGO FILTRO POR PRECIO
+//      else if(filterMax.length>0 && filterPrice.length>0 && !filterBrand.length>0 && !filters.length>0){
+//        dispatch(cleanOrder())
+//        dispatch(filterMin(filterMax,filterPrice))
+//      }
+//      //SI TENGO TODOS
+//      else if(filters.length>0 && filterMax.length>0 && filterBrand.length>0 && filterPrice.length>0){
+//       dispatch(cleanOrder())
+//       dispatch(filterMin(filterPrice,filterMax))
+//       dispatch(filterBrand(filterBrand))
+//       dispatch(filterCategories(filters))
+//      }
+//      else{
+//        dispatch(cleanOrder())
+//        dispatch(getAllProducts())
+//      }
 
-  }
+//   }
 
 
-  function handleSubmitCleanPrice(e) {
-    e.preventDefault(); 
-        //SI TENNGO CATEGORIAS SOLAMENTE
-    if(filters.length>0 && !filterBrand.length>0 && !filterOrder.length>0){ 
-      dispatch(cleanFilterPrice())
-      dispatch(filterCategories(filters))
+//   function handleSubmitCleanPrice(e) {
+//     e.preventDefault(); 
+//         //SI TENNGO CATEGORIAS SOLAMENTE
+//     if(filters.length>0 && !filterBrand.length>0 && !filterOrder.length>0){ 
+//       dispatch(cleanFilterPrice())
+//       dispatch(filterCategories(filters))
     
-     }
-     //SI TENGO MARCAS SOLAMENTE
-     else if( filterBrand.length>0 && !filters.length>0 && !filterOrder.length>0 ){
-       dispatch(cleanFilterPrice())
-       dispatch(filterBrands(filterBrand))
-     }
-     //SI TENGO MARCAS Y CATEGORIAS
-     else if(filters.length>0 && filterBrand.length>0 && !filterOrder.length>0 ){
-       dispatch(cleanFilterPrice())
-       dispatch(filterCategories(filters))
-       dispatch(filterBrands(filterBrand))
-     }
-     //SI TENGO FILTRO POR PRECIO
-     else if( filterOrder.length>0 && !filterBrand.length>0 && !filters.length>0){
-       dispatch(cleanFilterPrice())
-       dispatch(orderedByPrice(filterOrder))
-     }
-     //SI TENGO TODOS
-     else if(filters.length>0 && filterOrder.length>0 && filterBrand.length>0){
-      dispatch(cleanFilterPrice())
-      dispatch(filterBrands(filterBrand))
-      dispatch(filterCategories(filters))
-      dispatch(orderedByPrice(filterOrder))
-     }
-     else{
-       dispatch(cleanFilterPrice())
-       dispatch(getAllProducts())
-     }
+//      }
+//      //SI TENGO MARCAS SOLAMENTE
+//      else if( filterBrand.length>0 && !filters.length>0 && !filterOrder.length>0 ){
+//        dispatch(cleanFilterPrice())
+//        dispatch(filterBrands(filterBrand))
+//      }
+//      //SI TENGO MARCAS Y CATEGORIAS
+//      else if(filters.length>0 && filterBrand.length>0 && !filterOrder.length>0 ){
+//        dispatch(cleanFilterPrice())
+//        dispatch(filterCategories(filters))
+//        dispatch(filterBrands(filterBrand))
+//      }
+//      //SI TENGO FILTRO POR PRECIO
+//      else if( filterOrder.length>0 && !filterBrand.length>0 && !filters.length>0){
+//        dispatch(cleanFilterPrice())
+//        dispatch(orderedByPrice(filterOrder))
+//      }
+//      //SI TENGO TODOS
+//      else if(filters.length>0 && filterOrder.length>0 && filterBrand.length>0){
+//       dispatch(cleanFilterPrice())
+//       dispatch(filterBrands(filterBrand))
+//       dispatch(filterCategories(filters))
+//       dispatch(orderedByPrice(filterOrder))
+//      }
+//      else{
+//        dispatch(cleanFilterPrice())
+//        dispatch(getAllProducts())
+//      }
 
-  }
+//   }
 
 
 
  //--------------HANDLES FILTERS--------------
+
+
   function handleFilterCat(e) {
     e.preventDefault();
     setSearchParams({[e.target.name]:e.target.value})
-    dispatch(setFilter(e.target.value));
-    dispatch(filterCategories(e.target.value));
+    dispatch(filterCategories(categoryQuery))
+    
   }
 
   function handleFilterBrand(e) {
     e.preventDefault();
-    dispatch(setFilterBrands(e.target.value));
-    dispatch(filterBrands(e.target.value));
+    setSearchParams({[e.target.name]:e.target.value})
+    dispatch(filterBrands(brandQuery));
   }
 
   function handleFilterMax(e) {
@@ -227,56 +234,10 @@ export default function SideBar() {
   return (
     <aside className="w-1/4 md:w-64 sm:text-xs flex flex-col justify-around border-r-2 border-primary text-lg md:text-sm text-center text-primary-400 ">
       {/*------------------ CONTENEDOR DE LOS FILTROS  ------------------   /*/}
-      <div className="flex flex-col justify-center items-center p-0">
-       
-         <div className="flex  mb-2">
-    {  filters.length > 1?
-      <div className="h-8 flex items-center justify-center border-2 rounded-lg ">
-          <div className=" flex items-center ">
-            <p className="text-primary w-full ">{filters}</p>
-            <button onClick={e => handleSubmitCleanF(e)} className=" pl-4 ">
-              x
-            </button>
-          </div>
-        </div>:null}
 
-        {filterBrand.length >1?<div className="pl-4">
-          <div className="h-8 flex border-2 items-center rounded-lg pl-2">
-            <div className=" flex items-center ">
-              <p className="text-primary w-full ">{filterBrand}</p>
-              <button
-                className=" pl-4 "
-                onClick={e => handleSubmitCleanB(e)}
-              >
-                x
-              </button>
-            </div>
-          </div>
-        </div>:null}
-      </div>
-      <div className=" flex justify-center items-center w-full ">
-     { filterMax.length > 1 || filterPrice.length > 1?
-         <div className="h-8 w-3/6  flex border-2 items-center rounded-lg">
-         <div className="flex justify-center w-full ">
-           <p className="text-primary">de ${filterPrice} </p>
-           <p className="pl-1"> a ${filterMax}</p>
-           <button onClick={e => handleSubmitCleanPrice(e)} className="pl-2 ">
-              x
-            </button>
-           </div>
-         </div>:null}
-           
-         {filterOrder.length > 1?
-      <div className="h-8 flex items-center justify-center border-2 rounded-lg ">
-          <div className=" flex items-center ">
-            <p className="text-primary w-full ">{filterOrder}</p>
-            <button  className=" pl-4 " onClick={(e)=> handleSubmitCleanOrder(e)}>
-              x
-            </button>
-          </div>
-        </div>:null}
-         </div>
-      </div>
+       
+   
+ 
       {/*------------------ CATEGORIES  ------------------   /*/}
       <div className="flex flex-col pb-4">
         <h4 className="text-xl text-yellow-300 pb-4">Categories</h4>
@@ -314,7 +275,8 @@ export default function SideBar() {
         <button
           className="text-left text-lg pl-4"
           onClick={e => handleFilterBrand(e)}
-          value={"all"}
+          value="all"
+          name="all"
         >
           All
         </button>
@@ -325,8 +287,9 @@ export default function SideBar() {
                   className="text-left text-lg pl-4 hover:animate-pulse "
                   onClick={e => handleFilterBrand(e)}
                   value={m}
+                  name="brand"
                 >
-                  {" "}
+               
                   {m}
                 </button>
               );

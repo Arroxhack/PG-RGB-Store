@@ -2,10 +2,13 @@ import React from 'react'
 import { useState } from 'react'
 import Checkout from './Checkout';
 import {PayPalButtons, usePayPalScriptReducer} from "@paypal/react-paypal-js";
+import PaypalButton from './PaypalButton';
+import { useNavigate } from 'react-router';
 
-export default function Paypal() {
-    const [checkout, setCheckout] = useState(false); // al ser true se va a la pagina de checkout
-    // console.log("PayPalButtons: ",PayPalButtons)
+export default function CheckoutPaypal() {
+    // const [checkout, setCheckout] = useState(false); // al ser true se va a la pagina de paypal
+    const navigate = useNavigate();
+  
 
     let createOrder = (data, actions) => {
         return actions.order.create({
@@ -48,15 +51,28 @@ export default function Paypal() {
         });
       } 
 
+    let handleOnClick = () => { // Login true -> paypal / login false -> redirige a login
+        // console.log("ACAAAA: ",localStorage.getItem("cartProducts"))
+        
+        if(localStorage.getItem("login") && localStorage.getItem("cartProducts").length > 2){
+            // return setCheckout(true)
+            navigate("/paypal")
+        }
+        else if(localStorage.getItem("login")){
+            alert("No hay productos en el carrito")
+            navigate("/")
+        }
+        else{
+            alert(`No puedes comprar sin haber iniciado sesison
+            
+            ...redirigiendo a inicio de sesion`)
+            navigate("/logIn")
+        }
+    }
+
   return (
     <div >
-        {checkout ? <Checkout/>
-        : <button onClick={() => {setCheckout(true)}}>Checkout {/* al presionar este boton queremos ir a la pagina de pago, o sea de checkout */}</button>}
-        {/* <PayPalButtons
-           style={{ layout: "vertical" }}
-           createOrder={createOrder}
-           onApprove = {onApprove}
-         /> */}
+        <button onClick={handleOnClick}>Checkout</button>
     </div>
   )
 }
