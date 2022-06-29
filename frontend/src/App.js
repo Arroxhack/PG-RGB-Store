@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="Font-Open">
       <Routes>
-        <Route path="/paypal" element={<Checkout />} exact />
+        <Route path="/paypal" element={<Pagando />} exact />
         <Route path="/" element={<Home />} exact />
         <Route path="/products/:id" element={<DetailProduct />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
