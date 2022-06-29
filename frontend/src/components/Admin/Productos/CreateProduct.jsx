@@ -30,10 +30,9 @@ const CreateProduct = () => {
     description:'',
     image:[],
   })
-
   //#endregion
-  //#region IMAGEN
 
+  //#region IMAGEN
   const Upload = (arch)=>{
     Array.from(arch).forEach(a=>{
       let reader = new FileReader()
@@ -43,7 +42,6 @@ const CreateProduct = () => {
       }
     })
   }
-
   //#endregion
   
   //#region MANEJO DE ERRORES
@@ -70,7 +68,7 @@ const CreateProduct = () => {
     //#region PRICE
     if(!state.price){
         ERROR.price= false
-    } else if(!/^\d+$/.test(state.price)){
+    } else if(!/[0-9,]+$/.test(state.price)){
         ERROR.price= false
     } else {
         ERROR.price = true
@@ -196,11 +194,12 @@ const CreateProduct = () => {
   }
   //#endregion
   //#region useState + setState INPUT
+  
   const [cus, setCus] = useState({
     weight: null,
     dimensions: null,
     wattsPowerSupply: null,
-    porcentageDiscount: null,
+    percentageDiscount: 0,
   });
   const selectCustom = (e) => {
     setCus((prevState) => {
@@ -226,7 +225,7 @@ const CreateProduct = () => {
     weight: cus.weight,
     dimensions:cus.dimensions,
     wattsPowerSupply:cus.wattsPowerSupply,
-    porcentageDiscount: cus.porcentageDiscount,
+    percentageDiscount: cus.percentageDiscount,
     // SELECT
     compatibilityBrands:marca,
     ddr:ddram,
@@ -238,6 +237,28 @@ const CreateProduct = () => {
   const onSend = (e)=>{
     e.preventDefault()
     dispatch(createProduct(newProduct))
+
+    setFormOne(()=>{
+      const newState ={
+        name:'',
+        price:'',
+        stock:'',
+        brand:'',
+        description:'',
+        image:[],
+      }
+      return newState
+    })
+
+    setCus(()=>{
+      const newState = {
+        weight: null,
+        dimensions: null,
+        wattsPowerSupply: null,
+        percentageDiscount: 0,
+      }
+      return newState
+    })
   }
 
   return (
@@ -258,6 +279,7 @@ const CreateProduct = () => {
       <input className='border rounded-md placeholder:text-center text-center h-8 text-xl w-full' type="text" name="name" value={formOne.name} onChange={handleFormOne} placeholder='Name'/>
       {errorOne.name ? <div>✅</div> : <div>❌</div>}
       </div>
+
       {/* PRECIO */}
       <div className="flex flex-row gap-4 ml-5 items-center">
       <input className='border rounded-md placeholder:text-center text-center h-8 text-xl w-full' type="number" name="price" value={formOne.price} onChange={handleFormOne} placeholder='Precio'/>
@@ -303,7 +325,7 @@ const CreateProduct = () => {
 
       <Select className='rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3' placeholder='Oferta' onChange={selectOffer} options={customOffer}/>
 
-      <input type='number' value={cus.porcentageDiscount} name={'porcentageDiscount'} onChange={selectCustom} className='border rounded-md placeholder:text-center text-center h-8 text-xl w-full' placeholder='Porcentaje de descuento'/>
+      <input type='number' value={cus.percentageDiscount} name={'percentageDiscount'} onChange={selectCustom} className='border rounded-md placeholder:text-center text-center h-8 text-xl w-full' placeholder='Porcentaje de descuento'/>
     </> 
     : <></>}
     </div>

@@ -2,18 +2,52 @@ const { Router } = require('express');
 const { Product } = require('../../db');
 const router = Router();
 
-router.put('/products/:id', async (req, res) => {
+router.put('/edit-products/:id', async (req, res, next) => {
   //HACER BOTON EDIT -> ABRE MODAL -> MANDAN DATOS POR BODY -> EDITA
   //ACOMODAR RUTA -> PODER EDITAR CATEGORIA
   const { id } = req.params;
-  const objFinal = checkProduct(req.body);
-  const toEdit = await Product.update(objFinal, {
-    where: { id },
-  });
-  //Update nos devuelve un array de length 1 con un 1 si fue todo bien y con 0 si salio mal
-  toEdit[0] === 1
-    ? res.send('Correctly edit')
-    : res.status(404).send('Failed on edit');
+  const {
+    name,
+    price,
+    stock,
+    description,
+    compatibilityBrands,
+    ddr,
+    socket,
+    image,
+    factorMother,
+    weight,
+    dimensions,
+    wattsPowerSupply,
+    inOffer,
+    percentageDiscount,
+    category,
+    brand,
+  } = req.body;
+  try {
+    const editProduct = await Product.update({
+        name,
+        price,
+        stock,
+        description,
+        compatibilityBrands,
+        ddr,
+        socket,
+        image,
+        factorMother,
+        weight,
+        dimensions,
+        wattsPowerSupply,
+        inOffer,
+        percentageDiscount,
+        category,
+        brand,
+    },{where:{id}})
+
+    res.send(editProduct)
+  } catch (error) {
+    next(error)
+  }
 });
 
 function checkProduct({
