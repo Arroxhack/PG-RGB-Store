@@ -48,10 +48,6 @@ export function getAllProducts() {
 }
 
 /// GET MARCAS DE PRODUCTOS ///
-
-
-
-
 export function getBrand(payload) {
       return {
         type: GET_BRANDS,
@@ -133,15 +129,14 @@ export const createProduct = (product) => {
       const post = await axios.post(`${PATH}/create-product`, product);
       Swal.fire({
         title: `${post.data.name}`,
-        text: 'creado con exito!',
+        text: 'Creado con exito!',
         icon: 'success',
         confirmButtonText: 'ok',
       });
-
-      return {
+      return dispatch({
         type: CREATE_PRODUCT,
         payload: post.data,
-      };
+      })
     } catch (error) {
       Swal.fire({
         title: 'Algo fallo',
@@ -152,6 +147,49 @@ export const createProduct = (product) => {
     }
   };
 };
+/// UPDATE PRODUCTO ///
+export const editProduct = (producto)=>{
+  return async (dispatch)=>{
+    try {
+      const post = await axios.put(`${PATH}/edit-products/${producto.id}`, producto)
+      Swal.fire({
+        title: `${producto.name}`,
+        text: 'Editado con exito!',
+        icon: 'success',
+        confirmButtonText: 'ok',
+      });
+    } catch (error) {
+      Swal.fire({
+        title: 'Algo fallo',
+        text: 'No se pudo editar el producto',
+        icon: 'error',
+        confirmButtonText: 'ok',
+      });
+    }
+  }
+}
+/// DELETE PRODUCTO /// 
+export const deleteProduct=(id)=>{
+  return async dispatch =>{
+    try{
+      const deleteProduct = await axios.delete(`${PATH}/delete-product/${id}`)
+
+      Swal.fire({
+        icon:'success',
+        title:'Product delete',
+        confirmButtonText: 'Ok'
+      })
+    }
+    catch(error){
+      Swal.fire({
+        title: 'Algo fallo',
+        text: 'No se pudo borrar el producto',
+        icon: 'error',
+        confirmButtonText: 'ok',
+      });
+    }
+  }
+}
 
 /// POST REGISTRAR USUARIO ///
 export function PostUser(user) {
