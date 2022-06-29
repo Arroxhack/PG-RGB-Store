@@ -32,6 +32,49 @@ export default function PaypalButton() {
 }] 
 */
 
+let createOrder = (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              currency_code: "USD",
+              value: '77.44', // Can also reference a variable or function
+              breakdown: {
+                  item_total: { // Required when including the "items" array !!!!
+                      currency_code: "USD",
+                      value: '77.44'
+                  }
+              }
+            },
+            items: [
+              {
+                name: "First Product Name", /* Shows within upper-right dropdown during payment approval */
+                description: "Optional descriptive text..", /* Item details will also be in the completed paypal.com transaction view */
+                unit_amount: {
+                  currency_code: "USD",
+                  value: "50"
+                },
+                quantity: "2"
+              },
+            ]
+          }]
+        });
+      }
+      
+    let onApprove = (data, actions) => {
+        return actions.order.capture().then(function(orderData) {
+          // Successful capture! For dev/demo purposes:
+          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+          const transaction = orderData.purchase_units[0].payments.captures[0];
+          alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+          // When ready to go live, remove the alert and show a success message within this page. For example:
+          // const element = document.getElementById('paypal-button-container');
+          // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+          // Or go to another URL:  actions.redirect('thank_you.html');
+        });
+      } 
+
+
+
 const [paidFor, setPaidFor] = useState(false);
 const [error, setError] = useState(null);
 
@@ -46,15 +89,15 @@ const handleApprove = (orderID) => {
     //alert user with message // setError
 };
 
-if (paidFor){
-    //display a success message and redirect user to home "/"
-    alert("Thank you for your purchase")
-}
+// if (paidFor){
+//     //display a success message and redirect user to home "/"
+//     alert("Thank you for your purchase")
+// }
 
-if(error){
-    //Display error message and redirect user to wherever i want
-    alert(error);
-}
+// if(error){
+//     //Display error message and redirect user to wherever i want
+//     alert(error);
+// }
 
   return (
     <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "500px"}}> 
@@ -62,29 +105,37 @@ if(error){
 /*         onClick={(data, actions) => {
             //validate on button click
         }} */
-        createOrder={(data, actions) => {
+        createOrder={ createOrder /* (data, actions) => {
             return actions.order.create({
+                intent: "CAPTURE",
                 purchase_units: [
                     {
                         description: product[0].description,
                         amount:{
-                            value: product[0].price/100 //1.95
+                            currency_code: "USD",
+                            value:  "2"// product[0].price/100, //1.95
+                            // breakdown: {
+                            //     item_total: { // Required when including the "items" array !!!!
+                            //         currency_code: "USD",
+                            //         value: '2'
+                            //     }
+                            // }
                         }
                     }
                 ]
             })
-        }}
-        onApprove = {async(data, actions) => {
+        } */}
+        onApprove = {onApprove/* async(data, actions) => {
             const order = await actions.order.capture()
-            console.log("order: ", order)
+            console.log(order)
 
-            handleApprove(data.orderID);
-        }}
+            // handleApprove(data.orderID);
+        } */}
         onCancel = {() => { // sucede si el usuario cancela el checkout
             // Display cancel message and redirect the user to cart or checkout page
         }} 
         onError = {(err) => {
-            setError(err);
+            setError(err)
             console.log("Error: ", err)
         }}
     />

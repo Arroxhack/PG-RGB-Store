@@ -7,10 +7,6 @@ import ChangePassword from "./ChangePassword";
 import PhoneInput from "react-phone-input-2";
 import Swal from "sweetalert2";
 import "react-phone-input-2/lib/style.css";
-/*
-
-<input type='file' name='image' id='image' onChange={Uploaded}/>
-*/
 
 export default function Profile() {
   const id = localStorage.getItem("id");

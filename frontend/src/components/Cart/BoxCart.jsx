@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+import { Link } from 'react-router-dom'
 import { CartContext } from './CartContext'
 
 const BoxCart = ({onClick}) => {
@@ -24,13 +25,30 @@ const BoxCart = ({onClick}) => {
                             <p>{p.name}</p>
                             <p>{`$${p.price}`}</p><span>{`x ${p.amount}`}</span>
                             <p>{`$ ${(p.price * p.amount).toFixed(2)}`}</p>
-                            <button onClick={(e)=>deleteProductCart(p)}>❌</button>
+                            <button onClick={(e)=>deleteProductCart(p)}><svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      d="M6 18L18 6M6 6l12 12"
+                                    />
+                                  </svg></button>
                             <span className='col-start-1 col-end-8 bg-secundary h-[1px] mt-2 w-auto'></span>
                             </div>
                         )
                     })}
-                    <div className='flex justify-end mr-10 mb-5'>
-                    <p>{`Total a pagar: $${total.toFixed(2)}`}</p>
+                    <div className='grid grid-cols-2 mr-10 mb-5'>
+                    <Link to = "/cart">
+                    <button  className="w-full text-center  rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1">Proceed to checkout</button>
+                    </Link>
+                    <p>{`Total: $${total.toFixed(2)}`}</p>
+                    
                     </div>
                 </div>
             }
