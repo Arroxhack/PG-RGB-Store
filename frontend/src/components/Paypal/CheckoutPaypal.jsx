@@ -53,9 +53,7 @@ export default function CheckoutPaypal() {
 
     let handleOnClick = () => { // Login true -> paypal / login false -> redirige a login
         // console.log("ACAAAA: ",localStorage.getItem("cartProducts"))
-        // if(localStorage.getItem("cartProducts").length){
-        //     console.log(localStorage.getItem("cartProducts").length)
-        // }
+        
         if(localStorage.getItem("login") && localStorage.getItem("cartProducts").length > 2){
             // return setCheckout(true)
             navigate("/paypal")
