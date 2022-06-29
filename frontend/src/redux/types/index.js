@@ -19,3 +19,4 @@ export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const GET_USER_DATA = 'GET_USER_DATA';
 export const SET_FILTER_PRICE= 'SET_FILTER_PRICE'
 export const CLEAN_FILTER = 'CLEAN_FILTER';
+export const EDIT_PRODUCT = 'EDIT_PRODUCT'
