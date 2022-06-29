@@ -28,7 +28,7 @@ function App() {
         <Route path="/arma-tu-pc/amd" element={<Amd />} />
         <Route path="/arma-tu-pc/intel" element={<Intel />} />
 
-        <Route path="/categories" element={<Categories />} />
+        <Route path="/categories/"  element={<Categories />} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
         <Route path="/validate/:username" element={<Validacion />} />

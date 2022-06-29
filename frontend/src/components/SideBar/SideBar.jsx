@@ -14,7 +14,7 @@ import { getBrand } from "../../redux/actions";
 import { filterBrands } from "../../redux/actions";
 import { filterMin } from "../../redux/actions";
 import { cleanFilter } from "../../redux/actions";
-
+import { useSearchParams } from "react-router-dom";
 export default function SideBar() {
   //ESTADOS
   const dispatch = useDispatch();
@@ -26,8 +26,9 @@ export default function SideBar() {
   const filterMax = useSelector(state => state.filterMax);
   const filterBrand = useSelector(state => state.filterBrands);
   const filterOrder= useSelector(state=> state.filterOrder)
+
   
-  
+  const[searchParams,setSearchParams]= useSearchParams()
   
   useEffect(() => {
     dispatch(getAllCategories());
@@ -118,13 +119,88 @@ export default function SideBar() {
 }
 
   function handleSubmitCleanOrder(e) {
-    e.preventDefault();
-    dispatch(cleanOrder());
-    dispatch(getAllProducts())
+    e.preventDefault(); 
+        //SI TENNGO CATEGORIAS SOLAMENTE
+    if(filters.length>0 && !filterBrand.length>0 && !filterPrice.length>0 && !filterMax.length>0){ 
+      dispatch(cleanOrder())
+      dispatch(filterCategories(filters))
+    
+     }
+     //SI TENGO MARCAS SOLAMENTE
+     else if( filterBrand.length>0 && !filters.length>0 && !filterPrice.length>0 && !filterMax.length>0){
+       dispatch(cleanOrder())
+       dispatch(filterBrands(filterBrand))
+     }
+     //SI TENGO MARCAS Y CATEGORIAS
+     else if(filters.length>0 && filterBrand.length>0 && !filterMax.length>0 && !filterPrice.length>0){
+       dispatch(cleanOrder())
+       dispatch(filterCategories(filters))
+       dispatch(filterBrands(filterBrand))
+     }
+     //SI TENGO FILTRO POR PRECIO
+     else if(filterMax.length>0 && filterPrice.length>0 && !filterBrand.length>0 && !filters.length>0){
+       dispatch(cleanOrder())
+       dispatch(filterMin(filterMax,filterPrice))
+     }
+     //SI TENGO TODOS
+     else if(filters.length>0 && filterMax.length>0 && filterBrand.length>0 && filterPrice.length>0){
+      dispatch(cleanOrder())
+      dispatch(filterMin(filterPrice,filterMax))
+      dispatch(filterBrand(filterBrand))
+      dispatch(filterCategories(filters))
+     }
+     else{
+       dispatch(cleanOrder())
+       dispatch(getAllProducts())
+     }
+
   }
+
+
+  function handleSubmitCleanPrice(e) {
+    e.preventDefault(); 
+        //SI TENNGO CATEGORIAS SOLAMENTE
+    if(filters.length>0 && !filterBrand.length>0 && !filterOrder.length>0){ 
+      dispatch(cleanFilterPrice())
+      dispatch(filterCategories(filters))
+    
+     }
+     //SI TENGO MARCAS SOLAMENTE
+     else if( filterBrand.length>0 && !filters.length>0 && !filterOrder.length>0 ){
+       dispatch(cleanFilterPrice())
+       dispatch(filterBrands(filterBrand))
+     }
+     //SI TENGO MARCAS Y CATEGORIAS
+     else if(filters.length>0 && filterBrand.length>0 && !filterOrder.length>0 ){
+       dispatch(cleanFilterPrice())
+       dispatch(filterCategories(filters))
+       dispatch(filterBrands(filterBrand))
+     }
+     //SI TENGO FILTRO POR PRECIO
+     else if( filterOrder.length>0 && !filterBrand.length>0 && !filters.length>0){
+       dispatch(cleanFilterPrice())
+       dispatch(orderedByPrice(filterOrder))
+     }
+     //SI TENGO TODOS
+     else if(filters.length>0 && filterOrder.length>0 && filterBrand.length>0){
+      dispatch(cleanFilterPrice())
+      dispatch(filterBrands(filterBrand))
+      dispatch(filterCategories(filters))
+      dispatch(orderedByPrice(filterOrder))
+     }
+     else{
+       dispatch(cleanFilterPrice())
+       dispatch(getAllProducts())
+     }
+
+  }
+
+
+
  //--------------HANDLES FILTERS--------------
   function handleFilterCat(e) {
     e.preventDefault();
+    setSearchParams({[e.target.name]:e.target.value})
     dispatch(setFilter(e.target.value));
     dispatch(filterCategories(e.target.value));
   }
@@ -184,7 +260,7 @@ export default function SideBar() {
          <div className="flex justify-center w-full ">
            <p className="text-primary">de ${filterPrice} </p>
            <p className="pl-1"> a ${filterMax}</p>
-           <button onClick={e => handleSubmitCleanF(e)} className="pl-2 ">
+           <button onClick={e => handleSubmitCleanPrice(e)} className="pl-2 ">
               x
             </button>
            </div>
@@ -207,7 +283,7 @@ export default function SideBar() {
         <ul>
           <li className="flex flex-col   ">
             <button
-              className="text-left text-lg pl-8 hover:shadow-primary "
+              className="text-left text-lg pl-8  "
               onClick={e => handleFilterCat(e)}
               value={"all"}
             >
@@ -219,6 +295,7 @@ export default function SideBar() {
                     <button
                       className="text-left text-lg pl-8 hover:animate-pulse "
                       key={cat.id}
+                      name="category"
                       onClick={e => handleFilterCat(e)}
                       value={cat}
                     >

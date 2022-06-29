@@ -100,31 +100,31 @@ const reducer = (state = initialState, action) => {
     /// FILTRADO Y ORDENAMIENTO ///
     case FILTER_BY_PRICE:
       let orderedByPrice =
-      //SI TENGO CATEGORIES
-              !state.filterBrands.length>0 && state.filtros.length>0 && state.filterOrder.includes('menor valor')
-              ? state.products.sort(function (a, b) {
+        //SI TENGO CATEGORIES
+                !state.filterBrands.length>0 && state.filtros.length>0 && state.filterOrder.includes('menor valor')
+                ? state.products.sort(function (a, b) {
+                if (a.price > b.price) return 1;
+                if (b.price > a.price) return -1;
+                return 0;
+              }): !state.filterBrands.length>0 && state.filtros.length>0 && state.filterOrder.includes('mayor valor')?
+                state.products.sort(function (a, b) {
+                if (a.price > b.price) return -1;
+                if (b.price > a.price) return 1;
+                return 0;
+              }):
+        //SI NO TENGO CATEGORIES NI MARCAS
+              !state.filtros.length>0 && !state.filterBrands.length>0 && state.filterOrder.includes('menor valor')?
+              state.allProducts.sort(function (a, b) {
               if (a.price > b.price) return 1;
               if (b.price > a.price) return -1;
               return 0;
-            }): !state.filterBrands.length>0 && state.filtros.length>0 && state.filterOrder.includes('mayor valor')?
-              state.products.sort(function (a, b) {
+            }): !state.filtros.length>0 && !state.filterBrands.length>0 && state.filterOrder.includes('mayor valor')?
+              state.allProducts.sort(function (a, b) {
               if (a.price > b.price) return -1;
               if (b.price > a.price) return 1;
               return 0;
-            }):
-       //SI NO TENGO CATEGORIES NI MARCAS
-            !state.filtros.length>0 && !state.filterBrands.length>0 && state.filterOrder.includes('menor valor')?
-            state.allProducts.sort(function (a, b) {
-            if (a.price > b.price) return 1;
-            if (b.price > a.price) return -1;
-            return 0;
-          }): !state.filtros.length>0 && !state.filterBrands.length>0 && state.filterOrder.includes('mayor valor')?
-            state.allProducts.sort(function (a, b) {
-            if (a.price > b.price) return -1;
-            if (b.price > a.price) return 1;
-            return 0;
-          }): 
-      // SI TENGO MARCAS        
+            }): 
+        // SI TENGO MARCAS        
               state.brands.length>0 && state.filterOrder.includes('menor valor')?
               state.products.sort(function (a, b) {
               if (a.price > b.price) return 1;
@@ -135,9 +135,21 @@ const reducer = (state = initialState, action) => {
               if (a.price > b.price) return -1;
               if (b.price > a.price) return 1;
               return 0;
+              })
+                    
+              //// SI TENGO TODO       
+              :state.brands.length>0 && state.filtros.length>0 && state.filterMax.length>0
+              && state.filterPrice.le && state.filterOrder.includes('menor valor')?
+              state.products.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+              }):state.brands.length>0 && state.filterOrder.includes('mayor valor')?
+              state.products.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
               }):0
-            
-      
     
 
       return {
@@ -150,7 +162,7 @@ const reducer = (state = initialState, action) => {
       const categoriesFiltered = filter.includes('all')
         ? state.allProducts
         //SI TENGO CATEGORIAS
-        : state.brands.length>0?state.allProducts.filter((e) => e.category.includes(filter))
+        : state.brands.length>0?state.products.filter((e) => e.category.includes(filter))
         : state.allProducts.filter((e) => e.category.includes(filter))
 
       return {

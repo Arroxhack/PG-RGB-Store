@@ -26,6 +26,7 @@ import {
   SET_ORDER,
   CLEAN_ORDER,
   CLEAN_FILTER_PRICE,
+  CLEAN_FILTER_ORDER
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -233,6 +234,8 @@ export function orderedByPrice(payload) {
   };
 }
 export function filterCategories(payload) {
+  
+  
   return {
     type: FILTER_CATEGORIES,
     payload,
