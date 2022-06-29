@@ -43,7 +43,7 @@ function App() {
 
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
       
-        <Route path="/probando" element={<CheckoutCart />} />
+        <Route path="/cart" element={<CheckoutCart />} />
       </Routes>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+import { Link } from 'react-router-dom'
 import { CartContext } from './CartContext'
 
 const BoxCart = ({onClick}) => {
@@ -42,8 +43,10 @@ const BoxCart = ({onClick}) => {
                             </div>
                         )
                     })}
-                    <div className='flex justify-end mr-10 mb-5'>
-                    <button  className="w-full text-center relative rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1">Proceed to checkout</button>
+                    <div className='grid grid-cols-2 mr-10 mb-5'>
+                    <Link to = "/cart">
+                    <button  className="w-full text-center  rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1">Proceed to checkout</button>
+                    </Link>
                     <p>{`Total: $${total.toFixed(2)}`}</p>
                     
                     </div>
