@@ -7,14 +7,13 @@ export default function Ordenamientos() {
     
     const dispatch = useDispatch();
     const products = useSelector(state=> state.products)
-    const filterOrder= useSelector(state=> state.filterOrder)
+   
 
 
     function handleOrderedByPrice(e){
         e.preventDefault();
         dispatch(setOrder(e.target.value))
         dispatch(orderedByPrice(e.target.value))
-        console.log(products)
       }
       
     return (

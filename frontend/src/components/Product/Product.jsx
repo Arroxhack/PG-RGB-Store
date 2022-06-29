@@ -13,7 +13,7 @@ const Product = ({product}) => {
   }
 
   return (
-    <div className='bg-primary w-56 h-96 flex flex-col items-center rounded-md gap-2 text-primary-200 lg:hover:shadow-lg lg:hover:shadow-primary-200'>
+    <div className='bg-primary w-56 h-96 flex flex-col items-center rounded-md gap-2 text-primary-200 lg:hover:shadow-lg lg:hover:shadow-primary-300 lg:hover:-translate-y-2'>
         <div className="flex justify-center h-2/3 bg-secundary-100  rounded-t-md">
         <img src={product.image[0]} alt={`Imagen de ${product.name}`} className='rounded-t-md object-fill object-center '/>
         </div>

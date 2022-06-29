@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, cleanFilter } from "../../redux/actions/index";
+import { getAllProducts, cleanFilter, cleanFilterBrands, cleanFilterPrice, cleanOrder } from "../../redux/actions/index";
 import { clean } from "../../redux/actions/index";
 import SideBar from "../SideBar/SideBar";
 import Ordenamientos from "../Ordenamientos/Ordenamientos";
@@ -13,19 +13,19 @@ export default function Categories () {
     const allProducts = useSelector((state) => state.allProducts);
     const products = useSelector((state) => state.products);
     const filters= useSelector(state=>state.filtros)
+    const filterOrder= useSelector(state=> state.filterOrder)
   
   
     useEffect(() => {
       if(!products.length) dispatch(getAllProducts())
       dispatch(clean())
-      dispatch(cleanFilter());
     }, [dispatch]);
 
 
   return (
-    <div className=" w-full bg-gradient-to-t h-screen bg-primary-200  flex flex-col ">
+    <div className=" w-full bg-gradient-to-t bg-primary-200  flex flex-col ">
       
-      <div className="relative z-25">
+      <div className="sticky top-0 z-50">
       <NavBar/>
       </div>
       

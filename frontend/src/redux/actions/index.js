@@ -24,6 +24,8 @@ import {
   SET_FILTER_BRANDS,
   CLEAN_FILTER_BRANDS,
   SET_ORDER,
+  CLEAN_ORDER,
+  CLEAN_FILTER_PRICE,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -74,6 +76,19 @@ export function cleanFilterBrands() {
     payload: [],
   };
 }
+export function cleanOrder() {
+  return {
+    type: CLEAN_ORDER,
+    payload: [],
+  };
+}
+export function cleanFilterPrice() {
+  return {
+    type: CLEAN_FILTER_PRICE,
+    payload: [],
+  };
+}
+
 
 
 

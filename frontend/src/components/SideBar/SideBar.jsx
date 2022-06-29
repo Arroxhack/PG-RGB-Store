@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  cleanFilterBrands,
+  cleanFilterPrice,
   getAllCategories,
   getAllProducts,
   setFilterBrands,
   setFilterMax,
-  setFilterPrice,
+  setFilterPrice,cleanOrder,orderedByPrice, cleanFilterBrands
 } from "../../redux/actions";
 import { setFilter } from "../../redux/actions";
 import { filterCategories } from "../../redux/actions";
@@ -25,6 +25,8 @@ export default function SideBar() {
   const filterPrice = useSelector(state => state.filterPrice);
   const filterMax = useSelector(state => state.filterMax);
   const filterBrand = useSelector(state => state.filterBrands);
+  const filterOrder= useSelector(state=> state.filterOrder)
+  
   
   
   useEffect(() => {
@@ -36,14 +38,89 @@ export default function SideBar() {
   //--------------HANDLES CLEAN--------------
   function handleSubmitCleanF(e) {
     e.preventDefault();
-    dispatch(cleanFilter());
-    dispatch(getAllProducts())
+    //SI TENGO MARCAS
+    if(filterBrand.length>0 && !filterOrder.length && !filterPrice.length>0 && !filterMax.length>0){ 
+     dispatch(cleanFilter())
+     dispatch(filterBrands(filterBrand))
+    }
+    //SI TENGO ORDENAMIENTO Y MARCAS
+    else if( filterOrder.length>0 && filterBrand.length>0 & !filterPrice.length>0 && !filterMax.length>0){
+      dispatch(cleanFilter())
+      dispatch(filterBrands(filterBrand))
+      dispatch(orderedByPrice(filterOrder))
+    }
+    //SI TENGO MARCAS Y FILTRO DE PRECIOS
+    else if(filterBrand.length>0 && filterMax.length && filterPrice.length && !filterOrder.length){
+      dispatch(cleanFilter())
+      dispatch(filterBrands(filterBrand))
+      dispatch(filterMin(filterPrice,filterMax))
+    }
+    //SI TENGO FILTRO DE PRECIO
+    else if(filterMax.length && filterPrice.length && !filterOrder.length && !filterBrand.length>0){
+      dispatch(cleanFilter())
+      dispatch(filterMin(filterMax,filterPrice))
+    }
+    //SI TENGO ORDENAMIENTO 
+    else if(filterOrder.length>0 && !filterBrand.length>0 && !filterPrice.length>0 && !filterMax.length>0){
+      dispatch(cleanFilter())
+      dispatch(orderedByPrice(filterOrder))
+    }
+    else if(filterBrand.length>0 && filterMax.length>0 && filterOrder.length>0 && filterPrice.length>0){
+      dispatch(cleanFilter())
+      dispatch(filterBrands(filterBrand))
+      dispatch(orderedByPrice(filterOrder))
+      dispatch(filterMin(filterPrice,filterMax))
+     }
+    else{
+      dispatch(cleanFilter())
+      dispatch(getAllProducts())
+    }
   }
 
   function handleSubmitCleanB(e) {
     e.preventDefault();
-    dispatch(cleanFilterBrands());
-    dispatch(getAllProducts());
+    if(filters.length>0 && !filterOrder.length && !filterPrice.length>0 && !filterMax.length>0){ 
+      dispatch(cleanFilterBrands())
+      dispatch(filterCategories(filters))
+      //SI TENGO ORDENAMIENTO Y MARCAS
+     }
+     else if( filterOrder.length>0 && filters.length>0 && !filterPrice.length>0 && !filterMax.length>0){
+       dispatch(cleanFilterBrands())
+       dispatch(filterCategories(filters))
+       dispatch(orderedByPrice(filterOrder))
+     }
+     else if(filters.length>0 && filterMax.length && filterPrice.length && !filterOrder.length>0){
+       dispatch(cleanFilterBrands())
+       dispatch(filterCategories(filters))
+       dispatch(filterMin(filterPrice,filterMax))
+     }
+     else if(filterMax.length && filterPrice.length && !filterOrder.length && !filters.length>0){
+       dispatch(cleanFilterBrands())
+       dispatch(filterMin(filterMax,filterPrice))
+     }
+     else if(filterOrder.length>0 && !filters.length>0 && !filterPrice.length>0 && !filterMax.length>0 && !filterOrder.length>0){
+       dispatch(cleanFilterBrands())
+       dispatch(orderedByPrice(filterOrder))
+     }
+     else if(filters.length>0 && filterMax.length>0 && filterOrder.length>0 && filterPrice.length>0){
+      dispatch(cleanFilterBrands())
+      dispatch(filterCategories(filters))
+      dispatch(orderedByPrice(filterOrder))
+      dispatch(filterMin(filterPrice,filterMax))
+
+     }
+     else{
+       dispatch(cleanFilterBrands())
+       dispatch(getAllProducts())
+     }
+
+
+}
+
+  function handleSubmitCleanOrder(e) {
+    e.preventDefault();
+    dispatch(cleanOrder());
+    dispatch(getAllProducts())
   }
  //--------------HANDLES FILTERS--------------
   function handleFilterCat(e) {
@@ -72,11 +149,11 @@ export default function SideBar() {
   }
   
   return (
-    <aside className="w-1/4 md:w-64 sm:text-xs flex flex-col justify-around  border-r-2 border-primary sticky text-lg md:text-sm text-center text-primary-400 ">
+    <aside className="w-1/4 md:w-64 sm:text-xs flex flex-col justify-around border-r-2 border-primary text-lg md:text-sm text-center text-primary-400 ">
       {/*------------------ CONTENEDOR DE LOS FILTROS  ------------------   /*/}
       <div className="flex flex-col justify-center items-center p-0">
        
-         <div className="flex mb-2">
+         <div className="flex  mb-2">
     {  filters.length > 1?
       <div className="h-8 flex items-center justify-center border-2 rounded-lg ">
           <div className=" flex items-center ">
@@ -112,6 +189,16 @@ export default function SideBar() {
             </button>
            </div>
          </div>:null}
+           
+         {filterOrder.length > 1?
+      <div className="h-8 flex items-center justify-center border-2 rounded-lg ">
+          <div className=" flex items-center ">
+            <p className="text-primary w-full ">{filterOrder}</p>
+            <button  className=" pl-4 " onClick={(e)=> handleSubmitCleanOrder(e)}>
+              x
+            </button>
+          </div>
+        </div>:null}
          </div>
       </div>
       {/*------------------ CATEGORIES  ------------------   /*/}
@@ -120,7 +207,7 @@ export default function SideBar() {
         <ul>
           <li className="flex flex-col   ">
             <button
-              className="text-left text-lg pl-8"
+              className="text-left text-lg pl-8 hover:shadow-primary "
               onClick={e => handleFilterCat(e)}
               value={"all"}
             >
