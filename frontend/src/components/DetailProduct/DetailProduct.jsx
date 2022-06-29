@@ -48,11 +48,7 @@ function DetailProduct() {
       <div className="relative z-50 mb-11">
       <NavBar/>
       </div>
-<<<<<<< HEAD
-      <section class="font-Open  bg-gradient-to-t from-primary-300 to-primary  h-screen w-full flex items-center justify-center absolute z-100 pt-28">
-=======
       <section className="font-Open absolute z-100 mt-40">
->>>>>>> f8da5b439c76703e3389b032e397a84ec90e2a7d
         {loading ? (
           <div >
             <Loading />

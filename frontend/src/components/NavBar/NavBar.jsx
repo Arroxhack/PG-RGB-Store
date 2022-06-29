@@ -24,13 +24,8 @@ function NavBar() {
   };
 
   return (
-<<<<<<< HEAD
-    <nav className=" w-full flex flex-wrap items-center justify-between sticky top-0 z-50 py-4 shadow-lg bg-primary-200">
-      <div class="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 y-4  pb-5 lg:pb-0">
-=======
     <nav className="relative w-full flex flex-wrap items-center justify-between py-4 shadow-lg bg-primary-200">
       <div className="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 y-4  pb-5 lg:pb-0">
->>>>>>> f8da5b439c76703e3389b032e397a84ec90e2a7d
         {/*LOGO */}
         <div className="flex items-center flex-shrink-0 mr-16">
           <Link

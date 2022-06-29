@@ -27,16 +27,9 @@ function App() {
         {/* <Route path="/cart" element={<Cart />} /> */}
 
         <Route path="/arma-tu-pc" element={<BuildPc />} />
-<<<<<<< HEAD
-        <Route path="/arma-tu-pc/amd" element={<Amd />} />
-        <Route path="/arma-tu-pc/intel" element={<Intel />} />
-
-        <Route path="/categories/"  element={<Categories />} />
-=======
    
         <Route path="/cart" element={<CheckoutCart />} />
         <Route path="/categories" element={<Categories />} />
->>>>>>> f8da5b439c76703e3389b032e397a84ec90e2a7d
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
         <Route path="/validate/:username" element={<Validacion />} />
