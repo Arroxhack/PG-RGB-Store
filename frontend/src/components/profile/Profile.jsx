@@ -7,6 +7,7 @@ import ChangePassword from "./ChangePassword";
 import PhoneInput from "react-phone-input-2";
 import Swal from "sweetalert2";
 import "react-phone-input-2/lib/style.css";
+import NavBar from "../NavBar/NavBar";
 
 export default function Profile() {
   const id = localStorage.getItem("id");
@@ -126,6 +127,7 @@ export default function Profile() {
   };
   return (
     <div>
+      <NavBar />
       <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-gradient-to-t from-primary-300 to-primary">
         <button
           id="EditProfile"
@@ -155,6 +157,18 @@ export default function Profile() {
                 <p className="text-decoration underline">{user.username}</p>
               </div>
               <div className="flex row space-x-3">
+                <h2>cellphone:</h2>
+                <p className="text-decoration underline">
+                  {user.cellphone ? "+" + user.cellphone : "Dato no encontrado"}
+                </p>
+              </div>
+              <div className="flex row space-x-3">
+                <h2>Address:</h2>
+                <p className="text-decoration underline">
+                  {user.address ? user.address : "Dato no encontrado"}
+                </p>
+              </div>
+              <div className="flex row space-x-3">
                 <h2>image:</h2>
                 <p>
                   {user.image ? (
@@ -162,18 +176,6 @@ export default function Profile() {
                   ) : (
                     "Dato no encontrado"
                   )}
-                </p>
-              </div>
-              <div className="flex row space-x-3">
-                <h2>cellphone:</h2>
-                <p className="text-decoration underline">
-                  {user.cellphone ? user.cellphone : "Dato no encontrado"}
-                </p>
-              </div>
-              <div className="flex row space-x-3">
-                <h2>Address:</h2>
-                <p className="text-decoration underline">
-                  {user.address ? user.address : "Dato no encontrado"}
                 </p>
               </div>
             </>

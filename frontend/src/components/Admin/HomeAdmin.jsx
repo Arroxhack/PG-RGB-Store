@@ -8,13 +8,21 @@ import EditProduct from "./Productos/EditProduct";
 import CreateAdmin from "./Usuarios/CreateAdmin";
 import EditUser from "./Usuarios/EditUser";
 import Error from "../Error/Error";
+import { useSearchParams } from "react-router-dom";
+import AdminProduct from "./Productos/AdminProduct";
 
 const HomeAdmin = () => {
   const admin = localStorage.getItem("admin");
+  let [searchParms, setSearchParams] = useSearchParams();
 
-  const [menu, setMenu] = useState(0);
+  const [menu, setMenu] = useState("create-product");
 
-  console.log(menu);
+  const changeMenu = (e) => {
+    e.preventDefault();
+    let params = searchParms(e.target);
+    setSearchParams(params);
+  };
+
   return (
     <>
       {admin ? (
@@ -22,13 +30,13 @@ const HomeAdmin = () => {
           <Nav />
           <div className="flex flex-row">
             <div className="bg-primary-200 h-screen w-60">
-              <Menu value={menu} setValue={setMenu} />
+              <Menu value={menu} setValue={setMenu} onChange={changeMenu} />
             </div>
-            {menu == 0 && <CreateProduct />}
-            {menu == 1 && <EditProduct />}
-            {menu == 2 && <DeleteProduct />}
-            {menu == 3 && <CreateAdmin />}
-            {menu == 4 && <EditUser />}
+            {menu === "create-product" && <CreateProduct />}
+            {menu === "edit-product" && <EditProduct />}
+            {menu === "delete-product" && <DeleteProduct />}
+            {menu === "create-admin" && <CreateAdmin />}
+            {menu === "edit-user" && <EditUser />}
           </div>
         </div>
       ) : (

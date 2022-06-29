@@ -20,7 +20,13 @@ import {
   EDIT_PROFILE,
   GET_PROFILE,
   SET_FILTER_PRICE,
-  CLEAN_FILTER
+  CLEAN_FILTER,
+  SET_FILTER_BRANDS,
+  CLEAN_FILTER_BRANDS,
+  SET_ORDER,
+  CLEAN_ORDER,
+  CLEAN_FILTER_PRICE,
+  CLEAN_FILTER_ORDER
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -42,10 +48,6 @@ export function getAllProducts() {
 }
 
 /// GET MARCAS DE PRODUCTOS ///
-
-
-
-
 export function getBrand(payload) {
       return {
         type: GET_BRANDS,
@@ -65,6 +67,26 @@ export function cleanFilter() {
     payload: [],
   };
 }
+export function cleanFilterBrands() {
+  return {
+    type: CLEAN_FILTER_BRANDS,
+    payload: [],
+  };
+}
+export function cleanOrder() {
+  return {
+    type: CLEAN_ORDER,
+    payload: [],
+  };
+}
+export function cleanFilterPrice() {
+  return {
+    type: CLEAN_FILTER_PRICE,
+    payload: [],
+  };
+}
+
+
 
 
 /// GET DETALLE DE PRODUCTOS ///
@@ -107,15 +129,14 @@ export const createProduct = (product) => {
       const post = await axios.post(`${PATH}/create-product`, product);
       Swal.fire({
         title: `${post.data.name}`,
-        text: 'creado con exito!',
+        text: 'Creado con exito!',
         icon: 'success',
         confirmButtonText: 'ok',
       });
-
-      return {
+      return dispatch({
         type: CREATE_PRODUCT,
         payload: post.data,
-      };
+      })
     } catch (error) {
       Swal.fire({
         title: 'Algo fallo',
@@ -126,6 +147,49 @@ export const createProduct = (product) => {
     }
   };
 };
+/// UPDATE PRODUCTO ///
+export const editProduct = (producto)=>{
+  return async (dispatch)=>{
+    try {
+      const post = await axios.put(`${PATH}/edit-products/${producto.id}`, producto)
+      Swal.fire({
+        title: `${producto.name}`,
+        text: 'Editado con exito!',
+        icon: 'success',
+        confirmButtonText: 'ok',
+      });
+    } catch (error) {
+      Swal.fire({
+        title: 'Algo fallo',
+        text: 'No se pudo editar el producto',
+        icon: 'error',
+        confirmButtonText: 'ok',
+      });
+    }
+  }
+}
+/// DELETE PRODUCTO /// 
+export const deleteProduct=(id)=>{
+  return async dispatch =>{
+    try{
+      const deleteProduct = await axios.delete(`${PATH}/delete-product/${id}`)
+
+      Swal.fire({
+        icon:'success',
+        title:'Product delete',
+        confirmButtonText: 'Ok'
+      })
+    }
+    catch(error){
+      Swal.fire({
+        title: 'Algo fallo',
+        text: 'No se pudo borrar el producto',
+        icon: 'error',
+        confirmButtonText: 'ok',
+      });
+    }
+  }
+}
 
 /// POST REGISTRAR USUARIO ///
 export function PostUser(user) {
@@ -187,6 +251,18 @@ export function setFilterMax(payload) {
     payload,
   };
 }
+export function setFilterBrands(payload) {
+  return {
+    type: SET_FILTER_BRANDS,
+    payload,
+  };
+}
+export function setOrder(payload){
+  return{
+    type: SET_ORDER,
+    payload
+  }
+}
 
 /// ORDENAMIENTOS Y FILTRADOS ///
 export function orderedByPrice(payload) {
@@ -195,19 +271,44 @@ export function orderedByPrice(payload) {
     payload,
   };
 }
-export function filterCategories(payload) {
-  return {
-    type: FILTER_CATEGORIES,
-    payload,
+export function filterCategories(category) {
+  return async function (dispatch) {
+    let categories;
+    try {
+     if(category!=="all"){
+     categories = await axios.get(`${PATH}/products/?category=${category}`); //products por ahora
+     }else{
+      categories= await axios.get(`${PATH}/products`)
+     }
+      return dispatch({
+        type: FILTER_CATEGORIES,
+        payload: categories.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 
-export function filterBrands(payload) {
-  return {
-    type: FILTER_BRANDS,
-    payload,
+
+export function filterBrands(brand) {
+  return async function (dispatch) {
+    let brands;
+    try {
+     if(brand!=="all"){
+     brands = await axios.get(`${PATH}/brands/?brand=${brand}`); //products por ahora
+     } 
+     
+     return dispatch({
+        type: FILTER_BRANDS,
+        payload: brands.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
+
 export function filterMin(payload) {
   return {
     type: FILTER_MIN,

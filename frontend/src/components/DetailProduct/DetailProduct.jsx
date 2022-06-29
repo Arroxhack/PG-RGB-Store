@@ -44,13 +44,13 @@ function DetailProduct() {
   }
 
   return (
-    <div className="md:h-screen bg-gradient-to-t from-primary-300 to-primary flex flex-col">
-      <div className="relative z-50">
+    <div className="md:h-screen flex flex-col">
+      <div className="relative z-50 mb-11">
       <NavBar/>
       </div>
       <section className="font-Open absolute z-100 mt-40">
         {loading ? (
-          <div className="h-full">
+          <div >
             <Loading />
           </div>
         ) : (
