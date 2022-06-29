@@ -17,6 +17,7 @@ import Pagando from "./components/Paypal/Pagando";
 import Profile from "./components/profile/Profile";
 import ValidateNewPassword from "./components/profile/ValidateNewPassword.jsx";
 import CheckProduct from "./components/BuildPc/CheckProduct";
+import CheckoutCart from "./components/Cart/CheckoutCart";
 
 function App() {
   return (
@@ -43,8 +44,8 @@ function App() {
         <Route path="*" element={<Error />} />
 
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
-
-        <Route path="/probando" element={<CheckProduct />} />
+      
+        <Route path="/probando" element={<CheckoutCart />} />
       </Routes>
     </div>
   );
