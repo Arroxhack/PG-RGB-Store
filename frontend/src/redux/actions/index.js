@@ -20,7 +20,13 @@ import {
   EDIT_PROFILE,
   GET_PROFILE,
   SET_FILTER_PRICE,
-  CLEAN_FILTER
+  CLEAN_FILTER,
+  SET_FILTER_BRANDS,
+  CLEAN_FILTER_BRANDS,
+  SET_ORDER,
+  CLEAN_ORDER,
+  CLEAN_FILTER_PRICE,
+  CLEAN_FILTER_ORDER
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -61,6 +67,26 @@ export function cleanFilter() {
     payload: [],
   };
 }
+export function cleanFilterBrands() {
+  return {
+    type: CLEAN_FILTER_BRANDS,
+    payload: [],
+  };
+}
+export function cleanOrder() {
+  return {
+    type: CLEAN_ORDER,
+    payload: [],
+  };
+}
+export function cleanFilterPrice() {
+  return {
+    type: CLEAN_FILTER_PRICE,
+    payload: [],
+  };
+}
+
+
 
 
 /// GET DETALLE DE PRODUCTOS ///
@@ -225,6 +251,18 @@ export function setFilterMax(payload) {
     payload,
   };
 }
+export function setFilterBrands(payload) {
+  return {
+    type: SET_FILTER_BRANDS,
+    payload,
+  };
+}
+export function setOrder(payload){
+  return{
+    type: SET_ORDER,
+    payload
+  }
+}
 
 /// ORDENAMIENTOS Y FILTRADOS ///
 export function orderedByPrice(payload) {
@@ -233,19 +271,44 @@ export function orderedByPrice(payload) {
     payload,
   };
 }
-export function filterCategories(payload) {
-  return {
-    type: FILTER_CATEGORIES,
-    payload,
+export function filterCategories(category) {
+  return async function (dispatch) {
+    let categories;
+    try {
+     if(category!=="all"){
+     categories = await axios.get(`${PATH}/products/?category=${category}`); //products por ahora
+     }else{
+      categories= await axios.get(`${PATH}/products`)
+     }
+      return dispatch({
+        type: FILTER_CATEGORIES,
+        payload: categories.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 
-export function filterBrands(payload) {
-  return {
-    type: FILTER_BRANDS,
-    payload,
+
+export function filterBrands(brand) {
+  return async function (dispatch) {
+    let brands;
+    try {
+     if(brand!=="all"){
+     brands = await axios.get(`${PATH}/brands/?brand=${brand}`); //products por ahora
+     } 
+     
+     return dispatch({
+        type: FILTER_BRANDS,
+        payload: brands.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
+
 export function filterMin(payload) {
   return {
     type: FILTER_MIN,
