@@ -13,11 +13,11 @@ const CartProvider = ({children}) => {
         }
     })
 
-    console.log(products)
+    //console.log(products)
 
     useEffect(()=>{
         localStorage.setItem('cartProducts', JSON.stringify(products))
-        console.log(products)
+        //console.log(products)
     }, [products])
 
     const addProductToCart= product=>{
