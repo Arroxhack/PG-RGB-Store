@@ -28,7 +28,7 @@ function App() {
 
         <Route path="/arma-tu-pc" element={<BuildPc />} />
    
-
+        <Route path="/cart" element={<CheckoutCart />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
@@ -43,7 +43,7 @@ function App() {
 
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
       
-        <Route path="/cart" element={<CheckoutCart />} />
+      
       </Routes>
     </div>
   );
