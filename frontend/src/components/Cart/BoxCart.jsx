@@ -43,7 +43,9 @@ const BoxCart = ({onClick}) => {
                         )
                     })}
                     <div className='flex justify-end mr-10 mb-5'>
-                    <p>{`Total a pagar: $${total.toFixed(2)}`}</p>
+                    <button  className="w-full text-center relative rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1">Proceed to checkout</button>
+                    <p>{`Total: $${total.toFixed(2)}`}</p>
+                    
                     </div>
                 </div>
             }
