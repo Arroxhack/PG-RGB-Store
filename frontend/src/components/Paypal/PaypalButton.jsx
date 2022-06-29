@@ -58,7 +58,6 @@ if(error){
 
   return (
     <div>
-        holi
     <PayPalButtons
 /*         onClick={(data, actions) => {
             //validate on button click

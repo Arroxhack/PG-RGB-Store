@@ -4,6 +4,7 @@ import Logout from "../LogOut/Logout";
 import SearchBar from "../SearchBar/SearchBar";
 import BoxCart from "../Cart/BoxCart";
 import Nav from "./Nav";
+import CheckoutPaypal from "../Paypal/CheckoutPaypal";
 
 function NavBar() {
   const username = localStorage.getItem("username");
@@ -110,6 +111,9 @@ function NavBar() {
         </div>
       </div> */}
       </div>
+      <div className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
+        <CheckoutPaypal/>  
+      </div> 
       <div class="menu w-full lg:flex  space-x-3 lg:items-center lg:w-auto lg:px-3 px-8">
         <div>
           <SearchBar></SearchBar>

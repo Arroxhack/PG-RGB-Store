@@ -5,8 +5,8 @@ import {PayPalButtons, usePayPalScriptReducer} from "@paypal/react-paypal-js";
 import PaypalButton from './PaypalButton';
 import { useNavigate } from 'react-router';
 
-export default function Paypal() {
-    const [checkout, setCheckout] = useState(false); // al ser true se va a la pagina de checkout
+export default function CheckoutPaypal() {
+    // const [checkout, setCheckout] = useState(false); // al ser true se va a la pagina de paypal
     const navigate = useNavigate();
   
 
@@ -51,9 +51,10 @@ export default function Paypal() {
     //     });
     //   } 
 
-    let handleOnClick = () => {
+    let handleOnClick = () => { // Login true -> paypal / login false -> redirige a login
         if(localStorage.getItem("login")){
-            return setCheckout(true)
+            // return setCheckout(true)
+            navigate("/paypal")
         }
         else{
             alert(`No puedes comprar sin haber iniciado sesison
@@ -65,11 +66,7 @@ export default function Paypal() {
 
   return (
     <div >
-
-        {checkout ? <PaypalButton/>
-        : <button onClick={handleOnClick}>Checkout {/* al presionar este boton queremos ir a la pagina de pago, o sea de checkout */}</button>}
-
-
+        <button onClick={handleOnClick}>Checkout</button>
 
         {/* <PayPalButtons
            style={{ layout: "vertical" }}
@@ -79,11 +76,3 @@ export default function Paypal() {
     </div>
   )
 }
-
-
-
-
-
-
-
-
