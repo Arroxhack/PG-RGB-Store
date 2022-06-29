@@ -19,6 +19,8 @@ import {
   GET_USER_DATA,
   EDIT_PROFILE,
   GET_PROFILE,
+  SET_FILTER_PRICE,
+  CLEAN_FILTER
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -57,6 +59,13 @@ export function clean() {
     payload: [],
   };
 }
+export function cleanFilter() {
+  return {
+    type: CLEAN_FILTER,
+    payload: [],
+  };
+}
+
 
 /// GET DETALLE DE PRODUCTOS ///
 export function getProductDetail(id) {
@@ -166,7 +175,12 @@ export function setFilter(payload) {
     payload,
   };
 }
-
+export function setFilterPrice(payload) {
+  return {
+    type: SET_FILTER_PRICE,
+    payload,
+  };
+}
 export function setFilterMax(payload) {
   return {
     type: SET_FILTER_MAX,
@@ -214,7 +228,12 @@ export function searchProducts(search) {
         });
       })
       .catch(() => {
-        alert('Product not found!');
+        Swal.fire({
+          icon:'info',
+          title: 'Product not found',
+          button: 'OK'
+        })
+        ;
       });
   };
 }
