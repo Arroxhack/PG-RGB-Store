@@ -52,9 +52,17 @@ export default function CheckoutPaypal() {
     //   } 
 
     let handleOnClick = () => { // Login true -> paypal / login false -> redirige a login
-        if(localStorage.getItem("login")){
+        // console.log("ACAAAA: ",localStorage.getItem("cartProducts"))
+        // if(localStorage.getItem("cartProducts").length){
+        //     console.log(localStorage.getItem("cartProducts").length)
+        // }
+        if(localStorage.getItem("login") && localStorage.getItem("cartProducts").length > 2){
             // return setCheckout(true)
             navigate("/paypal")
+        }
+        else if(localStorage.getItem("login")){
+            alert("No hay productos en el carrito")
+            navigate("/")
         }
         else{
             alert(`No puedes comprar sin haber iniciado sesison
