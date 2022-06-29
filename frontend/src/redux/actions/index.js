@@ -142,6 +142,28 @@ export const editProduct = (producto)=>{
     }
   }
 }
+/// DELETE PRODUCTO /// 
+export const deleteProduct=(id)=>{
+  return async dispatch =>{
+    try{
+      const deleteProduct = await axios.delete(`${PATH}/delete-product/${id}`)
+
+      Swal.fire({
+        icon:'success',
+        title:'Product delete',
+        confirmButtonText: 'Ok'
+      })
+    }
+    catch(error){
+      Swal.fire({
+        title: 'Algo fallo',
+        text: 'No se pudo borrar el producto',
+        icon: 'error',
+        confirmButtonText: 'ok',
+      });
+    }
+  }
+}
 
 /// POST REGISTRAR USUARIO ///
 export function PostUser(user) {
