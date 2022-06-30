@@ -35,27 +35,41 @@ export default function Profile() {
     }
   };
   return (
-    <div>
-      <ul>
-        <h2>Name: </h2>
+    <div className=" flex flex-col h-screen w-full items-center justify-center bg-primary-200
+    ">
+      <div className="border-2 border-primary-400 h-3/5 w-2/6 flex flex-col items-center justify-center rounded-xl">
+      <ul className="">
+        
+        <h2 className="bor border-b-2 border-primary-300 w-38 text-secundary-250 text-lg">Name: </h2>
         <li>{user.name}</li>
-
-        <h2>LastName:</h2>
+   
+        <h2 className="bor border-b-2 border-primary-300 w-38 text-secundary-250 text-lg">LastName:</h2>
         <li>{user.lastname}</li>
-        <h2>Email:</h2>
+   
+        <h2 className="bor border-b-2 border-primary-300 w-38 text-secundary-250 text-lg">Email:</h2>
         <li>{user.email}</li>
-        <h2>Username:</h2>
+   
+        <h2 className="bor border-b-2 border-primary-300 w-38 text-secundary-250 text-lg">Username:</h2>
         <li>{user.username}</li>
-        <h2>image:</h2>
-        <li>{user.image ? <img src={user.image} /> : "Dato no encontrado"}</li>
-        <h2>cellphone:</h2>
+        
+        <div className="flex bor border-b-2  border-primary-300 w-38 ">
+        <h2 className="pr-4 text-secundary-250 text-lg">image:</h2>
+        <li >{user.image  ? <img  src={user.image} /> : "Dato no encontrado"}</li>
+        </div>
+        <div className="flex bor border-primary-300 border-b-2 w-38">
+        <h2 className="pr-4 text-secundary-250 text-lg">cellphone:</h2>
         <li>{user.cellphone ? user.cellphone : "Dato no encontrado"}</li>
-        <h2>Address:</h2>
+        </div>
+        <div className="flex bor border-b-2 border-primary-300 w-38">
+        <h2 className="pr-4 text-secundary-250 text-lg" >Address:</h2>
         <li>{user.address ? user.address : "Dato no encontrado"}</li>
+        </div>
       </ul>
-      <button onClick={(e) => handleChangePassword(e)}>
+      <button className="mt-4 rounded-lg lg:hover:bg-primary-300 lg:hover:text-primary-400 lg:hover:" onClick={(e) => handleChangePassword(e)}>
         Cambiar Contraseña
       </button>
+      </div>
+     
       {mostrarChangePassword === true ? <ChangePassword /> : null}
     </div>
   );
