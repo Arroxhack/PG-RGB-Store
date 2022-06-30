@@ -1,21 +1,19 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { deleteProduct } from "../../redux/actions";
 import NavBar from "../NavBar/NavBar";
-import Checkout from "../Paypal/Checkout";
 import CheckoutPaypal from "../Paypal/CheckoutPaypal";
 import { CartContext } from "./CartContext";
 
-function CheckoutCart() {
-  const [show, setShow] = useState(false);
-  const { products, deleteProductCart, resetProductCart } =
-    useContext(CartContext);
+function CheckoutCart({product}) {
+  const { products, deleteProductCart, addProductToCart, deleteProduct } = useContext(CartContext);
 
   let total = 0;
   products.forEach((p) => (total += p.amount * p.price));
 
   return (
     <div>
-      <NavBar/>
+      <NavBar />
       <div className="flex items-center justify-center py-8">
         <div>
           <div className="w-full absolute z-10 right-0 h-full">
@@ -37,10 +35,10 @@ function CheckoutCart() {
                     >
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                       <polyline points="15 6 9 12 15 18" />
-                    </svg><p className="text-sm pl-2 leading-none">
+                    </svg>
+                    <p className="text-sm pl-2 leading-none">
                       Back to products
                     </p>
-                    
                   </Link>
                 </div>
                 <p className="text-5xl font-black font-Open leading-10 pt-3">
@@ -51,7 +49,7 @@ function CheckoutCart() {
                   <div>
                     <div>
                       {products.length <= 0 ? (
-                        <p>No products yet!</p>
+                        <p className="flex items-center">No products yet!</p>
                       ) : (
                         <div>
                           {products.map((p) => {
@@ -72,11 +70,15 @@ function CheckoutCart() {
                                     <p className="text-base font-black leading-none text-gray-800">
                                       {p.name}
                                     </p>
-                                    <select className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
-                                      <option>{`x ${p.amount}`}</option>
-                                      <option>{`x ${p.amount + 1}`}</option>
-                                      <option>{`x ${p.amount + 2}`}</option>
-                                    </select>
+                                    <div className="flex justify-around">
+                                      <button  className="quan-buttons"  onClick={(e) => deleteProductCart(p)}>
+                                       - 
+                                      </button>
+                                      <label className="w-5"> {p.amount} </label>
+                                      <button className="quan-buttons" onClick={(e) => addProductToCart(p)}>
+                                       +
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
                                 <p className="text-base font-black leading-none text-gray-800">{`${(
@@ -84,7 +86,7 @@ function CheckoutCart() {
                                 ).toFixed(2)}`}</p>
                                 <button
                                   className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer"
-                                  onClick={(e) => deleteProductCart(p)}
+                                  onClick={(e) => deleteProduct(p)}
                                 >
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
