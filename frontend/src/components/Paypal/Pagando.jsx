@@ -133,8 +133,6 @@ export default function Pagando() {
             `Transaction number: ${detalles.id}`  
             // footer: '<a href="">Why do I have this issue?</a>'
         });
-
-
     })
   };
 
