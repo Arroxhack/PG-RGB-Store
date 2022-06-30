@@ -15,7 +15,7 @@ export default function Pagando() {
     let articulos = productJSON.map(e => {
      return {
             name: e.name,
-            description: e.category[0],
+            description: e.category[0] + "-" + e.id,
             unit_amount: {
                 currency_code: "USD",
                 value: e.price+"" //aca
@@ -41,6 +41,7 @@ export default function Pagando() {
         purchase_units: [{
             reference_id: "PUHF",
             description: "Sporting Goods",
+
             custom_id: "CUST-HighFashions",
             soft_descriptor: "HighFashions",
             amount: {
@@ -131,8 +132,18 @@ export default function Pagando() {
             "</br>" +
             "</br>" +
             `Transaction number: ${detalles.id}`  
+            // text: `Transaction number: ${detalles.id}`,
+            // text: `Amount paid: ${detalles.purchase_units[0].amount.value}`
             // footer: '<a href="">Why do I have this issue?</a>'
-        });
+        })
+        let arregloObjetosIdQuantity = detalles.purchase_units[0].items.map(e => {
+            let id = e.description.split("-")[1]
+            return {id:id, amount:e.quantity}
+        })
+        let products = arregloObjetosIdQuantity
+        axios.put(`http://localhost:3001/remove`, products) // "correctly edit"// "warning negative stock"// "failed on edit"
+            .then((response) => console.log(response))
+            .catch((err) => console.log(err))
     })
   };
 
@@ -164,7 +175,7 @@ export default function Pagando() {
   };
 
   return (
-    <div style={{display: "flex", justifyContent: "center", alignItems: "center", overflow:"auto"}}>
+    <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", overflow:"auto"}}>
         <PayPalButtons
         createOrder={(data, actions) => createOrder(data, actions)}
         onApprove={(data, actions) => onApprove(data, actions)}

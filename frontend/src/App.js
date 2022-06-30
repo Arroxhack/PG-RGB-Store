@@ -25,7 +25,6 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} exact />
         <Route path='/products/:id' element={<DetailProduct />} exact />
-        <Route path='/paypal' element={<PaypalButton />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
         <Route path='/arma-tu-pc' element={<BuildPc />} />
         <Route path='/categories' element={<Categories />} />
