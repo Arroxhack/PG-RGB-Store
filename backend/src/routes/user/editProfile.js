@@ -1,12 +1,12 @@
-const { Router } = require("express");
-const { User } = require("../../db");
+const { Router } = require('express');
+const { User } = require('../../db');
 const router = Router();
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
 //======================================
 //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
 //======================================
-router.put("/profile/edit", async (req, res, next) => {
+router.put('/profile/edit', async (req, res, next) => {
   const {
     id,
     NameEdit,
@@ -21,7 +21,7 @@ router.put("/profile/edit", async (req, res, next) => {
     const user = await User.findOne({ where: { id: id } });
 
     if (!user) {
-      res.status(404).send("Something go wrong :(");
+      res.status(404).send('Something go wrong :(');
     } else {
       const confirm = await bcrypt.compare(Password, user.password);
       if (confirm == true) {
@@ -36,15 +36,35 @@ router.put("/profile/edit", async (req, res, next) => {
           { where: { id: id } }
         );
         if (usuarioEditado[0] == 1) {
-          res.send("Hemos editado su perfil satisfactoriamente");
+          res.send('Hemos editado su perfil satisfactoriamente');
         } else {
-          res.send("Error al editar el perfil");
+          res.send('Error al editar el perfil');
         }
       } else {
-        res.send("Error,Contraseña Incorrecta");
+        res.send('Error,Contraseña Incorrecta');
       }
+      if (req.body.lastname) {
+        user.set({ lastname: req.body.lastname });
+      }
+      if (req.body.username) {
+        user.set({ username: req.body.username });
+      }
+      if (req.body.email) {
+        user.set({ email: req.body.email });
+      }
+      if (req.body.cellphone) {
+        user.set({ cellphone: req.body.cellphone });
+      }
+      if (req.body.address) {
+        user.set({ address: req.body.address });
+      }
+      if (req.body.image) {
+        user.set({ image: req.body.image });
+      }
+      await user.save();
+
       console.log(user);
-      res.send("done");
+      res.send('done');
     }
   } catch (error) {
     next(error);

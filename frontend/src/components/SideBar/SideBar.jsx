@@ -29,7 +29,7 @@ export default function SideBar() {
   const filterOrder= useSelector(state=> state.filterOrder)
 
   const productBrands = []
-  products.forEach(p=>{
+   products && products.forEach(p=>{
     if(!productBrands.includes(p.brand)){
       return productBrands.push(p.brand)
     }
