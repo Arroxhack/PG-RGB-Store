@@ -8,7 +8,8 @@ const router = Router();
 router.get('/products/', async (req, res, next) => {
   try {
     const cat = req.query.category;
-    if (cat) {
+
+    if (cat && cat !=='all') {
       const All = await Product.findAll();
       let AllProducts = All.map((p) => (p.category.includes(cat) ? p : ''));
       AllProducts = AllProducts.filter((e) => {
