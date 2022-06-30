@@ -11,12 +11,10 @@ function Amd() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
 
-
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  
   return (
     <div className="h-full bg-gradient-to-t from-primary-300 to-primary ">
       <NavBar />
@@ -24,17 +22,17 @@ function Amd() {
         <BoxCart />
       </div>
       <p>Now, pick your cpu!</p>
-     
+
       <div className="grid grid-cols-4 w-full gap-2.5 grid-rows-none relative">
-      {allProducts.map((product) => {
-        if(product.brand === "AMD")
-        return (
-          <Link to={`/products/${product.id}`}>
-            <Product key={product.id} product={product} />
-          </Link>
-        );
-      })}
-        </div>     
+        {allProducts.map((product) => {
+          if (product.brand === "AMD")
+            return (
+              <Link to={`/products/${product.id}`}>
+                <Product key={product.id} product={product} />
+              </Link>
+            );
+        })}
+      </div>
     </div>
   );
 }

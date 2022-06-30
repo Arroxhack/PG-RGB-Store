@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import swal from "sweetalert2";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 function ChangePassword() {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ function ChangePassword() {
       withCredentials: true,
     }).then((e) => e.data);
     if (result[0] === "E" && result[1] === "r" && result[2] === "r") {
-      swal.fire({
+      Swal.fire({
         icon: "error",
         title: "Error",
         text: `${result}`,
@@ -41,7 +41,7 @@ function ChangePassword() {
     } else {
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Enviar";
-      swal.fire({
+      Swal.fire({
         icon: "succes",
         title: "EXITO",
         text: `${result}`,
