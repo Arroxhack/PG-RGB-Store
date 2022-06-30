@@ -21,9 +21,12 @@ export default function Pagando() {
         }
     })
     console.log("Mis articulos: ", articulos)
+  
     let PrecioTotalArticulos = productJSON.reduce((prev, current) => {
-      return prev.price*prev.amount + current.price*current.amount +""
+        return prev.price*prev.amount + current.price*current.amount +""
     })
+ 
+   
     console.log("PrecioTotalArticulos: ", PrecioTotalArticulos)
 
 //[

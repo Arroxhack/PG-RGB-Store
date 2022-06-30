@@ -175,7 +175,7 @@ export default function LogIn() {
             <br />
             <div class="t-6">
             {`Don't have an account yet? `} 
-            <a class="no-underline border-b" href="../login/">
+            <a class="no-underline border-b" href="../register/">
             {`Sign Up`}
             </a>
             .
