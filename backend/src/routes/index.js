@@ -9,6 +9,7 @@ const Logout = require('./user/logout');
 const LoadCartProduct = require('./user/LoadCart');
 const email = require('./user/email');
 const editProfile = require('./user/editProfile');
+const removeFromStock = require('./Paypal/RemoveFromStock');
 //====ADMIN===
 const Delete = require('./admin/DeleteProduct');
 const Put = require('./admin/EditProduct');
@@ -46,5 +47,6 @@ router.use('/', CreateAdminUser);
 router.use('/', ResetPassword);
 router.use('/', editProfile);
 router.use('/', filterProduct);
+router.use('/', removeFromStock);
 
 module.exports = router;
