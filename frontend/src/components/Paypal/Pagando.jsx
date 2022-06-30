@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {PayPalButtons} from "@paypal/react-paypal-js";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 
 export default function Pagando() {
@@ -39,7 +41,6 @@ export default function Pagando() {
         purchase_units: [{
             reference_id: "PUHF",
             description: "Sporting Goods",
-
             custom_id: "CUST-HighFashions",
             soft_descriptor: "HighFashions",
             amount: {
@@ -119,15 +120,20 @@ export default function Pagando() {
 
   const onApprove = (data, actions) => { 
     return actions.order.capture().then(function (detalles) { // en detalles esta todo lo que pasa en nuestro pago en un objeto
-        console.log(detalles)
+        console.log("detalles de la compra: ", detalles);
+        Swal.fire({
+            icon: 'success',
+            title: 'Payment Successful!',
+            html: `Payer: ${detalles.payer.name.given_name} ${detalles.payer.name.surname}` +
+            "</br>" +
+            "</br>" +
+            `Amount paid: ${detalles.purchase_units[0].amount.value} USD` +
+            "</br>" +
+            "</br>" +
+            `Transaction number: ${detalles.id}`  
+            // footer: '<a href="">Why do I have this issue?</a>'
+        });
     })
-  };
-
-  const style = {
-    layout: 'vertical',
-    color:  'gold',
-    shape:  'pill',
-    label:  'pay',
   };
 
 //   {id: '6DX94897RC997852V', intent: 'CAPTURE', status: 'COMPLETED', purchase_units: Array(1), payer: {…}, …}
@@ -140,18 +146,31 @@ export default function Pagando() {
 //   status: "COMPLETED"
 //   update_time: "2022-06-29T17:22:20Z"
 
+  const style = {
+    layout: 'vertical',
+    color:  'gold',
+    shape:  'pill',
+    label:  'pay',
+  };
+
   const onCancel = (data) => {  // en data hay un order id que es un objeto {orderID: '6V920429E17498936'}
     console.log(data)
+    Swal.fire({
+        icon: 'error',
+        title: 'Payment Cancelled',
+        text: 'Your payment has been cancelled and will not be charged',
+        // footer: '<a href="">Why do I have this issue?</a>'
+      })
   };
 
   return (
-    <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "300px"}}>
-    <PayPalButtons
-      createOrder={(data, actions) => createOrder(data, actions)}
-      onApprove={(data, actions) => onApprove(data, actions)}
-      onCancel={onCancel}
-      style={style}
-    />
+    <div style={{display: "flex", justifyContent: "center", alignItems: "center", overflow:"auto"}}>
+        <PayPalButtons
+        createOrder={(data, actions) => createOrder(data, actions)}
+        onApprove={(data, actions) => onApprove(data, actions)}
+        onCancel={onCancel}
+        style={style}
+        />
     </div>
   );
 }
