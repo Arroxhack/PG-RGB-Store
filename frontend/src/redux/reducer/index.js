@@ -23,7 +23,9 @@ import {
   CLEAN_FILTER_BRANDS,
   SET_ORDER, 
   CLEAN_ORDER,
-  CLEAN_FILTER_PRICE
+  CLEAN_FILTER_PRICE,
+  FILTER_CATEGORY,
+  FILTER_BRAND
 } from '../types/index';
 
 const initialState = {
@@ -248,9 +250,21 @@ const reducer = (state = initialState, action) => {
         ...state,
         cart: [],
       };
+    /// ORDENAMIENTOS POR BACK ///
+    case FILTER_CATEGORY:
+      return{
+        ...state,
+        products:action.payload
+      };
+    case FILTER_BRAND:
+      return{
+        ...state,
+        products:action.payload
+      };
     default:
       return { ...state };
   }
+
 };
 
 export default reducer;
