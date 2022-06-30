@@ -275,11 +275,9 @@ export function filterCategories(category) {
   return async function (dispatch) {
     let categories;
     try {
-     if(category!=="all"){
+
      categories = await axios.get(`${PATH}/products/?category=${category}`); //products por ahora
-     }else{
-      categories= await axios.get(`${PATH}/products`)
-     }
+
       return dispatch({
         type: FILTER_CATEGORIES,
         payload: categories.data,

@@ -27,18 +27,25 @@ export default function SideBar() {
   const filterBrand = useSelector(state => state.filterBrands);
   const filterOrder= useSelector(state=> state.filterOrder)
 
+  const productBrands = []
+  products.forEach(p=>{
+    if(!productBrands.includes(p.brand)){
+      return productBrands.push(p.brand)
+    }
+  })
   
+  console.log(productBrands)
   const[searchParams,setSearchParams]= useSearchParams()
   const categoryQuery = searchParams.get("category")
   const brandQuery=searchParams.get("brand")
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getBrand())
-    if(categoryQuery != "all" && categories.length<10) dispatch(filterCategories(categoryQuery))
-
+    dispatch(filterCategories(categoryQuery))
     }
-  , [products, dispatch,brandQuery,categoryQuery]);
+  , [dispatch,brandQuery,categoryQuery]);
   
+
 
 
   // //--------------HANDLES CLEAN--------------
@@ -209,7 +216,6 @@ export default function SideBar() {
     e.preventDefault();
     setSearchParams({[e.target.name]:e.target.value})
     dispatch(filterCategories(categoryQuery))
-    
   }
 
   function handleFilterBrand(e) {
@@ -247,6 +253,7 @@ export default function SideBar() {
               className="text-left text-lg pl-8  "
               onClick={e => handleFilterCat(e)}
               value={"all"}
+              name='category'
             >
               All
             </button>
@@ -280,8 +287,8 @@ export default function SideBar() {
         >
           All
         </button>
-        {brand
-          ? brand.map(m => {
+        {productBrands
+          ? productBrands.map(m => {
               return (
                 <button
                   className="text-left text-lg pl-4 hover:animate-pulse "
