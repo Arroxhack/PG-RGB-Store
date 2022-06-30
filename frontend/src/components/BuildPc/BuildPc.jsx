@@ -42,7 +42,15 @@ function BuildPc() {
 
   const allProducts = useSelector((state) => state.allProducts);
   
- 
+ /*
+  FALTA:
+  QUE BOTON AMD E INTEL DESAPAREZCAN.
+  CAMBIAS PARA TRAER LOS COMPONENTES DEL BACK.
+  QUE ELIMINE LOS PRODUCTOS CON OPTION DE SLECT EN NOTHING.
+  SUMAR LAS COSAS AL CARRITO.
+  QUE MUESTRE LAS FOTOS DE LOS PRODUCTOS.
+  VER TEMA COMPATIBILIDAD
+  */
 
   const handleClickBrand = (e)=>{
     e.preventDefault();
@@ -109,7 +117,7 @@ function BuildPc() {
       }
     }
   }
-  console.log(build)
+
   return (
     // container de toda la pagina
     <div className="h-screen bg-primary-300 ">
