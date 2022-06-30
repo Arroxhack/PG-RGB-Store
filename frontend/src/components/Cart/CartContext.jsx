@@ -52,6 +52,21 @@ const CartProvider = ({children}) => {
         
     }
 
+    const deleteProduct = product => {
+        const inCart = products.find(p=>p.id===product.id)
+
+            if(inCart.amount===0){
+                setProducts(products.filter(p=>p.id!==product.id))
+            }
+            if(inCart.amount>=1){
+                setProducts(products.map(p=>{
+                    if(p.id===product.id){
+                       return {...inCart, amount: inCart.amount - inCart.amount}
+                    } return p
+                }))
+            }
+    }
+
     // const deleteProductCart = product=>{
     //     products.filter(p=>p.id!==product.id
     //     const inCart = products.find(p=>p.id===product.id)
@@ -75,9 +90,10 @@ const CartProvider = ({children}) => {
     }
 
 
+
     return (
 
-        <CartContext.Provider value={{products, addProductToCart,deleteProductCart, resetProductCart}}>
+        <CartContext.Provider value={{products, addProductToCart,deleteProductCart,deleteProduct, resetProductCart}}>
             {children}
         </CartContext.Provider>
     )

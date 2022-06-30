@@ -29,6 +29,7 @@ import {
   CLEAN_FILTER_ORDER,
   FILTER_CATEGORY,
   FILTER_BRAND,
+  DELETE_CART,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -246,6 +247,7 @@ export const addCart = (product) => {
     payload: product,
   };
 };
+
 export const resetCart = () => {
   return {
     type: RESET_CART,
