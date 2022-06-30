@@ -101,7 +101,6 @@ export function getAllCategories() {
   return async function (dispatch) {
     try {
       let AllCategory = await axios.get(`${PATH}/category`);
-      console.log(AllCategory);
       let allCategoryData = AllCategory.data.map((e) => e.name);
       return dispatch({
         type: GET_CATEGORIES,
