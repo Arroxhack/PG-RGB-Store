@@ -26,7 +26,9 @@ import {
   SET_ORDER,
   CLEAN_ORDER,
   CLEAN_FILTER_PRICE,
-  CLEAN_FILTER_ORDER
+  CLEAN_FILTER_ORDER,
+  FILTER_CATEGORY,
+  FILTER_BRAND
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -271,15 +273,46 @@ export function orderedByPrice(payload) {
     payload,
   };
 }
+
+export const filterCategory = category=>{
+  return async dispatch=>{
+    try{
+      const filterCat = await axios.get(`${PATH}/filter/?category=${category}`)
+
+      return dispatch({
+        type: FILTER_CATEGORY,
+        payload: filterCat.data
+      })
+
+    } catch(error){
+      console.log(error)
+    }
+  }
+}
+
+export const filterBran = (category, brand)=>{
+  return async dispatch=>{
+    try{
+      const filterBran = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}`)
+
+      return dispatch({
+        type: FILTER_BRAND,
+        payload: filterBran.data
+      })
+
+    } catch(error){
+      console.log(error)
+    }
+  }
+}
+
 export function filterCategories(category) {
   return async function (dispatch) {
     let categories;
     try {
-     if(category!=="all"){
+
      categories = await axios.get(`${PATH}/products/?category=${category}`); //products por ahora
-     }else{
-      categories= await axios.get(`${PATH}/products`)
-     }
+
       return dispatch({
         type: FILTER_CATEGORIES,
         payload: categories.data,
@@ -289,7 +322,6 @@ export function filterCategories(category) {
     }
   };
 }
-
 
 export function filterBrands(brand) {
   return async function (dispatch) {
