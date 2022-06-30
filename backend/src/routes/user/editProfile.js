@@ -1,24 +1,47 @@
 const { Router } = require('express');
 const { User } = require('../../db');
 const router = Router();
+const bcrypt = require('bcrypt');
 
 //======================================
 //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
 //======================================
-router.put('/profile/edit/:username', async (req, res, next) => {
-  const { username } = req.params;
+router.put('/profile/edit', async (req, res, next) => {
+  const {
+    id,
+    NameEdit,
+    LastnameEdit,
+    AddressEdit,
+    CellphoneEdit,
+    ImageUpload,
+    Password,
+  } = req.body;
 
   try {
-    const user = await User.findOne({ where: { username } });
+    const user = await User.findOne({ where: { id: id } });
 
     if (!user) {
       res.status(404).send('Something go wrong :(');
     } else {
-      //const objFinal = checkUser(toEdit);
-      //LO HAGO ASI PORQUE SI NO ME TIRA ERROR, SON LAS 1 AM
-      //CUANDO TENGAMOS TIEMPO LO ARREGLO, PORFA NO CRITIQUEN DEA
-      if (req.body.name) {
-        user.set({ name: req.body.name });
+      const confirm = await bcrypt.compare(Password, user.password);
+      if (confirm == true) {
+        const usuarioEditado = await User.update(
+          {
+            name: NameEdit,
+            lastname: LastnameEdit,
+            address: AddressEdit,
+            cellphone: CellphoneEdit,
+            image: ImageUpload,
+          },
+          { where: { id: id } }
+        );
+        if (usuarioEditado[0] == 1) {
+          res.send('Hemos editado su perfil satisfactoriamente');
+        } else {
+          res.send('Error al editar el perfil');
+        }
+      } else {
+        res.send('Error,Contraseña Incorrecta');
       }
       if (req.body.lastname) {
         user.set({ lastname: req.body.lastname });

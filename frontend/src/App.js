@@ -15,6 +15,9 @@ import Profile from './components/profile/Profile';
 import ValidateNewPassword from './components/profile/ValidateNewPassword.jsx';
 import CheckProduct from './components/BuildPc/CheckProduct';
 import PaypalButton from './components/Paypal/PaypalButton';
+import './App.css';
+import Pagando from './components/Paypal/Pagando';
+import CheckoutCart from './components/Cart/CheckoutCart';
 
 function App() {
   return (
@@ -31,6 +34,11 @@ function App() {
         <Route path='/validate/:username' element={<Validacion />} />
         <Route path='/admin' element={<HomeAdmin />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/paypal' element={<Pagando />} exact />
+        <Route path='/' element={<Home />} exact />
+        <Route path='/products/:id' element={<DetailProduct />} exact />
+        {/* <Route path="/cart" element={<Cart />} /> */}
+        <Route path='/cart' element={<CheckoutCart />} />
         <Route
           path='/resetPassword/:username'
           element={<ValidateNewPassword />}

@@ -5,7 +5,7 @@ import { verify } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import jwt_decode from "jwt-decode";
 import NavBar from "../NavBar/NavBar";
-import swal from "sweetalert2";
+import Swal from "sweetalert2";
 
 export default function LogIn() {
   let navigate = useNavigate();
@@ -17,14 +17,29 @@ export default function LogIn() {
     window.location.reload(false);
   };
   const ResendEmail = async (email) => {
-    console.log(email);
-    await axios({
+    const result = await axios({
       method: "post",
       url: "http://localhost:3001/resendEmailLogin",
       data: { email }, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
     });
+    if (result[0] === "E" && result[1] === "r" && result[2] === "r") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `${result}`,
+        button: "Aceptar",
+      });
+    } else {
+      Swal.fire({
+        icon: "succes",
+        title: "EXITO",
+        text: `${result}`,
+        button: "Aceptar",
+      });
+      navigate(`/`);
+    }
   };
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +60,7 @@ export default function LogIn() {
     let { login, lastname, verify, username, email, permissions, name, id } =
       user; //Info que trae la ruta
     if (verify === false) {
-      swal.fire({
+      Swal.fire({
         icon: "error" / "success",
         title: "Error",
         text: "Su Cuenta no esta verificada, sera redirigido a una pagina para verificar su correo electronico",
@@ -97,7 +112,7 @@ export default function LogIn() {
       localStorage.setItem("email", user.email);
       navigate("/");
     } else {
-      swal(
+      Swal(
         "El email asociado a la cuenta de google no coincide con ningun usuario registrado",
         "...redirigiendo para registrarse como un nuevo usuario!"
       ); // sweet alert
@@ -154,14 +169,12 @@ export default function LogIn() {
             </div>
             {errors ? (
               <p /* style={{color: "red"}} */ class="bg-secundary-50">
-                {swal
-                  .fire({
-                    icon: "error" / "success",
-                    title: "Error",
-                    text: errors,
-                    button: "Aceptar",
-                  })
-                  .then(() => refresh())}
+                {Swal.fire({
+                  icon: "error" / "success",
+                  title: "Error",
+                  text: errors,
+                  button: "Aceptar",
+                }).then(() => refresh())}
               </p>
             ) : null}{" "}
             {/* si hay errores salen aca */}
@@ -172,6 +185,14 @@ export default function LogIn() {
               Login
             </button>
             <div id="signInDiv"></div>
+            <br />
+            <div class="t-6">
+              {`Don't have an account yet? `}
+              <a class="no-underline border-b" href="../login/">
+                {`Sign Up`}
+              </a>
+              .
+            </div>
           </form>
         </div>
         {/*        { googleUser && 

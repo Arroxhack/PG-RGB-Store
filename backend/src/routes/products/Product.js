@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Product, Category, Op } = require('../../db');
+const { Product, Category, Op, Brand } = require('../../db');
 const router = Router();
 
 // hacemos un get de components (Products)
@@ -36,6 +36,42 @@ router.get('/products/', async (req, res, next) => {
     next(e);
   }
 });
+
+router.get('/brands/',async (req,res,next)=>{
+  try {
+    const marca = req.query.brand;
+    console.log(marca)
+    if (marca) {
+      const All= await Product.findAll();
+      let AllProduct = All.map((p) => (p.brand === marca ? p : ''));
+      AllProduct = AllProduct.filter((e) => {
+        if (e.id) {
+          return e;
+        }})
+      if (AllProduct.length > 0) {
+        res.send(AllProduct);
+      } else {
+        res.status(404).send('Error, Not Product with that Brand');
+      }
+    } else {
+      const allProducts = await Product.findAll();
+      if (allProducts.length) {
+        res.send(allProducts);
+      } else {
+        res.status(404).send('Error, Not Product in DataBase');
+      }
+    }
+  } catch (e) {
+    next(e);
+  }
+})
+
+
+
+
+
+
+
 router.get('/products/:ID', async (req, res, next) => {
   let { ID } = req.params;
   ID = Number(ID);

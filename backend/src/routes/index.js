@@ -8,7 +8,9 @@ const Login = require('./user/login');
 const Logout = require('./user/logout');
 const LoadCartProduct = require('./user/LoadCart');
 const email = require('./user/email');
+const editProfile = require('./user/editProfile');
 //====ADMIN===
+
 const Delete = require('./admin/DeleteProduct');
 const Put = require('./admin/EditProduct');
 const Create = require('./admin/CreateProduct');
@@ -41,4 +43,5 @@ router.use('/', LoadCartProduct);
 router.use('/', email);
 router.use('/', CreateAdminUser);
 router.use('/', ResetPassword);
+router.use('/', editProfile);
 module.exports = router;

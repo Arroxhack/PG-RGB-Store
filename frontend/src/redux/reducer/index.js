@@ -20,6 +20,13 @@ import {
   CLEAN_FILTER,
   BUILD_PC,
   GET_PRODUCTS_BY_CATEGORY,
+  SET_FILTER_BRANDS,
+  CLEAN_FILTER_BRANDS,
+  SET_ORDER,
+  CLEAN_ORDER,
+  CLEAN_FILTER_PRICE,
+  FILTER_CATEGORY,
+  FILTER_BRAND,
 } from '../types/index';
 
 const initialState = {
@@ -36,6 +43,8 @@ const initialState = {
   filterPrice: [],
   buildPc: {},
   productsByCategory: [],
+  filterBrands: [],
+  filterOrder: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -109,40 +118,89 @@ const reducer = (state = initialState, action) => {
 
     /// FILTRADO Y ORDENAMIENTO ///
     case FILTER_BY_PRICE:
-      let orderedByPrice = state.filtros.includes('menor valor')
-        ? state.products.sort(function (a, b) {
-            if (a.price > b.price) return 1;
-            if (b.price > a.price) return -1;
-            return 0;
-          })
-        : state.products.sort(function (a, b) {
-            if (a.price > b.price) return -1;
-            if (b.price > a.price) return 1;
-            return 0;
-          });
+      let orderedByPrice =
+        //SI TENGO CATEGORIES
+        !state.filterBrands.length > 0 &&
+        state.filtros.length > 0 &&
+        state.filterOrder.includes('menor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+            })
+          : !state.filterBrands.length > 0 &&
+            state.filtros.length > 0 &&
+            state.filterOrder.includes('mayor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
+            })
+          : //SI NO TENGO CATEGORIES NI MARCAS
+          !state.filtros.length > 0 &&
+            !state.filterBrands.length > 0 &&
+            state.filterOrder.includes('menor valor')
+          ? state.allProducts.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+            })
+          : !state.filtros.length > 0 &&
+            !state.filterBrands.length > 0 &&
+            state.filterOrder.includes('mayor valor')
+          ? state.allProducts.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
+            })
+          : // SI TENGO MARCAS
+          state.brands.length > 0 && state.filterOrder.includes('menor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+            })
+          : state.brands.length > 0 && state.filterOrder.includes('mayor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
+            })
+          : //// SI TENGO TODO
+          state.brands.length > 0 &&
+            state.filtros.length > 0 &&
+            state.filterMax.length > 0 &&
+            state.filterPrice.le &&
+            state.filterOrder.includes('menor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+            })
+          : state.brands.length > 0 && state.filterOrder.includes('mayor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
+            })
+          : 0;
+
       return {
         ...state,
         products: orderedByPrice,
       };
 
     case FILTER_CATEGORIES:
-      const products = state.products;
-      const filter = state.filtros;
-      const categoriesFiltered = filter.includes('all')
-        ? state.allProducts
-        : products.filter((e) => e.category.includes(filter[0]));
-
       return {
         ...state,
-        products: categoriesFiltered,
+        products: action.payload,
       };
 
     case FILTER_MIN:
-      const filterMaxAndMin = state.filtros
-        ? state.products.filter(
-            (e) => e.price > state.filterPrice && e.price < state.filterMax
-          )
-        : alert('No existen productos en este rango');
+      let filterMaxAndMin = state.allProducts.filter(
+        (e) => e.price > state.filterPrice && e.price < state.filterMax
+      );
+
       return {
         ...state,
         products: filterMaxAndMin,
@@ -154,7 +212,7 @@ const reducer = (state = initialState, action) => {
         : state.allProducts.filter((e) => state.filtros.includes(e.brand));
       return {
         ...state,
-        products: brandsFiltered,
+        products: action.payload,
       };
 
     ///SETEA EL ESTADO DE FILTROS///
@@ -173,6 +231,16 @@ const reducer = (state = initialState, action) => {
         ...state,
         filterPrice: action.payload,
       };
+    case SET_FILTER_BRANDS:
+      return {
+        ...state,
+        filterBrands: action.payload,
+      };
+    case SET_ORDER:
+      return {
+        ...state,
+        filterOrder: action.payload,
+      };
 
     case CLEAN:
       return {
@@ -186,6 +254,23 @@ const reducer = (state = initialState, action) => {
         filtros: action.payload,
       };
 
+    case CLEAN_FILTER_BRANDS:
+      return {
+        ...state,
+        filterBrands: action.payload,
+      };
+    case CLEAN_ORDER:
+      return {
+        ...state,
+        filterOrder: action.payload,
+      };
+    case CLEAN_FILTER_PRICE:
+      return {
+        ...state,
+        filterMax: action.payload,
+        filterPrice: action.payload,
+      };
+
     /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///
     case ADD_CART:
       return {
@@ -196,6 +281,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cart: [],
+      };
+    /// ORDENAMIENTOS POR BACK ///
+    case FILTER_CATEGORY:
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case FILTER_BRAND:
+      return {
+        ...state,
+        products: action.payload,
       };
     default:
       return { ...state };
