@@ -6,7 +6,8 @@ import {
   getAllProducts,
   setFilterBrands,
   setFilterMax,
-  setFilterPrice,cleanOrder,orderedByPrice, cleanFilterBrands
+  setFilterPrice,cleanOrder,orderedByPrice, cleanFilterBrands,
+  filterCategory, filterBran
 } from "../../redux/actions";
 import { setFilter } from "../../redux/actions";
 import { filterCategories } from "../../redux/actions";
@@ -27,18 +28,22 @@ export default function SideBar() {
   const filterBrand = useSelector(state => state.filterBrands);
   const filterOrder= useSelector(state=> state.filterOrder)
 
-  
+  const productBrands = []
+  products.forEach(p=>{
+    if(!productBrands.includes(p.brand)){
+      return productBrands.push(p.brand)
+    }
+  })
+
   const[searchParams,setSearchParams]= useSearchParams()
   const categoryQuery = searchParams.get("category")
   const brandQuery=searchParams.get("brand")
   useEffect(() => {
-    dispatch(getAllCategories());
-    dispatch(getBrand())
-    if(categoryQuery != "all" && categories.length<10) dispatch(filterCategories(categoryQuery))
-
+    dispatch(getAllCategories())
+    if(!brandQuery){dispatch(filterCategory(categoryQuery))}
+    if(brandQuery){dispatch(filterBran(categoryQuery,brandQuery))}
     }
-  , [products, dispatch,brandQuery,categoryQuery]);
-  
+  ,[brandQuery,categoryQuery, dispatch]);
 
 
   // //--------------HANDLES CLEAN--------------
@@ -208,14 +213,13 @@ export default function SideBar() {
   function handleFilterCat(e) {
     e.preventDefault();
     setSearchParams({[e.target.name]:e.target.value})
-    dispatch(filterCategories(categoryQuery))
-    
+    dispatch(filterCategory(categoryQuery))
   }
 
   function handleFilterBrand(e) {
     e.preventDefault();
-    setSearchParams({[e.target.name]:e.target.value})
-    dispatch(filterBrands(brandQuery));
+    setSearchParams({category:categoryQuery, [e.target.name]:e.target.value})
+    dispatch(filterBran(categoryQuery,brandQuery));
   }
 
   function handleFilterMax(e) {
@@ -247,6 +251,7 @@ export default function SideBar() {
               className="text-left text-lg pl-8  "
               onClick={e => handleFilterCat(e)}
               value={"all"}
+              name='category'
             >
               All
             </button>
@@ -276,12 +281,12 @@ export default function SideBar() {
           className="text-left text-lg pl-4"
           onClick={e => handleFilterBrand(e)}
           value="all"
-          name="all"
+          name="brand"
         >
           All
         </button>
-        {brand
-          ? brand.map(m => {
+        {productBrands
+          ? productBrands.map(m => {
               return (
                 <button
                   className="text-left text-lg pl-4 hover:animate-pulse "

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import swal from "sweetalert2";
+import Swal from "sweetalert2";
 
 export default function Validations() {
   const navigate = useNavigate();
@@ -24,8 +24,26 @@ export default function Validations() {
       .then((e) => e.data)
       .catch((e) => console.log(e));
 
-    if (UserRegister.validate === true) {
-      let { login, lastname, verify, username, email, permissions, name } = UserRegister.user;
+    if (
+      UserRegister[0] === "E" &&
+      UserRegister[1] === "r" &&
+      UserRegister[2] === "r"
+    ) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `${UserRegister}`,
+        button: "Aceptar",
+      });
+    } else {
+      Swal.fire({
+        icon: "succes",
+        title: "Exito",
+        text: `Verificacion Completa`,
+        button: "Aceptar",
+      });
+      let { login, lastname, verify, username, email, permissions, name } =
+        UserRegister.user;
       localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
       localStorage.setItem("name", name);
       localStorage.setItem("lastname", lastname);
@@ -33,8 +51,6 @@ export default function Validations() {
       localStorage.setItem("email", email);
       localStorage.setItem("Admin", permissions);
       navigate("/");
-    } else {
-      alert("The Token is not correctly");
     }
   }
   function deshabilitar_btnEnviar() {
@@ -54,8 +70,15 @@ export default function Validations() {
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
     }).then((e) => e.data);
-    if (result.length) {
-      swal.fire({
+    if (result[0] === "E" && result[1] === "r" && result[2] === "r") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `${result}`,
+        button: "Aceptar",
+      });
+    } else {
+      Swal.fire({
         icon: "success",
         title: "REENVIADO",
         text: "Codigo Reenviado,Espere 30 segundos para reenviarlo nuevamente",

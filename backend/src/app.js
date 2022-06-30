@@ -59,7 +59,7 @@ passport.use(
     findUser(username) //busca en Postgress el usuario // FUNCION EN CONTROLADORES
       .then((user) => {
         if (!user) {
-          return done(null, false, { message: "Nombre de usuario incorrecto" });
+          return done(null, false, { message: "Error Nombre de usuario incorrecto" });
         }
         if (user) {
           // Voy a hacer la comparación y evaluar el resultado
@@ -67,7 +67,7 @@ passport.use(
             // console.log(res, 'la respuesta de la promesa')
             if (res === false) {
               // No hay coincidencia entre las password
-              return done(null, false, { message: "Contraseña incorrecta" });
+              return done(null, false, { message: "Error Contraseña incorrecta" });
             }
             if (res === true) {
               // Si hay coincidencia entre las password
