@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import swal from "sweetalert2";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 function ChangePassword() {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ function ChangePassword() {
       withCredentials: true,
     }).then((e) => e.data);
     if (result[0] === "E" && result[1] === "r" && result[2] === "r") {
-      swal.fire({
+      Swal.fire({
         icon: "error",
         title: "Error",
         text: `${result}`,
@@ -41,7 +41,7 @@ function ChangePassword() {
     } else {
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Enviar";
-      swal.fire({
+      Swal.fire({
         icon: "succes",
         title: "EXITO",
         text: `${result}`,
@@ -54,30 +54,35 @@ function ChangePassword() {
   };
   return (
     <div>
-      <p>Porfavor ingrese su contraseña actual</p>
-      <form onSubmit={handleSubmit}>
-        <input
-          className="border-2 border-primary-400 rounded max-w-max  "
-          onChange={handleOnChange}
-          type="password"
-          name="password"
-          placeholder="Ingrese su contraseña actual"
-        />
-        <input
-          className="border-2 border-primary-400 rounded max-w-max  "
-          onChange={handleOnChange}
-          type="password"
-          name="passwordValidate"
-          placeholder="Ingrese Nuevamente su contraseña"
-        />
-        <button
-          className="hover:bg-primary-400 rounded-xl w-24 text-xl items-center"
-          id="enviar"
-          type="submit"
+      <div className="bg-secundary-200 px-2 py-6 rounded shadow-md text-black">
+        <p>Porfavor ingrese 2 veces su contraseña actual</p>
+        <form
+          className="flex flex-col justify-center items-center sm:w-80 sm:h-80"
+          onSubmit={handleSubmit}
         >
-          Enviar
-        </button>
-      </form>
+          <input
+            className="border-2 border-primary-400 rounded max-w-max  "
+            onChange={handleOnChange}
+            type="password"
+            name="password"
+            placeholder="Ingrese su contraseña"
+          />
+          <input
+            className="border-2 border-primary-400 rounded max-w-max  "
+            onChange={handleOnChange}
+            type="password"
+            name="passwordValidate"
+            placeholder="Ingrese su contraseña"
+          />
+          <button
+            className="hover:bg-primary-400 rounded-xl w-24 text-xl items-center"
+            id="enviar"
+            type="submit"
+          >
+            Enviar
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
