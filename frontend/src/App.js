@@ -16,6 +16,7 @@ import Profile from "./components/profile/Profile";
 import ValidateNewPassword from "./components/profile/ValidateNewPassword.jsx";
 import CheckProduct from "./components/BuildPc/CheckProduct";
 import CheckoutCart from "./components/Cart/CheckoutCart";
+import BoxComent from "./components/BoxComent/BoxComent";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/validate/:username" element={<Validacion />} />
         <Route path="/admin" element={<HomeAdmin />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/comment" element={<BoxComent/>}/>
         <Route
           path="/resetPassword/:username"
           element={<ValidateNewPassword />}
