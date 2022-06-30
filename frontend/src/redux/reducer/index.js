@@ -64,7 +64,7 @@ const reducer = (state = initialState, action) => {
       };
 
     //BUILD PC PROPIAAA
-    //SE GUARDA COMO UN OBJETO QUE EN SUS ATRIBUTOS TIENE OBJETOS, CADA KEY ES UNA CATEGORY Y CADA VALUE ES COMPONENTE QUE PERTENCE A ESA CATEGORY
+    //SE GUARDA COMO UN OBJETO QUE EN SUS ATRIBUTOS TIENE LOS ID DE LOS PRODUCTOS, CADA KEY ES UNA CATEGORY Y CADA VALUE ES COMPONENTE QUE PERTENCE A ESA CATEGORY
     case BUILD_PC:
       return {
         ...state,
@@ -76,14 +76,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         productsByCategory: action.payload,
       };
-    //======================================
-    //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
-    //======================================
-    // case GET_PROFILE:
-    //   return {
-    //     ...state,
-    //     profile: action.payload,
-    //   };
+
     case GET_CATEGORIES:
       return {
         ...state,

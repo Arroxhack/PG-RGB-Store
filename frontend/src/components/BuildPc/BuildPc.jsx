@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar/NavBar";
-import { getAllProducts, getAllCategories } from "../../redux/actions";
-import { Link, useSearchParams } from "react-router-dom";
+import { getAllProducts, getAllCategories,buildPc } from "../../redux/actions";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import CheckProduct from "./CheckProduct";
 
@@ -20,7 +20,10 @@ import hdd from './/imagesBuild/hdd.svg'
 function BuildPc() {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams({});
-  const [build,setBuild]=useState({CPU:{},Motherboard:{},GPU:{},Ram:{},'Power Supply':{},Case:{},SSD:{},HDD:{},'SSD M.2':{}});
+  const [build,setBuild]=useState({});
+  //{CPU:{},Motherboard:{},GPU:{},Ram:{},'Power Supply':{},Case:{},SSD:{},HDD:{},'SSD M.2':{}}
+  //algo asi se tendria que ver el build
+
   const [cpus, setCpu] = useState([]);//PROCESADORES
   const [mothers, setMother] = useState([]);//MOTHERS
   const [rams, setRam] = useState([]);//RAMS
@@ -30,7 +33,8 @@ function BuildPc() {
   const [ssds, setSsd] = useState([]);
   const [m2s, setM2] = useState([]);
   const [hdds, setHdd] = useState([]);
-
+  
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getAllProducts());
     dispatch(getAllCategories());
@@ -84,38 +88,28 @@ function BuildPc() {
       const auxHdd = allProducts.filter(el=>el.category.includes('HDD') && el)
       setHdd(auxHdd);
     }
-
-
-
   }
 
   const handleSelect = (e)=>{
     e.preventDefault();
 
-    setBuild({
-      ...build,
-      [e.target.name]:e.target.value
-    })
-    setSearchParams({
-      [e.target.name]:e.target.value
-    })
-    console.log(e.target.value[0])
+    //CHECKAMOS QUE HAYA ELEGIDO ALGO
+    if(e.target.value !== 'nothing'){
+      setBuild({
+        ...build,
+        [e.target.name]:e.target.value
+      })
+    }
+    //SI VALUE ES NOTHING Y BUILD LO INCLUYE, LO BORRAMOS
+    if(e.target.value){
+      for(const val in build){
+        if(build[val] === 'nothing'){
+          delete build[val];
+        }
+      }
+    }
   }
-
-  // const handleClickComponents = (e)=>{
-   
-  //   setBuild({
-  //     ...build,
-  //     [e.target.name]:e.target.value
-      
-  //   })  
-   
-  //   setSearchParams({
-  //     [e.target.name]:e.target.value
-  //   })
-    
-  // }
-
+  console.log(build)
   return (
     // container de toda la pagina
     <div className="h-screen bg-primary-300 ">
@@ -128,7 +122,10 @@ function BuildPc() {
             cpus.length > 0 ?
             <div>
               <img src={cpu} alt="cpu" width='100px' heigth='100px'/>
-              <select onChange={handleSelect} name='CPU'>{cpus.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
+              <select onChange={handleSelect} name='CPU'>
+              <option value='' disabled selected >Choose your cpu</option>
+              <option value='nothing'>Nothing</option>
+                {cpus.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
           }
 
@@ -136,7 +133,10 @@ function BuildPc() {
             mothers.length > 0 ?
             <div>
               <img src={mother} alt="mother" width='100px' heigth='100px'/>
-              <select onChange={handleSelect} name='Motherboard'>{mothers.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
+              <select onChange={handleSelect} name='Motherboard'>
+                <option value='' disabled selected >Choose your Motherboard</option>
+                <option value='nothing'>Nothing</option>
+              {mothers.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
           } 
          
@@ -144,7 +144,10 @@ function BuildPc() {
             rams.length > 0 ?
             <div>
               <img src={ram} alt="ram" width='100px' heigth='100px'/>
-              <select onChange={handleSelect} name='Ram'>{rams.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
+              <select onChange={handleSelect} name='Ram'>
+              <option value='' disabled selected >Choose your Ram</option>
+              <option value='nothing'>Nothing</option>
+                {rams.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
           } 
 
@@ -152,7 +155,10 @@ function BuildPc() {
             gpus.length > 0 ?
             <div>
               <img src={gpu} alt="gpu" width='100px' heigth='100px'/>
-              <select onChange={handleSelect} name='GPU'>{gpus.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
+              <select onChange={handleSelect} name='GPU'>
+              <option value='' disabled selected >Choose your GPU</option>
+              <option value='nothing'>Nothing</option>
+                {gpus.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
           } 
 
@@ -160,7 +166,10 @@ function BuildPc() {
             cases.length > 0 ?
             <div>
               <img src={casee} alt="case" width='100px' heigth='100px'/>
-              <select onChange={handleSelect} name='Case'>{cases.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
+              <select onChange={handleSelect} name='Case'>
+              <option value='' disabled selected >Choose your Case</option>
+              <option value='nothing'>Nothing</option>
+                {cases.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
           }   
 
@@ -168,7 +177,10 @@ function BuildPc() {
             psus.length > 0 ?
             <div>
               <img src={psu} alt="PowerSupply" width='100px' heigth='100px'/>
-              <select onChange={handleSelect} name='Power Supply'>{psus.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
+              <select onChange={handleSelect} name='Power Supply'>
+              <option value='' disabled selected >Choose your Power Supply</option>
+              <option value='nothing'>Nothing</option>
+                {psus.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
           }   
 
@@ -176,7 +188,10 @@ function BuildPc() {
             ssds.length > 0 ?
             <div>
               <img src={ssd} alt="ssd" width='100px' heigth='100px'/>
-              <select onChange={handleSelect} name='SSD'>{ssds.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
+              <select onChange={handleSelect} name='SSD'>
+              <option value='' disabled selected >Choose your SSD</option>
+              <option value='nothing'>Nothing</option>
+                {ssds.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
           }   
 
@@ -185,7 +200,10 @@ function BuildPc() {
             m2s.length > 0 ?
             <div>
               <img src={m2} alt="ssdm.2" width='100px' heigth='100px'/>
-              <select onChange={handleSelect} name='SSD M.2'>{m2s.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
+              <select onChange={handleSelect} name='SSD M.2'>
+              <option value='' disabled selected >Choose your SSD M.2</option>
+              <option value='nothing'>Nothing</option>
+                {m2s.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
           }   
 
@@ -194,11 +212,15 @@ function BuildPc() {
             hdds.length > 0 ?
             <div>
               <img src={hdd} alt="hdd" width='100px' heigth='100px'/>
-              <select onChange={handleSelect} name='HDD'>{hdds.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
+              <select onChange={handleSelect} name='HDD'>
+              <option value='' disabled selected >Choose your HDD</option>
+              <option value='nothing'>Nothing</option>
+                {hdds.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
-          }   
+          }
+
+          <button onClick={()=>{dispatch(buildPc(build)); navigate('/cart')}}>Buy</button>
       </div>
-          {console.log(build)}
     </div>
       )
 }

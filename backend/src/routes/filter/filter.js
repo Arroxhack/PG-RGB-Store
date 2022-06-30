@@ -5,7 +5,9 @@ const router = Router();
 router.get('/filter/', async (req, res, next) => {
   const { brand, category } = req.query;
   try {
-    const allProduct = await Product.findAll();
+    const allProductNotFilter = await Product.findAll();
+    const allProduct = allProductNotFilter.filter((p) => p.stock > 0);
+
     if (category && category !== 'all' && brand && brand !== 'all') {
       const filterCatBrand = [];
 
@@ -17,7 +19,7 @@ router.get('/filter/', async (req, res, next) => {
         }
       });
 
-      res.status(200).send(filterCatBrand);
+      res.status(201).send(filterCatBrand);
     }
     if (category === 'all' && brand) {
       const allBrand = [];
@@ -38,7 +40,7 @@ router.get('/filter/', async (req, res, next) => {
           filterCat.push(p);
         }
       });
-      res.status(202).send(filterCat);
+      res.status(201).send(filterCat);
     }
     if (brand === 'all') {
       const filterCat = [];
@@ -48,10 +50,10 @@ router.get('/filter/', async (req, res, next) => {
           filterCat.push(p);
         }
       });
-      res.status(203).send(filterCat);
+      res.status(201).send(filterCat);
     }
     if (category === 'all') {
-      res.status(204).send(allProduct);
+      res.status(201).send(allProduct);
     }
   } catch (error) {
     next(error);
