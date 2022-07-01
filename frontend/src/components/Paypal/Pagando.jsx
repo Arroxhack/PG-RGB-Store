@@ -120,7 +120,7 @@ export default function Pagando() {
   };
 
   const onApprove = (data, actions) => { 
-    return actions.order.capture().then(function (detalles) { // en detalles esta todo lo que pasa en nuestro pago en un objeto
+    return actions.order.capture().then(async function (detalles) { // en detalles esta todo lo que pasa en nuestro pago en un objeto
         console.log("detalles de la compra: ", detalles);
         Swal.fire({
             icon: 'success',
@@ -140,10 +140,26 @@ export default function Pagando() {
             let id = e.description.split("-")[1]
             return {id:id, amount:e.quantity}
         })
+
+        console.log("arregloObjetosIdQuantity: ", arregloObjetosIdQuantity)
+
         let products = arregloObjetosIdQuantity
-        axios.put(`http://localhost:3001/remove`, products) // "correctly edit"// "warning negative stock"// "failed on edit"
-            .then((response) => console.log(response))
-            .catch((err) => console.log(err))
+        
+        // console.log("products: ", JSON.stringify(products));
+
+        // axios.put(`http://localhost:3001/remove`, products) // "correctly edit"// "warning negative stock"// "failed on edit"
+        //     .then((response) => console.log(response))
+        //     .catch((err) => console.log(err))
+
+        const prueba = await axios({
+            method: "put",
+            url: "http://localhost:3001/remove",
+            data: {products},
+            // headers: { "X-Requested-With": "XMLHttpRequest" },
+            // withCredentials: true,
+            })
+            .then((e) => e.data)
+            .catch((e) => console.log(e));
     })
   };
 
