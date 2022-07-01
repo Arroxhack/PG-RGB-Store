@@ -13,7 +13,6 @@ router.put('/remove', async (req, res, next) => {
   }
 
   console.log("products: ", products[0].id);
-
       products.forEach(async (el) => {
       //busco el prod
       const idNumber = Number(el.id)
