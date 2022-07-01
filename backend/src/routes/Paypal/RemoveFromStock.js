@@ -3,37 +3,41 @@ const { Product } = require('../../db');
 const router = Router();
 
 router.put('/remove', async (req, res, next) => {
-  const { products } = req.body;
-  //[{id,amount},{id,amount}]
-  try {
-    products.forEach(async (el) => {
-      //busco el prod
+  const products = req.body; // [{id:"1", amount:"1"},{id:"2", amount:"2"}]
 
-      const product = await Product.findByPk(Number(el.id));
+  console.log('products: ', products); // [{id:"1", amount:"1"},{id:"2", amount:"2"}]
 
-      //si existe p, lo updateo
-      const stock = product.stock - Number(el.amount);
-
-      if (stock < 0) {
-        return res.send('Warning negative stock');
-      }
-
-      //Update nos devuelve un array de length 1 con un 1 si fue todo bien y con 0 si salio mal
-
-      if (product) {
-        const updated = await Product.update(
-          { stock },
-          { where: { id: Number(el.id) } }
-        );
-
-        updated[0] !== 0
-          ? res.send('Correctly edit')
-          : res.status(404).send('Failed on edit');
-      }
-    });
-  } catch (error) {
-    next(error);
+  if (!products) {
+    return res.send('no llega products');
   }
+
+  console.log('products: ', products[0].id);
+
+  products.forEach(async (el) => {
+    //busco el prod
+    const idNumber = Number(el.id);
+    const amountNumber = Number(el.amount);
+    const product = await Product.findByPk(idNumber);
+    //si existe p, lo updateo
+    const stock = product.stock - amountNumber;
+
+    if (stock < 0) {
+      return res.send('Warning negative stock');
+    }
+
+    //Update nos devuelve un array de length 1 con un 1 si fue todo bien y con 0 si salio mal
+
+    if (product) {
+      const updated = await Product.update(
+        { stock },
+        { where: { id: idNumber } }
+      );
+
+      updated[0] !== 0
+        ? res.send('Correctly edit')
+        : res.status(404).send('Failed on edit');
+    }
+  });
 });
 
 module.exports = router;
