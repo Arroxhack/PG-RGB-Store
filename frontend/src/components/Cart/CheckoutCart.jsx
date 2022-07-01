@@ -5,8 +5,9 @@ import NavBar from "../NavBar/NavBar";
 import CheckoutPaypal from "../Paypal/CheckoutPaypal";
 import { CartContext } from "./CartContext";
 
-function CheckoutCart({product}) {
-  const { products, deleteProductCart, addProductToCart, deleteProduct } = useContext(CartContext);
+function CheckoutCart({ product }) {
+  const { products, deleteProductCart, addProductToCart, deleteProduct } =
+    useContext(CartContext);
 
   let total = 0;
   products.forEach((p) => (total += p.amount * p.price));
@@ -70,13 +71,47 @@ function CheckoutCart({product}) {
                                     <p className="text-base font-black leading-none text-gray-800">
                                       {p.name}
                                     </p>
-                                    <div className="flex justify-around">
-                                      <button  className="quan-buttons"  onClick={(e) => deleteProductCart(p)}>
-                                       - 
+                                    <div className="flex justify-around space">
+                                      <button
+                                        className="quan-buttons"
+                                        onClick={(e) => deleteProductCart(p)}
+                                      >
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="h-6 w-6"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                          strokeWidth={2}
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M20 12H4"
+                                          />
+                                        </svg>
                                       </button>
-                                      <label className="w-5"> {p.amount} </label>
-                                      <button className="quan-buttons" onClick={(e) => addProductToCart(p)}>
-                                       +
+                                      <label className="w-5 font-Open">
+                                        {p.amount}
+                                      </label>
+                                      <button
+                                        className="quan-buttons"
+                                        onClick={(e) => addProductToCart(p)}
+                                      >
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="h-6 w-6"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                          strokeWidth={2}
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M12 4v16m8-8H4"
+                                          />
+                                        </svg>
                                       </button>
                                     </div>
                                   </div>

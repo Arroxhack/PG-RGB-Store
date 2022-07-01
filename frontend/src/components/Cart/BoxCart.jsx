@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
+
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { deleteProduct } from "../../redux/actions";
 import { CartContext } from "./CartContext";
 
 const BoxCart = ({ onClick }) => {
@@ -56,6 +59,7 @@ const BoxCart = ({ onClick }) => {
             <div className="grid grid-cols-2 mr-10 mb-5">
               <Link to="/cart">
                 <button className="bg-primary-300 px-3 py-1 rounded-md mt-2 mb-2 border border-primary-400 hover:border hover:border-primary-100">
+
                   Proceed to checkout
                 </button>
               </Link>
