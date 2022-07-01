@@ -55,16 +55,10 @@ const CartProvider = ({children}) => {
     const deleteProduct = product => {
         const inCart = products.find(p=>p.id===product.id)
 
-            if(inCart.amount===0){
+            if(inCart.amount){
                 setProducts(products.filter(p=>p.id!==product.id))
             }
-            if(inCart.amount>=1){
-                setProducts(products.map(p=>{
-                    if(p.id===product.id){
-                       return {...inCart, amount: inCart.amount - inCart.amount}
-                    } return p
-                }))
-            }
+           
     }
 
     // const deleteProductCart = product=>{
