@@ -15,14 +15,11 @@ router.put('/remove', async (req, res, next) => {
   
   console.log("products: ", products[0].id);
   try {
-      console.log("A")
       products.forEach(async (el) => {
       //busco el prod
       const idNumber = Number(el.id)
       const amountNumber = Number(el.amount)
-      console.log("B")
       const product = await Product.findByPk(idNumber);
-      console.log("c")  
       //si existe p, lo updateo
       const stock = product.stock - amountNumber;
 
