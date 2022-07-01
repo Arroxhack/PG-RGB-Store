@@ -11,7 +11,6 @@ const email = require("./user/email");
 const editProfile = require("./user/editProfile");
 const removeFromStock = require("./Paypal/RemoveFromStock");
 //====ADMIN===
-const Delete = require("./admin/DeleteProduct");
 const Put = require("./admin/EditProduct");
 const Create = require("./admin/CreateProduct");
 const GetUsers = require("./admin/GetUsers");
