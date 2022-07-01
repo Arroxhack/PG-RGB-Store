@@ -3,23 +3,22 @@ const { Product } = require('../../db');
 const router = Router();
 
 router.put('/remove', async (req, res, next) => {
-  console.log("body: ", req.body); // { products: '[{"id":"1","amount":"1"},{"id":"2","amount":"2"}]' }
 
-  const  products  = req.body.products;  // '[{"id":"1","amount":"1"},{"id":"2","amount":"2"}]'
+  const  products  = req.body; // [{id:"1", amount:"1"},{id:"2", amount:"2"}]
+
+  console.log("products: ", products); // [{id:"1", amount:"1"},{id:"2", amount:"2"}]
 
   if(!products){
     return res.send("no llega products")
   }
 
-  console.log("products: ", products); // [{"id":"1","amount":"1"},{"id":"2","amount":"2"}]
-  
   console.log("products: ", products[0].id);
-  try {
       products.forEach(async (el) => {
       //busco el prod
       const idNumber = Number(el.id)
       const amountNumber = Number(el.amount)
       const product = await Product.findByPk(idNumber);
+      console.log("product:", product);  
       //si existe p, lo updateo
       const stock = product.stock - amountNumber;
 
@@ -40,9 +39,6 @@ router.put('/remove', async (req, res, next) => {
           : res.status(404).send('Failed on edit');
       }
     });
-  } catch (error) {
-    next(error);
-  }
 });
 
 module.exports = router;

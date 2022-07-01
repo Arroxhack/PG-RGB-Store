@@ -148,13 +148,13 @@ export default function Pagando() {
         // console.log("products: ", JSON.stringify(products));
 
         // axios.put(`http://localhost:3001/remove`, products) // "correctly edit"// "warning negative stock"// "failed on edit"
-        //     .then((response) => console.log(response))
+        //     .then((response) => console.log(response.data))
         //     .catch((err) => console.log(err))
 
         const prueba = await axios({
             method: "put",
             url: "http://localhost:3001/remove",
-            data: {products},
+            data: products,
             // headers: { "X-Requested-With": "XMLHttpRequest" },
             // withCredentials: true,
             })
