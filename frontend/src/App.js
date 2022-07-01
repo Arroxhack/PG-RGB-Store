@@ -18,6 +18,7 @@ import PaypalButton from './components/Paypal/PaypalButton';
 import './App.css';
 import Pagando from './components/Paypal/Pagando';
 import CheckoutCart from './components/Cart/CheckoutCart';
+import Done from './components/Cart/Done';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='/admin' element={<HomeAdmin />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/paypal' element={<Pagando />} exact />
+        <Route path='/done' element={<Done />} />
         <Route path='/' element={<Home />} exact />
         <Route path='/products/:id' element={<DetailProduct />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
@@ -46,7 +48,7 @@ function App() {
 
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
 
-        <Route path='/probando' element={<CheckProduct />} />
+        <Route path='/done' element={<Done />} />
       </Routes>
     </div>
   );
