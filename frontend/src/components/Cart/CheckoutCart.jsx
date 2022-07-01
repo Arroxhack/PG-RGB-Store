@@ -154,6 +154,22 @@ function CheckoutCart({ product }) {
                     <p className="text-4xl font-black leading-9 font-Open">
                       Summary
                     </p>
+                    <div>
+                      {products.length <= 0 ? (
+                        <p className="flex items-center">No products yet!</p>
+                      ) : (
+                        <div>
+                          {products.map((p) => {
+                            return (
+                              <div key={p.id}>
+                                <p>{p.name}</p>
+                                <p>{p.price}</p>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div>
                     <div className="flex items-center pb-6 justify-between lg:pt-5 pt-20">
