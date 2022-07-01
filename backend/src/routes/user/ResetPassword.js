@@ -5,7 +5,7 @@ const randomstring = require("randomstring");
 const { transporter } = require("../../nodemailer/config");
 const router = Router();
 
-router.put("/sendTokenReset", async (req, res, net) => {
+router.put("/sendTokenReset", async (req, res) => {
   const { password, username } = req.body;
   const usuario = await User.findOne({ where: { username: username } });
   const passwordOfUser = await bcrypt.compare(password, usuario.password);
