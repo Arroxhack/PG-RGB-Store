@@ -6,13 +6,14 @@ import { getProductDetail } from "../../redux/actions/index";
 import NavBar from "../NavBar/NavBar";
 import Loading from "../Loading/Loading";
 import { CartContext } from "../Cart/CartContext";
+import Swal from "sweetalert2";
 
 function DetailProduct() {
   const dispatch = useDispatch();
   let { id } = useParams();
   id = Number(id);
 
-  const {addProductToCart} = useContext(CartContext)
+  const { addProductToCart } = useContext(CartContext);
 
   const [loading, setLoading] = useState(false);
 
@@ -24,12 +25,19 @@ function DetailProduct() {
     dispatch(getProductDetail(id));
   }, []);
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "bottom-end",
+    showConfirmButton: false,
+    timer: 2000,
+  });
+
   const ProductDetail = useSelector((state) => state.detail);
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
 
-  const images = ProductDetail.image
+  const images = ProductDetail.image;
 
   function discount() {
     let total =
@@ -38,19 +46,23 @@ function DetailProduct() {
     return total;
   }
 
-  const addCart = (e)=>{
-    e.preventDefault()
-    addProductToCart(ProductDetail)
-  }
+  const addCart = (e) => {
+    e.preventDefault();
+    Toast.fire({
+      icon: "success",
+      title: "Producto agregado al carrito",
+    });
+    addProductToCart(ProductDetail);
+  };
 
   return (
     <div className="md:h-screen flex flex-col">
       <div className="relative z-50 mb-11">
-      <NavBar/>
+        <NavBar />
       </div>
       <section className="font-Open absolute z-100 mt-40">
         {loading ? (
-          <div >
+          <div>
             <Loading />
           </div>
         ) : (
@@ -58,22 +70,26 @@ function DetailProduct() {
             <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
               <div className="grid grid-cols-2 gap-4 md:grid-cols-1 ">
                 <div className="aspect-w-1 aspect-h-1">
-                  {images && images[0].length > 100 ? images.map(i=>{
-                    return <img src={i} alt="Image not found" />
-                  }) : <img 
-                  alt="Image not found"
-                  className="object-cover rounded-xl"
-                  src={
-                    ProductDetail.image
-                      ? ProductDetail.image[0]
-                      : "1602010489_p_setting_fff_1_90_end_600.jpg"
-                  }
-                  height="600px"
-                  width="600px"
-                />}
+                  {images && images[0].length > 100 ? (
+                    images.map((i) => {
+                      return <img src={i} alt="Image not found" />;
+                    })
+                  ) : (
+                    <img
+                      alt="Image not found"
+                      className="object-cover rounded-xl"
+                      src={
+                        ProductDetail.image
+                          ? ProductDetail.image[0]
+                          : "1602010489_p_setting_fff_1_90_end_600.jpg"
+                      }
+                      height="600px"
+                      width="600px"
+                    />
+                  )}
                   {/* <img 
                     alt="Image not found"
-                    class="object-cover rounded-xl"
+                    className="object-cover rounded-xl"
                     src={
                       ProductDetail.image
                         ? ProductDetail.image[0]
@@ -84,11 +100,11 @@ function DetailProduct() {
                   /> */}
                 </div>
 
-                {/* <div class="grid grid-cols-2 gap-2 lg:mt-2">
-                  <div class="aspect-w-1 aspect-h-1">
+                {/* <div className="grid grid-cols-2 gap-2 lg:mt-2">
+                  <div className="aspect-w-1 aspect-h-1">
                     <img
                       alt="Image not found"
-                      class="object-cover rounded-xl"
+                      className="object-cover rounded-xl"
                       src={
                         ProductDetail.image
                           ? ProductDetail.image[1]
@@ -99,10 +115,10 @@ function DetailProduct() {
                     />
                   </div>
 
-                  <div class="aspect-w-1 aspect-h-1">
+                  <div className="aspect-w-1 aspect-h-1">
                     <img
                       alt="Image not found"
-                      class="object-cover rounded-xl"
+                      className="object-cover rounded-xl"
                       src={
                         ProductDetail.image
                           ? ProductDetail.image[2]
@@ -173,7 +189,9 @@ function DetailProduct() {
                 </details>
 
                 <form className="mt-8">
-                  <legend className="mb-1 text-sm font-medium">More details</legend>
+                  <legend className="mb-1 text-sm font-medium">
+                    More details
+                  </legend>
                   <p>
                     {ProductDetail.brand
                       ? `Brand: ${ProductDetail.brand}`

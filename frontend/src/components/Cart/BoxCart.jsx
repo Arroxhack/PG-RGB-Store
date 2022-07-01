@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { deleteProduct } from "../../redux/actions";
@@ -10,7 +11,6 @@ const BoxCart = ({ onClick }) => {
 
   let total = 0;
   products.forEach((p) => (total += p.amount * p.price));
-
 
   return (
     <div className="h-auto w-[520px] px-5 bg-primary rounded mt-10 -ml-80 absolute border-2 border-primary-200">
@@ -58,7 +58,8 @@ const BoxCart = ({ onClick }) => {
             })}
             <div className="grid grid-cols-2 mr-10 mb-5">
               <Link to="/cart">
-                <button className="w-full text-center  rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1">
+                <button className="bg-primary-300 px-3 py-1 rounded-md mt-2 mb-2 border border-primary-400 hover:border hover:border-primary-100">
+
                   Proceed to checkout
                 </button>
               </Link>

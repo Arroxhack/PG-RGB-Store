@@ -1,73 +1,40 @@
 import React from "react";
-import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import {PayPalButtons} from "@paypal/react-paypal-js";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 
 export default function Pagando() {
 
     let product = localStorage.getItem("cartProducts"); 
     let productJSON = JSON.parse(product);
-    console.log("Primer producto del carrito: ", productJSON);
+    
+    console.log("Productos completos del carrito: ", productJSON);
+
     let articulos = productJSON.map(e => {
      return {
             name: e.name,
-            description: e.category[0],
+            description: e.category[0] + "-" + e.id,
             unit_amount: {
                 currency_code: "USD",
                 value: e.price+"" //aca
            },
            quantity: e.amount
         }
-    })
-    console.log("Mis articulos: ", articulos)
-    let PrecioTotalArticulos = productJSON.reduce((prev, current) => {
-      return prev.price*prev.amount + current.price*current.amount +""
-    })
-    console.log("PrecioTotalArticulos: ", PrecioTotalArticulos)
+    });
+    console.log("Mis articulos: ", articulos);
+    console.log("Mis articulos.length: ", articulos.length);
 
-//[
-    // {
-    //     amount: 1
-    //     brand: "ASUS"
-    //     category: ['Motherboard']
-    //     compatibilityBrands: "Intel"
-    //     ddr: 4
-    //     description: "ASUS TUF GAMING Z590-PLUS WIFI takes all the essential elements of the latest Intel® processors and combines them with game-ready features and proven durability. Engineered with military-grade components, an upgraded power solution and a comprehensive cooling system, this motherboard offers rock-solid, stable performance for marathon gaming. Aesthetically, TUF GAMING Z590-PLUS WIFI sports the new TUF Gaming logo, and incorporates simple geometric design elements to reflect the dependability and stability that defines the TUF Gaming series."
-    //     dimensions: "338 mm x 273 mm"
-    //     factorMother: "ATX"
-    //     id: 2
-    //     image: (4) ['https://m.media-amazon.com/images/I/81wO3L69TSL._AC_SL1500_.jpg', 'https://http2.mlstatic.com/D_NQ_NP_818050-MLA48417753622_122021-O.webp', 'https://http2.mlstatic.com/D_NQ_NP_791666-MLA48417688966_122021-O.webp', 'https://http2.mlstatic.com/D_NQ_NP_778509-MLA48417800143_122021-O.webp']
-    //     inOffer: false
-    //     name: "ASUS TUF Gaming Z590-Plus WIFI"
-    //     percentageDiscount: 0
-    //     price: 195
-    //     socket: "LGA1200"
-    //     stock: 12
-    //     wattsPowerSupply: null
-    //     weight: null
-    // },
-    // {
-    //     amount: 1
-    //     brand: "ASUS"
-    //     category: ["Motherboard"]
-    //     compatibilityBrands: "Intel"
-    //     ddr: 4
-    //     description: "ASUS TUF GAMING Z590-PLUS WIFI takes all the essential elements of the latest Intel® processors and combines them with game-ready features and proven durability. Engineered with military-grade components, an upgraded power solution and a comprehensive cooling system, this motherboard offers rock-solid, stable performance for marathon gaming. Aesthetically, TUF GAMING Z590-PLUS WIFI sports the new TUF Gaming logo, and incorporates simple geometric design elements to reflect the dependability and stability that defines the TUF Gaming series."
-    //     dimensions: "338 mm x 273 mm"
-    //     factorMother: "ATX"
-    //     id: 2
-    //     image: ["https://m.media-amazon.com/images/I/81wO3L69TSL._AC_SL1500_.jpg",…]
-    //     inOffer: false
-    //     name: "ASUS TUF Gaming Z590-Plus WIFI"
-    //     percentageDiscount: 0
-    //     price: 195
-    //     socket: "LGA1200"
-    //     stock: 12
-    //     wattsPowerSupply: null
-    //     weight: null
-    // }
-//]
+    let PrecioTotalArticulos = articulos[0].unit_amount.value * articulos[0].quantity;
+    
+    if(articulos.length > 1){
+        PrecioTotalArticulos = productJSON.reduce((prev, current) => {
+            return prev.price*prev.amount + current.price*current.amount +""
+        })
+    };    
+    console.log("PrecioTotalArticulos: ", PrecioTotalArticulos);
+
 
   const createOrder = (data, actions) => {
     return actions.order.create({
@@ -151,17 +118,35 @@ export default function Pagando() {
         }]
     })
   };
+
   const onApprove = (data, actions) => { 
     return actions.order.capture().then(function (detalles) { // en detalles esta todo lo que pasa en nuestro pago en un objeto
-        console.log(detalles)
+        console.log("detalles de la compra: ", detalles);
+        Swal.fire({
+            icon: 'success',
+            title: 'Payment Successful!',
+            html: `Payer: ${detalles.payer.name.given_name} ${detalles.payer.name.surname}` +
+            "</br>" +
+            "</br>" +
+            `Amount paid: ${detalles.purchase_units[0].amount.value} USD` +
+            "</br>" +
+            "</br>" +
+            `Transaction number: ${detalles.id}`  
+            // text: `Transaction number: ${detalles.id}`,
+            // text: `Amount paid: ${detalles.purchase_units[0].amount.value}`
+            // footer: '<a href="">Why do I have this issue?</a>'
+        })
+        let arregloObjetosIdQuantity = detalles.purchase_units[0].items.map(e => {
+            let id = e.description.split("-")[1]
+            return {id:id, amount:e.quantity}
+        })
+        let products = arregloObjetosIdQuantity
+        axios.put(`http://localhost:3001/remove`, products) // "correctly edit"// "warning negative stock"// "failed on edit"
+            .then((response) => console.log(response))
+            .catch((err) => console.log(err))
     })
   };
-  const style = {
-    layout: 'vertical',
-    color:  'gold',
-    shape:  'pill',
-    label:  'pay',
-  }
+
 //   {id: '6DX94897RC997852V', intent: 'CAPTURE', status: 'COMPLETED', purchase_units: Array(1), payer: {…}, …}
 //   create_time: "2022-06-29T17:22:02Z"
 //   id: "6DX94897RC997852V"
@@ -172,17 +157,31 @@ export default function Pagando() {
 //   status: "COMPLETED"
 //   update_time: "2022-06-29T17:22:20Z"
 
+  const style = {
+    layout: 'vertical',
+    color:  'gold',
+    shape:  'pill',
+    label:  'pay',
+  };
+
   const onCancel = (data) => {  // en data hay un order id que es un objeto {orderID: '6V920429E17498936'}
     console.log(data)
+    Swal.fire({
+        icon: 'error',
+        title: 'Payment Cancelled',
+        text: 'Your payment has been cancelled and will not be charged',
+        // footer: '<a href="">Why do I have this issue?</a>'
+      })
   };
+
   return (
-    <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "300px"}}>
-    <PayPalButtons
-      createOrder={(data, actions) => createOrder(data, actions)}
-      onApprove={(data, actions) => onApprove(data, actions)}
-      onCancel={onCancel}
-      style={style}
-    />
+    <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", overflow:"auto"}}>
+        <PayPalButtons
+        createOrder={(data, actions) => createOrder(data, actions)}
+        onApprove={(data, actions) => onApprove(data, actions)}
+        onCancel={onCancel}
+        style={style}
+        />
     </div>
   );
 }
