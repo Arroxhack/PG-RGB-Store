@@ -73,7 +73,7 @@ function DetailProduct() {
                 />}
                   {/* <img 
                     alt="Image not found"
-                    class="object-cover rounded-xl"
+                    className="object-cover rounded-xl"
                     src={
                       ProductDetail.image
                         ? ProductDetail.image[0]
@@ -84,11 +84,11 @@ function DetailProduct() {
                   /> */}
                 </div>
 
-                {/* <div class="grid grid-cols-2 gap-2 lg:mt-2">
-                  <div class="aspect-w-1 aspect-h-1">
+                {/* <div className="grid grid-cols-2 gap-2 lg:mt-2">
+                  <div className="aspect-w-1 aspect-h-1">
                     <img
                       alt="Image not found"
-                      class="object-cover rounded-xl"
+                      className="object-cover rounded-xl"
                       src={
                         ProductDetail.image
                           ? ProductDetail.image[1]
@@ -99,10 +99,10 @@ function DetailProduct() {
                     />
                   </div>
 
-                  <div class="aspect-w-1 aspect-h-1">
+                  <div className="aspect-w-1 aspect-h-1">
                     <img
                       alt="Image not found"
-                      class="object-cover rounded-xl"
+                      className="object-cover rounded-xl"
                       src={
                         ProductDetail.image
                           ? ProductDetail.image[2]

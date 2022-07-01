@@ -31,7 +31,7 @@ export default function SearchBar() {
           onChange={onInputChange}
         ></input>
       
-        <input type="submit" class="absolute right-0 top-0 mt-5 mr-4" value='🔍'>
+        <input type="submit" className="absolute right-0 top-0 mt-5 mr-4" value='🔍'>
         </input>
       
       </form>

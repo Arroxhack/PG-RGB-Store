@@ -8,11 +8,12 @@ const router = Router();
 router.get('/products/', async (req, res, next) => {
   try {
     const cat = req.query.category;
-    if (cat) {
+
+    if (cat && cat !=='all') {
       const All = await Product.findAll();
       let AllProducts = All.map((p) => (p.category.includes(cat) ? p : ''));
       AllProducts = AllProducts.filter((e) => {
-        if (e.id) {
+        if (e.id && e.stock > 0) {
           return e;
         }
       });
@@ -22,7 +23,10 @@ router.get('/products/', async (req, res, next) => {
         res.status(404).send('Error, Not Product with that Category');
       }
     } else {
-      const AllProduct = await Product.findAll();
+      let AllProduct = await Product.findAll();
+      AllProduct = AllProduct.filter((e) => {
+        if (e.stock > 0) return e;
+      });
       if (AllProduct.length) {
         res.send(AllProduct);
       } else {

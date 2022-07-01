@@ -9,6 +9,7 @@ const Logout = require("./user/logout");
 const LoadCartProduct = require("./user/LoadCart");
 const email = require("./user/email");
 const editProfile = require("./user/editProfile");
+const removeFromStock = require("./Paypal/RemoveFromStock");
 //====ADMIN===
 const Delete = require("./admin/DeleteProduct");
 const Put = require("./admin/EditProduct");
@@ -18,6 +19,16 @@ const EditUser = require("./admin/EditUser");
 const CreateAdminUser = require("./admin/CreateAdminUser");
 const ResetPassword = require("./user/ResetPassword");
 const VerifyPassword = require("./admin/VerifyPassword");
+const Delete = require("./admin/DeleteProduct");
+const Put = require("./admin/EditProduct");
+const Create = require("./admin/CreateProduct");
+const GetUsers = require("./admin/GetUsers");
+const EditUser = require("./admin/EditUser");
+const CreateAdminUser = require("./admin/CreateAdminUser");
+const ResetPassword = require("./user/ResetPassword");
+// FILTER
+const filterProduct = require("./filter/filter");
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -43,6 +54,8 @@ router.use("/", email);
 router.use("/", CreateAdminUser);
 router.use("/", ResetPassword);
 router.use("/", editProfile);
+router.use("/", filterProduct);
+router.use("/", removeFromStock);
 router.use("/", VerifyPassword);
 
 module.exports = router;

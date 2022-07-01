@@ -168,7 +168,7 @@ export default function LogIn() {
               />
             </div>
             {errors ? (
-              <p /* style={{color: "red"}} */ class="bg-secundary-50">
+              <p /* style={{color: "red"}} */ className="bg-secundary-50">
                 {Swal.fire({
                   icon: "error" / "success",
                   title: "Error",
@@ -186,13 +186,13 @@ export default function LogIn() {
             </button>
             <div id="signInDiv"></div>
             <br />
-            <div class="t-6">
-              {`Don't have an account yet? `}
-              <a class="no-underline border-b" href="../login/">
-                {`Sign Up`}
-              </a>
-              .
-            </div>
+            <div className="t-6">
+            {`Don't have an account yet? `} 
+            <a className="no-underline border-b" href="../register/">
+            {`Sign Up`}
+            </a>
+            .
+          </div>
           </form>
         </div>
         {/*        { googleUser && 
