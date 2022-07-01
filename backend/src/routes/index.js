@@ -11,18 +11,12 @@ const email = require("./user/email");
 const editProfile = require("./user/editProfile");
 const removeFromStock = require("./Paypal/RemoveFromStock");
 //====ADMIN===
-const Put = require("./admin/EditProduct");
-const Create = require("./admin/CreateProduct");
-const GetUsers = require("./admin/GetUsers");
 const EditUser = require("./admin/EditUser");
-const CreateAdminUser = require("./admin/CreateAdminUser");
-const ResetPassword = require("./user/ResetPassword");
 const VerifyPassword = require("./admin/VerifyPassword");
 const Delete = require("./admin/DeleteProduct");
 const Put = require("./admin/EditProduct");
 const Create = require("./admin/CreateProduct");
 const GetUsers = require("./admin/GetUsers");
-const EditUser = require("./admin/EditUser");
 const CreateAdminUser = require("./admin/CreateAdminUser");
 const ResetPassword = require("./user/ResetPassword");
 // FILTER
