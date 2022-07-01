@@ -19,7 +19,7 @@ import hdd from './/imagesBuild/hdd.svg'
 
 function BuildPc() {
   const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams({});
+  const [searchParams, setSearchParams] = useSearchParams();
   const [build,setBuild]=useState({});
   //{CPU:{},Motherboard:{},GPU:{},Ram:{},'Power Supply':{},Case:{},SSD:{},HDD:{},'SSD M.2':{}}
   //algo asi se tendria que ver el build
@@ -55,9 +55,11 @@ function BuildPc() {
   const handleClickBrand = (e)=>{
     e.preventDefault();
     
-    setSearchParams({
-      [e.target.name]:e.target.value
-    })
+    searchParams.set(e.target.name,e.target.value);
+    setSearchParams(searchParams);
+    // setSearchParams({
+    //   [e.target.name]:e.target.value
+    // })
 
     setBuild.brand = e.target.value;
     
@@ -100,7 +102,8 @@ function BuildPc() {
 
   const handleSelect = (e)=>{
     e.preventDefault();
-
+    searchParams.set(e.target.name,e.target.value);
+    setSearchParams(searchParams);
     //CHECKAMOS QUE HAYA ELEGIDO ALGO
     if(e.target.value !== 'nothing'){
       setBuild({

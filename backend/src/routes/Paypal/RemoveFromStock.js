@@ -8,6 +8,7 @@ router.put('/remove', async (req, res, next) => {
   try {
     products.forEach(async (el) => {
       //busco el prod
+
       const product = await Product.findByPk(Number(el.id));
 
       //si existe p, lo updateo
