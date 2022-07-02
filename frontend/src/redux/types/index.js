@@ -26,6 +26,9 @@ export const CLEAN_FILTER_BRANDS = 'CLEAN_FILTER_BRANDS';
 export const SET_ORDER = 'SET_ORDER'
 export const CLEAN_ORDER = 'CLEAN_ORDER'
 export const CLEAN_FILTER_PRICE= 'CLEAN_FILTER_PRICE'
+
 /// FILTRADO
 export const FILTER_CATEGORY = 'FILTER_CATEGORY'
 export const FILTER_BRAND = 'FILTER_BRAND'
+// GETS ///
+export const GET_GPUS= 'GET_GPUS'

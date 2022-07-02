@@ -39,7 +39,7 @@ export default function SideBar() {
   const categoryQuery = searchParams.get("category")
   const brandQuery=searchParams.get("brand")
   useEffect(() => {
-    if(!products)dispatch(getAllCategories())
+    dispatch(getAllCategories())
     if(!brandQuery){dispatch(filterCategory(categoryQuery))}
     if(brandQuery){dispatch(filterBrand(categoryQuery,brandQuery))}
     }
@@ -219,7 +219,7 @@ export default function SideBar() {
   function handleFilterBrand(e) {
     e.preventDefault();
     setSearchParams({category:categoryQuery, [e.target.name]:e.target.value})
-    dispatch(filterBran(categoryQuery,brandQuery));
+    dispatch(filterBrand(categoryQuery,brandQuery));
   }
 
   function handleFilterMax(e) {

@@ -1,9 +1,18 @@
 import React from 'react'
+import aas from '../../images/hyperx.jpg'
+
+const imagen=[
+  "hyperx.jpg",
+  '/images/redragon.jpg'
+
+]
 
 const Slider = () => {
+
+    
   return (
-    <div>
-        <img className="w-full h-72 object-cover" src="https://redragon.es/content/uploads/2021/06/Drivers-scaled.jpg" alt="Slider" />
+    <div className='w-full select-none relative'>
+        <img className="w-full h-72 object-cover" src={imagen[0]} alt="Slider" />
     </div>
   )
 }

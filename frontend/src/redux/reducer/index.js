@@ -25,7 +25,7 @@ import {
   CLEAN_ORDER,
   CLEAN_FILTER_PRICE,
   FILTER_CATEGORY,
-  FILTER_BRAND
+  FILTER_BRAND,GET_GPUS
 } from '../types/index';
 
 const initialState = {
@@ -42,6 +42,7 @@ const initialState = {
   filterPrice: [],
   filterBrands:[],
   filterOrder: [],
+  gpus:[]
 };
 
 const reducer = (state = initialState, action) => {
@@ -91,6 +92,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         UserData: action.payload,
       };
+      case GET_CATEGORIES:
+        return {
+          ...state,
+          gpus: action.payload,
+        };
 
     /// BUSQUEDA ///
     case SEARCH_PRODUCTS:

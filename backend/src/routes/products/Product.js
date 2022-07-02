@@ -65,11 +65,6 @@ router.get('/brands/',async (req,res,next)=>{
 })
 
 
-
-
-
-
-
 router.get('/products/:ID', async (req, res, next) => {
   let { ID } = req.params;
   ID = Number(ID);
@@ -108,4 +103,16 @@ router.get('/product/', async (req, res, next) => {
     next(error);
   }
 });
+
+router.get('/gpu', async (req, res, next) => {
+  const All = await Product.findAll();
+  try {
+      let gpus = All.filter(g => g.category.includes("GPU"));
+      res.send(gpus)
+   }catch (e) {
+    next(e);
+  }
+})
+
+
 module.exports = router;

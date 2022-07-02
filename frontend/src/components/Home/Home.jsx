@@ -24,7 +24,7 @@ function Home() {
 
 
   return (
-    <div className="bg-gradient-to-t from-primary-300 to-primary">
+    <div className="bg-gradient-to-t from-primary-300 to-primary w-full">
       <NavBar/>
      
       <Slider/>
