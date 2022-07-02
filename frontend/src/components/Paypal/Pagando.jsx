@@ -53,11 +53,11 @@ export default function Pagando() {
             soft_descriptor: "HighFashions",
             amount: {
                 currency_code: "USD",
-                value: PrecioTotalArticulos, //value: "230.00"
+                value: PrecioTotalArticulos.toFixed(2), //value: "230.00"
                 breakdown: {
                     item_total: {
                         currency_code: "USD",
-                        value: PrecioTotalArticulos//value: "180.00"
+                        value: PrecioTotalArticulos.toFixed(2)//value: "180.00"
                     },
                     // shipping: {
                     //     currency_code: "USD",
