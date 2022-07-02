@@ -11,6 +11,7 @@ const email = require("./user/email");
 const editProfile = require("./user/editProfile");
 const removeFromStock = require("./Paypal/RemoveFromStock");
 const VerifyStock = require("./Paypal/VerifyStock");
+const review = require("./Comment/review");
 //====ADMIN===
 const EditUser = require("./admin/EditUser");
 const VerifyPassword = require("./admin/VerifyPassword");
@@ -52,5 +53,6 @@ router.use("/", filterProduct);
 router.use("/", removeFromStock);
 router.use("/", VerifyPassword);
 router.use("/", VerifyStock);
+router.use("/", review);
 
 module.exports = router;
