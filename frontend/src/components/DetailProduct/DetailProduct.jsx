@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getProductDetail } from "../../redux/actions/index";
 import NavBar from "../NavBar/NavBar";
@@ -50,7 +50,7 @@ function DetailProduct() {
     e.preventDefault();
     Toast.fire({
       icon: "success",
-      title: "Producto agregado al carrito",
+      title: "Added to cart!",
     });
     addProductToCart(ProductDetail);
   };
@@ -69,9 +69,10 @@ function DetailProduct() {
           <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
             <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
               <div className="grid grid-cols-2 gap-4 md:grid-cols-1 ">
-              <div className="flex items-center mt-0 text-gray-500 hover:text-primary-300 cursor-pointer">
+                <div className="flex items-center mt-0 text-gray-500 hover:text-primary-300 cursor-pointer">
                   <Link to="/categories?category=all">
-                    <svg text-secundary-250
+                    <svg
+                      text-secundary-250
                       xmlns="http://www.w3.org/2000/svg"
                       className="icon icon-tabler icon-tabler-chevron-left"
                       width={16}
@@ -109,10 +110,7 @@ function DetailProduct() {
                       width="600px"
                     />
                   )}
-              
                 </div>
-
-               
               </div>
 
               <div className="sticky top-0">
@@ -160,7 +158,6 @@ function DetailProduct() {
                       <span className="mt-4 text-sm text-primary-400 font-medium underline cursor-pointer group-open:absolute group-open:bottom-0 group-open:left-0 group-open:mt-0">
                         Read More
                       </span>
-                    
                     </div>
                   </summary>
 
@@ -178,59 +175,65 @@ function DetailProduct() {
                     More details
                   </legend>
                   <div className=" text-secundary-250 ">
-                  <p>
-                    {ProductDetail.brand
-                      ? `Brand: ${ProductDetail.brand}`
-                      : null}
-                  </p>
-                  <p>
-                    {ProductDetail.compatibilityBrands
-                      ? `Compatible with ${ProductDetail.compatibilityBrands}`
-                      : null}
-                  </p>
-                  <p>
-                    {ProductDetail.ddr ? `DDR: ${ProductDetail.ddr}` : null}{" "}
-                  </p>
-                  <p>
-                    {ProductDetail.socket
-                      ? `Socket: ${ProductDetail.socket}`
-                      : null}
-                  </p>
-                  <p>
-                    {ProductDetail.factorMother
-                      ? `Factor mother: ${ProductDetail.factorMother}`
-                      : null}
-                  </p>
-                  <p>
-                    {ProductDetail.weight
-                      ? `Weight: ${ProductDetail.weight}`
-                      : null}
-                  </p>
-                  <p>
-                    {ProductDetail.dimensions
-                      ? `Dimensions: ${ProductDetail.dimensions}`
-                      : null}
-                  </p>
-                  <p>
-                    {ProductDetail.wattsPowerSupply
-                      ? `Watts: ${ProductDetail.wattsPowerSupply}`
-                      : null}
-                  </p>
+                    <p>
+                      {ProductDetail.brand
+                        ? `Brand: ${ProductDetail.brand}`
+                        : null}
+                    </p>
+                    <p>
+                      {ProductDetail.compatibilityBrands
+                        ? `Compatible with ${ProductDetail.compatibilityBrands}`
+                        : null}
+                    </p>
+                    <p>
+                      {ProductDetail.ddr ? `DDR: ${ProductDetail.ddr}` : null}{" "}
+                    </p>
+                    <p>
+                      {ProductDetail.socket
+                        ? `Socket: ${ProductDetail.socket}`
+                        : null}
+                    </p>
+                    <p>
+                      {ProductDetail.factorMother
+                        ? `Factor mother: ${ProductDetail.factorMother}`
+                        : null}
+                    </p>
+                    <p>
+                      {ProductDetail.weight
+                        ? `Weight: ${ProductDetail.weight}`
+                        : null}
+                    </p>
+                    <p>
+                      {ProductDetail.dimensions
+                        ? `Dimensions: ${ProductDetail.dimensions}`
+                        : null}
+                    </p>
+                    <p>
+                      {ProductDetail.wattsPowerSupply
+                        ? `Watts: ${ProductDetail.wattsPowerSupply}`
+                        : null}
+                    </p>
                   </div>
                   <div>
-                  <button
-                    onClick={addCart}
-                    className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
-                  >
-                    Add to cart
-                  </button>
-                  <Link to="/cart">
-                <button className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1">
-
-                  Proceed to checkout
-                </button>
-              </Link>
-              
+                    <div className="flex w-full">
+                      <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+                        <button
+                          onClick={addCart}
+                          className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
+                        >
+                          Add to cart
+                        </button>
+                      </div>
+                      <div className="text-primary-200"> OR </div>
+                      <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+                        <NavLink
+                          className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
+                          to="/cart"
+                        >
+                          <button>Proceed to checkout</button>
+                        </NavLink>
+                      </div>
+                    </div>
                   </div>
                 </form>
               </div>

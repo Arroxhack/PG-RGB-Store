@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import NavBar from '../NavBar/NavBar';
 import { CartContext } from './CartContext';
 
 function Done() {
@@ -9,9 +10,10 @@ function Done() {
 
 
   return (
-    <section className='font-Open'>
-    <div className="container px-5 py-24 mx-auto">
-      <div className="flex flex-col text-center w-full mb-20">
+    <section className='font-Open bg-primary-200 h-screen'>
+        <NavBar/>
+    <div className="container  px-5 py-24 mx-auto">
+      <div className="flex flex-col bg-primary-200 h-screen text-center w-full mb-20">
         <h2 className="text-xs tracking-widest font-medium  mb-1">Congrats, your purchase has been successfully!</h2>
         <h1 className="sm:text-3xl text-2xl font-medium mb-4 text-gray-900">Thanks for buying with us!</h1>
         <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Here is the summary of your order:</p>
