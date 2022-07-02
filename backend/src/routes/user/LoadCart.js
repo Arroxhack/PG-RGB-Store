@@ -3,9 +3,8 @@ const { User } = require('../../db');
 const router = Router();
 
 //Cargar carrito en la bd
-router.put('/userCart/:email', async (req, res, next) => {
-  const { cartProductArray } = req.body;
-  const { email } = req.params;
+router.put('/userCart/', async (req, res, next) => {
+  const { cartProductArray,email } = req.body;
   try {
     //caso carrito vacio
     //caso carrito con cosas

@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 
 export default function LogIn() {
   let navigate = useNavigate();
+  const cartProduct = localStorage.getItem("cartProducts");
+  console.log(cartProduct, "ACAAAAA");
   const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
   const [password, setPassword] = useState(""); // Llega del input del form password al hacer submit.
   const [googleUser, setGoogleUser] = useState({});
@@ -187,12 +189,12 @@ export default function LogIn() {
             <div id="signInDiv"></div>
             <br />
             <div className="t-6">
-            {`Don't have an account yet? `} 
-            <a className="no-underline border-b" href="../register/">
-            {`Sign Up`}
-            </a>
-            .
-          </div>
+              {`Don't have an account yet? `}
+              <a className="no-underline border-b" href="../register/">
+                {`Sign Up`}
+              </a>
+              .
+            </div>
           </form>
         </div>
         {/*        { googleUser && 

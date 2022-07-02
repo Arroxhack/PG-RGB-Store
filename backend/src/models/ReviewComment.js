@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
 
   //HAY QUE REVEEEEEEEER ESTO
   sequelize.define(
-    "productComment",
+    "reviewComment",
     {
       comentario: {
         type: DataTypes.STRING(300),
@@ -16,8 +16,16 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
+      idCompra: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       idProducto: {
         type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      Comentado: {
+        type: DataTypes.BOOLEAN,
         allowNull: true,
       },
     },
