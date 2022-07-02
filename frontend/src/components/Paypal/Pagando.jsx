@@ -11,7 +11,6 @@ export default function Pagando() {
     let productJSON = JSON.parse(product);
     
     console.log("Productos completos del carrito: ", productJSON);
-
     let articulos = productJSON.map(e => {
      return {
             name: e.name,
@@ -136,6 +135,7 @@ export default function Pagando() {
             // text: `Amount paid: ${detalles.purchase_units[0].amount.value}`
             // footer: '<a href="">Why do I have this issue?</a>'
         })
+
         let arregloObjetosIdQuantity = detalles.purchase_units[0].items.map(e => {
             let id = e.description.split("-")[1]
             return {id:id, amount:e.quantity}
