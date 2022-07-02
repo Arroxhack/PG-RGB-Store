@@ -1,9 +1,9 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define("user", {
+  sequelize.define('user', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -74,10 +74,14 @@ module.exports = (sequelize) => {
       defaultValue: [{}],
     },
     tokenResetPassword: {
-      //LO QUE VA A TENER ESTO ES: TODO LO QUE TIENE PRODUCT + AMOUNT (CANTIDAD DE CADA PRODUCTO EN EL CARRITO)
       type: DataTypes.STRING,
       allowNull: true,
       defaultValue: null,
+    },
+    favoritos: {
+      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      allowNull: true,
+      defaultValue: [],
     },
     //AGREGAR FAVORITOS
   });
