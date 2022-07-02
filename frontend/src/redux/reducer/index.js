@@ -25,7 +25,8 @@ import {
   CLEAN_ORDER,
   CLEAN_FILTER_PRICE,
   FILTER_CATEGORY,
-  FILTER_BRAND
+  FILTER_BRAND,
+  FILTER_PRICE
 } from '../types/index';
 
 const initialState = {
@@ -101,62 +102,15 @@ const reducer = (state = initialState, action) => {
 
     /// FILTRADO Y ORDENAMIENTO ///
     case FILTER_BY_PRICE:
-      let orderedByPrice =
-        //SI TENGO CATEGORIES
-                !state.filterBrands.length>0 && state.filtros.length>0 && state.filterOrder.includes('menor valor')
-                ? state.products.sort(function (a, b) {
-                if (a.price > b.price) return 1;
-                if (b.price > a.price) return -1;
-                return 0;
-              }): !state.filterBrands.length>0 && state.filtros.length>0 && state.filterOrder.includes('mayor valor')?
-                state.products.sort(function (a, b) {
-                if (a.price > b.price) return -1;
-                if (b.price > a.price) return 1;
-                return 0;
-              }):
-        //SI NO TENGO CATEGORIES NI MARCAS
-              !state.filtros.length>0 && !state.filterBrands.length>0 && state.filterOrder.includes('menor valor')?
-              state.allProducts.sort(function (a, b) {
-              if (a.price > b.price) return 1;
-              if (b.price > a.price) return -1;
-              return 0;
-            }): !state.filtros.length>0 && !state.filterBrands.length>0 && state.filterOrder.includes('mayor valor')?
-              state.allProducts.sort(function (a, b) {
-              if (a.price > b.price) return -1;
-              if (b.price > a.price) return 1;
-              return 0;
-            }): 
-        // SI TENGO MARCAS        
-              state.brands.length>0 && state.filterOrder.includes('menor valor')?
-              state.products.sort(function (a, b) {
-              if (a.price > b.price) return 1;
-              if (b.price > a.price) return -1;
-              return 0;
-              }):state.brands.length>0 && state.filterOrder.includes('mayor valor')?
-              state.products.sort(function (a, b) {
-              if (a.price > b.price) return -1;
-              if (b.price > a.price) return 1;
-              return 0;
-              })
-                    
-              //// SI TENGO TODO       
-              :state.brands.length>0 && state.filtros.length>0 && state.filterMax.length>0
-              && state.filterPrice.le && state.filterOrder.includes('menor valor')?
-              state.products.sort(function (a, b) {
-              if (a.price > b.price) return 1;
-              if (b.price > a.price) return -1;
-              return 0;
-              }):state.brands.length>0 && state.filterOrder.includes('mayor valor')?
-              state.products.sort(function (a, b) {
-              if (a.price > b.price) return -1;
-              if (b.price > a.price) return 1;
-              return 0;
-              }):0
-    
-
+        let productOrder = [...state.products]
+        productOrder = productOrder.sort((a,b)=>{
+          if(a.price<b.price) {return action.payload==='LOW' ? -1 : 1}
+          if(a.price>b.price) {return action.payload==='LOW' ? 1 : -1}
+          return 0
+        })
       return {
         ...state,
-        products: orderedByPrice,
+        products: productOrder,
       };
 
     case FILTER_CATEGORIES:
@@ -261,6 +215,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         products:action.payload
       };
+    case FILTER_PRICE:
+      return{
+        ...state,
+        products:action.payload
+      }
     default:
       return { ...state };
   }

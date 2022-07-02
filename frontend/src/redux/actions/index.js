@@ -28,7 +28,8 @@ import {
   CLEAN_FILTER_PRICE,
   CLEAN_FILTER_ORDER,
   FILTER_CATEGORY,
-  FILTER_BRAND
+  FILTER_BRAND,
+  FILTER_PRICE
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -294,17 +295,75 @@ export const filterBran = (category, brand)=>{
   return async dispatch=>{
     try{
       const filterBran = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}`)
-
+      const dataFilter = filterBran.data
       return dispatch({
         type: FILTER_BRAND,
-        payload: filterBran.data
+        payload: dataFilter
       })
 
     } catch(error){
+      Swal.fire({
+        icon:'alert',
+        title:'Se produjo un error',
+        text: 'Por favor, actualice e intente nuevamente la busqueda',
+        confirmButtonText:'Ok'
+      })
+    }
+  }
+}
+
+export const filterPrice = (category,brand, min, max)=>{
+  return async dispatch=>{
+    try {
+      if(!brand){
+        if(min&&max){
+          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&min=${min}&max=${max}`)
+
+          return dispatch({
+            type: FILTER_PRICE,
+            payload: filterCat.data
+          })
+        }
+        if(min||max){
+          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&min=${min ? min : max}`)
+
+          return dispatch({
+            type: FILTER_PRICE,
+            payload: filterCat.data
+          })
+        }
+        
+      }
+      if(brand){
+        if(min&&max){
+          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}&min=${min}&max=${max}`)
+
+          return dispatch({
+            type: FILTER_PRICE,
+            payload: filterCat.data
+          })
+        }
+        if(min||max){
+          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}&min=${min ? min : max}`)
+
+          return dispatch({
+            type: FILTER_PRICE,
+            payload: filterCat.data
+          })
+        }
+
+      }
+    } catch (error) {
       console.log(error)
     }
   }
 }
+
+
+
+
+
+
 
 export function filterCategories(category) {
   return async function (dispatch) {

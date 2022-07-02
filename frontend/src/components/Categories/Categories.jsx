@@ -26,7 +26,7 @@ export default function Categories () {
 
 
   return (
-    <div className=" w-full bg-gradient-to-t bg-primary-200  flex flex-col ">
+    <div className=" w-full h-screen bg-gradient-to-t bg-primary-200  flex flex-col ">
       
       <div className="sticky top-0 z-50">
       <NavBar/>
@@ -39,7 +39,7 @@ export default function Categories () {
     </div>
     <div className="my-0 mx-auto  bg-primary-200 ">
     <div className="w-full flex justify-end mb-7 mt-7">
-    <Ordenamientos/>
+    {/* <Ordenamientos/> */}
     </div>
     <ContainerProduct/>
     </div>
