@@ -28,6 +28,8 @@ import {
   CLEAN_FILTER_PRICE,
   FILTER_CATEGORY,
   FILTER_BRAND,
+  FILTER_PRICE
+
 } from '../types/index';
 
 const initialState = {
@@ -112,6 +114,13 @@ const reducer = (state = initialState, action) => {
 
     /// FILTRADO Y ORDENAMIENTO ///
     case FILTER_BY_PRICE:
+
+        let productOrder = [...state.products]
+        productOrder = productOrder.sort((a,b)=>{
+          if(a.price<b.price) {return action.payload==='LOW' ? -1 : 1}
+          if(a.price>b.price) {return action.payload==='LOW' ? 1 : -1}
+          return 0
+        })
       let orderedByPrice =
         //SI TENGO CATEGORIES
         !state.filterBrands.length > 0 &&
@@ -179,9 +188,10 @@ const reducer = (state = initialState, action) => {
             })
           : 0;
 
+
       return {
         ...state,
-        products: orderedByPrice,
+        products: productOrder,
       };
 
     case FILTER_CATEGORIES:
@@ -287,6 +297,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
       };
+    case FILTER_PRICE:
+      return{
+        ...state,
+        products:action.payload
+      }
     default:
       return { ...state };
   }
