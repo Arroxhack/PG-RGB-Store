@@ -1,9 +1,9 @@
-const { Router } = require('express');
-const { User, Product } = require('../../db');
+const { Router } = require("express");
+const { User, Product } = require("../../db");
 const router = Router();
 
 //Cargar carrito en la bd
-router.post('/userCart', async (req, res, next) => {
+router.post("/userCart", async (req, res, next) => {
   let { email, cartProductArray } = req.body;
   const user = await User.findOne({ where: { email } });
   cartProductArray = JSON.parse(cartProductArray);
@@ -12,12 +12,12 @@ router.post('/userCart', async (req, res, next) => {
   //caso carrito vacio
   //caso carrito con cosas
   if (!cartProductArray?.length) {
-    return res.send('Fail: cart is empty');
+    return res.send("Fail: cart is empty");
   }
 
   if (cartProductArray.length > 0) {
     if (!user) {
-      return res.send('Fail: User doesnt exist');
+      return res.send("Fail: User doesnt exist");
     }
 
     //map -> verifica que cada prod coincida con la lista de prod
@@ -47,18 +47,37 @@ router.post('/userCart', async (req, res, next) => {
         lock: true,
       });
     } else {
-      const actualCart = user.cartProducts.filter(
-        (e) => e != productsVerified.map((a) => a)
+      const actualCart = user.cartProducts.concat(productsVerified);
+      const miCarritoSinDuplicados = actualCart.reduce(
+        (acumulador, valorActual) => {
+          const elementoYaExiste = acumulador.find(
+            (elemento) => elemento.name === valorActual.name
+          );
+          if (elementoYaExiste) {
+            return acumulador.map((elemento) => {
+              if (elemento.name === valorActual.name) {
+                return {
+                  ...elemento,
+                  amount: elemento.amount + valorActual.amount,
+                };
+              }
+
+              return elemento;
+            });
+          }
+
+          return [...acumulador, valorActual];
+        },
+        []
       );
-      console.log(actualCart);
       user.set({
-        cartProducts: actualCart,
+        cartProducts: miCarritoSinDuplicados,
       });
     }
 
     await user.save();
   }
-  user.lock ? res.send('Error: User blocked') : res.send('done');
+  user.lock ? res.send("Error: User blocked") : res.send("done");
   // } catch (e) {
   //   res.status(404).send('Error: updating user cart');
   // }

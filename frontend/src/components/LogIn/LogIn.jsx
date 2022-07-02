@@ -244,12 +244,12 @@ export default function LogIn() {
             <div id="signInDiv"></div>
             <br />
             <div className="t-6">
-            {`Don't have an account yet? `} 
-            <a className="no-underline border-b" href="../register/">
-            {`Sign Up`}
-            </a>
-            .
-          </div>
+              {`Don't have an account yet? `}
+              <a className="no-underline border-b" href="../register/">
+                {`Sign Up`}
+              </a>
+              .
+            </div>
           </form>
         </div>
         {/*        { googleUser && 
