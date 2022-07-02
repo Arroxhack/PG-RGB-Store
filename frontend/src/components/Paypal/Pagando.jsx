@@ -4,8 +4,11 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { CrearComentarioReview } from "./crearComentario";
+import { useNavigate } from "react-router-dom";
 
 export default function Pagando() {
+  const navigate = useNavigate();
+
   const username = localStorage.getItem("username");
   console.log(username);
   let product = localStorage.getItem("cartProducts");
@@ -175,6 +178,7 @@ export default function Pagando() {
       })
         .then((e) => e.data)
         .catch((e) => console.log(e));
+      navigate("/");
     });
   };
 
