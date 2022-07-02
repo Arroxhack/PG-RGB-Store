@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 
 export default function LogIn() {
   let navigate = useNavigate();
+  const cartProductArray = localStorage.getItem('cartProducts');
+  console.log(cartProductArray, ' soy cartttttt')
   const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
   const [password, setPassword] = useState(""); // Llega del input del form password al hacer submit.
   const [googleUser, setGoogleUser] = useState({});
@@ -16,6 +18,7 @@ export default function LogIn() {
   const refresh = () => {
     window.location.reload(false);
   };
+ 
   const ResendEmail = async (email) => {
     const result = await axios({
       method: "post",
@@ -69,19 +72,43 @@ export default function LogIn() {
       ResendEmail(email);
       return navigate(`/validate/${username}`);
     }
+    
     if (login) {
-      localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
-      localStorage.setItem("name", name);
-      localStorage.setItem("lastname", lastname);
-      localStorage.setItem("login", login);
-      localStorage.setItem("email", email);
-      localStorage.setItem("id", id);
-      if (permissions === true) {
-        localStorage.setItem("admin", permissions);
-      }
-      setUsername(""); //Reseteo mis estados locales
-      setPassword("");
-      navigate("/");
+      
+      console.log(' soy yo rey')
+        const email = user.email;
+        const response = await axios({
+          //La ruta trae toda la info en la base de datos de un usuario
+          method: "post",
+          url: "http://localhost:3001/userCart",
+          data: {email,cartProductArray}, // 
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+          withCredentials: true,
+        }).then((res)=> res.data).catch(e=>console.log(e));
+
+        const ress = await Promise.all([response]);
+
+        if(ress[0] === "E" && ress[1] === "r" && ress[2] === "r"){
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: `User blocked`,
+            button: "Aceptar",
+          }).then(()=> {return navigate('/login')})
+        }else{
+          localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
+          localStorage.setItem("name", name);
+          localStorage.setItem("lastname", lastname);
+          localStorage.setItem("login", login);
+          localStorage.setItem("email", email);
+          localStorage.setItem("id", id);
+          if (permissions === true) {
+            localStorage.setItem("admin", permissions);
+          }
+          setUsername(""); //Reseteo mis estados locales
+          setPassword("");
+          navigate("/");
+        }
     } else {
       //Si no trae login quiere decir que no esta autenticado el usuario
       setErrors(user);
@@ -103,20 +130,50 @@ export default function LogIn() {
       .then((data) => data.data)
       .catch((e) => console.log(e));
     // let userData = user.data
-    console.log(user);
-    if (user) {
-      localStorage.setItem("username", user.username);
-      localStorage.setItem("name", user.name);
-      localStorage.setItem("lastname", user.lastname);
-      localStorage.setItem("login", true);
-      localStorage.setItem("email", user.email);
-      navigate("/");
-    } else {
-      Swal(
-        "El email asociado a la cuenta de google no coincide con ningun usuario registrado",
-        "...redirigiendo para registrarse como un nuevo usuario!"
-      ); // sweet alert
-      navigate("/register");
+    //console.log(user);
+
+    if (user?.lock) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `User blocked`,
+        button: "Aceptar",
+      }).then(()=> {return navigate('/login')})
+    } else{
+      if (user) {
+       
+        const email = user.email;
+        const response = await axios({
+          //La ruta trae toda la info en la base de datos de un usuario
+          method: "post",
+          url: "http://localhost:3001/userCart",
+          data: {email,cartProductArray}, // 
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+          withCredentials: true,
+        }).then((res)=> res.data);
+
+        if(response[0] === "E" && response[1] === "r" && response[2] === "r"){
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: `User blocked`,
+            button: "Aceptar",
+          }).then(()=> {return navigate('/login')})
+        }else{
+          localStorage.setItem("username", user.username);
+          localStorage.setItem("name", user.name);
+          localStorage.setItem("lastname", user.lastname);
+          localStorage.setItem("login", true);
+          localStorage.setItem("email", user.email);
+          navigate("/");
+        }
+      } else {
+        Swal(
+          "El email asociado a la cuenta de google no coincide con ningun usuario registrado",
+          "...redirigiendo para registrarse como un nuevo usuario!"
+        ); // sweet alert
+        navigate("/register");
+      }
     }
   }
   useEffect(() => {
