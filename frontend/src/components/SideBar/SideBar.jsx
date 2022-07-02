@@ -16,6 +16,7 @@ import { filterBrands } from "../../redux/actions";
 import { filterMin } from "../../redux/actions";
 import { cleanFilter } from "../../redux/actions";
 import { useParams, useSearchParams } from "react-router-dom";
+import Side from "./Side";
 export default function SideBar() {
   //ESTADOS
   const dispatch = useDispatch();
@@ -29,7 +30,8 @@ export default function SideBar() {
   const filterOrder= useSelector(state=> state.filterOrder)
 
   const productBrands = []
-   products && products.forEach(p=>{
+  products && products.forEach(p=>{
+
     if(!productBrands.includes(p.brand)){
       return productBrands.push(p.brand)
     }
@@ -238,15 +240,12 @@ export default function SideBar() {
   return (
     <aside className="w-1/4 md:w-64 sm:text-xs flex flex-col justify-around border-r-2 border-primary text-lg md:text-sm text-center text-primary-400 ">
       {/*------------------ CONTENEDOR DE LOS FILTROS  ------------------   /*/}
-
-       
-   
- 
+       <Side/>
       {/*------------------ CATEGORIES  ------------------   /*/}
-      <div className="flex flex-col pb-4">
+      {/* <div className="flex flex-col pb-4">
         <h4 className="text-xl text-yellow-300 pb-4">Categories</h4>
         <ul>
-          <li className="flex flex-col   ">
+          <li className="flex flex-col">
             <button
               className="text-left text-lg pl-8  "
               onClick={e => handleFilterCat(e)}
@@ -272,9 +271,9 @@ export default function SideBar() {
               : 0}
           </li>
         </ul>
-      </div>
+      </div> */}
       {/*------------------ BRANDS ------------------   /*/}
-      <div className="flex flex-col  pl-4 pt-4">
+      {/* <div className="flex flex-col  pl-4 pt-4">
         <h4 className="text-xl text-yellow-300 pb-3">Brands</h4>
 
         <button
@@ -300,9 +299,9 @@ export default function SideBar() {
               );
             })
           : 0}
-      </div>
+      </div> */}
       {/*------------------ FILTER MIN PRICE AND MAX PRICE  ------------------   /*/}
-      <div className="pt-4">
+      {/* <div className="pt-4">
         <label htmlFor="">
           <input
             className="w-16 rounded-lg text-center bg-yellow-300 text-black placeholder:text-gray-900 "
@@ -328,7 +327,7 @@ export default function SideBar() {
         >
           submit
         </button>
-      </fragments>
+      </fragments> */}
     </aside>
   );
 }
