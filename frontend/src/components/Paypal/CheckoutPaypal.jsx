@@ -73,6 +73,7 @@ export default function CheckoutPaypal() {
     })
       .then((e) => e.data)
       .catch((e) => console.log(e));
+      
     if (Stock === "Success") {
       if (
         localStorage.getItem("login") &&
