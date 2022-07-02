@@ -65,25 +65,25 @@ function NavBar() {
         </div>
 
         {/*       
-        <div class="block lg:hidden">
+        <div className="block lg:hidden">
           {menuOpen ?   
-           <div class="flex justify-center bg-primary-200 ">
-          <ul class=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0 ">
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+           <div className="flex justify-center bg-primary-200 ">
+          <ul className=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0 ">
+            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
               <Link to="/categories">
                 <p>Categories</p>
               </Link>
             </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
               <Link to="/categories/notebooks">Notebooks</Link>
             </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
               <Link to="/categories/pc-armadas">Prebuilt PCs</Link>
             </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
               <Link to="/categories/placas-de-videos">GPUs</Link>
             </li>
-            <li class="md:p-4 py-2 block hover:bg-primary-300 rounded ">
+            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
               <Link to="/arma-tu-pc">
                 <p>Build your PC</p>
               </Link>
@@ -91,13 +91,13 @@ function NavBar() {
           </ul>
         </div>   : null}
 
-          <button onClick={handleMenu} class="text-secundary-250 py-2 px-2.5">
+          <button onClick={handleMenu} className="text-secundary-250 py-2 px-2.5">
             <svg
               aria-hidden="true"
               focusable="false"
               data-prefix="fas"
               data-icon="bars"
-              class="w-6"
+              className="w-6"
               role="img"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
@@ -112,7 +112,7 @@ function NavBar() {
       </div> */}
       </div>
       
-      <div class="menu w-full lg:flex  space-x-3 lg:items-center lg:w-auto lg:px-3 px-8">
+      <div className="menu w-full lg:flex  space-x-3 lg:items-center lg:w-auto lg:px-3 px-8">
         <div>
           <SearchBar></SearchBar>
         </div>

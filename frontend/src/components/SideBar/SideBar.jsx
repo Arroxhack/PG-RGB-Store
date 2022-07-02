@@ -31,6 +31,7 @@ export default function SideBar() {
 
   const productBrands = []
   products && products.forEach(p=>{
+
     if(!productBrands.includes(p.brand)){
       return productBrands.push(p.brand)
     }

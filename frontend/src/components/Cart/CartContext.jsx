@@ -52,6 +52,15 @@ const CartProvider = ({children}) => {
         
     }
 
+    const deleteProduct = product => {
+        const inCart = products.find(p=>p.id===product.id)
+
+            if(inCart.amount){
+                setProducts(products.filter(p=>p.id!==product.id))
+            }
+           
+    }
+
     // const deleteProductCart = product=>{
     //     products.filter(p=>p.id!==product.id
     //     const inCart = products.find(p=>p.id===product.id)
@@ -75,9 +84,10 @@ const CartProvider = ({children}) => {
     }
 
 
+
     return (
 
-        <CartContext.Provider value={{products, addProductToCart,deleteProductCart, resetProductCart}}>
+        <CartContext.Provider value={{products, addProductToCart,deleteProductCart,deleteProduct, resetProductCart}}>
             {children}
         </CartContext.Provider>
     )

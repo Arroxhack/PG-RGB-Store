@@ -7,6 +7,7 @@ import SideBar from "../SideBar/SideBar";
 import Ordenamientos from "../Ordenamientos/Ordenamientos";
 import NavBar from '../NavBar/NavBar'
 import ContainerProduct from '../ContainerProduct/ContainerProduct'
+import { useSearchParams } from "react-router-dom";
 
 
 export default function Categories () {
@@ -15,14 +16,17 @@ export default function Categories () {
     const products = useSelector((state) => state.products);
     const filters= useSelector(state=>state.filtros)
     const filterOrder= useSelector(state=> state.filterOrder)
-  
+    const [params, setParams] = useSearchParams()
 
+    const catQuery = params.get('category')
 
-  
     useEffect(() => {
-      if(!products.length) dispatch(getAllProducts())
+      if(!catQuery){
+        params.set('category', 'all')
+        setParams(params)
+      }
       dispatch(clean())
-    }, [dispatch]);
+    }, [dispatch,catQuery]);
 
 
   return (
@@ -38,9 +42,7 @@ export default function Categories () {
     <SideBar/>
     </div>
     <div className="my-0 mx-auto  bg-primary-200 ">
-    <div className="w-full flex justify-end mb-7 mt-7">
-    {/* <Ordenamientos/> */}
-    </div>
+
     <ContainerProduct/>
     </div>
       </div>

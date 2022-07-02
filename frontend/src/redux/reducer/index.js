@@ -1,9 +1,10 @@
-import { filterBrands } from '../actions';
+import { buildPc } from '../actions';
 import {
   ADD_CART,
   GET_ALL_PRODUCTS,
   GET_PRODUCT_DETAIL,
   RESET_CART,
+  DELETE_CART,
   SEARCH_PRODUCTS,
   FILTER_BY_PRICE,
   GET_CATEGORIES,
@@ -16,17 +17,19 @@ import {
   CLEAN,
   GET_USER_DATA,
   CREATE_PRODUCT,
-  GET_PROFILE,
   SET_FILTER_PRICE,
   CLEAN_FILTER,
+  BUILD_PC,
+  GET_PRODUCTS_BY_CATEGORY,
   SET_FILTER_BRANDS,
   CLEAN_FILTER_BRANDS,
-  SET_ORDER, 
+  SET_ORDER,
   CLEAN_ORDER,
   CLEAN_FILTER_PRICE,
   FILTER_CATEGORY,
   FILTER_BRAND,
   FILTER_PRICE
+
 } from '../types/index';
 
 const initialState = {
@@ -41,7 +44,9 @@ const initialState = {
   newProduct: [],
   UserData: [],
   filterPrice: [],
-  filterBrands:[],
+  buildPc: {},
+  productsByCategory: [],
+  filterBrands: [],
   filterOrder: [],
 };
 
@@ -60,14 +65,21 @@ const reducer = (state = initialState, action) => {
         ...state,
         detail: action.payload,
       };
-    //======================================
-    //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
-    //======================================
-    case GET_PROFILE:
+
+    //BUILD PC PROPIAAA
+    //SE GUARDA COMO UN OBJETO QUE EN SUS ATRIBUTOS TIENE LOS ID DE LOS PRODUCTOS, CADA KEY ES UNA CATEGORY Y CADA VALUE ES COMPONENTE QUE PERTENCE A ESA CATEGORY
+    case BUILD_PC:
       return {
         ...state,
-        profile: action.payload,
+        buildPc: { ...buildPc, [action.payload.category]: action.payload },
       };
+
+    case GET_PRODUCTS_BY_CATEGORY:
+      return {
+        ...state,
+        productsByCategory: action.payload,
+      };
+
     case GET_CATEGORIES:
       return {
         ...state,
@@ -75,10 +87,10 @@ const reducer = (state = initialState, action) => {
       };
 
     case GET_BRANDS:
-    let allBrands= state.products.map(e=> e.brand)  
-    let brand= new Set(allBrands) 
-      let arr= [...brand]
-    return {
+      let allBrands = state.products.map((e) => e.brand);
+      let brand = new Set(allBrands);
+      let arr = [...brand];
+      return {
         ...state,
         brands: arr,
       };
@@ -102,12 +114,81 @@ const reducer = (state = initialState, action) => {
 
     /// FILTRADO Y ORDENAMIENTO ///
     case FILTER_BY_PRICE:
+
         let productOrder = [...state.products]
         productOrder = productOrder.sort((a,b)=>{
           if(a.price<b.price) {return action.payload==='LOW' ? -1 : 1}
           if(a.price>b.price) {return action.payload==='LOW' ? 1 : -1}
           return 0
         })
+      let orderedByPrice =
+        //SI TENGO CATEGORIES
+        !state.filterBrands.length > 0 &&
+        state.filtros.length > 0 &&
+        state.filterOrder.includes('menor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+            })
+          : !state.filterBrands.length > 0 &&
+            state.filtros.length > 0 &&
+            state.filterOrder.includes('mayor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
+            })
+          : //SI NO TENGO CATEGORIES NI MARCAS
+          !state.filtros.length > 0 &&
+            !state.filterBrands.length > 0 &&
+            state.filterOrder.includes('menor valor')
+          ? state.allProducts.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+            })
+          : !state.filtros.length > 0 &&
+            !state.filterBrands.length > 0 &&
+            state.filterOrder.includes('mayor valor')
+          ? state.allProducts.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
+            })
+          : // SI TENGO MARCAS
+          state.brands.length > 0 && state.filterOrder.includes('menor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+            })
+          : state.brands.length > 0 && state.filterOrder.includes('mayor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
+            })
+          : //// SI TENGO TODO
+          state.brands.length > 0 &&
+            state.filtros.length > 0 &&
+            state.filterMax.length > 0 &&
+            state.filterPrice.le &&
+            state.filterOrder.includes('menor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return 1;
+              if (b.price > a.price) return -1;
+              return 0;
+            })
+          : state.brands.length > 0 && state.filterOrder.includes('mayor valor')
+          ? state.products.sort(function (a, b) {
+              if (a.price > b.price) return -1;
+              if (b.price > a.price) return 1;
+              return 0;
+            })
+          : 0;
+
+
       return {
         ...state,
         products: productOrder,
@@ -120,16 +201,19 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_MIN:
-     let filterMaxAndMin=  
-    state.allProducts.filter(
-        (e) => e.price > state.filterPrice && e.price < state.filterMax)
-       
-        return {
+      let filterMaxAndMin = state.allProducts.filter(
+        (e) => e.price > state.filterPrice && e.price < state.filterMax
+      );
+
+      return {
         ...state,
         products: filterMaxAndMin,
       };
 
     case FILTER_BRANDS:
+      const brandsFiltered = state.filtros.includes('all')
+        ? state.allProducts
+        : state.allProducts.filter((e) => state.filtros.includes(e.brand));
       return {
         ...state,
         products: action.payload,
@@ -139,59 +223,57 @@ const reducer = (state = initialState, action) => {
     case SET_FILTER:
       return {
         ...state,
-        filtros: action.payload,
+        filtros: [action.payload],
       };
     case SET_FILTER_MAX:
       return {
         ...state,
         filterMax: action.payload,
       };
-      case SET_FILTER_PRICE:
-        return {
-          ...state,
-          filterPrice: action.payload,
-        };
-    
-      case SET_FILTER_BRANDS:
+    case SET_FILTER_PRICE:
       return {
-      ...state,
-      filterBrands: action.payload,
+        ...state,
+        filterPrice: action.payload,
       };
-      case SET_ORDER:
+    case SET_FILTER_BRANDS:
       return {
-      ...state,
-      filterOrder: action.payload,
+        ...state,
+        filterBrands: action.payload,
       };
-      
+    case SET_ORDER:
+      return {
+        ...state,
+        filterOrder: action.payload,
+      };
+
     case CLEAN:
       return {
         ...state,
         detail: action.payload,
       };
 
-      case CLEAN_FILTER:
-        return {
-          ...state,
-          filtros: action.payload,
-        };
-        
-        case CLEAN_FILTER_BRANDS:
-          return{
-            ...state,
-            filterBrands:action.payload,
-          }
-          case CLEAN_ORDER:
-          return{
-            ...state,
-            filterOrder:action.payload,
-          }
-          case CLEAN_FILTER_PRICE:
-            return{
-              ...state,
-              filterMax:action.payload,
-              filterPrice:action.payload
-            }
-        
+    case CLEAN_FILTER:
+      return {
+        ...state,
+        filtros: action.payload,
+      };
+
+    case CLEAN_FILTER_BRANDS:
+      return {
+        ...state,
+        filterBrands: action.payload,
+      };
+    case CLEAN_ORDER:
+      return {
+        ...state,
+        filterOrder: action.payload,
+      };
+    case CLEAN_FILTER_PRICE:
+      return {
+        ...state,
+        filterMax: action.payload,
+        filterPrice: action.payload,
+      };
 
     /// CARRITO (CREO QUE LO TENGO QUE BORRAR) ///
     case ADD_CART:
@@ -206,14 +288,14 @@ const reducer = (state = initialState, action) => {
       };
     /// ORDENAMIENTOS POR BACK ///
     case FILTER_CATEGORY:
-      return{
+      return {
         ...state,
-        products:action.payload
+        products: action.payload,
       };
     case FILTER_BRAND:
-      return{
+      return {
         ...state,
-        products:action.payload
+        products: action.payload,
       };
     case FILTER_PRICE:
       return{
@@ -223,7 +305,6 @@ const reducer = (state = initialState, action) => {
     default:
       return { ...state };
   }
-
 };
 
 export default reducer;

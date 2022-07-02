@@ -8,7 +8,6 @@ import {
   FILTER_BY_PRICE,
   GET_CATEGORIES,
   SET_FILTER,
-  LOAD_USER,
   FILTER_CATEGORIES,
   GET_BRANDS,
   FILTER_BRANDS,
@@ -18,9 +17,10 @@ import {
   FILTER_MIN,
   GET_USER_DATA,
   EDIT_PROFILE,
-  GET_PROFILE,
   SET_FILTER_PRICE,
   CLEAN_FILTER,
+  BUILD_PC,
+  GET_PRODUCTS_BY_CATEGORY,
   SET_FILTER_BRANDS,
   CLEAN_FILTER_BRANDS,
   SET_ORDER,
@@ -29,6 +29,7 @@ import {
   CLEAN_FILTER_ORDER,
   FILTER_CATEGORY,
   FILTER_BRAND,
+  DELETE_CART,
   FILTER_PRICE
 } from '../types/index';
 import Swal from 'sweetalert2';
@@ -50,13 +51,31 @@ export function getAllProducts() {
   };
 }
 
+export function getProductsByCategory(category) {
+  return async (dispatch) => {
+    try {
+      const PRODUCTS = await axios.get(`${PATH}/?cat=${category}`);
+      return dispatch({
+        type: GET_PRODUCTS_BY_CATEGORY,
+        payload: PRODUCTS.data,
+      });
+    } catch (error) {}
+  };
+}
+//ARMADO PC
+export function buildPc(payload) {
+  return {
+    type: BUILD_PC,
+    payload,
+  };
+}
 /// GET MARCAS DE PRODUCTOS ///
 export function getBrand(payload) {
-      return {
-        type: GET_BRANDS,
-        payload,
-      };
-    }
+  return {
+    type: GET_BRANDS,
+    payload,
+  };
+}
 
 export function clean() {
   return {
@@ -89,9 +108,6 @@ export function cleanFilterPrice() {
   };
 }
 
-
-
-
 /// GET DETALLE DE PRODUCTOS ///
 export function getProductDetail(id) {
   return async function (dispatch) {
@@ -113,7 +129,6 @@ export function getAllCategories() {
   return async function (dispatch) {
     try {
       let AllCategory = await axios.get(`${PATH}/category`);
-      console.log(AllCategory);
       let allCategoryData = AllCategory.data.map((e) => e.name);
       return dispatch({
         type: GET_CATEGORIES,
@@ -139,7 +154,7 @@ export const createProduct = (product) => {
       return dispatch({
         type: CREATE_PRODUCT,
         payload: post.data,
-      })
+      });
     } catch (error) {
       Swal.fire({
         title: 'Algo fallo',
@@ -151,10 +166,13 @@ export const createProduct = (product) => {
   };
 };
 /// UPDATE PRODUCTO ///
-export const editProduct = (producto)=>{
-  return async (dispatch)=>{
+export const editProduct = (producto) => {
+  return async (dispatch) => {
     try {
-      const post = await axios.put(`${PATH}/edit-products/${producto.id}`, producto)
+      const post = await axios.put(
+        `${PATH}/edit-products/${producto.id}`,
+        producto
+      );
       Swal.fire({
         title: `${producto.name}`,
         text: 'Editado con exito!',
@@ -169,21 +187,20 @@ export const editProduct = (producto)=>{
         confirmButtonText: 'ok',
       });
     }
-  }
-}
-/// DELETE PRODUCTO /// 
-export const deleteProduct=(id)=>{
-  return async dispatch =>{
-    try{
-      const deleteProduct = await axios.delete(`${PATH}/delete-product/${id}`)
+  };
+};
+/// DELETE PRODUCTO ///
+export const deleteProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const deleteProduct = await axios.delete(`${PATH}/delete-product/${id}`);
 
       Swal.fire({
-        icon:'success',
-        title:'Product delete',
-        confirmButtonText: 'Ok'
-      })
-    }
-    catch(error){
+        icon: 'success',
+        title: 'Product delete',
+        confirmButtonText: 'Ok',
+      });
+    } catch (error) {
       Swal.fire({
         title: 'Algo fallo',
         text: 'No se pudo borrar el producto',
@@ -191,8 +208,8 @@ export const deleteProduct=(id)=>{
         confirmButtonText: 'ok',
       });
     }
-  }
-}
+  };
+};
 
 /// POST REGISTRAR USUARIO ///
 export function PostUser(user) {
@@ -231,6 +248,7 @@ export const addCart = (product) => {
     payload: product,
   };
 };
+
 export const resetCart = () => {
   return {
     type: RESET_CART,
@@ -260,11 +278,11 @@ export function setFilterBrands(payload) {
     payload,
   };
 }
-export function setOrder(payload){
-  return{
+export function setOrder(payload) {
+  return {
     type: SET_ORDER,
-    payload
-  }
+    payload,
+  };
 }
 
 /// ORDENAMIENTOS Y FILTRADOS ///
@@ -275,21 +293,20 @@ export function orderedByPrice(payload) {
   };
 }
 
-export const filterCategory = category=>{
-  return async dispatch=>{
-    try{
-      const filterCat = await axios.get(`${PATH}/filter/?category=${category}`)
+export const filterCategory = (category) => {
+  return async (dispatch) => {
+    try {
+      const filterCat = await axios.get(`${PATH}/filter/?category=${category}`);
 
       return dispatch({
         type: FILTER_CATEGORY,
-        payload: filterCat.data
-      })
-
-    } catch(error){
-      console.log(error)
+        payload: filterCat.data,
+      });
+    } catch (error) {
+      console.log(error);
     }
-  }
-}
+  };
+};
 
 export const filterBran = (category, brand)=>{
   return async dispatch=>{
@@ -356,8 +373,8 @@ export const filterPrice = (category,brand, min, max)=>{
     } catch (error) {
       console.log(error)
     }
-  }
-}
+  };
+};
 
 
 
@@ -369,8 +386,7 @@ export function filterCategories(category) {
   return async function (dispatch) {
     let categories;
     try {
-
-     categories = await axios.get(`${PATH}/products/?category=${category}`); //products por ahora
+      categories = await axios.get(`${PATH}/products/?category=${category}`); //products por ahora
 
       return dispatch({
         type: FILTER_CATEGORIES,
@@ -386,11 +402,11 @@ export function filterBrands(brand) {
   return async function (dispatch) {
     let brands;
     try {
-     if(brand!=="all"){
-     brands = await axios.get(`${PATH}/brands/?brand=${brand}`); //products por ahora
-     } 
-     
-     return dispatch({
+      if (brand !== 'all') {
+        brands = await axios.get(`${PATH}/brands/?brand=${brand}`); //products por ahora
+      }
+
+      return dispatch({
         type: FILTER_BRANDS,
         payload: brands.data,
       });
@@ -403,9 +419,9 @@ export function filterBrands(brand) {
 export function filterMin(payload) {
   return {
     type: FILTER_MIN,
-    payload
-  }
- }
+    payload,
+  };
+}
 
 /// BUSQUEDA ///
 export function searchProducts(search) {
@@ -421,11 +437,10 @@ export function searchProducts(search) {
       })
       .catch(() => {
         Swal.fire({
-          icon:'info',
+          icon: 'info',
           title: 'Product not found',
-          button: 'OK'
-        })
-        ;
+          button: 'OK',
+        });
       });
   };
 }
@@ -433,17 +448,17 @@ export function searchProducts(search) {
 //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
 //======================================
 // PERFIL DE USER
-export function getUserProfile(username) {
-  return (dispatch) => {
-    try {
-      axios
-        .get(`${PATH}/profile/${username}`)
-        .then((user) => dispatch({ type: GET_PROFILE, payload: user.data }));
-    } catch (error) {
-      console.log('ERROR EN GETUSERPROFILE ACTIONS');
-    }
-  };
-}
+// export function getUserProfile(username) {
+//   return (dispatch) => {
+//     try {
+//       axios
+//         .get(`${PATH}/profile/${username}`)
+//         .then((user) => dispatch({ type: GET_PROFILE, payload: user.data }));
+//     } catch (error) {
+//       console.log('ERROR EN GETUSERPROFILE ACTIONS');
+//     }
+//   };
+// }
 //======================================
 //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
 //======================================
