@@ -22,16 +22,23 @@ export default function Pagando() {
            quantity: e.amount
         }
     });
-    console.log("Mis articulos: ", articulos);
-    console.log("Mis articulos.length: ", articulos.length);
+    console.log("articulos: ", articulos);
+    console.log("articulos.length: ", articulos.length);
 
     let PrecioTotalArticulos = articulos[0].unit_amount.value * articulos[0].quantity;
-    
+
+    let multiplicacionEntreValueYQuantity = articulos.map(e => {
+        return e.unit_amount.value * e.quantity
+    })
+
+    console.log("multiplicacionEntreValueYQuantity: ", multiplicacionEntreValueYQuantity)
+
     if(articulos.length > 1){
-        PrecioTotalArticulos = productJSON.reduce((prev, current) => {
-            return prev.price*prev.amount + current.price*current.amount +""
+        PrecioTotalArticulos = multiplicacionEntreValueYQuantity.reduce((prev, current) => {
+            return prev + current 
         })
-    };    
+    };  
+      
     console.log("PrecioTotalArticulos: ", PrecioTotalArticulos);
 
 
@@ -45,11 +52,11 @@ export default function Pagando() {
             soft_descriptor: "HighFashions",
             amount: {
                 currency_code: "USD",
-                value: PrecioTotalArticulos, //value: "230.00"
+                value: PrecioTotalArticulos.toFixed(2), //value: "230.00"
                 breakdown: {
                     item_total: {
                         currency_code: "USD",
-                        value: PrecioTotalArticulos//value: "180.00"
+                        value: PrecioTotalArticulos.toFixed(2)//value: "180.00"
                     },
                     // shipping: {
                     //     currency_code: "USD",
