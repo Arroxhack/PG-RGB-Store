@@ -5,14 +5,16 @@ const { findUser } = require("../../controllers/users");
 
 router.post("/NewReview", async (req, res, next) => {
   const { idProduct, Username, idCompra } = req.body;
+  console.log(Username, " ACAAAAA user");
+  console.log(idProduct, " ACAAAAA ID");
   const user = await findUser(Username);
   if (!user?.name) {
-    res.send("Error no se encuentra el usuario");
+    return res.send("Error no se encuentra el usuario");
   }
   const product = await Product.findByPk(idProduct);
 
-  if (product) {
-    res.send("Error no se encontro producto con ese id");
+  if (!product) {
+    return res.send("Error no se encontro producto con ese id");
   }
 
   const NewReview = ReviewComment.create({
@@ -23,9 +25,9 @@ router.post("/NewReview", async (req, res, next) => {
     comentario: "",
   });
   if (NewReview) {
-    res.send("Done");
+    return res.send("Done");
   } else {
-    res.send("Error no create new Review Comment");
+    return res.send("Error no create new Review Comment");
   }
 });
 
