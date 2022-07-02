@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       idCompra: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true,
       },
       idProducto: {
