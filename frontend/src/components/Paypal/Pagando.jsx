@@ -23,16 +23,23 @@ export default function Pagando() {
            quantity: e.amount
         }
     });
-    console.log("Mis articulos: ", articulos);
-    console.log("Mis articulos.length: ", articulos.length);
+    console.log("articulos: ", articulos);
+    console.log("articulos.length: ", articulos.length);
 
     let PrecioTotalArticulos = articulos[0].unit_amount.value * articulos[0].quantity;
-    
+
+    let multiplicacionEntreValueYQuantity = articulos.map(e => {
+        return e.unit_amount.value * e.quantity
+    })
+
+    console.log("multiplicacionEntreValueYQuantity: ", multiplicacionEntreValueYQuantity)
+
     if(articulos.length > 1){
-        PrecioTotalArticulos = productJSON.reduce((prev, current) => {
-            return prev.price*prev.amount + current.price*current.amount +""
+        PrecioTotalArticulos = multiplicacionEntreValueYQuantity.reduce((prev, current) => {
+            return prev + current 
         })
-    };    
+    };  
+      
     console.log("PrecioTotalArticulos: ", PrecioTotalArticulos);
 
 
