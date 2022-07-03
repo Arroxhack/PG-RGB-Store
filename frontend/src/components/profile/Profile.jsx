@@ -8,8 +8,10 @@ import PhoneInput from "react-phone-input-2";
 import Swal from "sweetalert2";
 import "react-phone-input-2/lib/style.css";
 import NavBar from "../NavBar/NavBar";
+import { useNavigate } from "react-router";
 
 export default function Profile() {
+  const navigate = useNavigate();
   const id = localStorage.getItem("id");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.UserData);
@@ -39,6 +41,15 @@ export default function Profile() {
     const base64 = await convertToBase64(file);
     setImageUpload(base64);
     console.log(base64);
+  };
+
+  const NoLogin = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "No Login",
+      text: `Tienes que estar logeado para ingresar a la pagina`,
+      button: "Aceptar",
+    }).then(() => navigate("/login"));
   };
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -127,160 +138,176 @@ export default function Profile() {
   };
   return (
     <div>
-      <NavBar />
-      <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-gradient-to-t from-primary-300 to-primary">
-        <button
-          id="EditProfile"
-          className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
-          onClick={(e) => EditPerfil(e)}
-        >
-          {" "}
-          Editar Perfil
-        </button>
-        <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black">
-          {editPerfil === false ? (
-            <>
-              <div className="flex row space-x-3">
-                <h2>Name: </h2>
-                <p className="text-decoration underline ">{user.name}</p>
-              </div>
-              <div className="flex row space-x-3">
-                <h2>LastName:</h2>
-                <p className="text-decoration underline ">{user.lastname}</p>
-              </div>
-              <div className="flex row space-x-3">
-                <h2>Email:</h2>
-                <p className="text-decoration underline">{user.email}</p>
-              </div>
-              <div className="flex row space-x-3">
-                <h2>Username:</h2>
-                <p className="text-decoration underline">{user.username}</p>
-              </div>
-              <div className="flex row space-x-3">
-                <h2>cellphone:</h2>
-                <p className="text-decoration underline">
-                  {user.cellphone ? "+" + user.cellphone : "Dato no encontrado"}
-                </p>
-              </div>
-              <div className="flex row space-x-3">
-                <h2>Address:</h2>
-                <p className="text-decoration underline">
-                  {user.address ? user.address : "Dato no encontrado"}
-                </p>
-              </div>
-              <div className="flex row space-x-3">
-                <h2>image:</h2>
-                <p>
-                  {user.image ? (
-                    <img className="rounded-full h-20 w-20" src={user.image} />
-                  ) : (
-                    "Dato no encontrado"
-                  )}
-                </p>
-              </div>
-            </>
-          ) : (
-            <form>
-              <div className="flex row space-x-3">
-                <h2>Name: </h2>
-                <input
-                  name="Name"
-                  className="border-2 border-primary-400 rounded max-w-max  "
-                  value={NameEdit}
-                  onChange={(e) => setName(e.target.value)}
-                />
-                {console.log(NameEdit)}
-              </div>
-              <div className="flex row space-x-3">
-                <h2>LastName:</h2>
-                <input
-                  name="Lastname"
-                  className="border-2 border-primary-400 rounded max-w-max  "
-                  value={LastnameEdit}
-                  onChange={(e) => setLastname(e.target.value)}
-                />
-              </div>
-              <div className="flex row space-x-3">
-                <h2>Address:</h2>
-                <input
-                  name="Address"
-                  className="border-2 border-primary-400 rounded max-w-max  "
-                  value={AddressEdit}
-                  onChange={(e) => setAddress(e.target.value)}
-                />
-              </div>
-              <div className="flex row space-x-3">
-                <h2>Phone:</h2>
-                <PhoneInput
-                  name="cellphone"
-                  country={"ar"}
-                  value={CellphoneEdit}
-                  onChange={(phone) => setCellphone(phone)}
-                />
-              </div>
-              <div className="flex row space-x-3">
-                <h2>Image:</h2>
-                <p>
-                  {ImageUpload ? (
-                    <img className="rounded-full h-20 w-20" src={ImageUpload} />
-                  ) : (
-                    "Dato no encontrado"
-                  )}
-                </p>
-              </div>
-              <input
-                type="file"
-                name="image"
-                id="image"
-                onChange={UploadImage}
-              />
-              <div className="flex row space-x-3">
-                <button
-                  className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-100 uppercase font-semibold hover:bg-primary-300"
-                  onClick={(e) => DeleteImage(e)}
-                >
-                  Erase Image
-                </button>
-              </div>
-              <button
-                id="Edicion"
-                onClick={(e) => HandleConfirm(e)}
-                className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
-              >
-                Confirmar Edicion
-              </button>
-              {confirmEdit === true ? (
-                <div className="flex row space-x-3">
-                  <h2>Ingrese su contraseña para confirmar cambios:</h2>
+      {id ? (
+        <>
+          <NavBar />
+          <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-gradient-to-t from-primary-300 to-primary">
+            <button
+              id="EditProfile"
+              className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+              onClick={(e) => EditPerfil(e)}
+            >
+              {" "}
+              Editar Perfil
+            </button>
+            <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black">
+              {editPerfil === false ? (
+                <>
+                  <div className="flex row space-x-3">
+                    <h2>Name: </h2>
+                    <p className="text-decoration underline ">{user.name}</p>
+                  </div>
+                  <div className="flex row space-x-3">
+                    <h2>LastName:</h2>
+                    <p className="text-decoration underline ">
+                      {user.lastname}
+                    </p>
+                  </div>
+                  <div className="flex row space-x-3">
+                    <h2>Email:</h2>
+                    <p className="text-decoration underline">{user.email}</p>
+                  </div>
+                  <div className="flex row space-x-3">
+                    <h2>Username:</h2>
+                    <p className="text-decoration underline">{user.username}</p>
+                  </div>
+                  <div className="flex row space-x-3">
+                    <h2>cellphone:</h2>
+                    <p className="text-decoration underline">
+                      {user.cellphone
+                        ? "+" + user.cellphone
+                        : "Dato no encontrado"}
+                    </p>
+                  </div>
+                  <div className="flex row space-x-3">
+                    <h2>Address:</h2>
+                    <p className="text-decoration underline">
+                      {user.address ? user.address : "Dato no encontrado"}
+                    </p>
+                  </div>
+                  <div className="flex row space-x-3">
+                    <h2>image:</h2>
+                    <p>
+                      {user.image ? (
+                        <img
+                          className="rounded-full h-20 w-20"
+                          src={user.image}
+                        />
+                      ) : (
+                        "Dato no encontrado"
+                      )}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <form>
+                  <div className="flex row space-x-3">
+                    <h2>Name: </h2>
+                    <input
+                      name="Name"
+                      className="border-2 border-primary-400 rounded max-w-max  "
+                      value={NameEdit}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                    {console.log(NameEdit)}
+                  </div>
+                  <div className="flex row space-x-3">
+                    <h2>LastName:</h2>
+                    <input
+                      name="Lastname"
+                      className="border-2 border-primary-400 rounded max-w-max  "
+                      value={LastnameEdit}
+                      onChange={(e) => setLastname(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex row space-x-3">
+                    <h2>Address:</h2>
+                    <input
+                      name="Address"
+                      className="border-2 border-primary-400 rounded max-w-max  "
+                      value={AddressEdit}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex row space-x-3">
+                    <h2>Phone:</h2>
+                    <PhoneInput
+                      name="cellphone"
+                      country={"ar"}
+                      value={CellphoneEdit}
+                      onChange={(phone) => setCellphone(phone)}
+                    />
+                  </div>
+                  <div className="flex row space-x-3">
+                    <h2>Image:</h2>
+                    <p>
+                      {ImageUpload ? (
+                        <img
+                          className="rounded-full h-20 w-20"
+                          src={ImageUpload}
+                        />
+                      ) : (
+                        "Dato no encontrado"
+                      )}
+                    </p>
+                  </div>
                   <input
-                    placeholder="Ingrese Contraseña"
-                    name="Password"
-                    className="border-2 border-primary-400 rounded max-w-max  "
-                    value={Password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="file"
+                    name="image"
+                    id="image"
+                    onChange={UploadImage}
                   />
+                  <div className="flex row space-x-3">
+                    <button
+                      className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-100 uppercase font-semibold hover:bg-primary-300"
+                      onClick={(e) => DeleteImage(e)}
+                    >
+                      Erase Image
+                    </button>
+                  </div>
                   <button
-                    onClick={(e) => ConfirmEditLast(e)}
+                    id="Edicion"
+                    onClick={(e) => HandleConfirm(e)}
                     className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
                   >
-                    Enviar
+                    Confirmar Edicion
                   </button>
-                </div>
-              ) : null}
-              <div className="flex row space-x-3">
-                <button
-                  className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
-                  onClick={(e) => handleChangePassword(e)}
-                >
-                  Change Password
-                </button>
-              </div>
-            </form>
-          )}
+                  {confirmEdit === true ? (
+                    <div className="flex row space-x-3">
+                      <h2>Ingrese su contraseña para confirmar cambios:</h2>
+                      <input
+                        placeholder="Ingrese Contraseña"
+                        name="Password"
+                        className="border-2 border-primary-400 rounded max-w-max  "
+                        value={Password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                      <button
+                        onClick={(e) => ConfirmEditLast(e)}
+                        className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+                      >
+                        Enviar
+                      </button>
+                    </div>
+                  ) : null}
+                  <div className="flex row space-x-3">
+                    <button
+                      className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+                      onClick={(e) => handleChangePassword(e)}
+                    >
+                      Change Password
+                    </button>
+                  </div>
+                </form>
+              )}
 
-          {mostrarChangePassword === true ? <ChangePassword /> : null}
-        </div>
-      </div>
+              {mostrarChangePassword === true ? <ChangePassword /> : null}
+            </div>
+          </div>
+        </>
+      ) : (
+        NoLogin()
+      )}
     </div>
   );
 }

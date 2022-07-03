@@ -4,7 +4,7 @@ export const ADD_CART = 'ADD_CART';
 export const FILTER_BY_PRICE = 'FILTER_BY_PRICE';
 export const RESET_CART = 'RESET_CART';
 export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
-export const GET_PROFILE = 'GET_PROFILE';
+// export const GET_PROFILE = 'GET_PROFILE';
 export const EDIT_PROFILE = 'EDIT_PROFILE';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const SET_FILTER = 'SET_FILTER';
@@ -17,18 +17,21 @@ export const SET_FILTER_MAX = 'SET_FILTER_MAX';
 export const CLEAN = 'CLEAN';
 export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const GET_USER_DATA = 'GET_USER_DATA';
-export const SET_FILTER_PRICE= 'SET_FILTER_PRICE'
+export const SET_FILTER_PRICE = 'SET_FILTER_PRICE';
 export const CLEAN_FILTER = 'CLEAN_FILTER';
-export const EDIT_PRODUCT = 'EDIT_PRODUCT'
-export const DELETE_PRODUCT = 'DELETE_PRODUCT'
-export const SET_FILTER_BRANDS= 'SET_FILTER_BRANDS'
+export const BUILD_PC = 'BUILD_PC';
+export const GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY';
+export const EDIT_PRODUCT = 'EDIT_PRODUCT';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const SET_FILTER_BRANDS = 'SET_FILTER_BRANDS';
 export const CLEAN_FILTER_BRANDS = 'CLEAN_FILTER_BRANDS';
-export const SET_ORDER = 'SET_ORDER'
-export const CLEAN_ORDER = 'CLEAN_ORDER'
-export const CLEAN_FILTER_PRICE= 'CLEAN_FILTER_PRICE'
-
 /// FILTRADO
 export const FILTER_CATEGORY = 'FILTER_CATEGORY'
 export const FILTER_BRAND = 'FILTER_BRAND'
 // GETS ///
 export const GET_GPUS= 'GET_GPUS'
+export const SET_ORDER = 'SET_ORDER';
+export const CLEAN_ORDER = 'CLEAN_ORDER';
+export const CLEAN_FILTER_PRICE = 'CLEAN_FILTER_PRICE';
+export const FILTER_PRICE = 'FILTER_PRICE'
+

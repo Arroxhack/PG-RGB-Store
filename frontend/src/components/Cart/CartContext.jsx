@@ -1,7 +1,17 @@
 import { createContext,useEffect, useState } from "react"
+import Swal from "sweetalert2";
 
 export const CartContext = createContext()
 
+const Toast = Swal.mixin({
+    toast: true,
+    position: "bottom-end",
+    showConfirmButton: false,
+    timer: 2000, 
+  });
+
+ 
+ 
 const CartProvider = ({children}) => {
 
     const [products, setProducts] = useState(()=>{
@@ -32,11 +42,15 @@ const CartProvider = ({children}) => {
         }        else{
             setProducts([...products, {...product, amount:1}])
         }
-
+        Toast.fire({
+            icon: "success",
+            title: "Added one to cart!",
+          });
     }
 
-    const deleteProductCart = product =>{
+    const deleteProductCart = (product) =>{
         
+     
             const inCart = products.find(p=>p.id===product.id)
 
             if(inCart.amount===1){
@@ -49,7 +63,26 @@ const CartProvider = ({children}) => {
                     } return p
                 }))
             }
+            
+         
+            Toast.fire({
+              icon: "error",
+              title: "Removed one to cart!",
+            });
         
+    }
+
+    const deleteProduct = product => {
+        const inCart = products.find(p=>p.id===product.id)
+
+            if(inCart.amount){
+                setProducts(products.filter(p=>p.id!==product.id))
+            }
+           
+            Toast.fire({
+                icon: "error",
+                title: "Removed all to cart!",
+              });
     }
 
     // const deleteProductCart = product=>{
@@ -75,9 +108,10 @@ const CartProvider = ({children}) => {
     }
 
 
+
     return (
 
-        <CartContext.Provider value={{products, addProductToCart,deleteProductCart, resetProductCart}}>
+        <CartContext.Provider value={{products, addProductToCart,deleteProductCart,deleteProduct, resetProductCart}}>
             {children}
         </CartContext.Provider>
     )

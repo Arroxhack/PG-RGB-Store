@@ -35,9 +35,14 @@ export default function SearchBar() {
           onChange={onInputChange}
         ></input>
       
+<<<<<<< HEAD
           <button type="submit" className=" relative right-0  sm:ml-[-1rem] sm:mt-[0.5rem] md:pt-3 lg:ml-[-2rem] lg:mt-0 ">
         <BiSearchAlt2 className="sm:h-5 sm:w-5 sm:pb-2 sm:pr-2 text-primary-400 lg:h-11 lg:w-8 "/>
         </button>
+=======
+        <input type="submit" className="absolute right-0 top-0 mt-5 mr-4" value='🔍'>
+        </input>
+>>>>>>> 7524d3353ff9aa383ba1d9753642b1f731da80b9
       
       </form>
   
