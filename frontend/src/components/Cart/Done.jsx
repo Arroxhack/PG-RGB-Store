@@ -1,57 +1,112 @@
-import React, { useContext } from 'react'
-import NavBar from '../NavBar/NavBar';
-import { CartContext } from './CartContext';
+import React, { useContext } from "react";
+import NavBar from "../NavBar/NavBar";
+import { CartContext } from "./CartContext";
 
 function Done() {
-    const { products} = useContext(CartContext);
+  const { products } = useContext(CartContext);
 
-    let total = 0;
+  let total = 0;
   products.forEach((p) => (total += p.amount * p.price));
 
-
   return (
-    <section className='font-Open bg-primary-200 h-screen'>
-        <NavBar/>
-    <div className="container  px-5 py-24 mx-auto">
-      <div className="flex flex-col bg-primary-200 h-screen text-center w-full mb-20">
-        <h2 className="text-xs tracking-widest font-medium  mb-1">Congrats, your purchase has been successfully!</h2>
-        <h1 className="sm:text-3xl text-2xl font-medium mb-4 text-gray-900">Thanks for buying with us!</h1>
-        <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Here is the summary of your order:</p>
-        <div  className="lg:w-2/3 mx-auto leading-relaxed text-base">
-                          {products.map((p) => {
-                            return (
-                              <div  className="container mx-auto" key={p.id}>
-                                <p>{p.name}</p>
-                                <p>$ {p.price} x {p.amount}</p>
-                                <p className="text-base font-black leading-none">{`$${(
-                                  p.price * p.amount
-                                ).toFixed(2)}`}</p>
-                                 
-                              </div>
-                            );
-                          })}
-                        </div>
-                        <p className="text-2xl leading-normal text-gray-800">
-                        Total
-                      </p>
-                      <div>
-                        <p className="text-2xl font-bold leading-normal text-right text-gray-800">
-                          {`$ ${total.toFixed(2)}`}
-                        </p>
-                      </div>
-      </div>
-      <p className="lg:w-2/3 mx-auto leading-relaxed text-base">We sent a copy to your mail! </p>
-      <a className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
-            rel="noopener noreferrer"
-            href="http://localhost:3000/"
-            
-          >
-            Back to homepage
-          </a>
+    <section className="font-Open bg-primary-200 h-screen">
+      <NavBar />
+      <div classNamee="px-5 py-24 mx-auto sm:bg-primary-200">
+        <div className="flex flex-col bg-primary-200 text-center w-full">
+          <h2 className="text-xs tracking-widest font-medium  mb-1">
+            Congrats, your purchase has been successfully!
+          </h2>
+          <h1 className="sm:text-3xl text-2xl font-medium mb-4 text-gray-900">
+            Thanks for buying with us!
+          </h1>
+          <p className="lg:w-2/3 mb-5 mx-auto leading-relaxed text-base">
+            Here is the summary of your order:
+          </p>
+          <div className="container mx-auto rounded w-fit bg-secundary-250  ">
+            <div className="p-9">
+              <div className="flex flex-col mx-0 mt-8">
+                <table className="min-w-full divide-y divide-slate-500">
+                  <thead>
+                    <tr className="font-black">
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 md:pl-0"
+                      >
+                        Product
+                      </th>
+                      <th
+                        scope="col"
+                        className="py-3.5 px-3 text-right text-sm sm:table-cell"
+                      >
+                        Quantity
+                      </th>
+                      <th
+                        scope="col"
+                        className="py-3.5 px-3 text-right text-sm sm:table-cell"
+                      >
+                        Rate
+                      </th>
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-3 pr-4 text-right text-sm  sm:pr-6 md:pr-0"
+                      >
+                        Amount
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {products.map((p) => {
+                      return (
+                        <tr className="border-b border-primary-100">
+                          <td className="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
+                            <div className="font-medium">
+                              {p.name}
+                            </div>
+                          </td>
+                          <td className="hidden px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">
+                          {p.amount}
+                          </td>
+                          <td className="hidden px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">
+                           ${p.price}
+                          </td>
+                          <td className="py-4 pl-3 pr-4 text-sm text-right text-slate-500 sm:pr-6 md:pr-0">
+                          ${p.amount*p.price}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th
+                        scope="row"
+                        colspan="3"
+                        className="pt-2 pr-3 text-sm font-black text-right text-slate-500 sm:table-cell md:pl-0"
+                      >
+                        Subtotal
+                      </th>
+                      
+                      <td className="pt-2 pr-4 text-sm text-right text-slate-500 sm:pr-6 md:pr-0">
+                        {`$ ${total.toFixed(2)}`}
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <div>
+          <p classNameName="lg:w-2/3 mx-auto leading-relaxed text-base">
+            We sent a copy to your mail!
+          </p>
+         
+        </div>
+            </div>
+          </div>
+        </div>
+        
       </div>
       
-  </section>
-  )
+    </section>
+  );
 }
 
-export default Done
+export default Done;
