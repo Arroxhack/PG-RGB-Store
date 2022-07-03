@@ -73,9 +73,8 @@ function DetailProduct() {
                 <div className="flex items-center mt-0 text-gray-500 hover:text-primary-300 cursor-pointer">
                   <Link to="/categories?category=all">
                     <svg
-                      text-secundary-250
                       xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-chevron-left"
+                      className="icon text-secundary-250 icon-tabler icon-tabler-chevron-left"
                       width={16}
                       height={16}
                       viewBox="0 0 24 24"
@@ -132,7 +131,7 @@ function DetailProduct() {
                     </p>
                   </div>
 
-                  <p className="text-lg text-secundary-250 font-bold">
+                  <div className="text-lg text-secundary-250 font-bold">
                     {ProductDetail.price ? `U$D ${ProductDetail.price}` : null}
                     <p>
                       {ProductDetail.inOffer ? ProductDetail.inOffer : null}
@@ -142,7 +141,7 @@ function DetailProduct() {
                         ? `BUYING TODAY ${discount()} U$D!`
                         : null}
                     </p>
-                  </p>
+                  </div>
                 </div>
 
                 <details className="relative mt-4 group">
