@@ -134,9 +134,10 @@ export default function Register() {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-t from-primary-300 to-primary font-Open min-h-screen flex flex-col">
+    <section className="bg-primary-200 overflow-clip">
+    <div className="w-screen h-full bg-primary-200 font-Open min-h-screen flex flex-col">
       <NavBar />
-      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      <div className="container bg-primary-200 max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black w-full">
           <h1 className="mb-8 text-3xl text-center">Sign up</h1>
           <form onSubmit={handleSubmit}>
@@ -218,5 +219,6 @@ export default function Register() {
         </div>
       </div>
     </div>
+    </section>
   );
 }
