@@ -6,6 +6,7 @@ import { getProductDetail } from "../../redux/actions/index";
 import NavBar from "../NavBar/NavBar";
 import Loading from "../Loading/Loading";
 import { CartContext } from "../Cart/CartContext";
+import Swal from "sweetalert2";
 
 
 function DetailProduct() {
@@ -32,6 +33,12 @@ function DetailProduct() {
   }
 
   const images = ProductDetail.image;
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "bottom-end",
+    showConfirmButton: false,
+    timer: 2000,
+  });
 
   function discount() {
     let total =
@@ -39,11 +46,19 @@ function DetailProduct() {
       ProductDetail.price * ProductDetail.percentageDiscount;
     return total;
   }
-
+  const sendCard = (e) => {
+    e.preventDefault();
+    Toast.fire({
+      icon: "success",
+      title: "Producto agregado al carrito",
+    });
+    addProductToCart(ProductDetail);
+    // resetProductCart()
+  };
 
   return (
     <div className="md:h-screen flex flex-col bg-primary-200 ">
-      <div className="relative z-50 mb-11  ">
+      <div className="relative z-50 mb-11">
         <NavBar />
       </div>
       <section className="font-Open bg-primary-200 absolute z-100 mt-40">
@@ -204,7 +219,7 @@ function DetailProduct() {
                     <div className="flex w-full">
                       <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
                         <button
-                          onClick={addProductToCart}
+                          onClick={sendCard}
                           className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
                         >
                           Add to cart
