@@ -195,20 +195,16 @@ export default function LogIn() {
   }, []);
 
   return (
-    <div>
+    <div className="overflow-clip">
       <NavBar />
-      <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-gradient-to-t from-primary-300 to-primary">
+      <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-primary-200">
         <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black">
           <form
             className="flex flex-col justify-center items-center sm:w-80 sm:h-80"
             onSubmit={(e) => handleLoginSubmit(e)}
           >
             <div>
-              <img
-                className="w-16"
-                src="https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg"
-                alt="avatar"
-              />
+           
             </div>
             <div className="flex flex-col items-center justify-center gap-1">
               <input
