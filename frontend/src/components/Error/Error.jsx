@@ -1,8 +1,13 @@
 import React from "react";
 
+import NavBar from "../NavBar/NavBar";
+
 function Error() {
   return (
+    <div>
+      <NavBar />
     <section className="bg-gradient-to-t from-primary-300 to-primary flex items-center h-screen p-16 ">
+   
       <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
         <div className="max-w-md text-center">
           <h2 className="mb-8 font-extrabold text-9xl">
@@ -24,6 +29,7 @@ function Error() {
         </div>
       </div>
     </section>
+    </div>
   );
 }
 

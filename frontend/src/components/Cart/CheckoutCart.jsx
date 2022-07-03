@@ -5,7 +5,7 @@ import NavBar from "../NavBar/NavBar";
 import CheckoutPaypal from "../Paypal/CheckoutPaypal";
 import { CartContext } from "./CartContext";
 
-function CheckoutCart({ product }) {
+function CheckoutCart() {
   const { products, deleteProductCart, addProductToCart, deleteProduct } =
     useContext(CartContext);
 
