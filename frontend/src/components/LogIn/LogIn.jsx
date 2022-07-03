@@ -130,7 +130,7 @@ export default function LogIn() {
       .then((data) => data.data)
       .catch((e) => console.log(e));
     // let userData = user.data
-    //console.log(user);
+    console.log("user: ", user);
 
     if (user?.lock) {
       Swal.fire({
@@ -165,6 +165,10 @@ export default function LogIn() {
           localStorage.setItem("lastname", user.lastname);
           localStorage.setItem("login", true);
           localStorage.setItem("email", user.email);
+          localStorage.setItem("id", user.id);
+          if (user.permissions === true) {
+            localStorage.setItem("admin", user.permissions);
+          }
           navigate("/");
         }
       } else {

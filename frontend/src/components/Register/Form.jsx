@@ -119,7 +119,6 @@ export default function Register() {
           button: "Aceptar",
         });
       } else {
-        localStorage.setItem("user", UserRegister);
         navigate(`/validate/${UserRegister.username}`);
       }
       setUser({
