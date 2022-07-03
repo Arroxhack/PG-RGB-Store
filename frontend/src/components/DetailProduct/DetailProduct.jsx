@@ -6,7 +6,7 @@ import { getProductDetail } from "../../redux/actions/index";
 import NavBar from "../NavBar/NavBar";
 import Loading from "../Loading/Loading";
 import { CartContext } from "../Cart/CartContext";
-import Swal from "sweetalert2";
+
 
 function DetailProduct() {
   const dispatch = useDispatch();
@@ -25,13 +25,7 @@ function DetailProduct() {
     dispatch(getProductDetail(id));
   }, []);
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "bottom-end",
-    showConfirmButton: false,
-    timer: 2000,
-  });
-
+ 
   const ProductDetail = useSelector((state) => state.detail);
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
@@ -46,14 +40,6 @@ function DetailProduct() {
     return total;
   }
 
-  const addCart = (e) => {
-    e.preventDefault();
-    Toast.fire({
-      icon: "success",
-      title: "Added to cart!",
-    });
-    addProductToCart(ProductDetail);
-  };
 
   return (
     <div className="md:h-screen flex flex-col bg-primary-200 ">
@@ -218,13 +204,13 @@ function DetailProduct() {
                     <div className="flex w-full">
                       <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
                         <button
-                          onClick={addCart}
+                          onClick={addProductToCart}
                           className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
                         >
                           Add to cart
                         </button>
                       </div>
-                      <div className="text-primary-200"> OR </div>
+                      <div className="text-primary-200 select-none"> OR </div>
                       <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
                         <NavLink
                           className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
