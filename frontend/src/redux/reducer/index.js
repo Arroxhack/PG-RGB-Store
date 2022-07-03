@@ -28,7 +28,6 @@ import {
   CLEAN_FILTER_PRICE,
   FILTER_CATEGORY,
   FILTER_BRAND,GET_GPUS,
-  FILTER_BRAND,
   FILTER_PRICE
 
 } from '../types/index';

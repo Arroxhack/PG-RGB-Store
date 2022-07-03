@@ -61,73 +61,7 @@ function Nav() {
               </Link>
             </li>
           </ul>
-<<<<<<< HEAD
           <div className="flex">
-=======
-        </div>
-
-        {/*       
-        <div className="block lg:hidden">
-          {menuOpen ?   
-           <div className="flex justify-center bg-primary-200 ">
-          <ul className=" text-base text-secundary-250 pt-4 md:flex md:justify-between md:pt-0 ">
-            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
-              <Link to="/categories">
-                <p>Categories</p>
-              </Link>
-            </li>
-            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
-              <Link to="/categories/notebooks">Notebooks</Link>
-            </li>
-            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
-              <Link to="/categories/pc-armadas">Prebuilt PCs</Link>
-            </li>
-            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
-              <Link to="/categories/placas-de-videos">GPUs</Link>
-            </li>
-            <li className="md:p-4 py-2 block hover:bg-primary-300 rounded ">
-              <Link to="/arma-tu-pc">
-                <p>Build your PC</p>
-              </Link>
-            </li>
-          </ul>
-        </div>   : null}
-
-          <button onClick={handleMenu} className="text-secundary-250 py-2 px-2.5">
-            <svg
-              aria-hidden="true"
-              focusable="false"
-              data-prefix="fas"
-              data-icon="bars"
-              className="w-6"
-              role="img"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 448 512"
-            >
-              <path
-                fill="currentColor"
-                d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-              ></path>
-            </svg>
-          </button>
-        </div>
-      </div> */}
-      </div>
-      
-      <div className="menu w-full lg:flex  space-x-3 lg:items-center lg:w-auto lg:px-3 px-8">
-        <div>
-          <SearchBar></SearchBar>
-        </div>
-        <div className="flex ">
-        <p onClick={handleCart} className="bg-primary-400 font-Open px-5 py-1 rounded-lg cursor-pointer text-primary-200 uppercase font-semibold hover:bg-primary-300">Cart</p>
-        {cartOpen ? <div className="absolute">
-          <BoxCart onClick={handleCart}/>
-        </div> : <></>}
-          {/* {cartOpen ? (
-            <BoxCart onClick={handleCart} />
-          ) : (
-            <p onClick={handleCart} className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">Cart</p>)} */}
->>>>>>> 7524d3353ff9aa383ba1d9753642b1f731da80b9
           {username ? (
               <div className="flex flex-col ">
                 <Link to="/profile"  className="flex items-center py-2  sm:text-xs text-primary-400 md:text-xl left-0 ">
