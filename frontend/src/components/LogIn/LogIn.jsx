@@ -44,6 +44,7 @@ export default function LogIn() {
       navigate(`/`);
     }
   };
+
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
@@ -60,8 +61,8 @@ export default function LogIn() {
       .then((data) => data.data)
       .catch((e) => console.log(e));
 
-    let { login, lastname, verify, username, email, permissions, name, id } =
-      user; //Info que trae la ruta
+    let { login, lastname, verify, username, email, permissions, name, id } = user; //Info que trae la ruta
+
     if (verify === false) {
       Swal.fire({
         icon: "error" / "success",
@@ -74,7 +75,6 @@ export default function LogIn() {
     }
     
     if (login) {
-      
       console.log(' soy yo rey')
         const email = user.email;
         const response = await axios({
