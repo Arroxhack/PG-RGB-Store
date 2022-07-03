@@ -29,7 +29,7 @@ import {
   CLEAN_FILTER_ORDER,
   FILTER_CATEGORY,
   FILTER_BRAND,
-  GET_GPUS
+  GET_GPUS,
   DELETE_CART,
   FILTER_PRICE
 } from '../types/index';
