@@ -20,9 +20,6 @@ const Nav = () => {
               <Link to="/categories/pc-armadas">Prebuilt PCs</Link>
             </li>
             <li className="md:p-4 py-2 block active:bg-primary-300 rounded ">
-              <Link to="/categories/placas-de-videos">GPUs</Link>
-            </li>
-            <li className="md:p-4 py-2 block active:bg-primary-300 rounded ">
               <Link to="/arma-tu-pc">
                 <p>Build your PC</p>
               </Link>

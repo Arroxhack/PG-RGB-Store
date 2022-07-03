@@ -19,27 +19,27 @@ export default function SearchBar() {
     e.preventDefault();
     setSearch(e.target.value);
 
-    console.log(search);
+  
   }
   return (
-    <div className="lg:pt-2 relative mx-auto text-gray-600 sm:max-w-max md:max-w-max">
-      <form onSubmit={onSubmit} className='flex md:max-w-max '>
+ 
+      <form onSubmit={onSubmit} className='flex items-center sm:max-w-max lg:w-full  '>
+  
         <input
-          className=" border border-primary-400 lg:border-2 border-gray-300
-          bg-primary-200 lg:h-10 lg:px-5 lg:pr-16 rounded-lg text-sm focus:outline-none
-          sm:max-w-max sm:placeholder:text-xs  md:max-w-max md:h-9 md:placeholder:text-lg"
+          className=" border border-primary-400 lg:border-2
+          bg-primary-200 lg:h-10 rounded-lg text-sm focus:outline-none 
+         sm:placeholder:text-xs md:max-w-max md:h-9 md:placeholder:text-lg sm:max-w-max lg:pr-36 "
           type="text"
           placeholder="Search..."
           value={search}
           onChange={onInputChange}
         ></input>
       
-          <button type="submit" className="absolute right-0 ml-[-8px] sm:pt-1 md:pt-3">
-        <BiSearchAlt2 className="sm:h-6 sm:w-6 sm:pb-2 sm:pr-2 text-primary-400"/>
+          <button type="submit" className=" relative right-0  sm:ml-[-1rem] sm:mt-[0.5rem] md:pt-3 lg:ml-[-2rem] lg:mt-0 ">
+        <BiSearchAlt2 className="sm:h-5 sm:w-5 sm:pb-2 sm:pr-2 text-primary-400 lg:h-11 lg:w-8 "/>
         </button>
-     
       
       </form>
-    </div>
+  
   );
 }
