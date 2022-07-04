@@ -1,27 +1,33 @@
 import React, { useEffect } from "react";
-import Menu from "./Menu/Menu";
-import Nav from "./Nav/Nav";
+import Menu from "../Menu/Menu";
+import Nav from "../Nav/Nav";
 import { useState } from "react";
-import CreateProduct from "./Productos/CreateProduct";
-import DeleteProduct from "./Productos/DeleteProduct";
-import EditProduct from "./Productos/EditProduct";
-import CreateAdmin from "./Usuarios/CreateAdmin";
-import EditUser from "./Usuarios/EditUser";
-import Error from "../Error/Error";
+import EditProduct from "../Productos/EditProduct";
+import Error from "../../Error/Error";
 import { useParams, useSearchParams } from "react-router-dom";
-import AdminProduct from "./Productos/AdminProduct";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getProductDetail } from "../../../redux/actions";
 
-const HomeAdmin = () => {
-
-  const {page} = useParams()
-  
+const Edit = () => {
   const admin = localStorage.getItem("admin");
   const username = localStorage.getItem("username");
 
+  let [searchParms, setSearchParams] = useSearchParams();
 
+  const [menu, setMenu] = useState("create-product");
   const [Validate, setValidate] = useState(true);
+    
+  const {id} = useParams()
+    const dispatch = useDispatch()
+
+    const productID = parseInt(id)
+  const changeMenu = (e) => {
+    e.preventDefault();
+    let params = searchParms(e.target);
+    setSearchParams(params);
+  };
 
   const ValidatePassword = async () => {
     const { value: password } = await Swal.fire({
@@ -38,7 +44,7 @@ const HomeAdmin = () => {
 
     if (!password) {
       Swal.fire(`Tienes Que Ingresar Tu Contraseña de Administrador`);
-      // return ValidatePassword();
+      return ValidatePassword();
     }
     const result = await axios({
       method: "post",
@@ -57,32 +63,33 @@ const HomeAdmin = () => {
   };
 
   useEffect(() => {
-    ValidatePassword();
-  }, []);
+    // ValidatePassword();
+    dispatch(getProductDetail(productID))
+  }, [dispatch]);
 
   return (
-    <>
-      {Validate ? (
+    // <>
+    //   {Validate ? 
+      (
         <>
           {admin ? (
             <div>
               <Nav />
               <div className="flex flex-row">
                 <div className="bg-primary-200 h-screen w-60">
-                  <Menu/>
+                  <Menu value={menu} setValue={setMenu} onChange={changeMenu} />
                 </div>
-                {page === 'list-products' && <AdminProduct />}
-                {page === 'create-admin' ? <CreateAdmin /> : <></>}
-                {page === 'edit-user' ? <EditUser/> : <></>}
+                <EditProduct id={productID} />
               </div>
             </div>
           ) : (
             <Error />
           )}
         </>
-      ) : null}
-    </>
+      )
+    //    : null}
+    // </>
   );
 };
 
-export default HomeAdmin;
+export default Edit;

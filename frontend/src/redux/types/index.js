@@ -30,6 +30,9 @@ export const DELETE_FAV = 'DELETE_FAV';
 /// FILTRADO
 export const FILTER_CATEGORY = 'FILTER_CATEGORY';
 export const FILTER_BRAND = 'FILTER_BRAND';
+export const NEXT_PAGE = 'NEXT_PAGE';
+export const PREV_PAGE ='PREV_PAGE';
+export const SET_PAGE = 'SET_PAGE';
 // GETS ///
 export const GET_GPUS = 'GET_GPUS';
 export const SET_ORDER = 'SET_ORDER';

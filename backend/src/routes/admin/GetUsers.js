@@ -15,7 +15,6 @@ router.get("/Users", async (req, res, next) => {
 router.get("/Users/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const OneUsers = await User.findOne({ where: { id: id } });
     const { name, lastname, username, email, image, cellphone, address } =
       OneUsers;
