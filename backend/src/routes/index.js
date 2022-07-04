@@ -14,6 +14,7 @@ const VerifyStock = require('./Paypal/VerifyStock');
 const review = require('./Comment/review');
 const favorite = require('./user/addFavoritos');
 const deleteFav = require('./user/deleteFavoritos');
+const getFav = require('./user/getFavoritos');
 //====ADMIN===
 const EditUser = require('./admin/EditUser');
 const VerifyPassword = require('./admin/VerifyPassword');
@@ -33,7 +34,6 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-
 router.use('/', Products);
 router.use('/', Category);
 router.use('/api', CargarDB);
@@ -58,4 +58,5 @@ router.use('/', VerifyStock);
 router.use('/', review);
 router.use('/', favorite);
 router.use('/', deleteFav);
+router.use('/', getFav);
 module.exports = router;

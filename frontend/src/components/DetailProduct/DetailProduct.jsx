@@ -7,7 +7,12 @@ import NavBar from "../NavBar/NavBar";
 import Loading from "../Loading/Loading";
 import { CartContext } from "../Cart/CartContext";
 import Swal from "sweetalert2";
+<<<<<<< HEAD
+import Favorito from "../Favoritos/Favorito";
 
+=======
+import CommentReview from "./CommentReview";
+>>>>>>> d8c0e88228e068c4cacccc9595ef82e2881f2c16
 
 function DetailProduct() {
   const dispatch = useDispatch();
@@ -26,7 +31,6 @@ function DetailProduct() {
     dispatch(getProductDetail(id));
   }, []);
 
- 
   const ProductDetail = useSelector((state) => state.detail);
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
@@ -57,8 +61,8 @@ function DetailProduct() {
   };
 
   return (
-    <div className="md:h-screen flex flex-col bg-primary-200 ">
-      <div className="relative z-50 mb-11">
+    <div className="h-screen flex flex-col bg-primary-200">
+      <div className="relative z-50 mb-11 bg-primary-200">
         <NavBar />
       </div>
       <section className="font-Open bg-primary-200 absolute z-100 mt-40">
@@ -68,31 +72,8 @@ function DetailProduct() {
           </div>
         ) : (
           <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
-            <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-1 ">
-                <div className="flex items-center mt-0 text-gray-500 hover:text-primary-300 cursor-pointer">
-                  <Link to="/categories?category=all">
-                    <svg
-                      text-secundary-250
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-chevron-left"
-                      width={16}
-                      height={16}
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <polyline points="15 6 9 12 15 18" />
-                    </svg>
-                    <p className="text-sm pl-2 text-secundary-250 leading-none">
-                      Back to products
-                    </p>
-                  </Link>
-                </div>
+            <div className="grid items-start grid-cols-1  md:grid-cols-2">
+              <div className="grid grid-cols-2 md:grid-cols-1 ">
                 <div className="aspect-w-1 aspect-h-1">
                   {images && images[0].length > 100 ? (
                     images.map((i) => {
@@ -115,7 +96,7 @@ function DetailProduct() {
               </div>
 
               <div className="sticky top-0">
-                <strong className="border text-primary-400 border-primary-300 rounded-full tracking-wide px-3 font-medium py-0.5 text-xs bg-gray-100 text-blue-600">
+                <strong className="border text-primary-400 border-primary-300 rounded-full tracking-wide px-3 font-medium py-0.5 text-xs">
                   {ProductDetail.category ? ProductDetail.category[0] : null}
                 </strong>
 
@@ -132,7 +113,7 @@ function DetailProduct() {
                     </p>
                   </div>
 
-                  <p className="text-lg text-secundary-250 font-bold">
+                  <div className="text-lg text-secundary-250 font-bold">
                     {ProductDetail.price ? `U$D ${ProductDetail.price}` : null}
                     <p>
                       {ProductDetail.inOffer ? ProductDetail.inOffer : null}
@@ -142,13 +123,13 @@ function DetailProduct() {
                         ? `BUYING TODAY ${discount()} U$D!`
                         : null}
                     </p>
-                  </p>
+                  </div>
                 </div>
 
                 <details className="relative mt-4 group">
                   <summary className="block">
                     <div>
-                      <div className="prose max-w-none text-secundary-250 group-open:hidden">
+                      <div className="max-w-none text-secundary-250 group-open:hidden">
                         <p>
                           {ProductDetail.description
                             ? truncate(ProductDetail.description, 300)
@@ -162,7 +143,7 @@ function DetailProduct() {
                     </div>
                   </summary>
 
-                  <div className="pb-6 prose text-secundary-250 max-w-none">
+                  <div className="pb-6 text-secundary-250 max-w-none">
                     <p>
                       {ProductDetail.description
                         ? ProductDetail.description
@@ -175,7 +156,7 @@ function DetailProduct() {
                   <legend className="mb-1 text-secundary-250 text-sm font-medium">
                     More details
                   </legend>
-                  <div className=" text-secundary-250 ">
+                  <div className="text-secundary-250">
                     <p>
                       {ProductDetail.brand
                         ? `Brand: ${ProductDetail.brand}`
@@ -217,18 +198,23 @@ function DetailProduct() {
                   </div>
                   <div>
                     <div className="flex w-full">
+<<<<<<< HEAD
                       <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+                        <Favorito id={ProductDetail.id}/>
+=======
+                      <div className="grid h-20 flex-grow place-items-center">
+>>>>>>> d8c0e88228e068c4cacccc9595ef82e2881f2c16
                         <button
                           onClick={sendCard}
-                          className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
+                          className="w-full text-center py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
                         >
                           Add to cart
                         </button>
                       </div>
                       <div className="text-primary-200 select-none"> OR </div>
-                      <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+                      <div className="grid h-20 flex-grow place-items-center">
                         <NavLink
-                          className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
+                          className="w-full text-center py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
                           to="/cart"
                         >
                           <button>Proceed to checkout</button>
@@ -238,6 +224,7 @@ function DetailProduct() {
                   </div>
                 </form>
               </div>
+              <CommentReview idProduct={id} />
             </div>
           </div>
         )}

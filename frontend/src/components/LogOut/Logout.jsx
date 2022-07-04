@@ -2,17 +2,17 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { CartContext } from "../Cart/CartContext";
 import { useDispatch } from "react-redux";
-
+import { BiLogOut } from "react-icons/bi";
 
 export default function Logout() {
   const [actualizar, setActualizar] = useState("");
-  const {products} = useContext(CartContext); //CartContext estado global // products array con prodcucts con amount
+  const { products } = useContext(CartContext); //CartContext estado global // products array con prodcucts con amount
   const dispatch = useDispatch();
 
   function onClick(e) {
     e.preventDefault();
     // dispatch(postCart(products))
-    
+
     // axios.post("/rutaParaAgregarCarritoAUsuario", )
 
     axios({
@@ -38,13 +38,16 @@ export default function Logout() {
   }
 
   return (
-    <div>
-      <button
-        className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
-        onClick={(e) => onClick(e)}
-      >
-        Logout
+    <div className="flex items-center py-2">
+      <button onClick={(e) => onClick(e)}>
+        <BiLogOut className="h-4 w-4 md:h-12 md:w-14  text-primary-400 lg:hidden " />
       </button>
+      <span
+        onClick={(e) => onClick(e)}
+        className="text-base text-primary buttom"
+      >
+        Log Out
+      </span>
     </div>
   );
 }

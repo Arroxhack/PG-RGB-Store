@@ -19,25 +19,26 @@ export default function Categories () {
     const [params, setParams] = useSearchParams()
 
     const catQuery = params.get('category')
+    const searchFilter = params.get('name')
 
     useEffect(() => {
-      if(!catQuery){
+      if(!catQuery && !searchFilter){
         params.set('category', 'all')
         setParams(params)
       }
       dispatch(clean())
-    }, [dispatch,catQuery]);
+    }, []);
 
 
   return (
-    <div className=" w-full h-screen bg-gradient-to-t bg-primary-200  flex flex-col ">
+    <div className=" w-full h-screen bg-primary-200  flex flex-col ">
       
-      <div className="sticky top-0 z-50">
+      
       <NavBar/>
-      </div>
       
       
-    <div className='w-full flex justify-between  bg-primary-200 '>
+      
+    <div className='w-full flex justify-between   '>
       <div className=' bg-primary-200'>
     <SideBar/>
     </div>

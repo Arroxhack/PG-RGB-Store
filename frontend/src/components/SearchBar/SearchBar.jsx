@@ -1,40 +1,48 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { searchProducts } from "../../redux/actions";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { filterPrice, searchProducts } from "../../redux/actions";
+import {BiSearchAlt2} from 'react-icons/bi'
 
 export default function SearchBar() {
-  const [search, setSearch] = useState("");
+  const [name, setSearch] = useState("");
+
+  const [params, setParams]= useSearchParams()
+  
+
+
   let dispatch = useDispatch();
   const navigate = useNavigate();
   function onSubmit(e) {
     e.preventDefault();
-    dispatch(searchProducts(search));
     setSearch("");
-    navigate('/categories')
+    navigate(`/categories?name=${name}`)
   }
 
   function onInputChange(e) {
     e.preventDefault();
     setSearch(e.target.value);
-
-    console.log(search);
+  
   }
   return (
-    <div className="pt-2 relative mx-auto text-gray-600">
-      <form onSubmit={onSubmit}>
+ 
+      <form onSubmit={onSubmit} className='flex items-center sm:max-w-max lg:w-full  '>
+  
         <input
-          className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+          className=" border border-primary-400 lg:border-2
+          bg-primary-200 text-secundary-100 text-center lg:h-10 rounded-lg text-sm focus:outline-none 
+         sm:placeholder:text-xs md:max-w-max md:h-9 md:placeholder:text-lg sm:max-w-max lg:pr-36 "
           type="text"
           placeholder="Search..."
-          value={search}
+          value={name}
           onChange={onInputChange}
         ></input>
       
-        <input type="submit" className="absolute right-0 top-0 mt-5 mr-4" value='🔍'>
-        </input>
+          <button type="submit" className=" relative right-0  sm:ml-[-1rem] sm:mt-[0.5rem] md:pt-3 lg:ml-[-2rem] lg:mt-0 ">
+        <BiSearchAlt2 className="sm:h-5 sm:w-5 sm:pb-2 sm:pr-2 text-primary-400 lg:h-11 lg:w-8 "/>
+        </button>
       
       </form>
-    </div>
+  
   );
 }

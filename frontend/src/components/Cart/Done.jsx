@@ -11,9 +11,9 @@ function Done() {
   return (
     <section className="font-Open bg-primary-200 h-screen">
       <NavBar />
-      <div classNamee="px-5 py-24 mx-auto sm:bg-primary-200">
+      <div className="px-5 py-24 mx-auto sm:bg-primary-200">
         <div className="flex flex-col bg-primary-200 text-center w-full">
-          <h2 className="text-xs tracking-widest font-medium text-secundary-250  mt-10 mb-1">
+          <h2 className="text-xs tracking-widest font-medium text-secundary-250  mt-10 mb-1 ">
             Congrats, your purchase has been successfully!
           </h2>
           <h1 className="sm:text-3xl text-2xl font-medium mb-4 text-secundary-250 ">
@@ -22,7 +22,7 @@ function Done() {
           <p className="lg:w-2/3 mb-5 mx-auto leading-relaxed text-secundary-250  text-base">
             Here is the summary of your order:
           </p>
-          <div className="container mx-auto rounded p-4 w-fit bg-secundary-250 sm: align-middle ">
+          <div className=" mx-auto rounded p-5 w-fit bg-secundary-250 sm:">
             <div className="flex flex-col mx-0 mt-8">
               <table className="min-w-full divide-y">
                 <thead>
@@ -56,9 +56,9 @@ function Done() {
                 <tbody>
                   {products.map((p) => {
                     return (
-                      <tr className="border-b border-primary-100">
+                      <tr key={p.name} className="border-b border-primary-100">
                         <td className="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                          <div className="font-medium">{p.name}</div>
+                          <div className="font-medium" key={p.name}>{p.name}</div>
                         </td>
                         <td className="hidden px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">
                           {p.amount}
@@ -77,7 +77,7 @@ function Done() {
                   <tr>
                     <th
                       scope="row"
-                      colspan="3"
+                      colSpan="3"
                       className="pt-2 pr-3 text-sm font-black text-right text-slate-500 sm:table-cell md:pl-0"
                     >
                       Subtotal
