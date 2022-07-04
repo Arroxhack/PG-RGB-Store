@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   ADD_CART,
   GET_ALL_PRODUCTS,
@@ -30,9 +30,11 @@ import {
   FILTER_CATEGORY,
   FILTER_BRAND,
   DELETE_CART,
-} from '../types/index';
-import Swal from 'sweetalert2';
-const PATH = 'http://localhost:3001';
+  GET_COMMEND_PENDING,
+  GET_COMMEND_PRODUCT,
+} from "../types/index";
+import Swal from "sweetalert2";
+const PATH = "http://localhost:3001";
 
 /// GET PRODUCTOS ///
 export function getAllProducts() {
@@ -118,7 +120,7 @@ export function getProductDetail(id) {
         payload: product,
       });
     } catch (error) {
-      console.log(error, ' product detail');
+      console.log(error, " product detail");
     }
   };
 }
@@ -146,9 +148,9 @@ export const createProduct = (product) => {
       const post = await axios.post(`${PATH}/create-product`, product);
       Swal.fire({
         title: `${post.data.name}`,
-        text: 'Creado con exito!',
-        icon: 'success',
-        confirmButtonText: 'ok',
+        text: "Creado con exito!",
+        icon: "success",
+        confirmButtonText: "ok",
       });
       return dispatch({
         type: CREATE_PRODUCT,
@@ -156,10 +158,10 @@ export const createProduct = (product) => {
       });
     } catch (error) {
       Swal.fire({
-        title: 'Algo fallo',
-        text: 'No se pudo crear el producto',
-        icon: 'error',
-        confirmButtonText: 'ok',
+        title: "Algo fallo",
+        text: "No se pudo crear el producto",
+        icon: "error",
+        confirmButtonText: "ok",
       });
     }
   };
@@ -174,16 +176,16 @@ export const editProduct = (producto) => {
       );
       Swal.fire({
         title: `${producto.name}`,
-        text: 'Editado con exito!',
-        icon: 'success',
-        confirmButtonText: 'ok',
+        text: "Editado con exito!",
+        icon: "success",
+        confirmButtonText: "ok",
       });
     } catch (error) {
       Swal.fire({
-        title: 'Algo fallo',
-        text: 'No se pudo editar el producto',
-        icon: 'error',
-        confirmButtonText: 'ok',
+        title: "Algo fallo",
+        text: "No se pudo editar el producto",
+        icon: "error",
+        confirmButtonText: "ok",
       });
     }
   };
@@ -195,16 +197,16 @@ export const deleteProduct = (id) => {
       const deleteProduct = await axios.delete(`${PATH}/delete-product/${id}`);
 
       Swal.fire({
-        icon: 'success',
-        title: 'Product delete',
-        confirmButtonText: 'Ok',
+        icon: "success",
+        title: "Product delete",
+        confirmButtonText: "Ok",
       });
     } catch (error) {
       Swal.fire({
-        title: 'Algo fallo',
-        text: 'No se pudo borrar el producto',
-        icon: 'error',
-        confirmButtonText: 'ok',
+        title: "Algo fallo",
+        text: "No se pudo borrar el producto",
+        icon: "error",
+        confirmButtonText: "ok",
       });
     }
   };
@@ -216,10 +218,10 @@ export function PostUser(user) {
     try {
       const exit = await axios.post(`${PATH}/register`, user);
       if (exit.data) {
-        alert('Register Succesfully');
+        alert("Register Succesfully");
       }
     } catch (e) {
-      console.log('Error in Register');
+      console.log("Error in Register");
     }
   };
 }
@@ -235,7 +237,7 @@ export function GetUserData(id) {
         payload: user,
       });
     } catch (e) {
-      console.log('Error in Get Data');
+      console.log("Error in Get Data");
     }
   };
 }
@@ -344,7 +346,7 @@ export function filterBrands(brand) {
   return async function (dispatch) {
     let brands;
     try {
-      if (brand !== 'all') {
+      if (brand !== "all") {
         brands = await axios.get(`${PATH}/brands/?brand=${brand}`); //products por ahora
       }
 
@@ -371,7 +373,7 @@ export function searchProducts(search) {
     axios
       .get(`${PATH}/product?name=` + search)
       .then((products) => {
-        console.log(products, ' soy products');
+        console.log(products, " soy products");
         dispatch({
           type: SEARCH_PRODUCTS,
           payload: products.data,
@@ -379,9 +381,9 @@ export function searchProducts(search) {
       })
       .catch(() => {
         Swal.fire({
-          icon: 'info',
-          title: 'Product not found',
-          button: 'OK',
+          icon: "info",
+          title: "Product not found",
+          button: "OK",
         });
       });
   };
@@ -411,6 +413,79 @@ export function putUserProfile(username) {
       axios
         .put(`${PATH}/profile/edit/${username}`)
         .then((user) => dispatch({ type: EDIT_PROFILE, payload: user.data }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function PostComment(comment, username, id) {
+  return async () => {
+    try {
+      const result = await axios.put(`${PATH}/PostCommentReview`, {
+        comment,
+        username,
+        id,
+      });
+      if (result.data !== "Done") {
+        Swal.fire({
+          icon: "info",
+          title: "Error in DataBase",
+          button: "OK",
+        });
+      }
+      Swal.fire({
+        icon: "success",
+        title: "Comentario Posteado",
+        button: "OK",
+      }).then(() => window.location.reload());
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
+export function GetCommendPending(username) {
+  return (dispatch) => {
+    try {
+      axios
+        .put(`${PATH}/getCommendFalse/${username}`)
+        .then((user) =>
+          dispatch({ type: GET_COMMEND_PENDING, payload: user.data })
+        );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function GetCommendProduct(id) {
+  return (dispatch) => {
+    try {
+      axios
+        .put(`${PATH}/getCommendFalse/${id}`)
+        .then((user) =>
+          dispatch({ type: GET_COMMEND_PRODUCT, payload: user.data })
+        );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function VaciarStatePendingComment() {
+  return (dispatch) => {
+    try {
+      dispatch({ type: "GET_COMMEND_PENDING_VACIO", payload: [] });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function VaciarStateProductComment() {
+  return (dispatch) => {
+    try {
+      dispatch({ type: "GET_COMMEND_PRODUCT_VACIO", payload: [] });
     } catch (error) {
       console.log(error);
     }

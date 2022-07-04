@@ -28,6 +28,8 @@ import {
   CLEAN_FILTER_PRICE,
   FILTER_CATEGORY,
   FILTER_BRAND,
+  GET_COMMEND_PENDING,
+  GET_COMMEND_PRODUCT
 } from '../types/index';
 
 const initialState = {
@@ -46,6 +48,8 @@ const initialState = {
   productsByCategory: [],
   filterBrands: [],
   filterOrder: [],
+  CommendPending: [],
+  CommendProduct: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -287,6 +291,30 @@ const reducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
       };
+      //GET_COMMEND_PRODUCT
+      //CommendPending: [],
+ // CommendProduct: [],
+  //GET_COMMEND_PENDING,
+  case GET_COMMEND_PENDING:
+      return {
+        ...state,
+        CommendPending: action.payload,
+      };
+      case "GET_COMMEND_PENDING_VACIO":
+      return {
+        ...state,
+        CommendPending: [],
+      };
+      case GET_COMMEND_PRODUCT:
+        return {
+          ...state,
+          CommendProduct: action.payload,
+        };
+        case "GET_COMMEND_PRODUCT_VACIO":
+        return {
+          ...state,
+          CommendPending: [],
+        };
     default:
       return { ...state };
   }
