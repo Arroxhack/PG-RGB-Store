@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 export default function LogIn() {
   let navigate = useNavigate();
   const cartProductArray = localStorage.getItem('cartProducts');
-  console.log(cartProductArray, ' soy cartttttt')
+  console.log('cartProductArray: ', cartProductArray);
   const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
   const [password, setPassword] = useState(""); // Llega del input del form password al hacer submit.
   const [googleUser, setGoogleUser] = useState({});
@@ -75,13 +75,12 @@ export default function LogIn() {
     }
     
     if (login) {
-      console.log(' soy yo rey')
         const email = user.email;
         const response = await axios({
           //La ruta trae toda la info en la base de datos de un usuario
           method: "post",
           url: "http://localhost:3001/userCart",
-          data: {email,cartProductArray}, // 
+          data: {email,cartProductArray}, // cartProductArray -> array de objetos del local storage
           headers: { "X-Requested-With": "XMLHttpRequest" },
           withCredentials: true,
         }).then((res)=> res.data).catch(e=>console.log(e));
