@@ -176,7 +176,7 @@ export default function Pagando() {
       })
         .then((e) => e.data)
         .catch((e) => console.log(e));
-      navigate("/");
+      navigate("/done");
     });
   };
 

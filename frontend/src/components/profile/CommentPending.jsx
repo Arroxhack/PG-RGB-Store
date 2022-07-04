@@ -9,18 +9,20 @@ function CommentPending({ ComentariosPending }) {
     console.log(product);
   };
   return (
-    <div>
-      <p className="bg-primary-400 font-Open px-5 py-1 rounded-lg  cursor-default uppercase font-semibold ">
-        CON SU COMPRA TIENE DERECHO A HACER UN COMENTARIO DEL PRODUCTO:
-      </p>
-      <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black">
-        <select
+    <div className="mt-6">
+      <div className="p-6 mx-auto bg-secundary-250 rounded-md shadow-md">
+        <h1 className="text-2xl font-open font-bold pb-5 capitalize">
+          Comments
+        </h1>
+        <p>Do a review of your product!</p>
+    
+        <select className="bg-primary-200 text-secundary-250 block w-full px-4 py-2 mt-2 border rounded-md"
           onChange={(e) => {
             HandleSelect(e);
           }}
         >
           <option disabled selected>
-            Choose option:
+            Choose product:
           </option>
           {ComentariosPending &&
             ComentariosPending.map((e, i) => {
@@ -34,10 +36,10 @@ function CommentPending({ ComentariosPending }) {
         {product === 0 ? null : (
           <>
             <button
-              className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+               className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
               onClick={(e) => navigate(`/productsDetail/${product}`)}
             >
-              Realizar Comentario
+              Comment
             </button>
           </>
         )}
