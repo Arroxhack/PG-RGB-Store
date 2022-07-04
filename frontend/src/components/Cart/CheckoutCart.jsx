@@ -20,6 +20,31 @@ function CheckoutCart() {
           <div className="w-full absolute  right-0 bg-primary-200 h-full">
             <div className="flex md:flex-row bg-primary-200 flex-col justify-end">
               <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-secundary-250 overflow-y-auto overflow-x-hidden h-screen">
+
+                <div className="flex items-center text-gray-500 hover:text-primary-300 cursor-pointer">
+                  <Link to="/categories?category=all" >
+                    <div className="flex">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-chevron-left"
+                      width={16}
+                      height={16}
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <polyline points="15 6 9 12 15 18" />
+                    </svg>
+                    <p className="text-sm pl-2 leading-none">
+                      Back to products
+                    </p>
+                    </div>
+                  </Link>
+                </div>
                 <p className="text-5xl font-black mb-10 font-Open leading-10 pt-3">
                   Your Cart
                 </p>

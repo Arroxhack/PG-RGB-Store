@@ -8,8 +8,9 @@ const Promo = ({left, img, products}) => {
 
 
   return (
-    <div className={left ? 'flex flex-row gap-5 items-center mt-10 mb-10 justify-center bg-primary-200 px-16 py-5 rounded-xl sm:flex' : 'flex flex-row-reverse gap-5 items-center mt-10 mb-10 justify-center bg-primary-200 px-16 py-5 rounded-xl'}>
-       <img src={img} alt="" className='bject-cover h-80 w-40' />
+    <div className={left ? 'flex flex-row lg:gap-5 items-center lg:mt-10 lg:mb-10 justify-between bg-primary-200 lg:px-16 lg:py-5 rounded-xl ' 
+    : 'flex flex-row-reverse lg:gap-5 items-center lg:mt-10 lg:mb-10 justify-center bg-primary-200 lg:px-16 lg:py-5 rounded-xl sm:gap-5 sm:mt-5 sm:px-10 sm:py-4'}>
+       <img src={img} alt="" className='object-cover lg:h-80 lg:w-40 sm:h-40 sm:w-20' />
         {products.map(p=>{
           
             return (
