@@ -57,8 +57,8 @@ function DetailProduct() {
   };
 
   return (
-    <div className="md:h-screen flex flex-col bg-primary-200 ">
-      <div className="relative z-50 mb-11">
+    <div className="h-screen flex flex-col bg-primary-200">
+      <div className="relative z-50 mb-11 bg-primary-200">
         <NavBar />
       </div>
       <section className="font-Open bg-primary-200 absolute z-100 mt-40">
