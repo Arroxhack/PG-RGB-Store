@@ -7,7 +7,7 @@ import NavBar from "../NavBar/NavBar";
 import Loading from "../Loading/Loading";
 import { CartContext } from "../Cart/CartContext";
 import Swal from "sweetalert2";
-
+import CommentReview from "./CommentReview";
 
 function DetailProduct() {
   const dispatch = useDispatch();
@@ -26,7 +26,6 @@ function DetailProduct() {
     dispatch(getProductDetail(id));
   }, []);
 
- 
   const ProductDetail = useSelector((state) => state.detail);
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
@@ -70,7 +69,6 @@ function DetailProduct() {
           <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
             <div className="grid items-start grid-cols-1  md:grid-cols-2">
               <div className="grid grid-cols-2 md:grid-cols-1 ">
-                
                 <div className="aspect-w-1 aspect-h-1">
                   {images && images[0].length > 100 ? (
                     images.map((i) => {
@@ -137,7 +135,6 @@ function DetailProduct() {
                       <span className="mt-4 text-sm text-primary-400 font-medium underline cursor-pointer group-open:absolute group-open:bottom-0 group-open:left-0 group-open:mt-0">
                         Read More
                       </span>
-                    
                     </div>
                   </summary>
 
@@ -217,6 +214,7 @@ function DetailProduct() {
                   </div>
                 </form>
               </div>
+              <CommentReview idProduct={id} />
             </div>
           </div>
         )}

@@ -314,10 +314,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
       };
-    //GET_COMMEND_PRODUCT
-    //CommendPending: [],
-    // CommendProduct: [],
-    //GET_COMMEND_PENDING,
     case GET_COMMEND_PENDING:
       return {
         ...state,
