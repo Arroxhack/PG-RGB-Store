@@ -1,20 +1,72 @@
-const { Router } = require('express');
-const { User } = require('../../db');
+const { Router } = require("express");
+const { User } = require("../../db");
 const router = Router();
 
-router.put('/Users/:id', async (req, res, next) => {
+router.put("/Users/:id", async (req, res, next) => {
   const { id } = req.params;
   const user = await User.findOne({ where: { id } });
   if (!user) {
-    return res.status(404).send('No users with that ID');
+    return res.status(404).send("No users with that ID");
   }
 
   const objFinal = checkUser(req.body);
   const isUpdated = await User.update(objFinal, { where: { id } });
   //Update nos devuelve un array de length 1 con un 1 si fue todo bien y con 0 si salio mal
   isUpdated[0] === 1
-    ? res.send('Correctly edit')
-    : res.status(404).send('Failed on edit');
+    ? res.send("Correctly edit")
+    : res.status(404).send("Failed on edit");
+});
+
+router.put("/blockUser", async (req, res, next) => {
+  try {
+    const { Userid, idAdmin } = req.body;
+    console.log("AKAAAA", Userid, "KHE", idAdmin);
+    if (Userid && idAdmin) {
+      const Admin = await User.findOne({ where: { id: idAdmin } });
+      if (Admin?.permissions === false) {
+        return res.send("Error you not have permissions");
+      }
+      console.log("PASO1");
+      const user = await User.findOne({ where: { id: Userid } });
+      if (user.lock == false) {
+        const update = await user.update({ lock: true });
+        res.send("Done");
+      } else { return res.send("Error the user is already Block");
+      }
+    } else {
+      return res.status(404).send("Error");
+    }
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.put("/unlockUser", async (req, res, next) => {
+  try {
+    const { Userid, idAdmin } = req.body;
+    if (Userid && idAdmin) {
+      const Admin = await User.findOne({ where: { id: idAdmin } });
+      if (Admin?.permissions === false) {
+        return res.send("Error you not have permissions");
+      }
+      const user = await User.findOne({ where: { id: Userid } });
+      if (user.lock == true) {
+        const update = await user.update({ lock: false });
+
+        if (update[0] === 1) {
+          return res.send("Done");
+        } else {
+          return res.send("Error doing Update");
+        }
+      } else {
+        return res.send("Error the user is not Lock");
+      }
+    } else {
+      return res.status(404).send("Error");
+    }
+  } catch (e) {
+    next(e);
+  }
 });
 
 function checkUser({
