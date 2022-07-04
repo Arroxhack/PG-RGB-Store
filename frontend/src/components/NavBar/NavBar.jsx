@@ -12,10 +12,10 @@ import {AiOutlineClose} from 'react-icons/ai'
 
 
 function NavBar() {
-  // localStorage.getItem("username")
-  //localStorage.getItem("admin");
-  const username = true
-  const admin = true
+
+ 
+  const username = localStorage.getItem("username")
+  const admin =  localStorage.getItem("admin");
 
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -142,13 +142,13 @@ function Nav() {
                   <p className="buttom">Categories</p>
                 </Link>
               </li>
-              <li class="buttom lg:mr-5">
+              <li class="lg:buttom lg:mr-5">
                 <Link to="/categories/notebooks">Notebooks</Link>
               </li>
-              <li className="buttom lg:mr-5 ">
+              <li className="lg:buttom lg:mr-5 ">
                 <Link to="/categories/pc-armadas">Prebuilt PCs</Link>
               </li>
-              <li className="buttom lg:mr-5">
+              <li className="lg:buttom lg:mr-5">
                 <Link to="/arma-tu-pc">
                   <p>Build your PC</p>
                 </Link>
@@ -210,7 +210,7 @@ function Nav() {
             {/* CARRITO */}
             <div className="flex flex-col items-center text-primary-400 sm:h-full lg:mr-6 ">   
             <TiShoppingCart onClick={handleCart} className="h-6 w-7 md:h-10 md:w-10 relative cursor-pointer lg:hover:translate-y-px"/>
-          {cartOpen ? <div className="absolute">
+          {cartOpen ? <div className="absolute lg:translate-x-[-10rem] sm:translate-x-28 md:">
             <BoxCart onClick={handleCart}/>
           </div> : <></>}
           </div>
