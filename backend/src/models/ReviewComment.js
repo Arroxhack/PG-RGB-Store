@@ -24,6 +24,10 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
+      NameProduct: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       Comentado: {
         type: DataTypes.BOOLEAN,
         allowNull: true,

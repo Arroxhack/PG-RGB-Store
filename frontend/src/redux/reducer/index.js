@@ -28,6 +28,9 @@ import {
   CLEAN_FILTER_PRICE,
   FILTER_CATEGORY,
   FILTER_BRAND,
+  GET_COMMEND_PENDING,
+  GET_COMMEND_PRODUCT,
+  GET_GPUS,
   FILTER_PRICE,
   GET_FAV,
   DELETE_FAV,
@@ -51,6 +54,9 @@ const initialState = {
   filterBrands: [],
   filterOrder: [],
   favoritos: [],
+  gpus: [],
+  CommendPending: [],
+  CommendProduct: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -122,6 +128,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         UserData: action.payload,
+      };
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        gpus: action.payload,
       };
 
     /// BUSQUEDA ///
@@ -324,6 +335,26 @@ const reducer = (state = initialState, action) => {
         products: action.payload,
       };
 
+    case GET_COMMEND_PENDING:
+      return {
+        ...state,
+        CommendPending: action.payload,
+      };
+    case 'GET_COMMEND_PENDING_VACIO':
+      return {
+        ...state,
+        CommendPending: [],
+      };
+    case GET_COMMEND_PRODUCT:
+      return {
+        ...state,
+        CommendProduct: action.payload,
+      };
+    case 'GET_COMMEND_PRODUCT_VACIO':
+      return {
+        ...state,
+        CommendPending: [],
+      };
     default:
       return { ...state };
   }

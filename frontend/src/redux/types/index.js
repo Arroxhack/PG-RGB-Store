@@ -25,12 +25,17 @@ export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const SET_FILTER_BRANDS = 'SET_FILTER_BRANDS';
 export const CLEAN_FILTER_BRANDS = 'CLEAN_FILTER_BRANDS';
+export const ADD_FAV = 'ADD_FAV';
+export const DELETE_FAV = 'DELETE_FAV';
+/// FILTRADO
+export const FILTER_CATEGORY = 'FILTER_CATEGORY';
+export const FILTER_BRAND = 'FILTER_BRAND';
+// GETS ///
+export const GET_GPUS = 'GET_GPUS';
 export const SET_ORDER = 'SET_ORDER';
 export const CLEAN_ORDER = 'CLEAN_ORDER';
 export const CLEAN_FILTER_PRICE = 'CLEAN_FILTER_PRICE';
-export const FILTER_CATEGORY = 'FILTER_CATEGORY';
-export const FILTER_BRAND = 'FILTER_BRAND';
 export const FILTER_PRICE = 'FILTER_PRICE';
-export const ADD_FAV = 'ADD_FAV';
-export const DELETE_FAV = 'DELETE_FAV';
+export const GET_COMMEND_PENDING = 'GET_COMMEND_PENDING';
+export const GET_COMMEND_PRODUCT = 'GET_COMMEND_PRODUCT';
 export const GET_FAV = 'GET_FAV';

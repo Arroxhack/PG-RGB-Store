@@ -32,7 +32,10 @@ import {
   CLEAN_FILTER_ORDER,
   FILTER_CATEGORY,
   FILTER_BRAND,
+  GET_GPUS,
   DELETE_CART,
+  GET_COMMEND_PENDING,
+  GET_COMMEND_PRODUCT,
   FILTER_PRICE,
 } from '../types/index';
 import Swal from 'sweetalert2';
@@ -77,6 +80,22 @@ export function getBrand(payload) {
   return {
     type: GET_BRANDS,
     payload,
+  };
+}
+
+//// GET DE GPUS ////
+export function getGpus() {
+  return async function (dispatch) {
+    try {
+      let gpu = await axios.get(`${PATH}/gpu`);
+      let gpuData = gpu.data;
+      return dispatch({
+        type: GET_GPUS,
+        payload: gpuData,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 
@@ -509,5 +528,77 @@ export function getProductFavorito(idUser) {
         dispatch({ type: GET_FAV, payload: res.data });
       });
     } catch (error) {}
+  };
+}
+export function PostComment(comment, username, id) {
+  return async () => {
+    try {
+      const result = await axios.put(`${PATH}/PostCommentReview`, {
+        comment,
+        username,
+        id,
+      });
+      if (result.data !== 'Done') {
+        Swal.fire({
+          icon: 'info',
+          title: 'Error in DataBase',
+          button: 'OK',
+        });
+      }
+      Swal.fire({
+        icon: 'success',
+        title: 'Comentario Posteado',
+        button: 'OK',
+      }).then(() => window.location.reload());
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
+export function GetCommendPending(username) {
+  return (dispatch) => {
+    try {
+      axios
+        .put(`${PATH}/getCommendFalse/${username}`)
+        .then((user) =>
+          dispatch({ type: GET_COMMEND_PENDING, payload: user.data })
+        );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function GetCommendProduct(id) {
+  return (dispatch) => {
+    try {
+      axios
+        .get(`${PATH}/commentofProduct/${id}`)
+        .then((user) =>
+          dispatch({ type: GET_COMMEND_PRODUCT, payload: user.data })
+        );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function VaciarStatePendingComment() {
+  return (dispatch) => {
+    try {
+      dispatch({ type: 'GET_COMMEND_PENDING_VACIO', payload: [] });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function VaciarStateProductComment() {
+  return (dispatch) => {
+    try {
+      dispatch({ type: 'GET_COMMEND_PRODUCT_VACIO', payload: [] });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
