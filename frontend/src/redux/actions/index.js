@@ -600,7 +600,7 @@ export function GetCommendProduct(id) {
   return (dispatch) => {
     try {
       axios
-        .put(`${PATH}/getCommendFalse/${id}`)
+        .get(`${PATH}/commentofProduct/${id}`)
         .then((user) =>
           dispatch({ type: GET_COMMEND_PRODUCT, payload: user.data })
         );
