@@ -29,6 +29,7 @@ import {
   CLEAN_FILTER_ORDER,
   FILTER_CATEGORY,
   FILTER_BRAND,
+  GET_GPUS,
   DELETE_CART,
   FILTER_PRICE
 } from '../types/index';
@@ -76,6 +77,24 @@ export function getBrand(payload) {
     payload,
   };
 }
+
+//// GET DE GPUS ////
+export function getGpus() {
+  return async function (dispatch) {
+    try {
+      let gpu= await axios.get(`${PATH}/gpu`); 
+      let gpuData = gpu.data;
+      return dispatch({
+        type: GET_GPUS,
+        payload: gpuData,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
 
 export function clean() {
   return {
