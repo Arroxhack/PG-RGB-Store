@@ -134,7 +134,7 @@ function NavBar() {
               </Link>{" "}
               <Logout />
               {admin ? (
-                <Link to="/admin">
+                <Link to="/admin/list-products">
                   <button className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
                     ADMINPANEL
                   </button>

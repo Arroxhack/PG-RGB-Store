@@ -28,7 +28,10 @@ import {
   CLEAN_FILTER_PRICE,
   FILTER_CATEGORY,
   FILTER_BRAND,
-  FILTER_PRICE
+  FILTER_PRICE,
+  NEXT_PAGE,
+  PREV_PAGE,
+  SET_PAGE
 
 } from '../types/index';
 
@@ -48,6 +51,7 @@ const initialState = {
   productsByCategory: [],
   filterBrands: [],
   filterOrder: [],
+  page:1,
 };
 
 const reducer = (state = initialState, action) => {
@@ -302,6 +306,25 @@ const reducer = (state = initialState, action) => {
         ...state,
         products:action.payload
       }
+    case NEXT_PAGE:
+      return{
+        ...state,
+        page: state.page+1
+      };
+    case PREV_PAGE:
+      let prev = state.page-1
+      if(state.page===1){
+        prev = 1
+      }
+      return{
+        ...state,
+        page: prev
+      };
+      case SET_PAGE:
+        return{
+          ...state,
+          page: action.payload
+        }
     default:
       return { ...state };
   }

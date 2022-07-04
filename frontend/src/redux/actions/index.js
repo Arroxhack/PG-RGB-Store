@@ -30,7 +30,10 @@ import {
   FILTER_CATEGORY,
   FILTER_BRAND,
   DELETE_CART,
-  FILTER_PRICE
+  FILTER_PRICE,
+  NEXT_PAGE,
+  PREV_PAGE,
+  SET_PAGE
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -473,4 +476,22 @@ export function putUserProfile(username) {
       console.log(error);
     }
   };
+}
+
+// PAGINADO ADMIN
+export const nextPage = ()=>{
+  return{
+    type: NEXT_PAGE,
+  }
+}
+export const prevPage = ()=>{
+  return{
+    type: PREV_PAGE,
+  }
+}
+export const setPage = (p)=>{
+  return{
+    type:SET_PAGE,
+    payload:p
+  }
 }
