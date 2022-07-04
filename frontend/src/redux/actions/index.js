@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   ADD_CART,
   GET_ALL_PRODUCTS,
@@ -31,10 +31,12 @@ import {
   FILTER_BRAND,
   GET_GPUS,
   DELETE_CART,
-  FILTER_PRICE
-} from '../types/index';
-import Swal from 'sweetalert2';
-const PATH = 'http://localhost:3001';
+  GET_COMMEND_PENDING,
+  GET_COMMEND_PRODUCT,
+  FILTER_PRICE,
+} from "../types/index";
+import Swal from "sweetalert2";
+const PATH = "http://localhost:3001";
 
 /// GET PRODUCTOS ///
 export function getAllProducts() {
@@ -82,7 +84,7 @@ export function getBrand(payload) {
 export function getGpus() {
   return async function (dispatch) {
     try {
-      let gpu= await axios.get(`${PATH}/gpu`); 
+      let gpu = await axios.get(`${PATH}/gpu`);
       let gpuData = gpu.data;
       return dispatch({
         type: GET_GPUS,
@@ -93,8 +95,6 @@ export function getGpus() {
     }
   };
 }
-
-
 
 export function clean() {
   return {
@@ -138,7 +138,7 @@ export function getProductDetail(id) {
         payload: product,
       });
     } catch (error) {
-      console.log(error, ' product detail');
+      console.log(error, " product detail");
     }
   };
 }
@@ -166,9 +166,9 @@ export const createProduct = (product) => {
       const post = await axios.post(`${PATH}/create-product`, product);
       Swal.fire({
         title: `${post.data.name}`,
-        text: 'Creado con exito!',
-        icon: 'success',
-        confirmButtonText: 'ok',
+        text: "Creado con exito!",
+        icon: "success",
+        confirmButtonText: "ok",
       });
       return dispatch({
         type: CREATE_PRODUCT,
@@ -176,10 +176,10 @@ export const createProduct = (product) => {
       });
     } catch (error) {
       Swal.fire({
-        title: 'Algo fallo',
-        text: 'No se pudo crear el producto',
-        icon: 'error',
-        confirmButtonText: 'ok',
+        title: "Algo fallo",
+        text: "No se pudo crear el producto",
+        icon: "error",
+        confirmButtonText: "ok",
       });
     }
   };
@@ -194,16 +194,16 @@ export const editProduct = (producto) => {
       );
       Swal.fire({
         title: `${producto.name}`,
-        text: 'Editado con exito!',
-        icon: 'success',
-        confirmButtonText: 'ok',
+        text: "Editado con exito!",
+        icon: "success",
+        confirmButtonText: "ok",
       });
     } catch (error) {
       Swal.fire({
-        title: 'Algo fallo',
-        text: 'No se pudo editar el producto',
-        icon: 'error',
-        confirmButtonText: 'ok',
+        title: "Algo fallo",
+        text: "No se pudo editar el producto",
+        icon: "error",
+        confirmButtonText: "ok",
       });
     }
   };
@@ -215,16 +215,16 @@ export const deleteProduct = (id) => {
       const deleteProduct = await axios.delete(`${PATH}/delete-product/${id}`);
 
       Swal.fire({
-        icon: 'success',
-        title: 'Product delete',
-        confirmButtonText: 'Ok',
+        icon: "success",
+        title: "Product delete",
+        confirmButtonText: "Ok",
       });
     } catch (error) {
       Swal.fire({
-        title: 'Algo fallo',
-        text: 'No se pudo borrar el producto',
-        icon: 'error',
-        confirmButtonText: 'ok',
+        title: "Algo fallo",
+        text: "No se pudo borrar el producto",
+        icon: "error",
+        confirmButtonText: "ok",
       });
     }
   };
@@ -236,10 +236,10 @@ export function PostUser(user) {
     try {
       const exit = await axios.post(`${PATH}/register`, user);
       if (exit.data) {
-        alert('Register Succesfully');
+        alert("Register Succesfully");
       }
     } catch (e) {
-      console.log('Error in Register');
+      console.log("Error in Register");
     }
   };
 }
@@ -255,7 +255,7 @@ export function GetUserData(id) {
         payload: user,
       });
     } catch (e) {
-      console.log('Error in Get Data');
+      console.log("Error in Get Data");
     }
   };
 }
@@ -327,79 +327,82 @@ export const filterCategory = (category) => {
   };
 };
 
-export const filterBran = (category, brand)=>{
-  return async dispatch=>{
-    try{
-      const filterBran = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}`)
-      const dataFilter = filterBran.data
+export const filterBran = (category, brand) => {
+  return async (dispatch) => {
+    try {
+      const filterBran = await axios.get(
+        `${PATH}/filter/?category=${category}&brand=${brand}`
+      );
+      const dataFilter = filterBran.data;
       return dispatch({
         type: FILTER_BRAND,
-        payload: dataFilter
-      })
-
-    } catch(error){
-      Swal.fire({
-        icon:'alert',
-        title:'Se produjo un error',
-        text: 'Por favor, actualice e intente nuevamente la busqueda',
-        confirmButtonText:'Ok'
-      })
-    }
-  }
-}
-
-export const filterPrice = (category,brand, min, max)=>{
-  return async dispatch=>{
-    try {
-      if(!brand){
-        if(min&&max){
-          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&min=${min}&max=${max}`)
-
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data
-          })
-        }
-        if(min||max){
-          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&min=${min ? min : max}`)
-
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data
-          })
-        }
-        
-      }
-      if(brand){
-        if(min&&max){
-          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}&min=${min}&max=${max}`)
-
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data
-          })
-        }
-        if(min||max){
-          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}&min=${min ? min : max}`)
-
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data
-          })
-        }
-
-      }
+        payload: dataFilter,
+      });
     } catch (error) {
-      console.log(error)
+      Swal.fire({
+        icon: "alert",
+        title: "Se produjo un error",
+        text: "Por favor, actualice e intente nuevamente la busqueda",
+        confirmButtonText: "Ok",
+      });
     }
   };
 };
 
+export const filterPrice = (category, brand, min, max) => {
+  return async (dispatch) => {
+    try {
+      if (!brand) {
+        if (min && max) {
+          const filterCat = await axios.get(
+            `${PATH}/filter/?category=${category}&min=${min}&max=${max}`
+          );
 
+          return dispatch({
+            type: FILTER_PRICE,
+            payload: filterCat.data,
+          });
+        }
+        if (min || max) {
+          const filterCat = await axios.get(
+            `${PATH}/filter/?category=${category}&min=${min ? min : max}`
+          );
 
+          return dispatch({
+            type: FILTER_PRICE,
+            payload: filterCat.data,
+          });
+        }
+      }
+      if (brand) {
+        if (min && max) {
+          const filterCat = await axios.get(
+            `${PATH}/filter/?category=${category}&brand=${brand}&min=${min}&max=${max}`
+          );
 
+          return dispatch({
+            type: FILTER_PRICE,
+            payload: filterCat.data,
+          });
+        }
+        if (min || max) {
+          const filterCat = await axios.get(
+            `${PATH}/filter/?category=${category}&brand=${brand}&min=${
+              min ? min : max
+            }`
+          );
 
-
+          return dispatch({
+            type: FILTER_PRICE,
+            payload: filterCat.data,
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export function filterCategories(category) {
   return async function (dispatch) {
@@ -421,7 +424,7 @@ export function filterBrands(brand) {
   return async function (dispatch) {
     let brands;
     try {
-      if (brand !== 'all') {
+      if (brand !== "all") {
         brands = await axios.get(`${PATH}/brands/?brand=${brand}`); //products por ahora
       }
 
@@ -448,7 +451,7 @@ export function searchProducts(search) {
     axios
       .get(`${PATH}/product?name=` + search)
       .then((products) => {
-        console.log(products, ' soy products');
+        console.log(products, " soy products");
         dispatch({
           type: SEARCH_PRODUCTS,
           payload: products.data,
@@ -456,9 +459,9 @@ export function searchProducts(search) {
       })
       .catch(() => {
         Swal.fire({
-          icon: 'info',
-          title: 'Product not found',
-          button: 'OK',
+          icon: "info",
+          title: "Product not found",
+          button: "OK",
         });
       });
   };
@@ -488,6 +491,79 @@ export function putUserProfile(username) {
       axios
         .put(`${PATH}/profile/edit/${username}`)
         .then((user) => dispatch({ type: EDIT_PROFILE, payload: user.data }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function PostComment(comment, username, id) {
+  return async () => {
+    try {
+      const result = await axios.put(`${PATH}/PostCommentReview`, {
+        comment,
+        username,
+        id,
+      });
+      if (result.data !== "Done") {
+        Swal.fire({
+          icon: "info",
+          title: "Error in DataBase",
+          button: "OK",
+        });
+      }
+      Swal.fire({
+        icon: "success",
+        title: "Comentario Posteado",
+        button: "OK",
+      }).then(() => window.location.reload());
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
+export function GetCommendPending(username) {
+  return (dispatch) => {
+    try {
+      axios
+        .put(`${PATH}/getCommendFalse/${username}`)
+        .then((user) =>
+          dispatch({ type: GET_COMMEND_PENDING, payload: user.data })
+        );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function GetCommendProduct(id) {
+  return (dispatch) => {
+    try {
+      axios
+        .put(`${PATH}/getCommendFalse/${id}`)
+        .then((user) =>
+          dispatch({ type: GET_COMMEND_PRODUCT, payload: user.data })
+        );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function VaciarStatePendingComment() {
+  return (dispatch) => {
+    try {
+      dispatch({ type: "GET_COMMEND_PENDING_VACIO", payload: [] });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function VaciarStateProductComment() {
+  return (dispatch) => {
+    try {
+      dispatch({ type: "GET_COMMEND_PRODUCT_VACIO", payload: [] });
     } catch (error) {
       console.log(error);
     }

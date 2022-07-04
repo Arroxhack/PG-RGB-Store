@@ -2,19 +2,32 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { GetUserData } from "../../redux/actions/index";
+import {
+  GetUserData,
+  VaciarStatePendingComment,
+  GetCommendPending,
+} from "../../redux/actions/index";
 import ChangePassword from "./ChangePassword";
 import PhoneInput from "react-phone-input-2";
 import Swal from "sweetalert2";
 import "react-phone-input-2/lib/style.css";
 import NavBar from "../NavBar/NavBar";
 import { useNavigate } from "react-router";
+import CommentPending from "./CommentPending";
 
 export default function Profile() {
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
+  const username = localStorage.getItem("username");
+  console.log(username);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(GetUserData(id));
+    dispatch(GetCommendPending(username));
+  }, []);
   const user = useSelector((state) => state.UserData);
+  const Commend = useSelector((state) => state.CommendPending);
+  console.log("ACAAAAA", Commend);
   const [mostrarChangePassword, setMostrarChangePassword] = useState(false);
   const [NameEdit, setName] = useState("");
   const [LastnameEdit, setLastname] = useState("");
@@ -24,9 +37,6 @@ export default function Profile() {
   const [Password, setPassword] = useState("");
   const [editPerfil, setEditPerfil] = useState(false);
   const [confirmEdit, setConfirmEdit] = useState(false);
-  useEffect(() => {
-    dispatch(GetUserData(id));
-  }, []);
   const handleChangePassword = (e) => {
     e.preventDefault(e);
     if (mostrarChangePassword == false) {
@@ -144,7 +154,7 @@ export default function Profile() {
           <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-gradient-to-t from-primary-300 to-primary">
             <button
               id="EditProfile"
-              className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+              className="bg-primary-400 font-Open px-5 py-1 rounded-lg  uppercase font-semibold hover:bg-primary-300"
               onClick={(e) => EditPerfil(e)}
             >
               {" "}
@@ -303,6 +313,18 @@ export default function Profile() {
 
               {mostrarChangePassword === true ? <ChangePassword /> : null}
             </div>
+            { editPerfil ===true ? null :
+              <div>
+                {Commend.length > 0 ? (
+                  <>
+                    {" "}
+                    <CommentPending ComentariosPending={Commend} />{" "}
+                  </>
+                ) : (
+                  "No Comentarios Pendientes"
+                )}
+              </div>
+            }
           </div>
         </>
       ) : (
