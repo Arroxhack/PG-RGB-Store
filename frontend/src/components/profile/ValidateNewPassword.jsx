@@ -21,7 +21,7 @@ export default function Validations() {
     }
     const result = await axios({
       method: "put",
-      url: `http://localhost:3001/resetPassword`,
+      url: `https://proyecto-grupal-rgb.herokuapp.com/resetPassword`,
       data: { token, username, NewPassword },
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,

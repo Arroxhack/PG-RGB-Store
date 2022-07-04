@@ -22,7 +22,7 @@ export default function LogIn() {
   const ResendEmail = async (email) => {
     const result = await axios({
       method: "post",
-      url: "http://localhost:3001/resendEmailLogin",
+      url: "https://proyecto-grupal-rgb.herokuapp.com/resendEmailLogin",
       data: { email }, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -52,7 +52,7 @@ export default function LogIn() {
     const user = await axios({
       //La ruta trae toda la info en la base de datos de un usuario
       method: "post",
-      url: "http://localhost:3001/login",
+      url: "https://proyecto-grupal-rgb.herokuapp.com/login",
       data: userLogin, // objeto que tiene {userName y password}
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -80,7 +80,7 @@ export default function LogIn() {
         const response = await axios({
           //La ruta trae toda la info en la base de datos de un usuario
           method: "post",
-          url: "http://localhost:3001/userCart",
+          url: "https://proyecto-grupal-rgb.herokuapp.com/userCart",
           data: {email,cartProductArray}, // 
           headers: { "X-Requested-With": "XMLHttpRequest" },
           withCredentials: true,
@@ -126,7 +126,7 @@ export default function LogIn() {
     console.log("userObject: ", userObject);
     setGoogleUser(userObject);
     let user = await axios
-      .get(`http://localhost:3001/googleLogin?googleMail=${userObject.email}`)
+      .get(`https://proyecto-grupal-rgb.herokuapp.com/googleLogin?googleMail=${userObject.email}`)
       .then((data) => data.data)
       .catch((e) => console.log(e));
     // let userData = user.data
@@ -146,7 +146,7 @@ export default function LogIn() {
         const response = await axios({
           //La ruta trae toda la info en la base de datos de un usuario
           method: "post",
-          url: "http://localhost:3001/userCart",
+          url: "https://proyecto-grupal-rgb.herokuapp.com/userCart",
           data: {email,cartProductArray}, // 
           headers: { "X-Requested-With": "XMLHttpRequest" },
           withCredentials: true,

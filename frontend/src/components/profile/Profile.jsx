@@ -114,7 +114,7 @@ export default function Profile() {
     e.preventDefault();
     const result = await axios({
       method: "put",
-      url: `http://localhost:3001/profile/edit`,
+      url: `https://proyecto-grupal-rgb.herokuapp.com/profile/edit`,
       data: {
         id,
         NameEdit,

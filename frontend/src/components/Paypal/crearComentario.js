@@ -5,7 +5,7 @@ export async function CrearComentarioReview(Username, ArrayProduct, idCompra) {
     const idProduct = Number(ArrayProduct[i]);
     await axios({
       method: "post",
-      url: "http://localhost:3001/NewReview",
+      url: "https://proyecto-grupal-rgb.herokuapp.com/NewReview",
       data: { Username, idProduct, idCompra }, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,

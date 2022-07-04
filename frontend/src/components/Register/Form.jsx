@@ -100,7 +100,7 @@ export default function Register() {
     ) {
       const UserRegister = await axios({
         method: "post",
-        url: "http://localhost:3001/register",
+        url: "https://proyecto-grupal-rgb.herokuapp.com/register",
         data: user,
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,

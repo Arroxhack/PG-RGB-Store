@@ -62,11 +62,9 @@ export default function CheckoutPaypal() {
       return { id: el.id, amount: el.amount };
     });
 
-    console.log(product, "ACAAA");
-
     const Stock = await axios({
       method: "post",
-      url: "http://localhost:3001/VerifyStock",
+      url: "https://proyecto-grupal-rgb.herokuapp.com/VerifyStock",
       data: product,
       // headers: { "X-Requested-With": "XMLHttpRequest" },
       // withCredentials: true,

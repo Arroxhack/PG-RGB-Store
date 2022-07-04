@@ -17,7 +17,7 @@ export default function Logout() {
 
     axios({
       method: "post",
-      url: "http://localhost:3001/logout",
+      url: "https://proyecto-grupal-rgb.herokuapp.com/logout",
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
     })

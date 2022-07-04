@@ -48,7 +48,7 @@ const Edit = () => {
     }
     const result = await axios({
       method: "post",
-      url: "http://localhost:3001/verifyAdminPass",
+      url: "https://proyecto-grupal-rgb.herokuapp.com/verifyAdminPass",
       data: { username, password },
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,

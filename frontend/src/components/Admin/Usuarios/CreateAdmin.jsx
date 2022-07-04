@@ -18,7 +18,7 @@ const CreateAdmin = () => {
   const getAllUsers = async () => {
     const allusers = await axios({
       method: "get",
-      url: "http://localhost:3001/Users",
+      url: "https://proyecto-grupal-rgb.herokuapp.com/Users",
       data: null, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -29,7 +29,7 @@ const CreateAdmin = () => {
     e.preventDefault();
     const allusers = await axios({
       method: "get",
-      url: "http://localhost:3001/Users",
+      url: "https://proyecto-grupal-rgb.herokuapp.com/Users",
       data: null, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -51,7 +51,7 @@ const CreateAdmin = () => {
     if (method === "updateToAdmin") {
       const result = await axios({
         method: "post",
-        url: "http://localhost:3001/updateToAdmin",
+        url: "https://proyecto-grupal-rgb.herokuapp.com/updateToAdmin",
         data: { idUser, idAdmin }, // email
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,
@@ -80,7 +80,7 @@ const CreateAdmin = () => {
     if (method === "updateToUser") {
       const result = await axios({
         method: "post",
-        url: "http://localhost:3001/updateToUser",
+        url: "https://proyecto-grupal-rgb.herokuapp.com/updateToUser",
         data: { idUser, idAdmin }, // email
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,
@@ -108,7 +108,7 @@ const CreateAdmin = () => {
     if (method === "UpdateToSuperAdmin") {
       const result = await axios({
         method: "post",
-        url: "http://localhost:3001/UpdateToSuperAdmin",
+        url: "https://proyecto-grupal-rgb.herokuapp.com/UpdateToSuperAdmin",
         data: { idUser, idAdmin }, // email
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,

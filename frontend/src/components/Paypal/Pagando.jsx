@@ -169,7 +169,7 @@ export default function Pagando() {
 
       const prueba = await axios({
         method: "put",
-        url: "http://localhost:3001/remove",
+        url: "https://proyecto-grupal-rgb.herokuapp.com/remove",
         data: products,
         // headers: { "X-Requested-With": "XMLHttpRequest" },
         // withCredentials: true,

@@ -26,7 +26,7 @@ function ChangePassword() {
     const { password } = user;
     const result = await axios({
       method: "put",
-      url: "http://localhost:3001/sendTokenReset",
+      url: "https://proyecto-grupal-rgb.herokuapp.com/sendTokenReset",
       data: { username, password },
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
