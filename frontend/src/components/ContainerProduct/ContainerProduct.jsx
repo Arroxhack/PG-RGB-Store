@@ -19,7 +19,7 @@ const ContainerProduct = () => {
 
 
   return (
-    <div className="lg:grid lg:grid-cols-4 lg:w-full lg:gap-12 lg:grid-rows-none relative sm:grid-cols-1">
+    <div  className="lg:grid lg:grid-cols-4 lg:w-full lg:gap-12 lg:grid-rows-none relative sm:flex sm:flex-col sm:w-full sm:justify-center sm:items-center md:grid md:grid-cols-2 md:justify-items-center md:gap-4" >
         {allProducts.length>0?allProducts.map(p=>
                 <Link key={p.id} to={`/products/${p.id}`}>
                     <Product product={p}/>

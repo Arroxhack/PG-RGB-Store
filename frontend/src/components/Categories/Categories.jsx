@@ -30,7 +30,7 @@ export default function Categories () {
 
 
   return (
-    <div className=" w-full h-screen bg-primary-200  flex flex-col ">
+    <div className="bg-primary-200  flex flex-col ">
       
       
       <NavBar/>

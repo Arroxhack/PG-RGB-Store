@@ -7,7 +7,7 @@ import { clean } from "../../redux/actions/index";
 import Nav from "../NavBar/Nav";
 import NavBar from "../NavBar/NavBar";
 import Product from "../Product/Product";
-import SideBar from "../SideBar/SideBar";
+import ContainerProduct from "../ContainerProduct/ContainerProduct";
 import Slider from "../Slider.jsx/Slider";
 import Promo from "./PromLeft";
 
@@ -24,7 +24,7 @@ function Home() {
 
 
   return (
-    <div className="bg-gradient-to-t from-primary-300 to-primary w-full">
+    <div className="lg:bg-gradient-to-t bg-primary-200 ">
       
       <NavBar/>
     
@@ -42,19 +42,11 @@ function Home() {
       products={product}
       />
       </div>
+      <ContainerProduct/>
       <div>
         <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank">
           <img className='fixed bottom-2 right-2 w-20 m-5' src="https://storage.googleapis.com/m-infra.appspot.com/public/whatsapp/Whatsapp_logo.svg"/>
         </a>
-      </div>
-      <div  className="grid grid-cols-3 gap-12 grid-rows-none">
-      {/* {products.map((product) => {
-        return (
-          <Link to={`/products/${product.id}`}>
-            <Product key={product.id} product={product} />
-          </Link>
-        );
-      })} */}
       </div>
     </div>
   );

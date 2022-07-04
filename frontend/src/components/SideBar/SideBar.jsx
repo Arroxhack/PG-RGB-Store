@@ -238,7 +238,7 @@ export default function SideBar() {
   }
   
   return (
-    <aside className="w-1/4 md:w-64 sm:text-xs flex flex-col justify-around border-r-2 border-primary text-lg md:text-sm text-center text-primary-400 ">
+    <aside className="lg:w-1/4 md:w-64 sm:text-xs flex flex-col justify-around border-r-2 border-primary text-lg md:text-sm text-center text-primary-400 ">
       {/*------------------ CONTENEDOR DE LOS FILTROS  ------------------   /*/}
        <Side/>
       {/*------------------ CATEGORIES  ------------------   /*/}
