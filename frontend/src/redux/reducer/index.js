@@ -1,4 +1,4 @@
-import { buildPc } from '../actions';
+import { buildPc } from "../actions";
 import {
   ADD_CART,
   GET_ALL_PRODUCTS,
@@ -29,8 +29,10 @@ import {
   FILTER_CATEGORY,
   FILTER_BRAND,
   GET_COMMEND_PENDING,
-  GET_COMMEND_PRODUCT
-} from '../types/index';
+  GET_COMMEND_PRODUCT,
+  GET_GPUS,
+  FILTER_PRICE,
+} from "../types/index";
 
 const initialState = {
   allProducts: [],
@@ -48,6 +50,7 @@ const initialState = {
   productsByCategory: [],
   filterBrands: [],
   filterOrder: [],
+  gpus: [],
   CommendPending: [],
   CommendProduct: [],
 };
@@ -106,6 +109,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         UserData: action.payload,
       };
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        gpus: action.payload,
+      };
 
     /// BUSQUEDA ///
     case SEARCH_PRODUCTS:
@@ -116,11 +124,21 @@ const reducer = (state = initialState, action) => {
 
     /// FILTRADO Y ORDENAMIENTO ///
     case FILTER_BY_PRICE:
+      let productOrder = [...state.products];
+      productOrder = productOrder.sort((a, b) => {
+        if (a.price < b.price) {
+          return action.payload === "LOW" ? -1 : 1;
+        }
+        if (a.price > b.price) {
+          return action.payload === "LOW" ? 1 : -1;
+        }
+        return 0;
+      });
       let orderedByPrice =
         //SI TENGO CATEGORIES
         !state.filterBrands.length > 0 &&
         state.filtros.length > 0 &&
-        state.filterOrder.includes('menor valor')
+        state.filterOrder.includes("menor valor")
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return 1;
               if (b.price > a.price) return -1;
@@ -128,7 +146,7 @@ const reducer = (state = initialState, action) => {
             })
           : !state.filterBrands.length > 0 &&
             state.filtros.length > 0 &&
-            state.filterOrder.includes('mayor valor')
+            state.filterOrder.includes("mayor valor")
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return -1;
               if (b.price > a.price) return 1;
@@ -137,7 +155,7 @@ const reducer = (state = initialState, action) => {
           : //SI NO TENGO CATEGORIES NI MARCAS
           !state.filtros.length > 0 &&
             !state.filterBrands.length > 0 &&
-            state.filterOrder.includes('menor valor')
+            state.filterOrder.includes("menor valor")
           ? state.allProducts.sort(function (a, b) {
               if (a.price > b.price) return 1;
               if (b.price > a.price) return -1;
@@ -145,20 +163,20 @@ const reducer = (state = initialState, action) => {
             })
           : !state.filtros.length > 0 &&
             !state.filterBrands.length > 0 &&
-            state.filterOrder.includes('mayor valor')
+            state.filterOrder.includes("mayor valor")
           ? state.allProducts.sort(function (a, b) {
               if (a.price > b.price) return -1;
               if (b.price > a.price) return 1;
               return 0;
             })
           : // SI TENGO MARCAS
-          state.brands.length > 0 && state.filterOrder.includes('menor valor')
+          state.brands.length > 0 && state.filterOrder.includes("menor valor")
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return 1;
               if (b.price > a.price) return -1;
               return 0;
             })
-          : state.brands.length > 0 && state.filterOrder.includes('mayor valor')
+          : state.brands.length > 0 && state.filterOrder.includes("mayor valor")
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return -1;
               if (b.price > a.price) return 1;
@@ -169,13 +187,13 @@ const reducer = (state = initialState, action) => {
             state.filtros.length > 0 &&
             state.filterMax.length > 0 &&
             state.filterPrice.le &&
-            state.filterOrder.includes('menor valor')
+            state.filterOrder.includes("menor valor")
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return 1;
               if (b.price > a.price) return -1;
               return 0;
             })
-          : state.brands.length > 0 && state.filterOrder.includes('mayor valor')
+          : state.brands.length > 0 && state.filterOrder.includes("mayor valor")
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return -1;
               if (b.price > a.price) return 1;
@@ -185,7 +203,7 @@ const reducer = (state = initialState, action) => {
 
       return {
         ...state,
-        products: orderedByPrice,
+        products: productOrder,
       };
 
     case FILTER_CATEGORIES:
@@ -205,7 +223,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_BRANDS:
-      const brandsFiltered = state.filtros.includes('all')
+      const brandsFiltered = state.filtros.includes("all")
         ? state.allProducts
         : state.allProducts.filter((e) => state.filtros.includes(e.brand));
       return {
@@ -291,30 +309,35 @@ const reducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
       };
-      //GET_COMMEND_PRODUCT
-      //CommendPending: [],
- // CommendProduct: [],
-  //GET_COMMEND_PENDING,
-  case GET_COMMEND_PENDING:
+    case FILTER_PRICE:
+      return {
+        ...state,
+        products: action.payload,
+      };
+    //GET_COMMEND_PRODUCT
+    //CommendPending: [],
+    // CommendProduct: [],
+    //GET_COMMEND_PENDING,
+    case GET_COMMEND_PENDING:
       return {
         ...state,
         CommendPending: action.payload,
       };
-      case "GET_COMMEND_PENDING_VACIO":
+    case "GET_COMMEND_PENDING_VACIO":
       return {
         ...state,
         CommendPending: [],
       };
-      case GET_COMMEND_PRODUCT:
-        return {
-          ...state,
-          CommendProduct: action.payload,
-        };
-        case "GET_COMMEND_PRODUCT_VACIO":
-        return {
-          ...state,
-          CommendPending: [],
-        };
+    case GET_COMMEND_PRODUCT:
+      return {
+        ...state,
+        CommendProduct: action.payload,
+      };
+    case "GET_COMMEND_PRODUCT_VACIO":
+      return {
+        ...state,
+        CommendPending: [],
+      };
     default:
       return { ...state };
   }

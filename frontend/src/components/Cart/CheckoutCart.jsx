@@ -5,7 +5,7 @@ import NavBar from "../NavBar/NavBar";
 import CheckoutPaypal from "../Paypal/CheckoutPaypal";
 import { CartContext } from "./CartContext";
 
-function CheckoutCart({ product }) {
+function CheckoutCart() {
   const { products, deleteProductCart, addProductToCart, deleteProduct } =
     useContext(CartContext);
 
@@ -13,12 +13,12 @@ function CheckoutCart({ product }) {
   products.forEach((p) => (total += p.amount * p.price));
 
   return (
-    <div>
+    <div className="bg-primary-200">
       <NavBar />
       <div className="flex items-center justify-center py-8">
-        <div>
-          <div className="w-full absolute z-10 right-0 h-full">
-            <div className="flex md:flex-row flex-col justify-end">
+        <div className="">
+          <div className="w-full absolute  right-0 bg-primary-200 h-full">
+            <div className="flex md:flex-row bg-primary-200 flex-col justify-end">
               <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-secundary-250 overflow-y-auto overflow-x-hidden h-screen">
                 <div className="flex items-center text-gray-500 hover:text-primary-300 cursor-pointer">
                   <Link to="/categories?category=all">
@@ -42,7 +42,7 @@ function CheckoutCart({ product }) {
                     </p>
                   </Link>
                 </div>
-                <p className="text-5xl font-black font-Open leading-10 pt-3">
+                <p className="text-5xl font-black mb-10 font-Open leading-10 pt-3">
                   Your Cart
                 </p>
 
@@ -148,23 +148,22 @@ function CheckoutCart({ product }) {
                   </div>
                 </div>
               </div>
-              <div className="xl:w-1/2 md:w-1/3 xl:w-1/4 w-full font-Open bg-gray-100 h-full">
+              <div className="xl:w-1/2 md:w-1/3 xl:w-1/4 w-full font-Open h-full">
                 <div className="flex flex-col md:h-screen px-14 py-20 justify-between font-Open overflow-y-auto">
                   <div>
-                    <p className="text-4xl font-black leading-9 font-Open">
+                    <p className="text-4xl font-black mb-10 text-secundary-250 leading-9 font-Open">
                       Summary
                     </p>
-                    <div>
+                    <div >
                       {products.length <= 0 ? (
-                        <p className="flex items-center">No products yet!</p>
+                        <p className="flex text-secundary-250 font-Open items-center">No products yet!</p>
                       ) : (
                         <div>
                           {products.map((p) => {
                             return (
-                              <div key={p.id}>
-                                <p>{p.name}</p>
-                                <p>{p.price}</p>
-                              </div>
+                              <li className="text-secundary-250 font-Open" key={p.id}>
+                                <p>{p.name}: {p.amount} x ${p.price}</p>
+                              </li>
                             );
                           })}
                         </div>
@@ -173,11 +172,11 @@ function CheckoutCart({ product }) {
                   </div>
                   <div>
                     <div className="flex items-center pb-6 justify-between lg:pt-5 pt-20">
-                      <p className="text-2xl leading-normal text-gray-800">
+                      <p className="text-2xl text-secundary-250 leading-normal">
                         Total
                       </p>
                       <div>
-                        <p className="text-2xl font-bold leading-normal text-right text-gray-800">
+                        <p className="text-2xl  text-secundary-250 font-bold leading-normal text-right text-gray-800">
                           {`$ ${total.toFixed(2)}`}
                         </p>
                       </div>

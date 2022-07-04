@@ -55,7 +55,7 @@ router.get("/googleLogin", async (req, res) => {
       let googleUser = await User.findOne({
         where: { email: googleMail },
       });
-      console.log(googleUser);
+      console.log("googleUser: " ,googleUser);
       return res.json(googleUser);
     }
     return res.json("nada");

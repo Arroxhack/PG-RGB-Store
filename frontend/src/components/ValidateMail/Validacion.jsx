@@ -42,14 +42,18 @@ export default function Validations() {
         text: `Verificacion Completa`,
         button: "Aceptar",
       });
-      let { login, lastname, verify, username, email, permissions, name } =
+      let {lastname, verify, username, email, permissions, name, id} =
         UserRegister.user;
+        console.log("UserRegister: ", UserRegister);
       localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
       localStorage.setItem("name", name);
       localStorage.setItem("lastname", lastname);
-      localStorage.setItem("login", login);
+      localStorage.setItem("login", true);
       localStorage.setItem("email", email);
-      localStorage.setItem("Admin", permissions);
+      localStorage.setItem("id", id);
+      if (permissions === true) {
+        localStorage.setItem("admin", permissions);
+      }
       navigate("/");
     }
   }
