@@ -42,7 +42,7 @@ export default function Categories () {
       <div className=' bg-primary-200'>
     <SideBar/>
     </div>
-    <div className="my-0 mx-auto  bg-primary-200 ">
+    <div className="my-0 mx-auto w-screen bg-primary-200 ">
 
     <ContainerProduct/>
     </div>

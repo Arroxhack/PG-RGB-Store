@@ -35,35 +35,30 @@ router.post("/NewReview", async (req, res, next) => {
 });
 // Postear un nuevo Commentario  ( ESTO  SE HACE DESDE EL PROFILE )
 router.put("/PostCommentReview", async (req, res, next) => {
-  try {
-    const { username, id, comment } = req.body;
-    const user = await findUser(username);
-    if (!user?.name) {
-      return res.send("Error no se encuentra el usuario");
-    }
-    console.log(user.id, "user id", id, "ID Tabla");
-    const Review = await ReviewComment.findOne({
-      where: {
-        idUser: user.id,
-        id: id,
-      },
-    });
-    console.log(Review);
+  const { username, id, comment } = req.body;
+  console.log("ID", id, "USERNAME", username, "COMMENTARIO:", comment);
+  const user = await findUser(username);
+  if (!user?.name) {
+    return res.send("Error no se encuentra el usuario");
+  }
+  const Review = await ReviewComment.findOne({
+    where: {
+      idUser: user.id,
+      idProducto: id,
+    },
+  });
 
-    if (!Review?.idUser) {
-      return res.send("Error no se encontro la tabla Review");
-    }
+  if (!Review?.idUser) {
+    return res.send("Error no se encontro la tabla Review");
+  }
 
-    const update = await Review.update({ comentario: comment });
+  const update = await Review.update({ comentario: comment });
 
-    if ((update[0] = 1)) {
-      await Review.update({ Comentado: true });
-      return res.send("Done");
-    } else {
-      return re.send("Error no se publico el Review");
-    }
-  } catch (e) {
-    console.log(e);
+  if ((update[0] = 1)) {
+    await Review.update({ Comentado: true });
+    return res.send("Done");
+  } else {
+    return re.send("Error no se publico el Review");
   }
 });
 // Conseguir Todos los Comentarios pendiente de 1 usuario  ( ESTO  SE HACE DESDE EL PROFILE )
