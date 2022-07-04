@@ -34,18 +34,16 @@ import {
   FILTER_BRAND,
   GET_GPUS,
   DELETE_CART,
-  FILTER_PRICE,
   NEXT_PAGE,
   PREV_PAGE,
   SET_PAGE,
   GET_COMMEND_PENDING,
   GET_COMMEND_PRODUCT,
-
   FILTER_PRICE,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
-} from '../types/index';
+
 
 
 
@@ -576,7 +574,8 @@ export function getProductFavorito(idUser) {
         dispatch({ type: GET_FAV, payload: res.data });
       });
     } catch (error) {}
-  };
+  }
+}
 
 
 // PAGINADO ADMIN
@@ -597,6 +596,7 @@ export const setPage = (p)=>{
   }
 
 }
+
 export function PostComment(comment, username, id) {
   return async () => {
     try {
