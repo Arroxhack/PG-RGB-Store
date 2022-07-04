@@ -1,5 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 import {
+  ADD_FAV,
+  DELETE_FAV,
+  GET_FAV,
   ADD_CART,
   GET_ALL_PRODUCTS,
   GET_PRODUCT_DETAIL,
@@ -37,9 +40,15 @@ import {
   SET_PAGE,
   GET_COMMEND_PENDING,
   GET_COMMEND_PRODUCT,
+
+  FILTER_PRICE,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
+} from '../types/index';
+
+
+
 
 
 /// GET PRODUCTOS ///
@@ -142,7 +151,7 @@ export function getProductDetail(id) {
         payload: product,
       });
     } catch (error) {
-      console.log(error, " product detail");
+      console.log(error, ' product detail');
     }
   };
 }
@@ -170,9 +179,9 @@ export const createProduct = (product) => {
       const post = await axios.post(`${PATH}/create-product`, product);
       Swal.fire({
         title: `${post.data.name}`,
-        text: "Creado con exito!",
-        icon: "success",
-        confirmButtonText: "ok",
+        text: 'Creado con exito!',
+        icon: 'success',
+        confirmButtonText: 'ok',
       });
       return dispatch({
         type: CREATE_PRODUCT,
@@ -180,10 +189,10 @@ export const createProduct = (product) => {
       });
     } catch (error) {
       Swal.fire({
-        title: "Algo fallo",
-        text: "No se pudo crear el producto",
-        icon: "error",
-        confirmButtonText: "ok",
+        title: 'Algo fallo',
+        text: 'No se pudo crear el producto',
+        icon: 'error',
+        confirmButtonText: 'ok',
       });
     }
   };
@@ -198,16 +207,16 @@ export const editProduct = (producto) => {
       );
       Swal.fire({
         title: `${producto.name}`,
-        text: "Editado con exito!",
-        icon: "success",
-        confirmButtonText: "ok",
+        text: 'Editado con exito!',
+        icon: 'success',
+        confirmButtonText: 'ok',
       });
     } catch (error) {
       Swal.fire({
-        title: "Algo fallo",
-        text: "No se pudo editar el producto",
-        icon: "error",
-        confirmButtonText: "ok",
+        title: 'Algo fallo',
+        text: 'No se pudo editar el producto',
+        icon: 'error',
+        confirmButtonText: 'ok',
       });
     }
   };
@@ -219,16 +228,16 @@ export const deleteProduct = (id) => {
       const deleteProduct = await axios.delete(`${PATH}/delete-product/${id}`);
 
       Swal.fire({
-        icon: "success",
-        title: "Product delete",
-        confirmButtonText: "Ok",
+        icon: 'success',
+        title: 'Product delete',
+        confirmButtonText: 'Ok',
       });
     } catch (error) {
       Swal.fire({
-        title: "Algo fallo",
-        text: "No se pudo borrar el producto",
-        icon: "error",
-        confirmButtonText: "ok",
+        title: 'Algo fallo',
+        text: 'No se pudo borrar el producto',
+        icon: 'error',
+        confirmButtonText: 'ok',
       });
     }
   };
@@ -240,10 +249,10 @@ export function PostUser(user) {
     try {
       const exit = await axios.post(`${PATH}/register`, user);
       if (exit.data) {
-        alert("Register Succesfully");
+        alert('Register Succesfully');
       }
     } catch (e) {
-      console.log("Error in Register");
+      console.log('Error in Register');
     }
   };
 }
@@ -259,7 +268,7 @@ export function GetUserData(id) {
         payload: user,
       });
     } catch (e) {
-      console.log("Error in Get Data");
+      console.log('Error in Get Data');
     }
   };
 }
@@ -344,10 +353,10 @@ export const filterBran = (category, brand) => {
       });
     } catch (error) {
       Swal.fire({
-        icon: "alert",
-        title: "Se produjo un error",
-        text: "Por favor, actualice e intente nuevamente la busqueda",
-        confirmButtonText: "Ok",
+        icon: 'alert',
+        title: 'Se produjo un error',
+        text: 'Por favor, actualice e intente nuevamente la busqueda',
+        confirmButtonText: 'Ok',
       });
     }
   };
@@ -465,7 +474,7 @@ export function filterBrands(brand) {
   return async function (dispatch) {
     let brands;
     try {
-      if (brand !== "all") {
+      if (brand !== 'all') {
         brands = await axios.get(`${PATH}/brands/?brand=${brand}`); //products por ahora
       }
 
@@ -492,7 +501,7 @@ export function searchProducts(search) {
     axios
       .get(`${PATH}/product?name=` + search)
       .then((products) => {
-        console.log(products, " soy products");
+        console.log(products, ' soy products');
         dispatch({
           type: SEARCH_PRODUCTS,
           payload: products.data,
@@ -500,9 +509,9 @@ export function searchProducts(search) {
       })
       .catch(() => {
         Swal.fire({
-          icon: "info",
-          title: "Product not found",
-          button: "OK",
+          icon: 'info',
+          title: 'Product not found',
+          button: 'OK',
         });
       });
   };
@@ -539,6 +548,37 @@ export function putUserProfile(username) {
 }
 
 
+export function addProductFavorito(idProd, idUser) {
+  try {
+    axios
+      .put(`${PATH}/add/favorito`, { idProd, idUser })
+      .then((res) => res.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function deleteProductFavorito(idProd, idUser) {
+  try {
+    axios
+      .put(`${PATH}/delete/favorito`, { idProd, idUser })
+      .then((res) => res.data);
+  } catch (error) {
+    console.log(error, ' error delete');
+  }
+}
+
+export function getProductFavorito(idUser) {
+  return (dispatch) => {
+    try {
+      axios.get(`${PATH}/get/favorito?idUser=${idUser}`).then((res) => {
+        console.log(res.data, ' en actions getFavoritos');
+        dispatch({ type: GET_FAV, payload: res.data });
+      });
+    } catch (error) {}
+  };
+
+
 // PAGINADO ADMIN
 export const nextPage = ()=>{
   return{
@@ -555,6 +595,7 @@ export const setPage = (p)=>{
     type:SET_PAGE,
     payload:p
   }
+
 }
 export function PostComment(comment, username, id) {
   return async () => {
@@ -564,17 +605,17 @@ export function PostComment(comment, username, id) {
         username,
         id,
       });
-      if (result.data !== "Done") {
+      if (result.data !== 'Done') {
         Swal.fire({
-          icon: "info",
-          title: "Error in DataBase",
-          button: "OK",
+          icon: 'info',
+          title: 'Error in DataBase',
+          button: 'OK',
         });
       }
       Swal.fire({
-        icon: "success",
-        title: "Comentario Posteado",
-        button: "OK",
+        icon: 'success',
+        title: 'Comentario Posteado',
+        button: 'OK',
       }).then(() => window.location.reload());
     } catch (e) {
       console.log(e);
@@ -613,7 +654,7 @@ export function GetCommendProduct(id) {
 export function VaciarStatePendingComment() {
   return (dispatch) => {
     try {
-      dispatch({ type: "GET_COMMEND_PENDING_VACIO", payload: [] });
+      dispatch({ type: 'GET_COMMEND_PENDING_VACIO', payload: [] });
     } catch (error) {
       console.log(error);
     }
@@ -622,7 +663,7 @@ export function VaciarStatePendingComment() {
 export function VaciarStateProductComment() {
   return (dispatch) => {
     try {
-      dispatch({ type: "GET_COMMEND_PRODUCT_VACIO", payload: [] });
+      dispatch({ type: 'GET_COMMEND_PRODUCT_VACIO', payload: [] });
     } catch (error) {
       console.log(error);
     }

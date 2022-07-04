@@ -1,4 +1,4 @@
-import { buildPc } from "../actions";
+import { buildPc } from '../actions';
 import {
   ADD_CART,
   GET_ALL_PRODUCTS,
@@ -35,7 +35,13 @@ import {
   GET_COMMEND_PENDING,
   GET_COMMEND_PRODUCT,
   GET_GPUS,
-} from "../types/index";
+
+  FILTER_PRICE,
+  GET_FAV,
+  DELETE_FAV,
+  ADD_FAV,
+} from '../types/index';
+
 
 const initialState = {
   allProducts: [],
@@ -53,7 +59,11 @@ const initialState = {
   productsByCategory: [],
   filterBrands: [],
   filterOrder: [],
+
+  favoritos: [],
+
   page:1,
+
   gpus: [],
   CommendPending: [],
   CommendProduct: [],
@@ -75,8 +85,24 @@ const reducer = (state = initialState, action) => {
         detail: action.payload,
       };
 
+    // case ADD_FAV:
+    //   return {
+    //     ...state,
+    //     favoritos: [...action.payload],
+    //   };
+    // case DELETE_FAV:
+    //   return {
+    //     ...state,
+    //     favoritos: [...action.payload],
+    //   };
+    case GET_FAV:
+      return {
+        ...state,
+        favoritos: [...action.payload],
+      };
     //BUILD PC PROPIAAA
-    //SE GUARDA COMO UN OBJETO QUE EN SUS ATRIBUTOS TIENE LOS ID DE LOS PRODUCTOS, CADA KEY ES UNA CATEGORY Y CADA VALUE ES COMPONENTE QUE PERTENCE A ESA CATEGORY
+    //SE GUARDA COMO UN OBJETO QUE EN SUS ATRIBUTOS TIENE LOS ID DE LOS PRODUCTOS,
+    // CADA KEY ES UNA CATEGORY Y CADA VALUE ES COMPONENTE QUE PERTENCE A ESA CATEGORY
     case BUILD_PC:
       return {
         ...state,
@@ -131,10 +157,10 @@ const reducer = (state = initialState, action) => {
       let productOrder = [...state.products];
       productOrder = productOrder.sort((a, b) => {
         if (a.price < b.price) {
-          return action.payload === "LOW" ? -1 : 1;
+          return action.payload === 'LOW' ? -1 : 1;
         }
         if (a.price > b.price) {
-          return action.payload === "LOW" ? 1 : -1;
+          return action.payload === 'LOW' ? 1 : -1;
         }
         return 0;
       });
@@ -142,7 +168,7 @@ const reducer = (state = initialState, action) => {
         //SI TENGO CATEGORIES
         !state.filterBrands.length > 0 &&
         state.filtros.length > 0 &&
-        state.filterOrder.includes("menor valor")
+        state.filterOrder.includes('menor valor')
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return 1;
               if (b.price > a.price) return -1;
@@ -150,7 +176,7 @@ const reducer = (state = initialState, action) => {
             })
           : !state.filterBrands.length > 0 &&
             state.filtros.length > 0 &&
-            state.filterOrder.includes("mayor valor")
+            state.filterOrder.includes('mayor valor')
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return -1;
               if (b.price > a.price) return 1;
@@ -159,7 +185,7 @@ const reducer = (state = initialState, action) => {
           : //SI NO TENGO CATEGORIES NI MARCAS
           !state.filtros.length > 0 &&
             !state.filterBrands.length > 0 &&
-            state.filterOrder.includes("menor valor")
+            state.filterOrder.includes('menor valor')
           ? state.allProducts.sort(function (a, b) {
               if (a.price > b.price) return 1;
               if (b.price > a.price) return -1;
@@ -167,20 +193,20 @@ const reducer = (state = initialState, action) => {
             })
           : !state.filtros.length > 0 &&
             !state.filterBrands.length > 0 &&
-            state.filterOrder.includes("mayor valor")
+            state.filterOrder.includes('mayor valor')
           ? state.allProducts.sort(function (a, b) {
               if (a.price > b.price) return -1;
               if (b.price > a.price) return 1;
               return 0;
             })
           : // SI TENGO MARCAS
-          state.brands.length > 0 && state.filterOrder.includes("menor valor")
+          state.brands.length > 0 && state.filterOrder.includes('menor valor')
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return 1;
               if (b.price > a.price) return -1;
               return 0;
             })
-          : state.brands.length > 0 && state.filterOrder.includes("mayor valor")
+          : state.brands.length > 0 && state.filterOrder.includes('mayor valor')
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return -1;
               if (b.price > a.price) return 1;
@@ -191,13 +217,13 @@ const reducer = (state = initialState, action) => {
             state.filtros.length > 0 &&
             state.filterMax.length > 0 &&
             state.filterPrice.le &&
-            state.filterOrder.includes("menor valor")
+            state.filterOrder.includes('menor valor')
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return 1;
               if (b.price > a.price) return -1;
               return 0;
             })
-          : state.brands.length > 0 && state.filterOrder.includes("mayor valor")
+          : state.brands.length > 0 && state.filterOrder.includes('mayor valor')
           ? state.products.sort(function (a, b) {
               if (a.price > b.price) return -1;
               if (b.price > a.price) return 1;
@@ -227,7 +253,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_BRANDS:
-      const brandsFiltered = state.filtros.includes("all")
+      const brandsFiltered = state.filtros.includes('all')
         ? state.allProducts
         : state.allProducts.filter((e) => state.filtros.includes(e.brand));
       return {
@@ -323,6 +349,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         page: state.page+1
       };
+
     case PREV_PAGE:
       let prev = state.page-1
       if(state.page===1){
@@ -341,12 +368,13 @@ const reducer = (state = initialState, action) => {
     //CommendPending: [],
     // CommendProduct: [],
     //GET_COMMEND_PENDING,
+
     case GET_COMMEND_PENDING:
       return {
         ...state,
         CommendPending: action.payload,
       };
-    case "GET_COMMEND_PENDING_VACIO":
+    case 'GET_COMMEND_PENDING_VACIO':
       return {
         ...state,
         CommendPending: [],
@@ -356,7 +384,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         CommendProduct: action.payload,
       };
-    case "GET_COMMEND_PRODUCT_VACIO":
+    case 'GET_COMMEND_PRODUCT_VACIO':
       return {
         ...state,
         CommendPending: [],
