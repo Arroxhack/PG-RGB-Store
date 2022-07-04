@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+    
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -15,6 +16,7 @@ module.exports = {
         200: "#212126",
         300: "#F66095",
         400: "#2BCDC5",
+        500: "#FF0099",
       
       },
       secundary:{
@@ -32,9 +34,11 @@ module.exports = {
       md: "768px",
       // => @media (min-width: 960px) { ... }
 
-      lg: "1280px",
+      lg: "1000px",
       // => @media (min-width: 1440px) { ... }
     },
   },
   plugins: [],
+
 };
+

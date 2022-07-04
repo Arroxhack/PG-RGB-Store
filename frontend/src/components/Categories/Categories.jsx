@@ -7,6 +7,7 @@ import SideBar from "../SideBar/SideBar";
 import Ordenamientos from "../Ordenamientos/Ordenamientos";
 import NavBar from '../NavBar/NavBar'
 import ContainerProduct from '../ContainerProduct/ContainerProduct'
+import { useSearchParams } from "react-router-dom";
 
 
 export default function Categories () {
@@ -15,32 +16,34 @@ export default function Categories () {
     const products = useSelector((state) => state.products);
     const filters= useSelector(state=>state.filtros)
     const filterOrder= useSelector(state=> state.filterOrder)
-  
+    const [params, setParams] = useSearchParams()
 
+    const catQuery = params.get('category')
+    const searchFilter = params.get('name')
 
-  
     useEffect(() => {
-      if(!products.length) dispatch(getAllProducts())
+      if(!catQuery && !searchFilter){
+        params.set('category', 'all')
+        setParams(params)
+      }
       dispatch(clean())
-    }, [dispatch]);
+    }, []);
 
 
   return (
-    <div className=" w-full bg-gradient-to-t bg-primary-200  flex flex-col ">
+    <div className=" w-full h-screen bg-primary-200  flex flex-col ">
       
-      <div className="sticky top-0 z-50">
+      
       <NavBar/>
-      </div>
       
       
-    <div className='w-full flex justify-between  bg-primary-200 '>
+      
+    <div className='w-full flex justify-between   '>
       <div className=' bg-primary-200'>
     <SideBar/>
     </div>
-    <div className="my-0 mx-auto  bg-primary-200 ">
-    <div className="w-full flex justify-end mb-7 mt-7">
-    <Ordenamientos/>
-    </div>
+    <div className="my-0 mx-auto w-screen bg-primary-200 ">
+
     <ContainerProduct/>
     </div>
       </div>

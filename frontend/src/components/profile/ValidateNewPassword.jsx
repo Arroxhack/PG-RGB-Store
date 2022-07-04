@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import swal from "sweetalert2";
+import Swal from "sweetalert2";
 
 export default function Validations() {
   const navigate = useNavigate();
@@ -29,14 +29,14 @@ export default function Validations() {
       .then((e) => e.data)
       .catch((e) => console.log(e));
     if (result[0] === "E" && result[1] === "r" && result[2] === "r") {
-      swal.fire({
+      Swal.fire({
         icon: "error",
         title: "Error",
         text: `${result}`,
         button: "Aceptar",
       });
     } else {
-      swal.fire({
+      Swal.fire({
         icon: "succes",
         title: "EXITO",
         text: `${result}`,

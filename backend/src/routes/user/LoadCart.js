@@ -1,55 +1,105 @@
-const { Router } = require('express');
-const { User } = require('../../db');
+const { Router } = require("express");
+const { User, Product } = require("../../db");
 const router = Router();
 
 //Cargar carrito en la bd
-router.put('/userCart/:email', async (req, res, next) => {
-  const { cartProductArray } = req.body;
-  const { email } = req.params;
-  try {
-    //caso carrito vacio
-    //caso carrito con cosas
+router.post("/userCart", async (req, res, next) => {
+  let { email, cartProductArray } = req.body;
+  const user = await User.findOne({ where: { email } });
+  cartProductArray = JSON.parse(cartProductArray);
+  console.log(cartProductArray);
+  // try {
+  //caso carrito vacio
+  //caso carrito con cosas
+  if (!cartProductArray?.length) {
+    return res.send("Fail: cart is empty");
+  }
 
-    if (!cartProductArray.length) {
-      return res.send('cart is empty');
+  if (cartProductArray.length > 0) {
+    if (!user) {
+      return res.send("Fail: User doesnt exist");
     }
 
-    if (cartProductArray.length > 0) {
-      const user = await User.findOne({ where: { email } });
-
-      if (!user) {
-        return res.send('User doesnt exist');
-      }
-
-      user.set({
-        cartProducts: cartasd,
+    //map -> verifica que cada prod coincida con la lista de prod
+    let productsVerified = cartProductArray?.map(async (p) => {
+      const product = await Product.findOne({
+        where: {
+          id: p.id,
+          price: p.price,
+          name: p.name,
+          inOffer: p.inOffer,
+          percentageDiscount: p.percentageDiscount,
+        },
       });
 
-      await user.save();
+      if (product?.id === p.id) {
+        return product;
+      }
+    });
+
+    productsVerified = await Promise.all(productsVerified);
+    productsVerified = productsVerified.filter(
+      (e) => e !== undefined && e !== null
+    );
+
+    if (productsVerified.length !== cartProductArray.length) {
+      user.set({
+        lock: true,
+      });
+    } else {
+      const actualCart = user.cartProducts.concat(productsVerified);
+      const miCarritoSinDuplicados = actualCart.reduce(
+        (acumulador, valorActual) => {
+          const elementoYaExiste = acumulador.find(
+            (elemento) => elemento.name === valorActual.name
+          );
+          if (elementoYaExiste) {
+            return acumulador.map((elemento) => {
+              if (elemento.name === valorActual.name) {
+                return {
+                  ...elemento,
+                  amount: elemento.amount + valorActual.amount,
+                };
+              }
+
+              return elemento;
+            });
+          }
+
+          return [...acumulador, valorActual];
+        },
+        []
+      );
+      user.set({
+        cartProducts: miCarritoSinDuplicados,
+      });
     }
-    res.send('done');
-  } catch (e) {
-    res.status(404).send('error updating user cart');
+
+    await user.save();
   }
+  user.lock ? res.send("Error: User blocked") : res.send("done");
+  // } catch (e) {
+  //   res.status(404).send('Error: updating user cart');
+  // }
 });
 
 //Recuperar carrito de la bd
-router.get('/userCart/:email', async (req, res, next) => {
-  const { email } = req.params;
+// router.get('/userCart/:email', async (req, res, next) => {
+//   const { email } = req.params;
 
-  //traerme los datos
-  const user = await User.findOne({ where: { email } });
+//   //traerme los datos
+//   const user = await User.findOne({ where: { email } });
 
-  //ver si el user existe
-  if (!user) {
-    return res.send('User doesnt exist');
-  }
+//   //ver si el user existe
+//   if (!user) {
+//     return res.send('User doesnt exist');
+//   }
 
-  //guardar el carrito
-  const userCart = user.cartProducts;
+//   //guardar el carrito
+//   const userCart = user.cartProducts;
 
-  //devolver el carrito
-  res.send(userCart);
-});
+//   //devolver el carrito
+//   res.send(userCart);
+// });
 
 module.exports = router;

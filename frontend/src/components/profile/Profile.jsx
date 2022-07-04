@@ -2,30 +2,41 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { GetUserData } from "../../redux/actions/index";
+import {
+  GetUserData,
+  VaciarStatePendingComment,
+  GetCommendPending,
+} from "../../redux/actions/index";
 import ChangePassword from "./ChangePassword";
-/*
-const Uploaded = (e)=>{
-    const file = document.querySelector(
-      'input[type=file]')['files'][0];
-    let reader = new FileReader();
-    reader.onload = function () {
-        LAVARIABLEDONDEQUIERASGUARDAR = reader.result.replace("data:","")
-        .replace(/^.+,/, "");
-    }
-    reader.readAsDataURL(file);
-  }
-<input type='file' name='image' id='image' onChange={Uploaded}/>
-*/
+import PhoneInput from "react-phone-input-2";
+import Swal from "sweetalert2";
+import "react-phone-input-2/lib/style.css";
+import NavBar from "../NavBar/NavBar";
+import { useNavigate } from "react-router";
+import CommentPending from "./CommentPending";
 
 export default function Profile() {
+  const navigate = useNavigate();
   const id = localStorage.getItem("id");
+  const username = localStorage.getItem("username");
+  console.log(username);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.UserData);
-  const [mostrarChangePassword, setMostrarChangePassword] = useState(false);
-  useEffect( () => {
+  useEffect(() => {
     dispatch(GetUserData(id));
+    dispatch(GetCommendPending(username));
   }, []);
+  const user = useSelector((state) => state.UserData);
+  const Commend = useSelector((state) => state.CommendPending);
+  console.log("ACAAAAA", Commend);
+  const [mostrarChangePassword, setMostrarChangePassword] = useState(false);
+  const [NameEdit, setName] = useState("");
+  const [LastnameEdit, setLastname] = useState("");
+  const [AddressEdit, setAddress] = useState("");
+  const [CellphoneEdit, setCellphone] = useState("");
+  const [ImageUpload, setImageUpload] = useState("");
+  const [Password, setPassword] = useState("");
+  const [editPerfil, setEditPerfil] = useState(false);
+  const [confirmEdit, setConfirmEdit] = useState(false);
   const handleChangePassword = (e) => {
     e.preventDefault(e);
     if (mostrarChangePassword == false) {
@@ -34,29 +45,276 @@ export default function Profile() {
       setMostrarChangePassword(false);
     }
   };
+
+  const UploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertToBase64(file);
+    setImageUpload(base64);
+    console.log(base64);
+  };
+
+  const NoLogin = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "No Login",
+      text: `Tienes que estar logeado para ingresar a la pagina`,
+      button: "Aceptar",
+    }).then(() => navigate("/login"));
+  };
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const DeleteImage = (e) => {
+    e.preventDefault();
+    setImageUpload(null);
+  };
+
+  const EditPerfil = (e) => {
+    e.preventDefault();
+    setConfirmEdit(false);
+    if (editPerfil === false) {
+      setName(user.name);
+      setLastname(user.lastname);
+      setAddress(user.address);
+      setCellphone(user.cellphone);
+      setImageUpload(user.image);
+      setEditPerfil(true);
+      document.getElementById("EditProfile").innerHTML = "Ver Perfil";
+    } else {
+      dispatch(GetUserData(id));
+      setEditPerfil(false);
+      document.getElementById("EditProfile").innerHTML = "Editar Perfil";
+    }
+  };
+
+  const HandleConfirm = (e) => {
+    e.preventDefault();
+    if (confirmEdit === false) {
+      document.querySelector("#Edicion").innerHTML = "Cancelar Edicion";
+      setConfirmEdit(true);
+    } else {
+      document.querySelector("#Edicion").innerHTML = "Confirmar Edicion";
+      setConfirmEdit(false);
+    }
+  };
+
+  const ConfirmEditLast = async (e) => {
+    e.preventDefault();
+    const result = await axios({
+      method: "put",
+      url: `http://localhost:3001/profile/edit`,
+      data: {
+        id,
+        NameEdit,
+        LastnameEdit,
+        AddressEdit,
+        CellphoneEdit,
+        ImageUpload,
+        Password,
+      },
+      headers: { "X-Requested-With": "XMLHttpRequest" },
+      withCredentials: true,
+    })
+      .then((e) => e.data)
+      .catch((e) => console.log(e));
+    if (result[0] === "E" && result[1] === "r" && result[2] === "r") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `${result}`,
+        button: "Aceptar",
+      });
+    } else {
+      Swal.fire({
+        icon: "succes",
+        title: "EXITO",
+        text: `${result}`,
+        button: "Aceptar",
+      });
+      window.location.replace("http://localhost:3000/profile");
+    }
+  };
   return (
     <div>
-      <ul>
-        <h2>Name: </h2>
-        <li>{user.name}</li>
+      {id ? (
+        <>
+          <NavBar />
+          <div className="flex flex-col items-center justify-center min-h-screen h-full bg-primary-200">
+            <div className="max-w-4xl p-6 mx-auto bg-secundary-250 rounded-md shadow-md">
+              <h1 className="text-2xl font-open font-bold pb-5 capitalize">Profile</h1>
+              
+              {editPerfil === false ? (
+                <form className="font-Open">
+                  <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                    <h2 className="font-semibold"> Name:</h2>
+                    <p>{user.name}</p>
+                    <h2 className="font-semibold">Last Name:</h2>
+                    <p>{user.lastname}</p>
+                    <h2  className="font-semibold">Email:</h2>
+                    <p>{user.email}</p>
+                    <h2  className="font-semibold">Username:</h2>
+                    <p>{user.username}</p>
+                    <h2  className="font-semibold">Cellphone:</h2>
+                      <p>{user.cellphone
+                        ? "+" + user.cellphone
+                        : "Not found"}</p>
+                    <h2  className="font-semibold">Address:</h2>
+                      <p>{user.address ? user.address : "Not found"}</p>
+                    <h2  className="font-semibold">Image:</h2>
+                    <p>
+                      {user.image ? (
+                        <img
+                          className="rounded-full h-20 w-20"
+                          src={user.image}
+                        />
+                      ) : (
+                        "Not found"
+                      )}
+                    </p>
+                  </div>
+                  <button
+                    id="EditProfile"
+                    className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                    onClick={(e) => EditPerfil(e)}
+                  >
+                    Edit Profile
+                  </button>
+                </form>
+              ) : (
+                <form className="max-w-4xl p-6 mx-auto rounded-md shadow-md">
+                  <div className="text-lg font-semibold capitalize ">
+                    <label>Name: </label>
+                    <input
+                      name="Name"
+                      className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
+                      value={NameEdit}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                    {console.log(NameEdit)}
+                  </div>
+                  <div className="text-lg font-semibold capitalize ">
+                    <label >LastName:</label>
+                    <input
+                      name="Lastname"
+                      className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
+                      value={LastnameEdit}
+                      onChange={(e) => setLastname(e.target.value)}
+                    />
+                  </div>
+                  <div className="text-lg font-semibold capitalize ">
+                    <h2>Address:</h2>
+                    <input
+                      name="Address"
+                      className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
+                      value={AddressEdit}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </div>
+                  <div className="text-lg font-semibold capitalize ">
+                    <h2>Phone:</h2>
+                    <PhoneInput
+                    
+                      name="cellphone"
+                      country={"ar"}
+                      value={CellphoneEdit}
+                      onChange={(phone) => setCellphone(phone)}
+                    />
+                  </div>
+                  <div className="text-lg font-semibold capitalize ">
+                    <h2>Image:</h2>
+                    <p>
+                      {ImageUpload ? (
+                        <img
+                          className="rounded-full h-20 w-20"
+                          src={ImageUpload}
+                        />
+                      ) : (
+                        "Not found"
+                      )}
+                    </p>
+                  </div>
+                  <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    onChange={UploadImage}
+                  />
+                  <div className="flex row space-x-3">
+                    <button
+                      className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                      onClick={(e) => DeleteImage(e)}
+                    >
+                      Erase Image
+                    </button>
+                  </div>
+                  
+                  <div className="flex row space-x-3">
+                    <button
+                       className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                      onClick={(e) => handleChangePassword(e)}
+                    >
+                      Change Password
+                    </button>
+                  </div>
+                  <button
+                    id="Edicion"
+                    onClick={(e) => HandleConfirm(e)}
+                    className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                  >
+                    Done
+                  </button>
+                  {confirmEdit === true ? (
+                    <div className="flex row space-x-3">
+                      <h2>Ingrese su contraseña para confirmar cambios:</h2>
+                      <input
+                        placeholder="Ingrese Contraseña"
+                        name="Password"
+                        className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
+                        value={Password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                      <button
+                        onClick={(e) => ConfirmEditLast(e)}
+                        className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                      >
+                        Send
+                      </button>
+                    </div>
+                  ) : null}
+                </form>
+              )}
 
-        <h2>LastName:</h2>
-        <li>{user.lastname}</li>
-        <h2>Email:</h2>
-        <li>{user.email}</li>
-        <h2>Username:</h2>
-        <li>{user.username}</li>
-        <h2>image:</h2>
-        <li>{user.image ? <img src={user.image} /> : "Dato no encontrado"}</li>
-        <h2>cellphone:</h2>
-        <li>{user.cellphone ? user.cellphone : "Dato no encontrado"}</li>
-        <h2>Address:</h2>
-        <li>{user.address ? user.address : "Dato no encontrado"}</li>
-      </ul>
-      <button onClick={(e) => handleChangePassword(e)}>
-        Cambiar Contraseña
-      </button>
-      {mostrarChangePassword === true ? <ChangePassword /> : null}
+              {mostrarChangePassword === true ? <ChangePassword /> : null}
+            </div>
+            {editPerfil === true ? null : (
+              <div>
+                {Commend.length > 0 ? (
+                  <>
+            
+                    <CommentPending ComentariosPending={Commend} />{" "}
+                  </>
+                ) : (
+                  "There isnt pending comments"
+                )}
+              </div>
+            )}
+          </div>
+        </>
+      ) : (
+        NoLogin()
+      )}
     </div>
   );
 }

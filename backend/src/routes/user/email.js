@@ -10,7 +10,7 @@ router.post("/resendEmailLogin", async (req, res) => {
   console.log(email);
   const user = await User.findOne({ where: { email: email } });
   if (user?.lock) {
-    return res.send("Account blocked");
+    return res.send("Error Account blocked");
   } else {
     await transporter.sendMail({
       from: "rgbstore0@gmail.com", // sender address
@@ -19,6 +19,7 @@ router.post("/resendEmailLogin", async (req, res) => {
       text: "", // plain text body
       html: `<b>ENVIAMOS DE NUEVO TU CODIGO DE VERIFICACION:</b> <h1>${user.secretToken}</h1>`, // html body
     });
+    res.send("Codigo Reenviado");
   }
 });
 
@@ -33,9 +34,9 @@ router.post("/resendEmail", async (req, res) => {
       text: "", // plain text body
       html: `<b>ENVIAMOS DE NUEVO TU CODIGO DE VERIFICACION:</b> <h1>${user.secretToken}</h1>`, // html body
     });
-    res.send(response.accepted[0]);
+    res.send("Codigo Reenviado");
   } else {
-    res.status(404).send("error usuario no encontrado");
+    res.send("Error usuario no encontrado");
   }
 });
 module.exports = router;

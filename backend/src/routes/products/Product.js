@@ -8,11 +8,12 @@ const router = Router();
 router.get('/products/', async (req, res, next) => {
   try {
     const cat = req.query.category;
-    if (cat) {
+
+    if (cat && cat !=='all') {
       const All = await Product.findAll();
       let AllProducts = All.map((p) => (p.category.includes(cat) ? p : ''));
       AllProducts = AllProducts.filter((e) => {
-        if (e.id) {
+        if (e.id && e.stock > 0) {
           return e;
         }
       });
@@ -22,7 +23,10 @@ router.get('/products/', async (req, res, next) => {
         res.status(404).send('Error, Not Product with that Category');
       }
     } else {
-      const AllProduct = await Product.findAll();
+      let AllProduct = await Product.findAll();
+      AllProduct = AllProduct.filter((e) => {
+        if (e.stock > 0) return e;
+      });
       if (AllProduct.length) {
         res.send(AllProduct);
       } else {
@@ -64,11 +68,6 @@ router.get('/brands/',async (req,res,next)=>{
 })
 
 
-
-
-
-
-
 router.get('/products/:ID', async (req, res, next) => {
   let { ID } = req.params;
   ID = Number(ID);
@@ -107,4 +106,16 @@ router.get('/product/', async (req, res, next) => {
     next(error);
   }
 });
+
+router.get('/gpu', async (req, res, next) => {
+  const All = await Product.findAll();
+  try {
+      let gpus = All.filter(g => g.category.includes("GPU"));
+      res.send(gpus)
+   }catch (e) {
+    next(e);
+  }
+})
+
+
 module.exports = router;

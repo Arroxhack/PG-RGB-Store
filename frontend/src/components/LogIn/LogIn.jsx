@@ -5,10 +5,12 @@ import { verify } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import jwt_decode from "jwt-decode";
 import NavBar from "../NavBar/NavBar";
-import swal from "sweetalert2";
+import Swal from "sweetalert2";
 
 export default function LogIn() {
   let navigate = useNavigate();
+  const cartProductArray = localStorage.getItem('cartProducts');
+  console.log(cartProductArray, ' soy cartttttt')
   const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
   const [password, setPassword] = useState(""); // Llega del input del form password al hacer submit.
   const [googleUser, setGoogleUser] = useState({});
@@ -16,15 +18,31 @@ export default function LogIn() {
   const refresh = () => {
     window.location.reload(false);
   };
+ 
   const ResendEmail = async (email) => {
-    console.log(email);
-    await axios({
+    const result = await axios({
       method: "post",
       url: "http://localhost:3001/resendEmailLogin",
       data: { email }, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
     });
+    if (result[0] === "E" && result[1] === "r" && result[2] === "r") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `${result}`,
+        button: "Aceptar",
+      });
+    } else {
+      Swal.fire({
+        icon: "succes",
+        title: "EXITO",
+        text: `${result}`,
+        button: "Aceptar",
+      });
+      navigate(`/`);
+    }
   };
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +63,7 @@ export default function LogIn() {
     let { login, lastname, verify, username, email, permissions, name, id } =
       user; //Info que trae la ruta
     if (verify === false) {
-      swal.fire({
+      Swal.fire({
         icon: "error" / "success",
         title: "Error",
         text: "Su Cuenta no esta verificada, sera redirigido a una pagina para verificar su correo electronico",
@@ -54,19 +72,43 @@ export default function LogIn() {
       ResendEmail(email);
       return navigate(`/validate/${username}`);
     }
+    
     if (login) {
-      localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
-      localStorage.setItem("name", name);
-      localStorage.setItem("lastname", lastname);
-      localStorage.setItem("login", login);
-      localStorage.setItem("email", email);
-      localStorage.setItem("id", id);
-      if (permissions === true) {
-        localStorage.setItem("admin", permissions);
-      }
-      setUsername(""); //Reseteo mis estados locales
-      setPassword("");
-      navigate("/");
+      
+      console.log(' soy yo rey')
+        const email = user.email;
+        const response = await axios({
+          //La ruta trae toda la info en la base de datos de un usuario
+          method: "post",
+          url: "http://localhost:3001/userCart",
+          data: {email,cartProductArray}, // 
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+          withCredentials: true,
+        }).then((res)=> res.data).catch(e=>console.log(e));
+
+        const ress = await Promise.all([response]);
+
+        if(ress[0] === "E" && ress[1] === "r" && ress[2] === "r"){
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: `User blocked`,
+            button: "Aceptar",
+          }).then(()=> {return navigate('/login')})
+        }else{
+          localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
+          localStorage.setItem("name", name);
+          localStorage.setItem("lastname", lastname);
+          localStorage.setItem("login", login);
+          localStorage.setItem("email", email);
+          localStorage.setItem("id", id);
+          if (permissions === true) {
+            localStorage.setItem("admin", permissions);
+          }
+          setUsername(""); //Reseteo mis estados locales
+          setPassword("");
+          navigate("/");
+        }
     } else {
       //Si no trae login quiere decir que no esta autenticado el usuario
       setErrors(user);
@@ -88,20 +130,54 @@ export default function LogIn() {
       .then((data) => data.data)
       .catch((e) => console.log(e));
     // let userData = user.data
-    console.log(user);
-    if (user) {
-      localStorage.setItem("username", user.username);
-      localStorage.setItem("name", user.name);
-      localStorage.setItem("lastname", user.lastname);
-      localStorage.setItem("login", true);
-      localStorage.setItem("email", user.email);
-      navigate("/");
-    } else {
-      swal(
-        "El email asociado a la cuenta de google no coincide con ningun usuario registrado",
-        "...redirigiendo para registrarse como un nuevo usuario!"
-      ); // sweet alert
-      navigate("/register");
+    console.log("user: ", user);
+
+    if (user?.lock) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `User blocked`,
+        button: "Aceptar",
+      }).then(()=> {return navigate('/login')})
+    } else{
+      if (user) {
+       
+        const email = user.email;
+        const response = await axios({
+          //La ruta trae toda la info en la base de datos de un usuario
+          method: "post",
+          url: "http://localhost:3001/userCart",
+          data: {email,cartProductArray}, // 
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+          withCredentials: true,
+        }).then((res)=> res.data);
+
+        if(response[0] === "E" && response[1] === "r" && response[2] === "r"){
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: `User blocked`,
+            button: "Aceptar",
+          }).then(()=> {return navigate('/login')})
+        }else{
+          localStorage.setItem("username", user.username);
+          localStorage.setItem("name", user.name);
+          localStorage.setItem("lastname", user.lastname);
+          localStorage.setItem("login", true);
+          localStorage.setItem("email", user.email);
+          localStorage.setItem("id", user.id);
+          if (user.permissions === true) {
+            localStorage.setItem("admin", user.permissions);
+          }
+          navigate("/");
+        }
+      } else {
+        Swal(
+          "El email asociado a la cuenta de google no coincide con ningun usuario registrado",
+          "...redirigiendo para registrarse como un nuevo usuario!"
+        ); // sweet alert
+        navigate("/register");
+      }
     }
   }
   useEffect(() => {
@@ -119,20 +195,16 @@ export default function LogIn() {
   }, []);
 
   return (
-    <div>
+    <div className="overflow-clip">
       <NavBar />
-      <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-gradient-to-t from-primary-300 to-primary">
+      <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-primary-200">
         <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black">
           <form
             className="flex flex-col justify-center items-center sm:w-80 sm:h-80"
             onSubmit={(e) => handleLoginSubmit(e)}
           >
             <div>
-              <img
-                className="w-16"
-                src="https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg"
-                alt="avatar"
-              />
+           
             </div>
             <div className="flex flex-col items-center justify-center gap-1">
               <input
@@ -153,15 +225,13 @@ export default function LogIn() {
               />
             </div>
             {errors ? (
-              <p /* style={{color: "red"}} */ class="bg-secundary-50">
-                {swal
-                  .fire({
-                    icon: "error" / "success",
-                    title: "Error",
-                    text: errors,
-                    button: "Aceptar",
-                  })
-                  .then(() => refresh())}
+              <p /* style={{color: "red"}} */ className="bg-secundary-50">
+                {Swal.fire({
+                  icon: "error" / "success",
+                  title: "Error",
+                  text: errors,
+                  button: "Aceptar",
+                }).then(() => refresh())}
               </p>
             ) : null}{" "}
             {/* si hay errores salen aca */}
@@ -172,6 +242,14 @@ export default function LogIn() {
               Login
             </button>
             <div id="signInDiv"></div>
+            <br />
+            <div className="t-6">
+              {`Don't have an account yet? `}
+              <a className="no-underline border-b" href="../register/">
+                {`Sign Up`}
+              </a>
+              .
+            </div>
           </form>
         </div>
         {/*        { googleUser && 

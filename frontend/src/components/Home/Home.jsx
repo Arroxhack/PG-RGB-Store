@@ -24,11 +24,13 @@ function Home() {
 
 
   return (
-    <div className="bg-gradient-to-t from-primary-300 to-primary">
+    <div className="bg-gradient-to-t from-primary-300 to-primary w-full">
+      
       <NavBar/>
+    
      
       <Slider/>
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex flex-col items-center lg:mt-4 sm:mt-12">
       <Promo
       left={true}
       img={'https://assets.iprofesional.com/cdn-cgi/image/w=880,f=webp/https://assets.iprofesional.com/assets/jpg/2020/07/498933.jpg'}

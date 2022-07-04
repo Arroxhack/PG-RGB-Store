@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Product from '../Product/Product';
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Loading from '../Loading/Loading'
+import Swal from "sweetalert2";
 
 const ContainerProduct = () => {
   const allProducts = useSelector(state=>state.products)
@@ -16,7 +17,6 @@ const ContainerProduct = () => {
       setLoading(false);
     }, 2000);
   }, []);
-
 
   return (
     <div className="lg:grid lg:grid-cols-4 lg:w-full lg:gap-12 lg:grid-rows-none relative sm:grid-cols-1">
