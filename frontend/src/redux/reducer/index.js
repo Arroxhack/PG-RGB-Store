@@ -28,8 +28,10 @@ import {
   CLEAN_FILTER_PRICE,
   FILTER_CATEGORY,
   FILTER_BRAND,
-  FILTER_PRICE
-
+  FILTER_PRICE,
+  GET_FAV,
+  DELETE_FAV,
+  ADD_FAV,
 } from '../types/index';
 
 const initialState = {
@@ -48,6 +50,7 @@ const initialState = {
   productsByCategory: [],
   filterBrands: [],
   filterOrder: [],
+  favoritos: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -66,8 +69,24 @@ const reducer = (state = initialState, action) => {
         detail: action.payload,
       };
 
+    // case ADD_FAV:
+    //   return {
+    //     ...state,
+    //     favoritos: [...action.payload],
+    //   };
+    // case DELETE_FAV:
+    //   return {
+    //     ...state,
+    //     favoritos: [...action.payload],
+    //   };
+    case GET_FAV:
+      return {
+        ...state,
+        favoritos: [...action.payload],
+      };
     //BUILD PC PROPIAAA
-    //SE GUARDA COMO UN OBJETO QUE EN SUS ATRIBUTOS TIENE LOS ID DE LOS PRODUCTOS, CADA KEY ES UNA CATEGORY Y CADA VALUE ES COMPONENTE QUE PERTENCE A ESA CATEGORY
+    //SE GUARDA COMO UN OBJETO QUE EN SUS ATRIBUTOS TIENE LOS ID DE LOS PRODUCTOS,
+    // CADA KEY ES UNA CATEGORY Y CADA VALUE ES COMPONENTE QUE PERTENCE A ESA CATEGORY
     case BUILD_PC:
       return {
         ...state,
@@ -114,13 +133,16 @@ const reducer = (state = initialState, action) => {
 
     /// FILTRADO Y ORDENAMIENTO ///
     case FILTER_BY_PRICE:
-
-        let productOrder = [...state.products]
-        productOrder = productOrder.sort((a,b)=>{
-          if(a.price<b.price) {return action.payload==='LOW' ? -1 : 1}
-          if(a.price>b.price) {return action.payload==='LOW' ? 1 : -1}
-          return 0
-        })
+      let productOrder = [...state.products];
+      productOrder = productOrder.sort((a, b) => {
+        if (a.price < b.price) {
+          return action.payload === 'LOW' ? -1 : 1;
+        }
+        if (a.price > b.price) {
+          return action.payload === 'LOW' ? 1 : -1;
+        }
+        return 0;
+      });
       let orderedByPrice =
         //SI TENGO CATEGORIES
         !state.filterBrands.length > 0 &&
@@ -187,7 +209,6 @@ const reducer = (state = initialState, action) => {
               return 0;
             })
           : 0;
-
 
       return {
         ...state,
@@ -298,10 +319,11 @@ const reducer = (state = initialState, action) => {
         products: action.payload,
       };
     case FILTER_PRICE:
-      return{
+      return {
         ...state,
-        products:action.payload
-      }
+        products: action.payload,
+      };
+
     default:
       return { ...state };
   }

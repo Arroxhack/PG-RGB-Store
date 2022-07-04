@@ -7,6 +7,7 @@ import NavBar from "../NavBar/NavBar";
 import Loading from "../Loading/Loading";
 import { CartContext } from "../Cart/CartContext";
 import Swal from "sweetalert2";
+import Favorito from "../Favoritos/Favorito";
 
 
 function DetailProduct() {
@@ -218,6 +219,7 @@ function DetailProduct() {
                   <div>
                     <div className="flex w-full">
                       <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+                        <Favorito id={ProductDetail.id}/>
                         <button
                           onClick={sendCard}
                           className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"

@@ -140,6 +140,9 @@ function NavBar() {
                   </button>
                 </Link>
               ) : null}
+              <Link  to="/favoritos">
+                <button  className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">favoritos</button>
+              </Link>
             </div>
           ) : (
             <>
