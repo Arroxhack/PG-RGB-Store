@@ -14,11 +14,11 @@ import {IoIosBuild} from 'react-icons/io'
 import svg from '../../images/rename.svg'
 import {FiLogIn} from 'react-icons/fi'
 import {BsPencilSquare} from 'react-icons/bs'
-
-
+//localStorage.getItem("username");
+//localStorage.getItem("admin");
 function NavBar() {
-  const username = localStorage.getItem("username");
-  const admin = localStorage.getItem("admin");
+  const username = true
+  const admin = true
 
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
