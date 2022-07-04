@@ -60,7 +60,7 @@ function DetailProduct() {
   };
 
   return (
-    <div className="md:h-screen flex flex-col">
+    <div className="bg-primary-200 h-screen text-secundary-250 flex flex-col">
       <div className="relative z-50 mb-11">
         <NavBar />
       </div>
@@ -70,7 +70,7 @@ function DetailProduct() {
             <Loading />
           </div>
         ) : (
-          <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
+          <div className="relative  max-w-screen-xl px-4 py-8 mx-auto">
             <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
               <div className="grid grid-cols-2 gap-4 md:grid-cols-1 ">
                 <div className="aspect-w-1 aspect-h-1">
@@ -196,22 +196,22 @@ function DetailProduct() {
                 </form>
               </div>
             </div>
-            <p> Write here your Review of the Product:</p>
-            <div class="mb-3 pt-0">
+            <p className="text-2xl font-open 0 font-bold pb-5 capitalize"> Write here your Review of the Product:</p>
+            <div class="mb-3 bg-primary-20 pt-0">
               <input
                 value={comment}
                 onChange={(e) => setComentario(e.target.value)}
                 type="text"
                 placeholder="Write here your commend"
-                class="px-3 p-10 py-4 placeholder-slate-300 text-3xl text-slate-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                class="px-3 p-10 py-4 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full"
               />
             </div>
             <button
               onClick={(e) => HandleSubmit(e)}
-              className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+              className="w-20 text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
             >
-              {" "}
-              SEND{" "}
+    
+              SEND
             </button>
           </div>
         )}
