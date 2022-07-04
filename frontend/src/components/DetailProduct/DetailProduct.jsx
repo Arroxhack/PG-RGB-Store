@@ -199,7 +199,7 @@ function DetailProduct() {
                       <div className="grid h-20 flex-grow place-items-center">
                         <button
                           onClick={sendCard}
-                          className="w-full text-center py-3 rounded bg-primary-400 xl: hover:bg-primary-300 my-1"
+                          className="w-full text-center py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
                         >
                           Add to cart
                         </button>
@@ -207,7 +207,7 @@ function DetailProduct() {
                       <div className="text-primary-200 select-none"> OR </div>
                       <div className="grid h-20 flex-grow place-items-center">
                         <NavLink
-                          className="w-full text-center py-3 rounded bg-primary-400 xl: hover:bg-primary-300 my-1"
+                          className="w-full text-center py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
                           to="/cart"
                         >
                           <button>Proceed to checkout</button>
