@@ -19,14 +19,15 @@ export default function Categories () {
     const [params, setParams] = useSearchParams()
 
     const catQuery = params.get('category')
+    const searchFilter = params.get('name')
 
     useEffect(() => {
-      if(!catQuery){
+      if(!catQuery && !searchFilter){
         params.set('category', 'all')
         setParams(params)
       }
       dispatch(clean())
-    }, [dispatch,catQuery]);
+    }, []);
 
 
   return (
@@ -41,7 +42,7 @@ export default function Categories () {
       <div className=' bg-primary-200'>
     <SideBar/>
     </div>
-    <div className="my-0 mx-auto  bg-primary-200 ">
+    <div className="my-0 mx-auto w-screen bg-primary-200 ">
 
     <ContainerProduct/>
     </div>

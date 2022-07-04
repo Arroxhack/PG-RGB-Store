@@ -15,34 +15,30 @@ import svg from '../../images/rename.svg'
 import {FiLogIn} from 'react-icons/fi'
 import {BsPencilSquare} from 'react-icons/bs'
 
-function NavBar() {
 
- 
-  const username = localStorage.getItem("username")
-  const admin =  localStorage.getItem("admin");
+function NavBar() {
+  const username = localStorage.getItem("username");
+  const admin = localStorage.getItem("admin");
 
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const [navOpen, setNavOpen]= useState(false)
-  
+  const [navOpen, setNavOpen] = useState(false);
+
   const handleCart = (e) => {
     e.preventDefault();
     setCartOpen(!cartOpen);
   };
 
+  const handleOpen = () => {
+    setNavOpen(true);
+  };
+  const handleClose = () => {
+    setNavOpen(false);
+  };
 
- const handleOpen= ()=>{
-setNavOpen(true)
- }
- const handleClose= ()=>{
-  setNavOpen(false)
-   }
-  
-
-   //Nav para movil
-function Nav() {
-
+  //Nav para movil
+  function Nav() {
   return (
     <div className="flex flex-col items-start  bg-primary-200 text-primary-400 h-screen lef-0 w-2/4 fixed top-0 left-0 ">
       <button className='mt-5 active:border active:border-primary-200' onClick={()=>handleClose()}><AiOutlineClose className="md:h-12 md:w-14"/></button>
@@ -118,8 +114,7 @@ function Nav() {
             )}
             </div>
         </div>
-  )
-}
+  )}
 
 
 //nav de escritorio

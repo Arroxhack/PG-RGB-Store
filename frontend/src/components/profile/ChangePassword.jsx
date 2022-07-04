@@ -53,29 +53,29 @@ function ChangePassword() {
     }
   };
   return (
-    <div>
+    <div className="">
       <div className="bg-secundary-200 px-2 py-6 rounded shadow-md text-black">
         <p>Porfavor ingrese 2 veces su contraseña actual</p>
         <form
-          className="flex flex-col justify-center items-center sm:w-80 sm:h-80"
+          className="flex flex-col justify-center  items-center sm:w-80 sm:h-80"
           onSubmit={handleSubmit}
         >
           <input
-            className="border-2 border-primary-400 rounded max-w-max  "
+            className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
             onChange={handleOnChange}
             type="password"
             name="password"
             placeholder="Ingrese su contraseña"
           />
           <input
-            className="border-2 border-primary-400 rounded max-w-max  "
+            className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
             onChange={handleOnChange}
             type="password"
             name="passwordValidate"
             placeholder="Ingrese su contraseña"
           />
           <button
-            className="hover:bg-primary-400 rounded-xl w-24 text-xl items-center"
+            className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
             id="enviar"
             type="submit"
           >

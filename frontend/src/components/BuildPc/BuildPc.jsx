@@ -123,7 +123,8 @@ function BuildPc() {
 
   return (
     // container de toda la pagina
-    <div className="h-screen bg-primary-300 ">
+    <section className="h-full bg-primary-200 ">
+    <div>
       <NavBar />
       <button onClick={handleClickBrand} name='brand' value='AMD'>AMD</button>
       <button onClick={handleClickBrand} name='brand' value='Intel'>Intel</button>
@@ -134,7 +135,7 @@ function BuildPc() {
             <div>
               <img src={cpu} alt="cpu" width='100px' heigth='100px'/>
               <select onChange={handleSelect} name='CPU'>
-              <option value='' disabled selected >Choose your cpu</option>
+              <option value='none' disabled selected >Choose your cpu</option>
               <option value='nothing'>Nothing</option>
                 {cpus.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
@@ -145,7 +146,7 @@ function BuildPc() {
             <div>
               <img src={mother} alt="mother" width='100px' heigth='100px'/>
               <select onChange={handleSelect} name='Motherboard'>
-                <option value='' disabled selected >Choose your Motherboard</option>
+                <option value='none' disabled selected >Choose your Motherboard</option>
                 <option value='nothing'>Nothing</option>
               {mothers.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
@@ -156,7 +157,7 @@ function BuildPc() {
             <div>
               <img src={ram} alt="ram" width='100px' heigth='100px'/>
               <select onChange={handleSelect} name='Ram'>
-              <option value='' disabled selected >Choose your Ram</option>
+              <option value='none' disabled selected >Choose your Ram</option>
               <option value='nothing'>Nothing</option>
                 {rams.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select>
             </div> :null
@@ -233,6 +234,7 @@ function BuildPc() {
           <button onClick={()=>{dispatch(buildPc(build)); navigate('/cart')}}>Buy</button>
       </div>
     </div>
+    </section>
       )
 }
 

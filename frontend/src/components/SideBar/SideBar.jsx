@@ -7,7 +7,7 @@ import {
   setFilterBrands,
   setFilterMax,
   setFilterPrice,cleanOrder,orderedByPrice, cleanFilterBrands,
-  filterCategory, filterBran
+  filterCategory, filterBran, filterPrice
 } from "../../redux/actions";
 import { setFilter } from "../../redux/actions";
 import { filterCategories } from "../../redux/actions";
@@ -24,9 +24,7 @@ export default function SideBar() {
   const brand = useSelector(state => state.brands);
   const products = useSelector(state => state.products);
   const filters = useSelector(state => state.filtros);
-  const filterPrice = useSelector(state => state.filterPrice);
   const filterMax = useSelector(state => state.filterMax);
-  const filterBrand = useSelector(state => state.filterBrands);
   const filterOrder= useSelector(state=> state.filterOrder)
 
   const productBrands = []
@@ -40,202 +38,15 @@ export default function SideBar() {
   const[searchParams,setSearchParams]= useSearchParams()
   const categoryQuery = searchParams.get("category")
   const brandQuery=searchParams.get("brand")
+  const nameQuery=searchParams.get('name')
   useEffect(() => {
     dispatch(getAllCategories())
-    if(!brandQuery){dispatch(filterCategory(categoryQuery))}
-    if(brandQuery){dispatch(filterBrand(categoryQuery,brandQuery))}
+    if(!brandQuery){dispatch(filterCategory(categoryQuery,nameQuery))}
+    if(brandQuery){dispatch(filterBran(categoryQuery,brandQuery,nameQuery))}
     }
-  ,[brandQuery,categoryQuery, dispatch]);
+  ,[brandQuery,categoryQuery, dispatch,nameQuery]);
 
 
-  // //--------------HANDLES CLEAN--------------
-  // function handleSubmitCleanF(e) {
-  //   e.preventDefault();
-  //   //SI TENGO MARCAS
-  //   if(filterBrand.length>0 && !filterOrder.length && !filterPrice.length>0 && !filterMax.length>0){ 
-  //    dispatch(cleanFilter())
-  //    dispatch(filterBrands(filterBrand))
-  //   }
-  //   //SI TENGO ORDENAMIENTO Y MARCAS
-  //   else if( filterOrder.length>0 && filterBrand.length>0 & !filterPrice.length>0 && !filterMax.length>0){
-  //     dispatch(cleanFilter())
-  //     dispatch(filterBrands(filterBrand))
-  //     dispatch(orderedByPrice(filterOrder))
-  //   }
-  //   //SI TENGO MARCAS Y FILTRO DE PRECIOS
-  //   else if(filterBrand.length>0 && filterMax.length && filterPrice.length && !filterOrder.length){
-  //     dispatch(cleanFilter())
-  //     dispatch(filterBrands(filterBrand))
-  //     dispatch(filterMin(filterPrice,filterMax))
-  //   }
-  //   //SI TENGO FILTRO DE PRECIO
-  //   else if(filterMax.length && filterPrice.length && !filterOrder.length && !filterBrand.length>0){
-  //     dispatch(cleanFilter())
-  //     dispatch(filterMin(filterMax,filterPrice))
-  //   }
-  //   //SI TENGO ORDENAMIENTO 
-  //   else if(filterOrder.length>0 && !filterBrand.length>0 && !filterPrice.length>0 && !filterMax.length>0){
-  //     dispatch(cleanFilter())
-  //     dispatch(orderedByPrice(filterOrder))
-  //   }
-  //   else if(filterBrand.length>0 && filterMax.length>0 && filterOrder.length>0 && filterPrice.length>0){
-  //     dispatch(cleanFilter())
-  //     dispatch(filterBrands(filterBrand))
-  //     dispatch(orderedByPrice(filterOrder))
-  //     dispatch(filterMin(filterPrice,filterMax))
-  //    }
-  //   else{
-  //     dispatch(cleanFilter())
-  //     dispatch(getAllProducts())
-  //   }
-  // }
-
-//   function handleSubmitCleanB(e) {
-//     e.preventDefault();
-//     if(filters.length>0 && !filterOrder.length && !filterPrice.length>0 && !filterMax.length>0){ 
-//       dispatch(cleanFilterBrands())
-//       dispatch(filterCategories(filters))
-//       //SI TENGO ORDENAMIENTO Y MARCAS
-//      }
-//      else if( filterOrder.length>0 && filters.length>0 && !filterPrice.length>0 && !filterMax.length>0){
-//        dispatch(cleanFilterBrands())
-//        dispatch(filterCategories(filters))
-//        dispatch(orderedByPrice(filterOrder))
-//      }
-//      else if(filters.length>0 && filterMax.length && filterPrice.length && !filterOrder.length>0){
-//        dispatch(cleanFilterBrands())
-//        dispatch(filterCategories(filters))
-//        dispatch(filterMin(filterPrice,filterMax))
-//      }
-//      else if(filterMax.length && filterPrice.length && !filterOrder.length && !filters.length>0){
-//        dispatch(cleanFilterBrands())
-//        dispatch(filterMin(filterMax,filterPrice))
-//      }
-//      else if(filterOrder.length>0 && !filters.length>0 && !filterPrice.length>0 && !filterMax.length>0 && !filterOrder.length>0){
-//        dispatch(cleanFilterBrands())
-//        dispatch(orderedByPrice(filterOrder))
-//      }
-//      else if(filters.length>0 && filterMax.length>0 && filterOrder.length>0 && filterPrice.length>0){
-//       dispatch(cleanFilterBrands())
-//       dispatch(filterCategories(filters))
-//       dispatch(orderedByPrice(filterOrder))
-//       dispatch(filterMin(filterPrice,filterMax))
-
-//      }
-//      else{
-//        dispatch(cleanFilterBrands())
-//        dispatch(getAllProducts())
-//      }
-
-
-// }
-
-//   function handleSubmitCleanOrder(e) {
-//     e.preventDefault(); 
-//         //SI TENNGO CATEGORIAS SOLAMENTE
-//     if(filters.length>0 && !filterBrand.length>0 && !filterPrice.length>0 && !filterMax.length>0){ 
-//       dispatch(cleanOrder())
-//       dispatch(filterCategories(filters))
-    
-//      }
-//      //SI TENGO MARCAS SOLAMENTE
-//      else if( filterBrand.length>0 && !filters.length>0 && !filterPrice.length>0 && !filterMax.length>0){
-//        dispatch(cleanOrder())
-//        dispatch(filterBrands(filterBrand))
-//      }
-//      //SI TENGO MARCAS Y CATEGORIAS
-//      else if(filters.length>0 && filterBrand.length>0 && !filterMax.length>0 && !filterPrice.length>0){
-//        dispatch(cleanOrder())
-//        dispatch(filterCategories(filters))
-//        dispatch(filterBrands(filterBrand))
-//      }
-//      //SI TENGO FILTRO POR PRECIO
-//      else if(filterMax.length>0 && filterPrice.length>0 && !filterBrand.length>0 && !filters.length>0){
-//        dispatch(cleanOrder())
-//        dispatch(filterMin(filterMax,filterPrice))
-//      }
-//      //SI TENGO TODOS
-//      else if(filters.length>0 && filterMax.length>0 && filterBrand.length>0 && filterPrice.length>0){
-//       dispatch(cleanOrder())
-//       dispatch(filterMin(filterPrice,filterMax))
-//       dispatch(filterBrand(filterBrand))
-//       dispatch(filterCategories(filters))
-//      }
-//      else{
-//        dispatch(cleanOrder())
-//        dispatch(getAllProducts())
-//      }
-
-//   }
-
-
-//   function handleSubmitCleanPrice(e) {
-//     e.preventDefault(); 
-//         //SI TENNGO CATEGORIAS SOLAMENTE
-//     if(filters.length>0 && !filterBrand.length>0 && !filterOrder.length>0){ 
-//       dispatch(cleanFilterPrice())
-//       dispatch(filterCategories(filters))
-    
-//      }
-//      //SI TENGO MARCAS SOLAMENTE
-//      else if( filterBrand.length>0 && !filters.length>0 && !filterOrder.length>0 ){
-//        dispatch(cleanFilterPrice())
-//        dispatch(filterBrands(filterBrand))
-//      }
-//      //SI TENGO MARCAS Y CATEGORIAS
-//      else if(filters.length>0 && filterBrand.length>0 && !filterOrder.length>0 ){
-//        dispatch(cleanFilterPrice())
-//        dispatch(filterCategories(filters))
-//        dispatch(filterBrands(filterBrand))
-//      }
-//      //SI TENGO FILTRO POR PRECIO
-//      else if( filterOrder.length>0 && !filterBrand.length>0 && !filters.length>0){
-//        dispatch(cleanFilterPrice())
-//        dispatch(orderedByPrice(filterOrder))
-//      }
-//      //SI TENGO TODOS
-//      else if(filters.length>0 && filterOrder.length>0 && filterBrand.length>0){
-//       dispatch(cleanFilterPrice())
-//       dispatch(filterBrands(filterBrand))
-//       dispatch(filterCategories(filters))
-//       dispatch(orderedByPrice(filterOrder))
-//      }
-//      else{
-//        dispatch(cleanFilterPrice())
-//        dispatch(getAllProducts())
-//      }
-
-//   }
-
-
-
- //--------------HANDLES FILTERS--------------
-
-
-  function handleFilterCat(e) {
-    e.preventDefault();
-    setSearchParams({[e.target.name]:e.target.value})
-    dispatch(filterCategory(categoryQuery))
-  }
-
-  function handleFilterBrand(e) {
-    e.preventDefault();
-    setSearchParams({category:categoryQuery, [e.target.name]:e.target.value})
-    dispatch(filterBrand(categoryQuery,brandQuery));
-  }
-
-  function handleFilterMax(e) {
-    e.preventDefault();
-    dispatch(filterMin(e.target.value));
-  }
-  function onChangeMin(e) {
-    e.preventDefault();
-    dispatch(setFilterPrice(e.target.value));
-  }
-  function onChangeMax(e) {
-    e.preventDefault();
-    dispatch(setFilterMax(e.target.value));
-  }
   
   return (
     <aside className="lg:w-1/4 md:w-64 sm:text-xs flex flex-col justify-around border-r-2 border-primary text-lg md:text-sm text-center text-primary-400 ">

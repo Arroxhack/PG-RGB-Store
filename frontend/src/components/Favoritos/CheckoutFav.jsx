@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteProduct } from "../../redux/actions";
 import NavBar from "../NavBar/NavBar";
-import CheckoutPaypal from "../Paypal/CheckoutPaypal";
-import { CartContext } from "./CartContext";
+// import CheckoutPaypal from "../Paypal/CheckoutPaypal";
+// import { CartContext } from "./CartContext";
+import { FavoritoContext } from "./FavoritoContext";
 
-function CheckoutCart() {
-  const { products, deleteProductCart, addProductToCart, deleteProduct } =
-    useContext(CartContext);
+function CheckoutFav() {
+  const { products, addProductToFav,deleteProductFav, resetProductFav} =
+    useContext(FavoritoContext);
 
   let total = 0;
   products.forEach((p) => (total += p.amount * p.price));
@@ -17,13 +18,11 @@ function CheckoutCart() {
       <NavBar />
       <div className="flex items-center justify-center py-8">
         <div className="">
-          <div className="w-full absolute  right-0 bg-primary-200 h-full">
+          <div className="w-full absolute z-10 right-14 bg-primary-200 h-full">
             <div className="flex md:flex-row bg-primary-200 flex-col justify-end">
               <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-secundary-250 overflow-y-auto overflow-x-hidden h-screen">
-
                 <div className="flex items-center text-gray-500 hover:text-primary-300 cursor-pointer">
-                  <Link to="/categories?category=all" >
-                    <div className="flex">
+                  <Link to="/categories?category=all">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="icon icon-tabler icon-tabler-chevron-left"
@@ -42,18 +41,17 @@ function CheckoutCart() {
                     <p className="text-sm pl-2 leading-none">
                       Back to products
                     </p>
-                    </div>
                   </Link>
                 </div>
                 <p className="text-5xl font-black mb-10 font-Open leading-10 pt-3">
-                  Your Cart
+                  Your Favs
                 </p>
 
                 <div>
                   <div>
                     <div>
                       {products.length <= 0 ? (
-                        <p className="flex items-center">No products yet!</p>
+                        <p className="flex items-center">No added products yet!</p>
                       ) : (
                         <div>
                           {products.map((p) => {
@@ -74,13 +72,14 @@ function CheckoutCart() {
                                     <p className="text-base font-black leading-none text-gray-800">
                                       {p.name}
                                     </p>
-                                    <div className="flex justify-around m-9">
+                                    <div className="flex justify-around space">
                                       <button
-                                        onClick={(e) => deleteProductCart(p)}
+                                        className="quan-buttons"
+                                        onClick={(e) => deleteProductFav(p)}
                                       >
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
-                                          className="h-3 w-6"
+                                          className="h-6 w-6"
                                           fill="none"
                                           viewBox="0 0 24 24"
                                           stroke="currentColor"
@@ -93,15 +92,16 @@ function CheckoutCart() {
                                           />
                                         </svg>
                                       </button>
-                                      <label className="w-3 font-Open">
+                                      <label className="w-5 font-Open">
                                         {p.amount}
                                       </label>
                                       <button
-                                        onClick={(e) => addProductToCart(p)}
+                                        className="quan-buttons"
+                                        onClick={(e) => addProductToFav(p)}
                                       >
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
-                                          className="h-3 w-6"
+                                          className="h-6 w-6"
                                           fill="none"
                                           viewBox="0 0 24 24"
                                           stroke="currentColor"
@@ -117,16 +117,16 @@ function CheckoutCart() {
                                     </div>
                                   </div>
                                 </div>
-                                <p className="flex w-20 font-black leading-none">{`$ ${(
+                                {/* <p className="text-base font-black leading-none text-gray-800">{`${(
                                   p.price * p.amount
-                                ).toFixed(2)}`}</p>
+                                ).toFixed(2)}`}</p> */}
                                 <button
-                                  className="cursor-pointer"
-                                  onClick={(e) => deleteProduct(p)}
+                                  className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer"
+                                  onClick={(e) => resetProductFav(p)}
                                 >
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 text-secundary-50"
+                                    className="h-6 w-6"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -135,7 +135,7 @@ function CheckoutCart() {
                                     <path
                                       strokeLinecap="round"
                                       strokeLinejoin="round"
-                                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                      d="M6 18L18 6M6 6l12 12"
                                     />
                                   </svg>
                                 </button>
@@ -149,28 +149,21 @@ function CheckoutCart() {
                   </div>
                 </div>
               </div>
-              <div className="xl:w-1/2 md:w-1/3 xl:w-1/4 w-full font-Open h-full">
+              {/* <div className="xl:w-1/2 md:w-1/3 xl:w-1/4 w-full font-Open h-full">
                 <div className="flex flex-col md:h-screen px-14 py-20 justify-between font-Open overflow-y-auto">
                   <div>
                     <p className="text-4xl font-black mb-10 text-secundary-250 leading-9 font-Open">
                       Summary
                     </p>
-                    <div>
+                    <div >
                       {products.length <= 0 ? (
-                        <p className="flex text-secundary-250 font-Open items-center">
-                          No products yet!
-                        </p>
+                        <p className="flex text-secundary-250 font-Open items-center">No products yet!</p>
                       ) : (
                         <div>
                           {products.map((p) => {
                             return (
-                              <li
-                                className="text-secundary-250 font-Open"
-                                key={p.id}
-                              >
-                                <p>
-                                  {p.name}: {p.amount} x ${p.price}
-                                </p>
+                              <li className="text-secundary-250 font-Open" key={p.id}>
+                                <p>{p.name}: {p.amount} x ${p.price}</p>
                               </li>
                             );
                           })}
@@ -194,7 +187,7 @@ function CheckoutCart() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -203,4 +196,4 @@ function CheckoutCart() {
   );
 }
 
-export default CheckoutCart;
+export default CheckoutFav;

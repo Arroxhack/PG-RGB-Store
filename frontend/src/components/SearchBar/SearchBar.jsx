@@ -1,24 +1,27 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { searchProducts } from "../../redux/actions";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { filterPrice, searchProducts } from "../../redux/actions";
 import {BiSearchAlt2} from 'react-icons/bi'
 
 export default function SearchBar() {
-  const [search, setSearch] = useState("");
+  const [name, setSearch] = useState("");
+
+  const [params, setParams]= useSearchParams()
+  
+
+
   let dispatch = useDispatch();
   const navigate = useNavigate();
   function onSubmit(e) {
     e.preventDefault();
-    dispatch(searchProducts(search));
     setSearch("");
-    navigate('/categories')
+    navigate(`/categories?name=${name}`)
   }
 
   function onInputChange(e) {
     e.preventDefault();
     setSearch(e.target.value);
-
   
   }
   return (
@@ -31,7 +34,7 @@ export default function SearchBar() {
          sm:placeholder:text-xs md:max-w-max md:h-9 md:placeholder:text-lg sm:max-w-max md:pr-24 lg:max-w-max  "
           type="text"
           placeholder="Search..."
-          value={search}
+          value={name}
           onChange={onInputChange}
         ></input>
       

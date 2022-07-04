@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  ADD_FAV,
+  DELETE_FAV,
+  GET_FAV,
   ADD_CART,
   GET_ALL_PRODUCTS,
   GET_PRODUCT_DETAIL,
@@ -31,10 +34,20 @@ import {
   FILTER_BRAND,
   GET_GPUS,
   DELETE_CART,
-  FILTER_PRICE
+  NEXT_PAGE,
+  PREV_PAGE,
+  SET_PAGE,
+  GET_COMMEND_PENDING,
+  GET_COMMEND_PRODUCT,
+  FILTER_PRICE,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
+
+
+
+
+
 
 /// GET PRODUCTOS ///
 export function getAllProducts() {
@@ -82,7 +95,7 @@ export function getBrand(payload) {
 export function getGpus() {
   return async function (dispatch) {
     try {
-      let gpu= await axios.get(`${PATH}/gpu`); 
+      let gpu = await axios.get(`${PATH}/gpu`);
       let gpuData = gpu.data;
       return dispatch({
         type: GET_GPUS,
@@ -93,8 +106,6 @@ export function getGpus() {
     }
   };
 }
-
-
 
 export function clean() {
   return {
@@ -327,79 +338,119 @@ export const filterCategory = (category) => {
   };
 };
 
-export const filterBran = (category, brand)=>{
-  return async dispatch=>{
-    try{
-      const filterBran = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}`)
-      const dataFilter = filterBran.data
+export const filterBran = (category, brand) => {
+  return async (dispatch) => {
+    try {
+      const filterBran = await axios.get(
+        `${PATH}/filter/?category=${category}&brand=${brand}`
+      );
+      const dataFilter = filterBran.data;
       return dispatch({
         type: FILTER_BRAND,
-        payload: dataFilter
-      })
-
-    } catch(error){
-      Swal.fire({
-        icon:'alert',
-        title:'Se produjo un error',
-        text: 'Por favor, actualice e intente nuevamente la busqueda',
-        confirmButtonText:'Ok'
-      })
-    }
-  }
-}
-
-export const filterPrice = (category,brand, min, max)=>{
-  return async dispatch=>{
-    try {
-      if(!brand){
-        if(min&&max){
-          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&min=${min}&max=${max}`)
-
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data
-          })
-        }
-        if(min||max){
-          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&min=${min ? min : max}`)
-
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data
-          })
-        }
-        
-      }
-      if(brand){
-        if(min&&max){
-          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}&min=${min}&max=${max}`)
-
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data
-          })
-        }
-        if(min||max){
-          const filterCat = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}&min=${min ? min : max}`)
-
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data
-          })
-        }
-
-      }
+        payload: dataFilter,
+      });
     } catch (error) {
-      console.log(error)
+      Swal.fire({
+        icon: 'alert',
+        title: 'Se produjo un error',
+        text: 'Por favor, actualice e intente nuevamente la busqueda',
+        confirmButtonText: 'Ok',
+      });
     }
   };
 };
 
+export const filterPrice = (category, brand, min, max, name) => {
+  return async (dispatch) => {
+    try {
+      if(!name){
+        if (!brand) {
+          if (min && max) {
+            const filterCat = await axios.get(
+              `${PATH}/filter/?category=${category}&min=${min}&max=${max}`
+            );
+  
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filterCat.data,
+            });
+          }
+          if (min || max) {
+            const filterCat = await axios.get(
+              `${PATH}/filter/?category=${category}&min=${min ? min : max}`
+            );
+  
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filterCat.data,
+            });
+          }
+        }
+        if (brand) {
+          if (min && max) {
+            const filterCat = await axios.get(
+              `${PATH}/filter/?category=${category}&brand=${brand}&min=${min}&max=${max}`
+            );
+  
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filterCat.data,
+            });
+          }
+          if (min || max) {
+            const filterCat = await axios.get(
+              `${PATH}/filter/?category=${category}&brand=${brand}&min=${
+                min ? min : max
+              }`
+            );
+  
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filterCat.data,
+            });
+          }
+        }
+      }else{
+        if(brand){
+          const searchName = await axios.get(`${PATH}/filter/?name=${name}&brand=${brand}`)
+          const rta = searchName.data
+          if(rta.length>=1){
+            return dispatch({
+              type: FILTER_PRICE,
+              payload : searchName.data
+            })
+          }else{
+            Swal.fire({
+              icon:'alert',
+              title:'There was an error',
+              text: 'Please update and try again',
+              confirmButtonText: 'Ok'
+            })
+          }
+        }else{
+          const searchName = await axios.get(`${PATH}/filter/?name=${name}`)
+          const rta = searchName.data
+          if(rta.length>=1){
+            return dispatch({
+              type: FILTER_PRICE,
+              payload : searchName.data
+            })
+          }else{
+            Swal.fire({
+              icon:'alert',
+              title:'There was an error',
+              text: 'Please update and try again',
+              confirmButtonText: 'Ok'
+            })
+          }
+        }
 
-
-
-
-
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export function filterCategories(category) {
   return async function (dispatch) {
@@ -493,3 +544,129 @@ export function putUserProfile(username) {
     }
   };
 }
+
+
+export function addProductFavorito(idProd, idUser) {
+  try {
+    axios
+      .put(`${PATH}/add/favorito`, { idProd, idUser })
+      .then((res) => res.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function deleteProductFavorito(idProd, idUser) {
+  try {
+    axios
+      .put(`${PATH}/delete/favorito`, { idProd, idUser })
+      .then((res) => res.data);
+  } catch (error) {
+    console.log(error, ' error delete');
+  }
+}
+
+export function getProductFavorito(idUser) {
+  return (dispatch) => {
+    try {
+      axios.get(`${PATH}/get/favorito?idUser=${idUser}`).then((res) => {
+        console.log(res.data, ' en actions getFavoritos');
+        dispatch({ type: GET_FAV, payload: res.data });
+      });
+    } catch (error) {}
+  }
+}
+
+
+// PAGINADO ADMIN
+export const nextPage = ()=>{
+  return{
+    type: NEXT_PAGE,
+  }
+}
+export const prevPage = ()=>{
+  return{
+    type: PREV_PAGE,
+  }
+}
+export const setPage = (p)=>{
+  return{
+    type:SET_PAGE,
+    payload:p
+  }
+
+}
+
+export function PostComment(comment, username, id) {
+  return async () => {
+    try {
+      const result = await axios.put(`${PATH}/PostCommentReview`, {
+        comment,
+        username,
+        id,
+      });
+      if (result.data !== 'Done') {
+        Swal.fire({
+          icon: 'info',
+          title: 'Error in DataBase',
+          button: 'OK',
+        });
+      }
+      Swal.fire({
+        icon: 'success',
+        title: 'Comentario Posteado',
+        button: 'OK',
+      }).then(() => window.location.reload());
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
+export function GetCommendPending(username) {
+  return (dispatch) => {
+    try {
+      axios
+        .put(`${PATH}/getCommendFalse/${username}`)
+        .then((user) =>
+          dispatch({ type: GET_COMMEND_PENDING, payload: user.data })
+        );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function GetCommendProduct(id) {
+  return (dispatch) => {
+    try {
+      axios
+        .get(`${PATH}/commentofProduct/${id}`)
+        .then((user) =>
+          dispatch({ type: GET_COMMEND_PRODUCT, payload: user.data })
+        );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function VaciarStatePendingComment() {
+  return (dispatch) => {
+    try {
+      dispatch({ type: 'GET_COMMEND_PENDING_VACIO', payload: [] });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function VaciarStateProductComment() {
+  return (dispatch) => {
+    try {
+      dispatch({ type: 'GET_COMMEND_PRODUCT_VACIO', payload: [] });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
