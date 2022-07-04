@@ -19,6 +19,7 @@ import './App.css';
 import Pagando from './components/Paypal/Pagando';
 import CheckoutCart from './components/Cart/CheckoutCart';
 import Done from './components/Cart/Done';
+import DetailForComment from "./components/profile/DetailForComment"
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path='/done' element={<Done />} />
         <Route path='/' element={<Home />} exact />
         <Route path='/products/:id' element={<DetailProduct />} exact />
+        <Route path='/productsDetail/:id' element={<DetailForComment />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
         <Route path='/cart' element={<CheckoutCart />} />
         <Route

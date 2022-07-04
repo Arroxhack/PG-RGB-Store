@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -12,8 +11,8 @@ const CreateAdmin = () => {
   const [method, setMethod] = useState("Upgradear a Admin");
   const [state, setState] = useState("");
 
-  useEffect(async () => {
-    await getAllUsers();
+  useEffect(() => {
+    getAllUsers();
   }, []);
 
   const getAllUsers = async () => {
@@ -164,7 +163,7 @@ const CreateAdmin = () => {
           users.map((e, i) => {
             return (
               <option key={i} value={e.id}>
-                {e.email}---{e.permissions == true ? "admin" : "usuario"}
+                {e.email}---{e.permissions === true ? "admin" : "usuario"}
               </option>
             );
           })}
