@@ -5,6 +5,7 @@ export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
 export const RESET_CART = "RESET_CART";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 // export const GET_PROFILE = 'GET_PROFILE';
+
 export const EDIT_PROFILE = "EDIT_PROFILE";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const SET_FILTER = "SET_FILTER";
@@ -28,6 +29,9 @@ export const CLEAN_FILTER_BRANDS = "CLEAN_FILTER_BRANDS";
 /// FILTRADO
 export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const FILTER_BRAND = "FILTER_BRAND";
+export const NEXT_PAGE = 'NEXT_PAGE';
+export const PREV_PAGE ='PREV_PAGE';
+export const SET_PAGE = 'SET_PAGE';
 // GETS ///
 export const GET_GPUS = "GET_GPUS";
 export const SET_ORDER = "SET_ORDER";

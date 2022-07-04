@@ -72,7 +72,7 @@ function NavBar() {
               </Link>{" "}
               <Logout />
               {admin ? (
-                <Link to="/admin">
+                <Link to="/admin/list-product">
                   <button className=" md:p-4 py-2 block active:bg-primary-300 rounded">
                     Admin panel
                   </button>
