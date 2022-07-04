@@ -6,14 +6,14 @@ import { deleteProduct } from "../../redux/actions";
 import { CartContext } from "./CartContext";
 
 const BoxCart = ({ onClick }) => {
-  const { products, deleteProductCart, resetProductCart } =
+  const { products, deleteProductCart } =
     useContext(CartContext);
 
   let total = 0;
   products.forEach((p) => (total += p.amount * p.price));
 
   return (
-    <div className="h-auto w-[520px] px-5 bg-primary rounded mt-10 -ml-80 absolute border-2 border-primary-200">
+    <div className="h-auto lg:w-[520px]  px-5 bg-primary  text-primary-200 rounded mt-10 -ml-80 absolute z-10 border-2 border-primary-200">
       <div className="flex flex-row-reverse pr-2"></div>
       <div>
         {products.length <= 0 ? (

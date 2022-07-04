@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { CartContext } from "../Cart/CartContext";
 import { useDispatch } from "react-redux";
+import {BiLogOut} from 'react-icons/bi'
 
 
 export default function Logout() {
@@ -38,13 +39,13 @@ export default function Logout() {
   }
 
   return (
-    <div>
+    <div className="flex items-center py-2">
       <button
-        className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
         onClick={(e) => onClick(e)}
       >
-        Logout
+     <BiLogOut className="h-4 w-4 md:h-12 md:w-14  text-primary-400 lg:hidden "/>
       </button>
+      <span className="text-base text-primary buttom">Log Out</span>
     </div>
   );
 }

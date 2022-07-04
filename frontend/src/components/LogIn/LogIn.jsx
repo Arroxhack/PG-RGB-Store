@@ -130,7 +130,7 @@ export default function LogIn() {
       .then((data) => data.data)
       .catch((e) => console.log(e));
     // let userData = user.data
-    //console.log(user);
+    console.log("user: ", user);
 
     if (user?.lock) {
       Swal.fire({
@@ -165,6 +165,10 @@ export default function LogIn() {
           localStorage.setItem("lastname", user.lastname);
           localStorage.setItem("login", true);
           localStorage.setItem("email", user.email);
+          localStorage.setItem("id", user.id);
+          if (user.permissions === true) {
+            localStorage.setItem("admin", user.permissions);
+          }
           navigate("/");
         }
       } else {
@@ -191,20 +195,16 @@ export default function LogIn() {
   }, []);
 
   return (
-    <div>
+    <div className="overflow-clip">
       <NavBar />
-      <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-gradient-to-t from-primary-300 to-primary">
+      <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-primary-200">
         <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black">
           <form
             className="flex flex-col justify-center items-center sm:w-80 sm:h-80"
             onSubmit={(e) => handleLoginSubmit(e)}
           >
             <div>
-              <img
-                className="w-16"
-                src="https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg"
-                alt="avatar"
-              />
+           
             </div>
             <div className="flex flex-col items-center justify-center gap-1">
               <input

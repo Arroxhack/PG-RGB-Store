@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function Pagando() {
   const navigate = useNavigate();
-
   const username = localStorage.getItem("username");
   console.log(username);
   let product = localStorage.getItem("cartProducts");
@@ -40,7 +39,6 @@ export default function Pagando() {
       }
     );
   }
-
   const createOrder = (data, actions) => {
     return actions.order.create({
       purchase_units: [
