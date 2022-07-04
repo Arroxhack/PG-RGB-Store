@@ -34,12 +34,22 @@ import {
   FILTER_BRAND,
   GET_GPUS,
   DELETE_CART,
+  FILTER_PRICE,
+  NEXT_PAGE,
+  PREV_PAGE,
+  SET_PAGE,
   GET_COMMEND_PENDING,
   GET_COMMEND_PRODUCT,
+
   FILTER_PRICE,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
+} from '../types/index';
+
+
+
+
 
 /// GET PRODUCTOS ///
 export function getAllProducts() {
@@ -352,54 +362,91 @@ export const filterBran = (category, brand) => {
   };
 };
 
-export const filterPrice = (category, brand, min, max) => {
+export const filterPrice = (category, brand, min, max, name) => {
   return async (dispatch) => {
     try {
-      if (!brand) {
-        if (min && max) {
-          const filterCat = await axios.get(
-            `${PATH}/filter/?category=${category}&min=${min}&max=${max}`
-          );
-
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data,
-          });
+      if(!name){
+        if (!brand) {
+          if (min && max) {
+            const filterCat = await axios.get(
+              `${PATH}/filter/?category=${category}&min=${min}&max=${max}`
+            );
+  
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filterCat.data,
+            });
+          }
+          if (min || max) {
+            const filterCat = await axios.get(
+              `${PATH}/filter/?category=${category}&min=${min ? min : max}`
+            );
+  
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filterCat.data,
+            });
+          }
         }
-        if (min || max) {
-          const filterCat = await axios.get(
-            `${PATH}/filter/?category=${category}&min=${min ? min : max}`
-          );
-
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data,
-          });
+        if (brand) {
+          if (min && max) {
+            const filterCat = await axios.get(
+              `${PATH}/filter/?category=${category}&brand=${brand}&min=${min}&max=${max}`
+            );
+  
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filterCat.data,
+            });
+          }
+          if (min || max) {
+            const filterCat = await axios.get(
+              `${PATH}/filter/?category=${category}&brand=${brand}&min=${
+                min ? min : max
+              }`
+            );
+  
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filterCat.data,
+            });
+          }
         }
-      }
-      if (brand) {
-        if (min && max) {
-          const filterCat = await axios.get(
-            `${PATH}/filter/?category=${category}&brand=${brand}&min=${min}&max=${max}`
-          );
-
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data,
-          });
+      }else{
+        if(brand){
+          const searchName = await axios.get(`${PATH}/filter/?name=${name}&brand=${brand}`)
+          const rta = searchName.data
+          if(rta.length>=1){
+            return dispatch({
+              type: FILTER_PRICE,
+              payload : searchName.data
+            })
+          }else{
+            Swal.fire({
+              icon:'alert',
+              title:'There was an error',
+              text: 'Please update and try again',
+              confirmButtonText: 'Ok'
+            })
+          }
+        }else{
+          const searchName = await axios.get(`${PATH}/filter/?name=${name}`)
+          const rta = searchName.data
+          if(rta.length>=1){
+            return dispatch({
+              type: FILTER_PRICE,
+              payload : searchName.data
+            })
+          }else{
+            Swal.fire({
+              icon:'alert',
+              title:'There was an error',
+              text: 'Please update and try again',
+              confirmButtonText: 'Ok'
+            })
+          }
         }
-        if (min || max) {
-          const filterCat = await axios.get(
-            `${PATH}/filter/?category=${category}&brand=${brand}&min=${
-              min ? min : max
-            }`
-          );
 
-          return dispatch({
-            type: FILTER_PRICE,
-            payload: filterCat.data,
-          });
-        }
       }
     } catch (error) {
       console.log(error);
@@ -500,6 +547,7 @@ export function putUserProfile(username) {
   };
 }
 
+
 export function addProductFavorito(idProd, idUser) {
   try {
     axios
@@ -529,6 +577,25 @@ export function getProductFavorito(idUser) {
       });
     } catch (error) {}
   };
+
+
+// PAGINADO ADMIN
+export const nextPage = ()=>{
+  return{
+    type: NEXT_PAGE,
+  }
+}
+export const prevPage = ()=>{
+  return{
+    type: PREV_PAGE,
+  }
+}
+export const setPage = (p)=>{
+  return{
+    type:SET_PAGE,
+    payload:p
+  }
+
 }
 export function PostComment(comment, username, id) {
   return async () => {
@@ -602,3 +669,4 @@ export function VaciarStateProductComment() {
     }
   };
 }
+

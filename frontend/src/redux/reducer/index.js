@@ -28,14 +28,20 @@ import {
   CLEAN_FILTER_PRICE,
   FILTER_CATEGORY,
   FILTER_BRAND,
+  FILTER_PRICE,
+  NEXT_PAGE,
+  PREV_PAGE,
+  SET_PAGE,
   GET_COMMEND_PENDING,
   GET_COMMEND_PRODUCT,
   GET_GPUS,
+
   FILTER_PRICE,
   GET_FAV,
   DELETE_FAV,
   ADD_FAV,
 } from '../types/index';
+
 
 const initialState = {
   allProducts: [],
@@ -53,7 +59,11 @@ const initialState = {
   productsByCategory: [],
   filterBrands: [],
   filterOrder: [],
+
   favoritos: [],
+
+  page:1,
+
   gpus: [],
   CommendPending: [],
   CommendProduct: [],
@@ -332,8 +342,32 @@ const reducer = (state = initialState, action) => {
     case FILTER_PRICE:
       return {
         ...state,
-        products: action.payload,
+        products:action.payload
+      }
+    case NEXT_PAGE:
+      return{
+        ...state,
+        page: state.page+1
       };
+
+    case PREV_PAGE:
+      let prev = state.page-1
+      if(state.page===1){
+        prev = 1
+      }
+      return{
+        ...state,
+        page: prev
+      };
+      case SET_PAGE:
+        return{
+          ...state,
+          page: action.payload
+        }
+    //GET_COMMEND_PRODUCT
+    //CommendPending: [],
+    // CommendProduct: [],
+    //GET_COMMEND_PENDING,
 
     case GET_COMMEND_PENDING:
       return {
