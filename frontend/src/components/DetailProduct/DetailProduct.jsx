@@ -194,8 +194,8 @@ function DetailProduct() {
                   </div>
                 
                     <div className="flex w-full">
-                      {/* <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center"> */}
-                        {/* <Favorito id={ProductDetail.id}/> */}
+                   <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center"> 
+                     <Favorito id={ProductDetail.id}/> 
                       <div className="grid h-20 flex-grow place-items-center">
                         <button
                           onClick={sendCard}
@@ -203,7 +203,7 @@ function DetailProduct() {
                         >
                           Add to cart
                         </button>
-                      {/* </div> */}
+                    </div> 
                       <div className="text-primary-200 select-none"> OR </div>
                       <div className="grid h-20 flex-grow place-items-center">
                         <NavLink
