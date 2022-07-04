@@ -19,14 +19,15 @@ export default function Categories () {
     const [params, setParams] = useSearchParams()
 
     const catQuery = params.get('category')
+    const searchFilter = params.get('name')
 
     useEffect(() => {
-      if(!catQuery){
+      if(!catQuery && !searchFilter){
         params.set('category', 'all')
         setParams(params)
       }
       dispatch(clean())
-    }, [dispatch,catQuery]);
+    }, []);
 
 
   return (

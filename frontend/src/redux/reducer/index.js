@@ -35,7 +35,6 @@ import {
   GET_COMMEND_PENDING,
   GET_COMMEND_PRODUCT,
   GET_GPUS,
-  FILTER_PRICE,
 } from "../types/index";
 
 const initialState = {

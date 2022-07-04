@@ -63,20 +63,6 @@ function Nav() {
           </ul>
           <div className="flex">
           {username ? (
-<<<<<<< HEAD
-            <div>
-              <Link to="/profile">
-                <p className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
-                  Welcome {username}!
-                </p>
-              </Link>{" "}
-              <Logout />
-              {admin ? (
-                <Link to="/admin/list-products">
-                  <button className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
-                    ADMINPANEL
-                  </button>
-=======
               <div className="flex flex-col ">
                 <Link to="/profile"  className="flex items-center py-2  sm:text-xs text-primary-400 md:text-xl left-0 ">
                 <HiOutlineUserCircle className="h-4 w-4  md:h-12 md:w-14 text-primary-400 "/>
@@ -84,7 +70,7 @@ function Nav() {
                 </Link>{" "}
                 <Logout  />
                 {admin ? (
-                  <Link to="/admin">
+                  <Link to="/admin/list-products">
                     <button className=" md:p-4 py-2 block active:bg-primary-300 rounded">
                      Admin panel
                     </button>
@@ -102,7 +88,6 @@ function Nav() {
                   className=" sm:text-xs  text-primary-400 md:text-xl sm:mr-2 sm:w-10 lg:text-base  "
                 >
                   Log in
->>>>>>> 050c186548c9b6ce054ae1d3955d25ab989aa1f3
                 </Link>
                 </div>
                 <div className=" lg:mr-[-6rem]">

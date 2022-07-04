@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
-import { filterPrice, orderedByPrice } from '../../redux/actions'
+import { filterPrice, orderedByPrice, getAllCategories, clean } from '../../redux/actions'
 import Select from 'react-select'
 import Swal from 'sweetalert2'
 
@@ -55,16 +55,16 @@ const Side = () => {
 
     const[searchParams,setSearchParams]= useSearchParams()
 
-    console.log(searchParams,'ES POR ACA MI REY')
     const catQuery = searchParams.get("category")
     const brandQuery=searchParams.get("brand")
     const minQuery=searchParams.get('min')
     const maxQuery=searchParams.get('max')
+    const searchFilter = searchParams.get('name')
 
     useEffect(() => {
-        dispatch(filterPrice(catQuery,brandQuery,minQuery,maxQuery))
-        dispatch(filterPrice(catQuery,brandQuery,minQuery,maxQuery))
-    }, [dispatch, brandQuery, catQuery, minQuery, maxQuery])
+        dispatch(filterPrice(catQuery,brandQuery,minQuery,maxQuery,searchFilter))
+        dispatch(filterPrice(catQuery,brandQuery,minQuery,maxQuery,searchFilter))
+    }, [dispatch, brandQuery, catQuery, minQuery, maxQuery,searchFilter])
 
     const handleCategory = e=>{
         e.preventDefault();
@@ -72,6 +72,10 @@ const Side = () => {
         setSearchParams(searchParams)
         if(brandQuery){
             searchParams.delete('brand',brandQuery)
+            setSearchParams(searchParams)
+        }
+        if(searchFilter){
+            searchParams.delete('name', searchFilter)
             setSearchParams(searchParams)
         }
         dispatch(filterPrice(catQuery,brandQuery,minQuery,maxQuery))
@@ -132,7 +136,10 @@ const Side = () => {
         e.preventDefault()
         searchParams.delete(e.target.name)
         if(e.target.name==='min') searchParams.delete('max') 
-        if(e.target.name==='max') searchParams.delete('min') 
+        if(e.target.name==='max') searchParams.delete('min')
+        if(e.target.name === 'name'){
+            searchParams.set('category', 'all')
+        }
         setSearchParams(searchParams)
         dispatch(filterPrice(catQuery,brandQuery,minQuery,maxQuery))
     }
@@ -155,6 +162,7 @@ const Side = () => {
         </div>
         {/* BOTONES */}
         <div className='flex flex-row gap-1 justify-center pt-5 pb-5'>
+        {searchFilter &&<button name='name' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold hover:bg-primary-300 hover:text-primary transition' onClick={resetFilter}>{searchFilter}</button>}
         {brandQuery &&<button name='brand' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold hover:bg-primary-300 hover:text-primary transition' onClick={resetFilter}>{brandQuery}</button>}
         {minQuery && <button name='min' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold hover:bg-primary-300 hover:text-primary transition' onClick={resetFilter}>{minQuery}</button>}
         {maxQuery && <button name='max' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold hover:bg-primary-300 hover:text-primary transition' onClick={resetFilter}>{maxQuery}</button>}

@@ -1,201 +1,226 @@
 const { Router } = require("express");
-const { Product, Category, Brand } = require("../../db");
+const { Product, Category,Op, Brand } = require("../../db");
 const router = Router();
 
 router.get("/filter", async (req, res, next) => {
-  let { brand, category, min, max } = req.query;
+  let { brand, category, min, max, name } = req.query;
 
   try {
-    const products = await Product.findAll();
-    let allProduct = products;
-
-    if (!brand) {
-      if (category !== "all") {
-        allProduct = [];
-
-        products.forEach((p) => {
-          if (category === p.category[0]) {
-            allProduct.push(p);
-          }
-        });
-
-        if (min || max) {
-          const rangeProduct = [];
-          if (min && max) {
-            if (min > max) {
-              allProduct.forEach((p) => {
-                if (p.price <= min && p.price >= max) {
-                  rangeProduct.push(p);
-                }
-              });
-            } 
-              allProduct.forEach((p) => {
-                if (p.price >= min && p.price <= max) {
-                  rangeProduct.push(p);
-                }
-              });
-            
-
-            res.send(rangeProduct);
-          } else {
-            if (min) {
-              allProduct.forEach((p) => {
-                if (p.price >= min) {
-                  rangeProduct.push(p);
-                }
-              });
-              res.send(rangeProduct);
-            } else {
-              allProduct.forEach((p) => {
-                if (p.price >= max) {
-                  rangeProduct.push(p);
-                }
-              });
-              res.send(rangeProduct);
-            }
-          }
-        }
-
-        res.send(allProduct);
-      } else {
-        if (min || max) {
-          const rangeProduct = [];
-
-          if (min && max) {
-            if (min > max) {
-              allProduct.forEach((p) => {
-                if (p.price <= min && p.price >= max) {
-                  rangeProduct.push(p);
-                }
-              });
-            } 
-              allProduct.forEach((p) => {
-                if (p.price >= min && p.price <= max) {
-                  rangeProduct.push(p);
-                }
-              });
-            
-            res.send(rangeProduct);
-          } else {
-            if (min) {
-              allProduct.forEach((p) => {
-                if (p.price >= min) {
-                  rangeProduct.push(p);
-                }
-              });
-              res.send("2");
-            } else {
-              allProduct.forEach((p) => {
-                if (p.price >= max) {
-                  rangeProduct.push(p);
-                }
-              });
-              res.send("3");
-            }
-          }
-        }
-
-        res.send(allProduct);
-      }
-    } else {
-      if (brand !== "all") {
-        allProduct = [];
+    if(!name){
+      const products = await Product.findAll();
+      let allProduct = products;
+  
+      if (!brand) {
         if (category !== "all") {
-          products.forEach((p) => {
-            if (category === p.category[0] && brand === p.brand) {
-              allProduct.push(p);
-            }
-          });
-        } else {
-          products.forEach((p) => {
-            if (brand === p.brand) {
-              allProduct.push(p);
-            }
-          });
-        }
-
-        if (min || max) {
-          const rangeProduct = [];
-          if (min && max) {
-            if (min > max) {
-              allProduct.forEach((p) => {
-                if (p.price <= min && p.price >= max) {
-                  rangeProduct.push(p);
-                }
-              });
-            }
-            allProduct.forEach((p) => {
-              if (p.price >= min && p.price <= max) {
-                rangeProduct.push(p);
-              }
-            });
-            res.send(rangeProduct);
-          } else {
-            if (min) {
-              allProduct.forEach((p) => {
-                if (p.price >= min) {
-                  rangeProduct.push(p);
-                }
-              });
-              res.send(rangeProduct);
-            } else {
-              allProduct.forEach((p) => {
-                if (p.price >= max) {
-                  rangeProduct.push(p);
-                }
-              });
-              res.send(rangeProduct);
-            }
-          }
-        }
-
-        res.send(allProduct);
-      } else {
-        allProduct = [];
-        if (category !== "all") {
+          allProduct = [];
+  
           products.forEach((p) => {
             if (category === p.category[0]) {
               allProduct.push(p);
             }
           });
-        }
-
-        if (min || max) {
-          const rangeProduct = [];
-          if (min && max) {
-            if (min > max) {
-              allProduct.forEach((p) => {
-                if (p.price <= min && p.price >= max) {
-                  rangeProduct.push(p);
-                }
-              });
+  
+          if (min || max) {
+            const rangeProduct = [];
+            if (min && max) {
+              if (min > max) {
+                allProduct.forEach((p) => {
+                  if (p.price <= min && p.price >= max) {
+                    rangeProduct.push(p);
+                  }
+                });
+              } 
+                allProduct.forEach((p) => {
+                  if (p.price >= min && p.price <= max) {
+                    rangeProduct.push(p);
+                  }
+                });
+              
+  
+              res.send(rangeProduct);
+            } else {
+              if (min) {
+                allProduct.forEach((p) => {
+                  if (p.price >= min) {
+                    rangeProduct.push(p);
+                  }
+                });
+                res.send(rangeProduct);
+              } else {
+                allProduct.forEach((p) => {
+                  if (p.price >= max) {
+                    rangeProduct.push(p);
+                  }
+                });
+                res.send(rangeProduct);
+              }
             }
-            allProduct.forEach((p) => {
-              if (p.price >= min && p.price <= max) {
-                rangeProduct.push(p);
+          }
+  
+          res.send(allProduct);
+        } else {
+          if (min || max) {
+            const rangeProduct = [];
+  
+            if (min && max) {
+              if (min > max) {
+                allProduct.forEach((p) => {
+                  if (p.price <= min && p.price >= max) {
+                    rangeProduct.push(p);
+                  }
+                });
+              } 
+                allProduct.forEach((p) => {
+                  if (p.price >= min && p.price <= max) {
+                    rangeProduct.push(p);
+                  }
+                });
+              
+              res.send(rangeProduct);
+            } else {
+              if (min) {
+                allProduct.forEach((p) => {
+                  if (p.price >= min) {
+                    rangeProduct.push(p);
+                  }
+                });
+                res.send("2");
+              } else {
+                allProduct.forEach((p) => {
+                  if (p.price >= max) {
+                    rangeProduct.push(p);
+                  }
+                });
+                res.send("3");
+              }
+            }
+          }
+  
+          res.send(allProduct);
+        }
+      } else {
+        if (brand !== "all") {
+          allProduct = [];
+          if (category !== "all") {
+            products.forEach((p) => {
+              if (category === p.category[0] && brand === p.brand) {
+                allProduct.push(p);
               }
             });
-            res.send(rangeProduct);
           } else {
-            if (min) {
+            products.forEach((p) => {
+              if (brand === p.brand) {
+                allProduct.push(p);
+              }
+            });
+          }
+  
+          if (min || max) {
+            const rangeProduct = [];
+            if (min && max) {
+              if (min > max) {
+                allProduct.forEach((p) => {
+                  if (p.price <= min && p.price >= max) {
+                    rangeProduct.push(p);
+                  }
+                });
+              }
               allProduct.forEach((p) => {
-                if (p.price >= min) {
+                if (p.price >= min && p.price <= max) {
                   rangeProduct.push(p);
                 }
               });
               res.send(rangeProduct);
             } else {
+              if (min) {
+                allProduct.forEach((p) => {
+                  if (p.price >= min) {
+                    rangeProduct.push(p);
+                  }
+                });
+                res.send(rangeProduct);
+              } else {
+                allProduct.forEach((p) => {
+                  if (p.price >= max) {
+                    rangeProduct.push(p);
+                  }
+                });
+                res.send(rangeProduct);
+              }
+            }
+          }
+  
+          res.send(allProduct);
+        } else {
+          allProduct = [];
+          if (category !== "all") {
+            products.forEach((p) => {
+              if (category === p.category[0]) {
+                allProduct.push(p);
+              }
+            });
+          }
+  
+          if (min || max) {
+            const rangeProduct = [];
+            if (min && max) {
+              if (min > max) {
+                allProduct.forEach((p) => {
+                  if (p.price <= min && p.price >= max) {
+                    rangeProduct.push(p);
+                  }
+                });
+              }
               allProduct.forEach((p) => {
-                if (p.price >= max) {
+                if (p.price >= min && p.price <= max) {
                   rangeProduct.push(p);
                 }
               });
               res.send(rangeProduct);
+            } else {
+              if (min) {
+                allProduct.forEach((p) => {
+                  if (p.price >= min) {
+                    rangeProduct.push(p);
+                  }
+                });
+                res.send(rangeProduct);
+              } else {
+                allProduct.forEach((p) => {
+                  if (p.price >= max) {
+                    rangeProduct.push(p);
+                  }
+                });
+                res.send(rangeProduct);
+              }
             }
           }
+  
+          res.send(allProduct);
         }
+      }
+    }else{
+      const response = await Product.findAll({
+        where: {
+          name: { [Op.iLike]: `%${name}%` },
+        },
+      });
 
-        res.send(allProduct);
+      if(brand && brand !== 'all'){
+        const searchBrand = []
+        response.forEach(p=>{
+          if(p.brand.includes(brand)){
+            return searchBrand.push(p)
+          }
+        })
+
+        res.send(searchBrand)
+      }else{
+        if (response.length > 0) {
+          res.send(response);
+        } else {
+          res.status(404).send('Not product found');
+        }
       }
     }
 
