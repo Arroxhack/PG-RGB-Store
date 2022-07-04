@@ -7,12 +7,8 @@ import NavBar from "../NavBar/NavBar";
 import Loading from "../Loading/Loading";
 import { CartContext } from "../Cart/CartContext";
 import Swal from "sweetalert2";
-<<<<<<< HEAD
 import Favorito from "../Favoritos/Favorito";
-
-=======
 import CommentReview from "./CommentReview";
->>>>>>> d8c0e88228e068c4cacccc9595ef82e2881f2c16
 
 function DetailProduct() {
   const dispatch = useDispatch();
@@ -198,12 +194,8 @@ function DetailProduct() {
                   </div>
                   <div>
                     <div className="flex w-full">
-<<<<<<< HEAD
                       <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
                         <Favorito id={ProductDetail.id}/>
-=======
-                      <div className="grid h-20 flex-grow place-items-center">
->>>>>>> d8c0e88228e068c4cacccc9595ef82e2881f2c16
                         <button
                           onClick={sendCard}
                           className="w-full text-center py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
