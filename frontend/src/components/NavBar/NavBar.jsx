@@ -152,43 +152,6 @@ function NavBar() {
           </ul>
         </div>
       </div>
-<<<<<<< HEAD
-      
-      <div className="menu w-full lg:flex  space-x-3 lg:items-center lg:w-auto lg:px-3 px-8">
-        <div>
-          <SearchBar></SearchBar>
-        </div>
-        <div className="flex ">
-        <p onClick={handleCart} className="bg-primary-400 font-Open px-5 py-1 rounded-lg cursor-pointer text-primary-200 uppercase font-semibold hover:bg-primary-300">Cart</p>
-        {cartOpen ? <div className="absolute">
-          <BoxCart onClick={handleCart}/>
-        </div> : <></>}
-          {/* {cartOpen ? (
-            <BoxCart onClick={handleCart} />
-          ) : (
-            <p onClick={handleCart} className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">Cart</p>)} */}
-          {username ? (
-            <div>
-              <Link to="/profile">
-                <p className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
-                  Welcome {username}!
-                </p>
-              </Link>{" "}
-              <Logout />
-              {admin ? (
-                <Link to="/admin">
-                  <button className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">
-                    ADMINPANEL
-                  </button>
-                </Link>
-              ) : null}
-              <Link  to="/favoritos">
-                <button  className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">favoritos</button>
-              </Link>
-            </div>
-          ) : (
-            <>
-=======
 
       {/* SEARCHBAR */}
       <div className=" sm:w-1/4 sm:left-0 md:w-1/2 lg:w-1/4 sm:ml-[-4rem] flex lg:justify-center ">
@@ -206,6 +169,9 @@ function NavBar() {
               <span className="text-base text-primary buttom">profile</span>
             </Link>{" "}
             <Logout />
+            <Link  to="/favoritos">
+                <button  className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300">favoritos</button>
+              </Link>
             {admin ? (
               <Link to="/admin">
                 <button className="text-base text-primary buttom">
@@ -219,7 +185,6 @@ function NavBar() {
 
           <div className="flex justify-between  md:w-1/4 items-center sm:hidden lg:block ">
             <div className="buttom">
->>>>>>> d8c0e88228e068c4cacccc9595ef82e2881f2c16
               <Link
                 to="/logIn"
                 className=" sm:text-xs  text-primary-400 md:text-xl sm:mr-2 sm:w-10 lg:text-base  "
