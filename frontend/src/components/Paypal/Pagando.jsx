@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import axios from "axios";

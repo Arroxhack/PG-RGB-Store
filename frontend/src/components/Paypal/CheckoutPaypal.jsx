@@ -1,8 +1,4 @@
 import React from "react";
-import { useState } from "react";
-import Checkout from "./Checkout";
-import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import PaypalButton from "./PaypalButton";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
