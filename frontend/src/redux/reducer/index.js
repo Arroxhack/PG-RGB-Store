@@ -40,7 +40,6 @@ import {
   ADD_FAV,
 } from '../types/index';
 
-
 const initialState = {
   allProducts: [],
   products: [],
@@ -60,7 +59,7 @@ const initialState = {
 
   favoritos: [],
 
-  page:1,
+  page: 1,
 
   gpus: [],
   CommendPending: [],
@@ -88,11 +87,11 @@ const reducer = (state = initialState, action) => {
     //     ...state,
     //     favoritos: [...action.payload],
     //   };
-    // case DELETE_FAV:
-    //   return {
-    //     ...state,
-    //     favoritos: [...action.payload],
-    //   };
+    case DELETE_FAV:
+      return {
+        ...state,
+        favoritos: action.payload,
+      };
     case GET_FAV:
       return {
         ...state,
@@ -340,28 +339,28 @@ const reducer = (state = initialState, action) => {
     case FILTER_PRICE:
       return {
         ...state,
-        products:action.payload
-      }
+        products: action.payload,
+      };
     case NEXT_PAGE:
-      return{
+      return {
         ...state,
-        page: state.page+1
+        page: state.page + 1,
       };
 
     case PREV_PAGE:
-      let prev = state.page-1
-      if(state.page===1){
-        prev = 1
+      let prev = state.page - 1;
+      if (state.page === 1) {
+        prev = 1;
       }
-      return{
+      return {
         ...state,
-        page: prev
+        page: prev,
       };
-      case SET_PAGE:
-        return{
-          ...state,
-          page: action.payload
-        }
+    case SET_PAGE:
+      return {
+        ...state,
+        page: action.payload,
+      };
     //GET_COMMEND_PRODUCT
     //CommendPending: [],
     // CommendProduct: [],

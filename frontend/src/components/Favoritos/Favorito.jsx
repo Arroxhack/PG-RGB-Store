@@ -10,7 +10,7 @@ function Favorito({id}) {
     const idUser = localStorage.getItem('id');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const favoritos = useSelector(state=>state.favoritos);
     // useEffect(() => {
     //   dispatch(getProductFavorito(idUser));
     // }, [dispatch,idUser])
@@ -23,7 +23,7 @@ function Favorito({id}) {
     // deleteProductFavorito();
     const handleClickAdd = (e)=>{
         e.preventDefault();
-        const response = addProductFavorito(id,idUser);
+        dispatch(addProductFavorito(id,idUser));
         // console.log(response)
         // if(response){
         //   Swal.fire({
@@ -41,11 +41,11 @@ function Favorito({id}) {
         //   // text: `Amount paid: ${detalles.purchase_units[0].amount.value}`
         //   // footer: '<a href="">Why do I have this issue?</a>'
         // });
+        console.log(favoritos, 'soy state,favprotps')
     }
-
     const handleClickDelete = (e)=>{
       e.preventDefault();
-      deleteProductFavorito(id,idUser);
+      dispatch(deleteProductFavorito(id,idUser));
       // Swal.fire({
       //   icon: "success",
       //   title: "Deleted!",
