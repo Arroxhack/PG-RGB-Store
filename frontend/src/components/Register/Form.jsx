@@ -134,7 +134,7 @@ export default function Register() {
   };
 
   return (
-    <section className="bg-primary-200 overflow-clip">
+    <section className="bg-primary-200 overflow-auto ">
     <div className="w-screen h-full bg-primary-200 font-Open min-h-screen flex flex-col">
       <NavBar />
       <div className="container bg-primary-200 max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">

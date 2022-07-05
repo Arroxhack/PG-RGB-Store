@@ -4,7 +4,9 @@ const router = Router();
 
 //Cargar carrito en la bd
 router.post("/userCart", async (req, res, next) => {
+
   let { email, cartProductArray } = req.body;
+  
   const user = await User.findOne({ where: { email } });
   cartProductArray = JSON.parse(cartProductArray);
   console.log(cartProductArray);
@@ -33,6 +35,7 @@ router.post("/userCart", async (req, res, next) => {
       });
 
       if (product?.id === p.id) {
+        product.amount = p.amount
         return product;
       }
     });
