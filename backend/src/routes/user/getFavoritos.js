@@ -8,7 +8,8 @@ router.get('/get/favorito', async (req, res, next) => {
   //Me traigo los datos por body
   try {
     //Busco el user y el producto para corroborar que existen
-    const user = await User.findByPk(idUser);
+    const id = Number(idUser);
+    const user = await User.findByPk(id);
     // console.log(idUser);
     //Corroboro que existen, si no aviso
     if (!user) {

@@ -202,6 +202,7 @@ function NavBar() {
                 <span className="text-base text-primary buttom">profile</span>
                 </Link>{" "}
                 <Logout  />
+                <Link to='/favoritos'><button className="text-base text-primary buttom">Favoritos</button></Link>
                 {admin ? (
                   <Link to="/admin">
                     <button className="text-base text-primary buttom">
