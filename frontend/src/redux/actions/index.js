@@ -607,7 +607,7 @@ export function getProductFavorito(idUser) {
   return async (dispatch) => {
     try {
       await axios.get(`${PATH}/get/favorito?idUser=${idUser}`).then((res) => {
-        console.log(res.data, ' en actions getFavoritos');
+        //console.log(res.data, ' en actions getFavoritos');
         return dispatch({ type: GET_FAV, payload: res.data });
       });
     } catch (error) {}
