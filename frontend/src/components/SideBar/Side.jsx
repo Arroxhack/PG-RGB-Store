@@ -192,7 +192,7 @@ const Side = () => {
         </div>
 
         {/* MARCAS */}
-        <div className="flex flex-col  pl-4 pt-4">
+        <div className="flex flex-col  pt-4">
         <h4 className="text-xl pb-4">Brand</h4>
             <button className="text-left text-lg pl-8" value='all' name='brand' onClick={handleBrand}>ALL</button>
             {productBrands && 
