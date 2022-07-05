@@ -192,30 +192,31 @@ function DetailProduct() {
                         : null}
                     </p>
                   </div>
-                
+                  <div>
                     <div className="flex w-full">
                       <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
-                        <Favorito id={ProductDetail.id}/>
                         <button
                           onClick={sendCard}
-                          className="w-full text-center py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                          className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
                         >
                           Add to cart
                         </button>
-                      {/* </div> */}
+                      </div>
                       <div className="text-primary-200 select-none"> OR </div>
-                      <div className="grid h-20 flex-grow place-items-center">
+                      <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
                         <NavLink
-                          className="w-full text-center py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                          className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
                           to="/cart"
                         >
-                          <button>Go to cart</button>
+                          <button>Proceed to checkout</button>
                         </NavLink>
                       </div>
                     </div>
                   </div>
                 </form>
+                <Favorito id={ProductDetail.id}/> 
               </div>
+             
               <CommentReview idProduct={id} />
             </div>
           </div>

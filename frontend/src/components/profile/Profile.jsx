@@ -151,52 +151,28 @@ export default function Profile() {
       {id ? (
         <>
           <NavBar />
-          <div className=" flex flex-col items-center justify-center min-h-screen h-screen bg-gradient-to-t from-primary-300 to-primary">
-            <button
-              id="EditProfile"
-              className="bg-primary-400 font-Open px-5 py-1 rounded-lg  uppercase font-semibold hover:bg-primary-300"
-              onClick={(e) => EditPerfil(e)}
-            >
-              {" "}
-              Editar Perfil
-            </button>
-            <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black">
+          <div className="flex flex-col items-center justify-center min-h-screen h-full bg-primary-200">
+            <div className="max-w-4xl p-6 mx-auto bg-secundary-250 rounded-md shadow-md">
+              <h1 className="text-2xl font-open font-bold pb-5 capitalize">Profile</h1>
+              
               {editPerfil === false ? (
-                <>
-                  <div className="flex row space-x-3">
-                    <h2>Name: </h2>
-                    <p className="text-decoration underline ">{user.name}</p>
-                  </div>
-                  <div className="flex row space-x-3">
-                    <h2>LastName:</h2>
-                    <p className="text-decoration underline ">
-                      {user.lastname}
-                    </p>
-                  </div>
-                  <div className="flex row space-x-3">
-                    <h2>Email:</h2>
-                    <p className="text-decoration underline">{user.email}</p>
-                  </div>
-                  <div className="flex row space-x-3">
-                    <h2>Username:</h2>
-                    <p className="text-decoration underline">{user.username}</p>
-                  </div>
-                  <div className="flex row space-x-3">
-                    <h2>cellphone:</h2>
-                    <p className="text-decoration underline">
-                      {user.cellphone
+                <form className="font-Open">
+                  <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                    <h2 className="font-semibold"> Name:</h2>
+                    <p>{user.name}</p>
+                    <h2 className="font-semibold">Last Name:</h2>
+                    <p>{user.lastname}</p>
+                    <h2  className="font-semibold">Email:</h2>
+                    <p>{user.email}</p>
+                    <h2  className="font-semibold">Username:</h2>
+                    <p>{user.username}</p>
+                    <h2  className="font-semibold">Cellphone:</h2>
+                      <p>{user.cellphone
                         ? "+" + user.cellphone
-                        : "Dato no encontrado"}
-                    </p>
-                  </div>
-                  <div className="flex row space-x-3">
-                    <h2>Address:</h2>
-                    <p className="text-decoration underline">
-                      {user.address ? user.address : "Dato no encontrado"}
-                    </p>
-                  </div>
-                  <div className="flex row space-x-3">
-                    <h2>image:</h2>
+                        : "Not found"}</p>
+                    <h2  className="font-semibold">Address:</h2>
+                      <p>{user.address ? user.address : "Not found"}</p>
+                    <h2  className="font-semibold">Image:</h2>
                     <p>
                       {user.image ? (
                         <img
@@ -204,51 +180,59 @@ export default function Profile() {
                           src={user.image}
                         />
                       ) : (
-                        "Dato no encontrado"
+                        "Not found"
                       )}
                     </p>
                   </div>
-                </>
+                  <button
+                    id="EditProfile"
+                    className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                    onClick={(e) => EditPerfil(e)}
+                  >
+                    Edit Profile
+                  </button>
+                </form>
               ) : (
-                <form>
-                  <div className="flex row space-x-3">
-                    <h2>Name: </h2>
+                <form className="max-w-4xl p-6 mx-auto rounded-md shadow-md">
+                  <div className="text-lg font-semibold capitalize ">
+                    <label>Name: </label>
                     <input
                       name="Name"
-                      className="border-2 border-primary-400 rounded max-w-max  "
+                      className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
                       value={NameEdit}
                       onChange={(e) => setName(e.target.value)}
                     />
                     {console.log(NameEdit)}
                   </div>
-                  <div className="flex row space-x-3">
-                    <h2>LastName:</h2>
+                  <div className="text-lg font-semibold capitalize ">
+                    <label >LastName:</label>
                     <input
                       name="Lastname"
-                      className="border-2 border-primary-400 rounded max-w-max  "
+                      className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
                       value={LastnameEdit}
                       onChange={(e) => setLastname(e.target.value)}
                     />
                   </div>
-                  <div className="flex row space-x-3">
+                  <div className="text-lg font-semibold capitalize ">
                     <h2>Address:</h2>
                     <input
                       name="Address"
-                      className="border-2 border-primary-400 rounded max-w-max  "
+                      className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
                       value={AddressEdit}
                       onChange={(e) => setAddress(e.target.value)}
                     />
                   </div>
-                  <div className="flex row space-x-3">
+                  <div className="text-lg font-semibold capitalize ">
                     <h2>Phone:</h2>
                     <PhoneInput
+                    
                       name="cellphone"
                       country={"ar"}
                       value={CellphoneEdit}
                       onChange={(phone) => setCellphone(phone)}
                     />
                   </div>
-                  <div className="flex row space-x-3">
+                  <div className="text-lg font-semibold capitalize ">
                     <h2>Image:</h2>
                     <p>
                       {ImageUpload ? (
@@ -257,7 +241,7 @@ export default function Profile() {
                           src={ImageUpload}
                         />
                       ) : (
-                        "Dato no encontrado"
+                        "Not found"
                       )}
                     </p>
                   </div>
@@ -269,18 +253,27 @@ export default function Profile() {
                   />
                   <div className="flex row space-x-3">
                     <button
-                      className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-100 uppercase font-semibold hover:bg-primary-300"
+                      className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
                       onClick={(e) => DeleteImage(e)}
                     >
                       Erase Image
                     </button>
                   </div>
+                  
+                  <div className="flex row space-x-3">
+                    <button
+                       className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                      onClick={(e) => handleChangePassword(e)}
+                    >
+                      Change Password
+                    </button>
+                  </div>
                   <button
                     id="Edicion"
                     onClick={(e) => HandleConfirm(e)}
-                    className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+                    className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
                   >
-                    Confirmar Edicion
+                    Done
                   </button>
                   {confirmEdit === true ? (
                     <div className="flex row space-x-3">
@@ -288,43 +281,35 @@ export default function Profile() {
                       <input
                         placeholder="Ingrese Contraseña"
                         name="Password"
-                        className="border-2 border-primary-400 rounded max-w-max  "
+                        className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
                         value={Password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
                       <button
                         onClick={(e) => ConfirmEditLast(e)}
-                        className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
+                        className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
                       >
-                        Enviar
+                        Send
                       </button>
                     </div>
                   ) : null}
-                  <div className="flex row space-x-3">
-                    <button
-                      className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
-                      onClick={(e) => handleChangePassword(e)}
-                    >
-                      Change Password
-                    </button>
-                  </div>
                 </form>
               )}
 
               {mostrarChangePassword === true ? <ChangePassword /> : null}
             </div>
-            { editPerfil ===true ? null :
+            {editPerfil === true ? null : (
               <div>
                 {Commend.length > 0 ? (
                   <>
-                    {" "}
+            
                     <CommentPending ComentariosPending={Commend} />{" "}
                   </>
                 ) : (
-                  "No Comentarios Pendientes"
+                  "There isnt pending comments"
                 )}
               </div>
-            }
+            )}
           </div>
         </>
       ) : (

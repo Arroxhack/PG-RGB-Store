@@ -8,8 +8,8 @@ const Promo = ({left, img, products}) => {
 
 
   return (
-    <div className={left ? 'flex flex-row lg:gap-5 items-center lg:mt-10 lg:mb-10 justify-between bg-primary-200 lg:px-16 lg:py-5 rounded-xl ' 
-    : 'flex flex-row-reverse lg:gap-5 items-center lg:mt-10 lg:mb-10 justify-center bg-primary-200 lg:px-16 lg:py-5 rounded-xl sm:gap-5 sm:mt-5 sm:px-10 sm:py-4'}>
+    <div className={left ? 'lg:flex flex-row lg:gap-5 items-center lg:mt-10 lg:mb-10 justify-between bg-primary-200 lg:px-16 lg:py-5 rounded-xl sm:hidden lg:block ' 
+    : 'lg:flex lg:flex-row-reverse lg:gap-5 items-center lg:mt-10 lg:mb-10 justify-center bg-primary-200 lg:px-16 lg:py-5 rounded-xl sm:hidden lg:block'}>
        <img src={img} alt="" className='object-cover lg:h-80 lg:w-40 sm:h-40 sm:w-20' />
         {products.map(p=>{
           

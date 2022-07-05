@@ -56,11 +56,8 @@ const initialState = {
   productsByCategory: [],
   filterBrands: [],
   filterOrder: [],
-
   favoritos: [],
-
   page: 1,
-
   gpus: [],
   CommendPending: [],
   CommendProduct: [],
