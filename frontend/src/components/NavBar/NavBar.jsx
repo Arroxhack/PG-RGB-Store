@@ -214,7 +214,7 @@ function NavBar() {
             ) : (
                   // SI NO ESTA RGISTRADO
           
-              <div className="lg:flex justify-between  md:w-1/4 items-center sm:hidden lg:block ">
+              <div className="lg:flex justify-between  md:w-1/4 items-center sm:hidden">
                 <div className="buttom">
                 <Link
                   to="/logIn"
@@ -237,7 +237,7 @@ function NavBar() {
 
 
             {/* CARRITO */}
-            <div className="flex flex-col items-center text-primary-400 sm:h-full lg:mr-6 ">   
+            <div className="flex flex-col items-center text-primary-300 sm:h-full lg:mr-6 ">   
             <TiShoppingCart onClick={handleCart} className="h-6 w-7 md:h-10 md:w-10 relative cursor-pointer lg:hover:translate-y-px"/>
           {cartOpen ? <div className="absolute lg:translate-x-[-10rem] sm:translate-x-28 md:">
             <BoxCart onClick={handleCart}/>
