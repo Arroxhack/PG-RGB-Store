@@ -7,9 +7,11 @@ router.post("/userCart", async (req, res, next) => {
 
   let { email, cartProductArray } = req.body;
   
-  const user = await User.findOne({ where: { email } });
-  cartProductArray = JSON.parse(cartProductArray);
-  console.log(cartProductArray);
+  const user = await User.findOne({ where: { email } }); //usuario logeado
+  console.log("user: ", user);
+
+  cartProductArray = JSON.parse(cartProductArray); //arreglo de objetos products
+  // console.log(cartProductArray);
   // try {
   //caso carrito vacio
   //caso carrito con cosas
@@ -24,7 +26,7 @@ router.post("/userCart", async (req, res, next) => {
 
     //map -> verifica que cada prod coincida con la lista de prod
     let productsVerified = cartProductArray?.map(async (p) => {
-      const product = await Product.findOne({
+      let product = await Product.findOne({  //trae los productos que coincidan 
         where: {
           id: p.id,
           price: p.price,
@@ -33,48 +35,76 @@ router.post("/userCart", async (req, res, next) => {
           percentageDiscount: p.percentageDiscount,
         },
       });
-
       if (product?.id === p.id) {
-        product.amount = p.amount
+        product.dataValues.amount = p.amount
         return product;
       }
     });
 
     productsVerified = await Promise.all(productsVerified);
-    productsVerified = productsVerified.filter(
-      (e) => e !== undefined && e !== null
-    );
+
+    // console.log("productsVerified: ", productsVerified[0].toJSON())
+
+    productsVerified = productsVerified.filter((e) => e !== undefined && e !== null);
+
+    // console.log("productsVerified: ", productsVerified)
 
     if (productsVerified.length !== cartProductArray.length) {
       user.set({
         lock: true,
       });
     } else {
-      const actualCart = user.cartProducts.concat(productsVerified);
-      const miCarritoSinDuplicados = actualCart.reduce(
-        (acumulador, valorActual) => {
-          const elementoYaExiste = acumulador.find(
-            (elemento) => elemento.name === valorActual.name
-          );
-          if (elementoYaExiste) {
-            return acumulador.map((elemento) => {
-              if (elemento.name === valorActual.name) {
-                return {
-                  ...elemento,
-                  amount: elemento.amount + valorActual.amount,
-                };
-              }
+      // console.log("productsVerified: ", productsVerified)
+      // console.log("userCartProducts: ", user.cartProducts);
 
-              return elemento;
-            });
+      let dataOne = user.cartProducts;
+      let dataTwo = productsVerified.map(e => e.toJSON());
+
+      var sumObjectsByKey = (...objs) => 
+        Object.values(objs.reduce((a, e) => {
+          a[e.id] = a[e.id] || {id: e.id};
+
+          for (const k in e) {
+            if (k !== "id") {
+              a[e.id][k] = a[e.id][k] ? a[e.id][k] + e[k] : e[k];
+            }
           }
+          return a;
+        }, {}))
+      ;
 
-          return [...acumulador, valorActual];
-        },
-        []
-      );
+      let dataFinal = sumObjectsByKey(...dataOne , ...dataTwo)
+      // console.log("dataFinal: ", dataFinal)
+
+      // const actualCart = user.cartProducts.concat(productsVerified);
+
+      // console.log("actualCart: ", actualCart);
+
+      // const miCarritoSinDuplicados = actualCart.reduce(
+      //   (acumulador, valorActual) => {
+      //     const elementoYaExiste = acumulador.find(
+      //       (elemento) => elemento.name === valorActual.name
+      //     );
+      //     if (elementoYaExiste) {
+      //       return acumulador.map((elemento) => {
+      //         if (elemento.name === valorActual.name) {
+      //           return {
+      //             ...elemento,
+      //             amount: elemento.amount + valorActual.amount,
+      //           };
+      //         }
+
+      //         return elemento;
+      //       });
+      //     }
+
+      //     return [...acumulador, valorActual];
+      //   },
+      //   []
+      // );
+      // console.log("miCarritoSinDuplicados: ", miCarritoSinDuplicados);
       user.set({
-        cartProducts: miCarritoSinDuplicados,
+        cartProducts: dataFinal,
       });
     }
 

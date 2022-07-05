@@ -74,10 +74,10 @@ export default function LogIn() {
       return navigate(`/validate/${username}`);
     }
     
-    if (login) {
-        const email = user.email;
-        const response = await axios({
-          //La ruta trae toda la info en la base de datos de un usuario
+    if (login) {   //!!!!
+        // const cartProductArray = localStorage.getItem('cartProducts');
+        const email = user.email; //email del usuario logeado
+        const response = await axios({ //La ruta trae toda la info en la base de datos de un usuario
           method: "post",
           url: "http://localhost:3001/userCart",
           data: {email,cartProductArray}, // cartProductArray -> array de objetos del local storage
@@ -86,6 +86,7 @@ export default function LogIn() {
         }).then((res)=> res.data).catch(e=>console.log(e));
 
         const ress = await Promise.all([response]);
+        console.log("ress: ", ress);
 
         if(ress[0] === "E" && ress[1] === "r" && ress[2] === "r"){
           Swal.fire({
