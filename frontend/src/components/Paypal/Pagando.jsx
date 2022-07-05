@@ -208,6 +208,10 @@ export default function Pagando() {
     });
   };
 
+  const onError = (error) => {
+    console.log("Error: ", error)
+  }
+
   return (
     <div
       style={{
@@ -223,6 +227,7 @@ export default function Pagando() {
         onApprove={(data, actions) => onApprove(data, actions)}
         onCancel={onCancel}
         style={style}
+        onError = {onError}
       />
     </div>
   );

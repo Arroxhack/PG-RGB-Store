@@ -8,36 +8,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function CheckoutPaypal() {
-  // const [checkout, setCheckout] = useState(false); // al ser true se va a la pagina de paypal
   const navigate = useNavigate();
-
-  // let createOrder = (data, actions) => {
-  //     return actions.order.create({
-  //       purchase_units: [{
-  //         amount: {
-  //           currency_code: "USD",
-  //           value: '77.44', // Can also reference a variable or function
-  //           breakdown: {
-  //               item_total: { // Required when including the "items" array !!!!
-  //                   currency_code: "USD",
-  //                   value: '77.44'
-  //               }
-  //           }
-  //         },
-  //         items: [
-  //           {
-  //             name: "First Product Name", /* Shows within upper-right dropdown during payment approval */
-  //             description: "Optional descriptive text..", /* Item details will also be in the completed paypal.com transaction view */
-  //             unit_amount: {
-  //               currency_code: "USD",
-  //               value: "50"
-  //             },
-  //             quantity: "2"
-  //           },
-  //         ]
-  //       }]
-  //     });
-  //   }
 
   // let onApprove = (data, actions) => {
   //     return actions.order.capture().then(function(orderData) {
@@ -53,25 +24,23 @@ export default function CheckoutPaypal() {
   //   }
 
   let handleOnClick = async (e) => {
+
     e.preventDefault();
-    // Login true -> paypal / login false -> redirige a login
-    // console.log("ACAAAA: ",localStorage.getItem("cartProducts"))
+
     let product = localStorage.getItem("cartProducts");
     product = JSON.parse(product);
     product = product.map((el) => {
       return { id: el.id, amount: el.amount };
     });
 
-    console.log(product, "ACAAA");
+    // console.log(product, "ACAAA");
 
-    const Stock = await axios({
+    const Stock = await axios({ // devuelve un string con Success o un string con los nombres de los productos que no tienen stock
       method: "post",
       url: "http://localhost:3001/VerifyStock",
-      data: product,
-      // headers: { "X-Requested-With": "XMLHttpRequest" },
-      // withCredentials: true,
+      data: product // {id, amount}
     })
-      .then((e) => e.data)
+      .then((e) => e.data) 
       .catch((e) => console.log(e));
       
     if (Stock === "Success") {
@@ -79,15 +48,28 @@ export default function CheckoutPaypal() {
         localStorage.getItem("login") &&
         localStorage.getItem("cartProducts").length > 2
       ) {
-        // return setCheckout(true)
         navigate("/paypal");
       } else if (localStorage.getItem("login")) {
-        alert("No hay productos en el carrito");
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: 
+            'There are no products inside the cart' +
+            '<br/>' +
+            '<br/>' +
+            'Redirecting to home page' 
+          })
         navigate("/");
       } else {
-        alert(`No puedes comprar sin haber iniciado sesison
-      
-            ...redirigiendo a inicio de sesion`);
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: 
+            'You can not buy without login in' +
+            '<br/>' +
+            '<br/>' +
+            'Redirecting to login page' 
+          })
         navigate("/logIn");
       }
     } else {
@@ -95,7 +77,6 @@ export default function CheckoutPaypal() {
         icon: "warning",
         title: "No Stock",
         text: `${Stock}`,
-        // footer: '<a href="">Why do I have this issue?</a>'
       });
     }
   };
