@@ -13,13 +13,13 @@ const BoxCart = ({ onClick }) => {
   products.forEach((p) => (total += p.amount * p.price));
 
   return (
-    <div className="h-auto lg:w-[520px] font-Open px-5 bg-secundary-250 text-primary-200 rounded mt-10 -ml-80 absolute z-10">
+    <div className="h-auto  dropdown-toggle w-[520px] font-Open px-5 bg-secundary-250 text-primary-200 rounded mt-10 -ml-80 absolute z-10 md:text-center md:items-center">
       <div className="flex flex-row-reverse pr-2"></div>
       <div>
         {products.length <= 0 ? (
           <p className="text-center pt-16 pb-16">No products yet!</p>
         ) : (
-          <div className="flex flex-col gap-4 mt-5">
+          <div className="flex flex-col gap-4 mt-5 relative">
             {products.map((p) => {
               return (
                 <div

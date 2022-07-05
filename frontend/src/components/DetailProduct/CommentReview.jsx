@@ -23,25 +23,25 @@ export default function CommentReview({ idProduct }) {
   );
 
   return (
-    <div className="border-solid border-white">
-      <div className="bg-opacity-0 px-6 py-8 rounded shadow-md text-black  ">
-        <p className="w-full text-center py-3 rounded bg-primary-400 my-2">
-          Comentarios-Compradores
+    <div className="border-solid">
+      <div className="bg-opacity-0 px-6 py-8">
+        <p className="w-full text-center py-3 bg-primary-400 my-2">
+          Reviews
         </p>
         {AllComentarios.length > 0 ? (
           AllComentarios.map((e) => (
             <>
-              <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black my-2">
+              <div className="bg-secundary-250 px-6 py-8 rounded text-black my-2">
                 <p>{e.comentario}</p>
               </div>
             </>
           ))
         ) : (
-          <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black my-2">
-            <p>Todavia no hay comentarios de este producto</p>
+          <div className="bg-secundary-250 px-6 py-8 my-2">
+            <p>There's no reviews yet.</p>
           </div>
         )}
-        {console.log(ComentariosReducidos, " ACA REY")}
+        {console.log(ComentariosReducidos)}
       </div>
     </div>
   );
