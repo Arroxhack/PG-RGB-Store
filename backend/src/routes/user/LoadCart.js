@@ -5,6 +5,7 @@ const router = Router();
 //Cargar carrito en la bd
 router.post("/userCart", async (req, res, next) => {
 
+
   let { email, cartProductArray } = req.body;
   
   const user = await User.findOne({ where: { email } }); //usuario logeado
@@ -15,7 +16,7 @@ router.post("/userCart", async (req, res, next) => {
   // try {
   //caso carrito vacio
   //caso carrito con cosas
-  if (!cartProductArray?.length) {
+  if (!cartProductArray?.length && !user.cartProducts) {
     return res.send("Fail: cart is empty");
   }
 
@@ -66,7 +67,7 @@ router.post("/userCart", async (req, res, next) => {
 
           for (const k in e) {
             if (k !== "id") {
-              a[e.id][k] = a[e.id][k] ? a[e.id][k] + e[k] : e[k];
+              a[e.id][k] = a[e.id][k] ? k === "amount" ? a[e.id][k] + e[k] : e[k] : e[k];
             }
           }
           return a;
@@ -107,7 +108,6 @@ router.post("/userCart", async (req, res, next) => {
         cartProducts: dataFinal,
       });
     }
-
     await user.save();
   }
   user.lock ? res.send("Error: User blocked") : res.send("done");
@@ -116,23 +116,23 @@ router.post("/userCart", async (req, res, next) => {
   // }
 });
 
-//Recuperar carrito de la bd
-// router.get('/userCart/:email', async (req, res, next) => {
-//   const { email } = req.params;
+// Recuperar carrito de la bd
+router.get('/userCart/', async (req, res, next) => {
+  const { email } = req.query;
 
-//   //traerme los datos
-//   const user = await User.findOne({ where: { email } });
+  //traerme los datos
+  const user = await User.findOne({ where: { email } });
 
-//   //ver si el user existe
-//   if (!user) {
-//     return res.send('User doesnt exist');
-//   }
+  //ver si el user existe
+  if (!user) {
+    return res.send('User doesnt exist');
+  }
 
-//   //guardar el carrito
-//   const userCart = user.cartProducts;
+  //guardar el carrito
+  const userCart = user.cartProducts;
 
-//   //devolver el carrito
-//   res.send(userCart);
-// });
+  //devolver el carrito
+  res.send(userCart);
+});
 
 module.exports = router;
