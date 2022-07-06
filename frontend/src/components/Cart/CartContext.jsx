@@ -1,5 +1,6 @@
 import { createContext,useEffect, useState } from "react"
 import Swal from "sweetalert2";
+import axios from "axios";
 
 export const CartContext = createContext()
 
@@ -28,11 +29,25 @@ const CartProvider = ({children}) => {
     useEffect(()=>{
         localStorage.setItem('cartProducts', JSON.stringify(products))
         //console.log(products)
+        // console.log("products: ", products);
+        const login = localStorage.getItem('login');
+        const email = localStorage.getItem('email');
+        const cartProductArray = localStorage.getItem('cartProducts');
+        // console.log("login: ", login, ", email: ", email, ", cartProductArray: ", cartProductArray)
+        if(login && email){
+            (async() => {
+                const response = axios.post("http://localhost:3001/changeCart", {email, cartProductArray})
+                .then((res)=> res.data)
+                .catch(e=>console.log(e))
+                const ress = await Promise.all([response]);
+                console.log("ress: ", ress);
+            })()
+        }
     }, [products])
 
     const addProductToCart= product=>{
         const inCart = products.find(p=>p.id===product.id)
-
+        console.log("inCart: ", inCart)
         if(inCart){
             setProducts(products.map(p=>{
                 if(p.id===product.id){

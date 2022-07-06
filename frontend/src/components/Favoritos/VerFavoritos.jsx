@@ -19,11 +19,7 @@ function VerFavoritos() {
         dispatch(deleteProductFavorito(e.target.value,idUser));
         setRefresh(' ');
         //console.log(e.target.value, ' soy el value'
-        Swal.fire({
-            icon: "success",
-            title: "Deleted!",
-        });
-        
+    
     }
     
     useEffect(()=>{
@@ -40,8 +36,8 @@ console.log('soy fav: ', favoritos)
                 return(
                     <li key={p.id} >
                         <img  height='200px' width='200px' src={p.image[0]} alt='p-foto'/>
-                <p className=' bg-primary-500 bg-cover w-48 '>{p.name}</p>
-                <p className='bg-primary-500 bg-cover w-48 '> PRICE: {p.price}</p>
+                        <p className=' bg-primary-500 bg-cover w-48 '>{p.name}</p>
+                        <p className='bg-primary-500 bg-cover w-48 '> PRICE: {p.price}</p>
                     <button value={p.id} onClick={handleClickDelete}>Delete</button>
                 </li>
                 )

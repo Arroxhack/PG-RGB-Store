@@ -188,8 +188,9 @@ function NavBar() {
               <span className="text-base text-primary buttom">profile</span>
             </Link>{" "}
             <Logout />
+            <Link to='/favoritos'><button  className="flex lg:ml-[-1rem] text-base text-primary buttom items-center sm:hidden lg:block">Favoritos</button></Link>
             {admin ? (
-              <Link to="/admin/products">
+              <Link to="/admin/list-products">
                 <button className="text-base text-primary buttom">
                   admin panel
                 </button>
