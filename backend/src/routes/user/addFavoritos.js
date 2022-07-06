@@ -27,12 +27,12 @@ router.put('/add/favorito', async (req, res, next) => {
     let added = false;
     //Me guardo el array de ids favoritos del user
     const userFavorites = user.favoritos;
-
+    const id = Number(idProd);
     //console.log(userFavorites, ' soy user favoritos');
     //Si el array no incluye el producto, no lo tiene incluido entonces lo puedo agregar
-    if (!userFavorites.includes(idProd)) {
+    if (!userFavorites.includes(id)) {
       user.set({
-        favoritos: [...userFavorites, idProd],
+        favoritos: [...userFavorites, id],
       });
       //cambio el added a true porque se agrego correctamente
       added = true;
@@ -44,8 +44,11 @@ router.put('/add/favorito', async (req, res, next) => {
     }
     //const newUserUniqueFavorites = userFavorites.filter((p) => p.id != idProd);
 
+    const fav = user.favoritos.map(async (id) => await Product.findByPk(id));
+    const favorites = await Promise.all(fav);
+
     added
-      ? res.send({ success: 'Added!' })
+      ? res.send(favorites)
       : res.status(404).send({ error: 'something go wrong :(' });
   } catch (error) {
     next(error);

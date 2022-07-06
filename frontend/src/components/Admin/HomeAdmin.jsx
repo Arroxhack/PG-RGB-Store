@@ -12,12 +12,10 @@ import Response from "./Respuestas/Response";
 import axios from "axios";
 
 const HomeAdmin = () => {
+  const { page } = useParams();
 
-  const {page} = useParams()
-  
   const admin = localStorage.getItem("admin");
   const username = localStorage.getItem("username");
-
 
   const [Validate, setValidate] = useState(true);
 
@@ -28,7 +26,7 @@ const HomeAdmin = () => {
       inputLabel: "Password",
       inputPlaceholder: "Enter your password",
       inputAttributes: {
-        maxlength: 10,
+        maxlength: 25,
         autocapitalize: "off",
         autocorrect: "off",
       },
@@ -56,7 +54,7 @@ const HomeAdmin = () => {
 
   useEffect(() => {
     ValidatePassword();
-  }, []);
+  }, [admin]);
 
   return (
     <>
@@ -67,7 +65,7 @@ const HomeAdmin = () => {
               <Nav />
               <div className="flex flex-row">
                 <div className="bg-primary-200 h-screen w-60">
-                  <Menu/>
+                  <Menu />
                 </div>
                 {page === 'list-products' ? <AdminProduct /> : <></>}
                 {page === 'create-admin' ? <CreateAdmin /> : <></>}

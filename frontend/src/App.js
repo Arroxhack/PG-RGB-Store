@@ -14,7 +14,7 @@ import Error from './components/Error/Error.jsx';
 import Profile from './components/profile/Profile';
 import ValidateNewPassword from './components/profile/ValidateNewPassword.jsx';
 import CheckProduct from './components/BuildPc/CheckProduct';
-import PaypalButton from './components/Paypal/PaypalButton';
+
 import './App.css';
 import Pagando from './components/Paypal/Pagando';
 import CheckoutCart from './components/Cart/CheckoutCart';
@@ -25,6 +25,7 @@ import DetailForComment from './components/profile/DetailForComment';
 
 import Edit from './components/Admin/Productos/Edit'
 import Create from './components/Admin/Productos/Create';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
 
 
@@ -65,6 +66,7 @@ function App() {
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
 
         <Route path='/done' element={<Done />} />
+        <Route path="/ForgotPassword" element={<ForgotPassword/>} />
       </Routes>
     </div>
   );

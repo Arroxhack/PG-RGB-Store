@@ -3,64 +3,31 @@ import { deleteProductFavorito,addProductFavorito} from '../../redux/actions'
 import {useNavigate} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
 import {useEffect} from 'react'
-import Swal from "sweetalert2";
-// /<img src=''/>
+
 function Favorito({id}) {
     const login = localStorage.getItem('login');
     const idUser = localStorage.getItem('id');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //   dispatch(getProductFavorito(idUser));
-    // }, [dispatch,idUser])
-    
-    //const favs = useSelector(state=>state.favoritos);
-    //console.log(idUser)
-    // const arrayOfIdFavs = favs?.map(el=>el.idProd);
-    // console.log('arrayOfIdFavs: ',favs)
-    // addProductFavorito();
-    // deleteProductFavorito();
+   
     const handleClickAdd = (e)=>{
         e.preventDefault();
-        const response = addProductFavorito(id,idUser);
-        // console.log(response)
-        // if(response){
-        //   Swal.fire({
-        //     icon: "error",
-        //     title: response.error,
-        //     // text: `Transaction number: ${detalles.id}`,
-        //     // text: `Amount paid: ${detalles.purchase_units[0].amount.value}`
-        //     // footer: '<a href="">Why do I have this issue?</a>'
-        //   });
-        // }
-        // Swal.fire({
-        //   icon: "success",
-        //   title: "Added!",
-        //   // text: `Transaction number: ${detalles.id}`,
-        //   // text: `Amount paid: ${detalles.purchase_units[0].amount.value}`
-        //   // footer: '<a href="">Why do I have this issue?</a>'
-        // });
+        dispatch(addProductFavorito(id,idUser));
     }
-
     const handleClickDelete = (e)=>{
       e.preventDefault();
-      deleteProductFavorito(id,idUser);
-      // Swal.fire({
-      //   icon: "success",
-      //   title: "Deleted!",
-      //   // text: `Transaction number: ${detalles.id}`,
-      //   // text: `Amount paid: ${detalles.purchase_units[0].amount.value}`
-      //   // footer: '<a href="">Why do I have this issue?</a>'
-      // });
+      dispatch(deleteProductFavorito(id,idUser));
     }
   return (
     <div>
     {
-        login ? <div>{ <div><button className='bg-primary-300' onClick={handleClickAdd}>Add</button > 
-        <button className='bg-primary-300' onClick={handleClickDelete}>Dellete</button></div>} </div>: 
-        <div>{ <div><button className='bg-primary-300' onClick={()=>navigate('/login')}>Add</button > 
-        <button className='bg-primary-300' onClick={()=>navigate('/login')}>Dellete</button></div>} </div>
+        login ? <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">{ 
+        <div >
+          <button className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1" onClick={handleClickAdd}>Add</button > 
+        <button className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1" onClick={handleClickDelete}>Delete</button></div>} </div>: 
+        <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">{ <div >
+          <button className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"onClick={()=>navigate('/login')}>Add</button > 
+        <button className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1" onClick={()=>navigate('/login')}>Delete</button></div>} </div>
     }
     </div>
   )

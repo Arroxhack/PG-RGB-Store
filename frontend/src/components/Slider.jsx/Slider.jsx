@@ -26,9 +26,9 @@ const Slider = () => {
    
   }
   return (
-    <div className='w-full select-none relative flex  justify-start items-center lg:hover:text-primary-300 '>
+    <div className='w-full select-none relative flex  justify-start items-center lg:hover:text-primary-300  '>
           <button className='absolute lg:text-transparent lg:ml-11 sm:text-primary-300 ' onClick={()=>handlePrev()}><AiOutlineLeft className='lg:h-10 lg:w-10  '/></button>
-          <img src={images[imagenActual]} alt="promo1" className='w-full object-cover lg:h-80 sm:h-50 sm:h-24 '></img>
+          <img src={images[imagenActual]} alt="promo1" className='w-full object-cover lg:h-80 sm:h-50 sm:h-24 md:h-72 '></img>
           <button className='absolute right-0 lg:text-transparent lg:mr-11 sm:text-primary-300 ' onClick={()=>handleNext()}> <AiOutlineRight className='lg:h-10 lg:w-10   lg:hover:text-primary-500'/></button>
 
     </div>

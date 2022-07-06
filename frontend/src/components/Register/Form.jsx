@@ -35,6 +35,8 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    document.getElementById("enviar").disabled = true;
+    document.getElementById("enviar").innerHTML = "Sending...";
     if (
       name.length === 0 ||
       lastname.length === 0 ||
@@ -48,6 +50,8 @@ export default function Register() {
         text: "FILL IN THE BLANKS!",
         button: "Aceptar",
       });
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (name.length <= 3) {
       Swal.fire({
         icon: "warning",
@@ -55,6 +59,8 @@ export default function Register() {
         text: "NAME HAS TO BE AT LEAST 3 LETTERS",
         button: "Aceptar",
       });
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (!/^[a-zA-Z\s]*$/.test(lastname)) {
       Swal.fire({
         icon: "warning",
@@ -62,6 +68,8 @@ export default function Register() {
         text: "LASTNAME HAS TO BE ONLY LETTERS",
         button: "Aceptar",
       });
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (username.length <= 3) {
       Swal.fire({
         icon: "warning",
@@ -76,6 +84,8 @@ export default function Register() {
         text: "FORMAT HAS TO BE EMAIL",
         button: "Aceptar",
       });
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (!regexPass.test(password)) {
       Swal.fire({
         icon: "warning",
@@ -83,6 +93,7 @@ export default function Register() {
         text: "INVALID PASSWORD",
         button: "Aceptar",
       });
+      document.querySelector("#submit").innerHTML = "Submit";
     } else if (password !== passwordValidate) {
       Swal.fire({
         icon: "warning",
@@ -90,6 +101,8 @@ export default function Register() {
         text: "PASSWORDS HAS TO BE EQUAL",
         button: "Aceptar",
       });
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (
       /^[a-zA-Z\s]*$/.test(lastname) &&
       /^[a-zA-Z\s]*$/.test(name) &&
@@ -118,7 +131,11 @@ export default function Register() {
           text: `${UserRegister}`,
           button: "Aceptar",
         });
+        document.getElementById("enviar").disabled = false;
+        document.getElementById("enviar").innerHTML = "Submit";
       } else {
+        document.getElementById("enviar").disabled = false;
+        document.getElementById("enviar").innerHTML = "Submit";
         navigate(`/validate/${UserRegister.username}`);
       }
       setUser({
@@ -134,91 +151,92 @@ export default function Register() {
   };
 
   return (
-    <section className="bg-primary-200 overflow-clip">
-    <div className="w-screen h-full bg-primary-200 font-Open min-h-screen flex flex-col">
-      <NavBar />
-      <div className="container bg-primary-200 max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-        <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black w-full">
-          <h1 className="mb-8 text-3xl text-center">Sign up</h1>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Name</label>
-              {errors.name && <p>{errors.name}</p>}
-              <input
-                className="block border border-grey-light w-full p-3 rounded mb-4"
-                type="text"
-                placeholder="Name"
-                value={name}
-                name="name"
-                onChange={handleOnChange}
-              />
-              <label>Lastname</label>
-              {errors.lastname && <p>{errors.lastname}</p>}
-              <input
-                className="block border border-grey-light w-full p-3 rounded mb-4"
-                type="text"
-                placeholder="Lastname"
-                value={lastname}
-                name="lastname"
-                onChange={handleOnChange}
-              />
-              <label>Username</label>
-              {errors.username && <p>{errors.username}</p>}
-              <input
-                className="block border border-grey-light w-full p-3 rounded mb-4"
-                type="text"
-                placeholder="Username"
-                value={username}
-                name="username"
-                onChange={handleOnChange}
-              />
-              <label>Email</label>
-              {errors.email && <p>{errors.email}</p>}
-              <input
-                className="block border border-grey-light w-full p-3 rounded mb-4"
-                type="text"
-                placeholder="Email"
-                value={email}
-                name="email"
-                onChange={handleOnChange}
-              />
-              <label>Password</label>
-              {errors.password && <p>{errors.password}</p>}
-              <input
-                className="block border border-grey-light w-full p-3 rounded mb-4"
-                type="password"
-                placeholder="Password"
-                value={password}
-                name="password"
-                onChange={handleOnChange}
-              />
-              <input
-                className="block border border-grey-light w-full p-3 rounded mb-4"
-                type="password"
-                placeholder="Password"
-                value={passwordValidate}
-                name="passwordValidate"
-                onChange={handleOnChange}
-              />
-              <button
-                className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
-                type="submit"
-              >
-                {" "}
-                Submit{" "}
-              </button>
-            </div>
-            <div className="t-6">
-              Already have an account?
-              <a className="no-underline border-b" href="../login/">
-                Log in
-              </a>
-              .
-            </div>
-          </form>
+    <section className="bg-primary-200 overflow-auto ">
+      <div className="w-screen h-full bg-primary-200 font-Open min-h-screen flex flex-col">
+        <NavBar />
+        <div className="container bg-primary-200 max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+          <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black w-full">
+            <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label>Name</label>
+                {errors.name && <p>{errors.name}</p>}
+                <input
+                  className="block border border-grey-light w-full p-3 rounded mb-4"
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  name="name"
+                  onChange={handleOnChange}
+                />
+                <label>Lastname</label>
+                {errors.lastname && <p>{errors.lastname}</p>}
+                <input
+                  className="block border border-grey-light w-full p-3 rounded mb-4"
+                  type="text"
+                  placeholder="Lastname"
+                  value={lastname}
+                  name="lastname"
+                  onChange={handleOnChange}
+                />
+                <label>Username</label>
+                {errors.username && <p>{errors.username}</p>}
+                <input
+                  className="block border border-grey-light w-full p-3 rounded mb-4"
+                  type="text"
+                  placeholder="Username"
+                  value={username}
+                  name="username"
+                  onChange={handleOnChange}
+                />
+                <label>Email</label>
+                {errors.email && <p>{errors.email}</p>}
+                <input
+                  className="block border border-grey-light w-full p-3 rounded mb-4"
+                  type="text"
+                  placeholder="Email"
+                  value={email}
+                  name="email"
+                  onChange={handleOnChange}
+                />
+                <label>Password</label>
+                {errors.password && <p>{errors.password}</p>}
+                <input
+                  className="block border border-grey-light w-full p-3 rounded mb-4"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  name="password"
+                  onChange={handleOnChange}
+                />
+                <input
+                  className="block border border-grey-light w-full p-3 rounded mb-4"
+                  type="password"
+                  placeholder="Password"
+                  value={passwordValidate}
+                  name="passwordValidate"
+                  onChange={handleOnChange}
+                />
+                <button
+                  className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
+                  type="submit"
+                  id="enviar"
+                >
+                  {" "}
+                  Submit{" "}
+                </button>
+              </div>
+              <div className="t-6">
+                Already have an account?
+                <a className="no-underline border-b" href="../login/">
+                  Log in
+                </a>
+                .
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
     </section>
   );
 }
