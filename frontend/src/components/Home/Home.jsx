@@ -35,11 +35,9 @@ function Home() {
     <div className="lg:bg-gradient-to-t bg-primary-200 lg:w-full ">
       
       <NavBar/>
-    
-     
       <Slider/>
-      <div className="lg:flex lg:flex-col lg:items-center lg:justify-center mt-4 lg:w-full ">
-      <div className="sm:mt-8 lg:w-11/12 flex justify-center">
+      <div className="flex flex-col items-center justify-center mt-4 w-full ">
+      <div className="sm:mt-8 w-11/12 flex flex-col items-center justify-center">
       <h1 className="fornt-open font-semibold text-primary-400 text-2xl w-14 ">Motherboards</h1>
       <Promo
       left={true}
@@ -47,8 +45,8 @@ function Home() {
       products={mothers}
       />
       </div>
-      <div className="sm:mt-8 lg:w-11/12 flex flex-col items-center justify-center" >
-      <h1 className="fornt-open font-semibold text-primary-400 text-2xl titles lg:w-48 ">the best of asus</h1>
+      <div className="sm:mt-8 w-11/12 flex flex-col items-center justify-center" >
+      <h1 className="fornt-open font-semibold text-primary-400 text-2xl titles w-48 ">the best of asus</h1>
       <Promo
       left={false}
       img={'https://concepto.de/wp-content/uploads/2018/08/placa-madre4-e1534448782751.jpg'}
@@ -60,8 +58,8 @@ function Home() {
       </div>
       </div>
 
-      <div className=" sm:mt-8 lg:w-11/12 flex justify-center">
-      <h1 className="fornt-open font-semibold text-primary-400 text-2xl border-b-2 w-8">Cases</h1>
+      <div className=" sm:mt-8 w-11/12 flex flex-col items-center justify-center">
+      <h1 className="sm:mt-8 w-11/12 flex flex-col items-center justify-center">Cases</h1>
         <Promo
       left={false}
       img={'https://concepto.de/wp-content/uploads/2018/08/placa-madre4-e1534448782751.jpg'}

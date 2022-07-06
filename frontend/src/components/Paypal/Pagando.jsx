@@ -4,13 +4,16 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { CrearComentarioReview } from "./crearComentario";
 import { useNavigate } from "react-router-dom";
+import { SendReview } from "./SendEmail";
+
 
 export default function Pagando() {
   const navigate = useNavigate();
-  const username = localStorage.getItem("username");
-  console.log(username);
+  const username = localStorage.getItem("username"); //julianpardeiro
   let product = localStorage.getItem("cartProducts");
+//   console.log("product: ", product);
   let productJSON = JSON.parse(product);
+  console.log("productJSON: ", productJSON);
 
   let articulos = productJSON.map((e) => {
     return {
@@ -23,9 +26,9 @@ export default function Pagando() {
       quantity: e.amount,
     };
   });
+  console.log("articulos: ", articulos);
 
-  let PrecioTotalArticulos =
-    articulos[0].unit_amount.value * articulos[0].quantity;
+  let PrecioTotalArticulos = articulos[0].unit_amount.value * articulos[0].quantity;
 
   let multiplicacionEntreValueYQuantity = articulos.map((e) => {
     return e.unit_amount.value * e.quantity;
@@ -120,7 +123,11 @@ export default function Pagando() {
           },
         },
       ],
-    });
+    })
+    .then((orderId) => {
+        console.log("createOrder-orderId: ", orderId)
+        return orderId
+    })
   };
 
   const onApprove = (data, actions) => {
@@ -130,9 +137,11 @@ export default function Pagando() {
         let id = e.description.split("-")[1];
         return id;
       });
-      console.log(arregloSoloId, "ARREGLO ID");
-      console.log(username, "USUARIO");
-      console.log("idCompra", detalles.id);
+      console.log("ACAAAAAAAAAA", detalles.purchase_units[0].items);
+      const productsArray = detalles.purchase_units[0].items.map((e) => {
+        return { name: e.name, cant: e.quantity, price: e.unit_amount.value };
+      });
+      await SendReview(username, productsArray, detalles.id);
       await CrearComentarioReview(username, arregloSoloId, detalles.id);
       Swal.fire({
         icon: "success",
@@ -160,12 +169,6 @@ export default function Pagando() {
 
       let products = arregloObjetosIdQuantity;
 
-      // console.log("products: ", JSON.stringify(products));
-
-      // axios.put(`http://localhost:3001/remove`, products) // "correctly edit"// "warning negative stock"// "failed on edit"
-      //     .then((response) => console.log(response.data))
-      //     .catch((err) => console.log(err))
-
       const prueba = await axios({
         method: "put",
         url: "http://localhost:3001/remove",
@@ -175,7 +178,7 @@ export default function Pagando() {
       })
         .then((e) => e.data)
         .catch((e) => console.log(e));
-      navigate("/done");
+        navigate("/done");
     });
   };
 
@@ -208,8 +211,8 @@ export default function Pagando() {
   };
 
   const onError = (error) => {
-    console.log("Error: ", error)
-  }
+    console.log("Error: ", error);
+  };
 
   return (
     <div
@@ -226,7 +229,7 @@ export default function Pagando() {
         onApprove={(data, actions) => onApprove(data, actions)}
         onCancel={onCancel}
         style={style}
-        onError = {onError}
+        onError={onError}
       />
     </div>
   );

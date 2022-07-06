@@ -78,14 +78,14 @@ function DetailProduct() {
                   ) : (
                     <img
                       alt="Image not found"
-                      className="object-cover rounded-xl"
+                      className="object-cover lg:ml-6 sm:mb-5"
                       src={
                         ProductDetail.image
                           ? ProductDetail.image[0]
                           : "1602010489_p_setting_fff_1_90_end_600.jpg"
                       }
-                      height="600px"
-                      width="600px"
+                      height="500px"
+                      width="500px"
                     />
                   )}
                 </div>
@@ -203,7 +203,7 @@ function DetailProduct() {
                         </button>
                       </div>
                       <div className="text-primary-200 select-none"> OR </div>
-                      <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+                      <div className="grid h-20 flex-grow card rounded-box place-items-center">
                         <NavLink
                           className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
                           to="/cart"

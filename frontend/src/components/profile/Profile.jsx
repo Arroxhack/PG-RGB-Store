@@ -19,7 +19,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
   const username = localStorage.getItem("username");
-  console.log(username);
+  // console.log(username);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetUserData(id));
@@ -27,7 +27,7 @@ export default function Profile() {
   }, []);
   const user = useSelector((state) => state.UserData);
   const Commend = useSelector((state) => state.CommendPending);
-  console.log("ACAAAAA", Commend);
+  // console.log("ACAAAAA", Commend);
   const [mostrarChangePassword, setMostrarChangePassword] = useState(false);
   const [NameEdit, setName] = useState("");
   const [LastnameEdit, setLastname] = useState("");

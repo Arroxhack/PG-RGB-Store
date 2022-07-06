@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { verify } from "../../redux/actions";
@@ -6,6 +6,7 @@ import { useNavigate, } from "react-router";
 import jwt_decode from "jwt-decode";
 import NavBar from "../NavBar/NavBar";
 import Swal from "sweetalert2";
+import { CartContext } from "../Cart/CartContext";
 
 export default function LogIn() {
   let navigate = useNavigate();
@@ -18,7 +19,8 @@ export default function LogIn() {
   const refresh = () => {
     window.location.reload(false);
   };
-
+  const {setProducts, products} = useContext(CartContext)
+ 
   const ResendEmail = async (email) => {
     const result = await axios({
       method: "post",
@@ -73,11 +75,11 @@ export default function LogIn() {
       ResendEmail(email);
       return navigate(`/validate/${username}`);
     }
-
-    if (login) {
-        const email = user.email;
-        const response = await axios({
-          //La ruta trae toda la info en la base de datos de un usuario
+    
+    if (login) {   //!!!!
+        // const cartProductArray = localStorage.getItem('cartProducts');
+        const email = user.email; //email del usuario logeado
+        const response = await axios({ //La ruta trae toda la info en la base de datos de un usuario
           method: "post",
           url: "http://localhost:3001/userCart",
           data: {email,cartProductArray}, // cartProductArray -> array de objetos del local storage
@@ -85,7 +87,18 @@ export default function LogIn() {
           withCredentials: true,
         }).then((res)=> res.data).catch(e=>console.log(e));
 
-      const ress = await Promise.all([response]);
+        const ress = await Promise.all([response]);
+        console.log("ress: ", ress);
+
+        try {
+          const carritoDb = await axios.get(`http://localhost:3001/userCart?email=${user.email}`)
+            let carritoDbData = carritoDb.data.filter(e => e.id)
+            console.log("carritoDbData: ", carritoDbData)
+            setProducts([...carritoDbData])
+            // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
+        } catch (error) {
+          console.log(error)
+        }
 
       if (ress[0] === "E" && ress[1] === "r" && ress[2] === "r") {
         Swal.fire({
@@ -152,7 +165,20 @@ export default function LogIn() {
           data: { email, cartProductArray }, //
           headers: { "X-Requested-With": "XMLHttpRequest" },
           withCredentials: true,
-        }).then((res) => res.data);
+        }).then((res) => res.data).catch(e=>console.log(e));
+
+        const ress = await Promise.all([response]);
+        console.log("ress: ", ress);
+
+        try {
+          const carritoDb = await axios.get(`http://localhost:3001/userCart?email=${user.email}`)
+            let carritoDbData = carritoDb.data.filter(e => e.id)
+            console.log("carritoDbData: ", carritoDbData)
+            setProducts([...carritoDbData])
+            // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
+        } catch (error) {
+          console.log(error)
+        }
 
         if (response[0] === "E" && response[1] === "r" && response[2] === "r") {
           Swal.fire({
