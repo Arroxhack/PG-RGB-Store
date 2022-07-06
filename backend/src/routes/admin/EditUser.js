@@ -31,7 +31,8 @@ router.put("/blockUser", async (req, res, next) => {
       if (user.lock == false) {
         const update = await user.update({ lock: true });
         res.send("Done");
-      } else { return res.send("Error the user is already Block");
+      } else {
+        return res.send("Error the user is already Block");
       }
     } else {
       return res.status(404).send("Error");
@@ -53,10 +54,10 @@ router.put("/unlockUser", async (req, res, next) => {
       if (user.lock == true) {
         const update = await user.update({ lock: false });
 
-        if (update[0] === 1) {
-          return res.send("Done");
-        } else {
+        if (update[0] === 0) {
           return res.send("Error doing Update");
+        } else {
+          return res.send("Done");
         }
       } else {
         return res.send("Error the user is not Lock");
