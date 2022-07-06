@@ -44,11 +44,6 @@ import {
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
 
-
-
-
-
-
 /// GET PRODUCTOS ///
 export function getAllProducts() {
   return async function (dispatch) {
@@ -363,13 +358,13 @@ export const filterBran = (category, brand) => {
 export const filterPrice = (category, brand, min, max, name) => {
   return async (dispatch) => {
     try {
-      if(!name){
+      if (!name) {
         if (!brand) {
           if (min && max) {
             const filterCat = await axios.get(
               `${PATH}/filter/?category=${category}&min=${min}&max=${max}`
             );
-  
+
             return dispatch({
               type: FILTER_PRICE,
               payload: filterCat.data,
@@ -379,7 +374,7 @@ export const filterPrice = (category, brand, min, max, name) => {
             const filterCat = await axios.get(
               `${PATH}/filter/?category=${category}&min=${min ? min : max}`
             );
-  
+
             return dispatch({
               type: FILTER_PRICE,
               payload: filterCat.data,
@@ -391,7 +386,7 @@ export const filterPrice = (category, brand, min, max, name) => {
             const filterCat = await axios.get(
               `${PATH}/filter/?category=${category}&brand=${brand}&min=${min}&max=${max}`
             );
-  
+
             return dispatch({
               type: FILTER_PRICE,
               payload: filterCat.data,
@@ -403,48 +398,49 @@ export const filterPrice = (category, brand, min, max, name) => {
                 min ? min : max
               }`
             );
-  
+
             return dispatch({
               type: FILTER_PRICE,
               payload: filterCat.data,
             });
           }
         }
-      }else{
-        if(brand){
-          const searchName = await axios.get(`${PATH}/filter/?name=${name}&brand=${brand}`)
-          const rta = searchName.data
-          if(rta.length>=1){
+      } else {
+        if (brand) {
+          const searchName = await axios.get(
+            `${PATH}/filter/?name=${name}&brand=${brand}`
+          );
+          const rta = searchName.data;
+          if (rta.length >= 1) {
             return dispatch({
               type: FILTER_PRICE,
-              payload : searchName.data
-            })
-          }else{
+              payload: searchName.data,
+            });
+          } else {
             Swal.fire({
-              icon:'alert',
-              title:'There was an error',
+              icon: 'alert',
+              title: 'There was an error',
               text: 'Please update and try again',
-              confirmButtonText: 'Ok'
-            })
+              confirmButtonText: 'Ok',
+            });
           }
-        }else{
-          const searchName = await axios.get(`${PATH}/filter/?name=${name}`)
-          const rta = searchName.data
-          if(rta.length>=1){
+        } else {
+          const searchName = await axios.get(`${PATH}/filter/?name=${name}`);
+          const rta = searchName.data;
+          if (rta.length >= 1) {
             return dispatch({
               type: FILTER_PRICE,
-              payload : searchName.data
-            })
-          }else{
+              payload: searchName.data,
+            });
+          } else {
             Swal.fire({
-              icon:'alert',
-              title:'There was an error',
+              icon: 'alert',
+              title: 'There was an error',
               text: 'Please update and try again',
-              confirmButtonText: 'Ok'
-            })
+              confirmButtonText: 'Ok',
+            });
           }
         }
-
       }
     } catch (error) {
       console.log(error);
@@ -545,57 +541,96 @@ export function putUserProfile(username) {
   };
 }
 
-
 export function addProductFavorito(idProd, idUser) {
-  try {
-    axios
-      .put(`${PATH}/add/favorito`, { idProd, idUser })
-      .then((res) => res.data);
-  } catch (error) {
-    console.log(error);
-  }
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    timer: 2000,
+  });
+  return async (dispatch) => {
+    try {
+      await axios
+        .put(`${PATH}/add/favorito`, { idProd, idUser })
+        .then((res) => {
+          if (Array.isArray(res.data)) {
+            Toast.fire({
+              icon: 'success',
+              title: 'Added successfull',
+            });
+            dispatch({ type: ADD_FAV, payload: res.data });
+          } else {
+            Toast.fire({
+              icon: 'error',
+              title: res.data.error,
+            });
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export function deleteProductFavorito(idProd, idUser) {
-  try {
-    axios
-      .put(`${PATH}/delete/favorito`, { idProd, idUser })
-      .then((res) => res.data);
-  } catch (error) {
-    console.log(error, ' error delete');
-  }
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    timer: 2000,
+  });
+  return async (dispatch) => {
+    try {
+      await axios
+        .put(`${PATH}/delete/favorito`, { idProd, idUser })
+        .then((res) => {
+          if (Array.isArray(res.data)) {
+            Toast.fire({
+              icon: 'success',
+              title: 'Deleted successfull',
+            });
+            dispatch({ type: DELETE_FAV, payload: res.data });
+          } else {
+            Toast.fire({
+              icon: 'error',
+              title: res.data.error,
+            });
+          }
+        });
+    } catch (error) {
+      console.log(error, ' error delete');
+    }
+  };
 }
 
 export function getProductFavorito(idUser) {
-  return (dispatch) => {
+  return async (dispatch) => {
     try {
-      axios.get(`${PATH}/get/favorito?idUser=${idUser}`).then((res) => {
-        console.log(res.data, ' en actions getFavoritos');
-        dispatch({ type: GET_FAV, payload: res.data });
+      await axios.get(`${PATH}/get/favorito?idUser=${idUser}`).then((res) => {
+        //console.log(res.data, ' en actions getFavoritos');
+        return dispatch({ type: GET_FAV, payload: res.data });
       });
     } catch (error) {}
-  }
+  };
 }
-
 
 // PAGINADO ADMIN
-export const nextPage = ()=>{
-  return{
+export const nextPage = () => {
+  return {
     type: NEXT_PAGE,
-  }
-}
-export const prevPage = ()=>{
-  return{
+  };
+};
+export const prevPage = () => {
+  return {
     type: PREV_PAGE,
-  }
-}
-export const setPage = (p)=>{
-  return{
-    type:SET_PAGE,
-    payload:p
-  }
-
-}
+  };
+};
+export const setPage = (p) => {
+  return {
+    type: SET_PAGE,
+    payload: p,
+  };
+};
 
 export function PostComment(comment, username, id) {
   return async () => {
@@ -669,4 +704,3 @@ export function VaciarStateProductComment() {
     }
   };
 }
-

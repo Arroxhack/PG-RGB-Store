@@ -39,4 +39,30 @@ router.post("/resendEmail", async (req, res) => {
     res.send("Error usuario no encontrado");
   }
 });
+
+router.post("/SendEmailProducts", async (req, res) => {
+  const { username, products, precioTotal, idCompra } = req.body;
+  const user = await User.findOne({ where: { username: username } });
+  let StringToSend = "";
+
+  for (n in products) {
+    StringToSend +=
+      "<li>" + "<h2>" + "<p>" + products[n] + "</p>" + "</h2>" + "</li>";
+  }
+  if (user.id) {
+    const response = await transporter.sendMail({
+      from: "rgbstore0@gmail.com", // sender address
+      to: user.email, // list of receivers
+      subject: "Thank for your purchase  ✔", // Subject line
+      text: "", // plain text body
+      html: `<h2>Hi ${username} thank for purchase</h2>
+      <h2>Your order confirmation is below</h2>
+          <ul>${StringToSend},</ul> <h1><p>  TOTAL PRICE: $${precioTotal}</p></h1> <p> id purchase: ${idCompra}</p>`, // html body
+    });
+    res.send("Codigo Reenviado");
+  } else {
+    res.send("Error usuario no encontrado");
+  }
+});
+
 module.exports = router;
