@@ -213,6 +213,7 @@ export default function Register() {
                 <button
                   className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
                   type="submit"
+                  id="submit"
                 >
                   {" "}
                   Submit{" "}
