@@ -17,7 +17,7 @@ function CheckoutCart() {
       <NavBar />
       <div className="flex items-center justify-center py-8">
         <div className="">
-          <div className="w-full absolute  right-0 bg-primary-200 h-full">
+          <div className="w-full absolute right-0 bg-primary-200 h-full">
             <div className="flex md:flex-row bg-primary-200 flex-col justify-end">
               <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-secundary-250 overflow-y-auto overflow-x-hidden h-screen">
 

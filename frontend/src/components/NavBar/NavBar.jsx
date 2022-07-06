@@ -217,6 +217,9 @@ function NavBar() {
               </Link>
             </div>
           </div>
+
+        
+         
         )}
 
         {/* CARRITO */}
