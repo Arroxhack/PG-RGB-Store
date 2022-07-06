@@ -15,8 +15,15 @@ function Home() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
 
-  const product = products.slice(0,4)
+  //promo de mothers
+  let mothers = products.filter(m=>m.category.includes("Motherboard"))
 
+  //promo de cpu
+  let cpu=products.filter(m=>m.category.includes("CPU"))
+
+  //promo de asus
+  let asus=products.filter(m=>m.brand === "ASUS" )
+ 
   useEffect(() => {
     dispatch(getAllProducts());
     dispatch(clean())
@@ -24,25 +31,38 @@ function Home() {
 
 
   return (
-    <div className="lg:bg-gradient-to-t bg-primary-200 ">
+    <div className="lg:bg-gradient-to-t bg-primary-200 lg:w-full ">
       
       <NavBar/>
     
      
       <Slider/>
-      <div className="flex flex-col items-center lg:mt-4 sm:mt-12">
+      <div className="lg:flex lg:flex-col lg:items-center lg:justify-center mt-4 lg:w-full ">
+      <div className="sm:mt-8 lg:w-11/12">
+      <h1 className="fornt-open font-semibold text-primary-400 text-2xl w-14 ">Motherboards</h1>
       <Promo
       left={true}
-      img={'https://assets.iprofesional.com/cdn-cgi/image/w=880,f=webp/https://assets.iprofesional.com/assets/jpg/2020/07/498933.jpg'}
-      products={product}
-      />
-      <Promo
-      left={false}
-      img={'https://assets.iprofesional.com/cdn-cgi/image/w=880,f=webp/https://assets.iprofesional.com/assets/jpg/2020/07/498933.jpg'}
-      products={product}
+      img={'https://www.aorus.com/image/gallery/gallery-1615431112.jpg'}
+      products={mothers}
       />
       </div>
-      <ContainerProduct/>
+      <div className="sm:mt-8 lg:w-11/12" >
+      <h1 className="fornt-open font-semibold text-primary-400 text-2xl titles w-28 ">the best of asus</h1>
+      <Promo
+      left={false}
+      img={'https://concepto.de/wp-content/uploads/2018/08/placa-madre4-e1534448782751.jpg'}
+      products={asus}
+      />
+      </div>
+      <div className=" sm:mt-8 lg:w-11/12">
+      <h1 className="fornt-open font-semibold text-primary-400 text-2xl border-b-2 w-8">Cases</h1>
+        <Promo
+      left={false}
+      img={'https://concepto.de/wp-content/uploads/2018/08/placa-madre4-e1534448782751.jpg'}
+      products={cpu}
+      />
+      </div>
+      </div>
       <div>
         <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank">
           <img className='fixed bottom-2 right-2 w-20 m-5' src="https://storage.googleapis.com/m-infra.appspot.com/public/whatsapp/Whatsapp_logo.svg"/>

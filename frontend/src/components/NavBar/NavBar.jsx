@@ -5,7 +5,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import BoxCart from "../Cart/BoxCart";
 import CheckoutPaypal from "../Paypal/CheckoutPaypal";
 import {TiShoppingCart} from 'react-icons/ti'
-import {HiOutlineUserCircle} from 'react-icons/hi'
+import {AiOutlineUser} from 'react-icons/ai'
 import {AiOutlineMenu} from 'react-icons/ai'
 import {AiOutlineClose} from 'react-icons/ai'
 import {BiCategoryAlt} from 'react-icons/bi'
@@ -14,6 +14,7 @@ import {IoIosBuild} from 'react-icons/io'
 import svg from '../../images/rename.svg'
 import {FiLogIn} from 'react-icons/fi'
 import {BsPencilSquare} from 'react-icons/bs'
+import {MdOutlineSpaceDashboard} from 'react-icons/md'
 //localStorage.getItem("username");
 //localStorage.getItem("admin");
 function NavBar() {
@@ -45,13 +46,13 @@ function NavBar() {
           <ul className=" text-base text-primary pt-4 md:text-2xl   ">
             <li className="sm:py-2 md:py-6  active:bg-primary-300 rounded  ">
               <Link to="/categories" className="flex items-center">
-                 <BiCategoryAlt/> 
+                 <BiCategoryAlt className='md:h-10 md:w-8'/> 
                 <p  className="sm:ml-1 md:ml-2">Categories</p>
               </Link>
             </li>
             <li className=" sm:py-2 md:py-6   active:bg-primary-300 rounded ">
               <Link to="/categories/notebooks" className="flex items-center ">
-              <MdComputer/>
+              <MdComputer className='md:h-10 md:w-8'/>
                <p  className="sm:ml-1 md:ml-2"> Notebooks</p>
                 </Link>
             </li>
@@ -65,7 +66,7 @@ function NavBar() {
            
             <li className="sm:py-2 md:py-6 block active:bg-primary-300 rounded ">
               <Link to="/arma-tu-pc" className="flex items-center ">
-                <IoIosBuild/>
+                <IoIosBuild className='md:h-10 md:w-8'/>
                 <p  className="sm:ml-1 md:ml-2">Build your PC</p>
               </Link>
             </li>
@@ -73,14 +74,15 @@ function NavBar() {
           <div className="flex md:text-2xl  ">
           {username ? (
               <div className="flex flex-col ">
-                <Link to="/profile"  className="flex items-center sm:py-2 md:py-6  sm:text-xs text-primary-400 md:text-xl left-0 ">
-                <HiOutlineUserCircle className="h-4 w-4  md:h-12 md:w-14 text-primary-400 "/>
-                <span className="text-base">Profile</span>
+                <Link to="/profile"  className="flex items-center sm:py-2 md:py-6  sm:text-xs text-primary-400 md:text-xl  ">
+                <AiOutlineUser className="h-4 w-4  md:h-10 md:w-8 text-primary-400 "/>
+                <span className="text-base md:text-2xl md:ml-2">Profile</span>
                 </Link>{" "}
                 <Logout  />
                 {admin ? (
-                  <Link to="/admin">
-                    <button className=" md:p-4 sm:py-2 md:py-6 block active:bg-primary-300 rounded">
+                  <Link to="/admin" lassName="flex items-center sm:py-2 md:py-6  sm:text-xs text-primary-400 md:text-xl md:w-36 ">
+                    <MdOutlineSpaceDashboard className="h-4 w-4  md:h-10 md:w-8 text-primary-400 "/>
+                    <button className=" md:p-4 sm:py-2 md:py-6 block md:text-2xl md:ml-2 active:bg-primary-300 rounded md:w-36">
                      Admin panel
                     </button>
                   </Link>
@@ -120,7 +122,7 @@ function NavBar() {
 //nav de escritorio
   return (
       <nav className=" w-full flex  items-center lg:justify-between  shadow-lg bg-primary-200 sm:h-11 sm:flex justify-between md:flex md:justify-around md:h-20 lg:h-24 sticky z-50 top-0 left-0">
-       <div className="flex items-center sm:justify-around sm:w-1/4  md:w-1/4 lg:w-1/2 ">
+       <div className="flex items-center sm:justify-around sm:w-1/4  md:w-1/4 lg:w-2/5 ">
 
        <div className="sm:flex sm:items-center sm:ml-[-1rem] lg:hidden sm:block sm:mr-4">
        <button className="absolute" onClick={()=> handleOpen()}>
@@ -145,11 +147,11 @@ function NavBar() {
           {/*LOGO */}
 
 
-      <div className="flex justify-between items-center max-h-max bg-primary-200 text-base text-primary  sm:hidden lg:block ">
+      <div className="flex justify-between items-center max-h-max  text-base text-primary  sm:hidden lg:block ">
             <ul className="flex  ">
-              <li className="lg:mr-5 relative flex">
+              <li className="">
                 <Link to="/categories" className="">
-                  <p className="buttom">Categories</p>
+                  <p className=" lg:mr-5 buttom">Categories</p>
                 </Link>
               </li>
               <li class="lg:buttom lg:mr-5">
@@ -176,10 +178,10 @@ function NavBar() {
 
 
             {/* ADMIN, PERFIL Y LOG OUT */}
-          <div className="flex lg:justify-between  items-center sm:justify-end sm:w-18 lg:w-1/6 ">
+          <div className="lg:flex lg:justify-between  items-center sm:justify-end sm:w-18 lg:w-1/6 ">
             {username ? (
-              <div className="flex lg:ml-[-4rem] items-center sm:hidden lg:block">
-                <Link to="/profile"  className="sm:text-xs text-primary-400 md:text-xl flex ">
+              <div className="lg:flex lg:ml-[-4rem] items-center sm:hidden lg:block">
+                <Link to="/profile"  className="sm:text-xs text-primary-400 md:text-xl flex lg:ml-[-2rem] ">
                 <span className="text-base text-primary buttom">profile</span>
                 </Link>{" "}
                 <Logout  />

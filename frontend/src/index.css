@@ -4,16 +4,17 @@
 
 @layer components{
 .buttom{
-    @apply inline-block
+    @apply 
+    inline-block
+    text-base
     relative
     cursor-pointer
     transition-all
     duration-500
     before:content-['']
     before:absolute
-    before:-bottom-2
-    before:left-1/2
-    before:-translate-x-1/2
+    before:-bottom-0
+    before:left-0
     before:w-0
     before:h-0.5
     before:rounded-full
@@ -21,7 +22,28 @@
     before:transition-all
     before:duration-500
     before:bg-gradient-to-r
+    before:from-primary-400
+    before:via-primary-300
+    before:to-primary-500
     hover:before:w-full
     hover:before:opacity-100
 }
+
+.titles{
+    @apply 
+    inline-block
+    content-['']
+    bottom-0
+    left-0
+    w-11
+    h-0.5
+    rounded-full
+    transition-all
+    bg-gradient-to-r
+  from-primary-400
+  via-primary-300
+  to-primary-500
+    opacity-100
+}
+
 }
