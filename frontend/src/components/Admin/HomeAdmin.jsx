@@ -56,7 +56,7 @@ const HomeAdmin = () => {
 
   useEffect(() => {
     ValidatePassword();
-  }, []);
+  }, [admin]);
 
   return (
     <>

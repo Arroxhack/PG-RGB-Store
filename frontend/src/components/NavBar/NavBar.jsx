@@ -14,11 +14,9 @@ import { IoIosBuild } from "react-icons/io";
 import svg from "../../images/rename.svg";
 import { FiLogIn } from "react-icons/fi";
 import { BsPencilSquare } from "react-icons/bs";
-//localStorage.getItem("username");
-//localStorage.getItem("admin");
 function NavBar() {
-  const username = true;
-  const admin = true;
+  const username = localStorage.getItem("username");
+  const admin = localStorage.getItem("admin");
 
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -177,25 +175,6 @@ function NavBar() {
       {/* SEARCHBAR */}
       <div className=" sm:w-1/4  md:w-1/2 lg:w-1/4 sm:ml-[-4rem] flex lg:flex">
         <SearchBar />
-      </div>
-
-      <div className="flex justify-between  md:w-1/4 items-center sm:hidden lg:block ">
-        <div className="buttom">
-          <Link
-            to="/logIn"
-            className=" sm:text-xs  text-primary-400 md:text-xl sm:mr-2 sm:w-10 lg:text-base  "
-          >
-            Log in
-          </Link>
-        </div>
-        <div className=" lg:mr-[-6rem]">
-          <Link
-            to="/register"
-            className=" sm:text-xs text-primary-400  md:text-xl buttom lg:text-base"
-          >
-            Register
-          </Link>
-        </div>
       </div>
 
       {/* ADMIN, PERFIL Y LOG OUT */}
