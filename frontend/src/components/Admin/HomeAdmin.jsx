@@ -14,12 +14,10 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const HomeAdmin = () => {
+  const { page } = useParams();
 
-  const {page} = useParams()
-  
   const admin = localStorage.getItem("admin");
   const username = localStorage.getItem("username");
-
 
   const [Validate, setValidate] = useState(true);
 
@@ -58,7 +56,7 @@ const HomeAdmin = () => {
 
   useEffect(() => {
     ValidatePassword();
-  }, []);
+  }, [admin]);
 
   return (
     <>
@@ -69,11 +67,11 @@ const HomeAdmin = () => {
               <Nav />
               <div className="flex flex-row">
                 <div className="bg-primary-200 h-screen w-60">
-                  <Menu/>
+                  <Menu />
                 </div>
-                {page === 'list-products' && <AdminProduct />}
-                {page === 'create-admin' ? <CreateAdmin /> : <></>}
-                {page === 'edit-user' ? <EditUser/> : <></>}
+                {page === "list-products" && <AdminProduct />}
+                {page === "create-admin" ? <CreateAdmin /> : <></>}
+                {page === "edit-user" ? <EditUser /> : <></>}
               </div>
             </div>
           ) : (
