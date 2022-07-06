@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -208,6 +207,10 @@ export default function Pagando() {
     });
   };
 
+  const onError = (error) => {
+    console.log("Error: ", error)
+  }
+
   return (
     <div
       style={{
@@ -223,6 +226,7 @@ export default function Pagando() {
         onApprove={(data, actions) => onApprove(data, actions)}
         onCancel={onCancel}
         style={style}
+        onError = {onError}
       />
     </div>
   );

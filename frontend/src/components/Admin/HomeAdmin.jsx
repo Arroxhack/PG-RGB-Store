@@ -30,7 +30,7 @@ const HomeAdmin = () => {
       inputLabel: "Password",
       inputPlaceholder: "Enter your password",
       inputAttributes: {
-        maxlength: 10,
+        maxlength: 25,
         autocapitalize: "off",
         autocorrect: "off",
       },
