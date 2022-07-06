@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { verify } from "../../redux/actions";
-import { useNavigate } from "react-router";
+import { useNavigate, } from "react-router";
 import jwt_decode from "jwt-decode";
 import NavBar from "../NavBar/NavBar";
 import Swal from "sweetalert2";
@@ -100,27 +100,29 @@ export default function LogIn() {
           console.log(error)
         }
 
-        if(ress[0] === "E" && ress[1] === "r" && ress[2] === "r"){
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: `User blocked`,
-            button: "Aceptar",
-          }).then(()=> {return navigate('/login')})
-        }else{
-          localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
-          localStorage.setItem("name", name);
-          localStorage.setItem("lastname", lastname);
-          localStorage.setItem("login", login);
-          localStorage.setItem("email", email);
-          localStorage.setItem("id", id);
-          if (permissions === true) {
-            localStorage.setItem("admin", permissions);
-          }
-          setUsername(""); //Reseteo mis estados locales
-          setPassword("");
-          navigate("/");
+      if (ress[0] === "E" && ress[1] === "r" && ress[2] === "r") {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: `User blocked`,
+          button: "Aceptar",
+        }).then(() => {
+          return navigate("/login");
+        });
+      } else {
+        localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
+        localStorage.setItem("name", name);
+        localStorage.setItem("lastname", lastname);
+        localStorage.setItem("login", login);
+        localStorage.setItem("email", email);
+        localStorage.setItem("id", id);
+        if (permissions === true) {
+          localStorage.setItem("admin", permissions);
         }
+        setUsername(""); //Reseteo mis estados locales
+        setPassword("");
+        navigate("/");
+      }
     } else {
       //Si no trae login quiere decir que no esta autenticado el usuario
       setErrors(user);
@@ -150,28 +152,44 @@ export default function LogIn() {
         title: "Error",
         text: `User blocked`,
         button: "Aceptar",
-      }).then(()=> {return navigate('/login')})
-    } else{
+      }).then(() => {
+        return navigate("/login");
+      });
+    } else {
       if (user) {
-       
         const email = user.email;
         const response = await axios({
           //La ruta trae toda la info en la base de datos de un usuario
           method: "post",
           url: "http://localhost:3001/userCart",
-          data: {email,cartProductArray}, // 
+          data: { email, cartProductArray }, //
           headers: { "X-Requested-With": "XMLHttpRequest" },
           withCredentials: true,
-        }).then((res)=> res.data);
+        }).then((res) => res.data).catch(e=>console.log(e));
 
-        if(response[0] === "E" && response[1] === "r" && response[2] === "r"){
+        const ress = await Promise.all([response]);
+        console.log("ress: ", ress);
+
+        try {
+          const carritoDb = await axios.get(`http://localhost:3001/userCart?email=${user.email}`)
+            let carritoDbData = carritoDb.data.filter(e => e.id)
+            console.log("carritoDbData: ", carritoDbData)
+            setProducts([...carritoDbData])
+            // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
+        } catch (error) {
+          console.log(error)
+        }
+
+        if (response[0] === "E" && response[1] === "r" && response[2] === "r") {
           Swal.fire({
             icon: "error",
             title: "Error",
             text: `User blocked`,
             button: "Aceptar",
-          }).then(()=> {return navigate('/login')})
-        }else{
+          }).then(() => {
+            return navigate("/login");
+          });
+        } else {
           localStorage.setItem("username", user.username);
           localStorage.setItem("name", user.name);
           localStorage.setItem("lastname", user.lastname);
@@ -215,9 +233,7 @@ export default function LogIn() {
             className="flex flex-col justify-center items-center sm:w-80 sm:h-80"
             onSubmit={(e) => handleLoginSubmit(e)}
           >
-            <div>
-           
-            </div>
+            <div></div>
             <div className="flex flex-col items-center justify-center gap-1">
               <input
                 className="block border border-grey-light w-full p-3 rounded mb-4"
@@ -253,6 +269,7 @@ export default function LogIn() {
             >
               Login
             </button>
+            <button onClick={ ()=> navigate("/forgotPassword")} >Forgot Password</button>
             <div id="signInDiv"></div>
             <br />
             <div className="t-6">

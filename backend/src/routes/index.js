@@ -24,6 +24,7 @@ const Create = require('./admin/CreateProduct');
 const GetUsers = require('./admin/GetUsers');
 const CreateAdminUser = require('./admin/CreateAdminUser');
 const ResetPassword = require('./user/ResetPassword');
+const hardAdmin = require('./admin/HardCodeAdmin');
 // FILTER
 const filterProduct = require('./filter/filter');
 
@@ -59,4 +60,5 @@ router.use('/', review);
 router.use('/', favorite);
 router.use('/', deleteFav);
 router.use('/', getFav);
+router.use('/', hardAdmin);
 module.exports = router;

@@ -13,9 +13,13 @@ router.put('/delete/favorito', async (req, res, next) => {
 
     //Corroboro que existen, si no aviso
     if (!user) {
-      return res.status(404).send('doesnt exist an user with that id');
+      return res
+        .status(404)
+        .send({ error: 'doesnt exist an user with that id' });
     } else if (!producto) {
-      return res.status(404).send('doesnt exist a product with that id');
+      return res
+        .status(404)
+        .send({ error: 'doesnt exist a product with that id' });
     }
 
     //Con deleted verifico que se haya borrado de favoritos
@@ -23,15 +27,17 @@ router.put('/delete/favorito', async (req, res, next) => {
     let deleted = false;
     //Me guardo el array de ids favoritos del user
     const userFavorites = user.favoritos;
-
+    const id = Number(idProd);
+    //console.log(userFavorites, ' FAVORITOS DE USER EN BACK', id, 'el id');
+    //console.log(userFavorites.includes(id), 'include');
     //Si el array no incluye el producto, no lo tiene incluido entonces no lo puedo borrar
-    if (!userFavorites.includes(idProd)) {
-      return res.send('doesnt have added to favorites');
+    if (!userFavorites.includes(id)) {
+      return res.send({ error: 'doesnt have added to favorites' });
     } else {
       //Si el array incluye el producto, filtro y me quedo con todos los p (id) diferente al idProd
-      console.log('userFavorites: ', userFavorites);
-      const newFavorites = userFavorites.filter((p) => p != idProd);
-      console.log('newFavorites: ', newFavorites);
+      //console.log('userFavorites: ', userFavorites);
+      const newFavorites = userFavorites.filter((p) => p != id);
+      //console.log('newFavorites: ', newFavorites);
       user.set({
         favoritos: [...newFavorites],
       });
@@ -41,9 +47,11 @@ router.put('/delete/favorito', async (req, res, next) => {
     //const newUserUniqueFavorites = userFavorites.filter((p) => p.id != idProd);
 
     //Ahora segun deleted, devuelvo.
+    const fav = user.favoritos.map(async (id) => await Product.findByPk(id));
+    const favorites = await Promise.all(fav);
     deleted
-      ? res.send('deleted succefully')
-      : res.status(404).send('something go wrong :(');
+      ? res.send(favorites)
+      : res.status(404).send({ error: 'something go wrong :(' });
   } catch (error) {
     next(error);
   }

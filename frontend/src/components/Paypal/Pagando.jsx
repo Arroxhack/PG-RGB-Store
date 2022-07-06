@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { CrearComentarioReview } from "./crearComentario";
 import { useNavigate } from "react-router-dom";
+import { SendReview } from "./SendEmail";
 
 
 export default function Pagando() {
@@ -136,9 +137,11 @@ export default function Pagando() {
         let id = e.description.split("-")[1];
         return id;
       });
-      console.log(arregloSoloId, "ARREGLO ID");
-      console.log(username, "USUARIO");
-      console.log("idCompra", detalles.id);
+      console.log("ACAAAAAAAAAA", detalles.purchase_units[0].items);
+      const productsArray = detalles.purchase_units[0].items.map((e) => {
+        return { name: e.name, cant: e.quantity, price: e.unit_amount.value };
+      });
+      await SendReview(username, productsArray, detalles.id);
       await CrearComentarioReview(username, arregloSoloId, detalles.id);
       Swal.fire({
         icon: "success",
@@ -208,8 +211,8 @@ export default function Pagando() {
   };
 
   const onError = (error) => {
-    console.log("Error: ", error)
-  }
+    console.log("Error: ", error);
+  };
 
   return (
     <div
@@ -226,7 +229,7 @@ export default function Pagando() {
         onApprove={(data, actions) => onApprove(data, actions)}
         onCancel={onCancel}
         style={style}
-        onError = {onError}
+        onError={onError}
       />
     </div>
   );
