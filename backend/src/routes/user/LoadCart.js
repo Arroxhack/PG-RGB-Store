@@ -147,8 +147,14 @@ router.post("/changeCart", async (req, res, next) => {
   // try {
   //caso carrito vacio
   //caso carrito con cosas
-  if (!cartProductArray?.length && !user.cartProducts) {
-    return res.send("Fail: cart is empty");
+  if (!cartProductArray?.length) {
+    console.log("Entre aca")
+    console.log("user: ", user)
+    user.set({
+      cartProducts: [{}],
+    });
+    user.save();
+    return res.send("done");
   }
 
   if (cartProductArray.length > 0) {
