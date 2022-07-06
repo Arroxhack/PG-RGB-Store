@@ -135,4 +135,71 @@ router.get('/userCart/', async (req, res, next) => {
   res.send(userCart);
 });
 
+router.post("/changeCart", async (req, res, next) => {
+
+  let { email, cartProductArray } = req.body;
+  
+  const user = await User.findOne({ where: { email } }); //usuario logeado
+  console.log("user: ", user);
+
+  cartProductArray = JSON.parse(cartProductArray); //arreglo de objetos products
+  // console.log(cartProductArray);
+  // try {
+  //caso carrito vacio
+  //caso carrito con cosas
+  if (!cartProductArray?.length && !user.cartProducts) {
+    return res.send("Fail: cart is empty");
+  }
+
+  if (cartProductArray.length > 0) {
+    if (!user) {
+      return res.send("Fail: User doesnt exist");
+    }
+
+    //map -> verifica que cada prod coincida con la lista de prod
+    let productsVerified = cartProductArray?.map(async (p) => {
+      let product = await Product.findOne({  //trae los productos que coincidan 
+        where: {
+          id: p.id,
+          price: p.price,
+          name: p.name,
+          inOffer: p.inOffer,
+          percentageDiscount: p.percentageDiscount,
+        },
+      });
+      if (product?.id === p.id) {
+        product.dataValues.amount = p.amount
+        return product;
+      }
+    });
+
+    productsVerified = await Promise.all(productsVerified);
+
+    // console.log("productsVerified: ", productsVerified[0].toJSON())
+
+    productsVerified = productsVerified.filter((e) => e !== undefined && e !== null);
+
+    // console.log("productsVerified: ", productsVerified)
+
+    if (productsVerified.length !== cartProductArray.length) {
+      user.set({
+        lock: true,
+      });
+    } else {
+
+      let dataFinal = productsVerified.map(e => e.toJSON());
+      console.log("dataFinal: ", dataFinal)
+
+      user.set({
+        cartProducts: dataFinal,
+      });
+    }
+    await user.save();
+  }
+  user.lock ? res.send("Error: User blocked") : res.send("done");
+  // } catch (e) {
+  //   res.status(404).send('Error: updating user cart');
+  // }
+});
+
 module.exports = router;
