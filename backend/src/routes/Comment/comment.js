@@ -17,22 +17,36 @@ router.get('/comment/:id', async (req,res,next)=>{
 })
 
 router.post('/create-comment/:id', async(req,res,next)=>{
-
     try {
         const {id} = req.params
-        const {comment} = req.body
+        const {comment,user} = req.body
+
+        console.log(id, comment, user, "ES POR ACAAAAAA")
 
         const newComment = await ProductComment.create({
             comentario : comment
         })
+        await newComment.setProduct(id)
+        await newComment.setUser(user)
 
-        newComment.setProduct(id)
-
-        res.send('exito')
+        res.send(newComment)
     } catch (error) {
         next(error)
     }
 })
+
+router.get('/not-response', async(req,res,next)=>{
+    try {
+        const notResponse = await ProductComment.findAll({
+            where:{response:null}
+        })
+
+        res.send(notResponse)
+    } catch (error) {
+        next(error)
+    }
+})
+
 router.put('/create-response/:id', async(req,res,next)=>{
 
     try {
@@ -47,5 +61,6 @@ router.put('/create-response/:id', async(req,res,next)=>{
         next(error)
     }
 })
+
 
 module.exports = router;

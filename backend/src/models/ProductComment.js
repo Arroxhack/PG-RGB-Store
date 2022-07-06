@@ -14,11 +14,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(300),
         allowNull: true,
       },
-      idUser: {
+      idProducto: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      idProducto: {
+      userId: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },

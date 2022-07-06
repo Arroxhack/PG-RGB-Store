@@ -2,15 +2,13 @@ import React, { useEffect } from "react";
 import Menu from "./Menu/Menu";
 import Nav from "./Nav/Nav";
 import { useState } from "react";
-import CreateProduct from "./Productos/CreateProduct";
-import DeleteProduct from "./Productos/DeleteProduct";
-import EditProduct from "./Productos/EditProduct";
 import CreateAdmin from "./Usuarios/CreateAdmin";
 import EditUser from "./Usuarios/EditUser";
 import Error from "../Error/Error";
 import { useParams, useSearchParams } from "react-router-dom";
 import AdminProduct from "./Productos/AdminProduct";
 import Swal from "sweetalert2";
+import Response from "./Respuestas/Response";
 import axios from "axios";
 
 const HomeAdmin = () => {
@@ -71,9 +69,10 @@ const HomeAdmin = () => {
                 <div className="bg-primary-200 h-screen w-60">
                   <Menu/>
                 </div>
-                {page === 'list-products' && <AdminProduct />}
+                {page === 'list-products' ? <AdminProduct /> : <></>}
                 {page === 'create-admin' ? <CreateAdmin /> : <></>}
                 {page === 'edit-user' ? <EditUser/> : <></>}
+                {page === 'question-answer' ? <Response/> : <></>}
               </div>
             </div>
           ) : (
