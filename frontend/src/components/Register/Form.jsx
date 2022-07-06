@@ -35,8 +35,8 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    document.querySelector("#submit").innerHTML = "Sending...";
-    document.querySelector("#submit").innerHTML = "Submit";
+    document.getElementById("enviar").disabled = true;
+    document.getElementById("enviar").innerHTML = "Sending...";
     if (
       name.length === 0 ||
       lastname.length === 0 ||
@@ -50,7 +50,8 @@ export default function Register() {
         text: "FILL IN THE BLANKS!",
         button: "Aceptar",
       });
-      document.querySelector("#submit").innerHTML = "Submit";
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (name.length <= 3) {
       Swal.fire({
         icon: "warning",
@@ -58,7 +59,8 @@ export default function Register() {
         text: "NAME HAS TO BE AT LEAST 3 LETTERS",
         button: "Aceptar",
       });
-      document.querySelector("#submit").innerHTML = "Submit";
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (!/^[a-zA-Z\s]*$/.test(lastname)) {
       Swal.fire({
         icon: "warning",
@@ -66,7 +68,8 @@ export default function Register() {
         text: "LASTNAME HAS TO BE ONLY LETTERS",
         button: "Aceptar",
       });
-      document.querySelector("#submit").innerHTML = "Submit";
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (username.length <= 3) {
       Swal.fire({
         icon: "warning",
@@ -81,7 +84,8 @@ export default function Register() {
         text: "FORMAT HAS TO BE EMAIL",
         button: "Aceptar",
       });
-      document.querySelector("#submit").innerHTML = "Submit";
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (!regexPass.test(password)) {
       Swal.fire({
         icon: "warning",
@@ -97,7 +101,8 @@ export default function Register() {
         text: "PASSWORDS HAS TO BE EQUAL",
         button: "Aceptar",
       });
-      document.querySelector("#submit").innerHTML = "Submit";
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (
       /^[a-zA-Z\s]*$/.test(lastname) &&
       /^[a-zA-Z\s]*$/.test(name) &&
@@ -126,9 +131,11 @@ export default function Register() {
           text: `${UserRegister}`,
           button: "Aceptar",
         });
-        document.querySelector("#submit").innerHTML = "Submit";
+        document.getElementById("enviar").disabled = false;
+        document.getElementById("enviar").innerHTML = "Submit";
       } else {
-        document.querySelector("#submit").innerHTML = "Submit";
+        document.getElementById("enviar").disabled = false;
+        document.getElementById("enviar").innerHTML = "Submit";
         navigate(`/validate/${UserRegister.username}`);
       }
       setUser({
@@ -213,6 +220,7 @@ export default function Register() {
                 <button
                   className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
                   type="submit"
+                  id="enviar"
                 >
                   {" "}
                   Submit{" "}
