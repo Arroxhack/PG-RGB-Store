@@ -38,8 +38,8 @@ const Product = ({ product }) => {
         <h3 className='lg:text-xl font-bold sm:text-base md:text-xl'>{`$${product.price}`}</h3>
         <p className='lg:text-xs text-center uppercase sm:text-xs md:text-base'>{product.name}</p>        
         </div>
-        <button className=" text-primary bg-primary-200 lg:px-3 lg:py-1 rounded-sm lg:mb-2  border-primary-400  md:px-6 md:py-2 md:rounded-sm flex items-center sm:py-1 sm:px-2 sm:mb-2 "
-         onClick={sendCard}><TiShoppingCart className="md:h-8 md:w-6"/> Add to cart</button>
+        <button className=" text-primary bg-primary-200 lg:px-3 lg:py-1 rounded-sm lg:mb-2  border-primary-400  md:px-6 md:py-2 md:rounded-sm flex items-center sm:py-1 sm:px-2 sm:mb-2 lg:hover:bg-secundary-250 lg:hover:text-primary-200 lg:transform "
+         onClick={sendCard}><TiShoppingCart className="md:h-8 md:w-6 "/> Add to cart</button>
     </div>
   );
 };

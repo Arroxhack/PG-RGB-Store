@@ -18,8 +18,8 @@ import {MdOutlineSpaceDashboard} from 'react-icons/md'
 //localStorage.getItem("username");
 //localStorage.getItem("admin");
 function NavBar() {
-  const username = true
-  const admin = true
+  const username = localStorage.getItem("username")
+  const admin = localStorage.getItem("admin")
 
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -175,33 +175,13 @@ function NavBar() {
             <SearchBar/>
           </div>
 
-
-
-          <div className="flex justify-between  md:w-1/4 items-center sm:hidden lg:block ">
-            <div className="buttom">
-              <Link
-                to="/logIn"
-                className=" sm:text-xs  text-primary-400 md:text-xl sm:mr-2 sm:w-10 lg:text-base  "
-              >
-                Log in
-              </Link>
-            </div>
-            <div className=" lg:mr-[-6rem]">
-              <Link
-                to="/register"
-                className=" sm:text-xs text-primary-400  md:text-xl buttom lg:text-base"
-              >
-                Register
-              </Link>
-            </div>
-          </div>
         
             {/* ADMIN, PERFIL Y LOG OUT */}
           <div className="lg:flex lg:justify-between  items-center sm:justify-end sm:w-18 lg:w-1/6 ">
             {username ? (
               <div className="lg:flex lg:ml-[-4rem] items-center sm:hidden lg:block">
                 <Link to="/profile"  className="sm:text-xs text-primary-400 md:text-xl flex lg:ml-[-2rem] ">
-                <span className="text-base text-primary buttom">profile</span>
+                <span className="text-base text-primary buttom">{username}</span>
                 </Link>{" "}
                 <Logout  />
                 <Link to='/favoritos'><button className="text-base text-primary buttom">Favoritos</button></Link>

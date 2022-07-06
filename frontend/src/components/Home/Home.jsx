@@ -10,6 +10,7 @@ import Product from "../Product/Product";
 import ContainerProduct from "../ContainerProduct/ContainerProduct";
 import Slider from "../Slider.jsx/Slider";
 import Promo from "./PromLeft";
+import {SiWhatsapp} from 'react-icons/si'
 
 function Home() {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ function Home() {
      
       <Slider/>
       <div className="lg:flex lg:flex-col lg:items-center lg:justify-center mt-4 lg:w-full ">
-      <div className="sm:mt-8 lg:w-11/12">
+      <div className="sm:mt-8 lg:w-11/12 flex justify-center">
       <h1 className="fornt-open font-semibold text-primary-400 text-2xl w-14 ">Motherboards</h1>
       <Promo
       left={true}
@@ -46,15 +47,20 @@ function Home() {
       products={mothers}
       />
       </div>
-      <div className="sm:mt-8 lg:w-11/12" >
-      <h1 className="fornt-open font-semibold text-primary-400 text-2xl titles w-28 ">the best of asus</h1>
+      <div className="sm:mt-8 lg:w-11/12 flex flex-col items-center justify-center" >
+      <h1 className="fornt-open font-semibold text-primary-400 text-2xl titles lg:w-48 ">the best of asus</h1>
       <Promo
       left={false}
       img={'https://concepto.de/wp-content/uploads/2018/08/placa-madre4-e1534448782751.jpg'}
       products={asus}
       />
+
+      <div className="flex justify-center w-full">
+        <img className="w-11/12 lg:cursor-pointer" src="https://cdn.jsdelivr.net/gh/persano/BannersWebMaximus/armado-pc-home/arma-tu-compu-new.webp" alt="" />
       </div>
-      <div className=" sm:mt-8 lg:w-11/12">
+      </div>
+
+      <div className=" sm:mt-8 lg:w-11/12 flex justify-center">
       <h1 className="fornt-open font-semibold text-primary-400 text-2xl border-b-2 w-8">Cases</h1>
         <Promo
       left={false}
@@ -64,8 +70,11 @@ function Home() {
       </div>
       </div>
       <div>
+        <img src="https://compudel.com.pe/img/cms/BANNERS/BANNER%20EMPRESAS%20ANTEFINAL.png" alt="compra" className="w-full lg:cursor-pointer "/>
+      </div>
+      <div>
         <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank">
-          <img className='fixed bottom-2 right-2 w-20 m-5' src="https://storage.googleapis.com/m-infra.appspot.com/public/whatsapp/Whatsapp_logo.svg"/>
+        < SiWhatsapp className="fixed bottom-2 right-2 w-20 m-5 lg:h-11 lg:w-14 text-primary-400 lg:hover:"/>
         </a>
       </div>
     </div>

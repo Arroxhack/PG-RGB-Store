@@ -12,9 +12,9 @@ const Promo = ({left, img, products}) => {
 
 
   return (
-    <div className={left ? ' lg:flex flex-row lg:gap-5 lg:items-center lg:mt-10 lg:mb-10 lg:justify-center bg-primary-200 lg:px-16 lg:py-5 rounded-xl' 
-    : 'lg:flex lg:flex-row-reverse  lg:gap-5  lg:items-center lg:mt-10 lg:mb-10 lg:justify-center bg-primary-200  rounded-xl  '}>
-       <img src={img} alt="" className={ left?'ease-out duration-300 object-cover lg:h-96 lg:w-72 sm:h-40 sm:w-20 mt-6 rounded-bl-2xl rounded-tl-2xl transform hover:scale-110 sm:hidden lg:block' : ' object-cover lg:h-96 lg:w-72 sm:h-40 sm:w-20 mt-6 rounded-br-2xl rounded-tr-2xl hover:translate-y-2 transform hover:scale-110 ease-out duration-300 sm:hidden lg:block'} />
+    <div className={left ? ' lg:w-11/12 lg:flex flex-row lg:gap-5 lg:items-center lg:mt-10 lg:mb-10 bg-primary-200  rounded-xl' 
+    : 'lg:flex lg:flex-row-reverse  lg:gap-5  lg:items-center lg:mt-10 lg:mb-10  bg-primary-200  rounded-xl lg:w-11/12  '}>
+       <img src={img} alt="" className={ left?'ease-out duration-300 object-cover lg:h-96 lg:w-72 sm:h-40 sm:w-20 mt-6 rounded-bl-2xl rounded-tl-2xl transform hover:scale-110 sm:hidden lg:block lg:mr-[-4rem] lg:relative' : ' object-cover lg:h-96 lg:w-72 sm:h-40 sm:w-20 mt-6 rounded-br-2xl rounded-tr-2xl hover:translate-y-2 transform hover:scale-110 ease-out duration-300 sm:hidden lg:block lg:ml-[-4rem] lg:relative '} />
        <Swiper
         slidesPerView={3}
         loop={true}

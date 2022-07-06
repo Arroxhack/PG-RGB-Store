@@ -32,6 +32,7 @@ export default function Slider() {
         </SwiperSlide>
         <SwiperSlide  className='w-full h-96'><img src={promo2}  className='w-full h-80' alt="" /></SwiperSlide>
         <SwiperSlide  className='w-full h-96'><img src={promo3}  className='w-full h-80' alt="" /></SwiperSlide>
+        <SwiperSlide className='w-full h-96'> <img src="https://cdn.jsdelivr.net/gh/persano/BannersWebMaximus/top-slider/pc-armadas-gamer.webp" className='w-full h-80' alt="" /></SwiperSlide>
       </Swiper>
     </>
   );
