@@ -202,10 +202,15 @@ export default function LogIn() {
           navigate("/");
         }
       } else {
-        Swal(
-          "El email asociado a la cuenta de google no coincide con ningun usuario registrado",
-          "...redirigiendo para registrarse como un nuevo usuario!"
-        ); // sweet alert
+        Swal.fire({
+          icon: "warning",
+          title: "Oops...",
+          html:
+            `El email asociado a la cuenta de google no coincide con ningun usuario registrado` +
+            "</br>" +
+            "</br>" +
+            `...redirigiendo para registrarse como un nuevo usuario!`
+        });
         navigate("/register");
       }
     }
