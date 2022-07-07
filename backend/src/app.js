@@ -60,7 +60,7 @@ passport.use(
       .then((user) => {
         if (!user) {
           return done(null, false, {
-            message: "Error Nombre de usuario incorrecto",
+            message: "Error invalid username",
           });
         }
         if (user) {
@@ -70,7 +70,7 @@ passport.use(
             if (res === false) {
               // No hay coincidencia entre las password
               return done(null, false, {
-                message: "Error Contraseña incorrecta",
+                message: "Error invalid password",
               });
             }
             if (res === true) {
@@ -114,7 +114,7 @@ server.use((req, res, next) => {
   next();
 });
 server.get("/login", (req, res) => {
-  res.send("Username o contraseña incorrecta");
+  res.send("Invalid username or password");
 });
 
 server.use("/", routes);
