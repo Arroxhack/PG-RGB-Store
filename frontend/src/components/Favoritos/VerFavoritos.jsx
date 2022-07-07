@@ -26,22 +26,26 @@ useEffect(()=>{
     login &&
     dispatch(getProductFavorito(idUser));
 },[refresh,dispatch])
-console.log('soy fav: ', favoritos)
+//console.log('soy fav: ', favoritos)
 return (
 <div className='h-screen flex flex-col  overflow-auto items-center bg-primary-200'>
     <NavBar />
     <div className='flex justify-center items-center w-full'>
-        <div className='w-3/5 bg-primary-200 h-4/5'>
+        <div className='w-3/5 bg-primary-200 h-auto'>
         
-    <h1>FAVORITOS</h1>
+        <div className='flex flex-col items-center'>
+            <h1 className='font-pt font-bold text-primary-300'>FAVORITOS</h1>
+        </div>
+        
         <div className='object-center h-full bg-primary-200 flex flex-col content-center place-content-center text-center'>
         {favoritos.map((p)=>{
             return(
-                <div key={p.id} className='flex pb-4 h-48 justify-start bg-secundary-250 border-b border-primary-200'>
+                <div key={p.id} className='flex h-full justify-start bg-secundary-250 border-b border-primary-200'>
             
-                    <div className='max-h-max object-fit flex items-center bg-secundary-100'>
-                        <img className='object-center max-h-max  w-40' src={p.image[0]} alt='p-foto'/>
+                    <div className='bg-secundary-100'>
+                        <img className='object-contain h-36 w-36' src={p.image[0]} alt='p-foto'/>
                     </div>
+
                     <div className='flex flex-col ml-12 items-start justify-evenly'>
                     <div>
                         <p className='font-PT text-xl mt-3'>{p.name}</p>
