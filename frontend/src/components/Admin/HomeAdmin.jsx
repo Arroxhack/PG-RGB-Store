@@ -15,7 +15,7 @@ const HomeAdmin = () => {
   const { page } = useParams();
 
   const admin = localStorage.getItem("admin");
-  const username = localStorage.getItem("username");
+  const username = window.atob(localStorage.getItem("username"));
 
   const [Validate, setValidate] = useState(true);
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Menu = () => {
-  const username = localStorage.getItem("username");
+  const username = window.atob(localStorage.getItem("username"));
   return (
     <div className="text-secundary-100">
       <div>
