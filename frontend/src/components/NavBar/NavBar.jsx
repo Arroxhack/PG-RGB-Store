@@ -224,7 +224,7 @@ function NavBar() {
         )}
 
         {/* CARRITO */}
-        <div className="flex flex-col items-center text-primary-400 sm:h-full lg:mr-6 ">
+        <div className="flex flex-col items-center text-primary-300 sm:h-full lg:mr-6 ">
           <TiShoppingCart
             onClick={handleCart}
             className="h-6 w-7 md:h-10 md:w-10 relative cursor-pointer lg:hover:translate-y-px"
