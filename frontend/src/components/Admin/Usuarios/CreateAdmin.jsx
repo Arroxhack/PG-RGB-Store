@@ -5,7 +5,7 @@ import { useState } from "react";
 import swal from "sweetalert2";
 
 const CreateAdmin = () => {
-  const idAdmin = localStorage.getItem("id");
+  const idAdmin = window.atob(localStorage.getItem("id"));
   const [users, setUsers] = useState([]);
   const [Userid, setUserid] = useState(0);
   const [method, setMethod] = useState("Upgradear a Admin");

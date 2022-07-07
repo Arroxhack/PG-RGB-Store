@@ -7,7 +7,6 @@ const router = Router();
 
 router.post("/resendEmailLogin", async (req, res) => {
   const { email } = req.body;
-  console.log(email);
   const user = await User.findOne({ where: { email: email } });
   if (user?.lock) {
     return res.send("Error Account blocked");
@@ -19,7 +18,7 @@ router.post("/resendEmailLogin", async (req, res) => {
       text: "", // plain text body
       html: `<b>ENVIAMOS DE NUEVO TU CODIGO DE VERIFICACION:</b> <h1>${user.secretToken}</h1>`, // html body
     });
-    res.send("Codigo Reenviado");
+   return res.send("Codigo Reenviado");
   }
 });
 
@@ -34,9 +33,9 @@ router.post("/resendEmail", async (req, res) => {
       text: "", // plain text body
       html: `<b>ENVIAMOS DE NUEVO TU CODIGO DE VERIFICACION:</b> <h1>${user.secretToken}</h1>`, // html body
     });
-    res.send("Codigo Reenviado");
+   return res.send("Codigo Reenviado");
   } else {
-    res.send("Error usuario no encontrado");
+   return  res.send("Error usuario no encontrado");
   }
 });
 
