@@ -72,7 +72,7 @@ export default function LogIn() {
         text: "Su Cuenta no esta verificada, sera redirigido a una pagina para verificar su correo electronico",
         button: "Aceptar",
       });
-      ResendEmail(email);
+      await ResendEmail(email);
       return navigate(`/validate/${username}`);
     }
     

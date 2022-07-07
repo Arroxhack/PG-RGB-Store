@@ -19,6 +19,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
   const username = localStorage.getItem("username");
+
   // console.log(username);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -153,8 +154,10 @@ export default function Profile() {
           <NavBar />
           <div className="flex flex-col items-center justify-center min-h-screen h-full bg-primary-200">
             <div className="max-w-4xl p-6 mx-auto bg-secundary-250 rounded-md shadow-md">
-              <h1 className="text-2xl font-open font-bold pb-5 capitalize">Profile</h1>
-              
+              <h1 className="text-2xl font-open font-bold pb-5 capitalize">
+                Profile
+              </h1>
+
               {editPerfil === false ? (
                 <form className="font-Open">
                   <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
@@ -162,17 +165,15 @@ export default function Profile() {
                     <p>{user.name}</p>
                     <h2 className="font-semibold">Last Name:</h2>
                     <p>{user.lastname}</p>
-                    <h2  className="font-semibold">Email:</h2>
+                    <h2 className="font-semibold">Email:</h2>
                     <p>{user.email}</p>
-                    <h2  className="font-semibold">Username:</h2>
+                    <h2 className="font-semibold">Username:</h2>
                     <p>{user.username}</p>
-                    <h2  className="font-semibold">Cellphone:</h2>
-                      <p>{user.cellphone
-                        ? "+" + user.cellphone
-                        : "Not found"}</p>
-                    <h2  className="font-semibold">Address:</h2>
-                      <p>{user.address ? user.address : "Not found"}</p>
-                    <h2  className="font-semibold">Image:</h2>
+                    <h2 className="font-semibold">Cellphone:</h2>
+                    <p>{user.cellphone ? "+" + user.cellphone : "Not found"}</p>
+                    <h2 className="font-semibold">Address:</h2>
+                    <p>{user.address ? user.address : "Not found"}</p>
+                    <h2 className="font-semibold">Image:</h2>
                     <p>
                       {user.image ? (
                         <img
@@ -183,6 +184,8 @@ export default function Profile() {
                         "Not found"
                       )}
                     </p>
+                    <h2 className="font-semibold">Points:</h2>
+                    <p>{user.points}</p>
                   </div>
                   <button
                     id="EditProfile"
@@ -205,7 +208,7 @@ export default function Profile() {
                     {console.log(NameEdit)}
                   </div>
                   <div className="text-lg font-semibold capitalize ">
-                    <label >LastName:</label>
+                    <label>LastName:</label>
                     <input
                       name="Lastname"
                       className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
@@ -225,7 +228,6 @@ export default function Profile() {
                   <div className="text-lg font-semibold capitalize ">
                     <h2>Phone:</h2>
                     <PhoneInput
-                    
                       name="cellphone"
                       country={"ar"}
                       value={CellphoneEdit}
@@ -259,10 +261,10 @@ export default function Profile() {
                       Erase Image
                     </button>
                   </div>
-                  
+
                   <div className="flex row space-x-3">
                     <button
-                       className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                      className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
                       onClick={(e) => handleChangePassword(e)}
                     >
                       Change Password
@@ -302,7 +304,6 @@ export default function Profile() {
               <div>
                 {Commend.length > 0 ? (
                   <>
-            
                     <CommentPending ComentariosPending={Commend} />{" "}
                   </>
                 ) : (
