@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 function ChangePassword() {
   const navigate = useNavigate();
-  const username = localStorage.getItem("username");
+  const username = window.atob(localStorage.getItem("username"));
   const [user, setUser] = useState({
     password: "",
     passwordValidate: "",

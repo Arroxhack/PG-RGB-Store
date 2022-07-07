@@ -5,13 +5,13 @@ import axios from "axios";
 import { CrearComentarioReview } from "./crearComentario";
 import { useNavigate } from "react-router-dom";
 import { SendReview } from "./SendEmail";
-
+import { givePoints } from "./Points";
 
 export default function Pagando() {
   const navigate = useNavigate();
-  const username = localStorage.getItem("username"); //julianpardeiro
+  const username = window.atob(localStorage.getItem("username")); //julianpardeiro
   let product = localStorage.getItem("cartProducts");
-//   console.log("product: ", product);
+  //   console.log("product: ", product);
   let productJSON = JSON.parse(product);
   console.log("productJSON: ", productJSON);
 
@@ -28,7 +28,8 @@ export default function Pagando() {
   });
   console.log("articulos: ", articulos);
 
-  let PrecioTotalArticulos = articulos[0].unit_amount.value * articulos[0].quantity;
+  let PrecioTotalArticulos =
+    articulos[0].unit_amount.value * articulos[0].quantity;
 
   let multiplicacionEntreValueYQuantity = articulos.map((e) => {
     return e.unit_amount.value * e.quantity;
@@ -42,41 +43,42 @@ export default function Pagando() {
     );
   }
   const createOrder = (data, actions) => {
-    return actions.order.create({
-      purchase_units: [
-        {
-          reference_id: "PUHF",
-          description: "Sporting Goods",
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            reference_id: "PUHF",
+            description: "Sporting Goods",
 
-          custom_id: "CUST-HighFashions",
-          soft_descriptor: "HighFashions",
-          amount: {
-            currency_code: "USD",
-            value: PrecioTotalArticulos.toFixed(2), //value: "230.00"
-            breakdown: {
-              item_total: {
-                currency_code: "USD",
-                value: PrecioTotalArticulos.toFixed(2), //value: "180.00"
+            custom_id: "CUST-HighFashions",
+            soft_descriptor: "HighFashions",
+            amount: {
+              currency_code: "USD",
+              value: PrecioTotalArticulos.toFixed(2), //value: "230.00"
+              breakdown: {
+                item_total: {
+                  currency_code: "USD",
+                  value: PrecioTotalArticulos.toFixed(2), //value: "180.00"
+                },
+                // shipping: {
+                //     currency_code: "USD",
+                //     value: "30.00"
+                // },
+                // handling: {
+                //     currency_code: "USD",
+                //     value: "10.00"
+                // },
+                // tax_total: {
+                //     currency_code: "USD",
+                //     value: "20.00"
+                // },
+                // shipping_discount: {
+                //     currency_code: "USD",
+                //     value: "10"
+                // }
               },
-              // shipping: {
-              //     currency_code: "USD",
-              //     value: "30.00"
-              // },
-              // handling: {
-              //     currency_code: "USD",
-              //     value: "10.00"
-              // },
-              // tax_total: {
-              //     currency_code: "USD",
-              //     value: "20.00"
-              // },
-              // shipping_discount: {
-              //     currency_code: "USD",
-              //     value: "10"
-              // }
             },
-          },
-          items: articulos /* [{
+            items: articulos /* [{
                 name: "T-Shirt", //aca
                 description: "Green XL", //aca
                 sku: "sku01",
@@ -106,28 +108,28 @@ export default function Pagando() {
                 quantity: "2",
                 category: "PHYSICAL_GOODS"
             }] */,
-          shipping: {
-            method: "United States Postal Service",
-            address: {
-              name: {
-                full_name: "John",
-                surname: "Doe",
+            shipping: {
+              method: "United States Postal Service",
+              address: {
+                name: {
+                  full_name: "John",
+                  surname: "Doe",
+                },
+                address_line_1: "123 Townsend St",
+                address_line_2: "Floor 6",
+                admin_area_2: "San Francisco",
+                admin_area_1: "CA",
+                postal_code: "94107",
+                country_code: "US",
               },
-              address_line_1: "123 Townsend St",
-              address_line_2: "Floor 6",
-              admin_area_2: "San Francisco",
-              admin_area_1: "CA",
-              postal_code: "94107",
-              country_code: "US",
             },
           },
-        },
-      ],
-    })
-    .then((orderId) => {
-        console.log("createOrder-orderId: ", orderId)
-        return orderId
-    })
+        ],
+      })
+      .then((orderId) => {
+        console.log("createOrder-orderId: ", orderId);
+        return orderId;
+      });
   };
 
   const onApprove = (data, actions) => {
@@ -137,10 +139,10 @@ export default function Pagando() {
         let id = e.description.split("-")[1];
         return id;
       });
-      console.log("ACAAAAAAAAAA", detalles.purchase_units[0].items);
       const productsArray = detalles.purchase_units[0].items.map((e) => {
         return { name: e.name, cant: e.quantity, price: e.unit_amount.value };
       });
+      const resultPoint = await givePoints(username, productsArray);
       await SendReview(username, productsArray, detalles.id);
       await CrearComentarioReview(username, arregloSoloId, detalles.id);
       Swal.fire({
@@ -152,6 +154,7 @@ export default function Pagando() {
           "</br>" +
           `Amount paid: ${detalles.purchase_units[0].amount.value} USD` +
           "</br>" +
+          `${resultPoint}` +
           "</br>" +
           `Transaction number: ${detalles.id}`,
         // text: `Transaction number: ${detalles.id}`,
@@ -178,7 +181,7 @@ export default function Pagando() {
       })
         .then((e) => e.data)
         .catch((e) => console.log(e));
-        navigate("/done");
+      navigate("/done");
     });
   };
 

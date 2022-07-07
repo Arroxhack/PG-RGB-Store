@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -9,11 +9,11 @@ import Swal from "sweetalert2";
 import { CartContext } from "../Cart/CartContext";
 
 export default function Validations() {
-  const {setProducts, products} = useContext(CartContext)
+  const { setProducts, products } = useContext(CartContext);
   const navigate = useNavigate();
   const [token, setToken] = useState("");
   let { username } = useParams();
-  const cartProductArray = localStorage.getItem('cartProducts');
+  const cartProductArray = localStorage.getItem("cartProducts");
 
   async function HandleSubmit(e) {
     e.preventDefault();
@@ -45,38 +45,43 @@ export default function Validations() {
         text: `Verificacion Completa`,
         button: "Aceptar",
       });
-      let {lastname, verify, username, email, permissions, name, id} =
+      let { lastname, verify, username, email, permissions, name, id } =
         UserRegister.user;
-        console.log("UserRegister: ", UserRegister);
-        if(UserRegister.validate && email){
-          const response = await axios({
-            //La ruta trae toda la info en la base de datos de un usuario
-            method: "post",
-            url: "http://localhost:3001/userCart",
-            data: { email, cartProductArray }, //
-            headers: { "X-Requested-With": "XMLHttpRequest" },
-            withCredentials: true,
-          }).then((res) => res.data).catch(e=>console.log(e));
-  
-          const ress = await Promise.all([response]);
-          console.log("ress: ", ress);
+      console.log("UserRegister: ", UserRegister);
+      if (UserRegister.validate && email) {
+        const response = await axios({
+          //La ruta trae toda la info en la base de datos de un usuario
+          method: "post",
+          url: "http://localhost:3001/userCart",
+          data: { email, cartProductArray }, //
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+          withCredentials: true,
+        })
+          .then((res) => res.data)
+          .catch((e) => console.log(e));
 
-          try {
-            const carritoDb = await axios.get(`http://localhost:3001/userCart?email=${email}`)
-              let carritoDbData = carritoDb.data.filter(e => e.id)
-              console.log("carritoDbData: ", carritoDbData)
-              setProducts([...carritoDbData])
-              // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
-          } catch (error) {
-            console.log(error)
-          }
+        const ress = await Promise.all([response]);
+        console.log("ress: ", ress);
+
+        try {
+          const carritoDb = await axios.get(
+            `http://localhost:3001/userCart?email=${email}`
+          );
+          let carritoDbData = carritoDb.data.filter((e) => e.id);
+          console.log("carritoDbData: ", carritoDbData);
+          setProducts([...carritoDbData]);
+          // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
+        } catch (error) {
+          console.log(error);
         }
-      localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
-      localStorage.setItem("name", name);
-      localStorage.setItem("lastname", lastname);
+      }
+      //Seteo lo que trajo la ruta al localstorage
+      localStorage.setItem("username", window.btoa(username));
+      localStorage.setItem("name", window.btoa(name));
+      localStorage.setItem("lastname", window.btoa(lastname));
       localStorage.setItem("login", true);
-      localStorage.setItem("email", email);
-      localStorage.setItem("id", id);
+      localStorage.setItem("email", window.btoa(email));
+      localStorage.setItem("id", window.btoa(id));
       if (permissions === true) {
         localStorage.setItem("admin", permissions);
       }
