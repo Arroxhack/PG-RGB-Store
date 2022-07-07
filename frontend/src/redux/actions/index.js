@@ -40,6 +40,10 @@ import {
   GET_COMMEND_PENDING,
   GET_COMMEND_PRODUCT,
   FILTER_PRICE,
+  SEND_RESPONSE,
+  GET_QUESTION,
+  GET_QUEST,
+  POST_QUESTION,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -703,4 +707,90 @@ export function VaciarStateProductComment() {
       console.log(error);
     }
   };
+}
+/// QUESTIONS
+export const getQuestions = ()=>{
+  return async(dispatch)=>{
+    try{
+      const question = await axios.get(`${PATH}/not-response`)
+
+      return dispatch({
+        type: GET_QUESTION,
+        payload: question.data
+      })
+
+    }catch(error){
+      console.log(error)
+    }
+  }
+}
+
+export const sendResponse = (rta)=>{
+  return async(dispatch)=>{
+    const {id} = rta
+    const {response} = rta
+    console.log(id, response, 'ACAAAA')
+
+    try {
+      const send = await axios.put(`${PATH}/create-response/${id}`, {response})
+      if(send.data){
+        return dispatch({
+          type: SEND_RESPONSE
+        })
+      }
+
+    } catch (error) {
+      Swal.fire({
+        icon:'alert',
+        text:'Se produjo un error, vuelva a intentar por favor',
+        confirmButtonText: 'Ok'
+      })
+    }
+  }
+}
+
+export const getQuest = (id)=>{
+  return async(dispatch)=>{
+    try {
+      const questionProduct = await axios.get(`${PATH}/comment/${id}`)
+
+      if(questionProduct.data){
+        return dispatch({
+          type:GET_QUEST,
+          payload:questionProduct.data
+        })
+      }
+
+    } catch (error) {
+      Swal.fire({
+        icon:'alert',
+        text:'Se produjo un error, vuelva a intentar por favor',
+        confirmButtonText: 'Ok'
+      })
+    }
+  }
+}
+
+export const postQuest = (question)=>{
+  return async(dispatch)=>{
+    const {id}=question;
+    const {comentario, user}=question;
+    try {
+      const postQuestion = await axios.post(`${PATH}/create-comment/${id}`, {comment:comentario, user})
+
+      if(postQuestion){
+        return dispatch({
+          type: POST_QUESTION
+        })
+      }
+
+    } catch (error) {
+      Swal.fire({
+        icon:'alert',
+        text:'Se produjo un error, vuelva a intentar por favor',
+        confirmButtonText: 'Ok'
+      })
+    }
+  }
+
 }

@@ -24,11 +24,8 @@ const Create = require('./admin/CreateProduct');
 const GetUsers = require('./admin/GetUsers');
 const CreateAdminUser = require('./admin/CreateAdminUser');
 const ResetPassword = require('./user/ResetPassword');
-<<<<<<< HEAD
 const Comment = require('./Comment/comment')
-=======
 const hardAdmin = require('./admin/HardCodeAdmin');
->>>>>>> fd112254d68a429fcc66d81263c08e234f6daad1
 // FILTER
 const filterProduct = require('./filter/filter');
 

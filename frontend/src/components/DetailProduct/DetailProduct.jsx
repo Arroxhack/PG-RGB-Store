@@ -9,6 +9,7 @@ import { CartContext } from "../Cart/CartContext";
 import Swal from "sweetalert2";
 import Favorito from "../Favoritos/Favorito";
 import CommentReview from "./CommentReview";
+import Questions from "./Questions";
 
 function DetailProduct() {
   const dispatch = useDispatch();
@@ -218,6 +219,7 @@ function DetailProduct() {
               </div>
              
               <CommentReview idProduct={id} />
+              <Questions id={id}/>
             </div>
           </div>
         )}
