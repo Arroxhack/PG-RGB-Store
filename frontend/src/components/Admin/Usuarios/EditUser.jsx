@@ -3,7 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const EditUser = () => {
-  const idAdmin = localStorage.getItem("id");
+  const idAdmin = window.atob(localStorage.getItem("id"));
   const [users, setUsers] = useState([]);
   const [usersFilter, setUsersFilter] = useState([]);
   const [Userid, setUserid] = useState(0);

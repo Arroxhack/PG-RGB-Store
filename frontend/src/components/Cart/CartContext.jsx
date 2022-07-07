@@ -31,7 +31,7 @@ const CartProvider = ({children}) => {
         //console.log(products)
         // console.log("products: ", products);
         const login = localStorage.getItem('login');
-        const email = localStorage.getItem('email');
+        const email = window.atob(localStorage.getItem('email'));
         const cartProductArray = localStorage.getItem('cartProducts');
         // console.log("login: ", login, ", email: ", email, ", cartProductArray: ", cartProductArray)
         if(login && email){

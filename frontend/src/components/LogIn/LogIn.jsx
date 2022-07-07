@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { verify } from "../../redux/actions";
-import { useNavigate, } from "react-router";
+import { useNavigate } from "react-router";
 import jwt_decode from "jwt-decode";
 import NavBar from "../NavBar/NavBar";
 import Swal from "sweetalert2";
@@ -10,8 +10,8 @@ import { CartContext } from "../Cart/CartContext";
 
 export default function LogIn() {
   let navigate = useNavigate();
-  const cartProductArray = localStorage.getItem('cartProducts');
-  console.log('cartProductArray: ', cartProductArray);
+  const cartProductArray = localStorage.getItem("cartProducts");
+  console.log("cartProductArray: ", cartProductArray);
   const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
   const [password, setPassword] = useState(""); // Llega del input del form password al hacer submit.
   const [googleUser, setGoogleUser] = useState({});
@@ -19,8 +19,8 @@ export default function LogIn() {
   const refresh = () => {
     window.location.reload(false);
   };
-  const {setProducts, products} = useContext(CartContext)
- 
+  const { setProducts, products } = useContext(CartContext);
+
   const ResendEmail = async (email) => {
     const result = await axios({
       method: "post",
@@ -28,7 +28,7 @@ export default function LogIn() {
       data: { email }, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
-    });
+    }).then((e) => e.data);
     if (result[0] === "E" && result[1] === "r" && result[2] === "r") {
       Swal.fire({
         icon: "error",
@@ -38,7 +38,7 @@ export default function LogIn() {
       });
     } else {
       Swal.fire({
-        icon: "succes",
+        icon: "success",
         title: "EXITO",
         text: `${result}`,
         button: "Aceptar",
@@ -63,7 +63,8 @@ export default function LogIn() {
       .then((data) => data.data)
       .catch((e) => console.log(e));
 
-    let { login, lastname, verify, username, email, permissions, name, id } = user; //Info que trae la ruta
+    let { login, lastname, verify, username, email, permissions, name, id } =
+      user; //Info que trae la ruta
 
     if (verify === false) {
       Swal.fire({
@@ -72,33 +73,39 @@ export default function LogIn() {
         text: "Su Cuenta no esta verificada, sera redirigido a una pagina para verificar su correo electronico",
         button: "Aceptar",
       });
-      ResendEmail(email);
+      await ResendEmail(email);
       return navigate(`/validate/${username}`);
     }
-    
-    if (login) {   //!!!!
-        // const cartProductArray = localStorage.getItem('cartProducts');
-        const email = user.email; //email del usuario logeado
-        const response = await axios({ //La ruta trae toda la info en la base de datos de un usuario
-          method: "post",
-          url: "http://localhost:3001/userCart",
-          data: {email,cartProductArray}, // cartProductArray -> array de objetos del local storage
-          headers: { "X-Requested-With": "XMLHttpRequest" },
-          withCredentials: true,
-        }).then((res)=> res.data).catch(e=>console.log(e));
 
-        const ress = await Promise.all([response]);
-        console.log("ress: ", ress);
+    if (login) {
+      //!!!!
+      // const cartProductArray = localStorage.getItem('cartProducts');
+      const email = user.email; //email del usuario logeado
+      const response = await axios({
+        //La ruta trae toda la info en la base de datos de un usuario
+        method: "post",
+        url: "http://localhost:3001/userCart",
+        data: { email, cartProductArray }, // cartProductArray -> array de objetos del local storage
+        headers: { "X-Requested-With": "XMLHttpRequest" },
+        withCredentials: true,
+      })
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
 
-        try {
-          const carritoDb = await axios.get(`http://localhost:3001/userCart?email=${user.email}`)
-            let carritoDbData = carritoDb.data.filter(e => e.id)
-            console.log("carritoDbData: ", carritoDbData)
-            setProducts([...carritoDbData])
-            // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
-        } catch (error) {
-          console.log(error)
-        }
+      const ress = await Promise.all([response]);
+      console.log("ress: ", ress);
+
+      try {
+        const carritoDb = await axios.get(
+          `http://localhost:3001/userCart?email=${user.email}`
+        );
+        let carritoDbData = carritoDb.data.filter((e) => e.id);
+        console.log("carritoDbData: ", carritoDbData);
+        setProducts([...carritoDbData]);
+        // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
+      } catch (error) {
+        console.log(error);
+      }
 
       if (ress[0] === "E" && ress[1] === "r" && ress[2] === "r") {
         Swal.fire({
@@ -110,12 +117,12 @@ export default function LogIn() {
           return navigate("/login");
         });
       } else {
-        localStorage.setItem("username", username); //Seteo lo que trajo la ruta al localstorage
-        localStorage.setItem("name", name);
-        localStorage.setItem("lastname", lastname);
+        localStorage.setItem("username", window.btoa(username)); //Seteo lo que trajo la ruta al localstorage
+        localStorage.setItem("name",window.btoa(name));
+        localStorage.setItem("lastname",window.btoa(lastname));
         localStorage.setItem("login", login);
-        localStorage.setItem("email", email);
-        localStorage.setItem("id", id);
+        localStorage.setItem("email", window.btoa(email));
+        localStorage.setItem("id", window.btoa(id));
         if (permissions === true) {
           localStorage.setItem("admin", permissions);
         }
@@ -165,19 +172,23 @@ export default function LogIn() {
           data: { email, cartProductArray }, //
           headers: { "X-Requested-With": "XMLHttpRequest" },
           withCredentials: true,
-        }).then((res) => res.data).catch(e=>console.log(e));
+        })
+          .then((res) => res.data)
+          .catch((e) => console.log(e));
 
         const ress = await Promise.all([response]);
         console.log("ress: ", ress);
 
         try {
-          const carritoDb = await axios.get(`http://localhost:3001/userCart?email=${user.email}`)
-            let carritoDbData = carritoDb.data.filter(e => e.id)
-            console.log("carritoDbData: ", carritoDbData)
-            setProducts([...carritoDbData])
-            // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
+          const carritoDb = await axios.get(
+            `http://localhost:3001/userCart?email=${user.email}`
+          );
+          let carritoDbData = carritoDb.data.filter((e) => e.id);
+          console.log("carritoDbData: ", carritoDbData);
+          setProducts([...carritoDbData]);
+          // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
 
         if (response[0] === "E" && response[1] === "r" && response[2] === "r") {
@@ -209,7 +220,7 @@ export default function LogIn() {
             `El email asociado a la cuenta de google no coincide con ningun usuario registrado` +
             "</br>" +
             "</br>" +
-            `...redirigiendo para registrarse como un nuevo usuario!`
+            `...redirigiendo para registrarse como un nuevo usuario!`,
         });
         navigate("/register");
       }
@@ -274,7 +285,9 @@ export default function LogIn() {
             >
               Login
             </button>
-            <button onClick={ ()=> navigate("/forgotPassword")} >Forgot Password</button>
+            <button onClick={() => navigate("/forgotPassword")}>
+              Forgot Password
+            </button>
             <div id="signInDiv"></div>
             <br />
             <div className="t-6">
