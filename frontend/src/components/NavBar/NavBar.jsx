@@ -15,8 +15,11 @@ import svg from "../../images/rename.svg";
 import { FiLogIn } from "react-icons/fi";
 import { BsPencilSquare } from "react-icons/bs";
 function NavBar() {
-  const username = localStorage.getItem("username");
+  let username = localStorage.getItem("username");
   const admin = localStorage.getItem("admin");
+  if (username) {
+    username = window.atob(localStorage.getItem("username"));
+  }
 
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -188,7 +191,11 @@ function NavBar() {
               <span className="text-base text-primary buttom">profile</span>
             </Link>{" "}
             <Logout />
-            <Link to='/favoritos'><button  className="flex lg:ml-[-1rem] text-base text-primary buttom items-center sm:hidden lg:block">Favoritos</button></Link>
+            <Link to="/favoritos">
+              <button className="flex lg:ml-[-1rem] text-base text-primary buttom items-center sm:hidden lg:block">
+                Favoritos
+              </button>
+            </Link>
             {admin ? (
               <Link to="/admin/list-products">
                 <button className="text-base text-primary buttom">
@@ -218,9 +225,6 @@ function NavBar() {
               </Link>
             </div>
           </div>
-
-        
-         
         )}
 
         {/* CARRITO */}

@@ -9,7 +9,7 @@ import { givePoints } from "./Points";
 
 export default function Pagando() {
   const navigate = useNavigate();
-  const username = localStorage.getItem("username"); //julianpardeiro
+  const username = window.atob(localStorage.getItem("username")); //julianpardeiro
   let product = localStorage.getItem("cartProducts");
   //   console.log("product: ", product);
   let productJSON = JSON.parse(product);

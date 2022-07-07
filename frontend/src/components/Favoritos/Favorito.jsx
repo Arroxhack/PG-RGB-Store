@@ -6,7 +6,7 @@ import {useEffect} from 'react'
 
 function Favorito({id}) {
     const login = localStorage.getItem('login');
-    const idUser = localStorage.getItem('id');
+    const idUser = window.atob(localStorage.getItem('id'));
     const navigate = useNavigate();
     const dispatch = useDispatch();
    

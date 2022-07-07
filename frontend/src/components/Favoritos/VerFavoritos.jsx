@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 function VerFavoritos() {
 const login = localStorage.getItem('login');
-const idUser = localStorage.getItem('id');
+const idUser = window.atob(localStorage.getItem('id'));
 const dispatch = useDispatch();
 const favoritos = useSelector(state=>state.favoritos)
 const [refresh,setRefresh] = useState('');

@@ -17,9 +17,8 @@ import CommentPending from "./CommentPending";
 
 export default function Profile() {
   const navigate = useNavigate();
-  const id = localStorage.getItem("id");
-  const username = localStorage.getItem("username");
-
+  const id = window.atob(localStorage.getItem("id"));
+  const username = window.atob(localStorage.getItem("username"));
   // console.log(username);
   const dispatch = useDispatch();
   useEffect(() => {
