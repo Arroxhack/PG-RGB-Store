@@ -9,6 +9,7 @@ import { CartContext } from "../Cart/CartContext";
 import Swal from "sweetalert2";
 import Favorito from "../Favoritos/Favorito";
 import CommentReview from "./CommentReview";
+import Questions from "./Questions";
 
 function DetailProduct() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ function DetailProduct() {
     toast: true,
     position: "bottom-end",
     showConfirmButton: false,
-    timer: 2000,
+    timer: 500,
   });
 
   function discount() {
@@ -60,13 +61,14 @@ function DetailProduct() {
       <div className="relative z-50 mb-11 bg-primary-200">
         <NavBar />
       </div>
-      <section className="font-Open bg-primary-200 absolute z-100 mt-40">
+      <section className={loading ? 'flex justify-center' : "font-Open bg-primary-200 absolute z-100 mt-40"}>
         {loading ? (
           <div>
             <Loading />
           </div>
         ) : (
-          <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
+          <>
+            <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
             <div className="grid items-start grid-cols-1  md:grid-cols-2">
               <div className="grid grid-cols-2 md:grid-cols-1 ">
                 <div className="aspect-w-1 aspect-h-1">
@@ -216,11 +218,23 @@ function DetailProduct() {
                 <Favorito id={ProductDetail.id}/> 
               </div>
              
-              <CommentReview idProduct={id} />
             </div>
+            
           </div>
+          
+          <div className="max-w-[1000px] my-0 mx-auto">
+        <CommentReview idProduct={id} />
+
+        <Questions id={id}/>  
+        </div></>
+
+          
         )}
+
+
+
       </section>
+      
     </div>
   );
 }
