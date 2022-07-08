@@ -16,7 +16,6 @@ function DetailProduct() {
   id = Number(id);
 
   const { addProductToCart } = useContext(CartContext);
-
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
