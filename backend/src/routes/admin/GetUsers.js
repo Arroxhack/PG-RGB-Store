@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { User } = require("../../db");
 const router = Router();
+const bcrypt = require("bcrypt")
 
 router.get("/Users", async (req, res, next) => {
   try {
@@ -16,8 +17,16 @@ router.get("/Users/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const OneUsers = await User.findOne({ where: { id: id } });
-    const { name, lastname, username, email, image, cellphone, address } =
-      OneUsers;
+    const {
+      name,
+      lastname,
+      username,
+      email,
+      image,
+      cellphone,
+      address,
+      points,
+    } = OneUsers;
     const usuario = {
       name: name,
       lastname: lastname,
@@ -26,6 +35,7 @@ router.get("/Users/:id", async (req, res, next) => {
       image: image,
       cellphone: cellphone,
       address: address,
+      points: points,
     };
     usuario?.username
       ? res.send(usuario)

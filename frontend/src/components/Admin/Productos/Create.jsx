@@ -13,7 +13,7 @@ import CreateProduct from "./CreateProduct";
 
 const Create = () => {
   const admin = localStorage.getItem("admin");
-  const username = localStorage.getItem("username");
+  const username = window.atob(localStorage.getItem("username"));
 
   let [searchParms, setSearchParams] = useSearchParams();
 

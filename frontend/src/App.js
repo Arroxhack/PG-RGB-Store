@@ -12,6 +12,8 @@ import Error from "./components/Error/Error.jsx";
 import Profile from "./components/profile/Profile";
 import ValidateNewPassword from "./components/profile/ValidateNewPassword.jsx";
 import CheckProduct from "./components/BuildPc/CheckProduct";
+import Armado from "./components/BuildPc/Armado";
+import "./App.css";
 import Pagando from "./components/Paypal/Pagando";
 import CheckoutCart from "./components/Cart/CheckoutCart";
 import Done from "./components/Cart/Done";
@@ -20,9 +22,8 @@ import DetailForComment from "./components/profile/DetailForComment";
 import Edit from "./components/Admin/Productos/Edit";
 import Create from "./components/Admin/Productos/Create";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
-import Armado from "./components/BuildPc/Armado";
-import "./App.css";
 
+import Prueba from "./components/prueba.jsx";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} exact />
         <Route path="/products/:id" element={<DetailProduct />} exact />
+        {/* <Route path="/cart" element={<Cart />} /> */}
         <Route path="/arma-tu-pc" element={<BuildPc />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/logIn" element={<LogIn />} />
@@ -41,8 +43,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/paypal" element={<Pagando />} exact />
         <Route path="/done" element={<Done />} />
-        <Route path="/" element={<Home />} exact />
-        <Route path="/products/:id" element={<DetailProduct />} exact />
         <Route
           path="/productsDetail/:id"
           element={<DetailForComment />}
@@ -55,10 +55,10 @@ function App() {
           element={<ValidateNewPassword />}
         />
         <Route path="*" element={<Error />} />
-        <Route path="/done" element={<Done />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
         <Route path="/probando" element={<Armado />} />
+        <Route path="/prueba" element={<Prueba />} />
       </Routes>
     </div>
   );

@@ -13,7 +13,7 @@ function DetailProduct() {
   let { id } = useParams();
   id = Number(id);
   const navigate = useNavigate();
-  const username = localStorage.getItem("username");
+  const username = window.atob(localStorage.getItem("username"));
   const [loading, setLoading] = useState(false);
   const [comment, setComentario] = useState("");
 
