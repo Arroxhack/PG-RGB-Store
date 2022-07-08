@@ -499,7 +499,6 @@ export function searchProducts(search) {
     axios
       .get(`${PATH}/product?name=` + search)
       .then((products) => {
-        console.log(products, ' soy products');
         dispatch({
           type: SEARCH_PRODUCTS,
           payload: products.data,
@@ -729,13 +728,14 @@ export const sendResponse = (rta)=>{
   return async(dispatch)=>{
     const {id} = rta
     const {response} = rta
-    console.log(id, response, 'ACAAAA')
 
     try {
       const send = await axios.put(`${PATH}/create-response/${id}`, {response})
       if(send.data){
-        return dispatch({
-          type: SEND_RESPONSE
+        Swal.fire({
+          icon: 'success',
+          text: 'Response sent successfully',
+          confirmButtonText:'OK'
         })
       }
 
@@ -743,7 +743,7 @@ export const sendResponse = (rta)=>{
       Swal.fire({
         icon:'alert',
         text:'Se produjo un error, vuelva a intentar por favor',
-        confirmButtonText: 'Ok'
+        confirmButtonText: 'OK'
       })
     }
   }
@@ -778,9 +778,36 @@ export const postQuest = (question)=>{
     try {
       const postQuestion = await axios.post(`${PATH}/create-comment/${id}`, {comment:comentario, user})
 
-      if(postQuestion){
-        return dispatch({
-          type: POST_QUESTION
+        if(postQuestion.data){
+          Swal.fire({
+            icon: 'success',
+            text: 'Response sent successfully',
+            confirmButtonText:'OK'
+          })
+        }
+
+    } catch (error) {
+      Swal.fire({
+        icon:'alert',
+        text:'Se produjo un error, vuelva a intentar por favor',
+        confirmButtonText: 'Ok'
+      })
+    }
+  }
+
+}
+
+export const deleteQuest = (id)=>{
+  return async(dispatch)=>{
+    try {
+      console.log(id)
+      const deleteQUEST = await axios.delete(`${PATH}/delete-question/${id}`)
+
+      if(deleteQUEST.data){
+        Swal.fire({
+          icon: 'success',
+          text: 'Delete question successfully',
+          confirmButtonText:'OK'
         })
       }
 
@@ -792,5 +819,4 @@ export const postQuest = (question)=>{
       })
     }
   }
-
 }

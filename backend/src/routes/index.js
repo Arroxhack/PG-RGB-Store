@@ -17,7 +17,7 @@ const deleteFav = require("./user/deleteFavoritos");
 const getFav = require("./user/getFavoritos");
 const pointuser = require("./points/pointuser");
 //====ADMIN===
-<<<<<<< HEAD
+
 const EditUser = require('./admin/EditUser');
 const VerifyPassword = require('./admin/VerifyPassword');
 const Delete = require('./admin/DeleteProduct');
@@ -28,17 +28,7 @@ const CreateAdminUser = require('./admin/CreateAdminUser');
 const ResetPassword = require('./user/ResetPassword');
 const Comment = require('./Comment/comment')
 const hardAdmin = require('./admin/HardCodeAdmin');
-=======
-const EditUser = require("./admin/EditUser");
-const VerifyPassword = require("./admin/VerifyPassword");
-const Delete = require("./admin/DeleteProduct");
-const Put = require("./admin/EditProduct");
-const Create = require("./admin/CreateProduct");
-const GetUsers = require("./admin/GetUsers");
-const CreateAdminUser = require("./admin/CreateAdminUser");
-const ResetPassword = require("./user/ResetPassword");
-const hardAdmin = require("./admin/HardCodeAdmin");
->>>>>>> f430c8e12fcfe49d4118e478459a0d27bc9fab95
+
 // FILTER
 const filterProduct = require("./filter/filter");
 

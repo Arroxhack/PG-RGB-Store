@@ -24,7 +24,7 @@ function DetailProduct() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 2000);
     dispatch(getProductDetail(id));
   }, []);
 
@@ -38,7 +38,7 @@ function DetailProduct() {
     toast: true,
     position: "bottom-end",
     showConfirmButton: false,
-    timer: 2000,
+    timer: 10000000,
   });
 
   function discount() {
@@ -64,11 +64,12 @@ function DetailProduct() {
       </div>
       <section className="font-Open bg-primary-200 absolute z-100 mt-40">
         {loading ? (
-          <div>
+          <div className="flex justify-center ">
             <Loading />
           </div>
         ) : (
-          <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
+          <>
+            <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
             <div className="grid items-start grid-cols-1  md:grid-cols-2">
               <div className="grid grid-cols-2 md:grid-cols-1 ">
                 <div className="aspect-w-1 aspect-h-1">
@@ -218,12 +219,23 @@ function DetailProduct() {
                 <Favorito id={ProductDetail.id}/> 
               </div>
              
-              <CommentReview idProduct={id} />
-              <Questions id={id}/>
             </div>
+            
           </div>
+          
+          <div className="max-w-[1000px] my-0 mx-auto">
+        <CommentReview idProduct={id} />
+
+        <Questions id={id}/>  
+        </div></>
+
+          
         )}
+
+
+
       </section>
+      
     </div>
   );
 }
