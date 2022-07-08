@@ -54,7 +54,7 @@ const initialState = {
   newProduct: [],
   UserData: [],
   filterPrice: [],
-  buildPc: {},
+  buildPc: [],
   productsByCategory: [],
   filterBrands: [],
   filterOrder: [],
