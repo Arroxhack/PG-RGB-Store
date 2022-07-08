@@ -13,14 +13,14 @@ function Selects({ name, handleChange }) {
   }, [dispatch]);
 
   const allProducts = useSelector((state) => state.allProducts);
-
+  console.log(allProducts)
 
   return (
     <>
       <label className="p-2 mx-0 mb-2 mt-0 block font-Open font-bold leading-none cursor-pointer" htmlFor={id}>{label}</label>
       <select className="border-solid rounded p-2 mx-0 mb-2 mt-0 block text-base leading-none bg-secundary-250 cursor-pointer" name={id} id={id} onChange={handleChange}>
       <option value="">Choose your {name}</option>
-      {allProducts.map((p) => (p.category[0] === `${name}` ? <option> {p.name} </option>: null))}
+      {allProducts.map((p) => (p.category[0] === `${name}` ? <option  value={p.image}> {p.name} </option>: null))}
       </select>
     </>
   );
