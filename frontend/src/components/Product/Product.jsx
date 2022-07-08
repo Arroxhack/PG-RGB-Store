@@ -42,7 +42,11 @@ const Product = ({ product}) => {
        dispatch(deleteProductFavorito(product.id,idUser))
        setFav(' ')
      }
-  
+     useEffect(()=>{
+    
+      dispatch(getProductFavorito(idUser));
+
+  },[fav,dispatch])
 
 
      const favId= favorito.map(e=>e.id)
