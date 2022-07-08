@@ -17,8 +17,8 @@ function Selects({ name, handleChange }) {
 
   return (
     <>
-      <label htmlFor={id}>{label}</label>
-      <select name={id} id={id} onChange={handleChange}>
+      <label className="p-2 mx-0 mb-2 mt-0 block font-Open font-bold leading-none cursor-pointer" htmlFor={id}>{label}</label>
+      <select className="border-solid rounded p-2 mx-0 mb-2 mt-0 block text-base leading-none bg-secundary-250 cursor-pointer" name={id} id={id} onChange={handleChange}>
       <option value="">Choose your {name}</option>
       {allProducts.map((p) => (p.category[0] === `${name}` ? <option> {p.name} </option>: null))}
       </select>
