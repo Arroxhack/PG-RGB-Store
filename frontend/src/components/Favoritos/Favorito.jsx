@@ -24,33 +24,41 @@ function Favorito({id}) {
     const dispatch = useDispatch();
     const [isFavorite, setIsFavorite] = useState(false);
     const favorito = useSelector(state=>state.favoritos)
+    const favId = favorito.map(e=>e.id);
     
 
-    const checkFavorite = ()=>{
-      const favId = favorito.map(e=>e.id)
-      const check = favId.includes(id);
-      console.log('soy check: ', check)
-      if(check){
-        setIsFavorite(true)
-      }
-    }
-
+    // const checkFavorite = ()=>{
+    //   const favId = favorito.map(e=>e.id)
+    //   const check = favId.includes(id);
+    //   console.log('soy check: ', check)
+    //   if(check){
+    //     setIsFavorite(true)
+    //   }
+    // }
     const handleClickAdd = (e)=>{
         e.preventDefault();
         dispatch(addProductFavorito(id,idUser));
         dispatch(getProductFavorito(idUser));
+
+        const newArr = JSON.parse(localStorage.getItem('fav'));
+        newArr.push(id);
+        localStorage.setItem('fav',JSON.stringify(newArr));
         setIsFavorite(true);
     }
 
     const handleClickDelete = (e)=>{
       e.preventDefault();
       dispatch(deleteProductFavorito(id,idUser));
-      
+      dispatch(getProductFavorito(idUser));
+      const newArr = JSON.parse(localStorage.getItem('fav'));
+      const arr = newArr.filter(i=>i!== id);
+      localStorage.setItem('fav',JSON.stringify(arr));
       setIsFavorite(false);
     }
 
     useEffect(() => {
-      checkFavorite();
+      // checkFavorite();
+      localStorage.setItem('fav',JSON.stringify(favId))
       dispatch(getProductFavorito(idUser));
     }, [isFavorite,dispatch]);
   return (
