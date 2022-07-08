@@ -15,10 +15,10 @@ const ContainerProduct = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 800);
+    // setLoading(true);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 0);
     dispatch(getAllProducts())
     dispatch(cleanFilter())
   }, []);
