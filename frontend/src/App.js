@@ -6,24 +6,19 @@ import Categories from "./components/Categories/Categories";
 import LogIn from "./components/LogIn/LogIn";
 import Register from "./components/Register/Register.jsx";
 import Validacion from "./components/ValidateMail/Validacion.jsx";
-
 import HomeAdmin from "./components/Admin/HomeAdmin";
 import BuildPc from "./components/BuildPc/BuildPc";
-// import Amd from "./components/BuildPc/Amd";
-// import Intel from "./components/BuildPc/Intel";
 import Error from "./components/Error/Error.jsx";
 import Profile from "./components/profile/Profile";
 import ValidateNewPassword from "./components/profile/ValidateNewPassword.jsx";
 import CheckProduct from "./components/BuildPc/CheckProduct";
-
+import Armado from "./components/BuildPc/Armado";
 import "./App.css";
 import Pagando from "./components/Paypal/Pagando";
 import CheckoutCart from "./components/Cart/CheckoutCart";
 import Done from "./components/Cart/Done";
-
 import VerFavoritos from "./components/Favoritos/VerFavoritos";
 import DetailForComment from "./components/profile/DetailForComment";
-
 import Edit from "./components/Admin/Productos/Edit";
 import Create from "./components/Admin/Productos/Create";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
@@ -48,14 +43,11 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/paypal" element={<Pagando />} exact />
         <Route path="/done" element={<Done />} />
-        <Route path="/" element={<Home />} exact />
-        <Route path="/products/:id" element={<DetailProduct />} exact />
         <Route
           path="/productsDetail/:id"
           element={<DetailForComment />}
           exact
         />
-        {/* <Route path="/cart" element={<Cart />} /> */}
         <Route path="/cart" element={<CheckoutCart />} />
         <Route path="/favoritos" element={<VerFavoritos />} />
         <Route
@@ -63,11 +55,9 @@ function App() {
           element={<ValidateNewPassword />}
         />
         <Route path="*" element={<Error />} />
-
-        {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
-
-        <Route path="/done" element={<Done />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
+        {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
+        <Route path="/probando" element={<Armado />} />
         <Route path="/prueba" element={<Prueba />} />
       </Routes>
     </div>
