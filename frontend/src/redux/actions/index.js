@@ -115,7 +115,6 @@ export function clean() {
 export function cleanFilter() {
   return {
     type: CLEAN_FILTER,
-    payload: [],
   };
 }
 export function cleanFilterBrands() {

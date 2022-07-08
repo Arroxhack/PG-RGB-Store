@@ -32,18 +32,12 @@ export default function Categories () {
 
   return (
     <div className="bg-primary-200  flex flex-col ">
-      
-      
       <NavBar/>
-      
-      
-      
     <div className='w-full flex justify-between   '>
-      <div className=' bg-primary-200'>
+    <div className=' bg-primary-200'>
     <SideBar/>
     </div>
     <div className="my-0 mx-auto w-screen bg-primary-200 ">
-
     <ContainerProduct/>
     </div>
       </div>

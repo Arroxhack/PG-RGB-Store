@@ -295,7 +295,7 @@ const reducer = (state = initialState, action) => {
     case CLEAN_FILTER:
       return {
         ...state,
-        filtros: action.payload,
+        products: [],
       };
 
     case CLEAN_FILTER_BRANDS:

@@ -24,7 +24,7 @@ function DetailProduct() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 500);
     dispatch(getProductDetail(id));
   }, []);
 
@@ -38,7 +38,7 @@ function DetailProduct() {
     toast: true,
     position: "bottom-end",
     showConfirmButton: false,
-    timer: 10000000,
+    timer: 500,
   });
 
   function discount() {
@@ -62,9 +62,9 @@ function DetailProduct() {
       <div className="relative z-50 mb-11 bg-primary-200">
         <NavBar />
       </div>
-      <section className="font-Open bg-primary-200 absolute z-100 mt-40">
+      <section className={loading ? 'flex justify-center' : "font-Open bg-primary-200 absolute z-100 mt-40"}>
         {loading ? (
-          <div className="flex justify-center ">
+          <div>
             <Loading />
           </div>
         ) : (
