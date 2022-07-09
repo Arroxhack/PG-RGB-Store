@@ -17,15 +17,15 @@ function Armado() {
   const [selectedCase, setSelectedCase] = useState([]);
 
   const [build,setBuild] = useState({
-    "CPU": [],
-     "Motherboard": [],
-     "Ram": [],
-     "GPU": [],
-     "HDD": [],
-     "SSD": [],
-     "SSD M.2": [],
-     "Power Supply": [],
-     "Case": [],
+    "CPU": {},
+     "Motherboard": {},
+     "Ram": {},
+     "GPU": {},
+     "HDD": {},
+     "SSD": {},
+     "SSD M.2": {},
+     "Power Supply":{},
+     "Case": {},
    });
 
   const {addProductToCart } = useContext(CartContext);
@@ -33,7 +33,9 @@ function Armado() {
 
   const sendCard = (e) => {
     e.preventDefault();
-    addProductToCart(build)
+    let buildTotal = Object.values(build)
+    console.log(buildTotal)
+    addProductToCart(buildTotal)
   };
   const dispatch = useDispatch();
 
