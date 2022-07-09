@@ -40,7 +40,7 @@ function Home() {
       <Slider/>
       <div className="flex flex-col items-center justify-center mt-4 w-full ">
       <div className="sm:mt-8 w-11/12 flex flex-col items-center justify-center">
-      <h1 className="fornt-open font-semibold text-primary-400 text-2xl w-14 ">Motherboards</h1>
+      <h1 className="font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase">Motherboards</h1>
       <Promo
       left={true}
       img={'https://www.aorus.com/image/gallery/gallery-1615431112.jpg'}
@@ -48,7 +48,7 @@ function Home() {
       />
       </div>
       <div className="sm:mt-8 w-11/12 flex flex-col items-center justify-center" >
-      <h1 className="fornt-open font-semibold text-primary-400 text-2xl titles w-48 ">the best of asus</h1>
+      <h1 className="font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase">the best of asus</h1>
       <Promo
       left={false}
       img={'https://concepto.de/wp-content/uploads/2018/08/placa-madre4-e1534448782751.jpg'}
@@ -62,7 +62,7 @@ function Home() {
 
       <Marcas/>
       <div className=" sm:mt-8 w-11/12 flex flex-col items-center justify-center">
-      <h1 className="sm:mt-8 w-11/12 flex flex-col items-center justify-center">Cases</h1>
+      <h1 className="sm:mt-8 w-11/12 flex flex-col items-center justify-center font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase">Cases</h1>
         <Promo
       left={false}
       img={'https://concepto.de/wp-content/uploads/2018/08/placa-madre4-e1534448782751.jpg'}
