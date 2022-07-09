@@ -42,3 +42,8 @@ export const FILTER_PRICE = 'FILTER_PRICE';
 export const GET_COMMEND_PENDING = 'GET_COMMEND_PENDING';
 export const GET_COMMEND_PRODUCT = 'GET_COMMEND_PRODUCT';
 export const GET_FAV = 'GET_FAV';
+// QUESTION //
+export const SEND_RESPONSE = 'SEND_RESPONSE'
+export const GET_QUESTION = 'GET_QUESTION'
+export const GET_QUEST = 'GET_QUEST'
+export const POST_QUESTION = 'POST_QUESTION'

@@ -3,7 +3,7 @@
     height: 12rem;
     border-radius: 50%;
     position: relative;
-    animation: rotate 1s linear infinite
+    animation: rotate 1s linear infinite;
   }
   .loader::before , .loader::after {
     content: "";

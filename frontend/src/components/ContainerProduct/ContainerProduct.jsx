@@ -2,28 +2,40 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Product from '../Product/Product';
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from '../Loading/Loading'
 import Swal from "sweetalert2";
+import { cleanFilter, getAllProducts } from "../../redux/actions";
 
 const ContainerProduct = () => {
   const allProducts = useSelector(state=>state.products)
 
+  const dispatch = useDispatch()
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    // setLoading(true);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 0);
+    dispatch(getAllProducts())
+    dispatch(cleanFilter())
   }, []);
 
+  useEffect(()=>{},[allProducts])
+
   return (
-    <div  className="lg:grid lg:grid-cols-4 lg:w-full lg:gap-12 lg:grid-rows-none relative sm:flex sm:flex-col sm:w-full sm:justify-center sm:items-center md:grid md:grid-cols-2 md:justify-items-center md:gap-4" >
-        {allProducts.length>0?allProducts.map(p=>
-                <Link key={p.id} to={`/products/${p.id}`}>
-                    <Product product={p}/>
-                </Link>): <div className="h-screen w-full flex justify-center items-center"><Loading/></div>}
+    <div  className={loading ? 'flex justify-center' :"lg:grid lg:grid-cols-4 lg:w-full lg:gap-12 lg:grid-rows-none relative sm:flex sm:flex-col sm:w-full sm:justify-center sm:items-center md:grid md:grid-cols-2 md:justify-items-center md:gap-4" }>
+        {loading ? 
+        <div>
+        <Loading/>
+      </div>:
+      allProducts && allProducts.map(p=>
+        <Link key={p.id} to={`/products/${p.id}`}>
+          <Product product={p}/>
+        </Link>)
+      }
     </div>
   )
 }
