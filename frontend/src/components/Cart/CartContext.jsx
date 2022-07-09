@@ -45,16 +45,20 @@ const CartProvider = ({children}) => {
         }
     }, [products])
 
-    const addProductToCart= product=>{
+    const addProductToCart= product =>{
+       /* Finding the product in the cart. */
         const inCart = products.find(p=>p.id===product.id)
+       /* Logging the product that is in the cart. */
         console.log("inCart: ", inCart)
         if(inCart){
+            /* Adding the amount of the product to the cart. */
             setProducts(products.map(p=>{
                 if(p.id===product.id){
                     return {...inCart, amount: inCart.amount+1}
                 } else return p
             }))
-        }        else{
+        }       /* Adding the product to the cart. */
+         else{
             setProducts([...products, {...product, amount:1}])
         }
         Toast.fire({
@@ -62,6 +66,11 @@ const CartProvider = ({children}) => {
             title: "Added to cart!",
           });
     }
+
+    // const addBuildToCart = {} => {
+
+    // }
+
 
     const deleteProductCart = (product) =>{
         

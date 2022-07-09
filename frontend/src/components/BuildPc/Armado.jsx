@@ -29,13 +29,13 @@ function Armado() {
    });
 
   const {addProductToCart } = useContext(CartContext);
-  //verificar vacios 
+ 
+  
 
+ 
   const sendCard = (e) => {
     e.preventDefault();
-    let buildTotal = Object.values(build)
-    console.log(buildTotal)
-    addProductToCart(buildTotal)
+ 
   };
   const dispatch = useDispatch();
 
