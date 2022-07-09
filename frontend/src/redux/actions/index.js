@@ -716,7 +716,7 @@ export const getQuestions = ()=>{
         type: GET_QUESTION,
         payload: question.data
       })
-
+      console.log('ACA ESTAMOS')
     }catch(error){
       console.log(error)
     }

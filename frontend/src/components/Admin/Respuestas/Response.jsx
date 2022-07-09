@@ -8,7 +8,9 @@ import { useSearchParams } from 'react-router-dom'
 
 const Response = () => {
     const dispatch = useDispatch()
+    let page = useSelector(state=>state.page)
     let questions = useSelector(state=>state.questionAdmin)
+
     const [params, setParams] = useSearchParams()
 
     const pageQuery = params.get('page')
@@ -29,7 +31,9 @@ const Response = () => {
 
     useEffect(()=>{
         dispatch(getQuestions())
-    },[])
+        params.set('page',page)
+        setParams(params)
+    },[page])
 
     const handleResponse = (index, rta)=>{
         setResponse({
@@ -69,7 +73,7 @@ const Response = () => {
 
     return (
         <>
-        {questions.length > 0 ? 
+        {questions[0] ? 
             <div className="h-auto w-[800px] my-auto mx-auto py-8 px-10  flex flex-col items-center gap-5">
             {questions.map((q,i)=>{
                 const index = i

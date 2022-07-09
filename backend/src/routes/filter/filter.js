@@ -153,6 +153,7 @@ router.get("/filter", async (req, res, next) => {
           res.send(allProduct);
         } else {
           allProduct = [];
+
           if (category !== "all") {
             products.forEach((p) => {
               if (category === p.category[0]) {
@@ -195,8 +196,11 @@ router.get("/filter", async (req, res, next) => {
               }
             }
           }
-  
-          res.send(allProduct);
+          
+          if(category==='all'){
+            allProduct = products
+            res.send(allProduct);
+          }
         }
       }
     }else{
