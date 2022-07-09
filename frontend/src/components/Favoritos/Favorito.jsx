@@ -22,28 +22,18 @@ function Favorito({id}) {
     const idUser = window.atob(localStorage.getItem('id'));
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [isFavorite, setIsFavorite] = useState(false);
-    const favorito = useSelector(state=>state.favoritos)
-    const favId = favorito.map(e=>e.id);
-    
 
-    // const checkFavorite = ()=>{
-    //   const favId = favorito.map(e=>e.id)
-    //   const check = favId.includes(id);
-    //   console.log('soy check: ', check)
-    //   if(check){
-    //     setIsFavorite(true)
-    //   }
-    // }
+    const initialUserFavs =  JSON.parse(localStorage.getItem('fav')) || [];
+    const [userFavs, setUserFavs] = useState(initialUserFavs);
+
     const handleClickAdd = (e)=>{
         e.preventDefault();
         dispatch(addProductFavorito(id,idUser));
         dispatch(getProductFavorito(idUser));
-
         const newArr = JSON.parse(localStorage.getItem('fav'));
         newArr.push(id);
+        setUserFavs(newArr);
         localStorage.setItem('fav',JSON.stringify(newArr));
-        setIsFavorite(true);
     }
 
     const handleClickDelete = (e)=>{
@@ -52,20 +42,20 @@ function Favorito({id}) {
       dispatch(getProductFavorito(idUser));
       const newArr = JSON.parse(localStorage.getItem('fav'));
       const arr = newArr.filter(i=>i!== id);
+      setUserFavs(arr);
       localStorage.setItem('fav',JSON.stringify(arr));
-      setIsFavorite(false);
     }
 
     useEffect(() => {
-      // checkFavorite();
-      localStorage.setItem('fav',JSON.stringify(favId))
-      dispatch(getProductFavorito(idUser));
-    }, [isFavorite,dispatch]);
+      //Array de id favoritos en local storage
+      localStorage.setItem('fav',JSON.stringify(userFavs))
+      
+    },[userFavs]);
   return (
     <div>
   {
       login ?
-      isFavorite ?
+      userFavs.includes(id) ?
       <div>
         <Delete id={`delete-${id}`} onClick={handleClickDelete}/>
         </div>
