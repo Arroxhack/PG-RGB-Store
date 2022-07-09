@@ -201,14 +201,14 @@ export default function LogIn() {
             return navigate("/login");
           });
         } else {
-          localStorage.setItem("username", user.username);
-          localStorage.setItem("name", user.name);
-          localStorage.setItem("lastname", user.lastname);
+          localStorage.setItem("username", window.btoa(user.username));
+          localStorage.setItem("name", window.btoa(user.name));
+          localStorage.setItem("lastname", window.btoa(user.lastname));
           localStorage.setItem("login", true);
-          localStorage.setItem("email", user.email);
-          localStorage.setItem("id", user.id);
+          localStorage.setItem("email", window.btoa(user.email));
+          localStorage.setItem("id", window.btoa(user.id));
           if (user.permissions === true) {
-            localStorage.setItem("admin", user.permissions);
+            localStorage.setItem("admin", window.btoa(user.permissions));
           }
           navigate("/");
         }

@@ -17,15 +17,18 @@ const deleteFav = require("./user/deleteFavoritos");
 const getFav = require("./user/getFavoritos");
 const pointuser = require("./points/pointuser");
 //====ADMIN===
-const EditUser = require("./admin/EditUser");
-const VerifyPassword = require("./admin/VerifyPassword");
-const Delete = require("./admin/DeleteProduct");
-const Put = require("./admin/EditProduct");
-const Create = require("./admin/CreateProduct");
-const GetUsers = require("./admin/GetUsers");
-const CreateAdminUser = require("./admin/CreateAdminUser");
-const ResetPassword = require("./user/ResetPassword");
-const hardAdmin = require("./admin/HardCodeAdmin");
+
+const EditUser = require('./admin/EditUser');
+const VerifyPassword = require('./admin/VerifyPassword');
+const Delete = require('./admin/DeleteProduct');
+const Put = require('./admin/EditProduct');
+const Create = require('./admin/CreateProduct');
+const GetUsers = require('./admin/GetUsers');
+const CreateAdminUser = require('./admin/CreateAdminUser');
+const ResetPassword = require('./user/ResetPassword');
+const Comment = require('./Comment/comment')
+const hardAdmin = require('./admin/HardCodeAdmin');
+
 // FILTER
 const filterProduct = require("./filter/filter");
 
@@ -36,6 +39,33 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+router.use('/', Products);
+router.use('/', Category);
+router.use('/api', CargarDB);
+router.use('/', Register);
+router.use('/', Delete);
+router.use('/', Put);
+router.use('/', Login);
+router.use('/', Logout);
+router.use('/', Create);
+router.use('/', GetUsers);
+router.use('/', Brand);
+router.use('/', EditUser);
+router.use('/', LoadCartProduct);
+router.use('/', email);
+router.use('/', CreateAdminUser);
+router.use('/', ResetPassword);
+router.use('/', Comment)
+router.use('/', editProfile);
+router.use('/', filterProduct);
+router.use('/', removeFromStock);
+router.use('/', VerifyPassword);
+router.use('/', VerifyStock);
+router.use('/', review);
+router.use('/', favorite);
+router.use('/', deleteFav);
+router.use('/', getFav);
+router.use('/', hardAdmin);
 router.use("/", Products);
 router.use("/", Category);
 router.use("/api", CargarDB);

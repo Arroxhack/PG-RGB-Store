@@ -8,6 +8,7 @@ import Ordenamientos from "../Ordenamientos/Ordenamientos";
 import NavBar from '../NavBar/NavBar'
 import ContainerProduct from '../ContainerProduct/ContainerProduct'
 import { useSearchParams } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 
 export default function Categories () {
@@ -26,27 +27,37 @@ export default function Categories () {
         params.set('category', 'all')
         setParams(params)
       }
-      dispatch(clean())
+      dispatch(cleanFilter())
+    }, []);
+
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+      dispatch(cleanFilter())
     }, []);
 
 
   return (
-    <div className="bg-primary-200  flex flex-col ">
-      
-      
-      <NavBar/>
-      
-      
-      
-    <div className='w-full flex justify-between   '>
-      <div className=' bg-primary-200'>
-    <SideBar/>
-    </div>
-    <div className="my-0 mx-auto w-screen bg-primary-200 ">
 
-    <ContainerProduct/>
+    <div className="bg-primary-200 h-screen flex flex-col ">
+    <NavBar/>
+    {loading ? 
+    <div className="bg-primary-200 h-auto flex justify-center">
+      <Loading/>
     </div>
-      </div>
+     :
+        <div className='h-auto bg-primary-200 flex justify-between'>
+        <div className='bg-primary-200'>
+        <SideBar/>
+        </div>
+        <div className="my-0 mx-auto h-auto bg-primary-200 ">
+        <ContainerProduct/>
+        </div>
+        </div>}
 
     </div>
     

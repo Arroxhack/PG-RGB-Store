@@ -24,6 +24,15 @@ const Menu = () => {
           </h3>
         </Link>
         <div className="bg-secundary-100 h-[1px] w-[150px] my-3"></div>
+        <Link to="/admin/question-answer">
+          <h3
+            value="question-answer"
+            className="hover:bg-primary hover:text-primary-200 px-5 cursor-pointer"
+          >
+            Questions & answers
+          </h3>
+        </Link>
+        <div className="bg-secundary-100 h-[1px] w-[150px] my-3"></div>
         <Link to="/admin/create-admin">
           <h3
             value="create-admin"

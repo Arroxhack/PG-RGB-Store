@@ -40,11 +40,11 @@ export default function Logout() {
   return (
     <div className="flex items-center py-2">
       <button onClick={(e) => onClick(e)}>
-        <BiLogOut className="h-4 w-4 md:h-12 md:w-14  text-primary-400 lg:hidden " />
+        <BiLogOut className="h-4 w-4 md:h-10 md:w-8  text-primary-400 lg:hidden " />
       </button>
       <span
         onClick={(e) => onClick(e)}
-        className="text-base text-primary buttom"
+        className="lg:text-base md:text-2xl md:ml-2 text-primary buttom lg:w-18 lg:mr-2 "
       >
         Log Out
       </span>
