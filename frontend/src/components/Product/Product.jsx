@@ -6,6 +6,8 @@ import {MdOutlineFavoriteBorder,MdOutlineFavorite} from 'react-icons/md'
 import { deleteProductFavorito,addProductFavorito, getProductFavorito } from '../../redux/actions';
 import {useNavigate} from 'react-router-dom'
 import {useSelector,useDispatch,} from 'react-redux'
+import Favorito from "../Favoritos/Favorito";
+
 
 
 const Product = ({ product}) => {
@@ -55,11 +57,6 @@ const Product = ({ product}) => {
      lg:hover:shadow-lg lg:hover:shadow-primary-400 lg:hover:-translate-y-0.1 sm:w-52 sm:h-38 sm:mt-6  md:h-80 md:w-64 '>
            <div className="ml-48 mt-2 absolute">
 
-        {login? 
-        <button onClick={favId.includes(product.id)?handleClickDelete:handleClickAdd}>
-          <MdOutlineFavorite className="h-8 w-8 text-primary-500  active:text-primary-200 transform hover:scale-110"/>
-        </button>:<button onClick={()=>navigate('/login')}><MdOutlineFavorite className="h-8 w-8"/></button>
-      }
 
 
 {/*         
@@ -78,9 +75,15 @@ const Product = ({ product}) => {
         <h3 className='lg:text-xl font-bold sm:text-base md:text-xl'>{`$${product.price}`}</h3>
         <p className='lg:text-xs text-center uppercase sm:text-xs md:text-base'>{product.name}</p>        
         </div>
-        <button className=" text-primary bg-primary-200 lg:px-3 lg:py-1 rounded-sm lg:mb-2  
+
+        {/* <button className=" text-primary bg-primary-200 lg:px-3 lg:py-1 rounded-sm lg:mb-2  
         border-primary-400  md:px-6 md:py-2 md:rounded-sm flex items-center sm:py-1 sm:px-2 sm:mb-2 lg:hover:bg-secundary-250 lg:hover:text-primary-200 lg:transform "
-         onClick={sendCard}><TiShoppingCart className="md:h-8 md:w-6 "/> Add to cart</button>
+         onClick={sendCard}><TiShoppingCart className="md:h-8 md:w-6 "/> Add to cart</button> */}
+
+        <Favorito id={product.id}/>
+        <button className="bg-primary-300 lg:px-3 lg:py-1 rounded-sm lg:mb-2  border-primary-400 lg:hover:border lg:hover:border-primary-100  md:px-6 md:py-2 md:rounded-sm flex items-center sm:py-1 sm:px-2 sm:mb-2 "
+         onClick={sendCard}><TiShoppingCart className="md:h-8 md:w-6"/> Add to cart</button>
+
     </div>
   );
 };

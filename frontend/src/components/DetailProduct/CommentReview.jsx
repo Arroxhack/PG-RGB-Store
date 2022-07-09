@@ -41,7 +41,6 @@ export default function CommentReview({ idProduct }) {
             <p>There's no reviews yet.</p>
           </div>
         )}
-        {console.log(ComentariosReducidos)}
       </div>
     </div>
   );

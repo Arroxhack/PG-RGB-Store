@@ -13,7 +13,7 @@ const BoxCart = ({ onClick }) => {
   products.forEach((p) => (total += p.amount * p.price));
 
   return (
-    <div className="h-auto  dropdown-toggle w-[520px] font-Open px-5 bg-secundary-250 text-primary-200 rounded mt-10 -ml-80 absolute z-10 md:text-center md:items-center">
+    <div className="h-auto  dropdown-toggle lg:w-[520px] sm:w-80 font-Open px-5 bg-secundary-250 text-primary-200 rounded mt-10 lg:-ml-80 sm:-ml-[25.5rem]  absolute z-10 md:text-center md:items-center">
       <div className="flex flex-row-reverse pr-2"></div>
       <div>
         {products.length <= 0 ? (
@@ -26,20 +26,20 @@ const BoxCart = ({ onClick }) => {
                   key={p.id}
                   className="grid grid-cols-[2fr_8fr_1fr_3fr_4fr_1fr] gap-1 items-center"
                 >
-                  <img
+                  {/* <img
                     src={p.image[0]}
                     alt="Imagen"
                     width="50px"
                     height="50px"
-                  />
+                  /> */}
                   <p>{p.name}</p>
                   <p >{`$${p.price}`}</p>
-                  <span className="font-semibold">{`x ${p.amount}`}</span>
-                  <p className="font-semibold"> {`$ ${(p.price * p.amount).toFixed(2)}`}</p>
+                  <span className="font-semibold sm:w-6 flex ml-1">{`x ${p.amount}`}</span>
+                  <p className="font-semibold sm:w-20"> {`$ ${(p.price * p.amount).toFixed(2)}`}</p>
                   <button onClick={(e) => deleteProductCart(p)}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-secundary-50"
+                      className="h-6 w-6 -ml-4 text-secundary-50"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"

@@ -11,6 +11,8 @@ import ContainerProduct from "../ContainerProduct/ContainerProduct";
 import Slider from "../Slider.jsx/Slider";
 import Promo from "./PromLeft";
 import {SiWhatsapp} from 'react-icons/si'
+import Marcas from './Marcas'
+import Footer from "../Footer/Footer";
 
 function Home() {
   const dispatch = useDispatch();
@@ -58,6 +60,7 @@ function Home() {
       </div>
       </div>
 
+      <Marcas/>
       <div className=" sm:mt-8 w-11/12 flex flex-col items-center justify-center">
       <h1 className="sm:mt-8 w-11/12 flex flex-col items-center justify-center">Cases</h1>
         <Promo
@@ -75,6 +78,7 @@ function Home() {
         < SiWhatsapp className="fixed bottom-2 right-2 w-20 m-5 lg:h-11 lg:w-14 text-primary-400 lg:hover:"/>
         </a>
       </div>
+      <Footer/>
     </div>
   );
 }

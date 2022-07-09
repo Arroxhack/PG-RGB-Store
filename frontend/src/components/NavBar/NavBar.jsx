@@ -183,7 +183,7 @@ function NavBar() {
       {/* ADMIN, PERFIL Y LOG OUT */}
       <div className="flex lg:justify-between  items-center sm:justify-end sm:w-18 lg:w-1/6 ">
         {username ? (
-          <div className="flex lg:ml-[-4rem] items-center sm:hidden lg:block">
+          <div className="lg:flex lg:ml-[-6rem] lg:items-center lg:justify-between lg:w-full sm:hidden lg:block">
             <Link
               to="/profile"
               className="sm:text-xs text-primary-400 md:text-xl flex "
