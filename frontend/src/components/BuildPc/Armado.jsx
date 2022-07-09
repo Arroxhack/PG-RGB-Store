@@ -7,20 +7,35 @@ import Selects from "./Selects";
 
 function Armado() {
   const [selectedCPU, setSelectedCPU] = useState([]);
-  const [selectedMother, setSelectedMother] = useState();
-  const [selectedRam, setSelectedRam] = useState();
-  const [selectedGPU, setSelectedGPU] = useState();
-  const [selectedHDD, setSelectedHDD] = useState();
-  const [selectedSSD, setSelectedSSD] = useState();
-  const [selectedSSDM2, setSelectedSSDM2] = useState();
-  const [selectedPSUS, setSelectedPSUS] = useState();
-  const [selectedCase, setSelectedCase] = useState();
-  const { addProductToCart } = useContext(CartContext);
-  //{CPU:{},Motherboard:{},GPU:{},Ram:{},'Power Supply':{},Case:{},SSD:{},HDD:{},'SSD M.2':{}}
-  //algo asi se tendria que ver el build
+  const [selectedMother, setSelectedMother] = useState([]);
+  const [selectedRam, setSelectedRam] = useState([]);
+  const [selectedGPU, setSelectedGPU] = useState([]);
+  const [selectedHDD, setSelectedHDD] = useState([]);
+  const [selectedSSD, setSelectedSSD] = useState([]);
+  const [selectedSSDM2, setSelectedSSDM2] = useState([]);
+  const [selectedPSUS, setSelectedPSUS] = useState([]);
+  const [selectedCase, setSelectedCase] = useState([]);
+
+  const [build,setBuild] = useState({
+    "CPU": {},
+     "Motherboard": {},
+     "Ram": {},
+     "GPU": {},
+     "HDD": {},
+     "SSD": {},
+     "SSD M.2": {},
+     "Power Supply":{},
+     "Case": {},
+   });
+
+  const {addProductToCart } = useContext(CartContext);
+  //verificar vacios 
+
   const sendCard = (e) => {
     e.preventDefault();
-    addProductToCart();
+    let buildTotal = Object.values(build)
+    console.log(buildTotal)
+    addProductToCart(buildTotal)
   };
   const dispatch = useDispatch();
 
@@ -29,90 +44,201 @@ function Armado() {
   }, [dispatch]);
 
   const allProducts = useSelector((state) => state.allProducts);
-  // console.log(selectedCPU)
 
-
+  console.log(build) 
+  //console.log(products)
 
   return (
     <div className="bg-primary-100">
       <NavBar />
-      <div>
-        {/* <Brands /> */}
+      <div>Your pc:</div>
+      <div className="">
+   
         <div>
-          Your pc:
-          <br />
+          <Selects
+            name="CPU"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedCPU(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
+              
+             }}
+          />
+         <div>{selectedCPU.name}</div>
+          <img
+            alt="image not found"
+            width={100}
+            src={selectedCPU.image ? selectedCPU.image[0] : "https://cdn.pixabay.com/photo/2017/07/09/20/48/cpu-2488091_960_720.png"}
+          />
         </div>
-        <Selects
-          name="CPU"
-          handleChange={(e) => {
-            let valueArreglo = e.target.value
-            setSelectedCPU(JSON.parse(valueArreglo));
-          }}
-        />
-        <div> {selectedCPU.name} </div>
-        <img
-          alt="image not found"
-          src={selectedCPU.image ? selectedCPU.image[0] : null}
-        />
-        <br />
-        <Selects
-          name="Motherboard"
-          handleChange={(e) => {
-            setSelectedMother(e.target.value);
-          }}
-        />
-        {selectedMother} <br />
-        <Selects
-          name="Ram"
-          handleChange={(e) => {
-            setSelectedRam(e.target.value);
-          }}
-        />
-        {selectedRam} <br />
-        <Selects
-          name="GPU"
-          handleChange={(e) => {
-            setSelectedGPU(e.target.value);
-          }}
-        />
-        {selectedGPU} <br />
-        <Selects
-          name="HDD"
-          handleChange={(e) => {
-            setSelectedHDD(e.target.value);
-          }}
-        />
-        {selectedHDD} <br />
-        <Selects
-          name="SSD"
-          handleChange={(e) => {
-            setSelectedSSD(e.target.value);
-          }}
-        />
-        {selectedSSD} <br />
-        <Selects
-          name="SSD M.2"
-          handleChange={(e) => {
-            setSelectedSSDM2(e.target.value);
-          }}
-        />
-        {selectedSSDM2} <br />
-        <Selects
-          name="Power Supply"
-          handleChange={(e) => {
-            setSelectedPSUS(e.target.value);
-          }}
-        />
-        {selectedPSUS}
-        <br />
-        <Selects
-          name="Case"
-          handleChange={(e) => {
-            setSelectedCase(e.target.value);
-          }}
-        />
-        {selectedCase}
-        <br />
+        <div>
+          <Selects
+            name="Motherboard"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedMother(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
+            
+            }}
+          />
+
+          <div>{selectedMother.name}</div>
+          <img
+            alt="image not found"
+            width={100}
+            src={selectedMother.image ? selectedMother.image[0] : "https://kawaiistore.com.sv/wp-content/uploads/2020/05/1-41-512.png" }
+          />
+        </div>
+        <div>
+          <Selects
+            name="Ram"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedRam(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
+            }}
+          />
+          <div>{selectedRam.name}</div>
+          <img
+            alt="image not found"
+            width={100}
+            src={selectedRam.image ? selectedRam.image[0] : "https://d30y9cdsu7xlg0.cloudfront.net/png/32078-200.png"}
+          />
+        </div>
+
+        <div>
+          <Selects
+            name="GPU"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedGPU(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
+            }}
+          />
+
+          <div>{selectedGPU.name}</div>
+          <img
+            alt="image not found"
+            width={100}
+            src={selectedGPU.image ? selectedGPU.image[0] : "https://static.thenounproject.com/png/636353-200.png"}
+          />
+        </div>
+
+        <div>
+          <Selects
+            name="HDD"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedHDD(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
+            }}
+          />
+
+          <div>{selectedHDD.name}</div>
+          <img
+            alt="image not found"
+            width={100}
+            src={selectedHDD.image ? selectedHDD.image[0] : "https://www.pngrepo.com/download/173555/hard-drive.png"}
+          />
+        </div>
+
+        <div>
+          <Selects
+            name="SSD"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedSSD(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
+            }}
+          />
+
+          <div>{selectedSSD.name}</div>
+          <img
+            alt="image not found"
+            width={100}
+            src={selectedSSD.image ? selectedSSD.image[0] : "https://cdn-icons-png.flaticon.com/512/64/64199.png"}
+          />
+        </div>
+
+        <div>
+          <Selects
+            name="SSD M.2"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedSSDM2(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
+            }}
+          />
+
+          <div>{selectedSSDM2.name}</div>
+          <img
+            alt="image not found"
+            width={100}
+            src={selectedSSDM2.image ? selectedSSDM2.image[0] : "https://cdn1.iconfinder.com/data/icons/hardware-gliph/48/hardware-computer-electronic-ssd-m2-drive-storage-data-512.png"}
+          />
+        </div>
+
+        <div>
+          <Selects
+            name="Power Supply"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedPSUS(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
+            }}
+          />
+
+          <div>{selectedPSUS.name}</div>
+          <img
+            alt="image not found"
+            width={100}
+            src={selectedPSUS.image ? selectedPSUS.image[0] : "https://cdn-icons-png.flaticon.com/512/1470/1470137.png"}
+          />
+        </div>
+
+        <div>
+          <Selects
+            name="Case"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedCase(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
+            }}
+          />
+          <div>{selectedCase.name}</div>
+          <img
+            alt="image not found"
+            width={100}
+            src={selectedCase.image ? selectedCase.image[0] : "https://static.thenounproject.com/png/403047-200.png"}
+          />
+        </div>
       </div>
       <button
         onClick={sendCard}
