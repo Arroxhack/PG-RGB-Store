@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -6,12 +6,15 @@ import { CrearComentarioReview } from "./crearComentario";
 import { useNavigate } from "react-router-dom";
 import { SendReview } from "./SendEmail";
 import { givePoints } from "./Points";
+import { CartContext } from "../Cart/CartContext";
 
 export default function Pagando() {
   const navigate = useNavigate();
   const username = window.atob(localStorage.getItem("username")); //julianpardeiro
   let product = localStorage.getItem("cartProducts");
   //   console.log("product: ", product);
+  const { usePoints, points } = useContext(CartContext);
+  console.log(usePoints);
   let productJSON = JSON.parse(product);
   console.log("productJSON: ", productJSON);
 
@@ -26,7 +29,18 @@ export default function Pagando() {
       quantity: e.amount,
     };
   });
-  console.log("articulos: ", articulos);
+  console.log("puntos: ", points);
+  // if (usePoints) {
+  //   articulos.push({
+  //     name: "discount",
+  //     description: "discountpoints-999",
+  //     unit_amount: {
+  //       currency_code: "USD",
+  //       value: "-" + points + "", //aca
+  //     },
+  //     quantity: 1,
+  //   });
+  // }
 
   let PrecioTotalArticulos =
     articulos[0].unit_amount.value * articulos[0].quantity;
@@ -49,16 +63,19 @@ export default function Pagando() {
           {
             reference_id: "PUHF",
             description: "Sporting Goods",
-
             custom_id: "CUST-HighFashions",
             soft_descriptor: "HighFashions",
             amount: {
               currency_code: "USD",
-              value: PrecioTotalArticulos.toFixed(2), //value: "230.00"
+              value: PrecioTotalArticulos.toFixed(2) - points, //value: "230.00"
               breakdown: {
                 item_total: {
                   currency_code: "USD",
                   value: PrecioTotalArticulos.toFixed(2), //value: "180.00"
+                },
+                discount: {
+                  currency_code: "USD",
+                  value: points,
                 },
                 // shipping: {
                 //     currency_code: "USD",

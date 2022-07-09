@@ -1,14 +1,52 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteProduct } from "../../redux/actions";
 import NavBar from "../NavBar/NavBar";
+import { GetUserData } from "../../redux/actions/index";
 import CheckoutPaypal from "../Paypal/CheckoutPaypal";
 import { CartContext } from "./CartContext";
+import { useDispatch, useSelector } from "react-redux";
 
 function CheckoutCart() {
-  const { products, deleteProductCart, addProductToCart, deleteProduct } =
-    useContext(CartContext);
+  const [usepoints, setPointsIfNotUse] = useState(false);
+  const [PosiblePoints, setPosiblePoints] = useState(0);
+  const {
+    setPoints,
+    setUsePoints,
+    products,
+    deleteProductCart,
+    addProductToCart,
+    deleteProduct,
+  } = useContext(CartContext);
+  const dispatch = useDispatch();
+  let id = localStorage.getItem("id");
 
+  if (id) {
+    id = window.atob(localStorage.getItem("id"));
+  }
+  useEffect(() => {
+    dispatch(GetUserData(id));
+  }, []);
+
+  const isChecked = (e, total) => {
+    if (total < user.points) {
+      let PointsSobrantes = user.points - total;
+      setPosiblePoints(user.points - PointsSobrantes);
+    } else {
+      setPosiblePoints(user.points);
+    }
+    if (e.target.checked) {
+      setUsePoints(true);
+      setPointsIfNotUse(true);
+      setPoints(PosiblePoints);
+    } else {
+      setUsePoints(false);
+      setPoints(PosiblePoints);
+      setPointsIfNotUse(false);
+    }
+  };
+
+  const user = useSelector((state) => state.UserData);
   let total = 0;
   products.forEach((p) => (total += p.amount * p.price));
 
@@ -20,28 +58,27 @@ function CheckoutCart() {
           <div className="w-full absolute right-0 bg-primary-200 h-full">
             <div className="flex md:flex-row bg-primary-200 flex-col justify-end">
               <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-secundary-250 overflow-y-auto overflow-x-hidden h-screen">
-
                 <div className="flex items-center text-gray-500 hover:text-primary-300 cursor-pointer">
-                  <Link to="/categories?category=all" >
+                  <Link to="/categories?category=all">
                     <div className="flex">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-chevron-left"
-                      width={16}
-                      height={16}
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <polyline points="15 6 9 12 15 18" />
-                    </svg>
-                    <p className="text-sm pl-2 leading-none">
-                      Back to products
-                    </p>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-chevron-left"
+                        width={16}
+                        height={16}
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <polyline points="15 6 9 12 15 18" />
+                      </svg>
+                      <p className="text-sm pl-2 leading-none">
+                        Back to products
+                      </p>
                     </div>
                   </Link>
                 </div>
@@ -153,6 +190,18 @@ function CheckoutCart() {
                 <div className="flex flex-col md:h-screen px-14 py-20 justify-between font-Open overflow-y-auto">
                   <div>
                     <p className="text-4xl font-black mb-10 text-secundary-250 leading-9 font-Open">
+                      Total of points: {user.points}
+                      <br />
+                      <p className="flex text-secundary-250 text-2xl font-Open items-center">
+                        use Point in this purchase? {"     "}
+                        <input
+                          type="checkbox"
+                          checked={usepoints}
+                          onChange={(e) => isChecked(e, total)}
+                          className="ml-2 text-2xl font-medium dark:text-gray-300"
+                        />
+                      </p>
+                      <br />
                       Summary
                     </p>
                     <div>
@@ -184,9 +233,25 @@ function CheckoutCart() {
                         Total
                       </p>
                       <div>
-                        <p className="text-2xl  text-secundary-250 font-bold leading-normal text-right text-gray-800">
-                          {`$ ${total.toFixed(2)}`}
-                        </p>
+                        {usepoints == false ? (
+                          <p className="text-2xl  text-secundary-250 font-bold leading-normal text-right text-gray-800">
+                            {`$ ${total.toFixed(2)}`}
+                          </p>
+                        ) : (
+                          <>
+                            <p className="text-2xl  text-secundary-250  leading-normal text-right text-gray-800">
+                              {`$ ${0 - PosiblePoints}`}
+                            </p>
+                            <p className="text-2xl  text-secundary-250 font-bold leading-normal text-right text-gray-800">
+                              {`$ ${total.toFixed(2)}`}
+                            </p>
+                            <p className="text-2xl  text-secundary-250  leading-normal text-right text-gray-800">
+                              {`$ ${Math.round(
+                                total.toFixed(2) - PosiblePoints.toFixed(2)
+                              )}`}
+                            </p>
+                          </>
+                        )}
                       </div>
                     </div>
                     <div className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1">
