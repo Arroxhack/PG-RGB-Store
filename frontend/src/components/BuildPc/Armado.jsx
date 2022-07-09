@@ -5,7 +5,7 @@ import { CartContext } from "../Cart/CartContext";
 import NavBar from "../NavBar/NavBar";
 import Selects from "./Selects";
 
-function Armado() {
+function Armado({product}) {
   const [selectedCPU, setSelectedCPU] = useState([]);
   const [selectedMother, setSelectedMother] = useState([]);
   const [selectedRam, setSelectedRam] = useState([]);
@@ -23,7 +23,7 @@ function Armado() {
   //algo asi se tendria que ver el build
   const sendCard = (e) => {
     e.preventDefault();
-    addProductToCart(build);
+    addProductToCart(product);
   };
   const dispatch = useDispatch();
 
@@ -32,6 +32,9 @@ function Armado() {
   }, [dispatch]);
 
   const allProducts = useSelector((state) => state.allProducts);
+
+  console.log(build) 
+  
 
   return (
     <div className="bg-primary-100">
@@ -45,10 +48,13 @@ function Armado() {
             handleChange={(e) => {
               let valueArray = e.target.value;
               setSelectedCPU(JSON.parse(valueArray));
+              setBuild({
+                ...build,
+                [e.target.name]:e.target.value
+              })
             }}
           />
-
-          <div>{selectedCPU.name}</div>
+         <div>{selectedCPU.name}</div>
           <img
             alt="image not found"
             width={100}
