@@ -9,17 +9,19 @@ import store from './redux/store.js';
 import CartProvider from './components/Cart/CartContext';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import initialOptions from './components/Paypal/initialOptions.js';
-
+import FavProvider from './components/Favoritos/FavContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <CartProvider>
-          <PayPalScriptProvider options={initialOptions}>
-            <App />
-          </PayPalScriptProvider>
-        </CartProvider>
+        <FavProvider>
+          <CartProvider>
+            <PayPalScriptProvider options={initialOptions}>
+              <App />
+            </PayPalScriptProvider>
+          </CartProvider>
+        </FavProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>
