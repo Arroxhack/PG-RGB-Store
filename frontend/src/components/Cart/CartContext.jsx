@@ -59,7 +59,7 @@ const CartProvider = ({children}) => {
         }
         Toast.fire({
             icon: "success",
-            title: "Added one to cart!",
+            title: "Added to cart!",
           });
     }
 

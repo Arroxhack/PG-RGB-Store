@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, buildPc } from "../../redux/actions";
 
 function Selects({ name, handleChange }) {
-  let id = `select-${name}`;
+  let id = `${name}`;
   let label = name.charAt(0).toUpperCase() + name.slice(1);
   const dispatch = useDispatch();
 

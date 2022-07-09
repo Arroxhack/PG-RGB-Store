@@ -5,7 +5,7 @@ import { CartContext } from "../Cart/CartContext";
 import NavBar from "../NavBar/NavBar";
 import Selects from "./Selects";
 
-function Armado({product}) {
+function Armado() {
   const [selectedCPU, setSelectedCPU] = useState([]);
   const [selectedMother, setSelectedMother] = useState([]);
   const [selectedRam, setSelectedRam] = useState([]);
@@ -16,14 +16,24 @@ function Armado({product}) {
   const [selectedPSUS, setSelectedPSUS] = useState([]);
   const [selectedCase, setSelectedCase] = useState([]);
 
-  const [build,setBuild]=useState({});
+  const [build,setBuild] = useState({
+    "CPU": [],
+     "Motherboard": [],
+     "Ram": [],
+     "GPU": [],
+     "HDD": [],
+     "SSD": [],
+     "SSD M.2": [],
+     "Power Supply": [],
+     "Case": [],
+   });
 
-  const { addProductToCart } = useContext(CartContext);
-  //{CPU:{},Motherboard:{},GPU:{},Ram:{},'Power Supply':{},Case:{},SSD:{},HDD:{},'SSD M.2':{}}
-  //algo asi se tendria que ver el build
+  const {addProductToCart } = useContext(CartContext);
+  //verificar vacios 
+
   const sendCard = (e) => {
     e.preventDefault();
-    addProductToCart(product);
+    addProductToCart(build)
   };
   const dispatch = useDispatch();
 
@@ -34,7 +44,7 @@ function Armado({product}) {
   const allProducts = useSelector((state) => state.allProducts);
 
   console.log(build) 
-  
+  //console.log(products)
 
   return (
     <div className="bg-primary-100">
@@ -46,13 +56,14 @@ function Armado({product}) {
           <Selects
             name="CPU"
             handleChange={(e) => {
-              let valueArray = e.target.value;
-              setSelectedCPU(JSON.parse(valueArray));
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedCPU(valueArray);
               setBuild({
                 ...build,
-                [e.target.name]:e.target.value
+                [e.target.name]:valueArray
               })
-            }}
+              
+             }}
           />
          <div>{selectedCPU.name}</div>
           <img
@@ -65,8 +76,12 @@ function Armado({product}) {
           <Selects
             name="Motherboard"
             handleChange={(e) => {
-              let valueArray = e.target.value;
-              setSelectedMother(JSON.parse(valueArray));
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedMother(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
             
             }}
           />
@@ -82,8 +97,12 @@ function Armado({product}) {
           <Selects
             name="Ram"
             handleChange={(e) => {
-              let valueArray = e.target.value;
-              setSelectedRam(JSON.parse(valueArray));
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedRam(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
             }}
           />
           <div>{selectedRam.name}</div>
@@ -98,8 +117,12 @@ function Armado({product}) {
           <Selects
             name="GPU"
             handleChange={(e) => {
-              let valueArray = e.target.value;
-              setSelectedGPU(JSON.parse(valueArray));
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedGPU(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
             }}
           />
 
@@ -115,8 +138,12 @@ function Armado({product}) {
           <Selects
             name="HDD"
             handleChange={(e) => {
-              let valueArray = e.target.value;
-              setSelectedHDD(JSON.parse(valueArray));
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedHDD(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
             }}
           />
 
@@ -132,8 +159,12 @@ function Armado({product}) {
           <Selects
             name="SSD"
             handleChange={(e) => {
-              let valueArray = e.target.value;
-              setSelectedSSD(JSON.parse(valueArray));
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedSSD(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
             }}
           />
 
@@ -149,8 +180,12 @@ function Armado({product}) {
           <Selects
             name="SSD M.2"
             handleChange={(e) => {
-              let valueArray = e.target.value;
-              setSelectedSSDM2(JSON.parse(valueArray));
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedSSDM2(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
             }}
           />
 
@@ -166,8 +201,12 @@ function Armado({product}) {
           <Selects
             name="Power Supply"
             handleChange={(e) => {
-              let valueArray = e.target.value;
-              setSelectedPSUS(JSON.parse(valueArray));
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedPSUS(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
             }}
           />
 
@@ -183,8 +222,12 @@ function Armado({product}) {
           <Selects
             name="Case"
             handleChange={(e) => {
-              let valueArray = e.target.value;
-              setSelectedCase(JSON.parse(valueArray));
+              let valueArray = JSON.parse(e.target.value)
+              setSelectedCase(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]:valueArray
+              })
             }}
           />
           <div>{selectedCase.name}</div>

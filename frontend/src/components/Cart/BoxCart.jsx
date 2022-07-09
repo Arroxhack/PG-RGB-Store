@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { deleteProduct } from "../../redux/actions";
 import { CartContext } from "./CartContext";
 
-const BoxCart = ({ onClick }) => {
+const BoxCart = () => {
   const { products, deleteProductCart } =
     useContext(CartContext);
 
