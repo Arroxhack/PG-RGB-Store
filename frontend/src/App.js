@@ -24,6 +24,7 @@ import Create from "./components/Admin/Productos/Create";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 
 import Prueba from "./components/prueba.jsx";
+import Category from "./components/Category/Category";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
         <Route path="/products/:id" element={<DetailProduct />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
         <Route path="/arma-tu-pc" element={<BuildPc />} />
-        <Route path="/categories" element={<Categories />} />
+        <Route path="/categories" element={<Category/>} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
         <Route path="/validate/:username" element={<Validacion />} />

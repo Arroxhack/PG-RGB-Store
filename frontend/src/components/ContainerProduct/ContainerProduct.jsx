@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Product from '../Product/Product';
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from '../Loading/Loading'
 import Swal from "sweetalert2";
-import { cleanFilter, getAllProducts } from "../../redux/actions";
+import { cleanFilter, filterPrice, getAllProducts } from "../../redux/actions";
 
 const ContainerProduct = () => {
   const allProducts = useSelector(state=>state.products)
@@ -13,6 +13,7 @@ const ContainerProduct = () => {
   const dispatch = useDispatch()
 
   const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     // setLoading(true);
@@ -22,6 +23,8 @@ const ContainerProduct = () => {
     dispatch(getAllProducts())
     dispatch(cleanFilter())
   }, []);
+
+
 
   useEffect(()=>{},[allProducts])
 
