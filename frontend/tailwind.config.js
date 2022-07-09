@@ -12,11 +12,13 @@ module.exports = {
     colors: {
       primary: {
         DEFAULT: "#2BCDC5",
+        0: "transparent",
         100: "#38817A",
         200: "#212126",
         300: "#F66095",
         400: "#2BCDC5",
-        500: "#FF0099",
+        500: " #abb2b9",
+        600: "#a9acaf"
       
       },
       secundary:{
@@ -34,7 +36,7 @@ module.exports = {
       md: "768px",
       // => @media (min-width: 960px) { ... }
 
-      lg: "1000px",
+      lg: "1280px",
       // => @media (min-width: 1440px) { ... }
     },
   },

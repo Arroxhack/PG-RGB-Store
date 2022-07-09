@@ -38,6 +38,8 @@ import {
   GET_FAV,
   DELETE_FAV,
   ADD_FAV,
+  GET_QUESTION,
+  GET_QUEST,
 } from '../types/index';
 
 const initialState = {
@@ -61,6 +63,8 @@ const initialState = {
   gpus: [],
   CommendPending: [],
   CommendProduct: [],
+  questionAdmin:[],
+  questionDetail:[],
 };
 
 const reducer = (state = initialState, action) => {
@@ -291,7 +295,7 @@ const reducer = (state = initialState, action) => {
     case CLEAN_FILTER:
       return {
         ...state,
-        filtros: action.payload,
+        products: [],
       };
 
     case CLEAN_FILTER_BRANDS:
@@ -383,6 +387,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         CommendPending: [],
       };
+    /// GET QUESTION
+    case GET_QUESTION:
+      return{
+        ...state,
+        questionAdmin: action.payload
+      }
+    case GET_QUEST:
+      return{
+        ...state,
+        questionDetail: action.payload
+      }
     default:
       return { ...state };
   }

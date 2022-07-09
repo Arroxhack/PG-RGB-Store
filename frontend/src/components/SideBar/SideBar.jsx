@@ -7,7 +7,7 @@ import {
   setFilterBrands,
   setFilterMax,
   setFilterPrice,cleanOrder,orderedByPrice, cleanFilterBrands,
-  filterCategory, filterBran, filterPrice
+  filterCategory, filterBran, filterPrice, clean
 } from "../../redux/actions";
 import { setFilter } from "../../redux/actions";
 import { filterCategories } from "../../redux/actions";
@@ -20,16 +20,10 @@ import Side from "./Side";
 export default function SideBar() {
   //ESTADOS
   const dispatch = useDispatch();
-  const categories = useSelector(state => state.categories);
-  const brand = useSelector(state => state.brands);
   const products = useSelector(state => state.products);
-  const filters = useSelector(state => state.filtros);
-  const filterMax = useSelector(state => state.filterMax);
-  const filterOrder= useSelector(state=> state.filterOrder)
 
   const productBrands = []
   products && products.forEach(p=>{
-
     if(!productBrands.includes(p.brand)){
       return productBrands.push(p.brand)
     }
@@ -43,6 +37,7 @@ export default function SideBar() {
     dispatch(getAllCategories())
     if(!brandQuery){dispatch(filterCategory(categoryQuery,nameQuery))}
     if(brandQuery){dispatch(filterBran(categoryQuery,brandQuery,nameQuery))}
+    dispatch(cleanFilter())
     }
   ,[brandQuery,categoryQuery, dispatch,nameQuery]);
 
