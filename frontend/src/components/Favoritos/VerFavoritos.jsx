@@ -10,23 +10,41 @@ const login = localStorage.getItem('login');
 const idUser = window.atob(localStorage.getItem('id'));
 const dispatch = useDispatch();
 const favoritos = useSelector(state=>state.favoritos)
-const [refresh,setRefresh] = useState('');
-// console.log(favoritos,' fav en jsx  ')
-// console.log(idUser)
+
+const initialUserFavs =  JSON.parse(localStorage.getItem('fav'));
+const [userFavs, setUserFavs] = useState(initialUserFavs);
 
 const handleClickDelete = (e)=>{
     e.preventDefault();
     dispatch(deleteProductFavorito(e.target.value,idUser));
-    setRefresh(' ');
-    //console.log(e.target.value, ' soy el value'
-
+    dispatch(getProductFavorito(idUser));
+    const newArr = JSON.parse(localStorage.getItem('fav'));
+    console.log('soy el id ', e.target.value)
+    const arr = newArr.filter(i=>i!== e.target.value);
+    setUserFavs(arr);
+    localStorage.setItem('fav',JSON.stringify(arr));
 }
 
+
+console.log(userFavs)
+console.log(favoritos)
+const productToRender = [];
+favoritos.map((el)=>{
+    userFavs.map((id)=>{
+        if(el.id === id){
+            productToRender.push(el);
+        }
+    })
+})
+
+console.log(productToRender, ' soy productToRender');
 useEffect(()=>{
     login &&
     dispatch(getProductFavorito(idUser));
-},[refresh,dispatch])
+    localStorage.setItem('fav',JSON.stringify(userFavs));
+},[userFavs,dispatch])
 //console.log('soy fav: ', favoritos)
+
 return (
 <div className='h-screen flex flex-col  overflow-auto items-center bg-primary-200'>
     <NavBar />
@@ -38,7 +56,7 @@ return (
         </div>
         
         <div className='object-center h-full bg-primary-200 flex flex-col content-center place-content-center text-center'>
-        {favoritos.map((p)=>{
+        {productToRender.map((p)=>{
             return(
                 <div key={p.id} className='flex h-full justify-start bg-secundary-250 border-b border-primary-200'>
             

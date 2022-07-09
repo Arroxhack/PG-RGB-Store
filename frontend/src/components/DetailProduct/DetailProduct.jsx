@@ -9,6 +9,7 @@ import { CartContext } from "../Cart/CartContext";
 import Swal from "sweetalert2";
 import Favorito from "../Favoritos/Favorito";
 import CommentReview from "./CommentReview";
+import BoxFav from "../Favoritos/BoxFav";
 
 function DetailProduct() {
   const dispatch = useDispatch();
@@ -213,7 +214,7 @@ function DetailProduct() {
                     </div>
                   </div>
                 </form>
-                <Favorito id={ProductDetail.id}/> 
+                <BoxFav id={ProductDetail.id}/> 
               </div>
              
               <CommentReview idProduct={id} />

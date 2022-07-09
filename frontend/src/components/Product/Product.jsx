@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../Cart/CartContext";
 import Swal from "sweetalert2";
 import {TiShoppingCart} from 'react-icons/ti'
-import Favorito from "../Favoritos/Favorito";
+import BoxFav from "../Favoritos/BoxFav";
 
 const Product = ({ product }) => {
   const Toast = Swal.mixin({
@@ -33,7 +33,7 @@ const Product = ({ product }) => {
         <h3 className='lg:text-xl font-bold sm:text-base md:text-xl'>{`$${product.price}`}</h3>
         <p className='lg:text-xs text-center uppercase sm:text-xs md:text-base'>{product.name}</p>        
         </div>
-        <Favorito id={product.id}/>
+        <BoxFav id={product.id}/>
         <button className="bg-primary-300 lg:px-3 lg:py-1 rounded-sm lg:mb-2  border-primary-400 lg:hover:border lg:hover:border-primary-100  md:px-6 md:py-2 md:rounded-sm flex items-center sm:py-1 sm:px-2 sm:mb-2 "
          onClick={sendCard}><TiShoppingCart className="md:h-8 md:w-6"/> Add to cart</button>
     </div>

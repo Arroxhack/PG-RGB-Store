@@ -79,15 +79,15 @@ const reducer = (state = initialState, action) => {
         detail: action.payload,
       };
 
-    // case ADD_FAV:
-    //   return {
-    //     ...state,
-    //     favoritos: [...action.payload],
-    //   };
+    case ADD_FAV:
+      return {
+        ...state,
+        favoritos: [...state.favoritos, ...action.payload],
+      };
     case DELETE_FAV:
       return {
         ...state,
-        favoritos: action.payload,
+        favoritos: [...action.payload],
       };
     case GET_FAV:
       return {

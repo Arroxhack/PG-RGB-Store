@@ -133,6 +133,16 @@ export function cleanFilterPrice() {
   };
 }
 
+export function getProductFavDetail(id) {
+  return async function () {
+    try {
+      let product = await axios.get(`${PATH}/products/${id}`);
+      return product.data;
+    } catch (error) {
+      console.log(error, ' product fav detail');
+    }
+  };
+}
 /// GET DETALLE DE PRODUCTOS ///
 export function getProductDetail(id) {
   return async function (dispatch) {
