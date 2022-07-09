@@ -6,7 +6,7 @@ import NavBar from "../NavBar/NavBar";
 import Selects from "./Selects";
 
 function Armado() {
-  const [selectedCPU, setSelectedCPU] = useState();
+  const [selectedCPU, setSelectedCPU] = useState([]);
   const [selectedMother, setSelectedMother] = useState();
   const [selectedRam, setSelectedRam] = useState();
   const [selectedGPU, setSelectedGPU] = useState();
@@ -29,7 +29,10 @@ function Armado() {
   }, [dispatch]);
 
   const allProducts = useSelector((state) => state.allProducts);
-  console.log(selectedCPU)
+  // console.log(selectedCPU)
+
+
+
   return (
     <div className="bg-primary-100">
       <NavBar />
@@ -42,15 +45,14 @@ function Armado() {
         <Selects
           name="CPU"
           handleChange={(e) => {
-            setSelectedCPU(e.target.value);
+            let valueArreglo = e.target.value
+            setSelectedCPU(JSON.parse(valueArreglo));
           }}
         />
-        <div> {selectedCPU} </div>
+        <div> {selectedCPU.name} </div>
         <img
           alt="image not found"
-          src={allProducts.map((p) =>
-            p === { selectedCPU } ? p.image[0] : null
-          )}
+          src={selectedCPU.image ? selectedCPU.image[0] : null}
         />
         <br />
         <Selects
