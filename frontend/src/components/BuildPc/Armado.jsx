@@ -28,11 +28,15 @@ function Armado() {
     Case: {},
   });
 
-  const { addProductToCart } = useContext(CartContext);
+  const {  addArrayToCart} = useContext(CartContext);
 
+  
   const sendCard = (e) => {
     e.preventDefault();
-    addProductToCart(build);
+    const final = [selectedCPU, selectedMother, selectedRam, selectedGPU, selectedHDD, selectedSSD,selectedSSDM2, selectedPSUS, selectedCase].flat(99)
+    localStorage.setItem('buildPc', JSON.stringify(final))   
+    console.log(final, "este")
+    addArrayToCart(final)
   };
 
   const dispatch = useDispatch();
@@ -43,7 +47,7 @@ function Armado() {
 
   const allProducts = useSelector((state) => state.allProducts);
 
-  console.log(build);
+  //console.log(build);
   //console.log(products)
 
   return (
