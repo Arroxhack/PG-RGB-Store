@@ -74,7 +74,7 @@ function NavBar() {
           </li>
 
           <li className="sm:py-2 md:py-6 block active:bg-primary-300 rounded ">
-            <Link to="/arma-tu-pc" className="flex items-center ">
+            <Link to="/probando" className="flex items-center ">
               <IoIosBuild />
               <p className="sm:ml-1 md:ml-2">Build your PC</p>
             </Link>
