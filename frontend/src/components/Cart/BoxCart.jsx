@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { deleteProduct } from "../../redux/actions";
 import { CartContext } from "./CartContext";
 
-const BoxCart = ({ onClick }) => {
+const BoxCart = () => {
   const { products, deleteProductCart } =
     useContext(CartContext);
 
@@ -26,12 +26,12 @@ const BoxCart = ({ onClick }) => {
                   key={p.id}
                   className="grid grid-cols-[2fr_8fr_1fr_3fr_4fr_1fr] gap-1 items-center"
                 >
-                  {/* <img
+                  <img
                     src={p.image[0]}
                     alt="Imagen"
                     width="50px"
                     height="50px"
-                  /> */}
+                  />
                   <p>{p.name}</p>
                   <p >{`$${p.price}`}</p>
                   <span className="font-semibold sm:w-6 flex ml-1">{`x ${p.amount}`}</span>

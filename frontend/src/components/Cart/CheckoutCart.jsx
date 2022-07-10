@@ -8,8 +8,6 @@ import { CartContext } from "./CartContext";
 import { useDispatch, useSelector } from "react-redux";
 
 function CheckoutCart() {
-  const [usepoints, setPointsIfNotUse] = useState(false);
-  const [PosiblePoints, setPosiblePoints] = useState(0);
   const {
     setPoints,
     setUsePoints,
@@ -18,7 +16,10 @@ function CheckoutCart() {
     addProductToCart,
     deleteProduct,
   } = useContext(CartContext);
+  const [usepoints, setPointsIfNotUse] = useState(false);
+  const [PosiblePoints, setPosiblePoints] = useState(0);
   const dispatch = useDispatch();
+  setPoints(PosiblePoints);
   let id = localStorage.getItem("id");
 
   if (id) {
@@ -38,7 +39,6 @@ function CheckoutCart() {
     if (e.target.checked) {
       setUsePoints(true);
       setPointsIfNotUse(true);
-      setPoints(PosiblePoints);
     } else {
       setUsePoints(false);
       setPoints(PosiblePoints);

@@ -20,7 +20,18 @@ import hdd from './/imagesBuild/hdd.svg'
 function BuildPc() {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [build,setBuild]=useState({});
+  
+  const [build,setBuild] = useState({
+   "CPU": [],
+    "Motherboard": [],
+    "Ram": [],
+    "GPU": [],
+    "HDD": [],
+    "SSD": [],
+    "SSD M.2": [],
+    "Power Supply": [],
+    "Case": [],
+  });
   //{CPU:{},Motherboard:{},GPU:{},Ram:{},'Power Supply':{},Case:{},SSD:{},HDD:{},'SSD M.2':{}}
   //algo asi se tendria que ver el build
 
@@ -99,7 +110,7 @@ function BuildPc() {
       setHdd(auxHdd);
     }
   }
-
+console.log(build)
   const handleSelect = (e)=>{
     e.preventDefault();
     searchParams.set(e.target.name,e.target.value);
