@@ -23,7 +23,7 @@ router.get('/get/favorito', async (req, res, next) => {
     const fav = userFavoriteIds.map(async (id) => await Product.findByPk(id));
     const favorites = await Promise.all(fav);
     //console.log('favoritos en getFavoritos: ', favorites);
-    res.send(favorites);
+    res.send(favorites.map((el) => el.id));
     // added
     //   ? res.send('Added succefully')
     //   : res.status(404).send({ error: 'something go wrong :(' });

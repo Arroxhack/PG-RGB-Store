@@ -35,8 +35,17 @@ function Armado() {
  
   const sendCard = (e) => {
     e.preventDefault();
- 
+    let buildTotal = [build]
+    console.log(buildTotal)
+    buildTotal.forEach((obj)=>{
+      for(let prop in obj){
+          addProductToCart(obj[prop])
+
+      }
+    })
+   
   };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
