@@ -67,9 +67,8 @@ const CartProvider = ({children}) => {
           });
     }
 
-    // const addBuildToCart = {} => {
-
-    // }
+       
+    
 
 
     const deleteProductCart = (product) =>{
