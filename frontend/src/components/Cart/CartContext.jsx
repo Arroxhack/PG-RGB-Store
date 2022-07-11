@@ -15,7 +15,7 @@ const Toast = Swal.mixin({
  
 const CartProvider = ({children}) => {
 
-    const [products, setProducts] = useState(()=>{
+    const [products,   setProducts] = useState(()=>{
         try {
             const productosLocalStorage = localStorage.getItem('cartProducts')
             return productosLocalStorage ? JSON.parse(productosLocalStorage) : []
@@ -45,21 +45,76 @@ const CartProvider = ({children}) => {
         }
     }, [products])
 
-    const addProductToCart= product=>{
+ 
+    const addArrayToCart= product => {
+
+        console.log("product: ", product);
+        console.log("productos carrito: ", products)
+        // [{
+        //     brand: "AMD"
+        //     category: ['CPU']
+        //     compatibilityBrands: null
+        //     ddr: 4
+        //     id: 7 
+        // },
+        // {
+        //     brand: "ASUS"
+        //     category: ['Motherboard']
+        //     compatibilityBrands: "Intel"
+        //     ddr: 4
+        //     id: 8 
+        // }]
+              product.forEach(e => {
+                setProducts(products => [...products, {...e, amount:1}])
+            })
+            Toast.fire({
+            icon: "success",
+            title: "Added to cart!",
+          });
+    }
+
+    // const addArrayToCart= product =>{
+    //     product.forEach(e => {
+
+    //         const inCart = products.find(p=>p.id===e.id)
+
+    //         console.log("inCart: ", inCart)
+    //         if(inCart){
+    //             setProducts(products.map(p=>{
+    //                 if(p.id===e.id){
+    //                     return {...inCart, amount: inCart.amount+1}
+    //                 } else return p
+    //             }))
+    //         }       
+    //         else{
+    //             setProducts(products => [...products, {...product, amount:1}])
+    //         }
+    //         })
+    //     Toast.fire({
+    //         icon: "success",
+    //         title: "Added to cart!",
+    //       });
+    // }
+
+    const addProductToCart= product =>{
+       
         const inCart = products.find(p=>p.id===product.id)
+      
         console.log("inCart: ", inCart)
         if(inCart){
+           
             setProducts(products.map(p=>{
                 if(p.id===product.id){
                     return {...inCart, amount: inCart.amount+1}
                 } else return p
             }))
-        }        else{
-            setProducts([...products, {...product, amount:1}])
+        }       
+         else{
+            setProducts(products => [...products, {...product, amount:1}])
         }
         Toast.fire({
             icon: "success",
-            title: "Added one to cart!",
+            title: "Added to cart!",
           });
     }
 
@@ -126,7 +181,7 @@ const CartProvider = ({children}) => {
 
     return (
 
-        <CartContext.Provider value={{products, addProductToCart,deleteProductCart,deleteProduct, resetProductCart, setProducts}}>
+        <CartContext.Provider value={{products, addProductToCart,deleteProductCart,deleteProduct, addArrayToCart, resetProductCart, setProducts}}>
             {children}
         </CartContext.Provider>
     )

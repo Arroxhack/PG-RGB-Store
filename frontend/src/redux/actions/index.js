@@ -140,6 +140,7 @@ export function getProductFavDetail(id) {
   return async function () {
     try {
       let product = await axios.get(`${PATH}/products/${id}`);
+      console.log('soy product fav detail', product.data);
       return product.data;
     } catch (error) {
       console.log(error, ' product fav detail');
@@ -696,7 +697,8 @@ export function getProductFavorito(idUser) {
   return async (dispatch) => {
     try {
       await axios.get(`${PATH}/get/favorito?idUser=${idUser}`).then((res) => {
-        //console.log(res.data, ' en actions getFavoritos');
+        console.log(res.data, ' en actions getFavoritos');
+
         return dispatch({ type: GET_FAV, payload: res.data });
       });
     } catch (error) {}
@@ -794,115 +796,114 @@ export function VaciarStateProductComment() {
   };
 }
 /// QUESTIONS
-export const getQuestions = ()=>{
-  return async(dispatch)=>{
-    try{
-      const question = await axios.get(`${PATH}/not-response`)
+export const getQuestions = () => {
+  return async (dispatch) => {
+    try {
+      const question = await axios.get(`${PATH}/not-response`);
 
       return dispatch({
         type: GET_QUESTION,
         payload: question.data
       })
-      console.log('ACA ESTAMOS')
     }catch(error){
       console.log(error)
     }
-  }
-}
+  };
+};
 
-export const sendResponse = (rta)=>{
-  return async(dispatch)=>{
-    const {id} = rta
-    const {response} = rta
+export const sendResponse = (rta) => {
+  return async (dispatch) => {
+    const { id } = rta;
+    const { response } = rta;
 
     try {
-      const send = await axios.put(`${PATH}/create-response/${id}`, {response})
-      if(send.data){
+      const send = await axios.put(`${PATH}/create-response/${id}`, {
+        response,
+      });
+      if (send.data) {
         Swal.fire({
           icon: 'success',
           text: 'Response sent successfully',
-          confirmButtonText:'OK'
-        })
+          confirmButtonText: 'OK',
+        });
       }
-
     } catch (error) {
       Swal.fire({
-        icon:'alert',
-        text:'Se produjo un error, vuelva a intentar por favor',
-        confirmButtonText: 'OK'
-      })
+        icon: 'error',
+        text: 'Se produjo un error, vuelva a intentar por favor',
+        confirmButtonText: 'OK',
+      });
     }
-  }
-}
+  };
+};
 
-export const getQuest = (id)=>{
-  return async(dispatch)=>{
+export const getQuest = (id) => {
+  return async (dispatch) => {
     try {
-      const questionProduct = await axios.get(`${PATH}/comment/${id}`)
+      const questionProduct = await axios.get(`${PATH}/comment/${id}`);
 
-      if(questionProduct.data){
+      if (questionProduct.data) {
         return dispatch({
-          type:GET_QUEST,
-          payload:questionProduct.data
-        })
+          type: GET_QUEST,
+          payload: questionProduct.data,
+        });
       }
-
     } catch (error) {
       Swal.fire({
-        icon:'alert',
-        text:'Se produjo un error, vuelva a intentar por favor',
-        confirmButtonText: 'Ok'
-      })
+        icon: 'error',
+        text: 'Se produjo un error, vuelva a intentar por favor',
+        confirmButtonText: 'Ok',
+      });
     }
-  }
-}
+  };
+};
 
-export const postQuest = (question)=>{
-  return async(dispatch)=>{
-    const {id}=question;
-    const {comentario, user}=question;
+export const postQuest = (question) => {
+  return async (dispatch) => {
+    const { id } = question;
+    const { comentario, user } = question;
     try {
-      const postQuestion = await axios.post(`${PATH}/create-comment/${id}`, {comment:comentario, user})
+      const postQuestion = await axios.post(`${PATH}/create-comment/${id}`, {
+        comment: comentario,
+        user,
+      });
 
-        if(postQuestion.data){
-          Swal.fire({
-            icon: 'success',
-            text: 'Response sent successfully',
-            confirmButtonText:'OK'
-          })
-        }
-
+      if (postQuestion.data) {
+        Swal.fire({
+          icon: 'success',
+          text: 'Response sent successfully',
+          confirmButtonText: 'OK',
+        });
+      }
     } catch (error) {
       Swal.fire({
-        icon:'alert',
-        text:'Se produjo un error, vuelva a intentar por favor',
-        confirmButtonText: 'Ok'
-      })
+        icon: 'error',
+        text: 'Se produjo un error, vuelva a intentar por favor',
+        confirmButtonText: 'Ok',
+      });
     }
-  }
+  };
+};
 
-}
-
-export const deleteQuest = (id)=>{
-  return async(dispatch)=>{
+export const deleteQuest = (id) => {
+  return async (dispatch) => {
     try {
-      console.log(id)
-      const deleteQUEST = await axios.delete(`${PATH}/delete-question/${id}`)
+      console.log(id);
+      const deleteQUEST = await axios.delete(`${PATH}/delete-question/${id}`);
 
-      if(deleteQUEST.data){
+      if (deleteQUEST.data) {
         Swal.fire({
           icon: 'success',
           text: 'Delete question successfully',
-          confirmButtonText:'OK'
-        })
+          confirmButtonText: 'OK',
+        });
       }
-
     } catch (error) {
       Swal.fire({
-        icon:'alert',
-        text:'Se produjo un error, vuelva a intentar por favor',
-        confirmButtonText: 'Ok'
-      })
+        icon: 'error',
+        text: 'Se produjo un error, vuelva a intentar por favor',
+        confirmButtonText: 'Ok',
+      });
     }
-  }
-}
+  };
+};

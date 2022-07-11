@@ -231,6 +231,7 @@ export default function Pagando() {
         </div>
       <div className="w-full ">
       <div
+      name = "holi"
       style={res < 768 ? {
         width: '90%',
         height: '100%',
@@ -242,6 +243,15 @@ export default function Pagando() {
         margin: '0 auto'
       }
     }
+    // <div
+    //   style={{
+    //     display: "flex",
+    //     justifyContent: "center",
+    //     alignItems: "center",
+    //     height: "100vh",
+    //     width: "100vw",
+    //     overflow: "auto",
+    //   }}
     >
       <PayPalButtons
         createOrder={(data, actions) => createOrder(data, actions)}
