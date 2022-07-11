@@ -97,7 +97,7 @@ function DetailProduct() {
                 <strong className="border text-primary-400 border-primary-300 rounded-full tracking-wide px-3 font-medium py-0.5 text-xs">
                   {ProductDetail.category ? ProductDetail.category[0] : null}
                 </strong>
-
+                <BoxFav id={ProductDetail.id}/> 
                 <div className="flex justify-between text-secundary-250 mt-8">
                   <div className="max-w-[35ch] ">
                     <h1 className="text-2xl text-secundary-250 font-bold">
@@ -216,7 +216,7 @@ function DetailProduct() {
                     </div>
                   </div>
                 </form>
-                <BoxFav id={ProductDetail.id}/> 
+                
               </div>
              
             </div>

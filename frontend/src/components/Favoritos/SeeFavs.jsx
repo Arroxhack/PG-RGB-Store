@@ -7,13 +7,19 @@ import { useState } from 'react';
 import { FavContext } from './FavContext'
 import { Link } from 'react-router-dom';
 
+
+
 function SeeFavs() {
     const { favs, deleteProductFav } =
     useContext(FavContext);
     const dispatch = useDispatch();
     const idUser = window.atob(localStorage.getItem('id'));
     const [render, setRender] = useState([])
-    
+    const handleClickDelete = (e,id,idUser)=>{
+        e.preventDefault();
+        deleteProductFav(id,idUser)
+    }
+
     useEffect( ()=>{
        
         const arr = favs.map(id=>
@@ -22,7 +28,7 @@ function SeeFavs() {
             Promise.all(arr).then(res=>setRender(res));
            
     },[favs])
-    console.log('soy render ', render)
+    
     return(
         <div className='h-screen flex flex-col  overflow-auto items-center bg-primary-200'>
      <NavBar />
@@ -36,27 +42,29 @@ function SeeFavs() {
          <div className='object-center h-full bg-primary-200 flex flex-col content-center place-content-center text-center'>
          {render.length > 0 ? render.map((p)=>{
              return(
-                <div key={p?.id} className='flex h-full justify-start bg-secundary-250 border-b border-primary-200'>
+                <Link to={`/products/${p.id}`}>
+                <div key={p.id} className='flex h-full justify-start bg-secundary-250 border-b border-primary-200 hover:bg-primary-500'>
             
                     <div className='bg-secundary-100'>
-                        <img className='object-contain h-36 w-36' src={p?.image[0]} alt='p-foto'/>
+                        <img className='object-contain h-36 w-36' src={p.image[0]} alt='p-foto'/>
                     </div>
 
                     <div className='flex flex-col ml-12 items-start justify-evenly'>
                     <div>
-                        <p className='font-PT text-xl mt-3'>{p?.name}</p>
+                        <p className='font-PT text-xl mt-3'>{p.name}</p>
                     </div>
                     
                     <div className='left-0'>
-                        <p className='font-PT font-bold  '>${p?.price}</p>
+                        <p className='font-PT font-bold'>${p.price}</p>
                     </div>
-                    <div>
-                            <button value={p?.id} onClick={(e)=>deleteProductFav(p?.id,idUser)}>Delete</button>
+                    <div className='hover:bg-primary-200 rounded '>
+                            <button value={p.id} onClick={(e)=>handleClickDelete(e,p.id,idUser)}>Delete</button>
                     </div>
                     
                     </div>
         
             </div>
+            </Link>
             )
         })
     :

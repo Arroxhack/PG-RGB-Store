@@ -1,15 +1,13 @@
-const { Router } = require("express");
-const { User, Product } = require("../../db");
+const { Router } = require('express');
+const { User, Product } = require('../../db');
 const router = Router();
 
 //Cargar carrito en la bd
-router.post("/userCart", async (req, res, next) => {
-
-
+router.post('/userCart', async (req, res, next) => {
   let { email, cartProductArray } = req.body;
-  
+
   const user = await User.findOne({ where: { email } }); //usuario logeado
-  console.log("user: ", user);
+  console.log('user: ', user);
 
   cartProductArray = JSON.parse(cartProductArray); //arreglo de objetos products
   // console.log(cartProductArray);
@@ -17,17 +15,18 @@ router.post("/userCart", async (req, res, next) => {
   //caso carrito vacio
   //caso carrito con cosas
   if (!cartProductArray?.length && !user.cartProducts) {
-    return res.send("Fail: cart is empty");
+    return res.send('Fail: cart is empty');
   }
 
   if (cartProductArray.length > 0) {
     if (!user) {
-      return res.send("Fail: User doesnt exist");
+      return res.send('Fail: User doesnt exist');
     }
 
     //map -> verifica que cada prod coincida con la lista de prod
     let productsVerified = cartProductArray?.map(async (p) => {
-      let product = await Product.findOne({  //trae los productos que coincidan 
+      let product = await Product.findOne({
+        //trae los productos que coincidan
         where: {
           id: p.id,
           price: p.price,
@@ -37,7 +36,7 @@ router.post("/userCart", async (req, res, next) => {
         },
       });
       if (product?.id === p.id) {
-        product.dataValues.amount = p.amount
+        product.dataValues.amount = p.amount;
         return product;
       }
     });
@@ -46,7 +45,9 @@ router.post("/userCart", async (req, res, next) => {
 
     // console.log("productsVerified: ", productsVerified[0].toJSON())
 
-    productsVerified = productsVerified.filter((e) => e !== undefined && e !== null);
+    productsVerified = productsVerified.filter(
+      (e) => e !== undefined && e !== null
+    );
 
     // console.log("productsVerified: ", productsVerified)
 
@@ -59,22 +60,26 @@ router.post("/userCart", async (req, res, next) => {
       // console.log("userCartProducts: ", user.cartProducts);
 
       let dataOne = user.cartProducts;
-      let dataTwo = productsVerified.map(e => e.toJSON());
+      let dataTwo = productsVerified.map((e) => e.toJSON());
 
-      var sumObjectsByKey = (...objs) => 
-        Object.values(objs.reduce((a, e) => {
-          a[e.id] = a[e.id] || {id: e.id};
+      var sumObjectsByKey = (...objs) =>
+        Object.values(
+          objs.reduce((a, e) => {
+            a[e.id] = a[e.id] || { id: e.id };
 
-          for (const k in e) {
-            if (k !== "id") {
-              a[e.id][k] = a[e.id][k] ? k === "amount" ? a[e.id][k] + e[k] : e[k] : e[k];
+            for (const k in e) {
+              if (k !== 'id') {
+                a[e.id][k] = a[e.id][k]
+                  ? k === 'amount'
+                    ? a[e.id][k] + e[k]
+                    : e[k]
+                  : e[k];
+              }
             }
-          }
-          return a;
-        }, {}))
-      ;
-
-      let dataFinal = sumObjectsByKey(...dataOne , ...dataTwo)
+            return a;
+          }, {})
+        );
+      let dataFinal = sumObjectsByKey(...dataOne, ...dataTwo);
       // console.log("dataFinal: ", dataFinal)
 
       // const actualCart = user.cartProducts.concat(productsVerified);
@@ -110,7 +115,7 @@ router.post("/userCart", async (req, res, next) => {
     }
     await user.save();
   }
-  user.lock ? res.send("Error: User blocked") : res.send("done");
+  user.lock ? res.send('Error: User blocked') : res.send('done');
   // } catch (e) {
   //   res.status(404).send('Error: updating user cart');
   // }
@@ -135,12 +140,11 @@ router.get('/userCart/', async (req, res, next) => {
   res.send(userCart);
 });
 
-router.post("/changeCart", async (req, res, next) => {
-
+router.post('/changeCart', async (req, res, next) => {
   let { email, cartProductArray } = req.body;
-  
+
   const user = await User.findOne({ where: { email } }); //usuario logeado
-  console.log("user: ", user);
+  console.log('user: ', user);
 
   cartProductArray = JSON.parse(cartProductArray); //arreglo de objetos products
   // console.log(cartProductArray);
@@ -148,23 +152,24 @@ router.post("/changeCart", async (req, res, next) => {
   //caso carrito vacio
   //caso carrito con cosas
   if (!cartProductArray?.length) {
-    console.log("Entre aca")
-    console.log("user: ", user)
+    console.log('Entre aca');
+    console.log('user: ', user);
     user.set({
       cartProducts: [{}],
     });
     user.save();
-    return res.send("done");
+    return res.send('done');
   }
 
   if (cartProductArray.length > 0) {
     if (!user) {
-      return res.send("Fail: User doesnt exist");
+      return res.send('Fail: User doesnt exist');
     }
 
     //map -> verifica que cada prod coincida con la lista de prod
     let productsVerified = cartProductArray?.map(async (p) => {
-      let product = await Product.findOne({  //trae los productos que coincidan 
+      let product = await Product.findOne({
+        //trae los productos que coincidan
         where: {
           id: p.id,
           price: p.price,
@@ -174,7 +179,7 @@ router.post("/changeCart", async (req, res, next) => {
         },
       });
       if (product?.id === p.id) {
-        product.dataValues.amount = p.amount
+        product.dataValues.amount = p.amount;
         return product;
       }
     });
@@ -183,7 +188,9 @@ router.post("/changeCart", async (req, res, next) => {
 
     // console.log("productsVerified: ", productsVerified[0].toJSON())
 
-    productsVerified = productsVerified.filter((e) => e !== undefined && e !== null);
+    productsVerified = productsVerified.filter(
+      (e) => e !== undefined && e !== null
+    );
 
     // console.log("productsVerified: ", productsVerified)
 
@@ -192,9 +199,8 @@ router.post("/changeCart", async (req, res, next) => {
         lock: true,
       });
     } else {
-
-      let dataFinal = productsVerified.map(e => e.toJSON());
-      console.log("dataFinal: ", dataFinal)
+      let dataFinal = productsVerified.map((e) => e.toJSON());
+      console.log('dataFinal: ', dataFinal);
 
       user.set({
         cartProducts: dataFinal,
@@ -202,7 +208,7 @@ router.post("/changeCart", async (req, res, next) => {
     }
     await user.save();
   }
-  user.lock ? res.send("Error: User blocked") : res.send("done");
+  user.lock ? res.send('Error: User blocked') : res.send('done');
   // } catch (e) {
   //   res.status(404).send('Error: updating user cart');
   // }

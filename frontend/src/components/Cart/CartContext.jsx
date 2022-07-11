@@ -64,8 +64,32 @@ const CartProvider = ({children}) => {
         //     ddr: 4
         //     id: 8 
         // }]
+
+        // if(inCart){
+           
+        //     setProducts(products.map(p=>{
+        //         if(p.id===product.id){
+        //             return {...inCart, amount: inCart.amount+1}
+        //         } else return p
+        //     }))
+        // }       
+        //  else{
+        //     setProducts(products => [...products, {...product, amount:1}])
+        // }
               product.forEach(e => {
-                setProducts(products => [...products, {...e, amount:1}])
+                const inCart = products.find((el)=>el.id === e.id);
+                if(inCart){
+                    setProducts(products => {products.map(p=>{
+                        if(p.id === e.id){
+                           return [...products, {...e, amount: e.amount+=1}]
+                        }else{
+                            return p
+                        }
+                    })})
+                }else{
+
+                    setProducts(products => [...products, {...e, amount:1}])
+                }
             })
             Toast.fire({
             icon: "success",
