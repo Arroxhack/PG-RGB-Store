@@ -5,9 +5,11 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import NavBar from "../NavBar/NavBar";
 import Swal from "sweetalert2";
+import TyC from "./TyC";
 export default function Register() {
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
+  const [TyCopen, setTyCopen] = useState(false);
   const [user, setUser] = useState({
     name: "",
     lastname: "",
@@ -150,6 +152,15 @@ export default function Register() {
     }
   };
 
+  const handleTyC = (e) => {
+    e.preventDefault();
+    if (TyCopen === false) {
+      setTyCopen(true);
+    } else {
+      setTyCopen(false);
+    }
+  };
+
   return (
     <section className="bg-primary-200 overflow-auto ">
       <div className="w-screen h-full bg-primary-200 font-Open min-h-screen flex flex-col">
@@ -217,6 +228,17 @@ export default function Register() {
                   name="passwordValidate"
                   onChange={handleOnChange}
                 />
+
+                <label>Terms and Condicions </label>
+                <button onClick={handleTyC}>TyC</button>
+                {TyCopen ? (
+                  <div className="absolute lg:translate-x-[-10rem] sm:translate-x-28 md:">
+                    <TyC onClick={handleTyC} />
+                  </div>
+                ) : (
+                  <></>
+                )}
+
                 <button
                   className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
                   type="submit"
