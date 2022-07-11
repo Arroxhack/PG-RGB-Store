@@ -37,9 +37,39 @@ function Armado() {
     localStorage.setItem('buildPc', JSON.stringify(final))   
     console.log(final, "este")
     addArrayToCart(final)
+    setBuild({
+      CPU: {},
+    Motherboard: {},
+    Ram: {},
+    GPU: {},
+    HDD: {},
+    SSD: {},
+    "SSD M.2": {},
+    "Power Supply": {},
+    Case: {},
+    })
   };
 
   const dispatch = useDispatch();
+// {
+//   brand: "MSI"
+//   category: ['Motherboard']
+//   compatibilityBrands: "Intel"
+//   ddr: 5
+//   description: "Lightning Fast Game experience: PCIe 5.0 slots, Lightning Gen 4 x4 M.2, USB 3.2 Gen 2x2. Enhanced Power Design: Direct 18+1+1 phases power, dual 8-pin CPU power connectors, Core Boost, Memory Boost. "
+//   dimensions: "304 mm x 243 mm"
+//   factorMother: "ATX"
+//   id: 4
+//   image: (4) ['https://m.media-amazon.com/images/I/91g60mjR-8L._AC_SL1500_.jpg', 'https://http2.mlstatic.com/D_NQ_NP_712404-MLA48086467283_112021-O.webp', 'https://http2.mlstatic.com/D_NQ_NP_991506-MLA48086467284_112021-O.webp', 'https://http2.mlstatic.com/D_Q_NP_732851-MLA48086467282_112021-R.webp']
+//   inOffer: false
+//   name: "MOTHERBOARD MSI Z690 Force WiFi"
+//   percentageDiscount: 0
+//   price: 329.99
+//   socket: "LGA1700"
+//   stock: 2
+//   wattsPowerSupply: null
+//   weight: null
+// }
 
   useEffect(() => {
     dispatch(getAllProducts());

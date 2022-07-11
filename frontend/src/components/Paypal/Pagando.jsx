@@ -219,11 +219,13 @@ export default function Pagando() {
 
   return (
     <div
+      name = "holi"
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
+        width: "100vw",
         overflow: "auto",
       }}
     >
