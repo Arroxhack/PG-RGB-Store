@@ -1,17 +1,21 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { CrearComentarioReview } from "./crearComentario";
 import { useNavigate } from "react-router-dom";
 import { SendReview } from "./SendEmail";
-import { givePoints } from "./Points";
+import { givePoints, takePoints } from "./Points";
+import { CartContext } from "../Cart/CartContext";
 
 export default function Pagando() {
   const navigate = useNavigate();
   const username = window.atob(localStorage.getItem("username")); //julianpardeiro
   let product = localStorage.getItem("cartProducts");
   //   console.log("product: ", product);
+
+  const { usePoints, points } = useContext(CartContext);
+  console.log(usePoints);
   let productJSON = JSON.parse(product);
   // console.log("productJSON: ", productJSON);
 
@@ -26,8 +30,7 @@ export default function Pagando() {
       quantity: e.amount,
     };
   });
-  // console.log("articulos: ", articulos);
-
+  console.log("puntos: ", points);
   let PrecioTotalArticulos =
     articulos[0].unit_amount.value * articulos[0].quantity;
 
@@ -49,16 +52,22 @@ export default function Pagando() {
           {
             reference_id: "PUHF",
             description: "Sporting Goods",
-
             custom_id: "CUST-HighFashions",
             soft_descriptor: "HighFashions",
             amount: {
               currency_code: "USD",
-              value: PrecioTotalArticulos.toFixed(2), //value: "230.00"
+              value:
+                PrecioTotalArticulos > points
+                  ? PrecioTotalArticulos.toFixed(2) - points
+                  : points - PrecioTotalArticulos.toFixed(2), //value: "230.00"
               breakdown: {
                 item_total: {
                   currency_code: "USD",
                   value: PrecioTotalArticulos.toFixed(2), //value: "180.00"
+                },
+                discount: {
+                  currency_code: "USD",
+                  value: points,
                 },
                 // shipping: {
                 //     currency_code: "USD",
@@ -142,6 +151,7 @@ export default function Pagando() {
       const productsArray = detalles.purchase_units[0].items.map((e) => {
         return { name: e.name, cant: e.quantity, price: e.unit_amount.value };
       });
+      await takePoints(username, points);
       const resultPoint = await givePoints(username, productsArray);
       await SendReview(username, productsArray, detalles.id);
       await CrearComentarioReview(username, arregloSoloId, detalles.id);
@@ -172,7 +182,7 @@ export default function Pagando() {
 
       let products = arregloObjetosIdQuantity;
 
-      const prueba = await axios({
+      await axios({
         method: "put",
         url: "http://localhost:3001/remove",
         data: products,
@@ -195,7 +205,7 @@ export default function Pagando() {
   //   status: "COMPLETED"
   //   update_time: "2022-06-29T17:22:20Z"
 
-  const res = window.innerWidth
+  const res = window.innerWidth;
 
   const style = {
     layout: "vertical",
@@ -222,48 +232,48 @@ export default function Pagando() {
   return (
     <div className="flex flex-col select-none">
       <div className="mb-5 bg-primary-200 w-full">
-          <h1 className=" flex flex-col text-center text-primary-400 font-Open text-[90px] tracking-tight font-extrabold ">
-            RGB
-            <span className="font-PT -mt-16 text-primary-300 font-normal text-[90px] tracking-tight ">
-              STORE
-            </span>
-          </h1>
-        </div>
-      <div className="w-full ">
-      <div
-      name = "holi"
-      style={res < 768 ? {
-        width: '90%',
-        height: '100%',
-        margin: '0 auto'
-      }:
-      {
-        width: '500px',
-        height: '100%',
-        margin: '0 auto'
-      }
-    }
-    // <div
-    //   style={{
-    //     display: "flex",
-    //     justifyContent: "center",
-    //     alignItems: "center",
-    //     height: "100vh",
-    //     width: "100vw",
-    //     overflow: "auto",
-    //   }}
-    >
-      <PayPalButtons
-        createOrder={(data, actions) => createOrder(data, actions)}
-        onApprove={(data, actions) => onApprove(data, actions)}
-        onCancel={onCancel}
-        style={style}
-        onError={onError}
-      />
-    </div>
+        <h1 className=" flex flex-col text-center text-primary-400 font-Open text-[90px] tracking-tight font-extrabold ">
+          RGB
+          <span className="font-PT -mt-16 text-primary-300 font-normal text-[90px] tracking-tight ">
+            STORE
+          </span>
+        </h1>
       </div>
-
+      <div className="w-full ">
+        <div
+          name="holi"
+          style={
+            res < 768
+              ? {
+                  width: "90%",
+                  height: "100%",
+                  margin: "0 auto",
+                }
+              : {
+                  width: "500px",
+                  height: "100%",
+                  margin: "0 auto",
+                }
+          }
+          // <div
+          //   style={{
+          //     display: "flex",
+          //     justifyContent: "center",
+          //     alignItems: "center",
+          //     height: "100vh",
+          //     width: "100vw",
+          //     overflow: "auto",
+          //   }}
+        >
+          <PayPalButtons
+            createOrder={(data, actions) => createOrder(data, actions)}
+            onApprove={(data, actions) => onApprove(data, actions)}
+            onCancel={onCancel}
+            style={style}
+            onError={onError}
+          />
+        </div>
+      </div>
     </div>
-
   );
 }

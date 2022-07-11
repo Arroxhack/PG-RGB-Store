@@ -22,20 +22,18 @@ import DetailForComment from "./components/profile/DetailForComment";
 import Edit from "./components/Admin/Productos/Edit";
 import Create from "./components/Admin/Productos/Create";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
-import SeeFavs from './components/Favoritos/SeeFavs.jsx'
-
-import Prueba from "./components/prueba.jsx";
+import SeeFavs from "./components/Favoritos/SeeFavs.jsx";
 import Category from "./components/Category/Category";
 
 function App() {
   return (
-    <div className='Font-Open'>
+    <div className="Font-Open">
       <Routes>
-        <Route path='/' element={<Home />} exact />
-        <Route path='/products/:id' element={<DetailProduct />} exact />
+        <Route path="/" element={<Home />} exact />
+        <Route path="/products/:id" element={<DetailProduct />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
         <Route path="/arma-tu-pc" element={<BuildPc />} />
-        <Route path="/categories" element={<Category/>} />
+        <Route path="/categories" element={<Category />} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
         <Route path="/validate/:username" element={<Validacion />} />
@@ -46,22 +44,21 @@ function App() {
         <Route path="/paypal" element={<Pagando />} exact />
         <Route path="/done" element={<Done />} />
         <Route
-          path='/productsDetail/:id'
+          path="/productsDetail/:id"
           element={<DetailForComment />}
           exact
         />
-        <Route path='/cart' element={<CheckoutCart />} />
-        <Route path='/favoritos' element={<SeeFavs />} />
-        <Route 
-          path='/resetPassword/:username'
+        <Route path="/cart" element={<CheckoutCart />} />
+        <Route path="/favoritos" element={<SeeFavs />} />
+        <Route
+          path="/resetPassword/:username"
           element={<ValidateNewPassword />}
         />
-        <Route path='*' element={<Error />} />
-        <Route path='/ForgotPassword' element={<ForgotPassword />} />
+        <Route path="*" element={<Error />} />
+        <Route path="/ForgotPassword" element={<ForgotPassword />} />
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
         {/* <Route path='/testFav' element={<SeeFavs />} /> */}
-        <Route path='/probando' element={<Armado />} />
-        <Route path='/prueba' element={<Prueba />} />
+        <Route path="/probando" element={<Armado />} />
       </Routes>
     </div>
   );
