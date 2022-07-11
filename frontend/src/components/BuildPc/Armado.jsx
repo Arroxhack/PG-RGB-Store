@@ -37,6 +37,17 @@ function Armado() {
     localStorage.setItem('buildPc', JSON.stringify(final))   
     console.log(final, "este")
     addArrayToCart(final)
+    setBuild({
+      CPU: {},
+    Motherboard: {},
+    Ram: {},
+    GPU: {},
+    HDD: {},
+    SSD: {},
+    "SSD M.2": {},
+    "Power Supply": {},
+    Case: {},
+    })
   };
 
   const dispatch = useDispatch();

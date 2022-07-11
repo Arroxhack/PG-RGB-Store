@@ -46,30 +46,56 @@ const CartProvider = ({children}) => {
     }, [products])
 
  
-    const addArrayToCart= product =>{
-       
-        for(let i in product) 
-        { const inCart = products.find(p=>p.id===product[i].id)
-        console.log("inCart: ", inCart)
-        if(inCart){
-           
-            setProducts(products.map(p=>{
-                if(p.id===product[i].id){
-                    return {...inCart, amount: inCart.amount+1}
-                } else return p
-            }))
-        }       
-         else{
-            setProducts([...products, {...product[i], amount:1}])
-        }}
-        Toast.fire({
+    const addArrayToCart= product => {
+
+        console.log("product: ", product);
+        console.log("productos carrito: ", products)
+        // [{
+        //     brand: "AMD"
+        //     category: ['CPU']
+        //     compatibilityBrands: null
+        //     ddr: 4
+        //     id: 7 
+        // },
+        // {
+        //     brand: "ASUS"
+        //     category: ['Motherboard']
+        //     compatibilityBrands: "Intel"
+        //     ddr: 4
+        //     id: 8 
+        // }]
+              product.forEach(e => {
+                setProducts(products => [...products, {...e, amount:1}])
+            })
+            Toast.fire({
             icon: "success",
             title: "Added to cart!",
           });
     }
-    
- 
-    
+
+    // const addArrayToCart= product =>{
+    //     product.forEach(e => {
+
+    //         const inCart = products.find(p=>p.id===e.id)
+
+    //         console.log("inCart: ", inCart)
+    //         if(inCart){
+    //             setProducts(products.map(p=>{
+    //                 if(p.id===e.id){
+    //                     return {...inCart, amount: inCart.amount+1}
+    //                 } else return p
+    //             }))
+    //         }       
+    //         else{
+    //             setProducts(products => [...products, {...product, amount:1}])
+    //         }
+    //         })
+    //     Toast.fire({
+    //         icon: "success",
+    //         title: "Added to cart!",
+    //       });
+    // }
+
     const addProductToCart= product =>{
        
         const inCart = products.find(p=>p.id===product.id)
@@ -84,7 +110,7 @@ const CartProvider = ({children}) => {
             }))
         }       
          else{
-            setProducts([...products, {...product, amount:1}])
+            setProducts(products => [...products, {...product, amount:1}])
         }
         Toast.fire({
             icon: "success",
