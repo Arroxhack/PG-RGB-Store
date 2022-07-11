@@ -7,7 +7,7 @@ export default function Marcas() {
     <div className='flex w-5/6 flex-col justify-center items-center h-4/6 '>
     <div className=' flex w-[75%] items-center justify-between '>
     <div className='h-full w-[32%] rounded-lg '>
-    <Link to='categories?category=all&brand=intel'>
+    <Link to='categories?category=all&brand=Intel'>
     <img src="https://s3-symbol-logo.tradingview.com/intel--600.png" alt="" className='max-h-max   object-fill h-64 w-full rounded-lg lg:hover:opacity-80 lg:hover:cursor-pointer ' />
     </Link>
     </div>
@@ -17,7 +17,7 @@ export default function Marcas() {
     </Link>
     </div>
     <div className='h-full w-[32%] '>
-      <Link to='categories?category=all&brand=WesternDigital'>
+      <Link to='categories?category=all&brand=Western+Digital'>
     <img src="https://s3-symbol-logo.tradingview.com/western-digital--600.png" className='max-h-max object-fill h-64 w-full rounded-lg lg:hover:opacity-80 lg:hover:cursor-pointer' alt="" />
     </Link>
     </div>

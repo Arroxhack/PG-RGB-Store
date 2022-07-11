@@ -156,7 +156,7 @@ function NavBar() {
         <div className="flex justify-between items-center max-h-max bg-primary-200 text-base text-primary  sm:hidden lg:block ">
           <ul className="flex  ">
             <li className="lg:mr-5 relative flex">
-              <Link to="/categories" className="">
+              <Link to="/categories?category=all" className="">
                 <p className="buttom">Categories</p>
               </Link>
             </li>

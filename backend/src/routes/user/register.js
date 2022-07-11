@@ -84,7 +84,7 @@ router.put("/register/verify/", async (req, res, next) => {
   const { token, username } = req.body;
   const user = await User.findOne({ where: { username: username } });
 
-  console.log(token);
+  // console.log(token);
 
   if (user?.secretToken === token) {
     const isVerified = await User.update(

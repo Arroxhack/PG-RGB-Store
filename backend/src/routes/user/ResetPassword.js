@@ -36,7 +36,7 @@ router.put("/sendTokenReset", async (req, res) => {
       }
     }
   } catch (e) {
-    console.log;
+    console.log(e)
   }
 });
 
@@ -74,7 +74,7 @@ router.put("/resetPassword", async (req, res) => {
       res.send("Faltan enviar datos");
     }
   } catch (e) {
-    console.log;
+    console.log(e)
   }
 });
 // ------------ FORGOT PASSWORD ------------------ //
@@ -118,7 +118,7 @@ router.post("/sendTokenResetPassword", async (req, res) => {
 router.put("/resetForgotPassword", async (req, res) => {
   try {
     const { token, NewPassword, email } = req.body;
-    console.log(token, NewPassword, email);
+    // console.log(token, NewPassword, email);
     const securityLevels = 8;
     if (token && NewPassword && email) {
       const usuario = await User.findOne({ where: { email: email } });

@@ -3,27 +3,31 @@ import NavBar from '../NavBar/NavBar'
 import ContainerProduct from '../ContainerProduct/ContainerProduct'
 import { useSearchParams } from 'react-router-dom'
 import Side from './Side'
+import { useSelector } from 'react-redux'
+import Footer from '../Footer/Footer'
 
 
 const Category = () => {
 
-    const [params, setParams] = useSearchParams()
+    const {products} = useSelector(state=>state)
 
     useEffect(() => {
-        params.set('category','all')
-        setParams(params)
-    }, [])
+
+    }, [products])
 
   return (
-    <div className='bg-primary-200'>
+    <div className='bg-primary-200 '>
         <NavBar/>
-        <div className='flex flex-row gap-5'>
+        <div className='flex flex-row gap-5 w-full justify-center mt-5'>
             <div>
                 <Side/>
             </div>
             <div>
                 <ContainerProduct />
             </div>
+        </div>
+        <div className='mt-24'>
+            <Footer/>
         </div>
     </div>
   )
