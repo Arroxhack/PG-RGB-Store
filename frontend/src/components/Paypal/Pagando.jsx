@@ -5,7 +5,7 @@ import axios from "axios";
 import { CrearComentarioReview } from "./crearComentario";
 import { useNavigate } from "react-router-dom";
 import { SendReview } from "./SendEmail";
-import { givePoints } from "./Points";
+import { givePoints, takePoints } from "./Points";
 import { CartContext } from "../Cart/CartContext";
 
 export default function Pagando() {
@@ -13,6 +13,8 @@ export default function Pagando() {
   const username = window.atob(localStorage.getItem("username")); //julianpardeiro
   let product = localStorage.getItem("cartProducts");
   //   console.log("product: ", product);
+
+
   const { usePoints, points } = useContext(CartContext);
   console.log(usePoints);
   let productJSON = JSON.parse(product);
@@ -67,7 +69,10 @@ export default function Pagando() {
             soft_descriptor: "HighFashions",
             amount: {
               currency_code: "USD",
-              value: PrecioTotalArticulos.toFixed(2) - points, //value: "230.00"
+              value:
+                PrecioTotalArticulos > points
+                  ? PrecioTotalArticulos.toFixed(2) - points
+                  : points - PrecioTotalArticulos.toFixed(2), //value: "230.00"
               breakdown: {
                 item_total: {
                   currency_code: "USD",
@@ -159,6 +164,7 @@ export default function Pagando() {
       const productsArray = detalles.purchase_units[0].items.map((e) => {
         return { name: e.name, cant: e.quantity, price: e.unit_amount.value };
       });
+      await takePoints(username, points);
       const resultPoint = await givePoints(username, productsArray);
       await SendReview(username, productsArray, detalles.id);
       await CrearComentarioReview(username, arregloSoloId, detalles.id);
