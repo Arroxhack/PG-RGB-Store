@@ -12,6 +12,8 @@ const Toast = Swal.mixin({
 });
 
 const CartProvider = ({ children }) => {
+  const [usePoints, setUsePoints] = useState(false);
+  const [points, setPoints] = useState(0);
   const [products, setProducts] = useState(() => {
     try {
       const productosLocalStorage = localStorage.getItem("cartProducts");
@@ -20,8 +22,6 @@ const CartProvider = ({ children }) => {
       return [];
     }
   });
-  const [usePoints, setUsePoints] = useState(false);
-  const [points, setPoints] = useState(0);
 
   //console.log(products)
 
@@ -45,8 +45,63 @@ const CartProvider = ({ children }) => {
     }
   }, [products]);
 
+  // const addArrayToCart= product => {
+
+  //     console.log("product: ", product);
+  //     console.log("productos carrito: ", products)
+  //     // [{
+  //     //     brand: "AMD"
+  //     //     category: ['CPU']
+  //     //     compatibilityBrands: null
+  //     //     ddr: 4
+  //     //     id: 7
+  //     // },
+  //     // {
+  //     //     brand: "ASUS"
+  //     //     category: ['Motherboard']
+  //     //     compatibilityBrands: "Intel"
+  //     //     ddr: 4
+  //     //     id: 8
+  //     // }]
+  //           product.forEach(e => {
+  //             setProducts(products => [...products, {...e, amount:1}])
+  //         })
+  //         Toast.fire({
+  //         icon: "success",
+  //         title: "Added to cart!",
+  //       });
+  // }
+
+  const addArrayToCart = (product) => {
+    product.forEach((e) => {
+      const inCart = products.find((p) => p.id === e.id);
+
+      console.log("inCart: ", inCart);
+      if (inCart) {
+        setProducts(
+          products.map((p) => {
+            if (p.id === e.id) {
+              return [
+                (products) => products,
+                { ...inCart, amount: inCart.amount + 1 },
+              ];
+              // } else return p
+            }
+          })
+        );
+      } else {
+        setProducts((products) => [...products, { ...e, amount: 1 }]);
+      }
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Added to cart!",
+    });
+  };
+
   const addProductToCart = (product) => {
     const inCart = products.find((p) => p.id === product.id);
+
     console.log("inCart: ", inCart);
     if (inCart) {
       setProducts(
@@ -57,11 +112,11 @@ const CartProvider = ({ children }) => {
         })
       );
     } else {
-      setProducts([...products, { ...product, amount: 1 }]);
+      setProducts((products) => [...products, { ...product, amount: 1 }]);
     }
     Toast.fire({
       icon: "success",
-      title: "Added one to cart!",
+      title: "Added to cart!",
     });
   };
 
@@ -125,16 +180,17 @@ const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
-        points,
-        setPoints,
-        usePoints,
-        setUsePoints,
         products,
         addProductToCart,
         deleteProductCart,
         deleteProduct,
+        addArrayToCart,
         resetProductCart,
         setProducts,
+        usePoints,
+        setUsePoints,
+        points,
+        setPoints,
       }}
     >
       {children}

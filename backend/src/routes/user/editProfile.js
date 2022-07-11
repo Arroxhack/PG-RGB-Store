@@ -63,7 +63,7 @@ router.put('/profile/edit', async (req, res, next) => {
       }
       await user.save();
 
-      console.log(user);
+      // console.log(user);
       res.send('done');
     }
   } catch (error) {

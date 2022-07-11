@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { buildPc } from '../actions';
 import {
   ADD_CART,
@@ -338,6 +339,15 @@ const reducer = (state = initialState, action) => {
         products: action.payload,
       };
     case FILTER_PRICE:
+      const products = action.payload
+      if(products.length<1){
+        Swal.fire({
+          icon:'info',
+          title: 'No products found',
+          text:'Please try again',
+          confirmButtonText: '<a href="categories?category=all">OK</a>'
+        })
+      }
       return {
         ...state,
         products: action.payload,

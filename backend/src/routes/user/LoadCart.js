@@ -9,7 +9,7 @@ router.post("/userCart", async (req, res, next) => {
   let { email, cartProductArray } = req.body;
   
   const user = await User.findOne({ where: { email } }); //usuario logeado
-  console.log("user: ", user);
+  // console.log("user: ", user);
 
   cartProductArray = JSON.parse(cartProductArray); //arreglo de objetos products
   // console.log(cartProductArray);
@@ -140,7 +140,7 @@ router.post("/changeCart", async (req, res, next) => {
   let { email, cartProductArray } = req.body;
   
   const user = await User.findOne({ where: { email } }); //usuario logeado
-  console.log("user: ", user);
+  // console.log("user: ", user);
 
   cartProductArray = JSON.parse(cartProductArray); //arreglo de objetos products
   // console.log(cartProductArray);
@@ -148,8 +148,8 @@ router.post("/changeCart", async (req, res, next) => {
   //caso carrito vacio
   //caso carrito con cosas
   if (!cartProductArray?.length) {
-    console.log("Entre aca")
-    console.log("user: ", user)
+    // console.log("Entre aca")
+    // console.log("user: ", user)
     user.set({
       cartProducts: [{}],
     });
@@ -194,7 +194,7 @@ router.post("/changeCart", async (req, res, next) => {
     } else {
 
       let dataFinal = productsVerified.map(e => e.toJSON());
-      console.log("dataFinal: ", dataFinal)
+      // console.log("dataFinal: ", dataFinal)
 
       user.set({
         cartProducts: dataFinal,
