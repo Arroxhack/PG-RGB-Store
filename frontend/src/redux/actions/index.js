@@ -378,7 +378,7 @@ export const filterPrice = (category, brand, min, max, name) => {
             const filterCat = await axios.get(
               `${PATH}/filter/?category=${category}&min=${min}&max=${max}`
             );
-
+              
             return dispatch({
               type: FILTER_PRICE,
               payload: filterCat.data,
@@ -388,7 +388,7 @@ export const filterPrice = (category, brand, min, max, name) => {
             const filterCat = await axios.get(
               `${PATH}/filter/?category=${category}&min=${min ? min : max}`
             );
-
+              
             return dispatch({
               type: FILTER_PRICE,
               payload: filterCat.data,
@@ -461,6 +461,83 @@ export const filterPrice = (category, brand, min, max, name) => {
     }
   };
 };
+
+export const filterProducts = (category,brand,min,max,name)=>{
+  return async(dispatch)=>{
+    try {
+
+      if(!name){
+        if(!brand){
+          if(!min && !max){
+            const filter = await axios.get(`${PATH}/filter/?category=${category}`);
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filter.data
+            })
+          }else{
+            const filter = await axios.get(`${PATH}/filter/?category=${category}&min=${min}&max=${max}`);
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filter.data
+            })
+          }
+        }else{
+          if(!min && !max){
+            const filter = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}`);
+
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filter.data
+            })
+          }else{
+            const filter = await axios.get(`${PATH}/filter/?category=${category}&brand=${brand}&min=${min}&max=${max}`);
+            return dispatch({
+              type: FILTER_PRICE,
+              payload: filter.data
+            })
+          }
+        }
+      }else{
+        if(!brand){
+          if(!min && !max){
+            const filter = await axios.get(`${PATH}/filter/?name=${name}`);
+            return dispatch({
+              type:FILTER_PRICE,
+              payload: filter.data
+            })
+          }else{
+            const filter = await axios.get(`${PATH}/filter/?name=${name}&min=${min}&max=${max}`);
+            return dispatch({
+              type:FILTER_PRICE,
+              payload: filter.data
+            })
+          }
+        }else{
+          if(!min && !max){
+            const filter = await axios.get(`${PATH}/filter/?name=${name}&brand=${brand}`);
+            return dispatch({
+              type:FILTER_PRICE,
+              payload: filter.data
+            })
+          }else{
+            const filter = await axios.get(`${PATH}/filter/?name=${name}&brand=${brand}&min=${min}&max=${max}`);
+            return dispatch({
+              type:FILTER_PRICE,
+              payload: filter.data
+            })
+          }
+        }
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: 'alert',
+        title: 'Se produjo un error',
+        text: 'Por favor, actualice e intente nuevamente la busqueda',
+        confirmButtonText: 'Ok',
+      });
+    }
+  }
+}
 
 export function filterCategories(category) {
   return async function (dispatch) {
@@ -726,10 +803,10 @@ export const getQuestions = () => {
 
       return dispatch({
         type: GET_QUESTION,
-        payload: question.data,
-      });
-    } catch (error) {
-      console.log(error);
+        payload: question.data
+      })
+    }catch(error){
+      console.log(error)
     }
   };
 };

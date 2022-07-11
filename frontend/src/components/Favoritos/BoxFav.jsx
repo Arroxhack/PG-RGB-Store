@@ -36,7 +36,7 @@ const BoxFav = ({id,onClick})=>{
       e.preventDefault();
       addProductFav(id,idUser)
     }
-    
+
     return(  
     <div>
         {

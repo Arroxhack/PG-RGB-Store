@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -13,7 +13,7 @@ export default function Pagando() {
   let product = localStorage.getItem("cartProducts");
   //   console.log("product: ", product);
   let productJSON = JSON.parse(product);
-  console.log("productJSON: ", productJSON);
+  // console.log("productJSON: ", productJSON);
 
   let articulos = productJSON.map((e) => {
     return {
@@ -26,7 +26,7 @@ export default function Pagando() {
       quantity: e.amount,
     };
   });
-  console.log("articulos: ", articulos);
+  // console.log("articulos: ", articulos);
 
   let PrecioTotalArticulos =
     articulos[0].unit_amount.value * articulos[0].quantity;
@@ -168,7 +168,7 @@ export default function Pagando() {
           return { id: id, amount: e.quantity };
         }
       );
-      console.log("arregloObjetosIdQuantity: ", arregloObjetosIdQuantity);
+      // console.log("arregloObjetosIdQuantity: ", arregloObjetosIdQuantity);
 
       let products = arregloObjetosIdQuantity;
 
@@ -195,16 +195,18 @@ export default function Pagando() {
   //   status: "COMPLETED"
   //   update_time: "2022-06-29T17:22:20Z"
 
+  const res = window.innerWidth
+
   const style = {
     layout: "vertical",
     color: "gold",
-    shape: "pill",
+    shape: "rect",
     label: "pay",
   };
 
   const onCancel = (data) => {
     // en data hay un order id que es un objeto {orderID: '6V920429E17498936'}
-    console.log(data);
+    // console.log(data);
     Swal.fire({
       icon: "error",
       title: "Payment Cancelled",
@@ -218,16 +220,38 @@ export default function Pagando() {
   };
 
   return (
-    <div
+    <div className="flex flex-col select-none">
+      <div className="mb-5 bg-primary-200 w-full">
+          <h1 className=" flex flex-col text-center text-primary-400 font-Open text-[90px] tracking-tight font-extrabold ">
+            RGB
+            <span className="font-PT -mt-16 text-primary-300 font-normal text-[90px] tracking-tight ">
+              STORE
+            </span>
+          </h1>
+        </div>
+      <div className="w-full ">
+      <div
       name = "holi"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        width: "100vw",
-        overflow: "auto",
-      }}
+      style={res < 768 ? {
+        width: '90%',
+        height: '100%',
+        margin: '0 auto'
+      }:
+      {
+        width: '500px',
+        height: '100%',
+        margin: '0 auto'
+      }
+    }
+    // <div
+    //   style={{
+    //     display: "flex",
+    //     justifyContent: "center",
+    //     alignItems: "center",
+    //     height: "100vh",
+    //     width: "100vw",
+    //     overflow: "auto",
+    //   }}
     >
       <PayPalButtons
         createOrder={(data, actions) => createOrder(data, actions)}
@@ -237,5 +261,9 @@ export default function Pagando() {
         onError={onError}
       />
     </div>
+      </div>
+
+    </div>
+
   );
 }
