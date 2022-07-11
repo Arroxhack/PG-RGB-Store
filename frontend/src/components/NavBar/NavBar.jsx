@@ -41,7 +41,7 @@ function NavBar() {
   //Nav para movil
   function Nav() {
     return (
-      <div className="flex flex-col items-start  bg-primary-200 text-primary-400 h-screen lef-0 w-2/4 fixed top-0 left-0 ">
+      <div className="flex flex-col items-start  bg-primary-700 text-primary-400 h-screen lef-0 w-2/4 fixed top-0 left-0 ">
         <button
           className="mt-5 active:border active:border-primary-200"
           onClick={() => handleClose()}
@@ -80,7 +80,7 @@ function NavBar() {
             </Link>
           </li>
         </ul>
-        <div className="flex md:text-2xl  ">
+        <div className="flex md:text-2xl bottom-0   ">
           {username ? (
             <div className="flex flex-col ">
               <Link
@@ -102,7 +102,7 @@ function NavBar() {
           ) : (
             // SI NO ESTA RGISTRADO
 
-            <div className="flex flex-col  md:w-1/4     ">
+            <div className="flex flex-col  md:w-1/4   ">
               <div className="sm:py-2 md:py-6">
                 <Link
                   to="/logIn"
@@ -130,7 +130,7 @@ function NavBar() {
 
   //nav de escritorio
   return (
-    <nav className=" w-full flex  items-center lg:justify-between  shadow-lg bg-primary-200 sm:h-11 sm:flex justify-between md:flex md:justify-around md:h-20 lg:h-24 sticky z-50 top-0 left-0">
+    <nav className=" w-full flex  items-center lg:justify-between  shadow-lg bg-primary-700 sm:h-11 sm:flex justify-between md:flex md:justify-around md:h-20 lg:h-24 sticky z-50 top-0 left-0">
       <div className="flex items-center sm:justify-around sm:w-1/4  md:w-1/4 lg:w-1/2 ">
         <div className="sm:flex sm:items-center sm:ml-[-1rem] lg:hidden sm:block sm:mr-4">
           <button className="absolute" onClick={() => handleOpen()}>
@@ -153,7 +153,7 @@ function NavBar() {
         </div>
         {/*LOGO */}
 
-        <div className="flex justify-between items-center max-h-max bg-primary-200 text-base text-primary  sm:hidden lg:block ">
+        <div className="flex justify-between items-center max-h-max bg-primary-700 text-base text-primary  sm:hidden lg:block ">
           <ul className="flex  ">
             <li className="lg:mr-5 relative flex">
               <Link to="/categories?category=all" className="">

@@ -45,7 +45,10 @@ function Home() {
       <Slider/>
       <div className="flex flex-col items-center justify-center mt-4 w-full ">
       <div className="sm:mt-8 w-11/12 flex flex-col items-center justify-center">
+
+      <div className="w-full flex items-center justify-center border-b-4 border-primary-700">
       <h1 className="font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase">Motherboards</h1>
+      </div>
       <Promo
       left={true}
       img={promo1}
@@ -54,7 +57,9 @@ function Home() {
       />
       </div>
       <div className="sm:mt-8 w-11/12 flex flex-col items-center justify-center" >
+      <div className="w-full flex items-center justify-center border-b-4 border-primary-700">
       <h1 className="font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase">the best of asus</h1>
+      </div>
       <Promo
       left={false}
       img={promo2}
@@ -62,19 +67,20 @@ function Home() {
       params={'categories?category=all&brand=ASUS'}
       />
       </div>
-
-      <Marcas/>
-      <div className="  w-11/12 flex flex-col items-center justify-center">
-      <h1 className=" w-11/12 flex flex-col items-center justify-center font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase">Cases</h1>
+      <div className=" sm:mt-8 w-11/12 flex flex-col items-center justify-center">
+        <div className="w-full items-center justify-center flex border-b-4 border-primary-700">
+      <span className=" w-11/12 flex flex-col items-center justify-center font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase ">Cases</span>
+      </div>
         <Promo
-      left={false}
+      left={true}
       img={promo3}
       products={cases}
       params={'categories?category=Case'}
       />
       </div>
       </div>
-      <div className="mt-20">
+      <Marcas/>
+      <div className="">
         <img src="https://compudel.com.pe/img/cms/BANNERS/BANNER%20EMPRESAS%20ANTEFINAL.png" alt="compra" className="w-full sm:h-24 lg:h-52  "/>
       </div>
       <div>
