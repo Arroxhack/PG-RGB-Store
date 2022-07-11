@@ -29,21 +29,21 @@ export default function Slider() {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide className='w-full lg:h-96 sm:h-52'>
+        <SwiperSlide className='w-full lg:h-[18rem] sm:h-52'>
           <Link to='arma-tu-pc'>
-          <img className='w-full lg:h-80 sm:h-52' src={promo1} alt="" />
+          <img className='w-full lg:h-[18rem] sm:h-52' src={promo1} alt="" />
           </Link>
         </SwiperSlide>
         
-        <SwiperSlide  className='w-full lg:h-96 sm:h-52'>
+        <SwiperSlide  className='w-full lg:h-[18rem] sm:h-52'>
           <Link to='categories?category=all&brand=MSI'>
-          <img src={promo2} className='w-full lg:h-80 sm:h-52' alt="" />
+          <img src={promo2} className='w-full lg:h-[18rem] sm:h-52' alt="" />
           </Link>
           </SwiperSlide>
         
-        <SwiperSlide  className='w-full lg:h-96 sm:h-52'>
+        <SwiperSlide  className='w-full lg:h-[18rem] sm:h-52'>
           <Link to='categories?category=all&brand=AMD'>
-          <img src={promo3}  className='w-full lg:h-80 sm:h-52' alt="" />
+          <img src={promo3}  className='w-full lg:h-[18rem] sm:h-52' alt="" />
           </Link>
           </SwiperSlide>
        
