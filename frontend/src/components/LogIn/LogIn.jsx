@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 import NavBar from "../NavBar/NavBar";
 import Swal from "sweetalert2";
 import { CartContext } from "../Cart/CartContext";
+import { FavContext } from "../Favoritos/FavContext";
 
 export default function LogIn() {
   let navigate = useNavigate();
@@ -20,6 +21,7 @@ export default function LogIn() {
     window.location.reload(false);
   };
   const { setProducts, products } = useContext(CartContext);
+  const {setFavs, favs} = useContext(FavContext);
 
   const ResendEmail = async (email) => {
     const result = await axios({
@@ -103,6 +105,16 @@ export default function LogIn() {
         console.log("carritoDbData: ", carritoDbData);
         setProducts([...carritoDbData]);
         // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
+      } catch (error) {
+        console.log(error);
+      }
+
+      try {
+        const favDb = await axios.get(`http://localhost:3001/get/favorito?idUser=${user.id}`);
+
+        let favDbData = favDb.data;
+
+        setFavs([...favDbData]);
       } catch (error) {
         console.log(error);
       }
@@ -191,6 +203,17 @@ export default function LogIn() {
           console.log(error);
         }
 
+        
+      try {
+        const favDb = await axios.get(`http://localhost:3001/get/favorito?idUser=${user.id}`);
+
+        let favDbData = favDb.data;
+
+        setFavs([...favDbData]);
+      } catch (error) {
+        console.log(error);
+      }
+      
         if (response[0] === "E" && response[1] === "r" && response[2] === "r") {
           Swal.fire({
             icon: "error",

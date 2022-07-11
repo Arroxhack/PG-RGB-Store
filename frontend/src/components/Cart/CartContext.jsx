@@ -15,7 +15,7 @@ const Toast = Swal.mixin({
  
 const CartProvider = ({children}) => {
 
-    const [products, setProducts] = useState(()=>{
+    const [products,   setProducts] = useState(()=>{
         try {
             const productosLocalStorage = localStorage.getItem('cartProducts')
             return productosLocalStorage ? JSON.parse(productosLocalStorage) : []
@@ -45,38 +45,45 @@ const CartProvider = ({children}) => {
         }
     }, [products])
 
-
-    const addProductsToCart = (...product) =>{
-        const inCart = products.find(p=>p.id===product.id) // devuelve el valor que coincida // si no coincide, undefined
-        console.log("products: ", products) //productos en el carrito
-        console.log("inCart: ", inCart); // porducto que se quiere agregar y que ya esta en el carrito
-        console.log("product: ", product); //producto a agregar
-        if(inCart){ // si hay algo
-            setProducts(products.map(p=>{ // por cada producto en el carrito
-                if(p.id===product.id){
+ 
+    const addArrayToCart= product =>{
+       
+        for(let i in product) 
+        { const inCart = products.find(p=>p.id===product[i].id)
+        console.log("inCart: ", inCart)
+        if(inCart){
+           
+            setProducts(products.map(p=>{
+                if(p.id===product[i].id){
                     return {...inCart, amount: inCart.amount+1}
                 } else return p
             }))
-        }        
-        else{
-            setProducts([...products, {...product, amount:1}])
-        }
+        }       
+         else{
+            setProducts([...products, {...product[i], amount:1}])
+        }}
         Toast.fire({
             icon: "success",
             title: "Added to cart!",
           });
     }
-
-    const addProductToCart= product=>{
+    
+ 
+    
+    const addProductToCart= product =>{
+       
         const inCart = products.find(p=>p.id===product.id)
+      
         console.log("inCart: ", inCart)
         if(inCart){
+           
             setProducts(products.map(p=>{
                 if(p.id===product.id){
                     return {...inCart, amount: inCart.amount+1}
                 } else return p
             }))
-        }        else{
+        }       
+         else{
             setProducts([...products, {...product, amount:1}])
         }
         Toast.fire({
@@ -148,7 +155,7 @@ const CartProvider = ({children}) => {
 
     return (
 
-        <CartContext.Provider value={{products, addProductsToCart, addProductToCart,deleteProductCart,deleteProduct, resetProductCart, setProducts}}>
+        <CartContext.Provider value={{products, addProductToCart,deleteProductCart,deleteProduct, addArrayToCart, resetProductCart, setProducts}}>
             {children}
         </CartContext.Provider>
     )

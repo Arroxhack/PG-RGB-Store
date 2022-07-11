@@ -1,34 +1,27 @@
 import { createContext,useEffect, useState } from "react"
 import {useDispatch, useSelector} from 'react-redux'
 import { deleteProductFavorito,addProductFavorito,getProductFavorito} from '../../redux/actions'
+import axios from "axios";
 export const FavContext = createContext();
+
 
 const FavProvider = ({children}) =>{
     const dispatch = useDispatch();
     const idUser = window.atob(localStorage.getItem('id'));
+    const login = localStorage.getItem('login')
     const [favsBaseDeDatos, setFavsBaseDeDatos] = useState([])
     const favoritos = useSelector(state=>state.favoritos);
     
     const [favs, setFavs] = useState(()=>{
         try{
-            const favsLocalStorage = JSON.parse(localStorage.getItem('fav'));
-            setFavsBaseDeDatos(favoritos.map(e=>e.id));
-            const concatFavs = [favsLocalStorage ?  JSON.parse(favsLocalStorage) : [],...favsBaseDeDatos];
-            const aux = new Set(concatFavs);
-            const resNoReps = [...aux];
-            return resNoReps
-            //return favoritos.concat(JSON.parse(favsLocalStorage));
+            const favsLocalStorage = localStorage.getItem('fav');
+            return favsLocalStorage ? JSON.parse(favsLocalStorage) : []
         }catch(error){
             return []
         }
     });
 
     useEffect(()=>{
-        
-    },[])
-
-    useEffect(()=>{
-        dispatch(getProductFavorito(idUser));
         localStorage.setItem('fav', JSON.stringify(favs));
     },[favs])
 

@@ -15,9 +15,9 @@ function Selects({ name, handleChange }) {
   //console.log(allProducts);
 
   return (
-    <>
+    <div className="">
       <label
-        className="p-2 mx-0 mb-2 mt-0 block font-Open font-bold leading-none cursor-pointer"
+        className="p-2 mx-0 mb-2 mt-0 block font-Open font-bold leading-none"
         htmlFor={id}
       >
         {label}
@@ -32,7 +32,7 @@ function Selects({ name, handleChange }) {
         {allProducts.map((p) => p.category[0] === `${name}` ? ( <option id={p.id} value={JSON.stringify(p)}> {p.name} </option>) : null
         )}
       </select>
-    </>
+    </div>
   );
 }
 
