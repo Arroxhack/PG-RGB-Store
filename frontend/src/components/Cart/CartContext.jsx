@@ -46,55 +46,60 @@ const CartProvider = ({children}) => {
     }, [products])
 
  
-    const addArrayToCart= product => {
+    // const addArrayToCart= product => {
 
-        console.log("product: ", product);
-        console.log("productos carrito: ", products)
-        // [{
-        //     brand: "AMD"
-        //     category: ['CPU']
-        //     compatibilityBrands: null
-        //     ddr: 4
-        //     id: 7 
-        // },
-        // {
-        //     brand: "ASUS"
-        //     category: ['Motherboard']
-        //     compatibilityBrands: "Intel"
-        //     ddr: 4
-        //     id: 8 
-        // }]
-              product.forEach(e => {
-                setProducts(products => [...products, {...e, amount:1}])
-            })
-            Toast.fire({
-            icon: "success",
-            title: "Added to cart!",
-          });
-    }
-
-    // const addArrayToCart= product =>{
-    //     product.forEach(e => {
-
-    //         const inCart = products.find(p=>p.id===e.id)
-
-    //         console.log("inCart: ", inCart)
-    //         if(inCart){
-    //             setProducts(products.map(p=>{
-    //                 if(p.id===e.id){
-    //                     return {...inCart, amount: inCart.amount+1}
-    //                 } else return p
-    //             }))
-    //         }       
-    //         else{
-    //             setProducts(products => [...products, {...product, amount:1}])
-    //         }
+    //     console.log("product: ", product);
+    //     console.log("productos carrito: ", products)
+    //     // [{
+    //     //     brand: "AMD"
+    //     //     category: ['CPU']
+    //     //     compatibilityBrands: null
+    //     //     ddr: 4
+    //     //     id: 7 
+    //     // },
+    //     // {
+    //     //     brand: "ASUS"
+    //     //     category: ['Motherboard']
+    //     //     compatibilityBrands: "Intel"
+    //     //     ddr: 4
+    //     //     id: 8 
+    //     // }]
+    //           product.forEach(e => {
+    //             setProducts(products => [...products, {...e, amount:1}])
     //         })
-    //     Toast.fire({
+    //         Toast.fire({
     //         icon: "success",
     //         title: "Added to cart!",
     //       });
     // }
+
+    const addArrayToCart= product =>{
+        product.forEach(e => {
+
+            const inCart = products.find(p=>p.id===e.id)
+
+            console.log("inCart: ", inCart)
+            if(inCart){
+                setProducts(products => products.map(p=>{
+                    console.log("cada product que entra: ", p)
+                    if(p.id===e.id){
+                        return products => products, {...inCart, amount: inCart.amount+1}
+                    } 
+                    else {
+                        return products => products, {...p, amount:1}
+                    } 
+                }))
+            }       
+            else{
+                console.log("cada product que entra al segundo else: ", e)
+               return setProducts(products => [...products, {...e, amount:1}])
+            }
+            })
+        Toast.fire({
+            icon: "success",
+            title: "Your PC has been added to cart!",
+          });
+    }
 
     const addProductToCart= product =>{
        
