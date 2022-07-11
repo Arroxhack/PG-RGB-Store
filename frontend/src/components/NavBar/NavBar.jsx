@@ -156,7 +156,7 @@ function NavBar() {
         <div className="flex justify-between items-center max-h-max bg-primary-200 text-base text-primary  sm:hidden lg:block ">
           <ul className="flex  ">
             <li className="lg:mr-5 relative flex">
-              <Link to="/categories" className="">
+              <Link to="/categories?category=all" className="">
                 <p className="buttom">Categories</p>
               </Link>
             </li>
@@ -188,12 +188,12 @@ function NavBar() {
               to="/profile"
               className="sm:text-xs text-primary-400 md:text-xl flex "
             >
-              <span className="text-base text-primary buttom">profile</span>
+              <span className="text-base text-primary buttom">Profile</span>
             </Link>{" "}
             <Logout />
             <Link to="/favoritos">
               <button className="flex lg:ml-[-1rem] text-base text-primary buttom items-center sm:hidden lg:block">
-                Favoritos
+                Favorites
               </button>
             </Link>
             {admin ? (

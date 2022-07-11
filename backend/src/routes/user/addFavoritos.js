@@ -37,7 +37,7 @@ router.put('/add/favorito', async (req, res, next) => {
       //cambio el added a true porque se agrego correctamente
       added = true;
       await user.save();
-      console.log(user.favoritos);
+      // console.log(user.favoritos);
     } else {
       //si el array lo incluye, mando un 300 que ya esta agregado
       return res.send({ error: 'already have added to favorites' });

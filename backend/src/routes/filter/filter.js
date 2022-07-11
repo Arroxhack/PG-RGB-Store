@@ -153,6 +153,7 @@ router.get("/filter", async (req, res, next) => {
           res.send(allProduct);
         } else {
           allProduct = [];
+
           if (category !== "all") {
             products.forEach((p) => {
               if (category === p.category[0]) {
@@ -195,33 +196,75 @@ router.get("/filter", async (req, res, next) => {
               }
             }
           }
-  
-          res.send(allProduct);
+          
+          if(category==='all'){
+            allProduct = products
+            res.send(allProduct);
+          }
         }
       }
     }else{
-      const response = await Product.findAll({
+      const responseName = await Product.findAll({
         where: {
-          name: { [Op.iLike]: `%${name}%` },
+          name: { [Op.iLike]: `%${name}%` }
+        },
+      });
+      const responseBrand = await Product.findAll({
+        where: {
+          brand:{ [Op.iLike]: `%${name}%`}
         },
       });
 
-      if(brand && brand !== 'all'){
-        const searchBrand = []
-        response.forEach(p=>{
-          if(p.brand.includes(brand)){
-            return searchBrand.push(p)
-          }
-        })
+      let response = [...responseName, ...responseBrand]
 
-        res.send(searchBrand)
+      response = response.filter((value, index, self)=>
+        index === self.findIndex(t=>
+          t.id === value.id)
+      )
+
+      // const response = await Product.findAll({
+      //   where:{
+      //     category : {[Op.contains]:[`${name}`]}
+      //   }
+      // })
+
+      if(!brand){
+        if(!min && !max){
+          res.send(response)
+        }else{
+          const searchProduct = []
+
+          response.map(p=>{
+            if(p.price > min && p.price < max){
+              searchProduct.push(p)
+            }
+          })
+
+          res.send(searchProduct)
+        }
       }else{
-        if (response.length > 0) {
-          res.send(response);
-        } else {
-          res.status(404).send('Not product found');
+        if(!min && !max){
+          const searchBrand = []
+
+          response.forEach(p=>{
+            if(p.brand.includes(brand)){
+              searchBrand.push(p)
+            }
+          })
+
+          res.send(searchBrand)
+        }else{
+          const searchBrand = []
+
+          response.forEach(p=>{
+            if(p.brand.includes(brand) && p.price < max && p.price > min){
+              return searchBrand.push(p)
+            }
+          })
+          res.send(searchBrand)
         }
       }
+      
     }
 
   } catch (error) {
