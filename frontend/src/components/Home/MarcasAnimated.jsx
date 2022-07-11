@@ -28,7 +28,7 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 
 export default function MarcasAnimated() {
   return (
-    <div className='w-full h-80 flex justify-center items-center'>
+    <div className='w-full h-56 flex justify-center items-center'>
     <Swiper
       
         loop={true}
@@ -57,10 +57,10 @@ export default function MarcasAnimated() {
       >
     
         <SwiperSlide ><img src={intell} alt="" className='h-20 w-28' /></SwiperSlide>
-        <SwiperSlide><img src={amd} alt="" className='h- w-28'/></SwiperSlide>
+        <SwiperSlide><img src={amd} alt="" className='h-20 w-28'/></SwiperSlide>
         <SwiperSlide><img src={aerocool} alt="" className='h-20'/></SwiperSlide>
         <SwiperSlide><img src={corsair} alt="" className='h-20 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={evga} alt="" className='h-14 w-28'/></SwiperSlide>
+        <SwiperSlide><img src={evga} alt="" className='h-20 w-28'/></SwiperSlide>
         <SwiperSlide><img src={gigabyte} alt="" className='h-14 w-28'/></SwiperSlide>
         <SwiperSlide><img src={kingston} alt="" className='h-14 w-28'/></SwiperSlide>
         <SwiperSlide><img src={klipartz} alt=""className='h-20 w-28'/></SwiperSlide>
