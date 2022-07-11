@@ -188,12 +188,12 @@ function NavBar() {
               to="/profile"
               className="sm:text-xs text-primary-400 md:text-xl flex "
             >
-              <span className="text-base text-primary buttom">profile</span>
+              <span className="text-base text-primary buttom">Profile</span>
             </Link>{" "}
             <Logout />
             <Link to="/favoritos">
               <button className="flex lg:ml-[-1rem] text-base text-primary buttom items-center sm:hidden lg:block">
-                Favoritos
+                Favorites
               </button>
             </Link>
             {admin ? (

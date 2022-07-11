@@ -11,14 +11,14 @@ import NoFav from './Images/NoFav.png'
 const Add = ({id,onClick})=>{
 
     return(
-    <button id={id} onClick={onClick} className="w-full text-center py-3 rounded  text-white hover:bg-secundary-250 focus:outline-none my-1"> <img src={NoFav} alt='add-fav' height='25px' width='25px' /> </button>
+    <button id={id} onClick={onClick} className="w-full text-center py-3 rounded  text-white transform motion-safe:hover:scale-110 focus:outline-none my-1"> <img src={NoFav} alt='add-fav' height='25px' width='25px' /> </button>
     )
   }
 
   const Delete = ({id,onClick})=>{
     return(
       <button id={id} className="w-full text-center py-3 rounded 
-      hover:bg-secundary-250  focus:outline-none my-1" onClick={onClick}><img src={Fav} alt='delete-fav' height='25px' width='25px'/></button>
+      transform motion-safe:hover:scale-110  focus:outline-none my-1" onClick={onClick}><img src={Fav} alt='delete-fav' height='25px' width='25px'/></button>
     )
   } 
 const BoxFav = ({id,onClick})=>{
