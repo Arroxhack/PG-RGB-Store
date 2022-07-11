@@ -58,7 +58,7 @@ const BoxCart = () => {
             })}
             <div>
               <Link to="/cart">
-                <button className="w-full text-center mb-5 font-bold py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1">
+                <button className="w-full text-center mb-5 font-bold py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1 ">
 
                 {`Proceed to checkout: $${total.toFixed(2)}`}
                 </button>
