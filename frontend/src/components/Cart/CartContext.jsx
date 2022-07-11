@@ -15,7 +15,7 @@ const Toast = Swal.mixin({
  
 const CartProvider = ({children}) => {
 
-    const [products, setProducts] = useState(()=>{
+    const [products,   setProducts] = useState(()=>{
         try {
             const productosLocalStorage = localStorage.getItem('cartProducts')
             return productosLocalStorage ? JSON.parse(productosLocalStorage) : []
@@ -45,19 +45,44 @@ const CartProvider = ({children}) => {
         }
     }, [products])
 
-    const addProductToCart= product =>{
-       /* Finding the product in the cart. */
-        const inCart = products.find(p=>p.id===product.id)
-       /* Logging the product that is in the cart. */
+ 
+    const addArrayToCart= product =>{
+       
+        for(let i in product) 
+        { const inCart = products.find(p=>p.id===product[i].id)
         console.log("inCart: ", inCart)
         if(inCart){
-            /* Adding the amount of the product to the cart. */
+           
+            setProducts(products.map(p=>{
+                if(p.id===product[i].id){
+                    return {...inCart, amount: inCart.amount+1}
+                } else return p
+            }))
+        }       
+         else{
+            setProducts([...products, {...product[i], amount:1}])
+        }}
+        Toast.fire({
+            icon: "success",
+            title: "Added to cart!",
+          });
+    }
+    
+ 
+    
+    const addProductToCart= product =>{
+       
+        const inCart = products.find(p=>p.id===product.id)
+      
+        console.log("inCart: ", inCart)
+        if(inCart){
+           
             setProducts(products.map(p=>{
                 if(p.id===product.id){
                     return {...inCart, amount: inCart.amount+1}
                 } else return p
             }))
-        }       /* Adding the product to the cart. */
+        }       
          else{
             setProducts([...products, {...product, amount:1}])
         }
@@ -66,11 +91,6 @@ const CartProvider = ({children}) => {
             title: "Added to cart!",
           });
     }
-
-    // const addBuildToCart = {} => {
-
-    // }
-
 
     const deleteProductCart = (product) =>{
         
@@ -135,7 +155,7 @@ const CartProvider = ({children}) => {
 
     return (
 
-        <CartContext.Provider value={{products, addProductToCart,deleteProductCart,deleteProduct, resetProductCart, setProducts}}>
+        <CartContext.Provider value={{products, addProductToCart,deleteProductCart,deleteProduct, addArrayToCart, resetProductCart, setProducts}}>
             {children}
         </CartContext.Provider>
     )
