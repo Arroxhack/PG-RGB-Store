@@ -27,7 +27,7 @@ const Product = ({ product}) => {
 
   return (
     <div className='bg-primary-500 lg:w-64 lg:h-96 flex flex-col items-center rounded-sm gap-2 text-primary-200 
-     lg:hover:shadow-lg lg:hover:shadow-primary-400 lg:hover:-translate-y-0.1 sm:w-52 sm:h-38 sm:mt-6  md:h-80 md:w-64 '>
+     lg:hover:shadow-lg lg:hover:shadow-primary-400 lg:hover:-translate-y-0.1 sm:w-60 sm:h-38 sm:mt-6  md:h-80 md:w-64 '>
            <div className="ml-48 mt-2 absolute">
 
         </div>
