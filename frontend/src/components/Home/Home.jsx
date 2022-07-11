@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { getAllProducts } from "../../redux/actions/index";
 import { clean } from "../../redux/actions/index";
 import Nav from "../NavBar/Nav";
@@ -13,6 +13,11 @@ import Promo from "./PromLeft";
 import {SiWhatsapp} from 'react-icons/si'
 import Marcas from './Marcas'
 import Footer from "../Footer/Footer";
+import MarcasAnimated from "./MarcasAnimated";
+import { Link } from "react-router-dom";
+import promo1 from "../../images/promo1.jpg"
+import promo2 from "../../images/promo2.png"
+import promo3 from "../../images/promo3.jpg"
 
 function Home() {
   const dispatch = useDispatch();
@@ -22,7 +27,7 @@ function Home() {
   let mothers = products.filter(m=>m.category.includes("Motherboard"))
 
   //promo de cpu
-  let cpu=products.filter(m=>m.category.includes("CPU"))
+  let cases =products.filter(m=>m.category.includes("Case"))
 
   //promo de asus
   let asus=products.filter(m=>m.brand === "ASUS" )
@@ -40,44 +45,54 @@ function Home() {
       <Slider/>
       <div className="flex flex-col items-center justify-center mt-4 w-full ">
       <div className="sm:mt-8 w-11/12 flex flex-col items-center justify-center">
+
+      <div className="w-full flex items-center justify-center border-b-4 border-primary-700">
       <h1 className="font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase">Motherboards</h1>
+      </div>
       <Promo
       left={true}
-      img={'https://www.aorus.com/image/gallery/gallery-1615431112.jpg'}
+      img={promo1}
       products={mothers}
+      params={'categories?category=Motherboard'}
       />
       </div>
       <div className="sm:mt-8 w-11/12 flex flex-col items-center justify-center" >
+      <div className="w-full flex items-center justify-center border-b-4 border-primary-700">
       <h1 className="font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase">the best of asus</h1>
+      </div>
       <Promo
       left={false}
-      img={'https://concepto.de/wp-content/uploads/2018/08/placa-madre4-e1534448782751.jpg'}
+      img={promo2}
       products={asus}
+      params={'categories?category=all&brand=ASUS'}
       />
-
-      <div className="flex justify-center w-full">
-        <img className="w-11/12 lg:cursor-pointer" src="https://cdn.jsdelivr.net/gh/persano/BannersWebMaximus/armado-pc-home/arma-tu-compu-new.webp" alt="" />
       </div>
-      </div>
-
-      <Marcas/>
       <div className=" sm:mt-8 w-11/12 flex flex-col items-center justify-center">
-      <h1 className="sm:mt-8 w-11/12 flex flex-col items-center justify-center font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase">Cases</h1>
+        <div className="w-full items-center justify-center flex border-b-4 border-primary-700">
+      <span className=" w-11/12 flex flex-col items-center justify-center font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase ">Cases</span>
+      </div>
         <Promo
-      left={false}
-      img={'https://concepto.de/wp-content/uploads/2018/08/placa-madre4-e1534448782751.jpg'}
-      products={cpu}
+      left={true}
+      img={promo3}
+      products={cases}
+      params={'categories?category=Case'}
       />
       </div>
       </div>
-      <div>
-        <img src="https://compudel.com.pe/img/cms/BANNERS/BANNER%20EMPRESAS%20ANTEFINAL.png" alt="compra" className="w-full lg:cursor-pointer "/>
+      <Marcas/>
+      <div className="">
+        <img src="https://compudel.com.pe/img/cms/BANNERS/BANNER%20EMPRESAS%20ANTEFINAL.png" alt="compra" className="w-full sm:h-24 lg:h-52  "/>
       </div>
       <div>
-        <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank">
-        < SiWhatsapp className="fixed bottom-2 right-2 w-20 m-5 lg:h-11 lg:w-14 text-primary-400 lg:hover:"/>
+        <button  className="fixed bottom-2 right-2 w-28 m-5 lg:h-12 lg:w-44  flex items-center justify-center j rounded-2xl
+         gap-1 transform hover:scale-110 ">
+        <p className="text-xl text-primary-400 font-Open">Chat with us</p>
+        <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank" >
+        < SiWhatsapp className="h-7 w-9 relative text-primary-400 "/>
         </a>
+        </button>
       </div>
+      <MarcasAnimated/>
       <Footer/>
     </div>
   );

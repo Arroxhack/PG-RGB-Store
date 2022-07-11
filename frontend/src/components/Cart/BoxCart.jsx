@@ -13,13 +13,13 @@ const BoxCart = () => {
   products.forEach((p) => (total += p.amount * p.price));
 
   return (
-    <div className="h-auto  dropdown-toggle lg:w-[520px] sm:w-80 font-Open px-5 bg-secundary-250 text-primary-200 rounded mt-10 lg:-ml-80 sm:-ml-[25.5rem]  absolute z-10 md:text-center md:items-center">
-      <div className="flex flex-row-reverse pr-2"></div>
+    <div className="h-80 dropdown-toggle lg:w-[520px] sm:w-80 font-Open px-5 bg-secundary-250 text-primary-200 rounded mt-10 lg:-ml-80 sm:-ml-[25.5rem]  absolute z-10 md:text-center md:items-center sm:text-sm">
+      <div className="flex flex-row-reverse pr-2 "></div>
       <div>
         {products.length <= 0 ? (
           <p className="text-center pt-16 pb-16">No products yet!</p>
         ) : (
-          <div className="flex flex-col gap-4 mt-5 relative">
+          <div className="flex flex-col gap-4 mt-5 relative overflow-y-scroll h-64 ">
             {products.map((p) => {
               return (
                 <div
@@ -58,7 +58,7 @@ const BoxCart = () => {
             })}
             <div>
               <Link to="/cart">
-                <button className="w-full text-center mb-5 font-bold py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1">
+                <button className="w-full text-center mb-5 font-bold py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1 ">
 
                 {`Proceed to checkout: $${total.toFixed(2)}`}
                 </button>
