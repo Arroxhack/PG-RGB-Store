@@ -12,7 +12,6 @@ const ContainerProduct = () => {
 
   const dispatch = useDispatch()
 
-  const [loading, setLoading] = useState(false);
 
   useEffect(()=>{},[allProducts])
 
