@@ -78,11 +78,11 @@ function Home() {
         <img src="https://compudel.com.pe/img/cms/BANNERS/BANNER%20EMPRESAS%20ANTEFINAL.png" alt="compra" className="w-full sm:h-24 lg:h-52  "/>
       </div>
       <div>
-        <button  className="fixed bottom-2 right-2 w-28 m-5 lg:h-12 lg:w-36 bg-primary-400 flex items-center justify-center j rounded-2xl
-         gap-1 transform hover:scale-110 opacity-40 hover:opacity-100">
-        <p className="text-lg text-secundary-500 font-Open">chat with us</p>
+        <button  className="fixed bottom-2 right-2 w-28 m-5 lg:h-12 lg:w-44  flex items-center justify-center j rounded-2xl
+         gap-1 transform hover:scale-110 ">
+        <p className="text-xl text-primary-400 font-Open">Chat with us</p>
         <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank" >
-        < SiWhatsapp className="h-7 w-9 relative"/>
+        < SiWhatsapp className="h-7 w-9 relative text-primary-400 "/>
         </a>
         </button>
       </div>
