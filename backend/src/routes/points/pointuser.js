@@ -16,7 +16,7 @@ router.put("/givePoint", async (req, res) => {
     }
     let PointsWin = 0;
     let pointsToGive = user.points;
-    if (totalMount > 99 && totalMount < 500) {
+    if (totalMount > 50 && totalMount < 500) {
       PointsWin += Math.floor(totalMount * 0.03);
       pointsToGive += totalMount * 0.03;
       pointsToGive = Math.floor(pointsToGive);

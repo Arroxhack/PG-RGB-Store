@@ -32,7 +32,7 @@ function App() {
         <Route path="/" element={<Home />} exact />
         <Route path="/products/:id" element={<DetailProduct />} exact />
         {/* <Route path="/cart" element={<Cart />} /> */}
-        <Route path="/arma-tu-pc" element={<BuildPc />} />
+        <Route path="/arma-tu-pc" element={<Armado />} />
         <Route path="/categories" element={<Category />} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/register" element={<Register />} />

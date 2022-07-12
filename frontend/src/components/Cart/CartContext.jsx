@@ -13,6 +13,7 @@ const Toast = Swal.mixin({
 
 const CartProvider = ({ children }) => {
   const [usePoints, setUsePoints] = useState(false);
+  const [TyCcontext, setTyC] = useState(false);
   const [points, setPoints] = useState(0);
   const [products, setProducts] = useState(() => {
     try {
@@ -45,57 +46,32 @@ const CartProvider = ({ children }) => {
     }
   }, [products]);
 
-  // const addArrayToCart= product => {
-
-  //     console.log("product: ", product);
-  //     console.log("productos carrito: ", products)
-  //     // [{
-  //     //     brand: "AMD"
-  //     //     category: ['CPU']
-  //     //     compatibilityBrands: null
-  //     //     ddr: 4
-  //     //     id: 7
-  //     // },
-  //     // {
-  //     //     brand: "ASUS"
-  //     //     category: ['Motherboard']
-  //     //     compatibilityBrands: "Intel"
-  //     //     ddr: 4
-  //     //     id: 8
-  //     // }]
-  //           product.forEach(e => {
-  //             setProducts(products => [...products, {...e, amount:1}])
-  //         })
-  //         Toast.fire({
-  //         icon: "success",
-  //         title: "Added to cart!",
-  //       });
-  // }
-
   const addArrayToCart = (product) => {
     product.forEach((e) => {
       const inCart = products.find((p) => p.id === e.id);
 
       console.log("inCart: ", inCart);
       if (inCart) {
-        setProducts(
+        setProducts((products) =>
           products.map((p) => {
+            console.log("cada product que entra: ", p);
             if (p.id === e.id) {
-              return [
-                (products) => products,
-                { ...inCart, amount: inCart.amount + 1 },
-              ];
-              // } else return p
+              return (
+                (products) => products, { ...inCart, amount: inCart.amount + 1 }
+              );
+            } else {
+              return (products) => products, { ...p, amount: 1 };
             }
           })
         );
       } else {
-        setProducts((products) => [...products, { ...e, amount: 1 }]);
+        console.log("cada product que entra al segundo else: ", e);
+        return setProducts((products) => [...products, { ...e, amount: 1 }]);
       }
     });
     Toast.fire({
       icon: "success",
-      title: "Added to cart!",
+      title: "Your PC has been added to cart!",
     });
   };
 
@@ -136,7 +112,6 @@ const CartProvider = ({ children }) => {
         })
       );
     }
-
     Toast.fire({
       icon: "error",
       title: "Removed one to cart!",
@@ -191,6 +166,8 @@ const CartProvider = ({ children }) => {
         setUsePoints,
         points,
         setPoints,
+        TyCcontext,
+        setTyC,
       }}
     >
       {children}
