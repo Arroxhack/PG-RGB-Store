@@ -29,6 +29,7 @@ function Armado() {
   const [selectedPSUS, setSelectedPSUS] = useState([]);
   const [selectedCase, setSelectedCase] = useState([]);
 
+
   const [build, setBuild] = useState({
     CPU: {},
     Motherboard: {},
@@ -78,9 +79,9 @@ function Armado() {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
-  console.log(selectedCPU)
+  //console.log(selectedCPU)
   const allProducts = useSelector((state) => state.allProducts);
-
+  
   return (
     <div>
       <NavBar />
@@ -88,6 +89,7 @@ function Armado() {
         <div className="">
           <div className="w-full absolute right-0 h-full">
             <div className="flex md:flex-row bg-primary-200 flex-col justify-end">
+              
               <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-secundary-250 overflow-y-auto overflow-x-hidden h-screen">
                 <p className="text-5xl font-black mb-10 font-Open leading-10 pt-3">
                   Choose your components
@@ -105,8 +107,10 @@ function Armado() {
                     <div className="md:pl-3 md:w-3/4">
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
+                         brand={selectedCPU.brand}
                           name="CPU"
                           handleChange={(e) => {
+                        
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedCPU(valueArray);
                             console.log(valueArray.id);
@@ -132,6 +136,7 @@ function Armado() {
                     <div className="md:pl-3 md:w-3/4">
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
+                          brand={selectedCPU.brand}
                           name="Motherboard"
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
