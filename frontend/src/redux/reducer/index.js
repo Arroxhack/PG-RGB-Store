@@ -41,6 +41,9 @@ import {
   ADD_FAV,
   GET_QUESTION,
   GET_QUEST,
+  NEXT_PAGE_PRODUCTS,
+  PREV_PAGE_PRODUCTS,
+  SET_PAGE_PRODUCTS,
 } from '../types/index';
 
 const initialState = {
@@ -61,6 +64,7 @@ const initialState = {
   filterOrder: [],
   favoritos: [],
   page: 1,
+  pageContainer:1,
   gpus: [],
   CommendPending: [],
   CommendProduct: [],
@@ -408,6 +412,26 @@ const reducer = (state = initialState, action) => {
         ...state,
         questionDetail: action.payload
       }
+    case NEXT_PAGE_PRODUCTS:
+      return{
+        ...state,
+        pageContainer: state.pageContainer+1
+      };
+    case PREV_PAGE_PRODUCTS:
+      let previo = state.pageContainer - 1
+      if(previo === 1){
+        previo = 1
+      }
+      return{
+        ...state,
+        pageContainer: previo
+      };
+      case SET_PAGE_PRODUCTS:
+        return{
+          ...state,
+          pageContainer: action.payload
+        }
+      
     default:
       return { ...state };
   }
