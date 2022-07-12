@@ -16,6 +16,7 @@ import ssd from ".//imagesBuild/ssd.svg";
 import m2 from ".//imagesBuild/m2.svg";
 import hdd from ".//imagesBuild/hdd.svg";
 import { useNavigate } from "react-router";
+import { BsCartPlus } from "react-icons/bs";
 
 function Armado() {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ function Armado() {
   const [selectedPSUS, setSelectedPSUS] = useState([]);
   const [selectedCase, setSelectedCase] = useState([]);
 
+  const [cpus, setCpu] = useState([])
 
   const [build, setBuild] = useState({
     CPU: {},
@@ -74,6 +76,32 @@ function Armado() {
     navigate("/cart");
   };
 
+  /*
+    const [selectedCPU, setSelectedCPU] = useState([]);
+  const [selectedMother, setSelectedMother] = useState([]);
+  const [selectedRam, setSelectedRam] = useState([]);
+  const [selectedGPU, setSelectedGPU] = useState([]);
+  const [selectedHDD, setSelectedHDD] = useState([]);
+  const [selectedSSD, setSelectedSSD] = useState([]);
+  const [selectedSSDM2, setSelectedSSDM2] = useState([]);
+  const [selectedPSUS, setSelectedPSUS] = useState([]);
+  const [selectedCase, setSelectedCase] = useState([]);
+  */
+  const Check = (cpuSelected)=>{
+    if(cpuSelected.name !== cpus.name){
+   
+      setSelectedMother([])
+      setSelectedRam([])
+      setSelectedGPU([])
+      setSelectedHDD([])
+      setSelectedSSD([])
+      setSelectedSSDM2([])
+      setSelectedPSUS([])
+      setSelectedCase([])
+    }
+    setCpu(cpuSelected);
+  }
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -110,10 +138,10 @@ function Armado() {
                          brand={selectedCPU.brand}
                           name="CPU"
                           handleChange={(e) => {
-                        
+                            Check(selectedCPU);
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedCPU(valueArray);
-                            console.log(valueArray.id);
+                            //console.log(valueArray.id);
                             setBuild({
                               ...build,
                               [e.target.name]: valueArray,
