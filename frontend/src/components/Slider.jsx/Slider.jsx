@@ -36,13 +36,13 @@ export default function Slider() {
         </SwiperSlide>
         
         <SwiperSlide  className='w-full lg:h-[18rem] sm:h-32'>
-          <Link to='categories?category=all&brand=MSI'>
+          <Link to='categories?category=all&brand=MSI&page=1'>
           <img src={promo2} className='w-full lg:h-[18rem] sm:h-32' alt="" />
           </Link>
           </SwiperSlide>
         
         <SwiperSlide  className='w-full lg:h-[18rem] sm:h-32'>
-          <Link to='categories?category=all&brand=AMD'>
+          <Link to='categories?category=all&brand=AMD&page=1'>
           <img src={promo3}  className='w-full lg:h-[18rem] sm:h-32' alt="" />
           </Link>
           </SwiperSlide>

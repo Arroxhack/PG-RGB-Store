@@ -16,7 +16,7 @@ export default function SearchBar() {
   function onSubmit(e) {
     e.preventDefault();
     setSearch("");
-    navigate(`/categories?name=${name}`)
+    navigate(`/categories?name=${name}&page=1`)
   }
 
   function onInputChange(e) {

@@ -19,9 +19,8 @@ const Create = () => {
 
   const [menu, setMenu] = useState("create-product");
   const [Validate, setValidate] = useState(true);
-    
-    const dispatch = useDispatch()
 
+  const dispatch = useDispatch();
 
   const ValidatePassword = async () => {
     const { value: password } = await Swal.fire({
@@ -30,7 +29,7 @@ const Create = () => {
       inputLabel: "Password",
       inputPlaceholder: "Enter your password",
       inputAttributes: {
-        maxlength: 10,
+        maxlength: 25,
         autocapitalize: "off",
         autocorrect: "off",
       },
@@ -62,24 +61,22 @@ const Create = () => {
 
   return (
     // <>
-    //   {Validate ? 
-      (
-        <>
-          {admin ? (
-            <div>
-              <Nav />
-              <div className="flex flex-row">
-                <div className="bg-primary-200 h-screen w-60">
-                  <Menu/>
-                </div>
-               <CreateProduct/>
-              </div>
+    //   {Validate ?
+    <>
+      {admin ? (
+        <div>
+          <Nav />
+          <div className="flex flex-row">
+            <div className="bg-primary-200 h-screen w-60">
+              <Menu />
             </div>
-          ) : (
-            <Error />
-          )}
-        </>
-      )
+            <CreateProduct />
+          </div>
+        </div>
+      ) : (
+        <Error />
+      )}
+    </>
     //    : null}
     // </>
   );

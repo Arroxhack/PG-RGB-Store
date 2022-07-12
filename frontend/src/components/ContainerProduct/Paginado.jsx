@@ -31,13 +31,20 @@ const Paginado = ({max}) => {
         setParams(params)
         dispatch(prevPageProduct())
     }
-    
+
     useEffect(()=>{
         if(page!==1){
         params.set('page',page)
         setParams(params)
         }
     },[page])
+
+    useEffect(()=>{
+        return()=>{
+        dispatch(setPageProduct(1))
+        }
+    },[])
+    
   return (
     <div className='flex flex-row gap-5 items-center'>
         <button disabled={page<=1?true:false} className='disabled:invisible bg-primary-400 py-1 px-5 uppercase font-medium rounded-lg hover:bg-primary-300' type="submit" onClick={prev}>Prev</button>

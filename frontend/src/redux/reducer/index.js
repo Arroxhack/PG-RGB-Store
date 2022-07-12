@@ -349,7 +349,7 @@ const reducer = (state = initialState, action) => {
           icon:'info',
           title: 'No products found',
           text:'Please try again',
-          confirmButtonText: '<a href="categories?category=all">OK</a>'
+          confirmButtonText: '<a href="categories?category=all&page=1">OK</a>'
         })
       }
       return {
