@@ -11,6 +11,9 @@ import Favorito from "../Favoritos/Favorito";
 import CommentReview from "./CommentReview";
 import BoxFav from "../Favoritos/BoxFav";
 import Questions from "./Questions";
+import ShowLessMore from "show-more-less";
+import "show-more-less/dist/index.css";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 function DetailProduct() {
   const dispatch = useDispatch();
@@ -32,8 +35,10 @@ function DetailProduct() {
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
-
+  const [expanded, setExpanded] = useState(false);
   const images = ProductDetail.image;
+  const [text, setText] = useState(`${ProductDetail.description}`)
+  console.log(text)
   const Toast = Swal.mixin({
     toast: true,
     position: "bottom-end",
@@ -58,7 +63,7 @@ function DetailProduct() {
 
   return (
     <div className="h-full bg-primary-200">
-        <NavBar />
+      <NavBar />
       <section
         className={
           loading
@@ -89,7 +94,7 @@ function DetailProduct() {
                             ? ProductDetail.image[0]
                             : "1602010489_p_setting_fff_1_90_end_600.jpg"
                         }
-                        height="500"
+                        height="600"
                         width="500"
                       />
                     )}
@@ -135,15 +140,14 @@ function DetailProduct() {
                       <div>
                         <div className="max-w-none text-secundary-250 group-open:hidden">
                           <p>
-                            {ProductDetail.description
-                              ? truncate(ProductDetail.description, 300)
-                              : null}
+                            <ShowLessMore
+                              text={`${ProductDetail.description}`}
+                              threshold={100}
+                              expanded={expanded}
+                              onExpand={setExpanded}
+                            />
                           </p>
                         </div>
-
-                        <span className="mt-4 text-sm text-primary-400 font-medium underline cursor-pointer group-open:absolute group-open:bottom-0 group-open:left-0 group-open:mt-0">
-                          Read More
-                        </span>
                       </div>
                     </summary>
 
