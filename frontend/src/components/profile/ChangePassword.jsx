@@ -3,6 +3,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 function ChangePassword() {
+  const PATH = 'http://localhost:3001'
+
   const navigate = useNavigate();
   const username = window.atob(localStorage.getItem("username"));
   const [user, setUser] = useState({
@@ -26,7 +28,7 @@ function ChangePassword() {
     const { password } = user;
     const result = await axios({
       method: "put",
-      url: "http://localhost:3001/sendTokenReset",
+      url: `${PATH}/sendTokenReset`,
       data: { username, password },
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -48,7 +50,7 @@ function ChangePassword() {
         button: "Aceptar",
       });
       window.location.replace(
-        `http://localhost:3000/resetPassword/${username}`
+        `${PATH}/resetPassword/${username}`
       );
     }
   };

@@ -1,5 +1,10 @@
 import axios from "axios";
 export async function givePoints(username, ArrayProducts) {
+
+  const PATH = 'http://localhost:3001'
+
+  // CORREGIR LINEA 29
+
   let totalMount = 0;
   console.log(ArrayProducts);
   for (let x in ArrayProducts) {
@@ -9,7 +14,7 @@ export async function givePoints(username, ArrayProducts) {
   }
   const result = await axios({
     method: "put",
-    url: "http://localhost:3001/givePoint",
+    url: `${PATH}/givePoint`,
     data: { username, totalMount }, // email
     headers: { "X-Requested-With": "XMLHttpRequest" },
     withCredentials: true,

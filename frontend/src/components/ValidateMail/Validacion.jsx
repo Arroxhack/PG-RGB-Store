@@ -10,6 +10,9 @@ import { CartContext } from "../Cart/CartContext";
 import NavBar from '../NavBar/NavBar'
 
 export default function Validations() {
+
+  const PATH = 'http://localhost:3001'
+
   const { setProducts, products } = useContext(CartContext);
   const navigate = useNavigate();
   const [token, setToken] = useState("");
@@ -20,7 +23,7 @@ export default function Validations() {
     e.preventDefault();
     const UserRegister = await axios({
       method: "put",
-      url: `http://localhost:3001/register/verify`,
+      url: `${PATH}/register/verify`,
       data: { token, username },
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -53,7 +56,7 @@ export default function Validations() {
         const response = await axios({
           //La ruta trae toda la info en la base de datos de un usuario
           method: "post",
-          url: "http://localhost:3001/userCart",
+          url: `${PATH}/userCart`,
           data: { email, cartProductArray }, //
           headers: { "X-Requested-With": "XMLHttpRequest" },
           withCredentials: true,
@@ -66,7 +69,7 @@ export default function Validations() {
 
         try {
           const carritoDb = await axios.get(
-            `http://localhost:3001/userCart?email=${email}`
+            `${PATH}/userCart?email=${email}`
           );
           let carritoDbData = carritoDb.data.filter((e) => e.id);
           console.log("carritoDbData: ", carritoDbData);
@@ -102,7 +105,7 @@ export default function Validations() {
     deshabilitar_btnEnviar();
     const result = await axios({
       method: "post",
-      url: "http://localhost:3001/resendEmail",
+      url: `${PATH}/resendEmail`,
       data: { username }, // username
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,

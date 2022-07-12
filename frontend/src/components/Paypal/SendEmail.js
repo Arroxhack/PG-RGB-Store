@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export async function SendReview(username, ArrayProduct, idCompra) {
-  console.log("FUNCIONA PA ?");
+  const PATH = 'http://localhost:3001'
+
   let products = [];
   let precioTotal = 0;
   for (let n in ArrayProduct) {
@@ -17,7 +18,7 @@ export async function SendReview(username, ArrayProduct, idCompra) {
   }
   await axios({
     method: "post",
-    url: "http://localhost:3001/SendEmailProducts",
+    url: `${PATH}/SendEmailProducts`,
     data: { username, products, precioTotal, idCompra }, // email
     headers: { "X-Requested-With": "XMLHttpRequest" },
     withCredentials: true,

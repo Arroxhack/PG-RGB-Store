@@ -11,6 +11,8 @@ const Toast = Swal.mixin({
   timer: 2000,
 });
 
+const PATH = 'http://localhost:3001'
+
 const CartProvider = ({ children }) => {
   const [usePoints, setUsePoints] = useState(false);
   const [TyCcontext, setTyC] = useState(false);
@@ -37,7 +39,7 @@ const CartProvider = ({ children }) => {
     if (login && email) {
       (async () => {
         const response = axios
-          .post("http://localhost:3001/changeCart", { email, cartProductArray })
+          .post(`${PATH}/changeCart`, { email, cartProductArray })
           .then((res) => res.data)
           .catch((e) => console.log(e));
         const ress = await Promise.all([response]);

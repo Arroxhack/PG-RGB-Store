@@ -15,6 +15,8 @@ const Create = () => {
   const admin = localStorage.getItem("admin");
   const username = window.atob(localStorage.getItem("username"));
 
+  const PATH = 'http://localhost:3001'
+
   let [searchParms, setSearchParams] = useSearchParams();
 
   const [menu, setMenu] = useState("create-product");
@@ -41,7 +43,7 @@ const Create = () => {
     }
     const result = await axios({
       method: "post",
-      url: "http://localhost:3001/verifyAdminPass",
+      url: `${PATH}/verifyAdminPass`,
       data: { username, password },
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,

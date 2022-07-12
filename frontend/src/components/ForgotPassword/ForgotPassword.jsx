@@ -13,6 +13,8 @@ function ForgotPassword() {
   const [newPasswordValidate, setNewPasswordValidate] = useState("");
   const navigate = useNavigate();
 
+  const PATH = 'http://localhost:3001'
+
   const HandleSendToken = async (e) => {
     e.preventDefault();
     // if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(email)) {
@@ -21,7 +23,7 @@ function ForgotPassword() {
     document.querySelector("#token").innerHTML = "Sending...";
     const result = await axios({
       method: "post",
-      url: "http://localhost:3001/sendTokenResetPassword",
+      url: `${PATH}/sendTokenResetPassword`,
       data: { email }, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -59,7 +61,7 @@ function ForgotPassword() {
     }
     const result = await axios({
       method: "put",
-      url: "http://localhost:3001/resetForgotPassword",
+      url: `${PATH}/resetForgotPassword`,
       data: { email, NewPassword, token }, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,

@@ -38,6 +38,9 @@ export default function Register() {
   };
 
   const handleSubmit = async (e) => {
+
+    const PATH = 'http://localhost:3001'
+
     e.preventDefault();
     document.getElementById("enviar").disabled = true;
     document.getElementById("enviar").innerHTML = "Sending...";
@@ -142,7 +145,7 @@ export default function Register() {
     ) {
       const UserRegister = await axios({
         method: "post",
-        url: "http://localhost:3001/register",
+        url: `${PATH}/register`,
         data: user,
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,
