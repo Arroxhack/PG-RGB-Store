@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-// import styles from "./ShowMoreLess.module.scss";
+import React, { useContext, useState } from "react";
+import { CartContext } from "../Cart/CartContext";
 import ShowLessMore from "show-more-less";
 import "show-more-less/dist/index.css";
-export default function TyC() {
+export default function TyC({ Close }) {
+  const { setTyC } = useContext(CartContext);
   const [text, setText] = useState(`1- RGB STORE 
 RGBSTORE es una compañía de tecnología que ofrece servicios vinculados principalmente al comercio electrónico y a los pagos digitales. 
 
@@ -61,13 +62,39 @@ En virtud de esa responsabilidad, podrán realizar compensaciones, retenciones u
 
 11- Jurisdicción y Ley Aplicable
 Estos Términos y Condiciones se rigen por la ley argentina. Toda controversia derivada de su aplicación, interpretación, ejecución o validez será resuelta por los tribunales nacionales ordinarios competentes, con asiento en la Ciudad de Buenos Aires, salvo disposición específica de normas de orden público, como por ejemplo, legislación relativa al Consumidor. Para todos los efectos relacionados con estos Términos y Condiciones y con el uso del sitio,  RGB-STORE S.R.L. con CUIT 00-000000-0 establece como domicilio CASA DE NACHO, Ciudad Autónoma de Buenos Aires, Argentina.`);
-
+  const handleChecked = (e) => {
+    if (e.target.checked) {
+      setTyC(true);
+    } else {
+      setTyC(false);
+    }
+  };
+  console.log(Close);
   const [expanded, setExpanded] = useState(false);
   return (
-    <div className="h-auto  dropdown-toggle lg:w-[520px] sm:w-80 font-Open px-5 bg-secundary-250 text-primary-200 rounded mt-10 lg:-ml-80 sm:-ml-[25.5rem]  absolute z-10 md:text-center md:items-center">
+    <div className="h-[45rem] -mt-[40rem] p-6 mr-[40rem] dropdown-toggle lg:w-[520px] overflow-y-scroll sm:w-80 font-Open px-5 bg-secundary-250 text-primary-200 rounded mt-10 -ml-80 sm:-ml-[25.5rem]  absolute z-10 md:text-center md:items-center">
+      <div className="flex inline-flex">
+        <h1 className="text-3xl">Terms and Condition</h1>
+        <button onClick={(e) => Close(e)}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 ml-6 text-secundary-50"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
       <ShowLessMore
         text={text}
-        threshold={150}
+        threshold={1660}
         expanded={expanded}
         onExpand={setExpanded}
         // classes={{
@@ -76,6 +103,15 @@ Estos Términos y Condiciones se rigen por la ley argentina. Toda controversia d
         //   clickable: styles.clickable,
         // }}
       />
+      <label>Accept Terms and Conditions</label>
+      <input
+        type="checkbox"
+        name="check"
+        id="check"
+        className="ml-2 text-2xl font-medium dark:text-gray-300"
+        onChange={handleChecked}
+      />
+      <br />
     </div>
   );
 }

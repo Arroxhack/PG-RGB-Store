@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { validate, regexPass, regexEmail } from "./Validations";
 import { PostUser } from "../../redux/actions";
 import { useNavigate } from "react-router";
@@ -6,8 +6,10 @@ import axios from "axios";
 import NavBar from "../NavBar/NavBar";
 import Swal from "sweetalert2";
 import TyC from "./TyC";
+import { CartContext } from "../Cart/CartContext";
 export default function Register() {
   let navigate = useNavigate();
+  const { TyCcontext } = useContext(CartContext);
   const [errors, setErrors] = useState({});
   const [TyCopen, setTyCopen] = useState(false);
   const [user, setUser] = useState({
@@ -54,6 +56,15 @@ export default function Register() {
       });
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Submit";
+    } else if (TyCcontext === false) {
+      Swal.fire({
+        icon: "warning",
+        title: "Terms and Conditions",
+        text: "You need to accept Terms and Conditions to continue",
+        button: "Aceptar",
+      });
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (name.length <= 3) {
       Swal.fire({
         icon: "warning",
@@ -95,7 +106,8 @@ export default function Register() {
         text: "INVALID PASSWORD",
         button: "Aceptar",
       });
-      document.querySelector("#submit").innerHTML = "Submit";
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (password !== passwordValidate) {
       Swal.fire({
         icon: "warning",
@@ -228,12 +240,15 @@ export default function Register() {
                   name="passwordValidate"
                   onChange={handleOnChange}
                 />
-
-                <label>Terms and Condicions </label>
-                <button onClick={handleTyC}>TyC</button>
+                <button
+                  className="w-full text-white text-center hover:bg-primary-300 focus:outline-none my-1"
+                  onClick={handleTyC}
+                >
+                  Terms and Conditions
+                </button>
                 {TyCopen ? (
                   <div className="absolute lg:translate-x-[-10rem] sm:translate-x-28 md:">
-                    <TyC onClick={handleTyC} />
+                    <TyC Close={handleTyC} onClick={handleTyC} />
                   </div>
                 ) : (
                   <></>
