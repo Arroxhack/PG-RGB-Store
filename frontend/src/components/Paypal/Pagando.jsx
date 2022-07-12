@@ -3,7 +3,7 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { CrearComentarioReview } from "./crearComentario";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SendReview } from "./SendEmail";
 import { givePoints, takePoints } from "./Points";
 import { CartContext } from "../Cart/CartContext";
@@ -237,7 +237,13 @@ export default function Pagando() {
 
   return (
     <div className="flex flex-col select-none">
+      <span className="bg-primary-200">
+      <Link to = "/">
+      <button className="ml-5 mt-5 rounded bg-primary-400 p-3 hover:bg-primary-300">Back to home</button>
+      </Link>
+      </span>
       <div className="mb-5 bg-primary-200 w-full">
+      
         <h1 className=" flex flex-col text-center text-primary-400 font-Open text-[90px] tracking-tight font-extrabold ">
           RGB
           <span className="font-PT -mt-16 text-primary-300 font-normal text-[90px] tracking-tight ">
