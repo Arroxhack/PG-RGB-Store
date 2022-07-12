@@ -2,8 +2,9 @@ import React, {useEffect} from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
+import Select from 'react-select'
 import Swal from 'sweetalert2'
-import { filterPrice, filterProducts, getAllCategories } from '../../redux/actions'
+import { filterPrice, filterProducts, getAllCategories, orderedByPrice } from '../../redux/actions'
 
 const Side = () => {
 
@@ -106,6 +107,7 @@ const Side = () => {
     const setBrand = (e)=>{
         e.preventDefault()
         params.set([e.target.name], e.target.value)
+        params.set('page',1)
         setParams(params)
         dispatch(filterProducts(catQuery, brandQuery, minQuery, maxQuery, searchFilter))
     }
@@ -117,7 +119,7 @@ const Side = () => {
             const min = params.get('min')
             params.set('max', price.max)
             const max = params.get('max')
-            console.log(min>max)
+            params.set('page',1)
             if(min<max){
                 setParams(params)
                 dispatch(filterProducts(catQuery, brandQuery, minQuery, maxQuery, searchFilter))
@@ -153,10 +155,38 @@ const Side = () => {
     }
     //#endregion
     
+    //#region ORDENAMIENTO
+    const options = [{value:'LOW', label:'Lower price'},{value:'HIGH', label:'Higher price'}]
+
+    const [orden, setOrden] = useState(null)
+
+    const handleOrden=({value})=>{
+        setOrden(value)
+        dispatch(orderedByPrice(value))
+    }
+
+    const colourStyles = {
+        control : styles=>({...styles, backgroundColor: '#eeeeee'}),
+        option : (styles,{data, isDisabled, isFocused, isSelected})=>{
+            const color = '#212126'
+            return{
+                ...styles,
+                backgroundColor: isDisabled ? '#212126' : '#eeeeee',
+                color: '#212126',
+                cursor : isDisabled ? '#38817A' : '#38817A',
+            }
+        }
+    }
+    //#endregion
+
   return (
     <div className='text-secundary-250 flex flex-col text-center gap-5 w-[30vh]'>
+        {products.length ? 
+        <>
         <div>
-            ORDER PRICE
+        <h3 className='uppercase font-PT font-bold text-2xl'>Order by price</h3>
+            <Select options={options} placeholder='Order by price' 
+           onChange={handleOrden} className='bg-secundary' styles={colourStyles}/>
         </div>
         {/* BOTONES */}
         <div className='flex flex-row gap-1 justify-center pt-5 pb-5'>
@@ -196,7 +226,8 @@ const Side = () => {
                     )
                 })}
             </div>
-        </div>
+        </div></>
+        :<></>}
     </div>
   )
 }
