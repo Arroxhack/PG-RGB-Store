@@ -10,13 +10,15 @@ const EditUser = () => {
   const [method, setMethod] = useState("Upgradear a Admin");
   const [state, setState] = useState("");
 
+  const PATH = 'http://localhost:3001'
+
   useEffect(() => {
     getAllUsers();
   }, []);
   const getAllUsers = async () => {
     const allusers = await axios({
       method: "get",
-      url: "http://localhost:3001/Users",
+      url: `${PATH}/Users`,
       data: null, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -27,7 +29,7 @@ const EditUser = () => {
     e.preventDefault();
     const allusers = await axios({
       method: "get",
-      url: "http://localhost:3001/Users",
+      url: `${PATH}/Users`,
       data: null, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -57,7 +59,7 @@ const EditUser = () => {
     if (method === "Lock") {
       const result = await axios({
         method: "put",
-        url: "http://localhost:3001/blockUser",
+        url: `${PATH}/blockUser`,
         data: { Userid, idAdmin }, // email
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,
@@ -84,7 +86,7 @@ const EditUser = () => {
     } else {
       const result = await axios({
         method: "put",
-        url: "http://localhost:3001/unlockUser",
+        url: `${PATH}/unlockUser`,
         data: { Userid, idAdmin }, // email
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,

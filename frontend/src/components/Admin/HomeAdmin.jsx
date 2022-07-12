@@ -19,6 +19,8 @@ const HomeAdmin = () => {
 
   const [Validate, setValidate] = useState(true);
 
+  const PATH = 'http://localhost:3001'
+
   const ValidatePassword = async () => {
     const { value: password } = await Swal.fire({
       title: "Enter your password",
@@ -38,7 +40,7 @@ const HomeAdmin = () => {
     }
     const result = await axios({
       method: "post",
-      url: "http://localhost:3001/verifyAdminPass",
+      url: `${PATH}/verifyAdminPass`,
       data: { username, password },
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,

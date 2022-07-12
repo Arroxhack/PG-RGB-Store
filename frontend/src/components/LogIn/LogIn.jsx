@@ -10,6 +10,8 @@ import { CartContext } from "../Cart/CartContext";
 import { FavContext } from "../Favoritos/FavContext";
 
 export default function LogIn() {
+  const PATH = 'http://localhost:3001'
+
   let navigate = useNavigate();
   const cartProductArray = localStorage.getItem("cartProducts");
   console.log("cartProductArray: ", cartProductArray);
@@ -26,7 +28,7 @@ export default function LogIn() {
   const ResendEmail = async (email) => {
     const result = await axios({
       method: "post",
-      url: "http://localhost:3001/resendEmailLogin",
+      url: `${PATH}/resendEmailLogin`,
       data: { email }, // email
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -57,7 +59,7 @@ export default function LogIn() {
     const user = await axios({
       //La ruta trae toda la info en la base de datos de un usuario
       method: "post",
-      url: "http://localhost:3001/login",
+      url: `${PATH}/login`,
       data: userLogin, // objeto que tiene {userName y password}
       headers: { "X-Requested-With": "XMLHttpRequest" },
       withCredentials: true,
@@ -86,7 +88,7 @@ export default function LogIn() {
       const response = await axios({
         //La ruta trae toda la info en la base de datos de un usuario
         method: "post",
-        url: "http://localhost:3001/userCart",
+        url: `${PATH}/userCart`,
         data: { email, cartProductArray }, // cartProductArray -> array de objetos del local storage
         headers: { "X-Requested-With": "XMLHttpRequest" },
         withCredentials: true,
@@ -99,7 +101,7 @@ export default function LogIn() {
 
       try {
         const carritoDb = await axios.get(
-          `http://localhost:3001/userCart?email=${user.email}`
+          `${PATH}/userCart?email=${user.email}`
         );
         let carritoDbData = carritoDb.data.filter((e) => e.id);
         console.log("carritoDbData: ", carritoDbData);
@@ -110,7 +112,7 @@ export default function LogIn() {
       }
 
       try {
-        const favDb = await axios.get(`http://localhost:3001/get/favorito?idUser=${user.id}`);
+        const favDb = await axios.get(`${PATH}/get/favorito?idUser=${user.id}`);
 
         let favDbData = favDb.data;
 
@@ -159,7 +161,7 @@ export default function LogIn() {
     console.log("userObject: ", userObject);
     setGoogleUser(userObject);
     let user = await axios
-      .get(`http://localhost:3001/googleLogin?googleMail=${userObject.email}`)
+      .get(`${PATH}/googleLogin?googleMail=${userObject.email}`)
       .then((data) => data.data)
       .catch((e) => console.log(e));
     // let userData = user.data
@@ -180,7 +182,7 @@ export default function LogIn() {
         const response = await axios({
           //La ruta trae toda la info en la base de datos de un usuario
           method: "post",
-          url: "http://localhost:3001/userCart",
+          url: `${PATH}/userCart`,
           data: { email, cartProductArray }, //
           headers: { "X-Requested-With": "XMLHttpRequest" },
           withCredentials: true,
@@ -193,7 +195,7 @@ export default function LogIn() {
 
         try {
           const carritoDb = await axios.get(
-            `http://localhost:3001/userCart?email=${user.email}`
+            `${PATH}/userCart?email=${user.email}`
           );
           let carritoDbData = carritoDb.data.filter((e) => e.id);
           console.log("carritoDbData: ", carritoDbData);
@@ -205,7 +207,7 @@ export default function LogIn() {
 
         
       try {
-        const favDb = await axios.get(`http://localhost:3001/get/favorito?idUser=${user.id}`);
+        const favDb = await axios.get(`${PATH}/get/favorito?idUser=${user.id}`);
 
         let favDbData = favDb.data;
 

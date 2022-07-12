@@ -9,6 +9,9 @@ import { givePoints, takePoints } from "./Points";
 import { CartContext } from "../Cart/CartContext";
 
 export default function Pagando() {
+
+  const PATH = 'http://localhost:3001'
+
   const navigate = useNavigate();
   const username = window.atob(localStorage.getItem("username")); //julianpardeiro
   let product = localStorage.getItem("cartProducts");
@@ -184,7 +187,7 @@ export default function Pagando() {
 
       await axios({
         method: "put",
-        url: "http://localhost:3001/remove",
+        url: `${PATH}/remove`,
         data: products,
         // headers: { "X-Requested-With": "XMLHttpRequest" },
         // withCredentials: true,

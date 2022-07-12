@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 export default function CheckoutPaypal() {
   const navigate = useNavigate();
 
+  const PATH = 'http://localhost:3001'
+
   // let onApprove = (data, actions) => {
   //     return actions.order.capture().then(function(orderData) {
   //       // Successful capture! For dev/demo purposes:
@@ -33,7 +35,7 @@ export default function CheckoutPaypal() {
 
     const Stock = await axios({ // devuelve un string con Success o un string con los nombres de los productos que no tienen stock
       method: "post",
-      url: "http://localhost:3001/VerifyStock",
+      url: `${PATH}/VerifyStock`,
       data: product // {id, amount}
     })
       .then((e) => e.data) 

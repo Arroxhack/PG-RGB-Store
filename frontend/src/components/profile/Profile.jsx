@@ -16,6 +16,9 @@ import { useNavigate } from "react-router";
 import CommentPending from "./CommentPending";
 
 export default function Profile() {
+
+  const PATH = 'http://localhost:3001'
+
   const navigate = useNavigate();
   const id = window.atob(localStorage.getItem("id"));
   const username = window.atob(localStorage.getItem("username"));
@@ -114,7 +117,7 @@ export default function Profile() {
     e.preventDefault();
     const result = await axios({
       method: "put",
-      url: `http://localhost:3001/profile/edit`,
+      url: `${PATH}/profile/edit`,
       data: {
         id,
         NameEdit,
@@ -143,7 +146,7 @@ export default function Profile() {
         text: `${result}`,
         button: "Aceptar",
       });
-      window.location.replace("http://localhost:3000/profile");
+      window.location.replace("../profile");
     }
   };
   return (

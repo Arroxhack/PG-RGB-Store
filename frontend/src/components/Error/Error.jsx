@@ -21,7 +21,7 @@ function Error() {
           </p>
           <a className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
             rel="noopener noreferrer"
-            href="http://localhost:3000/"
+            href="../"
             
           >
             Back to homepage
