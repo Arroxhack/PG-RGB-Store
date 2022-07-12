@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
 import {AiOutlineClose} from 'react-icons/ai'
 
 
+
+
 function SeeFavs() {
   const { favs, deleteProductFav } = useContext(FavContext);
   const dispatch = useDispatch();
