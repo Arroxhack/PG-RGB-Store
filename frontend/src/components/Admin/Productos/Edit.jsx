@@ -17,7 +17,6 @@ const Edit = () => {
   let [searchParms, setSearchParams] = useSearchParams();
 
   const [menu, setMenu] = useState("create-product");
-  const [Validate, setValidate] = useState(true);
     
   const {id} = useParams()
     const dispatch = useDispatch()
@@ -28,40 +27,6 @@ const Edit = () => {
     let params = searchParms(e.target);
     setSearchParams(params);
   };
-
-  const ValidatePassword = async () => {
-    const { value: password } = await Swal.fire({
-      title: "Enter your password",
-      input: "password",
-      inputLabel: "Password",
-      inputPlaceholder: "Enter your password",
-      inputAttributes: {
-        maxlength: 10,
-        autocapitalize: "off",
-        autocorrect: "off",
-      },
-    });
-
-    if (!password) {
-      Swal.fire(`Tienes Que Ingresar Tu Contraseña de Administrador`);
-      return ValidatePassword();
-    }
-    const result = await axios({
-      method: "post",
-      url: "http://localhost:3001/verifyAdminPass",
-      data: { username, password },
-      headers: { "X-Requested-With": "XMLHttpRequest" },
-      withCredentials: true,
-    })
-      .then((e) => e.data)
-      .catch((e) => console.log(e));
-    if (result[0] === "E" && result[1] === "r" && result[2] === "r") {
-      return ValidatePassword();
-    } else {
-      return setValidate(true);
-    }
-  };
-
   useEffect(() => {
     // ValidatePassword();
     dispatch(getProductDetail(productID))

@@ -161,10 +161,10 @@ function NavBar() {
               </Link>
             </li>
             <li class="lg:buttom lg:mr-5">
-              <Link to="/categories/notebooks">Notebooks</Link>
+              <Link to="/categories?category=Notebook">Notebooks</Link>
             </li>
             <li className="lg:buttom lg:mr-5 ">
-              <Link to="/categories/pc-armadas">Prebuilt PCs</Link>
+              <Link to="/categories?category=Desktop">Prebuilt PCs</Link>
             </li>
             <li className="lg:buttom lg:mr-5">
               <Link to="/arma-tu-pc">
