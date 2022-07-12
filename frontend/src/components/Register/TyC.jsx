@@ -72,7 +72,7 @@ Estos Términos y Condiciones se rigen por la ley argentina. Toda controversia d
   console.log(Close);
   const [expanded, setExpanded] = useState(false);
   return (
-    <div className="lg:h-[40rem] lg:-mt-[40rem] p-6 lg:mr-[20rem] dropdown-toggle lg:w-[520px] overflow-y-scroll   font-Open px-5 bg-secundary-250 text-primary-200 rounded -ml-80  absolute z-10 md:text-center md:items-center w-full
+    <div className="lg:h-[40rem] lg:-mt-[40rem] p-6 lg:-m-[25rem] dropdown-toggle lg:w-[520px] overflow-y-scroll   font-Open px-5 bg-secundary-250 text-primary-200 rounded  absolute z-10 md:text-center md:items-center w-full
     sm:h-[25rem] sm:-mt-[20rem]  sm:-ml-[8rem] dropdown-toggle sm:w-[18rem]">
       <div className="flex inline-flex">
         <h1 className="text-3xl">Terms and Condition</h1>
