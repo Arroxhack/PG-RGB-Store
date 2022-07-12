@@ -65,6 +65,21 @@ export default function Register() {
       });
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Submit";
+    } else if (
+      name.includes(" ") ||
+      lastname.includes(" ") ||
+      username.includes(" ") ||
+      email.includes(" ") ||
+      password.includes(" ")
+    ) {
+      Swal.fire({
+        icon: "warning",
+        title: "Spacing",
+        text: "you can`t enter space",
+        button: "Aceptar",
+      });
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (name.length <= 3) {
       Swal.fire({
         icon: "warning",
