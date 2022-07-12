@@ -59,7 +59,7 @@ export default function Pagando() {
             soft_descriptor: "HighFashions",
             amount: {
               currency_code: "USD",
-              value:
+              value: 
                 PrecioTotalArticulos > points
                   ? PrecioTotalArticulos.toFixed(2) - points
                   : points - PrecioTotalArticulos.toFixed(2), //value: "230.00"
@@ -229,6 +229,12 @@ export default function Pagando() {
   };
 
   const onError = (error) => {
+    Swal.fire({
+      icon: "error",
+      title: "Payment Error",
+      text: "There has been an error in your payment and will not be charged",
+      // footer: '<a href="">Why do I have this issue?</a>'
+    });
     console.log("Error: ", error);
   };
 

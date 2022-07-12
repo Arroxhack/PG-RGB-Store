@@ -53,7 +53,7 @@ export default function Register() {
     ) {
       Swal.fire({
         icon: "warning",
-        title: "Algo Salio Mal",
+        title: "Something go wrong",
         text: "FILL IN THE BLANKS!",
         button: "Aceptar",
       });
@@ -86,7 +86,7 @@ export default function Register() {
     } else if (name.length <= 3) {
       Swal.fire({
         icon: "warning",
-        title: "Algo Salio Mal",
+        title: "Something go wrong",
         text: "NAME HAS TO BE AT LEAST 3 LETTERS",
         button: "Aceptar",
       });
@@ -95,7 +95,7 @@ export default function Register() {
     } else if (!/^[a-zA-Z\s]*$/.test(lastname)) {
       Swal.fire({
         icon: "warning",
-        title: "Algo Salio Mal",
+        title: "Something go wrong",
         text: "LASTNAME HAS TO BE ONLY LETTERS",
         button: "Aceptar",
       });
@@ -104,14 +104,14 @@ export default function Register() {
     } else if (username.length <= 3) {
       Swal.fire({
         icon: "warning",
-        title: "Algo Salio Mal",
+        title: "Something go wrong",
         text: "USERNAME HAS TO BE AT LEAST 3 LETTERS",
         button: "Aceptar",
       });
     } else if (!regexEmail.test(email)) {
       Swal.fire({
         icon: "warning",
-        title: "Algo Salio Mal",
+        title: "Something go wrong",
         text: "FORMAT HAS TO BE EMAIL",
         button: "Aceptar",
       });
@@ -120,7 +120,7 @@ export default function Register() {
     } else if (!regexPass.test(password)) {
       Swal.fire({
         icon: "warning",
-        title: "Algo Salio Mal",
+        title: "Something go wrong",
         text: "INVALID PASSWORD",
         button: "Aceptar",
       });
@@ -129,7 +129,7 @@ export default function Register() {
     } else if (password !== passwordValidate) {
       Swal.fire({
         icon: "warning",
-        title: "Algo Salio Mal",
+        title: "Something go wrong",
         text: "PASSWORDS HAS TO BE EQUAL",
         button: "Aceptar",
       });
