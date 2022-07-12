@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/actions";
+
 import { CartContext, addBuildToCart } from "../Cart/CartContext";
 import NavBar from "../NavBar/NavBar";
 import Selects from "./Selects";
@@ -14,8 +15,10 @@ import psu from ".//imagesBuild/psu.svg";
 import ssd from ".//imagesBuild/ssd.svg";
 import m2 from ".//imagesBuild/m2.svg";
 import hdd from ".//imagesBuild/hdd.svg";
+import { useNavigate } from "react-router";
 
 function Armado() {
+  const navigate = useNavigate();
   const [selectedCPU, setSelectedCPU] = useState([]);
   const [selectedMother, setSelectedMother] = useState([]);
   const [selectedRam, setSelectedRam] = useState([]);
@@ -67,6 +70,7 @@ function Armado() {
       "Power Supply": {},
       Case: {},
     });
+    navigate("/cart");
   };
 
   const dispatch = useDispatch();
