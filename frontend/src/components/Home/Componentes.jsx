@@ -55,6 +55,7 @@ export default function Componentes() {
                  </Link>
                  </div>  
                  <div className='w-1/5 flex flex-col items-center justify-center border-r border-primary-600 gap-2 hover:transition hover:duration-75 hover:ease-in hover:delay-75  hover:shadow-lg hover:shadow-primary  '>
+
                  <Link to='categories?category=Power+Supply&page=1' className='flex flex-col justify-center items-center'>
                  <img src={psu} alt=""className='h-16 w-16' />
                  <p>Power supply</p>

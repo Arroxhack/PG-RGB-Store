@@ -54,7 +54,7 @@ function Home() {
       left={true}
       img={promo1}
       products={mothers}
-      params={'categories?category=Motherboard'}
+      params={'categories?category=Motherboard&page=1'}
       />
       </div>
       <div className="sm:mt-8 w-11/12 flex flex-col items-center justify-center" >
@@ -65,7 +65,7 @@ function Home() {
       left={false}
       img={promo2}
       products={asus}
-      params={'categories?category=all&brand=ASUS'}
+      params={'categories?category=all&brand=ASUS&page=1'}
       />
       </div>
       <div className=" sm:mt-8 w-11/12 flex flex-col items-center justify-center">
@@ -76,7 +76,7 @@ function Home() {
       left={true}
       img={promo3}
       products={cases}
-      params={'categories?category=Case'}
+      params={'categories?category=Case&page=1'}
       />
       </div>
       </div>
