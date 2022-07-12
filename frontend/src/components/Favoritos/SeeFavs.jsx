@@ -26,6 +26,11 @@ function SeeFavs() {
     const arr = favs.map((id) => dispatch(getProductFavDetail(id)));
     Promise.all(arr).then((res) => setRender(res));
   }, [favs]);
+
+  const handleDelete = (e,id,idUser)=>{
+    e.preventDefault();
+    deleteProductFav(id, idUser)
+  }
   //console.log('soy render ', render)
   return (
     <div className="bg-primary-200 h-screen overflow-auto"  >
@@ -48,7 +53,7 @@ function SeeFavs() {
                       <button 
                       className="flex justify-end items-start relative lg:-mt-8 lg:mr-2 w-full sm:mt-2 md:mt-2"
                        value={p?.id}
-                       onClick={(e) => deleteProductFav(p?.id, idUser)}
+                       onClick={(e) => handleDelete(e,p.id, idUser)}
                      >
                       <AiOutlineClose className="lg:h-8 lg:w-8 sm:h-5 sm:w-5  motion-safe:hover:scale-110"/>
                      </button>
