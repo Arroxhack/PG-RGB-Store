@@ -65,6 +65,21 @@ export default function Register() {
       });
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Submit";
+    } else if (
+      name.includes(" ") ||
+      lastname.includes(" ") ||
+      username.includes(" ") ||
+      email.includes(" ") ||
+      password.includes(" ")
+    ) {
+      Swal.fire({
+        icon: "warning",
+        title: "Spacing",
+        text: "you can`t enter space",
+        button: "Aceptar",
+      });
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (name.length <= 3) {
       Swal.fire({
         icon: "warning",
@@ -174,8 +189,8 @@ export default function Register() {
   };
 
   return (
-    <section className="bg-primary-200 overflow-auto ">
-      <div className="w-screen h-full bg-primary-200 font-Open min-h-screen flex flex-col">
+    <section className="bg-primary-200  ">
+      <div className="w-full overflow-auto h-full bg-primary-200 font-Open min-h-screen flex flex-col">
         <NavBar />
         <div className="container bg-primary-200 max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black w-full">
