@@ -94,7 +94,7 @@ function DetailProduct() {
                             ? ProductDetail.image[0]
                             : "1602010489_p_setting_fff_1_90_end_600.jpg"
                         }
-                        height="500"
+                        height="600"
                         width="500"
                       />
                     )}
