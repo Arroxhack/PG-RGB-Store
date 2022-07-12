@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import promo1 from "../../images/promo1.jpg"
 import promo2 from "../../images/promo2.png"
 import promo3 from "../../images/promo3.jpg"
+import Componentes from "./Componentes";
 
 function Home() {
   const dispatch = useDispatch();
@@ -79,6 +80,7 @@ function Home() {
       />
       </div>
       </div>
+      <Componentes/>
       <Marcas/>
       <div className="">
         <img src="https://compudel.com.pe/img/cms/BANNERS/BANNER%20EMPRESAS%20ANTEFINAL.png" alt="compra" className="w-full sm:h-24 lg:h-52  "/>
@@ -93,6 +95,7 @@ function Home() {
         </button>
       </div>
       <MarcasAnimated/>
+      
       <Footer/>
     </div>
   );
