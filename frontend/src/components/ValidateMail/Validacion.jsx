@@ -125,11 +125,11 @@ export default function Validations() {
   };
 
   return (
-    <>
+    <div className="">
     <>
     <NavBar />
     </>
-    <div className=" flex flex-col items-center pt-10 min-h-screen bg-primary-200">
+    <div className=" flex flex-col items-center justify-center absolute inset-0 bg-primary-200">
       <div className="border px-5 py-3 h-[450px] w-[500px] text-center flex items-center flex-col justify-around rounded-lg bg-secundary-250">
         <div className="flex flex-col gap-5 items-center">
           <h3 className="text-primary-200 uppercase font-PT font-bold text-2xl">Enter a token is will send to mail:</h3>
@@ -144,6 +144,6 @@ export default function Validations() {
         </div>
       </div>
     </div>
-    </>
+    </div>
   );
 }
