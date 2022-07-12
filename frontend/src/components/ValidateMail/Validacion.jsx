@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { CartContext } from "../Cart/CartContext";
+import NavBar from '../NavBar/NavBar'
 
 export default function Validations() {
   const { setProducts, products } = useContext(CartContext);
@@ -94,6 +95,7 @@ export default function Validations() {
     }, 30000);
     document.getElementById("enviar").innerHTML = "Blocked";
   }
+
   const ResendEmail = async (e) => {
     e.preventDefault();
     document.getElementById("enviar").disabled = true;
@@ -123,33 +125,25 @@ export default function Validations() {
   };
 
   return (
-    <div className=" flex flex-col items-center justify-center min-h-screen ">
-      <div
-        className=" w-1/3 h-96  border-white border-2 gap-6 rounded-md flex flex-col justify-center items-center
-        sm:w-80 sm:h-80  "
-      >
-        <h3>Enter a token is will send to mail:</h3>
-        <div className="flex flex-col items-center justify-center gap-1">
-          <input
-            className="border-2 border-primary-400 rounded max-w-max  "
-            value={token}
-            onChange={(e) => setToken(e.target.value)}
-          />
-          <button
-            className="hover:bg-primary-400 rounded-xl w-24 text-xl items-center"
-            onClick={(e) => HandleSubmit(e)}
-          >
-            Send
-          </button>
-          <button
-            className="hover:bg-primary-400 rounded-xl w-24 text-xl items-center"
-            id="enviar"
-            onClick={(e) => ResendEmail(e)}
-          >
-            Re-Send Email
-          </button>
+    <>
+    <>
+    <NavBar />
+    </>
+    <div className=" flex flex-col items-center pt-10 min-h-screen bg-primary-200">
+      <div className="border px-5 py-3 h-[450px] w-[500px] text-center flex items-center flex-col justify-around rounded-lg bg-secundary-250">
+        <div className="flex flex-col gap-5 items-center">
+          <h3 className="text-primary-200 uppercase font-PT font-bold text-2xl">Enter a token is will send to mail:</h3>
+          <input className="text-center bg-[#EEEEEE] rounded-lg border border-primary-400 py-2 focus:outline-none focus:border-primary-300 text-primary-200" placeholder="Enter your token" value={token} onChange={(e) => setToken(e.target.value)}/>
+          
+          <button className="bg-primary px-5 py-1 rounded-lg hover:bg-primary-300 uppercase font-bold" onClick={(e) => HandleSubmit(e)}>Send</button>
+        </div>
+
+        <div>
+          <p className="text-[#0A0A0A] text-center mb-5">If the token did not arrive in your email, please check the spam or junk mail box. If not, press the following button.</p>
+          <button className="bg-primary px-5 py-1 rounded-lg hover:bg-primary-300 uppercase font-bold" id="enviar" onClick={(e) => ResendEmail(e)}>Re-Send</button>
         </div>
       </div>
     </div>
+    </>
   );
 }
