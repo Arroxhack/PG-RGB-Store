@@ -233,7 +233,7 @@ export default function Pagando() {
     <div className="flex flex-col select-none">
       <span className="bg-primary-200">
       <Link to = "/">
-      <button className="ml-5 mt-5 rounded bg-primary-400 p-3 hover:bg-primary-300"> Back to home</button>
+      <button className="ml-5 mt-5 rounded bg-primary-400 p-3 hover:bg-primary-300">Back to home</button>
       </Link>
       </span>
       <div className="mb-5 bg-primary-200 w-full">
