@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import Logout from "../../LogOut/Logout"
 
 const Nav = () => {
   return (
@@ -12,7 +13,7 @@ const Nav = () => {
           STORE
         </span>
       </Link>
-        <p className='text-primary'>Desconectar</p>
+        <Logout/>
     </div>
   )
 }
