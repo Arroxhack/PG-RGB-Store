@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { validate, regexPass, regexEmail } from "./Validations";
 import { PostUser } from "../../redux/actions";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import NavBar from "../NavBar/NavBar";
 import Swal from "sweetalert2";
+import TyC from "./TyC";
+import { CartContext } from "../Cart/CartContext";
 export default function Register() {
   let navigate = useNavigate();
+  const { TyCcontext } = useContext(CartContext);
   const [errors, setErrors] = useState({});
+  const [TyCopen, setTyCopen] = useState(false);
   const [user, setUser] = useState({
     name: "",
     lastname: "",
@@ -48,6 +52,30 @@ export default function Register() {
         icon: "warning",
         title: "Algo Salio Mal",
         text: "FILL IN THE BLANKS!",
+        button: "Aceptar",
+      });
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
+    } else if (TyCcontext === false) {
+      Swal.fire({
+        icon: "warning",
+        title: "Terms and Conditions",
+        text: "You need to accept Terms and Conditions to continue",
+        button: "Aceptar",
+      });
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
+    } else if (
+      name.includes(" ") ||
+      lastname.includes(" ") ||
+      username.includes(" ") ||
+      email.includes(" ") ||
+      password.includes(" ")
+    ) {
+      Swal.fire({
+        icon: "warning",
+        title: "Spacing",
+        text: "you can`t enter space",
         button: "Aceptar",
       });
       document.getElementById("enviar").disabled = false;
@@ -93,7 +121,8 @@ export default function Register() {
         text: "INVALID PASSWORD",
         button: "Aceptar",
       });
-      document.querySelector("#submit").innerHTML = "Submit";
+      document.getElementById("enviar").disabled = false;
+      document.getElementById("enviar").innerHTML = "Submit";
     } else if (password !== passwordValidate) {
       Swal.fire({
         icon: "warning",
@@ -150,9 +179,18 @@ export default function Register() {
     }
   };
 
+  const handleTyC = (e) => {
+    e.preventDefault();
+    if (TyCopen === false) {
+      setTyCopen(true);
+    } else {
+      setTyCopen(false);
+    }
+  };
+
   return (
-    <section className="bg-primary-200 overflow-auto ">
-      <div className="w-screen h-full bg-primary-200 font-Open min-h-screen flex flex-col">
+    <section className="bg-primary-200  ">
+      <div className="w-full overflow-auto h-full bg-primary-200 font-Open min-h-screen flex flex-col">
         <NavBar />
         <div className="container bg-primary-200 max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-secundary-250 px-6 py-8 rounded shadow-md text-black w-full">
@@ -217,6 +255,20 @@ export default function Register() {
                   name="passwordValidate"
                   onChange={handleOnChange}
                 />
+                <button
+                  className="w-full text-white text-center hover:bg-primary-300 focus:outline-none my-1"
+                  onClick={handleTyC}
+                >
+                  Terms and Conditions
+                </button>
+                {TyCopen ? (
+                  <div className="absolute lg:translate-x-[-10rem] sm:translate-x-28 md:">
+                    <TyC Close={handleTyC} onClick={handleTyC} />
+                  </div>
+                ) : (
+                  <></>
+                )}
+
                 <button
                   className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
                   type="submit"

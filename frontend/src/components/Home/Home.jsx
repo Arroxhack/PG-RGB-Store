@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import promo1 from "../../images/promo1.jpg"
 import promo2 from "../../images/promo2.png"
 import promo3 from "../../images/promo3.jpg"
+import Componentes from "./Componentes";
 
 function Home() {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ function Home() {
       <div className="flex flex-col items-center justify-center mt-4 w-full ">
       <div className="sm:mt-8 w-11/12 flex flex-col items-center justify-center">
 
-      <div className="w-full flex items-center justify-center border-b-4 border-primary-700">
+      <div className="w-full flex items-center justify-center border-b-4 border-primary-700 sm:w-9/12">
       <h1 className="font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase">Motherboards</h1>
       </div>
       <Promo
@@ -57,7 +58,7 @@ function Home() {
       />
       </div>
       <div className="sm:mt-8 w-11/12 flex flex-col items-center justify-center" >
-      <div className="w-full flex items-center justify-center border-b-4 border-primary-700">
+      <div className="w-full flex items-center justify-center border-b-4 border-primary-700 sm:w-9/12">
       <h1 className="font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase">the best of asus</h1>
       </div>
       <Promo
@@ -68,7 +69,7 @@ function Home() {
       />
       </div>
       <div className=" sm:mt-8 w-11/12 flex flex-col items-center justify-center">
-        <div className="w-full items-center justify-center flex border-b-4 border-primary-700">
+        <div className="w-full items-center justify-center flex border-b-4 border-primary-700 sm:w-9/12">
       <span className=" w-11/12 flex flex-col items-center justify-center font-open font-semibold text-primary-400 text-2xl titles w-30 uppercase ">Cases</span>
       </div>
         <Promo
@@ -79,20 +80,22 @@ function Home() {
       />
       </div>
       </div>
+      <Componentes/>
       <Marcas/>
       <div className="">
         <img src="https://compudel.com.pe/img/cms/BANNERS/BANNER%20EMPRESAS%20ANTEFINAL.png" alt="compra" className="w-full sm:h-24 lg:h-52  "/>
       </div>
       <div>
-        <button  className="fixed bottom-2 right-2 w-28 m-5 lg:h-12 lg:w-44  flex items-center justify-center j rounded-2xl
-         gap-1 transform hover:scale-110 ">
-        <p className="text-xl text-primary-400 font-Open">Chat with us</p>
+        <button  className="fixed bottom-2 right-2 sm:w-9  lg:h-12 lg:w-44  flex items-center justify-center  rounded-2xl
+         gap-1 lg:transform lg:hover:scale-110  sm:right-2">
+        <p className="text-xl text-primary-400 font-Open sm:hidden lg:block md:block">Chat with us</p>
         <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank" >
         < SiWhatsapp className="h-7 w-9 relative text-primary-400 "/>
         </a>
         </button>
       </div>
       <MarcasAnimated/>
+      
       <Footer/>
     </div>
   );
