@@ -81,7 +81,7 @@ function SeeFavs() {
                 <span className="text-xl font-medium font-PT flex justify-center text-primary-300  md:text-2xl">
                   You no have favorites yet D:
                 </span>
-                <Link to="/categories?category=all">
+                <Link to="/categories?category=all&page=1">
                   <button className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1">
                     Go add!
                   </button>
