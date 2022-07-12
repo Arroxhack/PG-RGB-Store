@@ -41,7 +41,7 @@ function NavBar() {
   //Nav para movil
   function Nav() {
     return (
-      <div className="flex flex-col items-start  bg-primary-700 text-primary-400 h-screen lef-0 w-2/4 fixed top-0 left-0 ">
+      <div className="flex flex-col items-start  bg-primary-700 text-primary-400 h-screen lef-0 w-2/4 fixed top-0 left-0 text-base ">
         <button
           className="mt-5 active:border active:border-primary-200"
           onClick={() => handleClose()}
@@ -85,10 +85,10 @@ function NavBar() {
             <div className="flex flex-col ">
               <Link
                 to="/profile"
-                className="flex items-center sm:py-2 md:py-6  sm:text-xs text-primary-400 md:text-xl left-0 "
+                className="flex items-center sm:py-2 md:py-6   text-primary-400 md:text-2xl left-0 "
               >
-                <HiOutlineUserCircle className="h-4 w-4  md:h-12 md:w-14 text-primary-400 " />
-                <span className="text-base">Profile</span>
+                <HiOutlineUserCircle className="  text-primary-400 " />
+                <span className=" sm:ml-1 md:ml-2">Profile</span>
               </Link>{" "}
               <Logout />
               {admin ? (
@@ -131,7 +131,7 @@ function NavBar() {
   //nav de escritorio
   return (
     <nav className=" w-full flex  items-center lg:justify-between  shadow-lg bg-primary-700 sm:h-11 sm:flex justify-between md:flex md:justify-around md:h-20 lg:h-24 sticky z-50 top-0 left-0">
-      <div className="flex items-center sm:justify-around sm:w-1/4  md:w-1/4 lg:w-1/2 ">
+      <div className="flex items-center sm:justify-around sm:w-1/4  md:w-1/4 lg:w-2/5 ">
         <div className="sm:flex sm:items-center sm:ml-[-1rem] lg:hidden sm:block sm:mr-4">
           <button className="absolute" onClick={() => handleOpen()}>
             <AiOutlineMenu className="h-6 w-7 md:h-12 md:w-14 text-primary-400 " />
@@ -153,7 +153,7 @@ function NavBar() {
         </div>
         {/*LOGO */}
 
-        <div className="flex justify-between items-center max-h-max bg-primary-700 text-base text-primary  sm:hidden lg:block ">
+        <div className="flex justify-between items-center max-h-max bg-primary-700 text-base text-primary  sm:hidden lg:block  lg:flex ">
           <ul className="flex  ">
             <li className="lg:mr-5 relative flex">
               <Link to="/categories?category=all&page=1" className="">
@@ -166,7 +166,7 @@ function NavBar() {
             <li className="lg:buttom lg:mr-5 ">
               <Link to="/categories?category=Desktop&page=1">Prebuilt PCs</Link>
             </li>
-            <li className="lg:buttom lg:mr-5">
+            <li className="lg:buttom ">
               <Link to="/arma-tu-pc">
                 <p>Build your PC</p>
               </Link>
@@ -176,14 +176,14 @@ function NavBar() {
       </div>
 
       {/* SEARCHBAR */}
-      <div className=" sm:w-1/4  md:w-1/2 lg:w-1/4 sm:ml-[-4rem] flex lg:flex">
+      <div className=" sm:w-1/4  md:w-1/2 lg:w-1/6 sm:ml-[-4rem] flex lg:flex lg:-ml-[10rem]">
         <SearchBar />
       </div>
 
       {/* ADMIN, PERFIL Y LOG OUT */}
-      <div className="flex lg:justify-between  items-center sm:justify-end sm:w-18 lg:w-1/6 ">
+      <div className="flex lg:justify-between  items-center sm:justify-end sm:w-18 lg:w-1/4 ">
         {username ? (
-          <div className="lg:flex lg:ml-[-6rem] lg:items-center lg:justify-between lg:w-full sm:hidden lg:block">
+          <div className="lg:flex lg:ml-[-6rem] lg:items-center lg:justify-between lg:w-full sm:hidden lg:block ">
             <Link
               to="/profile"
               className="sm:text-xs text-primary-400 md:text-xl flex "
