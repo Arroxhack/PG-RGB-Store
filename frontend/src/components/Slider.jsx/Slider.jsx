@@ -1,7 +1,7 @@
 
-import promo1 from '../../images/hyperx.jpg'
-import promo2 from '../../images/logitech.gif'
-import promo3 from '../../images/redragon.jpg'
+import promo1 from '../../images/armatupc.jpg'
+import promo2 from '../../images/msi.jpg'
+import promo3 from '../../images/ryzen.jpg'
 import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,6 +9,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
+import { Link } from 'react-router-dom';
 
 export default function Slider() {
   return (
@@ -28,11 +29,24 @@ export default function Slider() {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide className='w-full h-96'><img className='w-full h-80' src={promo1} alt="" />
+        <SwiperSlide className='w-full lg:h-[18rem] sm:h-52'>
+          <Link to='arma-tu-pc'>
+          <img className='w-full lg:h-[18rem] sm:h-52' src={promo1} alt="" />
+          </Link>
         </SwiperSlide>
-        <SwiperSlide  className='w-full h-96'><img src={promo2}  className='w-full h-80' alt="" /></SwiperSlide>
-        <SwiperSlide  className='w-full h-96'><img src={promo3}  className='w-full h-80' alt="" /></SwiperSlide>
-        <SwiperSlide className='w-full h-96'> <img src="https://cdn.jsdelivr.net/gh/persano/BannersWebMaximus/top-slider/pc-armadas-gamer.webp" className='w-full h-80' alt="" /></SwiperSlide>
+        
+        <SwiperSlide  className='w-full lg:h-[18rem] sm:h-52'>
+          <Link to='categories?category=all&brand=MSI'>
+          <img src={promo2} className='w-full lg:h-[18rem] sm:h-52' alt="" />
+          </Link>
+          </SwiperSlide>
+        
+        <SwiperSlide  className='w-full lg:h-[18rem] sm:h-52'>
+          <Link to='categories?category=all&brand=AMD'>
+          <img src={promo3}  className='w-full lg:h-[18rem] sm:h-52' alt="" />
+          </Link>
+          </SwiperSlide>
+       
       </Swiper>
     </>
   );

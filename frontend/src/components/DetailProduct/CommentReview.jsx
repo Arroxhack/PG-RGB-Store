@@ -23,9 +23,9 @@ export default function CommentReview({ idProduct }) {
   );
 
   return (
-    <div className="border-solid">
-      <div className="bg-opacity-0 px-6 py-8">
-        <p className="w-full text-center py-3 bg-primary-400 my-2">
+    <div className="border-solid w-full">
+      <div className="bg-opacity-0 ">
+        <p className=" text-center py-3 bg-primary-400 my-2">
           Reviews
         </p>
         {AllComentarios.length > 0 ? (

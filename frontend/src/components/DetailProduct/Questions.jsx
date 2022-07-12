@@ -83,7 +83,7 @@ const Questions = ({id}) => {
         <div className='bg-secundary-300 h-auto w-auto flex flex-col gap-1'>
         {question.map(p=>{
             return(
-                <div key={p.id} className='bg-secundary-250 h-auto w-auto flex flex-col gap-1'>
+                <div key={p.id} className='bg-primary-2 h-auto w-auto flex flex-col gap-1'>
                 <div className='bg-[#E2E2E2]'>
                 <h3 className='py-3 px-5'>{p.comentario}</h3>
                 <p className='text-[#9CA3AF] select-none font-normal text-right px-5'>{p.fechaPreg}</p> 
