@@ -25,28 +25,30 @@ const Category = () => {
     }, [products])
 
   return (
-    <div className='bg-primary-200 '>
+    <div className='bg-primary-200'>
         <NavBar/>
         {loading? 
                 <div className='flex justify-center mt-48 h-screen'>
                 <Loading/>
                 </div>:
-                <>
-                 <div className='flex flex-row gap-5 w-full justify-center mt-5'>
-            <div>
-                <Side/>
-            </div>
-            <div>
-                <ContainerProduct />
-            </div>
-        </div>
-        <div className='mt-24'>
-            <Footer/>
-        </div>
-        </>
-                }
-
-       
+        <>
+          <div className={products.length > 0 ? 'flex flex-row gap-5 w-full justify-center mt-5 inset-0' : 'bg-primary-200 h-screen'}>
+          <div>
+              <Side/>
+          </div>
+          <div>
+              <ContainerProduct />
+          </div>
+      </div>
+          {products.length ?
+      <div className='mt-24 '>
+      <Footer/>
+      </div> :<></>}
+      
+      </>
+        
+      }
+ 
     </div>
   )
 }

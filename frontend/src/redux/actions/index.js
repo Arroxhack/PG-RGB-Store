@@ -44,6 +44,9 @@ import {
   GET_QUESTION,
   GET_QUEST,
   POST_QUESTION,
+  NEXT_PAGE_PRODUCTS,
+  PREV_PAGE_PRODUCTS,
+  SET_PAGE_PRODUCTS,
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -531,9 +534,9 @@ export const filterProducts = (category,brand,min,max,name)=>{
     } catch (error) {
       Swal.fire({
         icon: 'alert',
-        title: 'Se produjo un error',
-        text: 'Por favor, actualice e intente nuevamente la busqueda',
-        confirmButtonText: 'Ok',
+        title: 'There was an error',
+        text: 'Please refresh and try the search again.',
+        confirmButtonText: 'OK',
       });
     }
   }
@@ -581,25 +584,21 @@ export function filterMin(payload) {
 }
 
 /// BUSQUEDA ///
-export function searchProducts(search) {
-  return function (dispatch) {
-    axios
-      .get(`${PATH}/product?name=` + search)
-      .then((products) => {
-        dispatch({
-          type: SEARCH_PRODUCTS,
-          payload: products.data,
-        });
-      })
-      .catch(() => {
-        Swal.fire({
-          icon: 'info',
-          title: 'Product not found',
-          button: 'OK',
-        });
-      });
-  };
-}
+// export function searchProducts(search) {
+//   return function (dispatch) {
+//     axios
+//       .get(`${PATH}/product?name=` + search)
+//       .then((products) => {
+//         dispatch({
+//           type: SEARCH_PRODUCTS,
+//           payload: products.data,
+//         });
+//       })
+//       .catch(() => {
+        
+//       });
+//   };
+// }
 //======================================
 //CAMBIAR PARAMS!!!!! PELIGROSO! PUEDO ACCEDER A PERFILES DE OTROS USER Y EDITARLOS!!!
 //======================================
@@ -905,5 +904,24 @@ export const deleteQuest = (id) => {
         confirmButtonText: 'Ok',
       });
     }
+  };
+};
+
+
+// PAGINADO PRODUCT
+export const nextPageProduct = () => {
+  return {
+    type: NEXT_PAGE_PRODUCTS,
+  };
+};
+export const prevPageProduct = () => {
+  return {
+    type: PREV_PAGE_PRODUCTS,
+  };
+};
+export const setPageProduct = (p) => {
+  return {
+    type: SET_PAGE_PRODUCTS,
+    payload: p,
   };
 };
