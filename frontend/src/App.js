@@ -24,6 +24,7 @@ import Create from "./components/Admin/Productos/Create";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import SeeFavs from "./components/Favoritos/SeeFavs.jsx";
 import Category from "./components/Category/Category";
+import Us from "./components/Us/Us";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
         {/* ACA ABAJO PODES CREAR TODAS LAS RUTAS DE PRUEBA QUE QUIERAS */}
         {/* <Route path='/testFav' element={<SeeFavs />} /> */}
         <Route path="/probando" element={<Armado />} />
+        <Route path="/about" element={<Us/>} />
       </Routes>
     </div>
   );

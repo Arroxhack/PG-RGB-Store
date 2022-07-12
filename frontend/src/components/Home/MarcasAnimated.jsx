@@ -39,10 +39,10 @@ export default function MarcasAnimated() {
         centeredSlides={true}
         breakpoints={{
           340: {
-            slidesPerView: 2,
+            slidesPerView: 3,
           },
           768: {
-            slidesPerView: 2,
+            slidesPerView: 4,
            
           },
           980: {
@@ -51,25 +51,26 @@ export default function MarcasAnimated() {
           },
 
         }}
+      
         modules={[Autoplay]}
         className=' flex justify-center items-center
         w-5/6 '
       >
     
-        <SwiperSlide ><img src={intell} alt="" className='h-20 w-28' /></SwiperSlide>
-        <SwiperSlide><img src={amd} alt="" className='h-20 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={aerocool} alt="" className='h-20'/></SwiperSlide>
-        <SwiperSlide><img src={corsair} alt="" className='h-20 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={evga} alt="" className='h-20 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={gigabyte} alt="" className='h-14 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={kingston} alt="" className='h-14 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={klipartz} alt=""className='h-20 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={asus} alt="" className='h-20 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={msi} alt="" className='h-20 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={crucial} alt="" className='h-14 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={sandisk} alt="" className='h-20 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={tforce} alt="" className='h-20 w-28'/></SwiperSlide>
-        <SwiperSlide><img src={thermaltake} alt=""className='h-20 w-28'/></SwiperSlide>
+        <SwiperSlide ><img src={intell} alt="" className='lg:h-20 lg:w-28 sm:h-12 sm:w-20' /></SwiperSlide>
+        <SwiperSlide><img src={amd} alt="" className='lg:h-20 lg:w-28 sm:h-12 sm:w-20'/></SwiperSlide>
+        <SwiperSlide><img src={aerocool} alt="" className='lg:h-20 lg:w-28 sm:h-12 sm:w-20 '/></SwiperSlide>
+        <SwiperSlide><img src={corsair} alt="" className='lg:h-20 lg:w-28 sm:h-12 sm:w-20'/></SwiperSlide>
+        <SwiperSlide><img src={evga} alt="" className='lg:h-20 lg:w-28 sm:h-12 sm:w-20'/></SwiperSlide>
+        <SwiperSlide><img src={gigabyte} alt="" className='lg:h-20 lg:w-28 sm:h-12 sm:w-20'/></SwiperSlide>
+        <SwiperSlide><img src={kingston} alt="" className='lg:h-20 lg:w-28 sm:h-12 sm:w-20'/></SwiperSlide>
+        <SwiperSlide><img src={klipartz} alt=""className='lg:h-20 lg:w-28 sm:h-12 sm:w-20 sm:h-16'/></SwiperSlide>
+        <SwiperSlide><img src={asus} alt="" className='lg:h-20 lg:w-28 sm:h-12 sm:w-20'/></SwiperSlide>
+        <SwiperSlide><img src={msi} alt="" className='lg:h-20 lg:w-28 sm:h-12 sm:w-20'/></SwiperSlide>
+        <SwiperSlide><img src={crucial} alt="" className='lg:h-14 lg:w-28 sm:h-12 sm:w-20'/></SwiperSlide>
+        <SwiperSlide><img src={sandisk} alt="" className='lg:h-20 lg:w-28 sm:h-12 sm:w-20'/></SwiperSlide>
+        <SwiperSlide><img src={tforce} alt="" className='lg:h-20 lg:w-28 sm:h-12 sm:w-20'/></SwiperSlide>
+        <SwiperSlide><img src={thermaltake} alt=""className='lg:h-20 lg:w-28 sm:h-12 sm:w-20'/></SwiperSlide>
         
 
     
