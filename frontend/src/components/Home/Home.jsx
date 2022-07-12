@@ -88,8 +88,8 @@ function Home() {
       <div>
         <button  className="fixed bottom-2 right-2 sm:w-9  lg:h-12 lg:w-44  flex items-center justify-center  rounded-2xl
          gap-1 lg:transform lg:hover:scale-110  sm:right-2">
-        <p className="text-xl text-primary-400 font-Open sm:hidden lg:block md:block">Chat with us</p>
         <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank" >
+        <p className="text-xl text-primary-400 font-Open sm:hidden lg:block md:block">Chat with us</p>
         < SiWhatsapp className="h-7 w-9 relative text-primary-400 "/>
         </a>
         </button>

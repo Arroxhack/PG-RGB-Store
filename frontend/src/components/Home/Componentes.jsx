@@ -20,7 +20,7 @@ export default function Componentes() {
             <div className='w-10/12 h-[22rem] bg-secundary-250 lg:hover:cursor-pointer mt-8 '>
                 <div className='w-full h-1/2 border  flex'>
                  <div className='w-1/5 flex flex-col items-center justify-center  border-r border-primary-600 gap-2 hover:transition hover:duration-75 hover:ease-in hover:delay-75  hover:shadow-lg hover:shadow-primary '>
-                 <Link to='categories?category=Case' className='flex flex-col justify-center items-center'>
+                 <Link to='categories?category=Case&page=1' className='flex flex-col justify-center items-center'>
                  <img src={cases} alt=""className='h-16 w-16' />
                  <p>Cases</p>
                  </Link>
@@ -30,17 +30,17 @@ export default function Componentes() {
                  <p>Coolers</p>
                  </div>  
                  <div className='w-1/5 flex flex-col items-center justify-center border-r border-primary-600 gap-2 hover:transition hover:duration-75 hover:ease-in hover:delay-75  hover:shadow-lg hover:shadow-primary '>
-                 <Link to='categories?category=CPU' className='flex flex-col justify-center items-center'>
+                 <Link to='categories?category=CPU&page=1' className='flex flex-col justify-center items-center'>
                  <img src={cpu} alt=""className='h-16 w-16' />
                  <p>Cpus</p>
                  </Link></div>  
                  <div className='w-1/5 flex flex-col items-center justify-center border-r border-primary-600 gap-2 hover:transition hover:duration-75 hover:ease-in hover:delay-75  hover:shadow-lg hover:shadow-primary  '>
-                 <Link to='categories?category=HDD' className='flex flex-col justify-center items-center'>
+                 <Link to='categories?category=HDD&page=1' className='flex flex-col justify-center items-center'>
                  <img src={hdd} alt=""className='h-16 w-16' />
                  <p>Hdd</p>
                  </Link></div>  
                  <div className='w-1/5 flex flex-col items-center justify-center hover:transition hover:duration-75 hover:ease-in hover:delay-75  hover:shadow-lg hover:shadow-primary '>
-                 <Link to='categories?category=SSD+M.2' className='flex flex-col justify-center items-center'>
+                 <Link to='categories?category=SSD+M.2&page=1' className='flex flex-col justify-center items-center'>
                  <img src={m2} alt=""className='h-16 w-16' />
                  <p>SSD M.2</p>
                  </Link>
@@ -49,28 +49,28 @@ export default function Componentes() {
 
                 <div className='w-full h-1/2  flex'>
                 <div className='w-1/5 flex flex-col items-center justify-center border-r border-primary-600  gap-2 hover:transition hover:duration-75 hover:ease-in hover:delay-75  hover:shadow-lg hover:shadow-primary '>
-                <Link to='categories?category=Motherboard' className='flex flex-col justify-center items-center'>
+                <Link to='categories?category=Motherboard&page=1' className='flex flex-col justify-center items-center'>
                  <img src={mother} alt=""className='h-16 w-16' />
                  <p>Motherboards</p>
                  </Link>
                  </div>  
                  <div className='w-1/5 flex flex-col items-center justify-center border-r border-primary-600 gap-2 hover:transition hover:duration-75 hover:ease-in hover:delay-75  hover:shadow-lg hover:shadow-primary  '>
-                 <Link to='categories?category=GPU' className='flex flex-col justify-center items-center'>
+                 <Link to='categories?category=Power+Supply&page=1' className='flex flex-col justify-center items-center'>
                  <img src={psu} alt=""className='h-16 w-16' />
                  <p>Power supply</p>
                  </Link></div>  
                  <div className='w-1/5 flex flex-col items-center justify-center border-r border-primary-600 gap-2 hover:transition hover:duration-75 hover:ease-in hover:delay-75  hover:shadow-lg hover:shadow-primary  '>
-                 <Link to='categories?category=Ram' className='flex flex-col justify-center items-center'>
+                 <Link to='categories?category=Ram&page=1' className='flex flex-col justify-center items-center'>
                  <img src={ram} alt=""className='h-16 w-16' />
                  <p>Rams</p>
                  </Link></div>  
                  <div className='w-1/5 flex flex-col items-center justify-center border-r border-primary-600  gap-2 hover:transition hover:duration-75 hover:ease-in hover:delay-75  hover:shadow-lg hover:shadow-primary '>
-                 <Link to='categories?category=SSD' className='flex flex-col justify-center items-center'>
+                 <Link to='categories?category=SSD&page=1' className='flex flex-col justify-center items-center'>
                  <img src={ssd} alt=""className='h-16 w-16' />
                  <p>SSD</p>
                  </Link></div>  
                  <div className='w-1/5 flex flex-col items-center justify-center border-r border-primary-600 gap-2 hover:transition hover:duration-75 hover:ease-in hover:delay-75  hover:shadow-lg hover:shadow-primary '>
-                 <Link to='categories?category=Power+Supply' className='flex flex-col justify-center items-center'>
+                 <Link to='categories?category=GPU&page=1' className='flex flex-col justify-center items-center'>
                  <img src={vga} alt=""className='h-16 w-16' />
                  <p>Gpus</p>
                  </Link></div>  
