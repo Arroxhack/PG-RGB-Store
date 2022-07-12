@@ -26,7 +26,7 @@ export default function Us() {
                 me gusta trabajar en equipo y
                 amoldarme a las diferentes
                 metodologías de trabajo.</p>
-                <div className='w-[40rem] h-8 flex justify-between items-center text-primary-400 '>
+                <div className='w-full h-8 flex justify-between items-center text-primary-400 '>
                 <div className='flex items-center'>
                 <a href="https://github.com/Joairazabal" >
                 <AiFillGithub className='h-8 w-8 opacity-30 hover:opacity-100'/>
@@ -36,7 +36,7 @@ export default function Us() {
                 </a>
                 </div>
                 <div>
-                    <h1 className='text-base underline opacity-30'>joairazabal1@gmail.com</h1>
+                    <h1 className='text-base underline opacity-30 mr-2'>joairazabal1@gmail.com</h1>
                 </div>
                 </div>
          </div>

@@ -50,7 +50,7 @@ function NavBar() {
         </button>
         <ul className=" text-base text-primary pt-4 md:text-2xl   ">
           <li className="sm:py-2 md:py-6  active:bg-primary-300 rounded  ">
-            <Link to="/categories" className="flex items-center">
+            <Link to="/categories?category=all&page=1" className="flex items-center">
               <BiCategoryAlt />
               <p className="sm:ml-1 md:ml-2">Categories</p>
             </Link>
@@ -156,7 +156,7 @@ function NavBar() {
         <div className="flex justify-between items-center max-h-max bg-primary-700 text-base text-primary  sm:hidden lg:block ">
           <ul className="flex  ">
             <li className="lg:mr-5 relative flex">
-              <Link to="/categories?category=all" className="">
+              <Link to="/categories?category=all&page=1" className="">
                 <p className="buttom">Categories</p>
               </Link>
             </li>

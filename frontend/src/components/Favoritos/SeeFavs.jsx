@@ -45,7 +45,7 @@ function SeeFavs() {
                     >
                       <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-secundary-50"
+                      className="h-6 w-6 text-primary-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -81,7 +81,7 @@ function SeeFavs() {
                 <span className="text-xl font-medium font-PT flex justify-center text-primary-300  md:text-2xl">
                   You no have favorites yet D:
                 </span>
-                <Link to="/categories?category=all">
+                <Link to="/categories?category=all&page=1">
                   <button className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1">
                     Go add!
                   </button>

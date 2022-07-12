@@ -42,7 +42,7 @@ function Armado() {
   });
 
   const { addArrayToCart } = useContext(CartContext);
-
+  console.log(cpu)
   const sendCard = (e) => {
     e.preventDefault();
     const final = [
@@ -78,7 +78,7 @@ function Armado() {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
-
+  console.log(selectedCPU)
   const allProducts = useSelector((state) => state.allProducts);
 
   return (
@@ -97,7 +97,7 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                        src={cpu}
+                        src={selectedCPU.image ? selectedCPU.image[0] : cpu}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
                       />
@@ -124,7 +124,7 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                        src={mother}
+                        src={selectedMother.image ? selectedMother.image[0] : mother}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
                       />
@@ -150,7 +150,7 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                        src={ram}
+                        src={selectedRam.image ? selectedRam.image[0] : ram}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
                       />
@@ -176,7 +176,7 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                        src={gpu}
+                        src={selectedGPU.image ? selectedGPU.image[0] : gpu}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
                       />
@@ -202,7 +202,7 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                        src={hdd}
+                        src={selectedHDD.image ? selectedHDD.image[0] : hdd}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
                       />
@@ -228,7 +228,7 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                        src={ssd}
+                        src={selectedSSD.image ? selectedSSD.image[0] : ssd}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
                       />
@@ -254,7 +254,7 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                        src={m2}
+                        src={selectedSSDM2.image ? selectedSSDM2.image[0] : m2}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
                       />
@@ -280,7 +280,7 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                        src={psu}
+                        src={selectedPSUS.image ? selectedPSUS.image[0] : psu}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
                       />
@@ -306,7 +306,7 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                        src={casee}
+                        src={selectedCase.image ? selectedCase.image[0] : casee}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
                       />
