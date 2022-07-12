@@ -12,6 +12,8 @@ import { useState } from "react";
 import { FavContext } from "./FavContext";
 import { Link } from "react-router-dom";
 
+
+
 function SeeFavs() {
   const { favs, deleteProductFav } = useContext(FavContext);
   const dispatch = useDispatch();
