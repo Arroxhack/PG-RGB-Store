@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import { getQuest, postQuest } from '../../redux/actions'
+import {BsArrowRight} from 'react-icons'
 
 const Questions = ({id}) => {
     const dispatch = useDispatch()
@@ -70,13 +71,13 @@ const Questions = ({id}) => {
 
 
   return (
-    <div>
-        <h2 className="w-full text-center py-3 bg-primary-400 my-2">Questions</h2>
+    <div className='mt-10'>
+        <h2 className="w-full text-center py-3 text-secundary-250 text-xl font-PT my-2">Questions</h2>
         <form className='bg-[#E2E2E2] mb-2 w-auto'>
             <textarea value={quest.comentario} onChange={handleQuest} className='mx-10 mt-5 w-[80%] resize-none p-3'></textarea>
             <div className='flex flex-row justify-between px-10 py-5'>
             {error.comentario ? <p className='text-secundary-50'>{error.comentario}</p> : <span></span>}
-            <button className='bg-primary-400 px-5 py-2 rounded-lg uppercase font-bold hover:bg-primary-300 disabled:bg-primary-200' disabled={error.comentario ? true : false} onClick={sendQuest}>Send</button>
+            <button className='bg-primary-400 px-5 py-2 rounded-lg uppercase font-bold hover:bg-primary-300 cursor-pointer' disabled={error.comentario ? true : false} onClick={sendQuest}>Send</button>
             </div>
 
         </form >
