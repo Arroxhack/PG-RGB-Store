@@ -32,9 +32,6 @@ function DetailProduct() {
   }, []);
 
   const ProductDetail = useSelector((state) => state.detail);
-  function truncate(str, n) {
-    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
-  }
   const [expanded, setExpanded] = useState(false);
   const images = ProductDetail.image;
   const [text, setText] = useState(`${ProductDetail.description}`)
