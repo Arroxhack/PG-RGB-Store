@@ -10,7 +10,7 @@ import { CartContext } from "../Cart/CartContext";
 
 export default function Pagando() {
 
-  const PATH = 'http://localhost:3001'
+  const PATH = 'https://rgb-store.herokuapp.com'
 
   const navigate = useNavigate();
   const username = window.atob(localStorage.getItem("username")); //julianpardeiro

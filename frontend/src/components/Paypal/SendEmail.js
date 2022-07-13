@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function SendReview(username, ArrayProduct, idCompra) {
-  const PATH = 'http://localhost:3001'
+  const PATH = 'https://rgb-store.herokuapp.com'
 
   let products = [];
   let precioTotal = 0;
