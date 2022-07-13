@@ -27,7 +27,7 @@ const Product = ({ product}) => {
 
   return (
     <div className='bg-primary-500 lg:w-64 lg:h-[22rem] flex flex-col items-center rounded-sm gap-2 text-primary-200 
-     lg:hover:shadow-lg lg:hover:shadow-primary-400 lg:hover:-translate-y-0.1 sm:w-52 sm:h-38 sm:mt-6  md:h-72 md:w-54 '>
+     lg:hover:shadow-lg lg:hover:shadow-primary-400 lg:hover:-translate-y-0.1 sm:w-44 sm:h-38 sm:mt-6  md:h-72 md:w-54 '>
        
         <div className="flex flex-col justify-center items-center lg:h-2/3  bg-secundary-100 w-full  rounded-t-sm sm:h-36 md:h-[18rem]">
         <div className="w-full flex justify-end items-end">

@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import Select from 'react-select'
 import Swal from 'sweetalert2'
 import { filterPrice, filterProducts, getAllCategories, orderedByPrice } from '../../redux/actions'
+import loupe from '../../images/loupe.svg'
 
 const Side = () => {
 
@@ -180,49 +181,51 @@ const Side = () => {
     //#endregion
 
   return (
-    <div className='text-secundary-250 flex flex-col text-center gap-5 w-[30vh]'>
+    <div className='text-secundary-250 flex flex-col text-center items-center lg:gap-5 lg:w-[30vh] sm:w-[20vh] '>
         {products.length ? 
         <>
-        <div>
-        <h3 className='uppercase font-PT font-bold text-2xl'>Order by price</h3>
+        <div className='mt-[2rem] flex flex-col items-center w-full'>
+        <h3 className='uppercase font-PT font-bold lg:text-2xl sm:text-md'>Order by price</h3>
             <Select options={options} placeholder='Order by price' isSearchable={ false } 
            onChange={handleOrden} className='bg-secundary' styles={colourStyles}/>
         </div>
         {/* BOTONES */}
         <div className='flex flex-row gap-1 justify-center pt-5 pb-5'>
-        {searchFilter &&<button name='name' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold hover:bg-primary-300 hover:text-primary transition' onClick={resetFilter}>{searchFilter}</button>}
-        {brandQuery &&<button name='brand' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold hover:bg-primary-300 hover:text-primary transition' onClick={resetFilter}>{brandQuery}</button>}
-        {minQuery && <button name='min' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold hover:bg-primary-300 hover:text-primary transition' onClick={resetFilter}>{minQuery}</button>}
-        {maxQuery && <button name='max' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold hover:bg-primary-300 hover:text-primary transition' onClick={resetFilter}>{maxQuery}</button>}
+        {searchFilter &&<button name='name' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold lg:hover:bg-primary-300 lg:hover:text-primary transition' onClick={resetFilter}>{searchFilter}</button>}
+        {brandQuery &&<button name='brand' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold lg:hover:bg-primary-300 lg:hover:text-primary transition' onClick={resetFilter}>{brandQuery}</button>}
+        {minQuery && <button name='min' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold lg:hover:bg-primary-300 lg:hover:text-primary transition' onClick={resetFilter}>{minQuery}</button>}
+        {maxQuery && <button name='max' className='h-8 w-auto px-2 bg-primary text-primary-300 rounded uppercase font-PT font-bold lg:hover:bg-primary-300 lg:hover:text-primary transition' onClick={resetFilter}>{maxQuery}</button>}
         </div>
+        {/* PRECIO */}
+        <form className='lg:flex  lg:items-center lg:justify-around sm:flex sm:justify-between sm:items-center '>
+            <div className='flex justify-between lg:w-3/4 sm:w-5/6'>
+            <input className='border border-primary bg-primary-200 rounded-lg text-center  lg:w-[80px] sm:w-14  focus:outline-none focus:border-primary-300' type="num" name='min' value={price.min} onChange={handlePrice} placeholder='Min'/>
+            <input className='border border-primary bg-primary-200 rounded-lg text-center  lg:w-[80px] sm:w-14 focus:outline-none  focus:border-primary-300' type="num" name='max' value={price.max} onChange={handlePrice} placeholder='Max'/>
+            </div>
+            <button className='' onClick={setPri}><img src={loupe} alt="" className='h-6 w-6 sm:ml-2' /></button>
+        </form>
         {/* CATEGORIAS */}
-        <div>
-            <h3 className='uppercase font-PT font-bold text-2xl'>Category</h3>
-            <div className='flex flex-col items-center gap-1 text-lg'>
-                <button className='text-primary hover:text-primary-300' name='category' value={'all'} onClick={setCategory}>ALL</button>
+        <div className='-mt-6'>
+            <h3 className='uppercase font-PT font-bold lg:text-2xl mt-11 sm:text-lg'>Category</h3>
+            <div className='flex flex-col items-start gap-1 text-lg mt-3 '>
+                <button className='text-primary lg:hover:text-primary-300' name='category' value={'all'} onClick={setCategory}>ALL</button>
                 {categories && categories.map(c=>{
                     return(
-                        <button className='text-primary hover:text-primary-300' name='category' value={c} key={c} onClick={setCategory}>{c}</button>
+                        <button className='text-primary lg:hover:text-primary-300' name='category' value={c} key={c} onClick={setCategory}>{c}</button>
                     )
                 })}
             </div>
         </div>
-        {/* PRECIO */}
-        <form className='flex flex-col items-center gap-2'>
-            <div className='flex gap-2'>
-            <input className='border border-primary bg-primary-200 rounded-lg text-center py-2 w-[80px] focus:outline-none focus:border-primary-300' type="num" name='min' value={price.min} onChange={handlePrice} placeholder='Min'/>
-            <input className='border border-primary bg-primary-200 rounded-lg text-center py-2 w-[80px] focus:outline-none  focus:border-primary-300' type="num" name='max' value={price.max} onChange={handlePrice} placeholder='Max'/>
-            </div>
-            <button className='px-5 rounded-2xl py-1 bg-primary-300 hover:bg-primary text-primary-200 uppercase font-bold' onClick={setPri}>Find</button>
-        </form>
+     
+        
         {/* MARCAS */}
         <div>
-        <h3 className='uppercase font-PT font-bold text-2xl'>Brand</h3>
-            <div className='flex flex-col items-center gap-1 text-lg'>
-                <button className='text-primary hover:text-primary-300' name='brand' value={'all'} onClick={resetFilter}>ALL</button>
+        <h3 className='uppercase font-PT font-bold lg:text-2xl lg:mt-11 sm:text-lg sm:mt-4'>Brand</h3>
+            <div className='flex flex-col items-start gap-1 text-lg mt-3'>
+                <button className='text-primary lg:hover:text-primary-300' name='brand' value={'all'} onClick={resetFilter}>ALL</button>
                 {productsBrands && productsBrands.map(c=>{
                     return(
-                        <button className='text-primary hover:text-primary-300' name='brand' value={c} key={c} onClick={setBrand}>{c}</button>
+                        <button className='text-primary lg:hover:text-primary-300' name='brand' value={c} key={c} onClick={setBrand}>{c}</button>
                     )
                 })}
             </div>

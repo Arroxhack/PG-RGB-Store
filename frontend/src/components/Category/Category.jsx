@@ -32,11 +32,11 @@ const Category = () => {
                 <Loading/>
                 </div>:
         <>
-          <div className={products.length > 0 ? 'flex flex-row gap-5 w-full justify-center mt-5 inset-0' : 'bg-primary-200 h-screen'}>
-          <div>
+          <div className={products.length > 0 ? 'flex flex-row lg:gap-5 w-full justify-around mt-5 inset-0' : 'bg-primary-200 h-screen'}>
+          <div >
               <Side/>
           </div>
-          <div>
+          <div >
               <ContainerProduct />
           </div>
       </div>
