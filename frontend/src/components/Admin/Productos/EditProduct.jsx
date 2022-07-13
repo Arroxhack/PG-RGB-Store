@@ -434,6 +434,7 @@ const EditProduct = ({id}) => {
                 <input
                   type="file"
                   name="image"
+                  value=""
                   id="image"
                   onChange={(e) => Upload(e.target.files)}
                   multiple
@@ -492,7 +493,7 @@ const EditProduct = ({id}) => {
                     value: product.socket,
                     label: product.socket,
                   }}
-                  className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                   placeholder="Socket"
                   onChange={selectSocket}
                   options={marca === "AMD" ? AMD : INTEL}

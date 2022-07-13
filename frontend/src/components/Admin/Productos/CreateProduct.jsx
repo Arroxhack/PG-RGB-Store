@@ -134,38 +134,38 @@ const CreateProduct = () => {
     setCustom(value);
   };
   const customOptions = [
-    { value: true, label: "Si" },
+    { value: true, label: "Yes" },
     { value: false, label: "No" },
   ];
   //#endregion
   //#region ARRAY OPTIONS
   const customOffer = [
-    { value: true, label: "Si" },
+    { value: true, label: "Yes" },
     { value: false, label: "No" },
   ];
   const brands = [
-    { value: null, label: "No tiene" },
+    { value: null, label: "Not necessary" },
     { value: "AMD", label: "AMD" },
     { value: "INTEL", label: "INTEL" },
   ];
   const DDR = [
-    { value: null, label: "No tiene" },
+    { value: null, label: "Not necessary" },
     { value: 2, label: 2 },
     { value: 3, label: 3 },
     { value: 4, label: 4 },
     { value: 5, label: 5 },
   ];
   const AMD = [
-    { value: null, label: "No tiene" },
+    { value: null, label: "Not necessary" },
     { value: "AM4", label: "AM4" },
   ];
   const INTEL = [
-    { value: null, label: "No tiene" },
+    { value: null, label: "Not necessary" },
     { value: "LGA1200", label: "LGA1200" },
     { value: "LGA1700", label: "LGA1700" },
   ];
   const factor = [
-    { value: null, label: "No tiene" },
+    { value: null, label: "Not necessary" },
     { value: "ATX", label: "ATX" },
     { value: "MICRO-ATX", label: "MICRO-ATX" },
   ];
@@ -269,6 +269,7 @@ const CreateProduct = () => {
           <div className="ml-5 mt-5 flex flex-col gap-3">
             <h2 className="font-bold font-Open">Category:</h2>
             <Select
+            defaultValue=""
               className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
               onChange={handleSelect}
               options={options}
@@ -276,13 +277,13 @@ const CreateProduct = () => {
             {category === "Otro" ? (
               <div className="flex flex-row gap-4 items-center">
                 <input
-                  className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                   type="text"
                   name="category"
                   value={formOne.category}
                   onChange={handleFormOne}
-                  placeholder="Nueva categoría"
-                />{" "}
+                  placeholder="New category"
+                />
                 <div>{errorOne.category ? <div>✅</div> : <div>❌</div>}</div>
               </div>
             ) : (
@@ -294,7 +295,7 @@ const CreateProduct = () => {
           <div className="flex flex-row gap-4 ml-5 items-center">
             <h2 className="font-bold font-Open">Name:</h2>
             <input
-              className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+              className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
               type="text"
               name="name"
               value={formOne.name}
@@ -308,12 +309,12 @@ const CreateProduct = () => {
           <div className="flex flex-row gap-4 ml-5 items-center">
             <h2 className="font-bold font-Open">Price:</h2>
             <input
-              className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+              className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
               type="number"
               name="price"
               value={formOne.price}
               onChange={handleFormOne}
-              placeholder="Precio"
+              placeholder="Price"
             />
             {errorOne.price ? <div>✅</div> : <div>❌</div>}
           </div>
@@ -321,7 +322,7 @@ const CreateProduct = () => {
           <div className="flex flex-row gap-4 ml-5 items-center">
             <h2 className="font-bold font-Open">Stock:</h2>
             <input
-              className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+              className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
               type="number"
               name="stock"
               value={formOne.stock}
@@ -336,13 +337,12 @@ const CreateProduct = () => {
               <h2 className="font-bold font-Open">Description:</h2>
               {errorOne.description ? <div>✅</div> : <div>❌</div>}
             </div>
-            <input
-              className="border rounded-md placeholder:text-center text-center h-72 text-xl w-full"
-              type="text"
+            <textarea
+              className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none resize-y h-48 text-xl"
               name="description"
               value={formOne.description}
               onChange={handleFormOne}
-              placeholder="Descripcion"
+              placeholder="Description"
             />
           </div>
           {/* IMAGEN */}
@@ -360,12 +360,12 @@ const CreateProduct = () => {
           <div className="flex flex-row gap-4 ml-5 items-center">
             <h2 className="font-bold font-Open">Brand:</h2>
             <input
-              className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+              className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
               type="text"
               name="brand"
               value={formOne.brand}
               onChange={handleFormOne}
-              placeholder="Marca"
+              placeholder="Brand"
             />
             {errorOne.brand ? <div>✅</div> : <div>❌</div>}
           </div>
@@ -374,7 +374,7 @@ const CreateProduct = () => {
         <div className="flex flex-col gap-3">
           <Select
             className="rounded-md placeholder:text-center mt-5 text-center h-8 text-xl w-full mb-3"
-            placeholder="Caracteristicas avanzadas"
+            placeholder="Custom Options"
             onChange={selectOption}
             options={customOptions}
           />
@@ -382,8 +382,9 @@ const CreateProduct = () => {
             <>
               <h2 className="font-bold font-Open">Compatibility:</h2>
               <Select
+              defaultValue=""
                 className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
-                placeholder="Compatibilidad de marcas"
+                placeholder="Brand compatibility"
                 name="brand"
                 onChange={selectBrand}
                 options={brands}
@@ -391,6 +392,7 @@ const CreateProduct = () => {
 
               <h2 className="font-bold font-Open">DDR:</h2>
               <Select
+              defaultValue=""
                 className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
                 placeholder="DDR"
                 onChange={selectDDR}
@@ -399,6 +401,7 @@ const CreateProduct = () => {
 
               {marca !== null && (
                 <Select
+                defaultValue=""
                   className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
                   placeholder="Socket"
                   onChange={selectSocket}
@@ -408,6 +411,7 @@ const CreateProduct = () => {
 
               <h2 className="font-bold font-Open">Factor:</h2>
               <Select
+              defaultValue=""
                 className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
                 placeholder="Factor Mother"
                 onChange={selectFactor}
@@ -420,8 +424,8 @@ const CreateProduct = () => {
                 value={cus.weight}
                 name={"weight"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
-                placeholder="Peso"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
+                placeholder="Weight"
               />
 
               <h2 className="font-bold font-Open">Dimensions:</h2>
@@ -430,8 +434,8 @@ const CreateProduct = () => {
                 value={cus.dimensions}
                 name={"dimensions"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
-                placeholder="Dimensiones"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
+                placeholder="Dimensions"
               />
 
               <h2 className="font-bold font-Open">Watts:</h2>
@@ -440,7 +444,7 @@ const CreateProduct = () => {
                 value={cus.wattsPowerSupply}
                 name={"wattsPowerSupply"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                 placeholder="Power Watts"
               />
 
@@ -458,8 +462,8 @@ const CreateProduct = () => {
                 value={cus.percentageDiscount}
                 name={"percentageDiscount"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
-                placeholder="Porcentaje de descuento"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
+                placeholder="Percentage Discount"
               />
             </>
           ) : (
@@ -476,7 +480,7 @@ const CreateProduct = () => {
               className="rounder-xl col-start-1 col-end-3 h-8 text-xl w-36 my-0 mx-auto bg-primary-300 text-primary-200 hover:bg-primary hover:border rounded-md"
               onClick={onSend}
             >
-              ENVIAR
+              Send
             </button>
           )}
       </form>
