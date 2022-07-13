@@ -56,14 +56,14 @@ function NavBar() {
             </Link>
           </li>
           <li className=" sm:py-2 md:py-6   active:bg-primary-300 rounded ">
-            <Link to="/categories/notebooks" className="flex items-center ">
+            <Link to="/categories?category=Notebook&page=1" className="flex items-center ">
               <MdComputer />
               <p className="sm:ml-1 md:ml-2"> Notebooks</p>
             </Link>
           </li>
 
           <li className="sm:py-2 md:py-6 block active:bg-primary-300 rounded ">
-            <Link to="/categories/pc-armadas" className="flex items-center ">
+            <Link to="/categories?category=Desktop&page=1" className="flex items-center ">
               <img
                 src={svg}
                 alt="svg pc"
@@ -92,7 +92,7 @@ function NavBar() {
               </Link>{" "}
               <Logout />
               {admin ? (
-                <Link to="/admin">
+                <Link to="/admin/list-products">
                   <button className=" md:p-4 sm:py-2 md:py-6 block active:bg-primary-300 rounded">
                     Admin panel
                   </button>
