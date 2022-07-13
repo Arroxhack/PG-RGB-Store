@@ -44,6 +44,7 @@ import {
   NEXT_PAGE_PRODUCTS,
   PREV_PAGE_PRODUCTS,
   SET_PAGE_PRODUCTS,
+  CLEAN_PRODUCTS,
 } from '../types/index';
 
 const initialState = {
@@ -431,7 +432,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           pageContainer: action.payload
         }
-      
+      case CLEAN_PRODUCTS:
+        return{
+          ...state,
+          products : action.payload
+        }
     default:
       return { ...state };
   }
