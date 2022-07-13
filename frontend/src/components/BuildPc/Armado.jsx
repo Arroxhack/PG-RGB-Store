@@ -104,6 +104,18 @@ function Armado() {
 
   const dispatch = useDispatch();
 
+  const CPU = selectedCPU.price ? selectedCPU.price : 0
+  const MOTHER = selectedMother.price ? selectedMother.price : 0
+  const RAM = selectedRam.price ? selectedRam.price : 0
+  const GPU = selectedGPU.price ? selectedGPU.price : 0
+  const HDD = selectedHDD.price ? selectedHDD.price : 0
+  const SSD = selectedSSD.price ? selectedSSD.price : 0
+  const SSDM2 = selectedSSDM2.price ? selectedSSDM2.price : 0
+  const PSUS = selectedPSUS.price ? selectedPSUS.price : 0
+  const CASE = selectedCase.price ? selectedCase.price : 0
+
+  const TOTAL = CPU + MOTHER + RAM + GPU + HDD + SSD + SSDM2 + PSUS + CASE
+
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
@@ -378,42 +390,53 @@ function Armado() {
 
               <div className="xl:w-1/2 md:w-1/3 xl:w-1/4 w-full font-Open h-full">
                 <div className="flex flex-col md:h-screen px-14 py-20 justify-between font-Open overflow-y-auto">
-                  {/* <div>
+                  <div>
                     <p className="text-4xl font-black mb-10 text-secundary-250 leading-9 font-Open">
                       Your pc
                     </p>
 
                     <div>
                       <li className="text-secundary-250 font-Open">
-                        {selectedCPU.name}
+                        {selectedCPU.name && `${selectedCPU.name} - $${selectedCPU.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedMother.name}
+                        {/* {selectedMother.name} */}
+                        {selectedMother.name && `${selectedMother.name} - $${selectedMother.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedRam.name}
+                        {/* {selectedRam.name} */}
+                        {selectedRam.name && `${selectedRam.name} - $${selectedRam.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedGPU.name}
+                        {/* {selectedGPU.name} */}
+                        {selectedGPU.name && `${selectedGPU.name} - $${selectedGPU.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedHDD.name}
+                        {/* {selectedHDD.name} */}
+                        {selectedHDD.name && `${selectedHDD.name} - $${selectedHDD.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedSSD.name}
+                        {/* {selectedSSD.name} */}
+                        {selectedSSD.name && `${selectedSSD.name} - $${selectedSSD.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedSSDM2.name}
+                        {/* {selectedSSDM2.name} */}
+                        {selectedSSDM2.name && `${selectedSSDM2.name} - $${selectedSSDM2.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedPSUS.name}
+                        {/* {selectedPSUS.name} */}
+                        {selectedPSUS.name && `${selectedPSUS.name} - $${selectedPSUS.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedCase.name}
+                        {/* {selectedCase.name} */}
+                        {selectedCase.name && `${selectedCase.name} - $${selectedCase.price}`}
                       </li>
                     </div>
-                  </div> */}
+                  </div>
                   <div>
+                    <p className="uppercase text-secundary-250 font-bold h-10 text-xl">
+                      {`Total : $${TOTAL}`}
+                    </p>
                     <button
                       onClick={sendCard}
                       className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"
