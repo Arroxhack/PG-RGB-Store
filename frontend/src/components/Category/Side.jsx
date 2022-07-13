@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import Select from 'react-select'
 import Swal from 'sweetalert2'
-import { filterPrice, filterProducts, getAllCategories, orderedByPrice } from '../../redux/actions'
+import { cleanProducts, filterPrice, filterProducts, getAllCategories, orderedByPrice } from '../../redux/actions'
 import loupe from '../../images/loupe.svg'
 
-const Side = () => {
+const Side = ({setLoading}) => {
 
     const dispatch = useDispatch()
     let {categories, products} = useSelector(state=>state)
@@ -48,14 +48,18 @@ const Side = () => {
 
         if(!/(\d)$/.test(state.min)){
             errors.min = 'Only numbers can be used'
-        } else if(state.max && state.min > state.max){
+        } else if(Number(state.min) > Number(state.max)){
             errors.min = "Can not be less than the minimum"
+        } else if(Number(state.min) < 0){
+            errors.min = "Can not be less than 0"
         }
         //max
         if(!/(\d)$/.test(state.max)){
             errors.max = 'Only numbers can be used'
-        } else if(state.min && state.min > state.max){
+        } else if(Number(state.min) > Number(state.max)){
             errors.max = "Can not be greater than the maximum"
+        }else if(Number(state.max) < 1){
+            errors.max = "Can not be less than 1"
         }
 
         return errors
@@ -75,6 +79,7 @@ const Side = () => {
     }
     //#endregion
 
+    //#region 
     const [params, setParams] = useSearchParams()
 
     const catQuery = params.get("category")
@@ -89,6 +94,8 @@ const Side = () => {
     }, [dispatch, brandQuery, catQuery, minQuery, maxQuery,searchFilter, price.min, price.max])
 
 
+    //#endregion
+
     //#region SETEO DE FILTRADOS
     const setCategory = (e)=>{
         e.preventDefault()
@@ -102,14 +109,26 @@ const Side = () => {
             params.delete('name', searchFilter)
             setParams(params)
         }
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false);
+            dispatch(cleanProducts())
+          }, 1000);
         dispatch(filterProducts(catQuery, brandQuery, minQuery, maxQuery, searchFilter))
+
     }
     
     const setBrand = (e)=>{
         e.preventDefault()
+        dispatch(cleanProducts())
         params.set([e.target.name], e.target.value)
         params.set('page',1)
         setParams(params)
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false);
+            dispatch(cleanProducts())
+          }, 1000);
         dispatch(filterProducts(catQuery, brandQuery, minQuery, maxQuery, searchFilter))
     }
 
@@ -121,7 +140,14 @@ const Side = () => {
             params.set('max', price.max)
             const max = params.get('max')
             params.set('page',1)
-            if(min<max){
+
+            if(Number(min)<Number(max)){
+                dispatch(cleanProducts())
+                setLoading(true)
+                setTimeout(() => {
+                    setLoading(false);
+                    dispatch(cleanProducts())
+                  }, 1000);
                 setParams(params)
                 dispatch(filterProducts(catQuery, brandQuery, minQuery, maxQuery, searchFilter))
                 setPrice(resetPrice)
@@ -152,6 +178,11 @@ const Side = () => {
             params.set('category', 'all')
         }
         setParams(params)
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false);
+            dispatch(cleanProducts())
+          }, 1000);
         dispatch(filterPrice(catQuery,brandQuery,minQuery,maxQuery))
     }
     //#endregion
