@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getProductDetail,
@@ -13,8 +14,8 @@ const EditProduct = ({id}) => {
   //#region DISPATCH Y BUSQUEDA DE PRODUCTOS
   let product = useSelector((state) => state.detail);
   const dispatch = useDispatch();
-
-  console.log(id, 'ACA MIRAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+  let navigate = useNavigate();
+  //console.log(id, 'ACA MIRAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
   useEffect(() => {
     dispatch(getProductDetail(Number(id)));
     dispatch(clean())
@@ -310,6 +311,7 @@ const EditProduct = ({id}) => {
     e.preventDefault();
     dispatch(editProduct(newProduct));
     dispatch(clean());
+    navigate("../admin/list-products?page=1");
   };
 
   return (
@@ -338,7 +340,7 @@ const EditProduct = ({id}) => {
                       name="category"
                       value={formOne.category}
                       onChange={handleFormOne}
-                      placeholder="Nueva categoría"
+                      placeholder="New category"
                     />
                     <div>
                       {errorOne.category ? <div>✅</div> : <div>❌</div>}
@@ -355,7 +357,7 @@ const EditProduct = ({id}) => {
               <h2 className="ml-10 font-bold font-Open">{`Name: ${product.name}`}</h2>
               <div className="flex flex-row gap-4 ml-5 items-center">
                 <input
-                  className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                   type="text"
                   name="name"
                   value={formOne.name}
@@ -371,12 +373,12 @@ const EditProduct = ({id}) => {
               <h2 className="ml-10 font-bold font-Open">{`Price: $${product.price}`}</h2>
               <div className="flex flex-row gap-4 ml-5 items-center">
                 <input
-                  className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                   type="number"
                   name="price"
                   value={formOne.price}
                   onChange={handleFormOne}
-                  placeholder="Precio"
+                  placeholder="Price"
                 />
                 {errorOne.price ? <div>✅</div> : <div>❌</div>}
               </div>
@@ -387,7 +389,7 @@ const EditProduct = ({id}) => {
               <h2 className="ml-10 font-bold font-Open">{`Stock: ${product.stock}`}</h2>
               <div className="flex flex-row gap-4 ml-5 items-center">
                 <input
-                  className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                   type="number"
                   name="stock"
                   value={formOne.stock}
@@ -403,11 +405,11 @@ const EditProduct = ({id}) => {
               <h2 className="ml-10 font-bold font-Open">{`Description:`}</h2>
               <div className="flex flex-row gap-4 ml-5 items-center">
                 <textarea
-                  className="border rounded-md placeholder:text-center resize-y h-48 text-xl w-full"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none resize-y h-48 text-xl"
                   name="description"
                   value={formOne.description}
                   onChange={handleFormOne}
-                  placeholder="Descripcion"
+                  placeholder="Description"
                 />
                 {errorOne.description ? <div>✅</div> : <div>❌</div>}
               </div>
@@ -420,6 +422,7 @@ const EditProduct = ({id}) => {
                 {product.image.map((i) => {
                   return (
                     <img
+                      value=""
                       key={i}
                       src={i}
                       alt="image not found"
@@ -432,6 +435,7 @@ const EditProduct = ({id}) => {
                 <input
                   type="file"
                   name="image"
+                  value=""
                   id="image"
                   onChange={(e) => Upload(e.target.files)}
                   multiple
@@ -444,12 +448,12 @@ const EditProduct = ({id}) => {
               <h2 className="ml-10 font-bold font-Open">{`Brand: ${product.brand}`}</h2>
               <div className="flex flex-row gap-4 ml-5 items-center">
                 <input
-                  className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                   type="text"
                   name="brand"
                   value={formOne.brand}
                   onChange={handleFormOne}
-                  placeholder="Marca"
+                  placeholder="Brand"
                 />
                 {errorOne.brand ? <div>✅</div> : <div>❌</div>}
               </div>
@@ -490,7 +494,7 @@ const EditProduct = ({id}) => {
                     value: product.socket,
                     label: product.socket,
                   }}
-                  className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                   placeholder="Socket"
                   onChange={selectSocket}
                   options={marca === "AMD" ? AMD : INTEL}
@@ -516,8 +520,8 @@ const EditProduct = ({id}) => {
                 value={cus.weight}
                 name={"weight"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
-                placeholder="Peso"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
+                placeholder="Weight"
               />
             </div>
 
@@ -528,8 +532,8 @@ const EditProduct = ({id}) => {
                 value={cus.dimensions}
                 name={"dimensions"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
-                placeholder="Dimensiones"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
+                placeholder="Dimensions"
               />
             </div>
 
@@ -540,7 +544,7 @@ const EditProduct = ({id}) => {
                 value={cus.wattsPowerSupply}
                 name={"wattsPowerSupply"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                 placeholder="Power Watts"
               />
             </div>
@@ -553,7 +557,7 @@ const EditProduct = ({id}) => {
                   label: product.inOffer,
                 }}
                 className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
-                placeholder="Oferta"
+                placeholder="Offer"
                 onChange={selectOffer}
                 options={customOffer}
               />
@@ -566,8 +570,8 @@ const EditProduct = ({id}) => {
                 value={cus.percentageDiscount}
                 name={"percentageDiscount"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
-                placeholder="Porcentaje de descuento"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
+                placeholder="Percentage Discount"
               />
             </div>
           </div>
@@ -579,10 +583,10 @@ const EditProduct = ({id}) => {
             errorOne.brand &&
             errorOne.description && (
               <button
-                className="rounder-xl col-start-1 col-end-3 h-8 text-xl w-36 bg-primary-300 text-primary-200 hover:bg-primary hover:border rounded-md"
+                className="rounder-xl col-start-1 col-end-3 h-8 text-xl w-36 bg-primary-300 text-primary-200 hover:bg-primary rounded-md"
                 onClick={onSend}
               >
-                ENVIAR
+                Send
               </button>
             )}
         </form>

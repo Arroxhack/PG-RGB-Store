@@ -69,7 +69,7 @@ const Create = () => {
         <div>
           <Nav />
           <div className="flex flex-row">
-            <div className="bg-primary-200 h-screen w-60">
+            <div className="bg-primary-200 h-100 w-60">
               <Menu />
             </div>
             <CreateProduct />

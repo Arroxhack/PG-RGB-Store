@@ -35,7 +35,7 @@ function DetailProduct() {
   const [expanded, setExpanded] = useState(false);
   const images = ProductDetail.image;
   const [text, setText] = useState(`${ProductDetail.description}`)
-  console.log(text)
+  //console.log(text)
   const Toast = Swal.mixin({
     toast: true,
     position: "bottom-end",

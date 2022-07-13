@@ -9,7 +9,7 @@ const Cart = () => {
 
     const dispatch = useDispatch()
 
-    console.log(product)
+    //console.log(product)
  
 
     const {cart} = useSelector(state=>state)

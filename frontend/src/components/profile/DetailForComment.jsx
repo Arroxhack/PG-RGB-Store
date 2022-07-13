@@ -42,7 +42,7 @@ function DetailProduct() {
     e.preventDefault();
     Toast.fire({
       icon: "success",
-      title: "Producto agregado al carrito",
+      title: "Added to cart!",
     });
     addProductToCart(ProductDetail);
   };
