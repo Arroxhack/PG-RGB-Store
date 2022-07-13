@@ -127,7 +127,6 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                      value=""
                         src={selectedCPU.image ? selectedCPU.image[0] : cpu}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
@@ -137,6 +136,8 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                          brand={selectedCPU.brand}
+                         socket={selectedCPU.socket}
+                         isSelected={true}
                           name="CPU"
                           handleChange={(e) => {
                             Check(selectedCPU);
@@ -157,7 +158,6 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                      value=""
                         src={selectedMother.image ? selectedMother.image[0] : mother}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
@@ -167,6 +167,9 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           brand={selectedCPU.brand}
+                          socket={selectedCPU.socket}
+                          ddr={selectedMother.ddr}
+                          isSelected={selectedCPU?.name? true : false}
                           name="Motherboard"
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
@@ -185,7 +188,6 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                      value=""
                         src={selectedRam.image ? selectedRam.image[0] : ram}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
@@ -195,6 +197,8 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="Ram"
+                          ddr={selectedMother.ddr}
+                          isSelected={selectedMother?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedRam(valueArray);
@@ -212,7 +216,6 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                      value=""
                         src={selectedGPU.image ? selectedGPU.image[0] : gpu}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
@@ -222,6 +225,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="GPU"
+                          isSelected={selectedRam?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedGPU(valueArray);
@@ -239,7 +243,6 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                      value=""
                         src={selectedHDD.image ? selectedHDD.image[0] : hdd}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
@@ -249,6 +252,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="HDD"
+                          isSelected={selectedGPU?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedHDD(valueArray);
@@ -266,7 +270,6 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                      value=""
                         src={selectedSSD.image ? selectedSSD.image[0] : ssd}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
@@ -276,6 +279,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="SSD"
+                          isSelected={selectedHDD?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedSSD(valueArray);
@@ -293,7 +297,6 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                      value=""
                         src={selectedSSDM2.image ? selectedSSDM2.image[0] : m2}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
@@ -303,6 +306,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="SSD M.2"
+                          isSelected={selectedSSD?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedSSDM2(valueArray);
@@ -320,7 +324,6 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                      value=""
                         src={selectedPSUS.image ? selectedPSUS.image[0] : psu}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
@@ -330,6 +333,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="Power Supply"
+                          isSelected={selectedSSDM2?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedPSUS(valueArray);
@@ -347,7 +351,6 @@ function Armado() {
                   <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
                     <div className="w-1/5">
                       <img
-                      value=""
                         src={selectedCase.image ? selectedCase.image[0] : casee}
                         alt="Imagen"
                         className="w-full h-full object-center object-cover"
@@ -357,6 +360,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="Case"
+                          isSelected={selectedPSUS?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedCase(valueArray);
@@ -374,7 +378,7 @@ function Armado() {
 
               <div className="xl:w-1/2 md:w-1/3 xl:w-1/4 w-full font-Open h-full">
                 <div className="flex flex-col md:h-screen px-14 py-20 justify-between font-Open overflow-y-auto">
-                  <div>
+                  {/* <div>
                     <p className="text-4xl font-black mb-10 text-secundary-250 leading-9 font-Open">
                       Your pc
                     </p>
@@ -408,7 +412,7 @@ function Armado() {
                         {selectedCase.name}
                       </li>
                     </div>
-                  </div>
+                  </div> */}
                   <div>
                     <button
                       onClick={sendCard}

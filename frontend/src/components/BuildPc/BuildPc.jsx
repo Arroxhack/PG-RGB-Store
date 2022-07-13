@@ -65,8 +65,8 @@ function BuildPc() {
 
   const handleClickBrand = (e)=>{
     e.preventDefault();
-    
-    searchParams.set(e.target.name,e.target.value);
+    const name = 'CPU';
+    searchParams.set(name,e.target.value);
     setSearchParams(searchParams);
     // setSearchParams({
     //   [e.target.name]:e.target.value

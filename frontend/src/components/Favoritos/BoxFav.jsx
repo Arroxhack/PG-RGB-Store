@@ -37,6 +37,10 @@ const BoxFav = ({id,onClick})=>{
       addProductFav(id,idUser)
     }
 
+    const handleClickNotLoging =(e)=>{
+      e.preventDefault();
+      navigate('/login')
+    }
     return(  
     <div className="relative mr-3 mb-10">
         {
@@ -51,7 +55,7 @@ const BoxFav = ({id,onClick})=>{
               </div>
               :
               <div>
-              <Add id={`add-${id}`} onClick={()=>navigate('/login')}/>
+              <Add id={`add-${id}`} onClick={handleClickNotLoging}/>
               </div>
           }
           </div>
