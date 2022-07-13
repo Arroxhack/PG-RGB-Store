@@ -6,7 +6,7 @@ function CommentPending({ ComentariosPending }) {
   const navigate = useNavigate();
   const HandleSelect = (e) => {
     setProduct(e.target.value);
-    console.log(product);
+   // console.log(product);
   };
   return (
     <div className="mt-6">

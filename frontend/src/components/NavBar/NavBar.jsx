@@ -199,7 +199,7 @@ function NavBar() {
             {admin ? (
               <Link to="/admin/list-products">
                 <button className="text-base text-primary buttom">
-                  admin panel
+                  Admin Panel
                 </button>
               </Link>
             ) : null}

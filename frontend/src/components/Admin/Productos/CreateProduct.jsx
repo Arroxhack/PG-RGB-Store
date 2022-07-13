@@ -349,6 +349,7 @@ const CreateProduct = () => {
           <div className="flex flex-row gap-4 ml-5 items-center">
             <h2 className="font-bold font-Open">Image:</h2>
             <input
+              value=""
               type="file"
               name="image"
               id="image"
@@ -373,6 +374,7 @@ const CreateProduct = () => {
         {/* OPCIONES CUSTOM */}
         <div className="flex flex-col gap-3">
           <Select
+          defaultValue=""
             className="rounded-md placeholder:text-center mt-5 text-center h-8 text-xl w-full mb-3"
             placeholder="Custom Options"
             onChange={selectOption}
@@ -382,7 +384,7 @@ const CreateProduct = () => {
             <>
               <h2 className="font-bold font-Open">Compatibility:</h2>
               <Select
-              defaultValue=""
+                defaultValue=""
                 className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
                 placeholder="Brand compatibility"
                 name="brand"
@@ -392,7 +394,7 @@ const CreateProduct = () => {
 
               <h2 className="font-bold font-Open">DDR:</h2>
               <Select
-              defaultValue=""
+                defaultValue=""
                 className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
                 placeholder="DDR"
                 onChange={selectDDR}
@@ -401,7 +403,7 @@ const CreateProduct = () => {
 
               {marca !== null && (
                 <Select
-                defaultValue=""
+                  defaultValue=""
                   className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
                   placeholder="Socket"
                   onChange={selectSocket}
@@ -411,7 +413,7 @@ const CreateProduct = () => {
 
               <h2 className="font-bold font-Open">Factor:</h2>
               <Select
-              defaultValue=""
+                defaultValue=""
                 className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
                 placeholder="Factor Mother"
                 onChange={selectFactor}

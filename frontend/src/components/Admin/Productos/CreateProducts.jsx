@@ -57,18 +57,18 @@ const CreateProducts = () => {
 
   return (
     <div>
-      <h1>Crear un producto</h1>
+      <h1>Create a product</h1>
       <form>
         {/* CATEGORIA */}
-        <Select onChange={handleSelect} options={options}/>
+        <Select onChange={handleSelect} options={options} defaultValue=""/>
       {category==='Otro' ? <input className='border' type='text' name='category' value={input.category}  onChange={handleInput} placeholder='Nueva categoría'/> : <></>}
         {/* NOMBRE DEL PRODUCTO */}
         <div>
-        <label>Nombre:</label><input className='border' type="text" name="name" value={input.name} onChange={handleInput} placeholder='Nombre' />
+        <label>Name:</label><input className='border' type="text" name="name" value={input.name} onChange={handleInput} placeholder='Nombre' />
         </div>
         {/* PRECIO DEL PRODUCTO */}
         <div>
-        <label>Precio:</label><input className='border' type="number" name="price" value={input.price} onChange={handleInput} placeholder='Precio' />
+        <label>Price:</label><input className='border' type="number" name="price" value={input.price} onChange={handleInput} placeholder='Precio' />
         </div>
         {/* Stock */}
         <div>
@@ -76,7 +76,7 @@ const CreateProducts = () => {
         </div>
         {/* DESCRIPCION */}
         <div>
-        <label>Descripcion:</label><input className='border' type="text" name="description" value={input.description} onChange={handleInput} placeholder='Descripcion' />
+        <label>Description:</label><input className='border' type="text" name="description" value={input.description} onChange={handleInput} placeholder='Descripcion' />
         </div>
         {/* IMAGEN */}
         <div>
@@ -84,9 +84,9 @@ const CreateProducts = () => {
         </div>
         {/* MARCA */}
         <div>
-        <label>Marca:</label><input className='border' type="text" name="brand" value={input.brand} onChange={handleInput} placeholder='Marca' />
+        <label>Brand:</label><input className='border' type="text" name="brand" value={input.brand} onChange={handleInput} placeholder='Marca' />
         </div>
-        <button onClick={onSend}>Enviar</button>
+        <button onClick={onSend}>Send</button>
       </form>
     </div>
   )
