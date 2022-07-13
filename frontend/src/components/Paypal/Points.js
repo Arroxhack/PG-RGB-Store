@@ -1,7 +1,7 @@
 import axios from "axios";
 export async function givePoints(username, ArrayProducts) {
 
-  const PATH = 'https://rgb-store.herokuapp.com/'
+  const PATH = 'https://rgb-store.herokuapp.com'
 
   // CORREGIR LINEA 29
 
