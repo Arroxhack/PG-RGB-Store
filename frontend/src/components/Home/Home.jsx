@@ -19,6 +19,7 @@ import promo1 from "../../images/promo1.jpg"
 import promo2 from "../../images/promo2.png"
 import promo3 from "../../images/promo3.jpg"
 import Componentes from "./Componentes";
+import banner from './Banner/BANNER.png'
 
 function Home() {
   const dispatch = useDispatch();
@@ -83,7 +84,7 @@ function Home() {
       <Componentes/>
       <Marcas/>
       <div className="">
-        <img src="https://compudel.com.pe/img/cms/BANNERS/BANNER%20EMPRESAS%20ANTEFINAL.png" alt="compra" className="w-full sm:h-24 lg:h-52  "/>
+        <img src={banner} alt="compra" className="w-full sm:h-24 lg:h-52  "/>
       </div>
       <div className="w-full">
         <button  className="fixed bottom-2  sm:w-9  lg:h-12 lg:w-full md:w-full  flex items-center justify-end  rounded-2xl

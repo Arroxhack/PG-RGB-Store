@@ -277,8 +277,8 @@ export default function Register() {
                   type="submit"
                   id="enviar"
                 >
-                  {" "}
-                  Submit{" "}
+                 
+                  Submit
                 </button>
               </div>
               <div className="t-6">

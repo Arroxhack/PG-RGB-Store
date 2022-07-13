@@ -39,7 +39,7 @@ const DeleteProduct = () => {
 
   return (
     <div>
-      <Select className='w-[600px] text-center' onChange={handleProduct} options={option}/>
+      <Select className='w-[600px] text-center' onChange={handleProduct} defaultValue="" options={option}/>
       {product.id && <button onClick={onClick}>Delete product</button>}
     </div>
   )

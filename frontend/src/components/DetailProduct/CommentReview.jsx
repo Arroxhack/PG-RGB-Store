@@ -6,7 +6,7 @@ import {
 } from "../../redux/actions/index";
 
 export default function CommentReview({ idProduct }) {
-  console.log(idProduct);
+  //console.log(idProduct);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetCommendProduct(idProduct));

@@ -250,6 +250,7 @@ export default function Profile() {
                     </p>
                   </div>
                   <input
+                  value=""
                     type="file"
                     name="image"
                     id="image"
