@@ -1,7 +1,7 @@
 import axios from "axios";
 export async function givePoints(username, ArrayProducts) {
 
-  const PATH = 'http://localhost:3001'
+  const PATH = 'https://rgb-store.herokuapp.com/'
 
   // CORREGIR LINEA 29
 
@@ -26,7 +26,7 @@ export async function givePoints(username, ArrayProducts) {
 export async function takePoints(username, totaltake) {
   await axios({
     method: "put",
-    url: "http://localhost:3001/takepoints",
+    url: "https://rgb-store.herokuapp.com/takepoints",
     data: { username, totaltake }, // email
     headers: { "X-Requested-With": "XMLHttpRequest" },
     withCredentials: true,
