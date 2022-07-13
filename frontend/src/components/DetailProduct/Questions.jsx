@@ -93,8 +93,8 @@ const Questions = ({id}) => {
                     <h3 className='py-3 px-5 m-0'>{p.response}</h3>
                     <p className='text-[#9CA3AF] select-none font-normal text-right px-5'>{p.fechaRta}</p>
                     </div> : 
-                    <div className='border-b'>
-                        <h3 className='py-3 px-5'>Aun no hay una respuesta</h3>
+                    <div className='border-primary border-b'>
+                        <h3 className='py-3 text-secundary-250 px-5'>Aun no hay una respuesta</h3>
                         <p className='text-secundary-250 select-none font-normal text-right px-5'>{p.fechaRta}</p>
                     </div>
                     }

@@ -185,7 +185,7 @@ const Side = () => {
         <>
         <div>
         <h3 className='uppercase font-PT font-bold text-2xl'>Order by price</h3>
-            <Select options={options} placeholder='Order by price' 
+            <Select options={options} placeholder='Order by price' isSearchable={ false } 
            onChange={handleOrden} className='bg-secundary' styles={colourStyles}/>
         </div>
         {/* BOTONES */}

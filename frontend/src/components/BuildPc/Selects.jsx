@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, buildPc } from "../../redux/actions";
 
-function Selects({ name, handleChange }) {
+function Selects({ name, handleChange, brand = undefined }) {
   let id = `${name}`;
   let label = name.charAt(0).toUpperCase() + name.slice(1);
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
@@ -29,7 +29,11 @@ function Selects({ name, handleChange }) {
         onChange={handleChange}
       >
         <option value="">Choose your {name}</option>
-        {allProducts.map((p) => p.category[0] === `${name}` ? ( <option id={p.id} value={JSON.stringify(p)}> {p.name} </option>) : null
+        
+        {name==='CPU' ? allProducts.map((p)=>p.category[0]===name ? (<option id={p.id} value={JSON.stringify(p)}> {p.name} </option>) : null) : null}
+        {name === 'Motherboard' && brand ? allProducts.map((p)=>p.category[0]===name && p.compatibilityBrands === brand ? (<option id={p.id} value={JSON.stringify(p)}> {p.name} </option>) : null) : name === 'Motherboard' && !brand ? allProducts.map((p)=>p.category[0]===name? (<option id={p.id} value={JSON.stringify(p)}> {p.name} </option>) : null) : null}
+
+        {allProducts.map((p) => p.category[0] !== 'CPU' &&  p.category[0] !== 'Motherboard' && p.category[0] === `${name}` ? ( <option id={p.id} value={JSON.stringify(p)}> {p.name} </option>) : null
         )}
       </select>
     </div>
