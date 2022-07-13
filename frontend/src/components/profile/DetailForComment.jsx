@@ -8,7 +8,7 @@ import Loading from "../Loading/Loading";
 import { CartContext } from "../Cart/CartContext";
 import Swal from "sweetalert2";
 import ShowLessMore from "show-more-less";
-import "show-more-less/dist/index.css";
+import styles from "show-more-less/dist/index.css";
 
 function DetailProduct() {
   const dispatch = useDispatch();
@@ -35,9 +35,6 @@ function DetailProduct() {
   });
 
   const ProductDetail = useSelector((state) => state.detail);
-  function truncate(str, n) {
-    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
-  }
   const { addProductToCart } = useContext(CartContext);
   const images = ProductDetail.image;
   const [expanded, setExpanded] = useState(false);
@@ -153,6 +150,11 @@ function DetailProduct() {
                               threshold={100}
                               expanded={expanded}
                               onExpand={setExpanded}
+                              classes={{
+                                root: styles.root,
+                                text: styles.text,
+                                clickable: styles.clickable
+                              }}
                             />
                           </p>
                         </div>
