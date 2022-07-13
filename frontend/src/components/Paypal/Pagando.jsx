@@ -17,7 +17,7 @@ export default function Pagando() {
   let product = localStorage.getItem("cartProducts");
   //   console.log("product: ", product);
 
-  const { usePoints, points } = useContext(CartContext);
+  const { usePoints, points} = useContext(CartContext);
   console.log(usePoints);
   let productJSON = JSON.parse(product);
   // console.log("productJSON: ", productJSON);

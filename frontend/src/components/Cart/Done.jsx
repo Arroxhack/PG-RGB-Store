@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
+import { useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import { CartContext } from "./CartContext";
 
 function Done() {
-  const { products } = useContext(CartContext);
+  const { products, resetProductCart } = useContext(CartContext);
+
 
   let total = 0;
   products.forEach((p) => (total += p.amount * p.price));
