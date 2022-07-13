@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 export default function Validations() {
 
-  const PATH = 'http://localhost:3001'
+  const PATH = 'https://rgb-store.herokuapp.com/'
 
   const navigate = useNavigate();
   const [token, setToken] = useState("");
