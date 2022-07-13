@@ -15,9 +15,8 @@ import { CartContext } from "../../Cart/CartContext";
 const Create = () => {
   const admin = localStorage.getItem("admin");
   const username = window.atob(localStorage.getItem("username"));
-
-  const PATH = "https://rgb-store.herokuapp.com";
-
+  const { verificate, setVerificate } = useContext(CartContext);
+  const PATH = "https://rgb-store.herokuapp.com/api";
 
   let [searchParms, setSearchParams] = useSearchParams();
 
