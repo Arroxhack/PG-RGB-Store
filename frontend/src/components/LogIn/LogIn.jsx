@@ -38,14 +38,14 @@ export default function LogIn() {
         icon: "error",
         title: "Error",
         text: `${result}`,
-        button: "Aceptar",
+        button: "OK",
       });
     } else {
       Swal.fire({
         icon: "success",
         title: "EXITO",
         text: `${result}`,
-        button: "Aceptar",
+        button: "OK",
       });
       navigate(`/`);
     }
@@ -74,8 +74,8 @@ export default function LogIn() {
       Swal.fire({
         icon: "error" / "success",
         title: "Error",
-        text: "Su Cuenta no esta verificada, sera redirigido a una pagina para verificar su correo electronico",
-        button: "Aceptar",
+        text: "Your account needs verification, you will be redirected to verification page!",
+        button: "OK",
       });
       await ResendEmail(email);
       return navigate(`/validate/${username}`);
@@ -126,7 +126,7 @@ export default function LogIn() {
           icon: "error",
           title: "Error",
           text: `User blocked`,
-          button: "Aceptar",
+          button: "OK",
         }).then(() => {
           return navigate("/login");
         });
@@ -172,7 +172,7 @@ export default function LogIn() {
         icon: "error",
         title: "Error",
         text: `User blocked`,
-        button: "Aceptar",
+        button: "OK",
       }).then(() => {
         return navigate("/login");
       });
@@ -221,7 +221,7 @@ export default function LogIn() {
             icon: "error",
             title: "Error",
             text: `User blocked`,
-            button: "Aceptar",
+            button: "OK",
           }).then(() => {
             return navigate("/login");
           });
@@ -299,7 +299,7 @@ export default function LogIn() {
                   icon: "error" / "success",
                   title: "Error",
                   text: errors,
-                  button: "Aceptar",
+                  button: "OK",
                 }).then(() => refresh())}
               </p>
             ) : null}
