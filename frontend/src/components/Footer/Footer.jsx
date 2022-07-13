@@ -14,8 +14,7 @@ export default function () {
           </div>
           <div>
             <h4 className="lg:text-base">
-              Somos un grupo de estudiantes Soy Henry y este es nuestro proyecto
-              final. Esperamos que les guste.
+            We are a group of students in soyHenry and this is our final project. We hope you like it.
             </h4>
           </div>
         </div>

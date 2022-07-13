@@ -11,9 +11,10 @@ const Toast = Swal.mixin({
   timer: 2000,
 });
 
-const PATH = 'http://localhost:3001'
+const PATH = "http://localhost:3001";
 
 const CartProvider = ({ children }) => {
+  const [verificate, setVerificate] = useState(false);
   const [usePoints, setUsePoints] = useState(false);
   const [TyCcontext, setTyC] = useState(false);
   const [points, setPoints] = useState(0);
@@ -157,6 +158,8 @@ const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
+        verificate,
+        setVerificate,
         products,
         addProductToCart,
         deleteProductCart,
