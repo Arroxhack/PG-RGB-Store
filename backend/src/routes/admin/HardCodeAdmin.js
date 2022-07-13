@@ -6,13 +6,12 @@ const router = Router();
 
 router.post('/hardAdmin', async (req, res, next) => {
   const { validatePass } = req.body;
-  console.log('acacaca1');
   try {
     if (validatePass === 'Yasuo4ever') {
       const name = 'admin';
       const lastname = 'admin';
       const username = 'admin';
-      const password = 'adminrgb1234';
+      const password = 'tinorusso123';
       const email = 'rgbstore0@gmail.com';
       const securityLevels = 8;
       const passHashed = bcrypt.hash(password, securityLevels);

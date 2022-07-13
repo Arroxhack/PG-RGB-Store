@@ -15,36 +15,40 @@ router.post(
     failureFlash: true,
   }),
   async (req, res) => {
-    let AccountLock = await User.findOne({
-      where: { username: req.user.username },
-    });
-    if (AccountLock?.lock) {
-      return res.redirect("/lockedaccount");
+    try {
+      let AccountLock = await User.findOne({
+        where: { username: req.user.username },
+      });
+      if (AccountLock?.lock) {
+        return res.redirect("/lockedaccount");
+      }
+      let {
+        name,
+        lastname,
+        image,
+        username,
+        email,
+        cellphone,
+        permissions,
+        verify,
+        id,
+      } = req.user;
+      // User autenticado, en req.user esta toda la data del usuario guardada en la base de datos.
+      return res.json({
+        login: true,
+        lastname,
+        image,
+        username,
+        email,
+        cellphone,
+        name,
+        permissions,
+        verify,
+        id,
+      });
+    } catch (e) {
+      console.log(e);
     }
-    let {
-      name,
-      lastname,
-      image,
-      username,
-      email,
-      cellphone,
-      permissions,
-      verify,
-      id,
-    } = req.user;
-    // User autenticado, en req.user esta toda la data del usuario guardada en la base de datos.
-    return res.json({
-      login: true,
-      lastname,
-      image,
-      username,
-      email,
-      cellphone,
-      name,
-      permissions,
-      verify,
-      id,
-    });
   }
 );
 
@@ -69,10 +73,12 @@ router.get("/lockedaccount", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.send(`${req.flash("error")[0]}`);
+  try{ 
+    res.send(`${req.flash("error")[0]}`);
+  }catch(e){
+        console.log(e)
+      }
 });
-
-
 
 // Middleware para mostrar la sesión actual en cada request
 router.use((req, res, next) => {
