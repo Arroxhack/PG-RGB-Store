@@ -18,9 +18,8 @@ import hdd from ".//imagesBuild/hdd.svg";
 import {  useNavigate } from "react-router";
 import { BsCartPlus } from "react-icons/bs";
 import {useSearchParams } from "react-router-dom";
-import Brands from "./Brands";
-import amd from './imagesBuild/2.jpg'
-import intel from './imagesBuild/1.jpg'
+import AMD from '../../images/AMD.png'
+import INTEL from '../../images/INTEL.png'
 function Armado() {
   const navigate = useNavigate();
   const [selectedCPU, setSelectedCPU] = useState([]);
@@ -115,24 +114,30 @@ function Armado() {
   //console.log(selectedCPU)
   const allProducts = useSelector((state) => state.allProducts);
   
-  // const handleClickBrand = (e) =>{
-  //   e.preventDefault();
+  const handleClickBrand = (e) =>{
+    e.preventDefault();
+    setBrand(e.currentTarget.value);
+    searchParams.set('brand',e.currentTarget.value)
+    setSearchParams(searchParams);
     
-  //   setSearchParams({[e.target.name]:[e.target.value]});
-    
-  //   console.log(e.target.value, 'nashe')
-  // }
+    console.log(e.currentTarget.value, 'nashe')
+  }
 
   return (
     <div>
       <NavBar />
       <div className="flex items-center bg-primary-200 justify-center py-8">
         <div className="">
-          <div className="w-full absolute right-0 h-full">
-            <div className="flex md:flex-row bg-primary-200 flex-row justify-end">
-              {brand.length <= 0 ?
-              <div className="h-screen items-center bg-primary-200 justify-center"><button className="m-14" onClick={(e)=>{setBrand('AMD')}} value="AMD" name='brand' ><img src={amd} alt=''/></button>
-               <button className="m-14" onClick={(e)=>{setBrand('Intel')}} value="Intel" name='brand' ><img  src={intel} alt=''/></button></div> : 
+          <div className="w-full absolute right-0 ">
+            <div className="flex h-screen md:flex-row w-full justify-center items-center bg-primary-200 flex-row">
+
+              {!searchParams.get('brand') ?
+              <div className="overflow-auto h-full w-2/4 flex items-center bg-primary-200 justify-around">
+                <button className="" onClick={handleClickBrand} value="AMD" name='brand' ><img src={AMD} alt=''/></button>
+               <button className="" onClick={handleClickBrand} value="Intel" name='brand' ><img src={INTEL} alt=''/></button>
+               </div> 
+               
+               : 
               <div className="flex md:flex-row bg-primary-200 flex-col justify-end">
   <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-secundary-250 overflow-y-auto overflow-x-hidden h-screen">
   <p className="text-5xl font-black mb-10 font-Open leading-10 pt-3">

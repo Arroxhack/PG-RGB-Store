@@ -25,7 +25,6 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import SeeFavs from './components/Favoritos/SeeFavs.jsx';
 import Category from './components/Category/Category';
 import Us from './components/Us/Us';
-import Brands from './components/BuildPc/Brands';
 function App() {
   return (
     <div className='Font-Open'>

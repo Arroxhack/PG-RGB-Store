@@ -1,19 +1,28 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, buildPc } from "../../redux/actions";
+import { getAllProducts } from "../../redux/actions";
 
-function Selects({ name, handleChange, brand = undefined }) {
+function Selects({ name, handleChange,brand=undefined}) {
   let id = `${name}`;
   let label = name.charAt(0).toUpperCase() + name.slice(1);
   const dispatch = useDispatch();
   
   useEffect(() => {
     dispatch(getAllProducts());
-  }, [dispatch,brand]);
+  }, [dispatch]);
 
   const allProducts = useSelector((state) => state.allProducts);
   //console.log(allProducts);
-
+  // let urlIntel = new URL('https://localhost:3000/arma-ru-pc?brand=Intel');
+  // let urlAmd = new URL('https://localhost:3000/arma-ru-pc?brand=AMD');
+  // let params;
+  // if(urlIntel.toString().slice(-5) === 'Intel'){
+  //   params = new URLSearchParams(urlIntel.search);
+  // }else{
+  //   params = new URLSearchParams(urlAmd.search);
+  // }
+  // const brand =  params.get('brand');
+  // console.log(brand,'soy la brand')
   return (
     <div className="">
       <label
