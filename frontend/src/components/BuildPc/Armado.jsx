@@ -15,9 +15,12 @@ import psu from ".//imagesBuild/psu.svg";
 import ssd from ".//imagesBuild/ssd.svg";
 import m2 from ".//imagesBuild/m2.svg";
 import hdd from ".//imagesBuild/hdd.svg";
-import { useNavigate } from "react-router";
+import {  useNavigate } from "react-router";
 import { BsCartPlus } from "react-icons/bs";
-
+import {useSearchParams } from "react-router-dom";
+import Brands from "./Brands";
+import amd from './imagesBuild/2.jpg'
+import intel from './imagesBuild/1.jpg'
 function Armado() {
   const navigate = useNavigate();
   const [selectedCPU, setSelectedCPU] = useState([]);
@@ -30,7 +33,10 @@ function Armado() {
   const [selectedPSUS, setSelectedPSUS] = useState([]);
   const [selectedCase, setSelectedCase] = useState([]);
 
+  const [brand, setBrand] = useState('')
+
   const [cpus, setCpu] = useState([])
+  let [searchParams, setSearchParams] = useSearchParams();
 
   const [build, setBuild] = useState({
     CPU: {},
@@ -89,7 +95,6 @@ function Armado() {
   */
   const Check = (cpuSelected)=>{
     if(cpuSelected.name !== cpus.name){
-   
       setSelectedMother([])
       setSelectedRam([])
       setSelectedGPU([])
@@ -110,258 +115,269 @@ function Armado() {
   //console.log(selectedCPU)
   const allProducts = useSelector((state) => state.allProducts);
   
+  // const handleClickBrand = (e) =>{
+  //   e.preventDefault();
+    
+  //   setSearchParams({[e.target.name]:[e.target.value]});
+    
+  //   console.log(e.target.value, 'nashe')
+  // }
+
   return (
     <div>
       <NavBar />
       <div className="flex items-center bg-primary-200 justify-center py-8">
         <div className="">
           <div className="w-full absolute right-0 h-full">
-            <div className="flex md:flex-row bg-primary-200 flex-col justify-end">
-              
-              <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-secundary-250 overflow-y-auto overflow-x-hidden h-screen">
-                <p className="text-5xl font-black mb-10 font-Open leading-10 pt-3">
-                  Choose your components
-                </p>
+            <div className="flex md:flex-row bg-primary-200 flex-row justify-end">
+              {brand.length <= 0 ?
+              <div className="h-screen items-center bg-primary-200 justify-center"><button className="m-14" onClick={(e)=>{setBrand('AMD')}} value="AMD" name='brand' ><img src={amd} alt=''/></button>
+               <button className="m-14" onClick={(e)=>{setBrand('Intel')}} value="Intel" name='brand' ><img  src={intel} alt=''/></button></div> : 
+              <div className="flex md:flex-row bg-primary-200 flex-col justify-end">
+  <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-secundary-250 overflow-y-auto overflow-x-hidden h-screen">
+  <p className="text-5xl font-black mb-10 font-Open leading-10 pt-3">
+    Choose your components
+  </p>
 
-                <div>
-                  <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
-                    <div className="w-1/5">
-                      <img
-                        src={selectedCPU.image ? selectedCPU.image[0] : cpu}
-                        alt="Imagen"
-                        className="w-full h-full object-center object-cover"
-                      />
-                    </div>
-                    <div className="md:pl-3 md:w-3/4">
-                      <div className="flex items-center justify-between w-full pt-1">
-                        <Selects
-                         brand={selectedCPU.brand}
-                          name="CPU"
-                          handleChange={(e) => {
-                            Check(selectedCPU);
-                            let valueArray = JSON.parse(e.target.value);
-                            setSelectedCPU(valueArray);
-                            //console.log(valueArray.id);
-                            setBuild({
-                              ...build,
-                              [e.target.name]: valueArray,
-                            });
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
-                    <div className="w-1/5">
-                      <img
-                        src={selectedMother.image ? selectedMother.image[0] : mother}
-                        alt="Imagen"
-                        className="w-full h-full object-center object-cover"
-                      />
-                    </div>
-                    <div className="md:pl-3 md:w-3/4">
-                      <div className="flex items-center justify-between w-full pt-1">
-                        <Selects
-                          brand={selectedCPU.brand}
-                          name="Motherboard"
-                          handleChange={(e) => {
-                            let valueArray = JSON.parse(e.target.value);
-                            setSelectedMother(valueArray);
-                            setBuild({
-                              ...build,
-                              [e.target.name]: valueArray,
-                            });
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
-                    <div className="w-1/5">
-                      <img
-                        src={selectedRam.image ? selectedRam.image[0] : ram}
-                        alt="Imagen"
-                        className="w-full h-full object-center object-cover"
-                      />
-                    </div>
-                    <div className="md:pl-3 md:w-3/4">
-                      <div className="flex items-center justify-between w-full pt-1">
-                        <Selects
-                          name="Ram"
-                          handleChange={(e) => {
-                            let valueArray = JSON.parse(e.target.value);
-                            setSelectedRam(valueArray);
-                            setBuild({
-                              ...build,
-                              [e.target.name]: valueArray,
-                            });
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
-                    <div className="w-1/5">
-                      <img
-                        src={selectedGPU.image ? selectedGPU.image[0] : gpu}
-                        alt="Imagen"
-                        className="w-full h-full object-center object-cover"
-                      />
-                    </div>
-                    <div className="md:pl-3 md:w-3/4">
-                      <div className="flex items-center justify-between w-full pt-1">
-                        <Selects
-                          name="GPU"
-                          handleChange={(e) => {
-                            let valueArray = JSON.parse(e.target.value);
-                            setSelectedGPU(valueArray);
-                            setBuild({
-                              ...build,
-                              [e.target.name]: valueArray,
-                            });
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
-                    <div className="w-1/5">
-                      <img
-                        src={selectedHDD.image ? selectedHDD.image[0] : hdd}
-                        alt="Imagen"
-                        className="w-full h-full object-center object-cover"
-                      />
-                    </div>
-                    <div className="md:pl-3 md:w-3/4">
-                      <div className="flex items-center justify-between w-full pt-1">
-                        <Selects
-                          name="HDD"
-                          handleChange={(e) => {
-                            let valueArray = JSON.parse(e.target.value);
-                            setSelectedHDD(valueArray);
-                            setBuild({
-                              ...build,
-                              [e.target.name]: valueArray,
-                            });
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
-                    <div className="w-1/5">
-                      <img
-                        src={selectedSSD.image ? selectedSSD.image[0] : ssd}
-                        alt="Imagen"
-                        className="w-full h-full object-center object-cover"
-                      />
-                    </div>
-                    <div className="md:pl-3 md:w-3/4">
-                      <div className="flex items-center justify-between w-full pt-1">
-                        <Selects
-                          name="SSD"
-                          handleChange={(e) => {
-                            let valueArray = JSON.parse(e.target.value);
-                            setSelectedSSD(valueArray);
-                            setBuild({
-                              ...build,
-                              [e.target.name]: valueArray,
-                            });
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
-                    <div className="w-1/5">
-                      <img
-                        src={selectedSSDM2.image ? selectedSSDM2.image[0] : m2}
-                        alt="Imagen"
-                        className="w-full h-full object-center object-cover"
-                      />
-                    </div>
-                    <div className="md:pl-3 md:w-3/4">
-                      <div className="flex items-center justify-between w-full pt-1">
-                        <Selects
-                          name="SSD M.2"
-                          handleChange={(e) => {
-                            let valueArray = JSON.parse(e.target.value);
-                            setSelectedSSDM2(valueArray);
-                            setBuild({
-                              ...build,
-                              [e.target.name]: valueArray,
-                            });
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
-                    <div className="w-1/5">
-                      <img
-                        src={selectedPSUS.image ? selectedPSUS.image[0] : psu}
-                        alt="Imagen"
-                        className="w-full h-full object-center object-cover"
-                      />
-                    </div>
-                    <div className="md:pl-3 md:w-3/4">
-                      <div className="flex items-center justify-between w-full pt-1">
-                        <Selects
-                          name="Power Supply"
-                          handleChange={(e) => {
-                            let valueArray = JSON.parse(e.target.value);
-                            setSelectedPSUS(valueArray);
-                            setBuild({
-                              ...build,
-                              [e.target.name]: valueArray,
-                            });
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
-                    <div className="w-1/5">
-                      <img
-                        src={selectedCase.image ? selectedCase.image[0] : casee}
-                        alt="Imagen"
-                        className="w-full h-full object-center object-cover"
-                      />
-                    </div>
-                    <div className="md:pl-3 md:w-3/4">
-                      <div className="flex items-center justify-between w-full pt-1">
-                        <Selects
-                          name="Case"
-                          handleChange={(e) => {
-                            let valueArray = JSON.parse(e.target.value);
-                            setSelectedCase(valueArray);
-                            setBuild({
-                              ...build,
-                              [e.target.name]: valueArray,
-                            });
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <div>
+    <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
+      <div className="w-1/5">
+        <img
+          src={selectedCPU.image ? selectedCPU.image[0] : cpu}
+          alt="Imagen"
+          className="w-full h-full object-center object-cover"
+        />
+      </div>
+      <div className="md:pl-3 md:w-3/4">
+        <div className="flex items-center justify-between w-full pt-1">
+          <Selects
+           brand={brand}
+            name="CPU"
+            handleChange={(e) => {
+              Check(selectedCPU);
+              let valueArray = JSON.parse(e.target.value);
+              setSelectedCPU(valueArray);
+              //console.log(valueArray.id);
+              setBuild({
+                ...build,
+                [e.target.name]: valueArray,
+              });
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
+      <div className="w-1/5">
+        <img
+          src={selectedMother.image ? selectedMother.image[0] : mother}
+          alt="Imagen"
+          className="w-full h-full object-center object-cover"
+        />
+      </div>
+      <div className="md:pl-3 md:w-3/4">
+        <div className="flex items-center justify-between w-full pt-1">
+          <Selects
+            brand={brand}
+            name="Motherboard"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value);
+              setSelectedMother(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]: valueArray,
+              });
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
+      <div className="w-1/5">
+        <img
+          src={selectedRam.image ? selectedRam.image[0] : ram}
+          alt="Imagen"
+          className="w-full h-full object-center object-cover"
+        />
+      </div>
+      <div className="md:pl-3 md:w-3/4">
+        <div className="flex items-center justify-between w-full pt-1">
+          <Selects
+            name="Ram"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value);
+              setSelectedRam(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]: valueArray,
+              });
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
+      <div className="w-1/5">
+        <img
+          src={selectedGPU.image ? selectedGPU.image[0] : gpu}
+          alt="Imagen"
+          className="w-full h-full object-center object-cover"
+        />
+      </div>
+      <div className="md:pl-3 md:w-3/4">
+        <div className="flex items-center justify-between w-full pt-1">
+          <Selects
+            name="GPU"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value);
+              setSelectedGPU(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]: valueArray,
+              });
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
+      <div className="w-1/5">
+        <img
+          src={selectedHDD.image ? selectedHDD.image[0] : hdd}
+          alt="Imagen"
+          className="w-full h-full object-center object-cover"
+        />
+      </div>
+      <div className="md:pl-3 md:w-3/4">
+        <div className="flex items-center justify-between w-full pt-1">
+          <Selects
+            name="HDD"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value);
+              setSelectedHDD(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]: valueArray,
+              });
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
+      <div className="w-1/5">
+        <img
+          src={selectedSSD.image ? selectedSSD.image[0] : ssd}
+          alt="Imagen"
+          className="w-full h-full object-center object-cover"
+        />
+      </div>
+      <div className="md:pl-3 md:w-3/4">
+        <div className="flex items-center justify-between w-full pt-1">
+          <Selects
+            name="SSD"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value);
+              setSelectedSSD(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]: valueArray,
+              });
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
+      <div className="w-1/5">
+        <img
+          src={selectedSSDM2.image ? selectedSSDM2.image[0] : m2}
+          alt="Imagen"
+          className="w-full h-full object-center object-cover"
+        />
+      </div>
+      <div className="md:pl-3 md:w-3/4">
+        <div className="flex items-center justify-between w-full pt-1">
+          <Selects
+            name="SSD M.2"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value);
+              setSelectedSSDM2(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]: valueArray,
+              });
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
+      <div className="w-1/5">
+        <img
+          src={selectedPSUS.image ? selectedPSUS.image[0] : psu}
+          alt="Imagen"
+          className="w-full h-full object-center object-cover"
+        />
+      </div>
+      <div className="md:pl-3 md:w-3/4">
+        <div className="flex items-center justify-between w-full pt-1">
+          <Selects
+            name="Power Supply"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value);
+              setSelectedPSUS(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]: valueArray,
+              });
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div className="md:flex items-center mt-14 py-8 border-t border-primary-400">
+      <div className="w-1/5">
+        <img
+          src={selectedCase.image ? selectedCase.image[0] : casee}
+          alt="Imagen"
+          className="w-full h-full object-center object-cover"
+        />
+      </div>
+      <div className="md:pl-3 md:w-3/4">
+        <div className="flex items-center justify-between w-full pt-1">
+          <Selects
+            name="Case"
+            handleChange={(e) => {
+              let valueArray = JSON.parse(e.target.value);
+              setSelectedCase(valueArray);
+              setBuild({
+                ...build,
+                [e.target.name]: valueArray,
+              });
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
               <div className="xl:w-1/2 md:w-1/3 xl:w-1/4 w-full font-Open h-full">
                 <div className="flex flex-col md:h-screen px-14 py-20 justify-between font-Open overflow-y-auto">
@@ -410,6 +426,8 @@ function Armado() {
                   </div>
                 </div>
               </div>
+              </div>
+              }
             </div>
           </div>
         </div>

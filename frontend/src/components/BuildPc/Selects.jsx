@@ -9,7 +9,7 @@ function Selects({ name, handleChange, brand = undefined }) {
   
   useEffect(() => {
     dispatch(getAllProducts());
-  }, [dispatch]);
+  }, [dispatch,brand]);
 
   const allProducts = useSelector((state) => state.allProducts);
   //console.log(allProducts);
@@ -30,7 +30,7 @@ function Selects({ name, handleChange, brand = undefined }) {
       >
         <option value="">Choose your {name}</option>
         
-        {name==='CPU' ? allProducts.map((p)=>p.category[0]===name ? (<option id={p.id} value={JSON.stringify(p)}> {p.name} </option>) : null) : null}
+        {name==='CPU' ? allProducts.map((p)=>p.category[0]===name && p.brand === brand? (<option id={p.id} value={JSON.stringify(p)}> {p.name} </option>) : null) : null}
         {name === 'Motherboard' && brand ? allProducts.map((p)=>p.category[0]===name && p.compatibilityBrands === brand ? (<option id={p.id} value={JSON.stringify(p)}> {p.name} </option>) : null) : name === 'Motherboard' && !brand ? allProducts.map((p)=>p.category[0]===name? (<option id={p.id} value={JSON.stringify(p)}> {p.name} </option>) : null) : null}
 
         {allProducts.map((p) => p.category[0] !== 'CPU' &&  p.category[0] !== 'Motherboard' && p.category[0] === `${name}` ? ( <option id={p.id} value={JSON.stringify(p)}> {p.name} </option>) : null
