@@ -29,4 +29,12 @@
     hover:before:opacity-100
 }
 
+
+
+}
+@layer utilities{
+    .box-effet{
+        -webkit-box-reflect: below 10px linear-gradient(transparent,rgba(255, 125, 0, 0.7))
+    }
+ 
 }

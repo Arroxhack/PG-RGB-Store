@@ -89,8 +89,8 @@ function Home() {
         <button  className="fixed bottom-2  sm:w-9  lg:h-12 lg:w-full md:w-full  flex items-center justify-end  rounded-2xl
          gap-1  sm:right-2">
        
-        <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank" >
-        <p className="text-xl text-primary-400 font-Open sm:hidden lg:block md:block">Chat with us</p>
+        <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank" className="flex w-[20rem] justify-end " >
+        <p className="text-xl text-primary-400 font-Open sm:hidden lg:block  md:block w-[15rem] -mr-[4rem]  ">Chat with us</p>
         < SiWhatsapp className="h-7 w-9 relative text-primary-400 "/>
         </a>
         </button>
