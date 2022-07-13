@@ -49,7 +49,7 @@ import {
   SET_PAGE_PRODUCTS,
 } from '../types/index';
 import Swal from 'sweetalert2';
-const PATH = 'https://rgb-store.herokuapp.com/';
+const PATH = 'https://rgb-store.herokuapp.com';
 
 /// GET PRODUCTOS ///
 export function getAllProducts() {

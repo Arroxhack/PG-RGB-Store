@@ -10,7 +10,7 @@ const EditUser = () => {
   const [method, setMethod] = useState("Upgradear a Admin");
   const [state, setState] = useState("");
 
-  const PATH = 'https://rgb-store.herokuapp.com/'
+  const PATH = 'https://rgb-store.herokuapp.com'
 
   useEffect(() => {
     getAllUsers();

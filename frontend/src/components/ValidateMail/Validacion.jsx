@@ -11,7 +11,7 @@ import NavBar from '../NavBar/NavBar'
 
 export default function Validations() {
 
-  const PATH = 'https://rgb-store.herokuapp.com/'
+  const PATH = 'https://rgb-store.herokuapp.com'
 
   const { setProducts, products } = useContext(CartContext);
   const navigate = useNavigate();

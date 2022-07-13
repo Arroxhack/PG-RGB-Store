@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 export default function CheckoutPaypal() {
   const navigate = useNavigate();
 
-  const PATH = 'https://rgb-store.herokuapp.com/'
+  const PATH = 'https://rgb-store.herokuapp.com'
 
   // let onApprove = (data, actions) => {
   //     return actions.order.capture().then(function(orderData) {

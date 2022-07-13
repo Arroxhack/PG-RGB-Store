@@ -15,7 +15,7 @@ const Create = () => {
   const admin = localStorage.getItem("admin");
   const username = window.atob(localStorage.getItem("username"));
 
-  const PATH = "https://rgb-store.herokuapp.com/";
+  const PATH = "https://rgb-store.herokuapp.com";
 
   let [searchParms, setSearchParams] = useSearchParams();
 

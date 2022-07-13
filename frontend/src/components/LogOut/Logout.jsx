@@ -9,7 +9,7 @@ export default function Logout() {
   const { products } = useContext(CartContext); //CartContext estado global // products array con prodcucts con amount
   const dispatch = useDispatch();
 
-  const PATH = 'https://rgb-store.herokuapp.com/'
+  const PATH = 'https://rgb-store.herokuapp.com'
 
   function onClick(e) {
     e.preventDefault();
