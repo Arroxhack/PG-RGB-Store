@@ -14,6 +14,7 @@ import { IoIosBuild } from "react-icons/io";
 import svg from "../../images/rename.svg";
 import { FiLogIn } from "react-icons/fi";
 import { BsPencilSquare } from "react-icons/bs";
+import {MdOutlineFavoriteBorder} from 'react-icons/md'
 function NavBar() {
   let username = localStorage.getItem("username");
   const admin = localStorage.getItem("admin");
@@ -74,9 +75,15 @@ function NavBar() {
           </li>
 
           <li className="sm:py-2 md:py-6 block active:bg-primary-300 rounded ">
-            <Link to="/probando" className="flex items-center ">
+            <Link to="/arma-tu-pc" className="flex items-center ">
               <IoIosBuild />
               <p className="sm:ml-1 md:ml-2">Build your PC</p>
+            </Link>
+          </li>
+          <li className="sm:py-2 md:py-6 block active:bg-primary-300 rounded ">
+            <Link to="/favoritos" className="flex items-center ">
+              <MdOutlineFavoriteBorder className="text-primary" />
+              <p className="sm:ml-1 md:ml-2">Favorites</p>
             </Link>
           </li>
         </ul>
@@ -90,6 +97,7 @@ function NavBar() {
                 <HiOutlineUserCircle className="  text-primary-400 " />
                 <span className=" sm:ml-1 md:ml-2">Profile</span>
               </Link>{" "}
+
               <Logout />
               {admin ? (
                 <Link to="/admin/list-products">
