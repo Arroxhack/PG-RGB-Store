@@ -176,7 +176,7 @@ function NavBar() {
       </div>
 
       {/* SEARCHBAR */}
-      <div className=" sm:w-1/4  md:w-1/2 lg:w-1/6 sm:ml-[-4rem] flex lg:flex lg:-ml-[10rem]">
+      <div className=" sm:w-1/5  md:w-1/2 lg:w-1/6 sm:ml-[-4rem] flex lg:flex lg:-ml-[10rem]">
         <SearchBar />
       </div>
 
