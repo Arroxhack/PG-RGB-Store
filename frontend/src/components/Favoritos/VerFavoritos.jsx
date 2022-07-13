@@ -19,15 +19,15 @@ const handleClickDelete = (e)=>{
     dispatch(deleteProductFavorito(e.target.value,idUser));
     dispatch(getProductFavorito(idUser));
     const newArr = JSON.parse(localStorage.getItem('fav'));
-    console.log('soy el id ', e.target.value)
+    //console.log('soy el id ', e.target.value)
     const arr = newArr.filter(i=>i!== e.target.value);
     setUserFavs(arr);
     localStorage.setItem('fav',JSON.stringify(arr));
 }
 
 
-console.log(userFavs)
-console.log(favoritos)
+//console.log(userFavs)
+//console.log(favoritos)
 const productToRender = [];
 favoritos.map((el)=>{
     userFavs.map((id)=>{
@@ -37,7 +37,7 @@ favoritos.map((el)=>{
     })
 })
 
-console.log(productToRender, ' soy productToRender');
+//console.log(productToRender, ' soy productToRender');
 useEffect(()=>{
     login &&
     dispatch(getProductFavorito(idUser));

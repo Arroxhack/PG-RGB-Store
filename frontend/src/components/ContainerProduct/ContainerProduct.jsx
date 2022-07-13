@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from '../Loading/Loading'
 import Swal from "sweetalert2";
-import { cleanFilter, filterPrice, getAllProducts } from "../../redux/actions";
+import { cleanFilter, cleanProducts, filterPrice, getAllProducts } from "../../redux/actions";
 import Paginado from "./Paginado";
 
 const ContainerProduct = () => {

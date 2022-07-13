@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Menu from "../Menu/Menu";
 import Nav from "../Nav/Nav";
 import { useState } from "react";
@@ -10,12 +10,13 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getProductDetail } from "../../../redux/actions";
 import CreateProduct from "./CreateProduct";
+import { CartContext } from "../../Cart/CartContext";
 
 const Create = () => {
   const admin = localStorage.getItem("admin");
   const username = window.atob(localStorage.getItem("username"));
-
-  const PATH = "https://rgb-store.herokuapp.com";
+  const { verificate, setVerificate } = useContext(CartContext);
+  const PATH = "https://rgb-store.herokuapp.com/api";
 
   let [searchParms, setSearchParams] = useSearchParams();
 
@@ -53,12 +54,15 @@ const Create = () => {
     if (result[0] === "E" && result[1] === "r" && result[2] === "r") {
       return ValidatePassword();
     } else {
+      setVerificate(true);
       return setValidate(true);
     }
   };
 
   useEffect(() => {
-    ValidatePassword();
+    if (verificate === false) {
+      ValidatePassword();
+    }
   }, [dispatch]);
 
   return (
@@ -69,7 +73,7 @@ const Create = () => {
         <div>
           <Nav />
           <div className="flex flex-row">
-            <div className="bg-primary-200 h-screen w-60">
+            <div className="bg-primary-200 h-100 w-60">
               <Menu />
             </div>
             <CreateProduct />

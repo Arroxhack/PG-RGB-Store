@@ -14,7 +14,7 @@ export default function LogIn() {
 
   let navigate = useNavigate();
   const cartProductArray = localStorage.getItem("cartProducts");
-  console.log("cartProductArray: ", cartProductArray);
+  //console.log("cartProductArray: ", cartProductArray);
   const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
   const [password, setPassword] = useState(""); // Llega del input del form password al hacer submit.
   const [googleUser, setGoogleUser] = useState({});
@@ -38,14 +38,14 @@ export default function LogIn() {
         icon: "error",
         title: "Error",
         text: `${result}`,
-        button: "Aceptar",
+        button: "OK",
       });
     } else {
       Swal.fire({
         icon: "success",
         title: "EXITO",
         text: `${result}`,
-        button: "Aceptar",
+        button: "OK",
       });
       navigate(`/`);
     }
@@ -74,8 +74,8 @@ export default function LogIn() {
       Swal.fire({
         icon: "error" / "success",
         title: "Error",
-        text: "Su Cuenta no esta verificada, sera redirigido a una pagina para verificar su correo electronico",
-        button: "Aceptar",
+        text: "Your account needs verification, you will be redirected to verification page!",
+        button: "OK",
       });
       await ResendEmail(email);
       return navigate(`/validate/${username}`);
@@ -97,14 +97,14 @@ export default function LogIn() {
         .catch((e) => console.log(e));
 
       const ress = await Promise.all([response]);
-      console.log("ress: ", ress);
+      //console.log("ress: ", ress);
 
       try {
         const carritoDb = await axios.get(
           `${PATH}/userCart?email=${user.email}`
         );
         let carritoDbData = carritoDb.data.filter((e) => e.id);
-        console.log("carritoDbData: ", carritoDbData);
+        //console.log("carritoDbData: ", carritoDbData);
         setProducts([...carritoDbData]);
         // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
       } catch (error) {
@@ -126,7 +126,7 @@ export default function LogIn() {
           icon: "error",
           title: "Error",
           text: `User blocked`,
-          button: "Aceptar",
+          button: "OK",
         }).then(() => {
           return navigate("/login");
         });
@@ -172,7 +172,7 @@ export default function LogIn() {
         icon: "error",
         title: "Error",
         text: `User blocked`,
-        button: "Aceptar",
+        button: "OK",
       }).then(() => {
         return navigate("/login");
       });
@@ -191,14 +191,14 @@ export default function LogIn() {
           .catch((e) => console.log(e));
 
         const ress = await Promise.all([response]);
-        console.log("ress: ", ress);
+        //console.log("ress: ", ress);
 
         try {
           const carritoDb = await axios.get(
             `${PATH}/userCart?email=${user.email}`
           );
           let carritoDbData = carritoDb.data.filter((e) => e.id);
-          console.log("carritoDbData: ", carritoDbData);
+          //console.log("carritoDbData: ", carritoDbData);
           setProducts([...carritoDbData]);
           // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
         } catch (error) {
@@ -221,7 +221,7 @@ export default function LogIn() {
             icon: "error",
             title: "Error",
             text: `User blocked`,
-            button: "Aceptar",
+            button: "OK",
           }).then(() => {
             return navigate("/login");
           });
@@ -299,10 +299,10 @@ export default function LogIn() {
                   icon: "error" / "success",
                   title: "Error",
                   text: errors,
-                  button: "Aceptar",
+                  button: "OK",
                 }).then(() => refresh())}
               </p>
-            ) : null}{" "}
+            ) : null}
             {/* si hay errores salen aca */}
             <button
               type="submit"

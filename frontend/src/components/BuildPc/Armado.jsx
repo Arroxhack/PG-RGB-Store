@@ -104,6 +104,18 @@ function Armado() {
 
   const dispatch = useDispatch();
 
+  const CPU = selectedCPU.price ? selectedCPU.price : 0
+  const MOTHER = selectedMother.price ? selectedMother.price : 0
+  const RAM = selectedRam.price ? selectedRam.price : 0
+  const GPU = selectedGPU.price ? selectedGPU.price : 0
+  const HDD = selectedHDD.price ? selectedHDD.price : 0
+  const SSD = selectedSSD.price ? selectedSSD.price : 0
+  const SSDM2 = selectedSSDM2.price ? selectedSSDM2.price : 0
+  const PSUS = selectedPSUS.price ? selectedPSUS.price : 0
+  const CASE = selectedCase.price ? selectedCase.price : 0
+
+  const TOTAL = CPU + MOTHER + RAM + GPU + HDD + SSD + SSDM2 + PSUS + CASE
+
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
@@ -136,6 +148,8 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                          brand={selectedCPU.brand}
+                         socket={selectedCPU.socket}
+                         isSelected={true}
                           name="CPU"
                           handleChange={(e) => {
                             Check(selectedCPU);
@@ -165,6 +179,9 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           brand={selectedCPU.brand}
+                          socket={selectedCPU.socket}
+                          ddr={selectedMother.ddr}
+                          isSelected={selectedCPU?.name? true : false}
                           name="Motherboard"
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
@@ -192,6 +209,8 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="Ram"
+                          ddr={selectedMother.ddr}
+                          isSelected={selectedMother?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedRam(valueArray);
@@ -218,6 +237,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="GPU"
+                          isSelected={selectedRam?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedGPU(valueArray);
@@ -244,6 +264,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="HDD"
+                          isSelected={selectedGPU?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedHDD(valueArray);
@@ -270,6 +291,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="SSD"
+                          isSelected={selectedHDD?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedSSD(valueArray);
@@ -296,6 +318,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="SSD M.2"
+                          isSelected={selectedSSD?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedSSDM2(valueArray);
@@ -322,6 +345,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="Power Supply"
+                          isSelected={selectedSSDM2?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedPSUS(valueArray);
@@ -348,6 +372,7 @@ function Armado() {
                       <div className="flex items-center justify-between w-full pt-1">
                         <Selects
                           name="Case"
+                          isSelected={selectedPSUS?.name ? true : false}
                           handleChange={(e) => {
                             let valueArray = JSON.parse(e.target.value);
                             setSelectedCase(valueArray);
@@ -372,35 +397,46 @@ function Armado() {
 
                     <div>
                       <li className="text-secundary-250 font-Open">
-                        {selectedCPU.name}
+                        {selectedCPU.name && `${selectedCPU.name} - $${selectedCPU.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedMother.name}
+                        {/* {selectedMother.name} */}
+                        {selectedMother.name && `${selectedMother.name} - $${selectedMother.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedRam.name}
+                        {/* {selectedRam.name} */}
+                        {selectedRam.name && `${selectedRam.name} - $${selectedRam.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedGPU.name}
+                        {/* {selectedGPU.name} */}
+                        {selectedGPU.name && `${selectedGPU.name} - $${selectedGPU.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedHDD.name}
+                        {/* {selectedHDD.name} */}
+                        {selectedHDD.name && `${selectedHDD.name} - $${selectedHDD.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedSSD.name}
+                        {/* {selectedSSD.name} */}
+                        {selectedSSD.name && `${selectedSSD.name} - $${selectedSSD.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedSSDM2.name}
+                        {/* {selectedSSDM2.name} */}
+                        {selectedSSDM2.name && `${selectedSSDM2.name} - $${selectedSSDM2.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedPSUS.name}
+                        {/* {selectedPSUS.name} */}
+                        {selectedPSUS.name && `${selectedPSUS.name} - $${selectedPSUS.price}`}
                       </li>
                       <li className="text-secundary-250 font-Open">
-                        {selectedCase.name}
+                        {/* {selectedCase.name} */}
+                        {selectedCase.name && `${selectedCase.name} - $${selectedCase.price}`}
                       </li>
                     </div>
                   </div>
                   <div>
+                    <p className="uppercase text-secundary-250 font-bold h-10 text-xl">
+                      {`Total : $${TOTAL}`}
+                    </p>
                     <button
                       onClick={sendCard}
                       className="w-full text-center py-3 rounded bg-primary-400 text-white hover:bg-primary-300 focus:outline-none my-1"

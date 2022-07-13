@@ -51,7 +51,7 @@ const Questions = ({id}) => {
         })
     }
 
-    console.log(error)
+    //console.log(error)
 
     const sendQuest=(e)=>{
         e.preventDefault()

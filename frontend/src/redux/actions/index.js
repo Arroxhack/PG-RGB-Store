@@ -47,6 +47,7 @@ import {
   NEXT_PAGE_PRODUCTS,
   PREV_PAGE_PRODUCTS,
   SET_PAGE_PRODUCTS,
+  CLEAN_PRODUCTS
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'https://rgb-store.herokuapp.com';
@@ -925,3 +926,11 @@ export const setPageProduct = (p) => {
     payload: p,
   };
 };
+
+// RESET PRODUCTS
+export const cleanProducts = ()=>{
+  return{
+    type: CLEAN_PRODUCTS,
+    payload: []
+  }
+}

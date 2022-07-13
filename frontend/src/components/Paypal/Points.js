@@ -6,7 +6,7 @@ export async function givePoints(username, ArrayProducts) {
   // CORREGIR LINEA 29
 
   let totalMount = 0;
-  console.log(ArrayProducts);
+  //console.log(ArrayProducts);
   for (let x in ArrayProducts) {
     let quantity = Number(ArrayProducts[x].cant);
     let amount = Number(ArrayProducts[x].price);

@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import { CartContext } from "./CartContext";
 
 function Done() {
-  const { products } = useContext(CartContext);
-
+  const { products, resetProductCart } = useContext(CartContext);
+  const [productsState, setProducts] = useState([]);
+  useEffect(() => {
+    setProducts(products);
+    resetProductCart();
+  }, []);
   let total = 0;
-  products.forEach((p) => (total += p.amount * p.price));
+  productsState.forEach((p) => (total += p.amount * p.price));
 
   return (
     <section className="font-Open bg-primary-200 h-screen">
@@ -54,11 +59,13 @@ function Done() {
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map((p) => {
+                  {productsState.map((p) => {
                     return (
                       <tr key={p.name} className="border-b border-primary-100">
                         <td className="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                          <div className="font-medium" key={p.name}>{p.name}</div>
+                          <div className="font-medium" key={p.name}>
+                            {p.name}
+                          </div>
                         </td>
                         <td className="hidden px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">
                           {p.amount}
@@ -91,11 +98,10 @@ function Done() {
               </table>
             </div>
             <div></div>
-           
           </div>
           <p className="lg:w-2/3 mx-auto my-5 text-secundary-250 leading-relaxed text-base">
-              We sent a copy to your mail!
-            </p>
+            We sent a copy to your mail!
+          </p>
         </div>
       </div>
     </section>

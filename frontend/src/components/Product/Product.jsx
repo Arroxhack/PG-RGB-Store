@@ -20,7 +20,7 @@ const Product = ({ product}) => {
       icon: "success",
       title: "Producto agregado al carrito",
     });
-    console.log("product", product);
+    //console.log("product", product);
     addProductToCart(product);
     // resetProductCart()
   };
