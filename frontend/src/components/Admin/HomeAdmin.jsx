@@ -19,11 +19,7 @@ const HomeAdmin = () => {
 
   const [Validate, setValidate] = useState(true);
 
-<<<<<<< HEAD
-  const PATH = "http://localhost:3001";
-=======
   const PATH = 'https://rgb-store.herokuapp.com'
->>>>>>> d07ce714421d51b13d4d31efe0712dacc7adc538
 
   const ValidatePassword = async () => {
     const { value: password } = await Swal.fire({
