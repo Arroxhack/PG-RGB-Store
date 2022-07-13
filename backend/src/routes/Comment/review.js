@@ -35,6 +35,9 @@ router.post("/NewReview", async (req, res, next) => {
 });
 // Postear un nuevo Commentario  ( ESTO  SE HACE DESDE EL PROFILE )
 router.put("/PostCommentReview", async (req, res, next) => {
+  try{
+
+  
   const { username, id, comment } = req.body;
   console.log("ID", id, "USERNAME", username, "COMMENTARIO:", comment);
   const user = await findUser(username);
@@ -60,6 +63,9 @@ router.put("/PostCommentReview", async (req, res, next) => {
   } else {
     return re.send("Error no se publico el Review");
   }
+}catch(e){
+  console.log(e)
+}
 });
 // Conseguir Todos los Comentarios pendiente de 1 usuario  ( ESTO  SE HACE DESDE EL PROFILE )
 router.put("/getCommendFalse/:username", async (req, res) => {
@@ -118,13 +124,17 @@ router.get("/AllComment", async (req, res) => {
   }
 });
 router.get("/AllCommentFalse", async (req, res) => {
-  const CommendList = await ReviewComment.findAll({
-    where: { Comentado: false },
-  });
-  if (CommendList.length > 0) {
-    return res.send(CommendList);
-  } else {
-    return res.send(false);
+  try{
+    const CommendList = await ReviewComment.findAll({
+      where: { Comentado: false },
+    });
+    if (CommendList.length > 0) {
+      return res.send(CommendList);
+    } else {
+      return res.send(false);
+    }
+  }catch(e){
+    console.log(e)
   }
 });
 module.exports = router;

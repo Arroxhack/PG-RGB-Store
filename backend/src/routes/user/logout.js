@@ -10,9 +10,14 @@ const { User } = require("../../db");
 // Cuando el usuario se deslogua, se limpian los datos de su sesión, y es
 // por ahora redirigido a / dónde recibirá un mensaje como respuesta.
 router.post("/logout", function (req, res) {
-  req.session.destroy(function (err) {
-    res.send("logoutSuccesfully"); //Inside a callback… bulletproof!
-  });
+  try{
+
+    req.session.destroy(function (err) {
+      res.send("logoutSuccesfully"); //Inside a callback… bulletproof!
+    });
+  }catch(e){
+    console.log(e)
+  }
 });
 
 // router.post("/logout", function (req, res) {

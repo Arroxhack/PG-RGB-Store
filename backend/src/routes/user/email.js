@@ -7,18 +7,23 @@ const router = Router();
 
 router.post("/resendEmailLogin", async (req, res) => {
   const { email } = req.body;
-  const user = await User.findOne({ where: { email: email } });
-  if (user?.lock) {
-    return res.send("Error Account blocked");
-  } else {
-    await transporter.sendMail({
-      from: "rgbstore0@gmail.com", // sender address
-      to: user.email, // list of receivers
-      subject: "Verificacìon ✔", // Subject line
-      text: "", // plain text body
-      html: `<b>ENVIAMOS DE NUEVO TU CODIGO DE VERIFICACION:</b> <h1>${user.secretToken}</h1>`, // html body
-    });
-   return res.send("Codigo Reenviado");
+  try{
+
+    const user = await User.findOne({ where: { email: email } });
+    if (user?.lock) {
+      return res.send("Error Account blocked");
+    } else {
+      await transporter.sendMail({
+        from: "rgbstore0@gmail.com", // sender address
+        to: user.email, // list of receivers
+        subject: "Verificacìon ✔", // Subject line
+        text: "", // plain text body
+        html: `<b>ENVIAMOS DE NUEVO TU CODIGO DE VERIFICACION:</b> <h1>${user.secretToken}</h1>`, // html body
+      });
+      return res.send("Codigo Reenviado");
+    }
+  }catch(e){
+    console.log(e)
   }
 });
 

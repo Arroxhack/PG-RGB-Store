@@ -15,7 +15,7 @@ const Create = () => {
   const admin = localStorage.getItem("admin");
   const username = window.atob(localStorage.getItem("username"));
 
-  const PATH = 'http://localhost:3001'
+  const PATH = "http://localhost:3001";
 
   let [searchParms, setSearchParams] = useSearchParams();
 
