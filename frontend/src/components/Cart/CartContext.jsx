@@ -43,7 +43,7 @@ const CartProvider = ({ children }) => {
           .then((res) => res.data)
           .catch((e) => console.log(e));
         const ress = await Promise.all([response]);
-        console.log("ress: ", ress);
+        //console.log("ress: ", ress);
       })();
     }
   }, [products]);
@@ -52,7 +52,7 @@ const CartProvider = ({ children }) => {
     product.forEach((e) => {
       const inCart = products.find((p) => p.id === e.id);
 
-      console.log("inCart: ", inCart);
+      //console.log("inCart: ", inCart);
       if (inCart) {
         setProducts((products) =>
           products.map((p) => {
@@ -67,7 +67,7 @@ const CartProvider = ({ children }) => {
           })
         );
       } else {
-        console.log("cada product que entra al segundo else: ", e);
+        //console.log("cada product que entra al segundo else: ", e);
         return setProducts((products) => [...products, { ...e, amount: 1 }]);
       }
     });
@@ -80,7 +80,7 @@ const CartProvider = ({ children }) => {
   const addProductToCart = (product) => {
     const inCart = products.find((p) => p.id === product.id);
 
-    console.log("inCart: ", inCart);
+    //console.log("inCart: ", inCart);
     if (inCart) {
       setProducts(
         products.map((p) => {

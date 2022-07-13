@@ -14,7 +14,7 @@ export default function LogIn() {
 
   let navigate = useNavigate();
   const cartProductArray = localStorage.getItem("cartProducts");
-  console.log("cartProductArray: ", cartProductArray);
+  //console.log("cartProductArray: ", cartProductArray);
   const [userName, setUsername] = useState(""); // Llega del input del form username al hacer submit.
   const [password, setPassword] = useState(""); // Llega del input del form password al hacer submit.
   const [googleUser, setGoogleUser] = useState({});
@@ -97,14 +97,14 @@ export default function LogIn() {
         .catch((e) => console.log(e));
 
       const ress = await Promise.all([response]);
-      console.log("ress: ", ress);
+      //console.log("ress: ", ress);
 
       try {
         const carritoDb = await axios.get(
           `${PATH}/userCart?email=${user.email}`
         );
         let carritoDbData = carritoDb.data.filter((e) => e.id);
-        console.log("carritoDbData: ", carritoDbData);
+        //console.log("carritoDbData: ", carritoDbData);
         setProducts([...carritoDbData]);
         // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
       } catch (error) {
@@ -191,14 +191,14 @@ export default function LogIn() {
           .catch((e) => console.log(e));
 
         const ress = await Promise.all([response]);
-        console.log("ress: ", ress);
+        //console.log("ress: ", ress);
 
         try {
           const carritoDb = await axios.get(
             `${PATH}/userCart?email=${user.email}`
           );
           let carritoDbData = carritoDb.data.filter((e) => e.id);
-          console.log("carritoDbData: ", carritoDbData);
+          //console.log("carritoDbData: ", carritoDbData);
           setProducts([...carritoDbData]);
           // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
         } catch (error) {
@@ -302,7 +302,7 @@ export default function LogIn() {
                   button: "Aceptar",
                 }).then(() => refresh())}
               </p>
-            ) : null}{" "}
+            ) : null}
             {/* si hay errores salen aca */}
             <button
               type="submit"
