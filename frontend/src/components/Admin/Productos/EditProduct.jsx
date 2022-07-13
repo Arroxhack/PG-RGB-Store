@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getProductDetail,
@@ -13,8 +14,8 @@ const EditProduct = ({id}) => {
   //#region DISPATCH Y BUSQUEDA DE PRODUCTOS
   let product = useSelector((state) => state.detail);
   const dispatch = useDispatch();
-
-  console.log(id, 'ACA MIRAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+  let navigate = useNavigate();
+  //console.log(id, 'ACA MIRAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
   useEffect(() => {
     dispatch(getProductDetail(Number(id)));
     dispatch(clean())
@@ -310,6 +311,7 @@ const EditProduct = ({id}) => {
     e.preventDefault();
     dispatch(editProduct(newProduct));
     dispatch(clean());
+    navigate("../admin/list-products?page=1");
   };
 
   return (
@@ -355,7 +357,7 @@ const EditProduct = ({id}) => {
               <h2 className="ml-10 font-bold font-Open">{`Name: ${product.name}`}</h2>
               <div className="flex flex-row gap-4 ml-5 items-center">
                 <input
-                  className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                   type="text"
                   name="name"
                   value={formOne.name}
@@ -371,7 +373,7 @@ const EditProduct = ({id}) => {
               <h2 className="ml-10 font-bold font-Open">{`Price: $${product.price}`}</h2>
               <div className="flex flex-row gap-4 ml-5 items-center">
                 <input
-                  className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                   type="number"
                   name="price"
                   value={formOne.price}
@@ -387,7 +389,7 @@ const EditProduct = ({id}) => {
               <h2 className="ml-10 font-bold font-Open">{`Stock: ${product.stock}`}</h2>
               <div className="flex flex-row gap-4 ml-5 items-center">
                 <input
-                  className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                   type="number"
                   name="stock"
                   value={formOne.stock}
@@ -403,7 +405,7 @@ const EditProduct = ({id}) => {
               <h2 className="ml-10 font-bold font-Open">{`Description:`}</h2>
               <div className="flex flex-row gap-4 ml-5 items-center">
                 <textarea
-                  className="border rounded-md placeholder:text-center resize-y h-48 text-xl w-full"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none resize-y h-48 text-xl"
                   name="description"
                   value={formOne.description}
                   onChange={handleFormOne}
@@ -444,7 +446,7 @@ const EditProduct = ({id}) => {
               <h2 className="ml-10 font-bold font-Open">{`Brand: ${product.brand}`}</h2>
               <div className="flex flex-row gap-4 ml-5 items-center">
                 <input
-                  className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                  className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                   type="text"
                   name="brand"
                   value={formOne.brand}
@@ -516,7 +518,7 @@ const EditProduct = ({id}) => {
                 value={cus.weight}
                 name={"weight"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                 placeholder="Peso"
               />
             </div>
@@ -528,7 +530,7 @@ const EditProduct = ({id}) => {
                 value={cus.dimensions}
                 name={"dimensions"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                 placeholder="Dimensiones"
               />
             </div>
@@ -540,7 +542,7 @@ const EditProduct = ({id}) => {
                 value={cus.wattsPowerSupply}
                 name={"wattsPowerSupply"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                 placeholder="Power Watts"
               />
             </div>
@@ -566,7 +568,7 @@ const EditProduct = ({id}) => {
                 value={cus.percentageDiscount}
                 name={"percentageDiscount"}
                 onChange={selectCustom}
-                className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"
+                className="text-center font-open block w-full border border-primary-500 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none"
                 placeholder="Porcentaje de descuento"
               />
             </div>
