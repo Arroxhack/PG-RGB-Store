@@ -259,7 +259,7 @@ export default function Register() {
                   onChange={handleOnChange}
                 />
                 <button
-                  className="w-full text-white text-center hover:bg-primary-300 focus:outline-none my-1"
+                  className="w-full text-white text-center underline hover:text-primary-300 focus:outline-none my-1"
                   onClick={handleTyC}
                 >
                   Terms and Conditions
@@ -277,8 +277,8 @@ export default function Register() {
                   type="submit"
                   id="enviar"
                 >
-                  {" "}
-                  Submit{" "}
+                 
+                  Submit
                 </button>
               </div>
               <div className="t-6">

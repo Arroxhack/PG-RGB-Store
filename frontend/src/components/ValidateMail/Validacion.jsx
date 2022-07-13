@@ -51,7 +51,7 @@ export default function Validations() {
       });
       let { lastname, verify, username, email, permissions, name, id } =
         UserRegister.user;
-      console.log("UserRegister: ", UserRegister);
+      //console.log("UserRegister: ", UserRegister);
       if (UserRegister.validate && email) {
         const response = await axios({
           //La ruta trae toda la info en la base de datos de un usuario
@@ -65,14 +65,14 @@ export default function Validations() {
           .catch((e) => console.log(e));
 
         const ress = await Promise.all([response]);
-        console.log("ress: ", ress);
+        //console.log("ress: ", ress);
 
         try {
           const carritoDb = await axios.get(
             `${PATH}/userCart?email=${email}`
           );
           let carritoDbData = carritoDb.data.filter((e) => e.id);
-          console.log("carritoDbData: ", carritoDbData);
+          //console.log("carritoDbData: ", carritoDbData);
           setProducts([...carritoDbData]);
           // localStorage.setItem("cartProducts", JSON.stringify(carritoDbData))
         } catch (error) {

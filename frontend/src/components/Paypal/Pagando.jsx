@@ -18,7 +18,7 @@ export default function Pagando() {
   //   console.log("product: ", product);
 
   const { usePoints, points } = useContext(CartContext);
-  console.log(usePoints);
+  //console.log(usePoints);
   let productJSON = JSON.parse(product);
   // console.log("productJSON: ", productJSON);
 
@@ -33,7 +33,7 @@ export default function Pagando() {
       quantity: e.amount,
     };
   });
-  console.log("puntos: ", points);
+  //console.log("puntos: ", points);
   let PrecioTotalArticulos =
     articulos[0].unit_amount.value * articulos[0].quantity;
 
@@ -139,7 +139,7 @@ export default function Pagando() {
         ],
       })
       .then((orderId) => {
-        console.log("createOrder-orderId: ", orderId);
+        //console.log("createOrder-orderId: ", orderId);
         return orderId;
       });
   };

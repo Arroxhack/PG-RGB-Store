@@ -19,6 +19,7 @@ import promo1 from "../../images/promo1.jpg"
 import promo2 from "../../images/promo2.png"
 import promo3 from "../../images/promo3.jpg"
 import Componentes from "./Componentes";
+import banner from './Banner/BANNER.png'
 
 function Home() {
   const dispatch = useDispatch();
@@ -83,7 +84,7 @@ function Home() {
       <Componentes/>
       <Marcas/>
       <div className="">
-        <img src="https://m.media-amazon.com/images/S/aplus-seller-content-images-us-east-1/ATVPDKIKX0DER/A2TC87EJKQMY9O/ead8f20c-0084-4cc1-8948-096b5115cad2.__CR0,0,970,300_PT0_SX970_V1___.jpg" alt="compra" className="w-full sm:h-24 lg:h-52  "/>
+        <img src={banner} alt="compra" className="w-full sm:h-24 lg:h-52  "/>
       </div>
       <div className="w-full">
         <button  className="fixed bottom-2  sm:w-9  lg:h-12 lg:w-full md:w-full  flex items-center justify-end  rounded-2xl
