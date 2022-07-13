@@ -18,7 +18,7 @@ const Add = ({id,onClick})=>{
   const Delete = ({id,onClick})=>{
     return(
       <button id={id} className="py-3 
-      motion-safe:hover:scale-110" onClick={onClick}><img src={Fav} alt='delete-fav' height='25px' width='25px'/></button>
+      motion-safe:hover:scale-110" onClick={onClick}><img src={Fav} alt='delete-fav' height='35px' width='35px'/></button>
     )
   } 
 const BoxFav = ({id,onClick})=>{
@@ -38,7 +38,7 @@ const BoxFav = ({id,onClick})=>{
     }
 
     return(  
-    <div>
+    <div className="relative mr-3 mb-10">
         {
             login ?
             favs.includes(id) ?
