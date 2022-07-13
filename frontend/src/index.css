@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+.buttom{
+    @apply 
+    inline-block
+    text-base
+    relative
+    cursor-pointer
+    transition-all
+    duration-500
+    before:content-['']
+    before:absolute
+    before:-bottom-0
+    before:left-0
+    before:w-0
+    before:h-0.5
+    before:rounded-full
+    before:opacity-0
+    before:transition-all
+    before:duration-500
+    before:bg-gradient-to-r
+    before:from-primary-400
+    before:via-primary-300
+    before:to-primary-400
+    hover:before:w-full
+    hover:before:opacity-100
+}
+
+
+
+}
+@layer utilities{
+    .box-effet{
+        -webkit-box-reflect: below 10px linear-gradient(transparent,rgba(255, 125, 0, 0.7))
+    }
+ 
+}

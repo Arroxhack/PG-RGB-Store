@@ -1,14 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-ReactDOM.render(
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store.js';
+import CartProvider from './components/Cart/CartContext';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import initialOptions from './components/Paypal/initialOptions.js';
+import FavProvider from './components/Favoritos/FavContext';
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <BrowserRouter>
+      <Provider store={store}>
+        <FavProvider>
+          <CartProvider>
+            <PayPalScriptProvider options={initialOptions}>
+              <App />
+            </PayPalScriptProvider>
+          </CartProvider>
+        </FavProvider>
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
