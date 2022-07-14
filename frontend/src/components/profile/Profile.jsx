@@ -163,15 +163,15 @@ export default function Profile() {
       {id ? (
         <>
           <NavBar />
-          <div className="lg:flex  lg:items-start pt-11 lg:justify-center min-h-screen h-full w-full gap-8 bg-primary-200 sm:grid">
-            <div className="lg:w-[25rem] p-4  bg-secundary-250 shadow-md sm:w[10rem]">
+          <div className="lg:flex  lg:items-start pt-11 lg:justify-center min-h-screen h-full w-full gap-8 bg-primary-200 sm:grid sm:items-center sm:justify-center">
+            <div className="lg:w-[25rem] lg:p-4  bg-secundary-250 shadow-md sm:w-[22rem]">
               <h1 className="text-2xl font-open font-bold pb-5 capitalize">
                 Profile
               </h1>
 
               {editPerfil === false ? (
                 <form className="font-Open">
-                  <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 max-w-max">
                     <h2 className="font-semibold"> Name:</h2>
                     <p>{user.name}</p>
                     <h2 className="font-semibold">Last Name:</h2>
@@ -198,13 +198,15 @@ export default function Profile() {
                     <h2 className="font-semibold">Points:</h2>
                     <p>{user.points}</p>
                   </div>
+                  <div className=" flex justify-center mt-2">
                   <button
                     id="EditProfile"
-                    className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                    className="w-auto text-center mt-5 py-3 px-5 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
                     onClick={(e) => EditPerfil(e)}
                   >
                     Edit Profile
                   </button>
+                  </div>
                 </form>
               ) : (
                 <form className="max-w-4xl p-6 mx-auto rounded-md shadow-md">
@@ -324,7 +326,7 @@ export default function Profile() {
             )}
            
             {editPerfil === true ? null :(
-                          <div className="p-6 w-[25rem] bg-secundary-250 shadow-md ">
+                          <div className="p-6 lg:w-[25rem] bg-secundary-250 shadow-md sm:w-[22rem] ">
                           <h2 className="text-2xl font-open font-bold pb-5 capitalize">Purchase history</h2>
                           <div className="flex flex-col gap-5">
                         {history[0]?.id ? <>{
