@@ -38,7 +38,7 @@ export default function CommentReview({ idProduct }) {
           ))
         ) : (
           <div className="bg-secundary-250 px-6 py-8 my-2">
-            <p>There's no reviews yet.</p>
+            <p>There are no reviews yet.</p>
           </div>
         )}
       </div>

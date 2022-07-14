@@ -58,9 +58,9 @@ function DetailProduct() {
     if (comment === "") {
       return Swal.fire({
         icon: "warning",
-        title: "Commend",
-        text: `Tienes que Comentar algo para continuar`,
-        button: "Aceptar",
+        title: "Comment",
+        text: `You have to enter a comment to continue`,
+        button: "Ok",
       });
     }
     dispatch(PostComment(comment, username, id));

@@ -29,8 +29,12 @@ const ResetPassword = require('./user/ResetPassword');
 const Comment = require('./Comment/comment')
 const hardAdmin = require('./admin/HardCodeAdmin');
 
+
 // FILTER
 const filterProduct = require("./filter/filter");
+
+//
+const historyPurch = require('./Purchase/Purchase')
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -93,5 +97,6 @@ router.use("/", deleteFav);
 router.use("/", getFav);
 router.use("/", hardAdmin);
 router.use("/", pointuser);
+router.use('/', historyPurch);
 
 module.exports = router;

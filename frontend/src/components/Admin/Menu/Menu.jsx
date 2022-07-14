@@ -7,8 +7,8 @@ const Menu = () => {
     <div className="text-secundary-100">
       <div>
         <div className="flex flex-col items-center pb-16 pt-10">
-          <p>PANEL DE ADMINISTRADOR</p>
-          <p>WELCOME BACK:</p>
+          <p>Admin panel</p>
+          <p>Welcome back:</p>
           <p className="uppercase">{username}</p>
         </div>
       </div>
@@ -20,7 +20,7 @@ const Menu = () => {
             value="create-product"
             className="hover:bg-primary hover:text-primary-200 px-5 cursor-pointer"
           >
-            List products
+            Product list
           </h3>
         </Link>
         <div className="bg-secundary-100 h-[1px] w-[150px] my-3"></div>

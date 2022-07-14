@@ -8,11 +8,11 @@ router.post("/verifyAdminPass", async (req, res, next) => {
   console.log(username, password);
   try {
     if (username === undefined || password === undefined) {
-      res.send("Error Faltan Datos");
+      res.send("Error: Insufficient data");
     }
     const user = await User.findOne({ where: { username: username } });
     if (!user.password) {
-      res.send("Error no se encontro el usuario");
+      res.send("Error: User not found");
     }
     const contraseña = await bcrypt.compare(password, user.password);
     if (contraseña === true) {

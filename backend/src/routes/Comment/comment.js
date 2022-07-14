@@ -52,7 +52,7 @@ router.post('/create-comment/:id', async(req,res,next)=>{
         await newComment.setProduct(id)
         await newComment.setUser(user)
 
-        res.send('Comentario creado con exito')
+        res.send('Comment was successfully created')
     } catch (error) {
         next(error)
     }
@@ -104,7 +104,7 @@ router.put('/create-response/:id', async(req,res,next)=>{
         ,{where:{id:id}})
 
         console.log(newComment)
-        res.send('exito')
+        res.send('success')
     } catch (error) {
         next(error)
     }
@@ -116,7 +116,7 @@ router.delete('/delete-question/:id', async(req,res,next)=>{
         
         const deleteQuestion = await ProductComment.destroy({where:{id}})
 
-        res.send('Comentario eliminado')
+        res.send('Comment deleted')
 
     } catch (error) {
         next(error)

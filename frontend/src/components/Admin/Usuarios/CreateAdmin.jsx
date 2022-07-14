@@ -65,14 +65,14 @@ const CreateAdmin = () => {
           icon: "error",
           title: "Error",
           text: result,
-          button: "Aceptar",
+          button: "Ok",
         });
       } else {
         swal.fire({
           icon: "success",
-          title: "EXITO ✔",
+          title: "Success ✔",
           text: result,
-          button: "Aceptar",
+          button: "Ok",
         });
       }
       document.getElementById("enviar").disabled = false;
@@ -94,14 +94,14 @@ const CreateAdmin = () => {
           icon: "error",
           title: "Error",
           text: result,
-          button: "Aceptar",
+          button: "Ok",
         });
       } else {
         swal.fire({
           icon: "success",
-          title: "EXITO ✔",
+          title: "Success ✔",
           text: result,
-          button: "Aceptar",
+          button: "Ok",
         });
       }
       document.getElementById("enviar").disabled = false;
@@ -122,14 +122,14 @@ const CreateAdmin = () => {
           icon: "error",
           title: "Error",
           text: result,
-          button: "Aceptar",
+          button: "Ok",
         });
       } else {
         swal.fire({
           icon: "success",
-          title: "EXITO ✔",
+          title: "Success ✔",
           text: result,
-          button: "Aceptar",
+          button: "Ok",
         });
       }
       document.getElementById("enviar").disabled = false;
@@ -143,16 +143,16 @@ const CreateAdmin = () => {
         className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
         onClick={(e) => getAllUsersButton(e)}
       >
-        Recargar Usuarios
+        Refresh users
       </button>
-      <p>CREAR NUEVO ADMIN/SUPERADMIN/USUARIO:</p>
+      <p>Create new Admin/SuperAdmin/User:</p>
       <select onChange={(e) => HandleFilter(e)}>
         <option value="" disabled selected>
-          Seleccione una de las 3 opciones:
+          Select one:
         </option>
-        <option value={"updateToAdmin"}>USER a ADMIN</option>
-        <option value={"updateToUser"}>ADMIN a USER</option>
-        <option value={"UpdateToSuperAdmin"}>ADMIN a SuperADMIN</option>
+        <option value={"updateToAdmin"}>User into Admin</option>
+        <option value={"updateToUser"}>Admint into User</option>
+        <option value={"UpdateToSuperAdmin"}>Admin into SuperAdmin</option>
       </select>
       <select
         onChange={(e) => {
@@ -160,13 +160,13 @@ const CreateAdmin = () => {
         }}
       >
         <option value="" disabled selected>
-          Seleccione un usuario:
+          Select a user:
         </option>
         {users &&
           users.map((e, i) => {
             return (
               <option key={i} value={e.id}>
-                {e.email}---{e.permissions === true ? "admin" : "usuario"}
+                {e.email}---{e.permissions === true ? "admin" : "user"}
               </option>
             );
           })}
@@ -177,10 +177,10 @@ const CreateAdmin = () => {
         className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
       >
         {method === "updateToUser"
-          ? "Convertir Admin a User"
+          ? "Turn Admin into User"
           : method === "updateToAdmin"
-          ? "Upgradear a Admin"
-          : "Upgradear a SuperAdmin"}
+          ? "Turn User into Admin"
+          : "Turn Admin into SuperAdmin"}
       </button>
     </div>
   );

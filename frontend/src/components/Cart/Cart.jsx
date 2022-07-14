@@ -29,7 +29,7 @@ const deleteCart = (e)=>{
                 </div>
             )
         })}
-            <button onClick={deleteCart}>limpiar carrito</button>
+            <button onClick={deleteCart}>Empty cart</button>
     </div>
   )
 }

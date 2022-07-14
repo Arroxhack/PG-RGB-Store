@@ -21,10 +21,10 @@ function ChangePassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (user.password !== user.passwordValidate) {
-      return alert("Las contraseñas deben coincidir");
+      return alert("Passwords must be the same");
     }
     document.getElementById("enviar").disabled = true;
-    document.getElementById("enviar").innerHTML = "Enviando...";
+    document.getElementById("enviar").innerHTML = "Sending...";
     const { password } = user;
     const result = await axios({
       method: "put",
@@ -38,16 +38,16 @@ function ChangePassword() {
         icon: "error",
         title: "Error",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       });
     } else {
       document.getElementById("enviar").disabled = false;
-      document.getElementById("enviar").innerHTML = "Enviar";
+      document.getElementById("enviar").innerHTML = "Send";
       Swal.fire({
         icon: "succes",
-        title: "EXITO",
+        title: "Succes",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       });
       window.location.replace(
         `${PATH}/resetPassword/${username}`
@@ -57,7 +57,7 @@ function ChangePassword() {
   return (
     <div className="">
       <div className="bg-secundary-200 px-2 py-6 rounded shadow-md text-black">
-        <p>Porfavor ingrese 2 veces su contraseña actual</p>
+        <p>Please enter your current password twice</p>
         <form
           className="flex flex-col justify-center  items-center sm:w-80 sm:h-80"
           onSubmit={handleSubmit}
@@ -67,21 +67,21 @@ function ChangePassword() {
             onChange={handleOnChange}
             type="password"
             name="password"
-            placeholder="Ingrese su contraseña"
+            placeholder="Enter your password"
           />
           <input
             className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
             onChange={handleOnChange}
             type="password"
             name="passwordValidate"
-            placeholder="Ingrese su contraseña"
+            placeholder="Enter your password"
           />
           <button
             className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
             id="enviar"
             type="submit"
           >
-            Enviar
+            Send
           </button>
         </form>
       </div>

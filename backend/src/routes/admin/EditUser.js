@@ -6,7 +6,7 @@ router.put("/Users/:id", async (req, res, next) => {
   const { id } = req.params;
   const user = await User.findOne({ where: { id } });
   if (!user) {
-    return res.status(404).send("No users with that ID");
+    return res.status(404).send("There is no user with that ID");
   }
 
   const objFinal = checkUser(req.body);
@@ -24,7 +24,7 @@ router.put("/blockUser", async (req, res, next) => {
     if (Userid && idAdmin) {
       const Admin = await User.findOne({ where: { id: idAdmin } });
       if (Admin?.permissions === false) {
-        return res.send("Error you not have permissions");
+        return res.send("Error: No permissions");
       }
       console.log("PASO1");
       const user = await User.findOne({ where: { id: Userid } });
@@ -32,7 +32,7 @@ router.put("/blockUser", async (req, res, next) => {
         const update = await user.update({ lock: true });
         res.send("Done");
       } else {
-        return res.send("Error the user is already Block");
+        return res.send("Error: The user is already banned");
       }
     } else {
       return res.status(404).send("Error");
@@ -48,19 +48,19 @@ router.put("/unlockUser", async (req, res, next) => {
     if (Userid && idAdmin) {
       const Admin = await User.findOne({ where: { id: idAdmin } });
       if (Admin?.permissions === false) {
-        return res.send("Error you not have permissions");
+        return res.send("Error: You do not have permissions");
       }
       const user = await User.findOne({ where: { id: Userid } });
       if (user.lock == true) {
         const update = await user.update({ lock: false });
 
         if (update[0] === 0) {
-          return res.send("Error doing Update");
+          return res.send("Error while updating");
         } else {
           return res.send("Done");
         }
       } else {
-        return res.send("Error the user is not Lock");
+        return res.send("Error: The user is not banned");
       }
     } else {
       return res.status(404).send("Error");

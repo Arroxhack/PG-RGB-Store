@@ -53,7 +53,7 @@ function DetailProduct() {
     e.preventDefault();
     Toast.fire({
       icon: "success",
-      title: "Producto agregado al carrito",
+      title: "Product added to cart",
     });
     addProductToCart(ProductDetail);
   };
@@ -69,7 +69,7 @@ function DetailProduct() {
         }
       >
         {loading ? (
-          <div>
+          <div className="h-screen bg-primary-200 w-full flex justify-center items-center">
             <Loading />
           </div>
         ) : (
@@ -106,8 +106,8 @@ function DetailProduct() {
                   <div className="flex justify-between text-secundary-250 mt-8">
                     <div className="max-w-[35ch] ">
                       <h1 className="text-2xl text-secundary-250 font-bold">
-                        {ProductDetail.name ? ProductDetail.name : null}{" "}
-                        <BoxFav id={ProductDetail.id} />
+                        {ProductDetail.name ? ProductDetail.name : null}{" "} 
+                        <BoxFav id={ProductDetail.id} /> 
                       </h1>
 
                       <p className="mt-0.5 text-secundary-250 text-sm">

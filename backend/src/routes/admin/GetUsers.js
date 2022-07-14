@@ -8,7 +8,7 @@ router.get("/Users", async (req, res, next) => {
     const allUsers = await User.findAll();
     allUsers?.length
       ? res.send(allUsers)
-      : res.status(404).send("Something go wrong :(");
+      : res.status(404).send("Something went wrong :("); //????????????
   } catch (error) {
     next(error);
   }
@@ -39,7 +39,7 @@ router.get("/Users/:id", async (req, res, next) => {
     };
     usuario?.username
       ? res.send(usuario)
-      : res.status(404).send("Error: no se encontro el usuario");
+      : res.status(404).send("Error: User not found");
   } catch (error) {
     next(error);
   }

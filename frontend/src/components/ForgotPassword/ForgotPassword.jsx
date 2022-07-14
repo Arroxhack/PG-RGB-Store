@@ -33,15 +33,15 @@ function ForgotPassword() {
         icon: "error",
         title: "Error",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       });
       document.querySelector("#token").innerHTML = "Send Token";
     } else {
       Swal.fire({
         icon: "succes",
-        title: "Email Send",
+        title: "Email Sent",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       }).then(() => setVerify(true));
       document.querySelector("#token").innerHTML = "Send Token";
       setState(" ");
@@ -56,7 +56,7 @@ function ForgotPassword() {
         icon: "warning",
         title: "Error",
         text: `The password must be the same`,
-        button: "Aceptar",
+        button: "Ok",
       });
     }
     const result = await axios({
@@ -71,15 +71,15 @@ function ForgotPassword() {
         icon: "error",
         title: "Error",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       });
       document.querySelector("#change").innerHTML = "Change Password";
     } else {
       Swal.fire({
         icon: "success",
-        title: "APPROVE",
+        title: "Password authorization completed",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       }).then(() => {
         setVerify(false);
         navigate("/");
@@ -98,7 +98,7 @@ function ForgotPassword() {
             {Verify === false ? (
               <>
                 <div className="flex flex-col items-center justify-center gap-1">
-                  <label>Enter your mail:</label>
+                  <label>Enter your email:</label>
                   <input
                     className="block border border-grey-light w-full p-3 rounded mb-4"
                     type="email"
@@ -112,7 +112,7 @@ function ForgotPassword() {
                       icon: "error" / "success",
                       title: "Error",
                       text: errors,
-                      button: "Aceptar",
+                      button: "Ok",
                     }).then(() => window.location.reload())}
                   </p>
                 ) : null}{" "}

@@ -30,7 +30,7 @@ const AdminProduct = () => {
 
     const removeProduct = (id)=>{
       Swal.fire({
-      title: 'Do you delete product?',
+      title: 'Removing product',
       showDenyButton: true,
       confirmButtonText: 'Yes',
       denyButtonText: `No`,
