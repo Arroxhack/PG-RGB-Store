@@ -94,7 +94,7 @@ function DetailProduct() {
                     ) : (
                       <img
                         alt="Image not found"
-                        className="ml-6 rounded sm:mb-5"
+                        className=" mr-3 rounded sm:mr-8"
                         src={
                           ProductDetail.image
                             ? ProductDetail.image[0]
