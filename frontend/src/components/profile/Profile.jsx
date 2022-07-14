@@ -164,7 +164,7 @@ export default function Profile() {
         <>
           <NavBar />
           <div className="lg:flex  lg:items-start pt-11 lg:justify-center min-h-screen h-full w-full gap-8 bg-primary-200 sm:grid sm:items-center sm:justify-center">
-            <div className="lg:w-[25rem] lg:p-4  bg-secundary-250 shadow-md sm:w-[22rem]">
+            <div className="lg:w-[35rem] lg:p-4  bg-secundary-250 shadow-md sm:w-auto sm:p-2">
               <h1 className="text-2xl font-open font-bold pb-5 capitalize">
                 Profile
               </h1>
@@ -335,7 +335,7 @@ export default function Profile() {
       
 
             {editPerfil === true ? null : (
-              <div className="p-6 lg:w-[25rem] bg-secundary-250 shadow-md sm:w-[22rem] ">
+              <div className="p-6 lg:w-[35rem] lg:p-4  bg-secundary-250 shadow-md sm:w-auto sm:p-2 sm:mb-2">
                 <h2 className="text-2xl font-open font-bold pb-5 capitalize">
                   Purchase history
                 </h2>
