@@ -70,7 +70,7 @@ const Response = () => {
     }
 
     useEffect(()=>{},[questions])
-
+      
     return (
         <>
         {questions[0] ? 

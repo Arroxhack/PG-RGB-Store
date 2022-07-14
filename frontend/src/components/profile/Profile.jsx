@@ -163,8 +163,8 @@ export default function Profile() {
       {id ? (
         <>
           <NavBar />
-          <div className="flex flex-col items-center justify-center min-h-screen h-full bg-primary-200">
-            <div className="max-w-4xl p-4 mx-auto bg-secundary-250 shadow-md">
+          <div className="lg:flex  lg:items-start pt-11 lg:justify-center min-h-screen h-full w-full gap-8 bg-primary-200 sm:grid">
+            <div className="lg:w-[25rem] p-4  bg-secundary-250 shadow-md sm:w[10rem]">
               <h1 className="text-2xl font-open font-bold pb-5 capitalize">
                 Profile
               </h1>
@@ -319,14 +319,12 @@ export default function Profile() {
                   <>
                     <CommentPending ComentariosPending={Commend} />{" "}
                   </>
-                ) : (
-                  "There are not pending comments"
-                )}
+                ) : null}
               </div>
             )}
            
             {editPerfil === true ? null :(
-                          <div className="p-6 mx-auto w-max bg-secundary-250 shadow-md mt-5">
+                          <div className="p-6 w-[25rem] bg-secundary-250 shadow-md ">
                           <h2 className="text-2xl font-open font-bold pb-5 capitalize">Purchase history</h2>
                           <div className="flex flex-col gap-5">
                         {history[0]?.id ? <>{

@@ -801,7 +801,6 @@ export const getQuestions = () => {
   return async (dispatch) => {
     try {
       const question = await axios.get(`${PATH}/not-response`);
-
       return dispatch({
         type: GET_QUESTION,
         payload: question.data
