@@ -330,7 +330,7 @@ export default function Profile() {
                   Purchase history
                 </h2>
                 <div className="flex flex-col gap-5">
-                  {history.length > 0 ? (
+                  {history[0]?.id ? (
                     <>
                       {history.map((p) => {
                         let total = 0;
