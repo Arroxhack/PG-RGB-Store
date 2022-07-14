@@ -327,16 +327,16 @@ export default function Profile() {
                           <div className="p-6 mx-auto bg-secundary-250 rounded-md shadow-md mt-5">
                           <h2 className="text-2xl font-open font-bold pb-5 capitalize">Purchase history</h2>
                           <div className="flex flex-col gap-5">
-                        {history.length > 0 ? <>{
+                        {history[0]?.id ? <>{
                           history.map(p=>{
                             let total = 0
-                            return <div>
+                            return <div key={p.id}>
                               <table className="w-[350px]">
                             <caption className="font-bold">{`#${p.id} - ${p.createdAt.slice(0,-14)}`}</caption>
                             <tbody>
                             {p.products.map(e=>{
                               total = total + Number(e.price)
-                              return <tr className="grid grid-cols-[3fr_1fr_1fr] px-5 py-2 border-t">
+                              return <tr key={e.name} className="grid grid-cols-[3fr_1fr_1fr] px-5 py-2 border-t">
                               <td>{e.name}</td>
                               <td className="text-center">{e.cant}</td>
                               <td className="text-center">{`$${e.price}`}</td>
