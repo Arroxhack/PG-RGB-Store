@@ -434,7 +434,7 @@ function Armado() {
                   </div>
                   <div>
                     <p className="uppercase text-secundary-250 font-bold h-10 text-xl">
-                      {`Total : $${TOTAL}`}
+                      {`Total : $${TOTAL.toFixed(2)}`}
                     </p>
                     <button
                       onClick={sendCard}
