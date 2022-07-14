@@ -15,12 +15,12 @@ router.post("/userCart", async (req, res, next) => {
     //caso carrito vacio
     //caso carrito con cosas
     if (!cartProductArray?.length && !user.cartProducts) {
-      return res.send("Fail: cart is empty");
+      return res.send("Fail: Cart is empty");
     }
 
     if (cartProductArray.length > 0) {
       if (!user) {
-        return res.send("Fail: User doesnt exist");
+        return res.send("Fail: User does not exist");
       }
 
       //map -> verifica que cada prod coincida con la lista de prod
@@ -115,7 +115,7 @@ router.post("/userCart", async (req, res, next) => {
       }
       await user.save();
     }
-    user.lock ? res.send("Error: User blocked") : res.send("done");
+    user.lock ? res.send("Error: User banned") : res.send("done");
     // } catch (e) {
     //   res.status(404).send('Error: updating user cart');
     // }
@@ -133,7 +133,7 @@ router.get("/userCart/", async (req, res, next) => {
 
     //ver si el user existe
     if (!user) {
-      return res.send("User doesnt exist");
+      return res.send("User does not exist");
     }
 
     //guardar el carrito
@@ -169,7 +169,7 @@ router.post("/changeCart", async (req, res, next) => {
 
     if (cartProductArray.length > 0) {
       if (!user) {
-        return res.send("Fail: User doesnt exist");
+        return res.send("Fail: User does not exist");
       }
 
       //map -> verifica que cada prod coincida con la lista de prod
@@ -214,7 +214,7 @@ router.post("/changeCart", async (req, res, next) => {
       }
       await user.save();
     }
-    user.lock ? res.send("Error: User blocked") : res.send("done");
+    user.lock ? res.send("Error: User banned") : res.send("done");
     // } catch (e) {
     //   res.status(404).send('Error: updating user cart');
     // }

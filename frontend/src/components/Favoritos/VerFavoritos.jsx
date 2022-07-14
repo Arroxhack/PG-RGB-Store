@@ -52,7 +52,7 @@ return (
         <div className='w-3/5 bg-primary-200 h-auto'>
         
         <div className='flex flex-col items-center'>
-            <h1 className='font-pt font-bold text-primary-300'>FAVORITOS</h1>
+            <h1 className='font-pt font-bold text-primary-300'>Favourites</h1>
         </div>
         
         <div className='object-center h-full bg-primary-200 flex flex-col content-center place-content-center text-center'>

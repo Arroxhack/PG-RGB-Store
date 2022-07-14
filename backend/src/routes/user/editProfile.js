@@ -21,7 +21,7 @@ router.put('/profile/edit', async (req, res, next) => {
     const user = await User.findOne({ where: { id: id } });
 
     if (!user) {
-      res.status(404).send('Something go wrong :(');
+      res.status(404).send('Something went wrong :(');
     } else {
       const confirm = await bcrypt.compare(Password, user.password);
       if (confirm == true) {
@@ -36,12 +36,12 @@ router.put('/profile/edit', async (req, res, next) => {
           { where: { id: id } }
         );
         if (usuarioEditado[0] == 1) {
-          res.send('Hemos editado su perfil satisfactoriamente');
+          res.send('Your profile was successfully edited');
         } else {
-          res.send('Error al editar el perfil');
+          res.send('Error while editing profile');
         }
       } else {
-        res.send('Error,Contraseña Incorrecta');
+        res.send('Error, wrong password');
       }
       if (req.body.lastname) {
         user.set({ lastname: req.body.lastname });

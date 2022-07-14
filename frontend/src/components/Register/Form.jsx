@@ -53,9 +53,9 @@ export default function Register() {
     ) {
       Swal.fire({
         icon: "warning",
-        title: "Something go wrong",
-        text: "FILL IN THE BLANKS!",
-        button: "Aceptar",
+        title: "Something went wrong",
+        text: "Complete every field",
+        button: "Ok",
       });
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Submit";
@@ -64,7 +64,7 @@ export default function Register() {
         icon: "warning",
         title: "Terms and Conditions",
         text: "You need to accept Terms and Conditions to continue",
-        button: "Aceptar",
+        button: "Ok",
       });
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Submit";
@@ -78,60 +78,60 @@ export default function Register() {
       Swal.fire({
         icon: "warning",
         title: "Spacing",
-        text: "you can`t enter space",
-        button: "Aceptar",
+        text: "YOU CAN NOT ENTER SPACES",
+        button: "Ok",
       });
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Submit";
     } else if (name.length <= 3) {
       Swal.fire({
         icon: "warning",
-        title: "Something go wrong",
-        text: "NAME HAS TO BE AT LEAST 3 LETTERS",
-        button: "Aceptar",
+        title: "Something went wrong",
+        text: "NAME HAS TO BE AT LEAST 3 LETTERS LONG",
+        button: "Ok",
       });
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Submit";
     } else if (!/^[a-zA-Z\s]*$/.test(lastname)) {
       Swal.fire({
         icon: "warning",
-        title: "Something go wrong",
+        title: "Something went wrong",
         text: "LASTNAME HAS TO BE ONLY LETTERS",
-        button: "Aceptar",
+        button: "Ok",
       });
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Submit";
     } else if (username.length <= 3) {
       Swal.fire({
         icon: "warning",
-        title: "Something go wrong",
-        text: "USERNAME HAS TO BE AT LEAST 3 LETTERS",
-        button: "Aceptar",
+        title: "Something went wrong",
+        text: "USERNAME HAS TO BE AT LEAST 3 LETTERS LONG",
+        button: "Ok",
       });
     } else if (!regexEmail.test(email)) {
       Swal.fire({
         icon: "warning",
-        title: "Something go wrong",
-        text: "FORMAT HAS TO BE EMAIL",
-        button: "Aceptar",
+        title: "Something went wrong",
+        text: "IT HAS TO BE AN EMAIL",
+        button: "Ok",
       });
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Submit";
     } else if (!regexPass.test(password)) {
       Swal.fire({
         icon: "warning",
-        title: "Something go wrong",
+        title: "Something went wrong",
         text: "INVALID PASSWORD",
-        button: "Aceptar",
+        button: "Ok",
       });
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Submit";
     } else if (password !== passwordValidate) {
       Swal.fire({
         icon: "warning",
-        title: "Something go wrong",
-        text: "PASSWORDS HAS TO BE EQUAL",
-        button: "Aceptar",
+        title: "Something went wrong",
+        text: "Passwords have to be the same",
+        button: "Ok",
       });
       document.getElementById("enviar").disabled = false;
       document.getElementById("enviar").innerHTML = "Submit";
@@ -161,7 +161,7 @@ export default function Register() {
           icon: "error",
           title: "Error",
           text: `${UserRegister}`,
-          button: "Aceptar",
+          button: "OK",
         });
         document.getElementById("enviar").disabled = false;
         document.getElementById("enviar").innerHTML = "Submit";
@@ -177,7 +177,7 @@ export default function Register() {
         email: "",
         password: "",
         passwordValidate: "",
-        address: "ejemplo",
+        address: "example",
       });
     }
   };

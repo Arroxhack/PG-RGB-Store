@@ -14,7 +14,7 @@ export default function () {
           </div>
           <div>
             <h4 className="lg:text-base md:text-xs">
-            We are a group of students in soyHenry and this is our final project. We hope you like it.
+            We are a group of students from soyHenry and this is our final project. We hope you like it.
             </h4>
           </div>
         </div>

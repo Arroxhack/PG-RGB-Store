@@ -38,14 +38,14 @@ export default function LogIn() {
         icon: "error",
         title: "Error",
         text: `${result}`,
-        button: "OK",
+        button: "Ok",
       });
     } else {
       Swal.fire({
         icon: "success",
-        title: "EXITO",
+        title: "Success",
         text: `${result}`,
-        button: "OK",
+        button: "Ok",
       });
       navigate(`/`);
     }
@@ -125,8 +125,8 @@ export default function LogIn() {
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: `User blocked`,
-          button: "OK",
+          text: `User banned`,
+          button: "Ok",
         }).then(() => {
           return navigate("/login");
         });
@@ -171,8 +171,8 @@ export default function LogIn() {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: `User blocked`,
-        button: "OK",
+        text: `User banned`,
+        button: "Ok",
       }).then(() => {
         return navigate("/login");
       });
@@ -220,7 +220,7 @@ export default function LogIn() {
           Swal.fire({
             icon: "error",
             title: "Error",
-            text: `User blocked`,
+            text: `User banned`,
             button: "OK",
           }).then(() => {
             return navigate("/login");
@@ -240,12 +240,12 @@ export default function LogIn() {
       } else {
         Swal.fire({
           icon: "warning",
-          title: "Oops...",
+          title: "Something went wrong",
           html:
-            `El email asociado a la cuenta de google no coincide con ningun usuario registrado` +
+            `Your google account email does not match with a registered account` +
             "</br>" +
             "</br>" +
-            `...redirigiendo para registrarse como un nuevo usuario!`,
+            `...redirecting to register page!`,
         });
         navigate("/register");
       }
@@ -299,7 +299,7 @@ export default function LogIn() {
                   icon: "error" / "success",
                   title: "Error",
                   text: errors,
-                  button: "OK",
+                  button: "Ok",
                 }).then(() => refresh())}
               </p>
             ) : null}

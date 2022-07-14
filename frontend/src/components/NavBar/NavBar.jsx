@@ -168,7 +168,7 @@ function NavBar() {
                 <p className="buttom">Categories</p>
               </Link>
             </li>
-            <li class="lg:buttom lg:mr-5">
+            <li className="lg:buttom lg:mr-5">
               <Link to="/categories?category=Notebook&page=1">Notebooks</Link>
             </li>
             <li className="lg:buttom lg:mr-5 ">
