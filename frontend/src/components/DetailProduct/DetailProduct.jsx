@@ -85,13 +85,14 @@ function DetailProduct() {
                     ) : (
                       <img
                         alt="Image not found"
-                        className="rounded sm:mb-5 md:pr-8"
+                        className=" mr-3 rounded sm:mr-8"
                         src={
                           ProductDetail.image
                             ? ProductDetail.image[0]
                             : "1602010489_p_setting_fff_1_90_end_600.jpg"
                         }
-                        
+                        height="600"
+                        width="500"
                       />
                     )}
                   </div>
