@@ -42,7 +42,7 @@ const Promo = ({left, img, products,params}) => {
         {products.map(p=>{ 
           
             return (
-              <SwiperSlide className="sm:flex sm:justify-center ">
+              <SwiperSlide key={p.id} className="sm:flex sm:justify-center ">
                 <Link key={p.id} to={`/products/${p.id}`}>
                   <div className="px-8">
                 <Product product={p}/>
