@@ -75,9 +75,9 @@ function DetailProduct() {
         ) : (
           <>
             <div className="container max-w-screen-xl px-4 py-8 mx-auto">
-              <div className="grid  grid-cols-1  md:grid-cols-2">
-                <div className="grid grid-cols-2  md:grid-cols-1 ">
-                  <div className="aspect-w-1 rounded aspect-h-1">
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="grid grid-cols-2 md:grid-cols-1 ">
+                  <div>
                     {images && images[0].length > 100 ? (
                       images.map((i) => {
                         return <img src={i} alt="Image not found" />;
@@ -85,7 +85,7 @@ function DetailProduct() {
                     ) : (
                       <img
                         alt="Image not found"
-                        className="lg:ml-6 rounded sm:mb-5"
+                        className="rounded sm:mb-5"
                         src={
                           ProductDetail.image
                             ? ProductDetail.image[0]
