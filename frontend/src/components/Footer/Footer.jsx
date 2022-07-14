@@ -13,8 +13,8 @@ export default function () {
             <h1 className="text-primary-300">US</h1>
           </div>
           <div>
-            <h4 className="lg:text-base">
-            We are a group of students in soyHenry and this is our final project. We hope you like it.
+            <h4 className="lg:text-base md:text-xs">
+            We are a group of students from soyHenry and this is our final project. We hope you like it.
             </h4>
           </div>
         </div>

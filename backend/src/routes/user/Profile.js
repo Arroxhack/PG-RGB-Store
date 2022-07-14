@@ -10,7 +10,7 @@ router.get('/profile/:username', async (req, res, next) => {
     const user = await User.findOne({ where: { username } });
     user?.name.length
       ? res.send(user)
-      : res.status(404).send('Something go wrong :(');
+      : res.status(404).send('Something went wrong :(');
   } catch (error) {
     next(error);
   }

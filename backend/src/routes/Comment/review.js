@@ -8,12 +8,12 @@ router.post("/NewReview", async (req, res, next) => {
     const { idProduct, Username, idCompra } = req.body;
     const user = await findUser(Username);
     if (!user?.name) {
-      return res.send("Error no se encuentra el usuario");
+      return res.send("Error: User was not found");
     }
     const product = await Product.findByPk(idProduct);
 
     if (!product) {
-      return res.send("Error no se encontro producto con ese id");
+      return res.send("Error: Theres is no product with that id");
     }
 
     const NewReview = ReviewComment.create({
@@ -27,7 +27,7 @@ router.post("/NewReview", async (req, res, next) => {
     if (NewReview) {
       return res.send("Done");
     } else {
-      return res.send("Error no create new Review Comment");
+      return res.send("Error: Comment was not created");
     }
   } catch (e) {
     console.log(e);
@@ -42,7 +42,7 @@ router.put("/PostCommentReview", async (req, res, next) => {
   console.log("ID", id, "USERNAME", username, "COMMENTARIO:", comment);
   const user = await findUser(username);
   if (!user?.name) {
-    return res.send("Error no se encuentra el usuario");
+    return res.send("Error: User was not found");
   }
   const Review = await ReviewComment.findOne({
     where: {
@@ -52,7 +52,7 @@ router.put("/PostCommentReview", async (req, res, next) => {
   });
 
   if (!Review?.idUser) {
-    return res.send("Error no se encontro la tabla Review");
+    return res.send("Error: Review panel was not found"); // tabla review
   }
 
   const update = await Review.update({ comentario: comment });
@@ -61,7 +61,7 @@ router.put("/PostCommentReview", async (req, res, next) => {
     await Review.update({ Comentado: true });
     return res.send("Done");
   } else {
-    return re.send("Error no se publico el Review");
+    return re.send("Error: Review was not published");
   }
 }catch(e){
   console.log(e)
@@ -73,12 +73,12 @@ router.put("/getCommendFalse/:username", async (req, res) => {
     const { username } = req.params;
     console.log("user", username);
     if (username === undefined || username === null) {
-      return res.send("Error no username");
+      return res.send("Error: No username");
     }
     const user = await User.findOne({ where: { username: username } });
     console.log(user, "LOLLL");
     if (!user?.id) {
-      return res.send("Error no Usuario");
+      return res.send("Error: No user");
     }
 
     const CommendList = await ReviewComment.findAll({

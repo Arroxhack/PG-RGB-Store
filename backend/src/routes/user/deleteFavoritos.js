@@ -15,11 +15,11 @@ router.put('/delete/favorito', async (req, res, next) => {
     if (!user) {
       return res
         .status(404)
-        .send({ error: 'doesnt exist an user with that id' });
+        .send({ error: 'User with selected id does not exist' });
     } else if (!producto) {
       return res
         .status(404)
-        .send({ error: 'doesnt exist a product with that id' });
+        .send({ error: 'Product with selected id does not exist' });
     }
 
     //Con deleted verifico que se haya borrado de favoritos
@@ -32,7 +32,7 @@ router.put('/delete/favorito', async (req, res, next) => {
     //console.log(userFavorites.includes(id), 'include');
     //Si el array no incluye el producto, no lo tiene incluido entonces no lo puedo borrar
     if (!userFavorites.includes(id)) {
-      return res.send({ error: 'doesnt have added to favorites' });
+      return res.send({ error: 'Was not added to favourites' });
     } else {
       //Si el array incluye el producto, filtro y me quedo con todos los p (id) diferente al idProd
       //console.log('userFavorites: ', userFavorites);
@@ -51,7 +51,7 @@ router.put('/delete/favorito', async (req, res, next) => {
     const favorites = await Promise.all(fav);
     deleted
       ? res.send(favorites)
-      : res.status(404).send({ error: 'something go wrong :(' });
+      : res.status(404).send({ error: 'Something went wrong :(' });
   } catch (error) {
     next(error);
   }

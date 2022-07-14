@@ -13,7 +13,7 @@ router.get('/get/favorito', async (req, res, next) => {
     // console.log(idUser);
     //Corroboro que existen, si no aviso
     if (!user) {
-      return res.status(404).send('doesnt exist an user with that id');
+      return res.status(404).send('User with selected id does not exist');
     }
 
     //en la bd me guardo los id nomas

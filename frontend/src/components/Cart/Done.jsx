@@ -19,13 +19,13 @@ function Done() {
       <div className="px-5 py-24 mx-auto sm:bg-primary-200">
         <div className="flex flex-col bg-primary-200 text-center w-full">
           <h2 className="text-xs tracking-widest font-medium text-secundary-250  mt-10 mb-1 ">
-            Congrats, your purchase has been successfully!
+            Congratulations on your purchase!
           </h2>
           <h1 className="sm:text-3xl text-2xl font-medium mb-4 text-secundary-250 ">
             Thanks for buying with us!
           </h1>
           <p className="lg:w-2/3 mb-5 mx-auto leading-relaxed text-secundary-250  text-base">
-            Here is the summary of your order:
+            Here is your order summary:
           </p>
           <div className=" mx-auto rounded p-5 w-fit bg-secundary-250 sm:">
             <div className="flex flex-col mx-0 mt-8">
@@ -100,7 +100,7 @@ function Done() {
             <div></div>
           </div>
           <p className="lg:w-2/3 mx-auto my-5 text-secundary-250 leading-relaxed text-base">
-            We sent a copy to your mail!
+            We have sent a copy to your email!
           </p>
         </div>
       </div>

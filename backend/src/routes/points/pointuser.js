@@ -12,7 +12,7 @@ router.put("/givePoint", async (req, res) => {
     }
 
     if (user?.username != username) {
-      return res.send("Error , usuario no encontrado");
+      return res.send("Error , user was not found");
     }
     let PointsWin = 0;
     let pointsToGive = user.points;
@@ -27,7 +27,7 @@ router.put("/givePoint", async (req, res) => {
     }
 
     await user.update({ points: pointsToGive });
-    return res.send(`Points win in this purchase: ${PointsWin}`);
+    return res.send(`Points won on purchase: ${PointsWin}`);
   } catch (e) {
     console.log(e);
   }
@@ -46,7 +46,7 @@ router.put("/takepoints", async (req, res) => {
     }
 
     if (user?.username != username) {
-      return res.send("Error , usuario no encontrado");
+      return res.send("Error , user was not found");
       console.log("Error 2");
     }
 

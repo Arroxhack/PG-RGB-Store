@@ -117,7 +117,7 @@ const CartProvider = ({ children }) => {
     }
     Toast.fire({
       icon: "error",
-      title: "Removed one to cart!",
+      title: "Removed one from cart!",
     });
   };
 
@@ -130,7 +130,7 @@ const CartProvider = ({ children }) => {
 
     Toast.fire({
       icon: "error",
-      title: "Removed all to cart!",
+      title: "Removed all from cart!",
     });
   };
 

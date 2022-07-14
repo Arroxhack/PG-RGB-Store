@@ -44,8 +44,8 @@ export default function Slider() {
           <Link to='categories?category=all&brand=MSI&page=1'>
           <img src={promo2} className='w-full lg:h-[23rem] sm:h-32 absolute' alt="" />
           
-          <div className='absolute h-[2rem] flex flex-col justify-between ml-[10rem] mt-[6rem]  '>
-          <h1 className=' text-6xl text-primary-400 font-Open lg:text-7xl tracking-tight font-extrabold cursor-default box-efecto  sm:text-xl'>RGB</h1>
+          <div className='absolute h-[2rem] flex flex-col justify-between lg:ml-[10rem] lg:mt-[6rem] sm:ml-2 sm:m-2  '>
+          <h1 className=' text-6xl text-primary-400 font-Open lg:text-7xl tracking-tight font-extrabold cursor-default box-efecto  sm:text-2xl'>RGB</h1>
           <h1 className='font-PT text-primary-300 font-normal lg:text-6xl tracking-tight sm:text-xl lg:box-effet shadow-[  rgba(217, 136, 15, 0.600) 5px 5px, rgba(217, 136, 15, 0.5) 10px 10px, rgba(217, 136, 15, 0.4) 15px 15px, rgba(217, 136, 15, 0.3) 20px 20px, rgba(217, 136, 15, 0.2) 25px 25px, rgba(217, 136, 15, 0.1) 30px 30px,
     rgba(217, 136, 15, 0.05) 35px 35px]  '>STORE</h1>
           </div>
@@ -56,8 +56,8 @@ export default function Slider() {
         <SwiperSlide  className='w-full lg:h-[23rem] sm:h-32'>
           <Link to='categories?category=all&brand=AMD&page=1'>
           <img src={promo3}  className='w-full lg:h-[23rem] sm:h-32 absolute' alt="" />
-          <div className='absolute h-[2rem] flex flex-col justify-between ml-[5rem] mt-[6rem]  '>
-          <h1 className=' text-6xl text-primary-400 font-Open lg:text-7xl tracking-tight font-extrabold cursor-default box-efecto  sm:text-xl'>RGB</h1>
+          <div className='absolute h-[2rem] flex flex-col justify-between lg:ml-[5rem] lg:mt-[6rem] sm:ml-2  '>
+          <h1 className=' text-6xl text-primary-400 font-Open lg:text-7xl tracking-tight font-extrabold cursor-default box-efecto  sm:text-2xl'>RGB</h1>
           <h1 className='font-PT text-primary-300 font-normal lg:text-6xl tracking-tight sm:text-xl lg:box-effet shadow-[  rgba(217, 136, 15, 0.600) 5px 5px, rgba(217, 136, 15, 0.5) 10px 10px, rgba(217, 136, 15, 0.4) 15px 15px, rgba(217, 136, 15, 0.3) 20px 20px, rgba(217, 136, 15, 0.2) 25px 25px, rgba(217, 136, 15, 0.1) 30px 30px,
     rgba(217, 136, 15, 0.05) 35px 35px]  '>STORE</h1>
           </div>
@@ -79,9 +79,10 @@ export default function Slider() {
           <SwiperSlide  className='w-full lg:h-[23rem] sm:h-32'>
           <Link to='categories?category=all&brand=AMD&page=1'>
           <img src={promo6}  className='w-full lg:h-[23rem] sm:h-32 absolute' alt="" />
-          <div className='absolute h-[2rem] flex flex-col justify-between ml-[8rem] mt-[6rem]  '>
-          <h1 className=' text-6xl text-primary-400 font-Open lg:text-7xl tracking-tight font-extrabold cursor-default box-efecto  sm:text-xl'>RGB</h1>
-          <h1 className='font-PT text-primary-300 font-normal lg:text-6xl tracking-tight sm:text-xl '>STORE</h1>
+          <div className='absolute h-[2rem] flex flex-col justify-between lg:ml-[5rem] lg:mt-[6rem] sm:ml-2  '>
+          <h1 className=' text-6xl text-primary-400 font-Open lg:text-7xl tracking-tight font-extrabold cursor-default box-efecto  sm:text-2xl'>RGB</h1>
+          <h1 className='font-PT text-primary-300 font-normal lg:text-6xl tracking-tight sm:text-xl lg:box-effet shadow-[  rgba(217, 136, 15, 0.600) 5px 5px, rgba(217, 136, 15, 0.5) 10px 10px, rgba(217, 136, 15, 0.4) 15px 15px, rgba(217, 136, 15, 0.3) 20px 20px, rgba(217, 136, 15, 0.2) 25px 25px, rgba(217, 136, 15, 0.1) 30px 30px,
+    rgba(217, 136, 15, 0.05) 35px 35px]  '>STORE</h1>
           </div>
           </Link>
           </SwiperSlide>

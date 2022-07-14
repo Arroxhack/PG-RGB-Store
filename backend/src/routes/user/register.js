@@ -14,7 +14,7 @@ router.get("/register", (req, res, next) => {
   try{
 
     res.send(
-      "Error No puede realizar un post /register mientras su sesión esté iniciada"
+      "Error: You can not post to /register while your account is logged in"
       );
     }catch(e){
       console.log(e)
@@ -25,12 +25,12 @@ router.post("/register", async (req, res, next) => {
   const { name, lastname, username, email, password } = req.body;
   try {
   if (!name || !lastname || !password || !email || !username) {
-    return res.send("Error Fill all the blanks");
+    return res.send("Error: Fill all the blanks");
   }
 
     const AccountLock = await User.findOne({ where: { email } });
     if (AccountLock?.lock) {
-      return res.send("Error Account blocked");
+      return res.send("Error: Account banned");
     }
 
     if (name && lastname && password && email) {
@@ -51,9 +51,9 @@ router.post("/register", async (req, res, next) => {
 
       if (promisedAll[0]) {
         // Si el correo ya existe
-        return res.send("Error This mail already exist, use another!!");
+        return res.send("Error: This mail already exists, use another");
       } else if (promisedAll[1]) {
-        return res.send("Error This username already exist, use another!!");
+        return res.send("Error: This username already exists, use another");
       } else {
         newUser = await User.create({
           name,
@@ -70,17 +70,17 @@ router.post("/register", async (req, res, next) => {
         await transporter.sendMail({
           from: "rgbstore0@gmail.com", // sender address
           to: newUser.email, // list of receivers
-          subject: "Verificacìon ✔", // Subject line
+          subject: "Verification ✔", // Subject line
           text: "", // plain text body
-          html: `<b>TU CODIGO DE VERIFICACION:</b> <h1>${newUser.secretToken}</h1>`, // html body
+          html: `<b>Your verification code is:</b> <h1>${newUser.secretToken}</h1>`, // html body
         });
         res.send(newUser);
       }
     } else {
-      res.status(404).send("Error Blanks in form, register not created");
+      res.status(404).send("Error: Please verify there are no spaces inside the fields");
     }
   } catch (error) {
-    next("Error Inesperado");
+    next("Unexpected error");
   }
 });
 
@@ -99,9 +99,9 @@ router.put("/register/verify/", async (req, res, next) => {
     );
     isVerified[0] === 1
       ? res.json({ validate: true, user })
-      : res.status(404).send("Error Failed ");
+      : res.status(404).send("Error Failed");
   } else {
-    res.send("Error Invalid token");
+    res.send("Error: Invalid token");
   }
   //Update nos devuelve un array de length 1 con un 1 si fue todo bien y con 0 si salio mal
 }catch(e){

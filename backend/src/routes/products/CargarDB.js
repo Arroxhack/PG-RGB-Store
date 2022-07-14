@@ -51,9 +51,9 @@ router.post('/', async (req, res, next) => {
           }
         }
       }
-      res.send('Base de Datos Llena satisfactoriamente :D ');
+      res.send('Database loaded :D');
     } else {
-      res.status(401).send('La Api No Funciona');
+      res.status(401).send('The Api is not working');
     }
   } catch (e) {
     next(e);

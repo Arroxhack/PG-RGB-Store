@@ -7,7 +7,7 @@ router.put("/remove", async (req, res, next) => {
     const products = req.body; // [{id:"1", amount:"1"},{id:"2", amount:"2"}]
 
     if (!products) {
-      return res.send("Error no llega products");
+      return res.send("Error: no products"); //error no llega products
     }
 
     const verify = products.map(async (el) => {
@@ -31,14 +31,14 @@ router.put("/remove", async (req, res, next) => {
         );
 
         if (updated[0] !== 0) {
-          return "Correctly edit";
+          return "Correctly edited";
         } else {
           return "Error";
         }
       }
     });
     if (verify.includes("Error")) {
-      res.status(404).send("Error on update");
+      res.status(404).send("Error while updating");
     } else {
       res.send("Done");
     }
