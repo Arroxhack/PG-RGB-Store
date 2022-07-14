@@ -36,13 +36,13 @@ export default function Slider() {
         className="mySwiper"
       >
         <SwiperSlide className='w-full lg:h-[23rem] sm:h-32'>
-          <Link to='arma-tu-pc'>
+          <Link to='acategories?category=all&page=1&brand=ASUS'>
           <img className='w-full lg:h-[23rem] sm:h-32' src={promo1} alt="" />
           </Link>
         </SwiperSlide>
         
         <SwiperSlide  className='w-full lg:h-[23rem] sm:h-32'>
-          <Link to='categories?category=all&brand=MSI&page=1'>
+          <Link to='categories?category=Desktop&page=1'>
           <img src={promo2} className='w-full lg:h-[23rem] sm:h-32 absolute' alt="" />
           
           <div className='absolute h-[2rem] flex flex-col justify-between lg:ml-[10rem] lg:mt-[6rem] sm:ml-2 sm:m-2  '>
@@ -55,7 +55,7 @@ export default function Slider() {
           </SwiperSlide>
         
         <SwiperSlide  className='w-full lg:h-[23rem] sm:h-32'>
-          <Link to='categories?category=all&brand=AMD&page=1'>
+          <Link to='categories?category=Ram&page=1'>
           <img src={promo3}  className='w-full lg:h-[23rem] sm:h-32 absolute' alt="" />
           <div className='absolute h-[2rem] flex flex-col justify-between lg:ml-[5rem] lg:mt-[6rem] sm:ml-2  '>
           <h1 className=' text-6xl text-primary-400 font-Open lg:text-7xl tracking-tight font-extrabold cursor-default box-efecto  sm:text-2xl'>RGB</h1>
@@ -66,19 +66,19 @@ export default function Slider() {
           </SwiperSlide>
 
           <SwiperSlide  className='w-full lg:h-[23rem] sm:h-32'>
-          <Link to='categories?category=all&brand=AMD&page=1'>
+          <Link to='categories?category=GPU&page=1'>
           <img src={promo4}  className='w-full lg:h-[23rem] sm:h-32' alt="" />
           </Link>
           </SwiperSlide>
-
+        
           <SwiperSlide  className='w-full lg:h-[23rem] sm:h-32'>
-          <Link to='categories?category=all&brand=AMD&page=1'>
+          <Link to='categories?category=Motherboard&page=1'>
           <img src={promo5}  className='w-full lg:h-[23rem] sm:h-32' alt="" />
           </Link>
           </SwiperSlide>
 
           <SwiperSlide  className='w-full lg:h-[23rem] sm:h-32'>
-          <Link to='categories?category=all&brand=AMD&page=1'>
+          <Link to='categories?category=Motherboard&page=1'>
           <img src={promo6}  className='w-full lg:h-[23rem] sm:h-32 absolute' alt="" />
           <div className='absolute h-[2rem] flex flex-col justify-between lg:ml-[5rem] lg:mt-[6rem] sm:ml-2  '>
           <h1 className=' text-6xl text-primary-400 font-Open lg:text-7xl tracking-tight font-extrabold cursor-default box-efecto  sm:text-2xl'>RGB</h1>

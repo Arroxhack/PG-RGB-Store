@@ -12,6 +12,7 @@ const Questions = ({id}) => {
         dispatch(getQuest(id))
     }, [])
 
+
     let idUser = localStorage.getItem("id");
     if (idUser) {
         idUser = window.atob(localStorage.getItem('id'));
@@ -68,6 +69,7 @@ const Questions = ({id}) => {
 
     useEffect(()=>{
     },[question])
+    console.log(question)
 
 
   return (
