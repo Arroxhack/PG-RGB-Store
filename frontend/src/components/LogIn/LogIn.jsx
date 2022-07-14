@@ -10,7 +10,7 @@ import { CartContext } from "../Cart/CartContext";
 import { FavContext } from "../Favoritos/FavContext";
 
 export default function LogIn() {
-  const PATH = 'https://rgb-store.herokuapp.com'
+  const PATH = 'http://localhost:3001'
 
   let navigate = useNavigate();
   const cartProductArray = localStorage.getItem("cartProducts");
