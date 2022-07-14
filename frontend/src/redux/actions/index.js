@@ -47,6 +47,8 @@ import {
   NEXT_PAGE_PRODUCTS,
   PREV_PAGE_PRODUCTS,
   SET_PAGE_PRODUCTS,
+  CLEAN_PRODUCTS,
+  GET_HISTORY
 } from '../types/index';
 import Swal from 'sweetalert2';
 const PATH = 'http://localhost:3001';
@@ -887,7 +889,6 @@ export const postQuest = (question) => {
 export const deleteQuest = (id) => {
   return async (dispatch) => {
     try {
-      console.log(id);
       const deleteQUEST = await axios.delete(`${PATH}/delete-question/${id}`);
 
       if (deleteQUEST.data) {
@@ -925,3 +926,30 @@ export const setPageProduct = (p) => {
     payload: p,
   };
 };
+
+// RESET PRODUCTS
+export const cleanProducts = ()=>{
+  return{
+    type: CLEAN_PRODUCTS,
+    payload: []
+  }
+}
+
+// GET HISTORY
+export const getHistory = (id)=>{
+  return async (dispatch)=>{
+    try {
+      const history = await axios.get(`${PATH}/user-purchase/${id}`)
+
+      if(history.data){
+        return dispatch(
+          {type: GET_HISTORY,
+          payload: history.data}
+        )
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

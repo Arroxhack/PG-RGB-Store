@@ -33,6 +33,7 @@ export const FILTER_BRAND = 'FILTER_BRAND';
 export const NEXT_PAGE = 'NEXT_PAGE';
 export const PREV_PAGE ='PREV_PAGE';
 export const SET_PAGE = 'SET_PAGE';
+export const CLEAN_PRODUCTS = 'CLEAN_PRODUCTS'
 // GETS ///
 export const GET_GPUS = 'GET_GPUS';
 export const SET_ORDER = 'SET_ORDER';
@@ -51,3 +52,5 @@ export const POST_QUESTION = 'POST_QUESTION'
 export const NEXT_PAGE_PRODUCTS = 'NEXT_PAGE_PRODUCTS';
 export const PREV_PAGE_PRODUCTS ='PREV_PAGE_PRODUCTS';
 export const SET_PAGE_PRODUCTS = 'SET_PAGE_PRODUCTS';
+// LISTA DE COMPRA
+export const GET_HISTORY = 'GET_HISTORY'

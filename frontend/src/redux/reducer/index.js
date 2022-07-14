@@ -44,6 +44,8 @@ import {
   NEXT_PAGE_PRODUCTS,
   PREV_PAGE_PRODUCTS,
   SET_PAGE_PRODUCTS,
+  CLEAN_PRODUCTS,
+  GET_HISTORY,
 } from '../types/index';
 
 const initialState = {
@@ -70,6 +72,7 @@ const initialState = {
   CommendProduct: [],
   questionAdmin:[],
   questionDetail:[],
+  history:[],
 };
 
 const reducer = (state = initialState, action) => {
@@ -431,7 +434,16 @@ const reducer = (state = initialState, action) => {
           ...state,
           pageContainer: action.payload
         }
-      
+      case CLEAN_PRODUCTS:
+        return{
+          ...state,
+          products : action.payload
+        }
+      case GET_HISTORY:
+        return{
+          ...state,
+          history: action.payload
+        }
     default:
       return { ...state };
   }

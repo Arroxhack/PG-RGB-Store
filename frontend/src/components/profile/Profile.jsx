@@ -6,6 +6,7 @@ import {
   GetUserData,
   VaciarStatePendingComment,
   GetCommendPending,
+  getHistory,
 } from "../../redux/actions/index";
 import ChangePassword from "./ChangePassword";
 import PhoneInput from "react-phone-input-2";
@@ -20,13 +21,19 @@ export default function Profile() {
   const PATH = 'http://localhost:3001'
 
   const navigate = useNavigate();
+  
   const id = window.atob(localStorage.getItem("id"));
+
   const username = window.atob(localStorage.getItem("username"));
   // console.log(username);
+  
+  const {history} = useSelector(state=>state)
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetUserData(id));
     dispatch(GetCommendPending(username));
+    dispatch(getHistory(id))
   }, []);
   const user = useSelector((state) => state.UserData);
   const Commend = useSelector((state) => state.CommendPending);
@@ -149,6 +156,8 @@ export default function Profile() {
       window.location.replace("../profile");
     }
   };
+
+  // console.log(history)
   return (
     <div>
       {id ? (
@@ -314,7 +323,39 @@ export default function Profile() {
                 )}
               </div>
             )}
+            {editPerfil === true ? null :(
+                          <div className="p-6 mx-auto bg-secundary-250 rounded-md shadow-md mt-5">
+                          <h2 className="text-2xl font-open font-bold pb-5 capitalize">Purchase history</h2>
+                          <div className="flex flex-col gap-5">
+                        {history.length > 0 ? <>{
+                          history.map(p=>{
+                            let total = 0
+                            return <div>
+                              <table className="w-[350px]">
+                            <caption className="font-bold">{`#${p.id} - ${p.createdAt.slice(0,-14)}`}</caption>
+                            <tbody>
+                            {p.products.map(e=>{
+                              total = total + Number(e.price)
+                              return <tr className="grid grid-cols-[3fr_1fr_1fr] px-5 py-2 border-t">
+                              <td>{e.name}</td>
+                              <td className="text-center">{e.cant}</td>
+                              <td className="text-center">{`$${e.price}`}</td>
+                              </tr>
+                            })}
+                            <tr>
+                            <th className="text-end border-t">{`Total: $${total}`}</th>
+                            </tr>
+                            </tbody>
+                            </table>
+                            </div>
+                          })
+                        }</> : ('No purchases found')}
+                        </div>
+                        </div>
+            )}
           </div>
+
+
         </>
       ) : (
         NoLogin()

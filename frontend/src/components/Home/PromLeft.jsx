@@ -44,7 +44,9 @@ const Promo = ({left, img, products,params}) => {
             return (
               <SwiperSlide className="sm:flex sm:justify-center ">
                 <Link key={p.id} to={`/products/${p.id}`}>
+                  <div className="px-8">
                 <Product product={p}/>
+                </div>
                 </Link>
                 </SwiperSlide>
                 
