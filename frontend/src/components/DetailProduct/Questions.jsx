@@ -90,7 +90,7 @@ const Questions = ({id}) => {
                 <p className='text-[#9CA3AF] select-none font-normal text-right px-5'>{p.fechaPreg}</p> 
                 </div>
                 {p.response ? <div className='border-b'>
-                    <h3 className='py-3 px-5 m-0'>{p.response}</h3>
+                    <h3 className='py-3 text-secundary-250 px-5'>{p.response}</h3>
                     <p className='text-[#9CA3AF] select-none font-normal text-right px-5'>{p.fechaRta}</p>
                     </div> : 
                     <div className='border-primary border-b'>
