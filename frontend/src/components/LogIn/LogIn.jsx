@@ -298,7 +298,7 @@ export default function LogIn() {
                 {Swal.fire({
                   icon: "error" / "success",
                   title: "Error",
-                  text: `${errors}`,
+                  text: `Error in the username/password`,
                   button: "Ok",
                 }).then(() => refresh())}
               </p>
