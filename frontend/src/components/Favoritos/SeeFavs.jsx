@@ -49,9 +49,9 @@ function SeeFavs() {
                     lg:hover:shadow-lg lg:hover:shadow-primary-400 lg:hover:-translate-y-0.1 sm:w-52 sm:h-38 sm:mt-6  md:h-64 md:w-64 ' key={p?.id}>
                       <div className="flex flex-col justify-around items-center lg:h-2/3  bg-secundary-100 w-full  rounded-t-sm sm:h-32 md:h-40 gap-3 ">
                       <Link key={p.id} to={`/products/${p.id}`} className='w-full flex flex-col justify-start items-center '>
-                      <div className="w-full flex justify-end items-end">
+                      <div className="w-full flex justify-end items-end lg:-mt-16 ">
                       <button 
-                      className="flex justify-end items-start relative lg:-mt-8 lg:mr-2 w-full sm:mt-2 md:mt-2"
+                      className="flex justify-end items-start relative lg:mr-2 w-full sm:mt-2 md:mt-2"
                        value={p?.id}
                        onClick={(e) => handleDelete(e,p.id, idUser)}
                      >
@@ -59,7 +59,7 @@ function SeeFavs() {
                      </button>
                      </div>
                      
-                    <img src={p?.image[0]} alt={`Imagen de ${p?.name}`} className='lg:rounded-t-md lg:object-fill lg:object-center sm:w-28 sm:h-[6rem] md:h-22 md:w-36 relative -mr-[1rem] '/>
+                    <img src={p?.image[0]} alt={`Imagen de ${p?.name}`} className='lg:rounded-t-md lg:object-fill lg:object-center sm:w-28 sm:h-[6rem] md:h-22 md:w-36 relative -mr-[1rem] lg:mt-4 '/>
                     </Link>
                     </div>
                     <div className='flex flex-col items-center lg:h-1/6 md:h-1/4 md:w-2/3 lg:w-2/3'>
