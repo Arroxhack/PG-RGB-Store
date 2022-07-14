@@ -135,14 +135,14 @@ export default function Validations() {
     <div className=" flex flex-col items-center justify-center absolute inset-0 bg-primary-200">
       <div className="border px-5 py-3 h-[450px] w-[500px] text-center flex items-center flex-col justify-around rounded-lg bg-secundary-250">
         <div className="flex flex-col gap-5 items-center">
-          <h3 className="text-primary-200 uppercase font-PT font-bold text-2xl">Enter a token is will send to mail:</h3>
+          <h3 className="text-primary-200 uppercase font-PT font-bold text-2xl">We have sent a token to your email. Use it here:</h3>
           <input className="text-center bg-[#EEEEEE] rounded-lg border border-primary-400 py-2 focus:outline-none focus:border-primary-300 text-primary-200" placeholder="Enter your token" value={token} onChange={(e) => setToken(e.target.value)}/>
           
           <button className="bg-primary px-5 py-1 rounded-lg hover:bg-primary-300 uppercase font-bold" onClick={(e) => HandleSubmit(e)}>Send</button>
         </div>
 
         <div>
-          <p className="text-[#0A0A0A] text-center mb-5">If the token did not arrive in your email, please check the spam or junk mail box. If not, press the following button.</p>
+          <p className="text-[#0A0A0A] text-center mb-5"> Check spam or junk mail box. If you did not receive the email, press the following button.</p>
           <button className="bg-primary px-5 py-1 rounded-lg hover:bg-primary-300 uppercase font-bold" id="enviar" onClick={(e) => ResendEmail(e)}>Re-Send</button>
         </div>
       </div>
