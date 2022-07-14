@@ -392,9 +392,8 @@ function Armado() {
                 <div className="flex flex-col md:h-screen px-14 py-20 justify-between font-Open overflow-y-auto">
                   <div>
                     <p className="text-4xl font-black mb-10 text-secundary-250 leading-9 font-Open">
-                      Your pc
+                      Your PC
                     </p>
-
                     <div>
                       <li className="text-secundary-250 font-Open">
                         {selectedCPU.name && `${selectedCPU.name} - $${selectedCPU.price}`}
