@@ -309,9 +309,7 @@ export default function Profile() {
                   <>
                     <CommentPending ComentariosPending={Commend} />{" "}
                   </>
-                ) : (
-                  "There isnt pending comments"
-                )}
+                ) : null}
               </div>
             )}
           </div>

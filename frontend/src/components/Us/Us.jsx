@@ -70,8 +70,8 @@ export default function Us() {
             <img src={tino} alt="" className='lg:h-3/4 lg:w-3/4 sm:h-2/4 sm:w-2/4 rounded-full md:h-24 md:w-24'/>
           </div>
           <div className='w-9/12 flex flex-col justify-around '>
-            <h1 className='lg:text-xl text-primary-300 sm:mt-2 md:text-xl  '>Giovanna Antonucci</h1>
-            <h2 className='text-sm text-secundary-250 lg:-mt-4 sm:-mt-2 md:-mt-6 md:text-base'>Full stack developer - Front-end oriented</h2>
+            <h1 className='lg:text-xl text-primary-300 sm:mt-2 md:text-xl  '>Valentino Russo Barbagelata</h1>
+            <h2 className='text-sm text-secundary-250 lg:-mt-4 sm:-mt-2 md:-mt-6 md:text-base'>Full stack developer - Back-end oriented</h2>
             <div className='w-full flex justify-end items-center '>
               <div className='flex mr-4 text-primary-300 gap-2 lg-mt-11 items-center'>
               <a href="https://github.com/tinorusso1012" target='_blanck' className='lg:hover:opacity-80 lg:opacity-30 '>
@@ -96,8 +96,8 @@ export default function Us() {
             <img src={gio} alt="" className='lg:h-3/4 lg:w-3/4 sm:h-2/4 sm:w-2/4 rounded-full md:h-24 md:w-24'/>
           </div>
           <div className='w-9/12 flex flex-col justify-around '>
-            <h1 className='lg:text-xl text-primary-300 sm:mt-2 md:text-xl  '>Valentino </h1>
-            <h2 className='text-sm text-secundary-250 lg:-mt-4 sm:-mt-2 md:-mt-6 md:text-base'>Full stack developer - Back-end oriented</h2>
+            <h1 className='lg:text-xl text-primary-300 sm:mt-2 md:text-xl  '>Giovanna Antonucci</h1>
+            <h2 className='text-sm text-secundary-250 lg:-mt-4 sm:-mt-2 md:-mt-6 md:text-base'>Full stack developer - Front-end oriented</h2>
             <div className='w-full flex justify-end items-center '>
               <div className='flex mr-4 text-primary-300 gap-2 lg-mt-11 items-center'>
           <a href="https://github.com/gioantonucci" target='_blanck' className='lg:hover:opacity-80 lg:opacity-30 '>

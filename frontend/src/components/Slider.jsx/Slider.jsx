@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { Link } from 'react-router-dom';
+import './Slider.css'
 
 export default function Slider() {
   return (
