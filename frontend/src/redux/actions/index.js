@@ -191,9 +191,9 @@ export const createProduct = (product) => {
       const post = await axios.post(`${PATH}/create-product`, product);
       Swal.fire({
         title: `${post.data.name}`,
-        text: 'Creado con exito!',
+        text: 'Created successfully!',
         icon: 'success',
-        confirmButtonText: 'ok',
+        confirmButtonText: 'Ok',
       });
       return dispatch({
         type: CREATE_PRODUCT,
@@ -201,10 +201,10 @@ export const createProduct = (product) => {
       });
     } catch (error) {
       Swal.fire({
-        title: 'Algo fallo',
-        text: 'No se pudo crear el producto',
+        title: 'Something went wrong',
+        text: 'Product was not created',
         icon: 'error',
-        confirmButtonText: 'ok',
+        confirmButtonText: 'Ok',
       });
     }
   };
@@ -219,16 +219,16 @@ export const editProduct = (producto) => {
       );
       Swal.fire({
         title: `${producto.name}`,
-        text: 'Editado con exito!',
+        text: 'Product updated successfully!',
         icon: 'success',
-        confirmButtonText: 'ok',
+        confirmButtonText: 'Ok',
       });
     } catch (error) {
       Swal.fire({
-        title: 'Algo fallo',
-        text: 'No se pudo editar el producto',
+        title: 'Something went wrong',
+        text: 'Product was not updated',
         icon: 'error',
-        confirmButtonText: 'ok',
+        confirmButtonText: 'Ok',
       });
     }
   };
@@ -241,15 +241,15 @@ export const deleteProduct = (id) => {
 
       Swal.fire({
         icon: 'success',
-        title: 'Product delete',
+        title: 'Product deleted successfully',
         confirmButtonText: 'Ok',
       });
     } catch (error) {
       Swal.fire({
-        title: 'Algo fallo',
-        text: 'No se pudo borrar el producto',
+        title: 'Something went wrong',
+        text: 'Product was not deleted',
         icon: 'error',
-        confirmButtonText: 'ok',
+        confirmButtonText: 'Ok',
       });
     }
   };
@@ -366,8 +366,8 @@ export const filterBran = (category, brand) => {
     } catch (error) {
       Swal.fire({
         icon: 'alert',
-        title: 'Se produjo un error',
-        text: 'Por favor, actualice e intente nuevamente la busqueda',
+        title: 'Something went wrong',
+        text: 'Please refresh and try searching again',
         confirmButtonText: 'Ok',
       });
     }
@@ -438,8 +438,8 @@ export const filterPrice = (category, brand, min, max, name) => {
           } else {
             Swal.fire({
               icon: 'alert',
-              title: 'There was an error',
-              text: 'Please update and try again',
+              title: 'Something went wrong',
+              text: 'Please refresh and try again',
               confirmButtonText: 'Ok',
             });
           }
@@ -454,8 +454,8 @@ export const filterPrice = (category, brand, min, max, name) => {
           } else {
             Swal.fire({
               icon: 'alert',
-              title: 'There was an error',
-              text: 'Please update and try again',
+              title: 'Something went wrong',
+              text: 'Please refresh and try again',
               confirmButtonText: 'Ok',
             });
           }
@@ -647,7 +647,7 @@ export function addProductFavorito(idProd, idUser) {
           if (Array.isArray(res.data)) {
             Toast.fire({
               icon: 'success',
-              title: 'Added successfull',
+              title: 'Successfully added to favourites',
             });
             dispatch({ type: ADD_FAV, payload: res.data });
           } else {
@@ -678,7 +678,7 @@ export function deleteProductFavorito(idProd, idUser) {
           if (Array.isArray(res.data)) {
             Toast.fire({
               icon: 'success',
-              title: 'Deleted successfull',
+              title: 'Successfully removed from favourites',
             });
             dispatch({ type: DELETE_FAV, payload: res.data });
           } else {
@@ -735,14 +735,14 @@ export function PostComment(comment, username, id) {
       if (result.data !== 'Done') {
         Swal.fire({
           icon: 'info',
-          title: 'Error in DataBase',
-          button: 'OK',
+          title: 'DataBase error',
+          button: 'Ok',
         });
       }
       Swal.fire({
         icon: 'success',
-        title: 'Comentario Posteado',
-        button: 'OK',
+        title: 'Comment posted',
+        button: 'Ok',
       }).then(() => window.location.reload());
     } catch (e) {
       console.log(e);
@@ -825,14 +825,14 @@ export const sendResponse = (rta) => {
         Swal.fire({
           icon: 'success',
           text: 'Response sent successfully',
-          confirmButtonText: 'OK',
+          confirmButtonText: 'Ok',
         });
       }
     } catch (error) {
       Swal.fire({
         icon: 'error',
-        text: 'Se produjo un error, vuelva a intentar por favor',
-        confirmButtonText: 'OK',
+        text: 'Something went wrong, please try again',
+        confirmButtonText: 'Ok',
       });
     }
   };
@@ -852,7 +852,7 @@ export const getQuest = (id) => {
     } catch (error) {
       Swal.fire({
         icon: 'error',
-        text: 'Se produjo un error, vuelva a intentar por favor',
+        text: 'Something went wrong, please try again',
         confirmButtonText: 'Ok',
       });
     }
@@ -873,13 +873,13 @@ export const postQuest = (question) => {
         Swal.fire({
           icon: 'success',
           text: 'Response sent successfully',
-          confirmButtonText: 'OK',
+          confirmButtonText: 'Ok',
         });
       }
     } catch (error) {
       Swal.fire({
         icon: 'error',
-        text: 'Se produjo un error, vuelva a intentar por favor',
+        text: 'Something went wrong, please try again',
         confirmButtonText: 'Ok',
       });
     }
@@ -894,14 +894,14 @@ export const deleteQuest = (id) => {
       if (deleteQUEST.data) {
         Swal.fire({
           icon: 'success',
-          text: 'Delete question successfully',
-          confirmButtonText: 'OK',
+          text: 'Question successfully deleted',
+          confirmButtonText: 'Ok',
         });
       }
     } catch (error) {
       Swal.fire({
         icon: 'error',
-        text: 'Se produjo un error, vuelva a intentar por favor',
+        text: 'Something went wrong, please try again',
         confirmButtonText: 'Ok',
       });
     }

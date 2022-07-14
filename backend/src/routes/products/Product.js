@@ -20,7 +20,7 @@ router.get('/products/', async (req, res, next) => {
       if (AllProducts.length > 0) {
         res.send(AllProducts);
       } else {
-        res.status(404).send('Error, Not Product with that Category');
+        res.status(404).send('Error, There is no product corresponding with the selected category');
       }
     } else {
       let AllProduct = await Product.findAll();
@@ -30,7 +30,7 @@ router.get('/products/', async (req, res, next) => {
       if (AllProduct.length) {
         res.send(AllProduct);
       } else {
-        res.status(404).send('Error, Not Product in DataBase');
+        res.status(404).send('Error, DataBase empty');
       }
     }
   } catch (e) {
@@ -52,14 +52,14 @@ router.get('/brands/',async (req,res,next)=>{
       if (AllProduct.length > 0) {
         res.send(AllProduct);
       } else {
-        res.status(404).send('Error, Not Product with that Brand');
+        res.status(404).send('Error, There is no product corresponding with the selected brand');
       }
     } else {
       const allProducts = await Product.findAll();
       if (allProducts.length) {
         res.send(allProducts);
       } else {
-        res.status(404).send('Error, Not Product in DataBase');
+        res.status(404).send('Error, DataBase empty');
       }
     }
   } catch (e) {
@@ -78,7 +78,7 @@ router.get('/products/:ID', async (req, res, next) => {
     if (ProductID) {
       res.send(ProductID);
     } else {
-      res.status(404).send('Error, Not Product with that ID');
+      res.status(404).send('Error, There is no product corresponding with the selected ID');
     }
   } catch (e) {
     next(e);
@@ -100,7 +100,7 @@ router.get('/product/', async (req, res, next) => {
       console.log(response, ' soy response  ');
       res.send(response);
     } else {
-      res.status(404).send('Not product found');
+      res.status(404).send('Product was not found');
     }
   } catch (error) {
     next(error);

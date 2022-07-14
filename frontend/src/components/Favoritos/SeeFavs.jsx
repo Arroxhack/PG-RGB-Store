@@ -37,7 +37,7 @@ function SeeFavs() {
       <NavBar />
       <section className="container p-6 mx-auto  ">
         <h2 className="text-xl font-medium font-PT flex justify-center text-primary-300  md:text-2xl">
-          FAVORITES
+          Favourites
         </h2>
 
         <div className="flex items-center justify-center bg-primary-200 h-full">

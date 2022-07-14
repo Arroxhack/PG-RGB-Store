@@ -14,7 +14,7 @@ const Add = ({id,onClick})=>{
 const Delete = ({id,onClick})=>{
   return(
     <button id={id} className="w-full text-center py-3 rounded bg-primary-400 text-white 
-    hover:bg-primary-300 focus:outline-none my-1" onClick={onClick}>Delete</button>
+    hover:bg-primary-300 focus:outline-none my-1" onClick={onClick}>Remove</button>
   )
 } 
 function Favorito({id}) {

@@ -26,7 +26,7 @@ const EditProduct = ({id}) => {
   //#region FORM
   //#region CATEGORIAS + OPTIONS CATEGORIAS
   const categorias = useSelector((state) => state.categories);
-  const allCategory = [...categorias, "Otro"];
+  const allCategory = [...categorias, "Other"];
   const options = allCategory.map((c) => {
     return { value: c, label: c };
   });
@@ -191,32 +191,32 @@ const EditProduct = ({id}) => {
 
   //#region ARRAY OPTIONS
   const customOffer = [
-    { value: true, label: "Si" },
+    { value: true, label: "Yes" },
     { value: false, label: "No" },
   ];
   const brands = [
-    { value: null, label: "No tiene" },
+    { value: null, label: "-" },
     { value: "AMD", label: "AMD" },
     { value: "INTEL", label: "INTEL" },
   ];
   const DDR = [
-    { value: null, label: "No tiene" },
+    { value: null, label: "-" },
     { value: 2, label: 2 },
     { value: 3, label: 3 },
     { value: 4, label: 4 },
     { value: 5, label: 5 },
   ];
   const AMD = [
-    { value: null, label: "No tiene" },
+    { value: null, label: "-" },
     { value: "AM4", label: "AM4" },
   ];
   const INTEL = [
-    { value: null, label: "No tiene" },
+    { value: null, label: "-" },
     { value: "LGA1200", label: "LGA1200" },
     { value: "LGA1700", label: "LGA1700" },
   ];
   const factor = [
-    { value: null, label: "No tiene" },
+    { value: null, label: "-" },
     { value: "ATX", label: "ATX" },
     { value: "MICRO-ATX", label: "MICRO-ATX" },
   ];
@@ -293,7 +293,7 @@ const EditProduct = ({id}) => {
     brand: formOne.brand,
     description: formOne.description,
     image: formOne.image,
-    category: category !== "Otro" ? [category] : [formOne.category],
+    category: category !== "other" ? [category] : [formOne.category],
     // OPCIONES CUSTOM
     weight: cus.weight,
     dimensions: cus.dimensions,
@@ -332,7 +332,7 @@ const EditProduct = ({id}) => {
                     label: product.category[0],
                   }}
                 />
-                {category === "Otro" ? (
+                {category === "Other" ? (
                   <div className="flex flex-row gap-4 items-center">
                     <input
                       className="border rounded-md placeholder:text-center text-center h-8 text-xl w-full"

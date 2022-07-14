@@ -28,11 +28,11 @@ router.put("/sendTokenReset", async (req, res) => {
           to: usuario.email, // list of receivers
           subject: "✔Reset Password✔", // Subject line
           text: "", // plain text body
-          html: `<b>Token secreto para Resetear Password:</b> <p>${token}</p>`, // html body
+          html: `<b>Use this token to reset your password:</b> <p>${token}</p>`, // html body
         });
-        res.send("Token Para Cambiar la contraseña enviado a su mail");
+        res.send("A verification token was sent to your email to reset your password");
       } else {
-        res.send("Token reset Update Error");
+        res.send("Token reset Updated Error");
       }
     }
   } catch (e) {
@@ -51,7 +51,7 @@ router.put("/resetPassword", async (req, res) => {
         usuario.password
       );
       if (passwordBefore === true) {
-        res.send("Error, no puede poner la misma contraseña ");
+        res.send("Error, you can not use the same password");
       }
       if (usuario?.tokenResetPassword === token) {
         const passHashed = await bcrypt.hash(NewPassword, securityLevels);
@@ -65,13 +65,13 @@ router.put("/resetPassword", async (req, res) => {
         );
         console.log("update1", update, "update2", update2);
         if (update[0] === 1 && update2[0] === 1) {
-          res.send("La Contraseña Fue Cambiada con exito");
+          res.send("Your password has been successfully changed");
         } else {
-          res.send("Error al cambiar la contraseña");
+          res.send("Error while changing the password");
         }
       }
     } else {
-      res.send("Faltan enviar datos");
+      res.send("Missing data"); // faltan enviar datos
     }
   } catch (e) {
     console.log(e)
@@ -103,11 +103,11 @@ router.post("/sendTokenResetPassword", async (req, res) => {
           to: usuario.email, // list of receivers
           subject: "Forgot Password✔", // Subject line
           text: "", // plain text body
-          html: `<h2>Hi! ${usuario.username}<h2/> <b>token to reset Password:</b> <p>${token}</p>`, // html body
+          html: `<h2>Hi! ${usuario.username}<h2/> <b>Here is the token to change your Password:</b> <p>${token}</p>`, // html body
         });
         return res.send("Token send---Check your email");
       } else {
-        return res.send("Token reset Update Error");
+        return res.send("Token reset Updated Error");
       }
     }
   } catch (e) {
@@ -127,7 +127,7 @@ router.put("/resetForgotPassword", async (req, res) => {
         usuario.password
       );
       if (passwordBefore === true) {
-        return res.send("Error, no puede poner la misma contraseña ");
+        return res.send("Error, you can not use the same password");
       }
       if (usuario?.tokenResetPassword === token) {
         const passHashed = await bcrypt.hash(NewPassword, securityLevels);
@@ -140,13 +140,13 @@ router.put("/resetForgotPassword", async (req, res) => {
           { where: { email: email } }
         );
         if (update[0] === 1 && update2[0] === 1) {
-          return res.send("La Contraseña Fue Cambiada con exito");
+          return res.send("Your password has been successfully changed");
         } else {
-          return res.send("Error al cambiar la contraseña");
+          return res.send("Error while changing the password");
         }
       }
     } else {
-      return res.send("Faltan enviar datos");
+      return res.send("Missing data"); // faltan enviar datos
     }
   } catch (e) {
     console.log(e);

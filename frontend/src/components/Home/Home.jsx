@@ -91,7 +91,7 @@ function Home() {
          gap-1  sm:right-2">
        
         <a id="whatsapp" title="Whatsapp" href="https://wa.me/543434720830?text=" target="_blank" className="flex w-[20rem] justify-end " >
-        <p className="text-xl text-primary-400 font-Open sm:hidden lg:block  md:block w-[15rem] -mr-[4rem]  ">Chat with us</p>
+        <p className="text-xl text-primary-400 font-Open sm:hidden lg:block  md:block w-[15rem] -mr-[2rem]  ">Live chat support</p>
         < SiWhatsapp className="h-7 w-9 relative text-primary-400 "/>
         </a>
         </button>
