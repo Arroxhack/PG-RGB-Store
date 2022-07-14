@@ -27,7 +27,7 @@ export default function Profile() {
   const username = window.atob(localStorage.getItem("username"));
   // console.log(username);
   
-  const {history} = useSelector(state=>state)
+  const {history} = useSelector((state)=>state.history);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -319,7 +319,7 @@ export default function Profile() {
                     <CommentPending ComentariosPending={Commend} />{" "}
                   </>
                 ) : (
-                  "There are not pending comments"
+                 null
                 )}
               </div>
             )}
@@ -327,7 +327,7 @@ export default function Profile() {
                           <div className="p-6 mx-auto bg-secundary-250 rounded-md shadow-md mt-5">
                           <h2 className="text-2xl font-open font-bold pb-5 capitalize">Purchase history</h2>
                           <div className="flex flex-col gap-5">
-                        {history.length > 0 ? <>{
+                        {history?.length > 0 ? <>{
                           history.map(p=>{
                             let total = 0
                             return <div>
