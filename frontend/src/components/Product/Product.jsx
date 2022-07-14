@@ -18,7 +18,7 @@ const Product = ({ product}) => {
     e.preventDefault();
     Toast.fire({
       icon: "success",
-      title: "Producto agregado al carrito",
+      title: "Product added to cart",
     });
     //console.log("product", product);
     addProductToCart(product);

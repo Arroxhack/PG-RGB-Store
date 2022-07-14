@@ -31,23 +31,23 @@ const Side = () => {
         max:''
     })
     const [error, setError]=useState({
-        min:'No puede estar vacio',
-        max:'No puede estar vacio'
+        min:'Can not be empty',
+        max:'Can not be empty'
     })
 
     const validate = state=>{
         const errors = {}
         //min
         if(!/(\d)$/.test(state.min)){
-            errors.min = 'No cumple con los requisitos'
+            errors.min = 'It does not fullfil the requirements'
         } else if(state.max && state.min > state.max){
-            errors.min = 'No puede ser mayor que el máximo'
+            errors.min = 'It can not be bigger than max'
         }
         //max
         if(!/(\d)$/.test(state.max)){
-            errors.max = 'No cumple con los requisitos'
+            errors.max = 'It does not fullfil the requirements'
         } else if(state.min && state.min > state.max){
-            errors.max = 'No puede ser menor que el minimo'
+            errors.max = 'It can not be smaller than min'
         }
 
         return errors
@@ -105,7 +105,7 @@ const Side = () => {
         if(error.min && error.max){
             Swal.fire({
                 icon:'alert',
-                title:'Busqueda mal realizada',
+                title:'Wrong search',
                 confirmButtonText:'ok'
             })
         }else{

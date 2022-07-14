@@ -27,7 +27,7 @@ function Profile() {
         <p>{userProfile.address}</p>
         <p>{userProfile.cellphone}</p>
         <Link to={`/profile/edit/${userProfile.username}`}>
-            <button>Editar</button>
+            <button>Edit</button>
         </Link>
     </div>
   )

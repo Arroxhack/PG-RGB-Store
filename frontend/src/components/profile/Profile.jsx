@@ -66,9 +66,9 @@ export default function Profile() {
   const NoLogin = () => {
     Swal.fire({
       icon: "warning",
-      title: "No Login",
-      text: `Tienes que estar logeado para ingresar a la pagina`,
-      button: "Aceptar",
+      title: "Login",
+      text: `You have to be logged in to continue`,
+      button: "Ok",
     }).then(() => navigate("/login"));
   };
   const convertToBase64 = (file) => {
@@ -101,21 +101,21 @@ export default function Profile() {
       setCellphone(user.cellphone);
       setImageUpload(user.image);
       setEditPerfil(true);
-      document.getElementById("EditProfile").innerHTML = "Ver Perfil";
+      document.getElementById("EditProfile").innerHTML = "See profile";
     } else {
       dispatch(GetUserData(id));
       setEditPerfil(false);
-      document.getElementById("EditProfile").innerHTML = "Editar Perfil";
+      document.getElementById("EditProfile").innerHTML = "Edit profile";
     }
   };
 
   const HandleConfirm = (e) => {
     e.preventDefault();
     if (confirmEdit === false) {
-      document.querySelector("#Edicion").innerHTML = "Cancelar Edicion";
+      document.querySelector("#Edicion").innerHTML = "Cancel changes";
       setConfirmEdit(true);
     } else {
-      document.querySelector("#Edicion").innerHTML = "Confirmar Edicion";
+      document.querySelector("#Edicion").innerHTML = "Confirm changes";
       setConfirmEdit(false);
     }
   };
@@ -144,14 +144,14 @@ export default function Profile() {
         icon: "error",
         title: "Error",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       });
     } else {
       Swal.fire({
         icon: "succes",
-        title: "EXITO",
+        title: "Succes",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       });
       window.location.replace("../profile");
     }
@@ -291,9 +291,9 @@ export default function Profile() {
                   </button>
                   {confirmEdit === true ? (
                     <div className="flex row space-x-3">
-                      <h2>Ingrese su contraseña para confirmar cambios:</h2>
+                      <h2>Enter your password to confirm changes:</h2>
                       <input
-                        placeholder="Ingrese Contraseña"
+                        placeholder="Enter password"
                         name="Password"
                         className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
                         value={Password}
@@ -319,7 +319,7 @@ export default function Profile() {
                     <CommentPending ComentariosPending={Commend} />{" "}
                   </>
                 ) : (
-                  "There isnt pending comments"
+                  "There are not pending comments"
                 )}
               </div>
             )}
