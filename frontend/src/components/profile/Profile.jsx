@@ -338,8 +338,8 @@ export default function Profile() {
                             <tbody>
                             {p.products.map(e=>{
                               total = total + Number(e.price)
-                              return <tr className="grid grid-cols-[3fr_1fr_1fr] px-5 py-2 border-t">
-                              <td>{e.name}</td>
+                              return <tr  className="grid grid-cols-[3fr_1fr_1fr] px-5 py-2 border-t">
+                              <td key={e.id}>{e.name}</td>
                               <td className="text-center">{e.cant}</td>
                               <td className="text-center">{`$${e.price}`}</td>
                               </tr>
