@@ -7,12 +7,12 @@ router.post("/post-purchase", async (req, res, next) => {
     const {id,idUser,products}=req.body
     try {
         if(!id || !idUser || !products){
-            return res.status(404).send('Error: falta un argumento')
+            return res.status(404).send('Error: lack of argument') //Error: falta un argumento
         }else{
             const user = await User.findOne({where:{id:idUser}})
 
             if(!user?.id){
-                return res.status(404).send('Error: no hay user')
+                return res.status(404).send('Error: There is no user')
             }else{
                 const newPurch={
                     id,
@@ -23,7 +23,7 @@ router.post("/post-purchase", async (req, res, next) => {
                 const createPurch = await Purchase.create(newPurch)
 
                 if(!createPurch?.id){
-                    return res.status(404).send('Error: no se pudo crear')
+                    return res.status(404).send('Error: Unable to create') //no se pudo crear
                 }else{
                     return res.send(createPurch)
                 }
@@ -40,11 +40,11 @@ router.get('/user-purchase/:id', async(req,res,next)=>{
     const {id}=req.params
     try {
         if(!id){
-            return res.status(404).send('Error: no hay ID')
+            return res.status(404).send('Error: There is no ID')
         }else{
             const user = await User.findOne({where:{id}})
             if(!user?.id){
-                return res.status(404).send('Error: no se pudo encontrar el usuario')
+                return res.status(404).send('Error: User was not found')
             }else{
                 const purchase = await Purchase.findAll({where:{idUser:id}})
 

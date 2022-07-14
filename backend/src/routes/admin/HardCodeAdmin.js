@@ -39,7 +39,7 @@ router.post('/hardAdmin', async (req, res, next) => {
         return res.send(userInAdmin);
         res.send({ success: 'created successfully' });
       } else {
-        res.status(404).send({ error: 'created was wrong' });
+        res.status(404).send({ error: 'something went wrong' });
       }
     }
   } catch (error) {

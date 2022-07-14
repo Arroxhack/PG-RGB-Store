@@ -15,11 +15,11 @@ router.put('/add/favorito', async (req, res, next) => {
     if (!user) {
       return res
         .status(404)
-        .send({ error: 'doesnt exist an user with that id' });
+        .send({ error: 'User with selected id does not exist' });
     } else if (!producto) {
       return res
         .status(404)
-        .send({ error: 'doesnt exist a product with that id' });
+        .send({ error: 'Product with selected id does not exist' });
     }
 
     //Con added verifico que se haya agregado de favoritos
@@ -40,7 +40,7 @@ router.put('/add/favorito', async (req, res, next) => {
       // console.log(user.favoritos);
     } else {
       //si el array lo incluye, mando un 300 que ya esta agregado
-      return res.send({ error: 'already have added to favorites' });
+      return res.send({ error: 'Already added to favorites' });
     }
     //const newUserUniqueFavorites = userFavorites.filter((p) => p.id != idProd);
 
@@ -49,7 +49,7 @@ router.put('/add/favorito', async (req, res, next) => {
 
     added
       ? res.send(favorites)
-      : res.status(404).send({ error: 'something go wrong :(' });
+      : res.status(404).send({ error: 'Something went wrong :(' });
   } catch (error) {
     next(error);
   }

@@ -62,14 +62,14 @@ router.get("/googleLogin", async (req, res) => {
       // console.log("googleUser: " ,googleUser);
       return res.json(googleUser);
     }
-    return res.json("nada");
+    return res.json("nothing");
   } catch (error) {
     next(error);
   }
 });
 
 router.get("/lockedaccount", (req, res) => {
-  res.send("Su email ha sido bloquedo por el administrador del sitio");
+  res.send("Your account has been banned by an admin");
 });
 
 router.get("/login", (req, res) => {
