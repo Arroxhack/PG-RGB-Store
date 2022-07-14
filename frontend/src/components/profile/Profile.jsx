@@ -327,7 +327,7 @@ export default function Profile() {
                           <div className="p-6 mx-auto bg-secundary-250 rounded-md shadow-md mt-5">
                           <h2 className="text-2xl font-open font-bold pb-5 capitalize">Purchase history</h2>
                           <div className="flex flex-col gap-5">
-                        {history.length > 0 ? <>{
+                        {history[0]?.id ? <>{
                           history.map(p=>{
                             let total = 0
                             return <div key={p.id}>
