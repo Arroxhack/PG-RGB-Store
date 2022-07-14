@@ -9,9 +9,9 @@ function CommentPending({ ComentariosPending }) {
    // console.log(product);
   };
   return (
-    <div className="flex rounded-lg bg-secundary-250 p-8 sm:flex-row flex-col">
+    <div className="flex bg-secundary-250 p-6 sm:flex-row flex-col">
           <div className="flex-grow">
-        <h1 className="text-2xl font-open font-bold pb-5 capitalize">
+        <h1 className="text-2xl font-open font-bold pb-4 capitalize">
           Comments
         </h1>
         <p>Do a review of your product!</p>
