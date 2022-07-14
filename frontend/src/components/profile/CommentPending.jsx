@@ -10,7 +10,7 @@ function CommentPending({ ComentariosPending }) {
   };
   return (
     <div className="mt-6">
-      <div className="p-6 mx-auto bg-secundary-250 rounded-md shadow-md">
+      <div className="max-w-4xl p-4 mx-auto bg-secundary-250 rounded-md shadow-md">
         <h1 className="text-2xl font-open font-bold pb-5 capitalize">
           Comments
         </h1>
