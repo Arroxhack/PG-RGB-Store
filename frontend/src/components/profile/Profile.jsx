@@ -293,7 +293,7 @@ export default function Profile() {
                     className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
                     onClick={(e) => EditPerfil(e)}
                   >
-                    Back
+                    Back to Profile
                   </button>
                   {confirmEdit === true ? (
                     <div className="flex row space-x-3">
