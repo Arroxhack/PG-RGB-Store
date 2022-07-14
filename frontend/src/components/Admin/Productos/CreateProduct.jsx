@@ -453,7 +453,7 @@ const CreateProduct = () => {
               <h2 className="font-bold font-Open">Offer:</h2>
               <Select
                 className="rounded-md placeholder:text-center text-center h-8 text-xl w-full mb-3"
-                placeholder="Oferta"
+                placeholder="Offer"
                 onChange={selectOffer}
                 options={customOffer}
               />

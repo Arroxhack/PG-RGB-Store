@@ -39,7 +39,7 @@ const Create = () => {
     });
 
     if (!password) {
-      Swal.fire(`Tienes Que Ingresar Tu Contraseña de Administrador`);
+      Swal.fire(`Access with your admin password`);
       return ValidatePassword();
     }
     const result = await axios({

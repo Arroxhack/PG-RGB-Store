@@ -58,9 +58,9 @@ function DetailProduct() {
     if (comment === "") {
       return Swal.fire({
         icon: "warning",
-        title: "Commend",
-        text: `Tienes que Comentar algo para continuar`,
-        button: "Aceptar",
+        title: "Comment",
+        text: `You have to enter a comment to continue`,
+        button: "Ok",
       });
     }
     dispatch(PostComment(comment, username, id));
@@ -68,7 +68,7 @@ function DetailProduct() {
   };
 
   return (
-    <div className="h-full bg-primary-200">
+    <div className="h-screen bg-primary-200">
       <NavBar />
       <section
         className={
@@ -94,7 +94,7 @@ function DetailProduct() {
                     ) : (
                       <img
                         alt="Image not found"
-                        className="lg:ml-6 rounded sm:mb-5"
+                        className="ml-6 rounded sm:mb-5"
                         src={
                           ProductDetail.image
                             ? ProductDetail.image[0]

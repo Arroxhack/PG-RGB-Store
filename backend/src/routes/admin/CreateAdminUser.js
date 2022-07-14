@@ -28,25 +28,25 @@ router.post("/updateToAdmin", async (req, res) => {
               await transporter.sendMail({
                 from: "rgbstore0@gmail.com", // sender address
                 to: userToAdmin.email, // list of receivers
-                subject: "✔MODIFICACION DE PERMISOS✔", // Subject line
+                subject: "Permissions changes ✔", // Subject line
                 text: "", // plain text body
-                html: `<b>Sus permisos en la pagina fueron modificados su nuevo rol es:</b> <p>ADMINISTRADOR</p>`, // html body
+                html: `<b>Your permissions were updated. Your new role is now:</b> <p>Administrator</p>`, // html body
               });
-              res.send(`Rol de ${userToAdmin.username} cambiado a Admin`);
+              res.send(`${userToAdmin.username} is now Admin`);
             }
           } else {
             res.status(404).send("Failed on edit");
           }
         } else {
-          res.send("Error Este usuario ya tiene permisos de Admin");
+          res.send("Error: This user is already an Admin");
         }
       } else {
         res.send(
-          "Error El Administrador no tiene Suficiente Rango para realizar esta operacion"
+          "Error: Insufficient rank to make this operation"
         );
       }
     } else {
-      res.send("Error No se mando ningun id");
+      res.send("Error: No id");
     }
   } catch (e) {
     console.log(e);
@@ -77,24 +77,24 @@ router.post("/updateToUser", async (req, res) => {
             await transporter.sendMail({
               from: "rgbstore0@gmail.com", // sender address
               to: AdminToUser.email, // list of receivers
-              subject: "✔MODIFICACION DE PERMISOS✔", // Subject line
+              subject: "Permissions changes ✔", // Subject line
               text: "", // plain text body
-              html: `<b>Sus permisos en la pagina fueron modificados su nuevo rol es:</b> <p>USUARIO</p>`, // html body
+              html: `<b>Your permissions were updated. Your new role is now:</b> <p>User</p>`, // html body
             });
-            res.send(`Rol de ${AdminToUser.username} cambiado a usuario`);
+            res.send(`${AdminToUser.username} is now User`);
           } else {
-            res.send("Error Failed on edit");
+            res.send("Error: Failed on edit");
           }
         } else {
-          res.send("Error Este usuario no tiene permisos de Administrador");
+          res.send("Error: This user is not an Admin");
         }
       } else {
         res.send(
-          "Error El Administrador no tiene Suficiente Rango para realizar esta operacion"
+          "Error: Insufficient rank to make this operation"
         );
       }
     } else {
-      res.send("Error No se mando ningun id");
+      res.send("Error: No id");
     }
   } catch (e) {
     console.log(e);
@@ -115,7 +115,7 @@ router.post("/UpdateToSuperAdmin", async (req, res) => {
           where: { username: AdminToSuperAdmin.username },
         });
         if (!TablaAdmin) {
-          return res.send("Error, El Usuario no tiene Rango Administrador");
+          return res.send("Error: The user rank is not Admin");
         }
         if (TablaAdmin.username == AdminToSuperAdmin.username) {
           const DarSuperAdmin = await Admin.update(
@@ -128,30 +128,30 @@ router.post("/UpdateToSuperAdmin", async (req, res) => {
               await transporter.sendMail({
                 from: "rgbstore0@gmail.com", // sender address
                 to: TablaAdmin.email, // list of receivers
-                subject: "✔MODIFICACION DE PERMISOS✔", // Subject line
+                subject: "Permissions changes ✔", // Subject line
                 text: "", // plain text body
-                html: `<b>Sus permisos en la pagina fueron modificados su nuevo rol es:</b> <p>SUPER ADMINISTRADOR</p>`, // html body
+                html: `<b>Your permissions were updated. Your new role is now:</b> <p>Super Admin</p>`, // html body
               });
               res.send(
-                `Rol de ${AdminToSuperAdmin.username} cambiado a Super Admin`
+                `${AdminToSuperAdmin.username} is now Super Admin`
               );
             }
           } else {
-            res.send("Error al Actualizar Permisos");
+            res.send("Error while updating permissions");
           }
         } else {
           res.send(
-            "Error el usuario al que le quieres dar el permiso todavia no tiene asignado el rol Administrador, primero asignale ese Rango para despues asignarle SuperAdmin"
+            "Error: The user needs to be Admin first to become Super Admin"
           );
         }
       } else {
         res.send(
-          "Error No tienes los permisos necesarios para Realizar estas Acciones"
+          "Error: Insufficient rank to make this operation"
         );
       }
     } else {
       res.send(
-        "Error No tienes los permisos necesarios para Realizar estas Acciones"
+        "Error: Insufficient rank to make this operation"
       );
     }
   } catch (e) {

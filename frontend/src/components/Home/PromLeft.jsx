@@ -7,10 +7,11 @@ import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper";
 
 
+
+
 const Promo = ({left, img, products,params}) => {
 
-
-
+  
 
   return (
     <div className={left ? ' w-11/12 lg:flex flex-row  lg:items-center lg:mt-10 lg:mb-10 bg-primary-200  rounded-xl lg:my-32' 
@@ -25,7 +26,8 @@ const Promo = ({left, img, products,params}) => {
         modules={[Autoplay, Navigation]}
         breakpoints={{
           360: {
-            slidesPerView: 1,
+            slidesPerView: 1, 
+          
           },
           768: {
             slidesPerView: 2,
@@ -42,9 +44,11 @@ const Promo = ({left, img, products,params}) => {
         {products.map(p=>{ 
           
             return (
-              <SwiperSlide className="sm:flex sm:justify-center ">
+              <SwiperSlide key={p.id} className="sm:flex sm:justify-center ">
                 <Link key={p.id} to={`/products/${p.id}`}>
+                  <div className="px-8">
                 <Product product={p}/>
+                </div>
                 </Link>
                 </SwiperSlide>
                 
@@ -53,6 +57,7 @@ const Promo = ({left, img, products,params}) => {
         </Swiper>
     </div>
   )
+  
 }
 
 export default Promo

@@ -36,14 +36,14 @@ export default function Validations() {
         icon: "error",
         title: "Error",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       });
     } else {
       Swal.fire({
         icon: "succes",
-        title: "EXITO",
+        title: "Succes",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       });
       navigate(`/`);
     }
@@ -67,7 +67,7 @@ export default function Validations() {
           onChange={(e) => setNewPasswordValidate(e.target.value)}
           placeholder="Repeat New Password"
         />
-        <h3>Enter a Password token is will send to mail:</h3>
+        <h3>Enter the token that was sent to your email:</h3>
         <div className="flex flex-col items-center justify-center gap-1">
           <input
             className="border-2 border-primary-400 rounded max-w-max  "

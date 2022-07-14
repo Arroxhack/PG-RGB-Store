@@ -6,6 +6,7 @@ import {
   GetUserData,
   VaciarStatePendingComment,
   GetCommendPending,
+  getHistory,
 } from "../../redux/actions/index";
 import ChangePassword from "./ChangePassword";
 import PhoneInput from "react-phone-input-2";
@@ -20,13 +21,19 @@ export default function Profile() {
   const PATH = 'https://rgb-store.herokuapp.com'
 
   const navigate = useNavigate();
+
   const id = window.atob(localStorage.getItem("id"));
+
   const username = window.atob(localStorage.getItem("username"));
   // console.log(username);
+
+  const { history } = useSelector((state) => state);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetUserData(id));
     dispatch(GetCommendPending(username));
+    dispatch(getHistory(id));
   }, []);
   const user = useSelector((state) => state.UserData);
   const Commend = useSelector((state) => state.CommendPending);
@@ -59,9 +66,9 @@ export default function Profile() {
   const NoLogin = () => {
     Swal.fire({
       icon: "warning",
-      title: "No Login",
-      text: `Tienes que estar logeado para ingresar a la pagina`,
-      button: "Aceptar",
+      title: "Login",
+      text: `You have to be logged in to continue`,
+      button: "Ok",
     }).then(() => navigate("/login"));
   };
   const convertToBase64 = (file) => {
@@ -94,21 +101,21 @@ export default function Profile() {
       setCellphone(user.cellphone);
       setImageUpload(user.image);
       setEditPerfil(true);
-      document.getElementById("EditProfile").innerHTML = "Ver Perfil";
+      document.getElementById("EditProfile").innerHTML = "See profile";
     } else {
       dispatch(GetUserData(id));
       setEditPerfil(false);
-      document.getElementById("EditProfile").innerHTML = "Editar Perfil";
+      document.getElementById("EditProfile").innerHTML = "Edit profile";
     }
   };
 
   const HandleConfirm = (e) => {
     e.preventDefault();
     if (confirmEdit === false) {
-      document.querySelector("#Edicion").innerHTML = "Cancelar Edicion";
+      document.querySelector("#Edicion").innerHTML = "Cancel changes";
       setConfirmEdit(true);
     } else {
-      document.querySelector("#Edicion").innerHTML = "Confirmar Edicion";
+      document.querySelector("#Edicion").innerHTML = "Confirm changes";
       setConfirmEdit(false);
     }
   };
@@ -137,32 +144,34 @@ export default function Profile() {
         icon: "error",
         title: "Error",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       });
     } else {
       Swal.fire({
         icon: "succes",
-        title: "EXITO",
+        title: "Succes",
         text: `${result}`,
-        button: "Aceptar",
+        button: "Ok",
       });
       window.location.replace("../profile");
     }
   };
+
+  // console.log(history)
   return (
     <div>
       {id ? (
         <>
           <NavBar />
-          <div className="flex flex-col items-center justify-center min-h-screen h-full bg-primary-200">
-            <div className="max-w-4xl p-6 mx-auto bg-secundary-250 rounded-md shadow-md">
+          <div className="lg:flex  lg:items-start pt-11 lg:justify-center min-h-screen h-full w-full gap-8 bg-primary-200 sm:grid sm:items-center sm:justify-center">
+            <div className="lg:w-[25rem] lg:p-4  bg-secundary-250 shadow-md sm:w-[22rem]">
               <h1 className="text-2xl font-open font-bold pb-5 capitalize">
                 Profile
               </h1>
 
               {editPerfil === false ? (
                 <form className="font-Open">
-                  <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 max-w-max">
                     <h2 className="font-semibold"> Name:</h2>
                     <p>{user.name}</p>
                     <h2 className="font-semibold">Last Name:</h2>
@@ -189,13 +198,15 @@ export default function Profile() {
                     <h2 className="font-semibold">Points:</h2>
                     <p>{user.points}</p>
                   </div>
+                  <div className=" flex justify-center mt-2">
                   <button
                     id="EditProfile"
-                    className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                    className="w-auto text-center mt-5 py-3 px-5 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
                     onClick={(e) => EditPerfil(e)}
                   >
                     Edit Profile
                   </button>
+                  </div>
                 </form>
               ) : (
                 <form className="max-w-4xl p-6 mx-auto rounded-md shadow-md">
@@ -250,7 +261,7 @@ export default function Profile() {
                     </p>
                   </div>
                   <input
-                  value=""
+                    value=""
                     type="file"
                     name="image"
                     id="image"
@@ -280,11 +291,18 @@ export default function Profile() {
                   >
                     Done
                   </button>
+                  <button
+                    id="EditProfile"
+                    className="w-full text-center mt-5 py-3 rounded bg-primary-400 lg:hover:bg-primary-300 my-1"
+                    onClick={(e) => EditPerfil(e)}
+                  >
+                    Back to Profile
+                  </button>
                   {confirmEdit === true ? (
                     <div className="flex row space-x-3">
-                      <h2>Ingrese su contraseña para confirmar cambios:</h2>
+                      <h2>Enter your password to confirm changes:</h2>
                       <input
-                        placeholder="Ingrese Contraseña"
+                        placeholder="Enter password"
                         name="Password"
                         className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-primary-400 focus:ring-primary-400 before:focus:ring-primary-100"
                         value={Password}
@@ -303,15 +321,60 @@ export default function Profile() {
 
               {mostrarChangePassword === true ? <ChangePassword /> : null}
             </div>
+
             {editPerfil === true ? null : (
               <div>
                 {Commend.length > 0 ? (
                   <>
                     <CommentPending ComentariosPending={Commend} />{" "}
                   </>
-                ) : (
-                  "There isnt pending comments"
-                )}
+                ) : null}
+              </div>
+            )}
+
+      
+
+            {editPerfil === true ? null : (
+              <div className="p-6 lg:w-[25rem] bg-secundary-250 shadow-md sm:w-[22rem] ">
+                <h2 className="text-2xl font-open font-bold pb-5 capitalize">
+                  Purchase history
+                </h2>
+                <div className="flex flex-col gap-5">
+                  {history[0]?.id ? (
+                    <>
+                      {history.map((p) => {
+                        let total = 0;
+                        return (
+                          <div>
+                            <table className="w-[350px]">
+                              <caption className="font-bold">{`#${
+                                p.id
+                              } - ${p.createdAt.slice(0, -14)}`}</caption>
+                              <tbody>
+                                {p.products.map((e) => {
+                                  total = total + Number(e.price);
+                                  return (
+                                    <tr className="grid grid-cols-[3fr_1fr_1fr] px-5 py-2 border-t">
+                                      <td key={e.id}>{e.name}</td>
+                                      <td className="text-center">{e.cant}</td>
+                                      <td className="text-center">{`$${e.price}`}</td>
+                                    </tr>
+                                  );
+                                })}
+                                <tr>
+                                  <th className="text-end border-t">{`Total: $${total}`}</th>
+                                </tr>
+                              </tbody>
+
+                            </table>
+                          </div>
+                        );
+                      })}
+                    </>
+                  ) : (
+                    "No purchases found"
+                  )}
+                </div>
               </div>
             )}
           </div>

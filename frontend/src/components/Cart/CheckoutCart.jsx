@@ -248,11 +248,11 @@ function CheckoutCart() {
                 <div className="flex flex-col md:h-screen px-14 py-20 justify-between font-Open overflow-y-auto">
                   <div>
                     <p className="text-4xl font-black mb-10 text-secundary-250 leading-9 font-Open">
-                      Total of points: {user.points}
+                      Total points: {user.points}
                       <br />
                       {total > 100 ? (
                         <p className="flex text-secundary-250 text-2xl font-Open items-center">
-                          use Point in this purchase? {"     "}
+                          Use your points? {"     "}
                           <input
                             type="checkbox"
                             id={"check"}
@@ -260,10 +260,12 @@ function CheckoutCart() {
                             className="ml-2 text-2xl font-medium dark:text-gray-300"
                           />
                         </p>
-                      ) : (
+                      ) : 
+                      (
                         <p className="flex text-secundary-250 text-2xl font-Open items-center">
-                          To use Points your have to do a purchase of 100$ or
-                          More!{setUsePoints(false)}
+                          <br />
+                          You can only use your points with a purchase of 100$ or more!
+                          {setUsePoints(false)}
                           {setPoints(0)}
                           {unchecked()}
                           {/* {setPosiblePoints(0)} */}

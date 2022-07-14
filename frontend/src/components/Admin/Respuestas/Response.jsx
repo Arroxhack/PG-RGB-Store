@@ -55,7 +55,7 @@ const Response = () => {
         e.preventDefault()
         Swal.fire({
             icon: 'warning',
-            title: 'Do you delete question?',
+            title: 'Delete question?',
             showDenyButton: true,
             confirmButtonText: 'Yes',
             denyButtonText: `No`,
@@ -70,7 +70,7 @@ const Response = () => {
     }
 
     useEffect(()=>{},[questions])
-
+      
     return (
         <>
         {questions[0] ? 
@@ -88,8 +88,8 @@ const Response = () => {
                 </div>
                 <h4 className='border p-2 text-justify rounded-sm bg-secundary-100'>{q.comentario}</h4>
                 <form className='flex flex-col gap-2'>
-                    <label className='font-medium whitespace-nowrap'>Response:</label>
-                    <textarea name={q.id} value={response.response} onChange={e=>handleResponse(e.target.name, e.target.value)} placeholder='Response' className='border h-52 p-2 resize-none text-justify'/>
+                    <label className='font-medium whitespace-nowrap'>Answer:</label>
+                    <textarea name={q.id} value={response.response} onChange={e=>handleResponse(e.target.name, e.target.value)} placeholder='Answer' className='border h-52 p-2 resize-none text-justify'/>
                     <button onClick={sendRTA} className='bg-[#008000] px-4 py-1 rounded-lg uppercase text-secundary-100 font-bold'>Send</button>
                     <button name={q.id} onClick={deleteQUEST} className='bg-secundary-50 px-4 py-1 rounded-lg uppercase text-secundary-100 font-bold'>Delete</button>
                 </form>

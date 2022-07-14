@@ -14,6 +14,7 @@ import { IoIosBuild } from "react-icons/io";
 import svg from "../../images/rename.svg";
 import { FiLogIn } from "react-icons/fi";
 import { BsPencilSquare } from "react-icons/bs";
+import {MdOutlineFavoriteBorder} from 'react-icons/md'
 function NavBar() {
   let username = localStorage.getItem("username");
   const admin = localStorage.getItem("admin");
@@ -56,14 +57,14 @@ function NavBar() {
             </Link>
           </li>
           <li className=" sm:py-2 md:py-6   active:bg-primary-300 rounded ">
-            <Link to="/categories/notebooks" className="flex items-center ">
+            <Link to="/categories?category=Notebook&page=1" className="flex items-center ">
               <MdComputer />
               <p className="sm:ml-1 md:ml-2"> Notebooks</p>
             </Link>
           </li>
 
           <li className="sm:py-2 md:py-6 block active:bg-primary-300 rounded ">
-            <Link to="/categories/pc-armadas" className="flex items-center ">
+            <Link to="/categories?category=Desktop&page=1" className="flex items-center ">
               <img
                 src={svg}
                 alt="svg pc"
@@ -74,9 +75,15 @@ function NavBar() {
           </li>
 
           <li className="sm:py-2 md:py-6 block active:bg-primary-300 rounded ">
-            <Link to="/probando" className="flex items-center ">
+            <Link to="/arma-tu-pc" className="flex items-center ">
               <IoIosBuild />
               <p className="sm:ml-1 md:ml-2">Build your PC</p>
+            </Link>
+          </li>
+          <li className="sm:py-2 md:py-6 block active:bg-primary-300 rounded ">
+            <Link to="/favoritos" className="flex items-center ">
+              <MdOutlineFavoriteBorder className="text-primary" />
+              <p className="sm:ml-1 md:ml-2">Favorites</p>
             </Link>
           </li>
         </ul>
@@ -90,9 +97,10 @@ function NavBar() {
                 <HiOutlineUserCircle className="  text-primary-400 " />
                 <span className=" sm:ml-1 md:ml-2">Profile</span>
               </Link>{" "}
+
               <Logout />
               {admin ? (
-                <Link to="/admin">
+                <Link to="/admin/list-products">
                   <button className=" md:p-4 sm:py-2 md:py-6 block active:bg-primary-300 rounded">
                     Admin panel
                   </button>
@@ -160,7 +168,7 @@ function NavBar() {
                 <p className="buttom">Categories</p>
               </Link>
             </li>
-            <li class="lg:buttom lg:mr-5">
+            <li className="lg:buttom lg:mr-5">
               <Link to="/categories?category=Notebook&page=1">Notebooks</Link>
             </li>
             <li className="lg:buttom lg:mr-5 ">
@@ -176,7 +184,7 @@ function NavBar() {
       </div>
 
       {/* SEARCHBAR */}
-      <div className=" sm:w-1/4  md:w-1/2 lg:w-1/6 sm:ml-[-4rem] flex lg:flex lg:-ml-[10rem]">
+      <div className=" sm:w-1/5  md:w-1/2 lg:w-1/6 sm:ml-[-4rem] flex lg:flex lg:-ml-[10rem]">
         <SearchBar />
       </div>
 

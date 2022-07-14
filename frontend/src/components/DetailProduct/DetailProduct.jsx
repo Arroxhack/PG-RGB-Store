@@ -53,7 +53,7 @@ function DetailProduct() {
     e.preventDefault();
     Toast.fire({
       icon: "success",
-      title: "Producto agregado al carrito",
+      title: "Product added to cart",
     });
     addProductToCart(ProductDetail);
   };
@@ -69,15 +69,15 @@ function DetailProduct() {
         }
       >
         {loading ? (
-          <div>
+          <div className="h-screen bg-primary-200 w-full flex justify-center items-center">
             <Loading />
           </div>
         ) : (
           <>
             <div className="container max-w-screen-xl px-4 py-8 mx-auto">
-              <div className="grid  grid-cols-1  md:grid-cols-2">
-                <div className="grid grid-cols-2  md:grid-cols-1 ">
-                  <div className="aspect-w-1 rounded aspect-h-1">
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="grid grid-cols-2 md:grid-cols-1 ">
+                  <div>
                     {images && images[0].length > 100 ? (
                       images.map((i) => {
                         return <img src={i} alt="Image not found" />;
@@ -85,14 +85,13 @@ function DetailProduct() {
                     ) : (
                       <img
                         alt="Image not found"
-                        className="lg:ml-6 rounded sm:mb-5"
+                        className="rounded sm:mb-5 md:pr-8"
                         src={
                           ProductDetail.image
                             ? ProductDetail.image[0]
                             : "1602010489_p_setting_fff_1_90_end_600.jpg"
                         }
-                        height="600"
-                        width="500"
+                        
                       />
                     )}
                   </div>
@@ -106,8 +105,8 @@ function DetailProduct() {
                   <div className="flex justify-between text-secundary-250 mt-8">
                     <div className="max-w-[35ch] ">
                       <h1 className="text-2xl text-secundary-250 font-bold">
-                        {ProductDetail.name ? ProductDetail.name : null}{" "}
-                        <BoxFav id={ProductDetail.id} />
+                        {ProductDetail.name ? ProductDetail.name : null}{" "} 
+                        <BoxFav id={ProductDetail.id} /> 
                       </h1>
 
                       <p className="mt-0.5 text-secundary-250 text-sm">

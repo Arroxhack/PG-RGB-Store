@@ -70,14 +70,14 @@ const EditUser = () => {
           icon: "error",
           title: "Error",
           text: result,
-          button: "Aceptar",
+          button: "Ok",
         });
       } else {
         Swal.fire({
           icon: "success",
-          title: "UPDATE ✔",
+          title: "Updated ✔",
           text: result,
-          button: "Acept",
+          button: "Ok",
         });
       }
       document.getElementById("enviar").disabled = false;
@@ -97,14 +97,14 @@ const EditUser = () => {
           icon: "error",
           title: "Error",
           text: result,
-          button: "Aceptar",
+          button: "Ok",
         });
       } else {
         Swal.fire({
           icon: "success",
-          title: "UPDATE ✔",
+          title: "Updated ✔",
           text: result,
-          button: "Acept",
+          button: "Ok",
         });
       }
       document.getElementById("enviar").disabled = false;
@@ -118,14 +118,14 @@ const EditUser = () => {
         className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
         onClick={(e) => getAllUsersButton(e)}
       >
-        Recargar Usuarios
+        Refresh users
       </button>
       <select onChange={(e) => HandleFilter(e)}>
         <option value="" disabled selected>
           Seleccione una opcion:
         </option>
-        <option value={"Lock"}>BLOCK USER</option>
-        <option value={"UnLock"}>UNLOCK USER</option>
+        <option value={"Lock"}>Ban User</option>
+        <option value={"UnLock"}>Unban User</option>
       </select>
       <select
         onChange={(e) => {
@@ -149,7 +149,7 @@ const EditUser = () => {
         onClick={(e) => HandleSubmit(e)}
         className="bg-primary-400 font-Open px-5 py-1 rounded-lg text-primary-200 uppercase font-semibold hover:bg-primary-300"
       >
-        {method === "Lock" ? "Block User" : "Unlock User"}
+        {method === "Lock" ? "Ban User" : "Unban User"}
       </button>
     </div>
   );

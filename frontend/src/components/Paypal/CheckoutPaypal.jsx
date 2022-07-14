@@ -50,7 +50,7 @@ export default function CheckoutPaypal() {
       } else if (localStorage.getItem("login")) {
         Swal.fire({
             icon: 'error',
-            title: 'Oops...',
+            title: 'Something went wrong',
             html: 
             'There are no products inside the cart' +
             '<br/>' +
@@ -61,7 +61,7 @@ export default function CheckoutPaypal() {
       } else {
         Swal.fire({
             icon: 'error',
-            title: 'Oops...',
+            title: 'Something went wrong',
             html: 
             'You can not buy without login in' +
             '<br/>' +

@@ -40,14 +40,14 @@ export default function Validations() {
         icon: "error",
         title: "Error",
         text: `${UserRegister}`,
-        button: "Aceptar",
+        button: "Ok",
       });
     } else {
       Swal.fire({
         icon: "succes",
-        title: "Exito",
-        text: `Verificacion Completa`,
-        button: "Aceptar",
+        title: "Succes",
+        text: `Verification complete`,
+        button: "Ok",
       });
       let { lastname, verify, username, email, permissions, name, id } =
         UserRegister.user;
@@ -96,7 +96,7 @@ export default function Validations() {
     setTimeout(function () {
       document.getElementById("enviar").innerHTML = "Re-Send Email";
     }, 30000);
-    document.getElementById("enviar").innerHTML = "Blocked";
+    document.getElementById("enviar").innerHTML = "Banned";
   }
 
   const ResendEmail = async (e) => {
@@ -120,9 +120,9 @@ export default function Validations() {
     } else {
       Swal.fire({
         icon: "success",
-        title: "REENVIADO",
-        text: "Codigo Reenviado,Espere 30 segundos para reenviarlo nuevamente",
-        button: "Aceptar",
+        title: "Re sent",
+        text: "Wait 30 secods to resend again",
+        button: "Ok",
       });
     }
   };

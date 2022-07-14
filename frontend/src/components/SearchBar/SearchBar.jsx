@@ -28,7 +28,7 @@ export default function SearchBar() {
       className="flex items-center sm:max-w-max lg:max-w-max "
     >
       <input
-        className="pl-5 text-secundary-100 lg:left-0 border border-primary-400 lg:border-2
+        className="lg:pl-5 text-secundary-100 lg:left-0 border border-primary-400 lg:border-2
           bg-primary-200 lg:h-10 rounded-lg text-sm focus:outline-none 
          sm:placeholder:text-xs md:max-w-max md:h-9 md:placeholder:text-lg sm:max-w-max md:pr-24 lg:max-w-max  "
         type="text"

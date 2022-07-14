@@ -7,10 +7,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { SendReview } from "./SendEmail";
 import { givePoints, takePoints } from "./Points";
 import { CartContext } from "../Cart/CartContext";
+import { postHistory } from "./History";
+
 
 export default function Pagando() {
 
   const PATH = 'https://rgb-store.herokuapp.com'
+
+  const idUser = window.atob(localStorage.getItem('id'));
 
   const navigate = useNavigate();
   const username = window.atob(localStorage.getItem("username")); //julianpardeiro
@@ -155,6 +159,7 @@ export default function Pagando() {
         return { name: e.name, cant: e.quantity, price: e.unit_amount.value };
       });
       await takePoints(username, points);
+      await postHistory(detalles.id,idUser,productsArray)
       const resultPoint = await givePoints(username, productsArray);
       await SendReview(username, productsArray, detalles.id);
       await CrearComentarioReview(username, arregloSoloId, detalles.id);

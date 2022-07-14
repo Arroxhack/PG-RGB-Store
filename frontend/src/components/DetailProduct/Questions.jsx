@@ -12,6 +12,7 @@ const Questions = ({id}) => {
         dispatch(getQuest(id))
     }, [])
 
+
     let idUser = localStorage.getItem("id");
     if (idUser) {
         idUser = window.atob(localStorage.getItem('id'));
@@ -68,6 +69,7 @@ const Questions = ({id}) => {
 
     useEffect(()=>{
     },[question])
+    console.log(question)
 
 
   return (
@@ -90,11 +92,11 @@ const Questions = ({id}) => {
                 <p className='text-[#9CA3AF] select-none font-normal text-right px-5'>{p.fechaPreg}</p> 
                 </div>
                 {p.response ? <div className='border-b'>
-                    <h3 className='py-3 px-5 m-0'>{p.response}</h3>
+                    <h3 className='py-3 text-secundary-250 px-5'>{p.response}</h3>
                     <p className='text-[#9CA3AF] select-none font-normal text-right px-5'>{p.fechaRta}</p>
                     </div> : 
                     <div className='border-primary border-b'>
-                        <h3 className='py-3 text-secundary-250 px-5'>Aun no hay una respuesta</h3>
+                        <h3 className='py-3 text-secundary-250 px-5'>There is no answer yet</h3>
                         <p className='text-secundary-250 select-none font-normal text-right px-5'>{p.fechaRta}</p>
                     </div>
                     }
