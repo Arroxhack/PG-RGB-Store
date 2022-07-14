@@ -3,7 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 function ChangePassword() {
-  const PATH = 'http://localhost:3001'
+  const PATH = 'https://rgb-store.herokuapp.com'
 
   const navigate = useNavigate();
   const username = window.atob(localStorage.getItem("username"));

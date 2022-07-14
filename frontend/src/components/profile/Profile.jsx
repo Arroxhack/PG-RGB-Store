@@ -17,7 +17,8 @@ import { useNavigate } from "react-router";
 import CommentPending from "./CommentPending";
 
 export default function Profile() {
-  const PATH = "http://localhost:3001";
+
+  const PATH = 'https://rgb-store.herokuapp.com'
 
   const navigate = useNavigate();
 

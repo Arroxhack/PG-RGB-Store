@@ -51,7 +51,7 @@ import {
   GET_HISTORY
 } from '../types/index';
 import Swal from 'sweetalert2';
-const PATH = 'http://localhost:3001';
+const PATH = 'https://rgb-store.herokuapp.com';
 
 /// GET PRODUCTOS ///
 export function getAllProducts() {

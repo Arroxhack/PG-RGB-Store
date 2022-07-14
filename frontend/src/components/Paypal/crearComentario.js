@@ -3,7 +3,7 @@ import axios from "axios";
 export async function CrearComentarioReview(Username, ArrayProduct, idCompra) {
   for (let i = 0; i < ArrayProduct.length; i++) {
     const idProduct = Number(ArrayProduct[i]);
-    const PATH = 'http://localhost:3001'
+    const PATH = 'https://rgb-store.herokuapp.com'
     await axios({
       method: "post",
       url: `${PATH}/NewReview`,

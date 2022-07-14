@@ -12,7 +12,7 @@ import { postHistory } from "./History";
 
 export default function Pagando() {
 
-  const PATH = 'http://localhost:3001'
+  const PATH = 'https://rgb-store.herokuapp.com'
 
   const idUser = window.atob(localStorage.getItem('id'));
 

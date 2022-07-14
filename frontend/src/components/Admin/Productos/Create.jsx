@@ -16,7 +16,7 @@ const Create = () => {
   const admin = localStorage.getItem("admin");
   const username = window.atob(localStorage.getItem("username"));
   const { verificate, setVerificate } = useContext(CartContext);
-  const PATH = "http://localhost:3001";
+  const PATH = "https://rgb-store.herokuapp.com/api";
 
   let [searchParms, setSearchParams] = useSearchParams();
 
