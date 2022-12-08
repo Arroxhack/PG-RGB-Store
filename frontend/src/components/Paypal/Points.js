@@ -1,7 +1,7 @@
 import axios from "axios";
 export async function givePoints(username, ArrayProducts) {
 
-  const PATH = 'https://rgb-store.herokuapp.com'
+  const PATH = 'https://pg-rgb-store-backend-production.up.railway.app'
 
   // CORREGIR LINEA 29
 
@@ -26,7 +26,7 @@ export async function givePoints(username, ArrayProducts) {
 export async function takePoints(username, totaltake) {
   await axios({
     method: "put",
-    url: "https://rgb-store.herokuapp.com/takepoints",
+    url: "https://pg-rgb-store-backend-production.up.railway.app/takepoints",
     data: { username, totaltake }, // email
     headers: { "X-Requested-With": "XMLHttpRequest" },
     withCredentials: true,

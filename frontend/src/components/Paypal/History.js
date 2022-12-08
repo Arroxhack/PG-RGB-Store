@@ -1,7 +1,7 @@
 import axios from "axios";
 export async function postHistory(id, idUser, products) {
 
-  const PATH = 'https://rgb-store.herokuapp.com'
+  const PATH = 'https://pg-rgb-store-backend-production.up.railway.app'
 
   const result = await axios({
     method: "post",

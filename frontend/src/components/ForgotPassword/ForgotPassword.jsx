@@ -13,7 +13,7 @@ function ForgotPassword() {
   const [newPasswordValidate, setNewPasswordValidate] = useState("");
   const navigate = useNavigate();
 
-  const PATH = 'https://rgb-store.herokuapp.com'
+  const PATH = 'https://pg-rgb-store-backend-production.up.railway.app'
 
   const HandleSendToken = async (e) => {
     e.preventDefault();

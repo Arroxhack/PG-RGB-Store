@@ -18,7 +18,7 @@ import CommentPending from "./CommentPending";
 
 export default function Profile() {
 
-  const PATH = 'https://rgb-store.herokuapp.com'
+  const PATH = 'https://pg-rgb-store-backend-production.up.railway.app'
 
   const navigate = useNavigate();
 

@@ -19,7 +19,7 @@ const HomeAdmin = () => {
 
   const [Validate, setValidate] = useState(true);
 
-  const PATH = 'https://rgb-store.herokuapp.com'
+  const PATH = 'https://pg-rgb-store-backend-production.up.railway.app'
 
   const ValidatePassword = async () => {
     const { value: password } = await Swal.fire({

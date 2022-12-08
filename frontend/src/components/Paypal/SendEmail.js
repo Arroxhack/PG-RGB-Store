@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function SendReview(username, ArrayProduct, idCompra) {
-  const PATH = 'https://rgb-store.herokuapp.com'
+  const PATH = 'https://pg-rgb-store-backend-production.up.railway.app'
 
   let products = [];
   let precioTotal = 0;

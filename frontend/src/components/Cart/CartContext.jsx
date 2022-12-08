@@ -11,7 +11,7 @@ const Toast = Swal.mixin({
   timer: 2000,
 });
 
-const PATH = 'https://rgb-store.herokuapp.com'
+const PATH = 'https://pg-rgb-store-backend-production.up.railway.app'
 
 const CartProvider = ({ children }) => {
   const [verificate, setVerificate] = useState(false);

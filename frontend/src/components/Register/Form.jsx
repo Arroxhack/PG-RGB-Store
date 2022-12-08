@@ -39,7 +39,7 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
 
-    const PATH = 'https://rgb-store.herokuapp.com'
+    const PATH = 'https://pg-rgb-store-backend-production.up.railway.app'
 
     e.preventDefault();
     document.getElementById("enviar").disabled = true;
